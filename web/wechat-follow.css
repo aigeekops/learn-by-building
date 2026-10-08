@@ -1,0 +1,19 @@
+.wechat-follow-card{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;margin-top:24px;padding:24px 26px;background:linear-gradient(115deg,#eeedff,#f4f1fc 58%,#eaf4f1);border:1px solid #e6e2f6;border-radius:16px;text-align:left;overflow:hidden}
+.wechat-follow-card::before{content:"";position:absolute;right:-46px;top:-46px;width:170px;height:170px;background:radial-gradient(circle,rgba(91,89,212,.12),transparent 70%);pointer-events:none}
+.wechat-follow-icon{flex:none;width:54px;height:54px;border-radius:14px;background:#fff;border:1px solid #ece9f7;box-shadow:0 6px 18px #5b59d41a;display:grid;place-items:center;color:#5b59d4}
+.wechat-follow-icon svg{width:28px;height:28px;display:block}
+.wechat-follow-copy{min-width:0;flex:1}
+.wechat-follow-copy>small{font-size:11px;color:#6f6cab;letter-spacing:.5px}
+.wechat-follow-copy h2{margin:4px 0 6px;font-size:20px;color:#2b2752}
+.wechat-follow-tag{display:inline-block;font-size:10px;font-weight:600;color:#5b59d4;background:#fff;border:1px solid #ddd9f6;border-radius:999px;padding:2px 9px;margin-bottom:8px}
+.wechat-follow-card .wechat-follow-copy p{font-size:13px;line-height:1.8;margin:6px 0 14px;color:#5f5d78}
+.wechat-follow-card .btn,#wechat-follow-dialog .btn{min-height:44px}
+.wechat-follow-thumbnail{flex:none;background:#fff;border:1px solid #ece9f7;border-radius:12px;padding:10px;line-height:0;box-shadow:0 6px 18px #5b59d41a;transition:transform .15s ease}
+.wechat-follow-thumbnail:hover{transform:translateY(-2px)}
+.wechat-follow-thumbnail img{display:block;width:132px;height:132px;object-fit:contain;border-radius:6px}
+#wechat-follow-dialog{width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:26px;border:1px solid #e4e9ec;border-radius:16px;color:var(--ink);overflow:auto;text-align:center}
+#wechat-follow-dialog::backdrop{background:#1f293766;backdrop-filter:blur(2px)}
+.wechat-follow-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;text-align:left}.wechat-follow-heading small{font-size:11px;color:var(--muted)}.wechat-follow-heading h2{font-size:22px;margin:3px 0}
+#wechat-follow-dialog>p{font-size:13px;color:#66717e;line-height:1.8;margin:18px 0}.wechat-follow-qr{margin:16px 0}.wechat-follow-qr img{display:block;width:240px;height:240px;max-width:100%;object-fit:contain;padding:8px;background:#fff;margin:auto}.wechat-follow-qr figcaption{font-size:12px;color:#66717e;margin-top:10px}
+.wechat-follow-search{background:#f3f5f7;border-radius:8px;padding:18px 12px}.wechat-follow-optional{display:block;color:#66717e;font-size:11px;margin-top:12px}
+@media(max-width:650px){.wechat-follow-card{gap:18px;padding:20px 18px;flex-direction:column;align-items:flex-start}.wechat-follow-icon{width:46px;height:46px;border-radius:12px}.wechat-follow-icon svg{width:24px;height:24px}.wechat-follow-thumbnail{align-self:center}#wechat-follow-dialog{padding:22px 18px}.wechat-follow-heading h2{font-size:20px}}

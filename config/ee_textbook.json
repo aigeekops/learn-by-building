@@ -1,0 +1,1948 @@
+{
+  "version": 1,
+  "title": "电路原理补课站",
+  "subtitle": "视频讲快了，就回到这里把原理弄懂。",
+  "source": {
+    "title": "Lessons in Electric Circuits",
+    "author": "Tony R. Kuphaldt 及各章贡献者",
+    "publisher": "All About Circuits（整理与更新）",
+    "url": "https://www.allaboutcircuits.com/textbook/",
+    "license": "Design Science License",
+    "license_url": "https://www.gnu.org/licenses/dsl.html",
+    "checked_on": "2026-10-07",
+    "note": "本站首页及教材正文标注 Design Science License。这里提供原创中文导学、原创算例与原文入口，不是六卷逐字翻译或全文镜像。原文、插图及其许可归原作者；平台代码许可不覆盖第三方教材。目录核对不代表已逐页审核全书。"
+  },
+  "study_note": "每节建议 30 分钟：读导学 8 分钟，跟算 7 分钟，练习 10 分钟，解释与记录 5 分钟。时间可调整，不是掌握承诺。参考卷和实验卷穿插使用；先走完入门主线，再按项目选读进阶章节。",
+  "safety": "动手从有保护的低压限流电源开始。先断电改线，检查极性与额定值；本路线不安排市电、高压、大电流电池或拆电源实验。网页演示仅为模型，不能证明接线或硬件安全。",
+  "stages": [
+    {
+      "id": "start",
+      "title": "先看懂一张电路图",
+      "goal": "只用四则运算，分清物理量、回路与测量方式。",
+      "gate": "能标出两个测量点、写对单位，并识别电流档跨电源的错误。"
+    },
+    {
+      "id": "dc",
+      "title": "用直流规律解释现象",
+      "goal": "从一个电阻走向分压、负载和电源预算。",
+      "gate": "独立算出带负载分压，并用 KCL/KVL 检查答案。"
+    },
+    {
+      "id": "signals",
+      "title": "理解随时间变化的信号",
+      "goal": "把电容、电感、波形与滤波连接起来。",
+      "gate": "能比较时间常数、区分峰值与有效值，解释滤波的代价。"
+    },
+    {
+      "id": "devices",
+      "title": "让小信号控制大负载",
+      "goal": "理解二极管、晶体管、运放与电机背后的条件。",
+      "gate": "画对负载电流路径，说清驱动、额定值和保护条件。"
+    },
+    {
+      "id": "digital",
+      "title": "从电压走向信息",
+      "goal": "连接电平、逻辑、状态与采样。",
+      "gate": "能画真值表和状态图，并指出 ADC 精度与采样率的区别。"
+    },
+    {
+      "id": "system",
+      "title": "把知识用在完整小系统",
+      "goal": "用参考卷和实验卷建立可复现的验证流程。",
+      "gate": "提交一份传感器到执行器的设计与排障记录，注明证据类型。"
+    }
+  ],
+  "volumes": [
+    {
+      "id": "dc",
+      "number": 1,
+      "title": "直流电路",
+      "url": "https://www.allaboutcircuits.com/textbook/direct-current/",
+      "guide": "先学这一卷：看懂电路，再用守恒关系计算。",
+      "chapters": [
+        {
+          "number": 1,
+          "title": "电学基本概念",
+          "lessons": [
+            "circuit"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 2,
+          "title": "欧姆定律",
+          "lessons": [
+            "ohm"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 3,
+          "title": "电气安全",
+          "lessons": [
+            "meter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 4,
+          "title": "科学计数法与单位前缀",
+          "lessons": [
+            "units"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 5,
+          "title": "串联与并联",
+          "lessons": [
+            "networks"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 6,
+          "title": "分压与基尔霍夫定律",
+          "lessons": [
+            "divider"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 7,
+          "title": "串并联混合电路",
+          "lessons": [
+            "networks"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 8,
+          "title": "直流测量电路",
+          "lessons": [
+            "meter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 9,
+          "title": "电气仪表信号",
+          "lessons": [
+            "project"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 10,
+          "title": "直流网络分析",
+          "lessons": [
+            "thevenin"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 11,
+          "title": "电池与电源系统",
+          "lessons": [
+            "power"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 12,
+          "title": "导体与绝缘体物理",
+          "lessons": [
+            "ohm"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 13,
+          "title": "电容",
+          "lessons": [
+            "rc"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 14,
+          "title": "磁与电磁",
+          "lessons": [
+            "inductor"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 15,
+          "title": "电感",
+          "lessons": [
+            "inductor"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 16,
+          "title": "RC 与 L/R 时间常数",
+          "lessons": [
+            "rc"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 17,
+          "title": "贡献者",
+          "lessons": [],
+          "scope": "署名与贡献记录"
+        }
+      ]
+    },
+    {
+      "id": "ac",
+      "number": 2,
+      "title": "交流电路",
+      "url": "https://www.allaboutcircuits.com/textbook/alternating-current/",
+      "guide": "理解变化的信号；电力、传输线等主题在项目需要时深入。",
+      "chapters": [
+        {
+          "number": 1,
+          "title": "交流基础",
+          "lessons": [
+            "wave"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 2,
+          "title": "复数",
+          "lessons": [
+            "filter",
+            "reference"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 3,
+          "title": "电抗与阻抗：电感",
+          "lessons": [
+            "filter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 4,
+          "title": "电抗与阻抗：电容",
+          "lessons": [
+            "filter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 5,
+          "title": "电抗与阻抗：RLC",
+          "lessons": [
+            "filter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 6,
+          "title": "谐振",
+          "lessons": [
+            "filter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 7,
+          "title": "混合频率信号",
+          "lessons": [
+            "wave",
+            "pwm"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 8,
+          "title": "滤波器",
+          "lessons": [
+            "filter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 9,
+          "title": "变压器",
+          "lessons": [
+            "motor"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 10,
+          "title": "多相交流电路",
+          "lessons": [
+            "motor"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 11,
+          "title": "功率因数",
+          "lessons": [
+            "wave"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 12,
+          "title": "交流测量电路",
+          "lessons": [
+            "meter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 13,
+          "title": "交流电动机",
+          "lessons": [
+            "motor"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 14,
+          "title": "传输线",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 15,
+          "title": "贡献者",
+          "lessons": [],
+          "scope": "署名与贡献记录"
+        }
+      ]
+    },
+    {
+      "id": "semi",
+      "number": 3,
+      "title": "半导体",
+      "url": "https://www.allaboutcircuits.com/textbook/semiconductors/",
+      "guide": "从二极管、开关驱动到放大与反馈；器件物理按需深入。",
+      "chapters": [
+        {
+          "number": 1,
+          "title": "放大器与有源器件",
+          "lessons": [
+            "opamp"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 2,
+          "title": "固态器件理论",
+          "lessons": [
+            "diode"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 3,
+          "title": "二极管与整流器",
+          "lessons": [
+            "diode"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 4,
+          "title": "双极型晶体管 BJT",
+          "lessons": [
+            "switch"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 5,
+          "title": "结型场效应管 JFET",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 6,
+          "title": "绝缘栅场效应管 MOSFET",
+          "lessons": [
+            "switch"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 7,
+          "title": "晶闸管",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 8,
+          "title": "运算放大器",
+          "lessons": [
+            "opamp"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 9,
+          "title": "实用模拟半导体电路",
+          "lessons": [
+            "project"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 10,
+          "title": "直流电机驱动",
+          "lessons": [
+            "motor"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 11,
+          "title": "电子管",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 12,
+          "title": "贡献者",
+          "lessons": [],
+          "scope": "署名与贡献记录"
+        }
+      ]
+    },
+    {
+      "id": "digital",
+      "number": 4,
+      "title": "数字电路",
+      "url": "https://www.allaboutcircuits.com/textbook/digital/",
+      "guide": "先学电平、逻辑和状态，再接 ADC、通信与计算机。",
+      "chapters": [
+        {
+          "number": 1,
+          "title": "计数制",
+          "lessons": [
+            "levels"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 2,
+          "title": "二进制运算",
+          "lessons": [
+            "levels"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 3,
+          "title": "逻辑门",
+          "lessons": [
+            "levels",
+            "logic"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 4,
+          "title": "开关",
+          "lessons": [
+            "state"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 5,
+          "title": "机电继电器",
+          "lessons": [
+            "switch"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 6,
+          "title": "梯形逻辑",
+          "lessons": [
+            "logic"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 7,
+          "title": "布尔代数",
+          "lessons": [
+            "logic"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 8,
+          "title": "卡诺图",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 9,
+          "title": "组合逻辑功能",
+          "lessons": [
+            "logic"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 10,
+          "title": "多谐振荡器与锁存器",
+          "lessons": [
+            "state"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 11,
+          "title": "时序电路",
+          "lessons": [
+            "state"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 12,
+          "title": "移位寄存器",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 13,
+          "title": "数模与模数转换",
+          "lessons": [
+            "adc"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 14,
+          "title": "数字通信",
+          "lessons": [
+            "pwm"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 15,
+          "title": "数字存储器",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 16,
+          "title": "数字计算原理",
+          "lessons": [
+            "state"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 17,
+          "title": "贡献者",
+          "lessons": [],
+          "scope": "署名与贡献记录"
+        }
+      ]
+    },
+    {
+      "id": "reference",
+      "number": 5,
+      "title": "工程参考",
+      "url": "https://www.allaboutcircuits.com/textbook/reference/",
+      "guide": "随用随查：公式、单位、符号、数学、SPICE 和排障。",
+      "chapters": [
+        {
+          "number": 1,
+          "title": "常用公式与换算系数",
+          "lessons": [
+            "units",
+            "reference"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 2,
+          "title": "色码",
+          "lessons": [
+            "ohm"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 3,
+          "title": "导体与绝缘体表",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 4,
+          "title": "代数参考",
+          "lessons": [
+            "networks"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 5,
+          "title": "三角学参考",
+          "lessons": [
+            "wave"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 6,
+          "title": "微积分参考",
+          "lessons": [
+            "rc"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 7,
+          "title": "使用 SPICE 电路仿真程序",
+          "lessons": [
+            "reference"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 8,
+          "title": "排障理论与实践",
+          "lessons": [
+            "debug"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 9,
+          "title": "电路图符号",
+          "lessons": [
+            "circuit"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 10,
+          "title": "元素周期表",
+          "lessons": [],
+          "scope": "进阶选读：在原卷目录继续深入"
+        },
+        {
+          "number": 11,
+          "title": "贡献者",
+          "lessons": [],
+          "scope": "署名与贡献记录"
+        }
+      ]
+    },
+    {
+      "id": "experiments",
+      "number": 6,
+      "title": "电子实验",
+      "url": "https://www.allaboutcircuits.com/textbook/experiments/",
+      "guide": "搭配原理学习；这里只安排低压入门与纸上验证，进阶实验先读条件。",
+      "chapters": [
+        {
+          "number": 1,
+          "title": "电子项目入门",
+          "lessons": [
+            "meter"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 2,
+          "title": "基础项目与测试仪器",
+          "lessons": [
+            "ohm"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 3,
+          "title": "直流电路项目",
+          "lessons": [
+            "divider",
+            "rc"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 4,
+          "title": "交流电路项目",
+          "lessons": [
+            "motor"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 5,
+          "title": "分立半导体电路项目",
+          "lessons": [
+            "diode",
+            "switch"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 6,
+          "title": "模拟集成电路项目",
+          "lessons": [
+            "opamp",
+            "pwm"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 7,
+          "title": "数字集成电路项目",
+          "lessons": [
+            "logic",
+            "state"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 8,
+          "title": "555 定时器项目",
+          "lessons": [
+            "rc",
+            "state"
+          ],
+          "scope": "相关导学，不代表整章已讲完"
+        },
+        {
+          "number": 9,
+          "title": "贡献者",
+          "lessons": [],
+          "scope": "署名与贡献记录"
+        }
+      ]
+    }
+  ],
+  "lessons": [
+    {
+      "id": "units",
+      "stage": "start",
+      "title": "01 · 单位与数量级",
+      "question": "视频里的 4.7k、100μ 和 mA 到底多大？",
+      "concepts": [
+        "物理量描述对象，单位规定尺度。V 是电压单位，A 是电流单位，Ω 是电阻单位；不能把它们当成可互换的数字。",
+        "k 表示一千，m 表示千分之一，μ 表示百万分之一。先把输入统一成 V、A、Ω、F，再代公式，最后换回易读单位。",
+        "检验结果时先估数量级：几伏加在几千欧电阻上，电流应是几毫安，不会是几安培。"
+      ],
+      "formula": "1 kΩ = 1000 Ω；1 mA = 0.001 A；100 μF = 0.0001 F",
+      "example": [
+        "把 4.7 kΩ 写成 4700 Ω。",
+        "3.3 V ÷ 4700 Ω ≈ 0.000702 A。",
+        "乘以 1000，得到约 0.702 mA。"
+      ],
+      "misconception": "μF 与 mF 相差 1000 倍；小数点错位可能让时间常数或电流差三个数量级。",
+      "practice": "列一张 V、A、Ω、F 的单位表；手算 2.2 kΩ、470 μF、0.02 A 的基本单位值。",
+      "acceptance": "三项换算无误，并能用自己的话解释 k、m、μ。",
+      "quiz": {
+        "question": "0.02 A 是多少 mA？",
+        "options": [
+          "0.02 mA",
+          "20 mA",
+          "2000 mA"
+        ],
+        "answer": 1,
+        "explanation": "A 转 mA 要乘以 1000，所以是 20 mA。"
+      },
+      "sources": [
+        {
+          "title": "Metric Notation",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-4/metric-notation/"
+        },
+        {
+          "title": "Metric Prefixes and Unit Conversions",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-1/metric-prefixes-and-unit-conversions/"
+        }
+      ],
+      "lab": "",
+      "terms": "单位 前缀 千欧 毫安 微法 科学计数法",
+      "minutes": 30,
+      "prerequisites": []
+    },
+    {
+      "id": "circuit",
+      "stage": "start",
+      "title": "02 · 回路、电压与参考地",
+      "question": "为什么一根线接上去，灯还是不亮？",
+      "concepts": [
+        "持续直流需要闭合的导电路径。画图时沿着电源、负载、返回线走一圈，开路处会中断理想稳态电流。",
+        "电压是两点之间的电势差；电流是单位时间通过截面的电荷量。说“这个点 3 V”时，必须补上相对哪个参考点。",
+        "GND 通常是选定的电路参考节点，不一定接大地。非隔离模块交换电压信号时需要明确共同参考；隔离接口应遵循其连接规范。"
+      ],
+      "formula": "V_AB = V_A − V_B；I = ΔQ / Δt",
+      "example": [
+        "A 相对公共参考点是 5 V，B 是 2 V。",
+        "A 对 B 的电压是 5 − 2 = 3 V。",
+        "交换表笔后 B 对 A 是 −3 V；负号只是方向反了。"
+      ],
+      "misconception": "电流不会在负载中被“吃掉”；负载把电能转成其他形式，回路中的电荷仍守恒。",
+      "practice": "画电池—开关—电阻的闭合回路；再画断开开关的情况，标出电压测量的两个点。",
+      "acceptance": "指出开路时可以有电压但没有理想稳态回路电流。",
+      "quiz": {
+        "question": "A=5 V、B=2 V（同一参考），V_BA 是？",
+        "options": [
+          "7 V",
+          "3 V",
+          "−3 V"
+        ],
+        "answer": 2,
+        "explanation": "电压有方向，V_BA = V_B − V_A = −3 V。"
+      },
+      "sources": [
+        {
+          "title": "What Are Electric Circuits?",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-1/electric-circuits/"
+        },
+        {
+          "title": "Wires and Connections",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-9/wires-and-connections/"
+        }
+      ],
+      "lab": "measurement",
+      "terms": "闭合回路 共地 GND 地线 电势差 开路 短路",
+      "minutes": 30,
+      "prerequisites": [
+        "units"
+      ]
+    },
+    {
+      "id": "meter",
+      "stage": "start",
+      "title": "03 · 先学会正确测量",
+      "question": "电压档和电流档为什么不能用同一种接法？",
+      "concepts": [
+        "电压表跨接在两个节点之间，理想输入电阻很大，尽量不改变原电路。电流表串入被测支路，理想内阻很小。",
+        "把电流档直接跨在电源两端会形成危险的低阻通路。电阻档由表内部供电，应先断开外部供电并确认储能元件已安全放电。",
+        "本路线先用网页模型或纸上电路；实物只用有保护的低压限流电源，并核对表笔插孔、量程和元件额定值。市电、拆电源和高能电池不属于入门练习。"
+      ],
+      "formula": "电压：并联测；电流：串联测；电阻：断电测",
+      "example": [
+        "要测 1 kΩ 电阻两端电压：表拨直流电压档，跨接两端。",
+        "要测支路电流：先断电，在支路断开处串入表，再按仪表规范操作。",
+        "要测阻值：断电、确认放电，必要时断开一端排除并联支路影响。"
+      ],
+      "misconception": "通断蜂鸣不等于任意两点都是同一节点；表的判定阈值和并联通路会影响结果。",
+      "practice": "在接线练习中选择电压、电流、电阻三种测量，先画接法并解释会不会改变电路。",
+      "acceptance": "能识别错误的电流档跨电源接法，区分电阻读数与通断判断。",
+      "quiz": {
+        "question": "测电阻前首先应做什么？",
+        "options": [
+          "切断外部供电并确认储能已安全释放",
+          "把量程调到最大电流",
+          "跨接电源"
+        ],
+        "answer": 0,
+        "explanation": "电阻档会施加内部测试信号，外部电压与残余电荷会造成错误读数或损坏。"
+      },
+      "sources": [
+        {
+          "title": "Safe Meter Usage",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-3/safe-meter-usage/"
+        },
+        {
+          "title": "Multimeters",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-8/multimeters/"
+        }
+      ],
+      "lab": "measurement",
+      "terms": "万用表 表笔 电压档 电流档 电阻档 安全 测量",
+      "minutes": 30,
+      "prerequisites": [
+        "circuit"
+      ]
+    },
+    {
+      "id": "ohm",
+      "stage": "start",
+      "title": "04 · 欧姆定律与功率",
+      "question": "为什么电阻会发热，换小一点又更亮？",
+      "concepts": [
+        "对保持近似恒定阻值的电阻，电压、电流和阻值满足 V=IR。把电压增大或阻值减小，电流就增大。",
+        "功率表示每秒转换的能量，P=VI。对电阻还能写成 I²R 或 V²/R，方便由已知量计算。",
+        "元件的功率额定值不是实际耗电值。实际功耗由电路决定，选型还需考虑环境、散热和降额；二极管等非线性器件不能直接当恒定电阻。"
+      ],
+      "formula": "I = V/R；P = VI = I²R = V²/R（电阻）",
+      "example": [
+        "5 V 加在 1 kΩ 电阻上：I=5/1000=5 mA。",
+        "P=5×0.005=0.025 W，即 25 mW。",
+        "保持 5 V，把电阻改成 100 Ω：50 mA、0.25 W，功耗增加十倍。"
+      ],
+      "misconception": "“更大功率的电源会强行灌入额定电流”不成立；正常恒压供电下电流由负载与电源限流状态共同决定。",
+      "practice": "先算 3 V、1 kΩ 的电流与功率，再用直流练习对照趋势；注明这是计算结果。",
+      "acceptance": "写出公式、代入值、单位，并解释阻值减半时电流和功率的变化。",
+      "quiz": {
+        "question": "恒压条件下，电阻减半，电阻功耗怎样变？",
+        "options": [
+          "减半",
+          "不变",
+          "变为两倍"
+        ],
+        "answer": 2,
+        "explanation": "P=V²/R，V 不变时功率与 R 成反比。"
+      },
+      "sources": [
+        {
+          "title": "Ohm’s Law - How Voltage, Current, and Resistance Relate",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-2/voltage-current-resistance-relate/"
+        },
+        {
+          "title": "Calculating Electric Power",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-2/calculating-electric-power/"
+        },
+        {
+          "title": "Intro Lab - Ohm’s Law",
+          "url": "https://www.allaboutcircuits.com/textbook/experiments/chpt-2/ohms-law/"
+        }
+      ],
+      "lab": "dc",
+      "terms": "欧姆定律 功率 发热 限流 电源额定",
+      "minutes": 30,
+      "prerequisites": [
+        "meter"
+      ]
+    },
+    {
+      "id": "networks",
+      "stage": "dc",
+      "title": "05 · 串并联与守恒",
+      "question": "电流遇到岔路怎样分，电压又在哪里掉下去？",
+      "concepts": [
+        "串联元件共用同一条电流路径，电流相同；并联支路连接同一对节点，电压相同。先判断节点，不能只凭图画得横还是竖。",
+        "KCL 来自电荷守恒：稳态节点流入与流出的电流代数和为零。KVL 表示沿闭合回路的电压升降代数和为零。",
+        "先给电流方向与电压极性作假设，算出负数说明真实方向相反，不必重画整个问题。"
+      ],
+      "formula": "串联 R_eq=R₁+R₂；并联 1/R_eq=1/R₁+1/R₂；ΣI=0，ΣV=0",
+      "example": [
+        "两个 1 kΩ 电阻串联在 6 V 上，总电阻 2 kΩ。",
+        "回路电流 3 mA，每只电阻压降 3 V，6−3−3=0。",
+        "改为并联，每支路 6 mA，总电流 12 mA，总电阻 500 Ω。"
+      ],
+      "misconception": "并联支路电流不一定平分；只有阻值相等且端电压相同时才相等。",
+      "practice": "画出同样两个电阻的串联和并联版本，为每个节点与回路写一个守恒检查。",
+      "acceptance": "同时用等效电阻和 KCL/KVL 得到一致答案。",
+      "quiz": {
+        "question": "两个相同电阻并联后的等效阻值是单只的？",
+        "options": [
+          "一半",
+          "两倍",
+          "不变"
+        ],
+        "answer": 0,
+        "explanation": "两个相同支路的总电流加倍，同电压下等效电阻减半。"
+      },
+      "sources": [
+        {
+          "title": "Series Circuits and the Application of Ohm’s Law",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-5/simple-series-circuits/"
+        },
+        {
+          "title": "Parallel Circuits and the Application of Ohm’s Law",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-5/simple-parallel-circuits/"
+        },
+        {
+          "title": "Kirchhoff’s Voltage Law (KVL)",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-6/kirchhoffs-voltage-law-kvl/"
+        },
+        {
+          "title": "Kirchhoff’s Current Law (KCL)",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-6/kirchhoffs-current-law-kcl/"
+        }
+      ],
+      "lab": "dc",
+      "terms": "串联 并联 KCL KVL 基尔霍夫 节点",
+      "minutes": 30,
+      "prerequisites": [
+        "ohm"
+      ]
+    },
+    {
+      "id": "divider",
+      "stage": "dc",
+      "title": "06 · 分压器为什么一接负载就变了",
+      "question": "视频说两个相同电阻得到一半电压，为什么我的不是？",
+      "concepts": [
+        "无负载分压器中，两只串联电阻电流相同，因此输出等于输入乘以下方阻值所占比例。",
+        "输出接入负载后，负载与下方电阻并联。下方等效阻值减小，分压比随之下降；读数变化不是公式失效，而是电路变了。",
+        "提高分压电阻会节省静态电流，却更容易被有限输入阻抗加载。选择阻值要兼顾功耗、负载、噪声和响应速度。"
+      ],
+      "formula": "无负载 V_out=V_in R₂/(R₁+R₂)；有负载用 R₂∥R_L 替代 R₂",
+      "example": [
+        "5 V、R₁=R₂=10 kΩ，空载输出 2.5 V。",
+        "接上 R_L=10 kΩ，下方等效为 5 kΩ。",
+        "输出变成 5×5/(10+5)≈1.67 V。"
+      ],
+      "misconception": "分压器不能当作适用于任意负载的稳压电源。",
+      "practice": "打开分压练习，先预测空载和 10 kΩ 负载输出，再记录两者差值。",
+      "acceptance": "能画出负载所在的并联关系，并解释输出下降原因。",
+      "quiz": {
+        "question": "若负载阻值继续减小，输出通常怎样变？",
+        "options": [
+          "升高",
+          "降低",
+          "保持一半"
+        ],
+        "answer": 1,
+        "explanation": "下方并联等效阻值更小，分压比进一步降低。"
+      },
+      "sources": [
+        {
+          "title": "Voltage Divider Circuits",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-6/voltage-divider-circuits/"
+        },
+        {
+          "title": "DC Lab - Voltage Divider",
+          "url": "https://www.allaboutcircuits.com/textbook/experiments/chpt-3/voltage-divider/"
+        }
+      ],
+      "lab": "dc",
+      "terms": "分压 负载效应 输入阻抗 稳压",
+      "minutes": 30,
+      "prerequisites": [
+        "networks"
+      ]
+    },
+    {
+      "id": "thevenin",
+      "stage": "dc",
+      "title": "07 · 把复杂电路化成一个电源",
+      "question": "为什么接上设备后电源电压会下跌？",
+      "concepts": [
+        "对符合条件的线性两端网络，可以用一个开路电压源串联等效电阻表示，这就是戴维南等效。它让你从负载看到的行为入手，不必每次重算内部所有支路。",
+        "求电阻时独立理想电压源置零可短路，独立电流源置零可开路；含受控源的电路不能照搬全部关掉，要用测试源等方法。",
+        "等效只对所讨论端口和模型成立。真实电池的内阻会随温度、荷电状态和时间变化，不能用一次估计覆盖所有工况。"
+      ],
+      "formula": "V_L=V_th R_L/(R_th+R_L)",
+      "example": [
+        "等效电源 5 V，串联电阻 100 Ω，负载 900 Ω。",
+        "电流 5/(100+900)=5 mA。",
+        "负载电压 4.5 V，内部串联部分损失 0.5 V。"
+      ],
+      "misconception": "“空载电压正常”不能排除供电问题；还要看加载后的电压与电流。",
+      "practice": "把 10 kΩ/10 kΩ 的 5 V 分压器等效成 2.5 V 串 5 kΩ，重算 10 kΩ 负载。",
+      "acceptance": "两种方法都得到约 1.67 V，并写明线性模型条件。",
+      "quiz": {
+        "question": "5 V 电源串 100 Ω、接 900 Ω 负载，输出是多少？",
+        "options": [
+          "5 V",
+          "0.5 V",
+          "4.5 V"
+        ],
+        "answer": 2,
+        "explanation": "总电流 5 mA，负载压降是 5 mA×900 Ω=4.5 V。"
+      },
+      "sources": [
+        {
+          "title": "How to Use Thevenin’s Theorem",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-10/thevenins-theorem/"
+        },
+        {
+          "title": "Voltage Divider Circuits",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-6/voltage-divider-circuits/"
+        }
+      ],
+      "lab": "dc",
+      "terms": "戴维南 等效 内阻 压降 电源下跌",
+      "minutes": 30,
+      "prerequisites": [
+        "divider"
+      ]
+    },
+    {
+      "id": "power",
+      "stage": "dc",
+      "title": "08 · 电池、续航与供电预算",
+      "question": "1000 mAh 的电池能让机器人运行一小时吗？",
+      "concepts": [
+        "Ah 表示电荷容量，不是功率，也不是直接的能量。比较不同电压电池时，用标称电压乘 Ah 估算 Wh 更有意义。",
+        "平均负载、转换效率和可用容量决定粗略续航；峰值和堵转电流决定供电是否瞬时掉压。两张预算表要分开。",
+        "数据表的测试条件决定容量含义；温度、放电倍率和截止电压都会影响结果。入门只做预算，不自行拼接或充放电裸电芯。"
+      ],
+      "formula": "E≈V_nom×C_Ah；t≈E×η/P_avg",
+      "example": [
+        "3.7 V、1 Ah 的标称能量约为 3.7 Wh。",
+        "假设转换效率 80%，可给负载的估算能量 2.96 Wh。",
+        "平均负载 1 W，理想预算约 2.96 h；这不是实测续航。"
+      ],
+      "misconception": "把 mAh 直接除以跨不同电压侧的电流会漏掉转换关系。",
+      "practice": "列控制板、传感器和驱动器的平均/峰值功耗来源；未知参数写“待查”，不要填猜测值为实测。",
+      "acceptance": "给出带假设的续航区间，并单独列出峰值电流检查项。",
+      "quiz": {
+        "question": "3.7 V、2 Ah 电池的标称能量约为？",
+        "options": [
+          "7.4 Wh",
+          "2 W",
+          "3.7 Ah"
+        ],
+        "answer": 0,
+        "explanation": "标称能量近似等于 3.7 V×2 Ah=7.4 Wh。"
+      },
+      "sources": [
+        {
+          "title": "Battery Ratings",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-11/battery-ratings/"
+        },
+        {
+          "title": "Calculating Electric Power",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-2/calculating-electric-power/"
+        }
+      ],
+      "lab": "",
+      "terms": "电池 续航 mAh Wh 供电预算 堵转 峰值",
+      "minutes": 30,
+      "prerequisites": [
+        "thevenin"
+      ]
+    },
+    {
+      "id": "rc",
+      "stage": "signals",
+      "title": "09 · 电容与时间常数",
+      "question": "电容为什么能让电压慢慢变，而不是马上跳？",
+      "concepts": [
+        "电容储存电场能量。对理想电容 i=C·dv/dt，有限电流只能以有限速度改变电压；电压突变需要理想无限大脉冲电流。",
+        "电阻限制充电电流，随着电容电压接近电源，电阻两端压差变小，充电速度逐渐放慢。",
+        "RC 时间常数衡量接近新稳态的快慢。约 5τ 接近 99.3%，并非数学上已经完全充满；初始电压不同要用一般表达式。"
+      ],
+      "formula": "τ=RC；从 0 V 充电时 V_C=V_s(1−e^(−t/RC))",
+      "example": [
+        "R=10 kΩ、C=100 μF，所以 τ=1 s。",
+        "5 V 阶跃输入后，1 s 时约 3.16 V。",
+        "5 s 时约 4.97 V；R 或 C 加倍会让同一充电比例所需时间加倍。"
+      ],
+      "misconception": "电容不是只在“满了”与“没满”之间切换；其电压连续变化。",
+      "practice": "在 RC 动画中暂停到 1τ 与 5τ，比较读数；把 C 加倍后先预测再观察。",
+      "acceptance": "能解释初始快、后来慢，并区分动画计算与真实电容的漏电、容差。",
+      "quiz": {
+        "question": "R 与 C 都加倍，τ 变成几倍？",
+        "options": [
+          "2 倍",
+          "4 倍",
+          "不变"
+        ],
+        "answer": 1,
+        "explanation": "τ=RC，两项都乘 2，结果乘 4。"
+      },
+      "sources": [
+        {
+          "title": "Electric Fields and Capacitance",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-13/electric-fields-capacitance/"
+        },
+        {
+          "title": "Capacitor Transient Response",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-16/capacitor-transient-response/"
+        },
+        {
+          "title": "DC Lab - Capacitor Charging and Discharging",
+          "url": "https://www.allaboutcircuits.com/textbook/experiments/chpt-3/capacitor-charging-and-discharging/"
+        }
+      ],
+      "lab": "rc",
+      "terms": "电容 RC 时间常数 充放电 去耦 延时",
+      "minutes": 30,
+      "prerequisites": [
+        "power"
+      ]
+    },
+    {
+      "id": "inductor",
+      "stage": "signals",
+      "title": "10 · 电感、磁场与断电尖峰",
+      "question": "线圈关掉了，为什么还可能损坏开关？",
+      "concepts": [
+        "电感储存磁场能量。其电流变化会伴随感应电压，变化越快，所需电压幅值越大。",
+        "关闭线圈供电并不意味着已有电流瞬间消失；如果没有受控的续流或吸收路径，开关两端可能出现高电压。",
+        "法拉第定律描述磁通变化产生感应电动势，楞次定律给出反抗变化的方向。运动、磁场强度和方向都重要，静止磁场不自动产生持续感应电压。"
+      ],
+      "formula": "v_L=L·di/dt；E_L=½LI²",
+      "example": [
+        "假设 L=10 mH，电流从 0.1 A 在 1 ms 内近似线性变到 0。",
+        "变化率幅值 100 A/s，因此电感电压幅值约 1 V。",
+        "若缩短到 10 μs，同样近似下变成 100 V，说明快速切断的代价。"
+      ],
+      "misconception": "这个算例是假定变化时间的估算，不是预测真实尖峰；寄生参数与保护电路会改变波形。",
+      "practice": "用电磁感应练习改变磁通变化方向，记录极性；在纸上给线圈驱动补画电流释放路径。",
+      "acceptance": "解释电流连续性与尖峰关系，并说清算例的假设。",
+      "quiz": {
+        "question": "相同 L、相同电流变化量，变化时间更短时所需电压幅值？",
+        "options": [
+          "更小",
+          "不变",
+          "更大"
+        ],
+        "answer": 2,
+        "explanation": "v=L·di/dt，变化率越大，电压幅值越大。"
+      },
+      "sources": [
+        {
+          "title": "Electromagnetic Induction",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-14/electromagnetic-induction/"
+        },
+        {
+          "title": "Inductor Voltage and Current Relationship",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-15/inductors-and-calculus/"
+        },
+        {
+          "title": "Inductor Commutating Circuits",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-3/inductor-commutating-circuits/"
+        }
+      ],
+      "lab": "exploration",
+      "terms": "电感 磁场 反电动势 续流 尖峰 电磁感应",
+      "minutes": 30,
+      "prerequisites": [
+        "rc"
+      ]
+    },
+    {
+      "id": "wave",
+      "stage": "signals",
+      "title": "11 · 波形、频率、相位与有效值",
+      "question": "交流电压的“几伏”说的是哪个数？",
+      "concepts": [
+        "周期 T 是一轮变化的时间，频率 f=1/T。相位描述两个同频波形在周期中的相对位置，不能只比较某一瞬间的高低。",
+        "峰值、峰峰值、平均值与有效值不同。有效值对应在电阻上产生相同平均发热效果的直流值。",
+        "正弦波的峰值除以 √2 才是有效值；这个换算不能直接用于方波、PWM 或含直流偏置的任意信号。"
+      ],
+      "formula": "f=1/T；纯正弦 V_rms=V_peak/√2；相位差=Δt/T×360°",
+      "example": [
+        "周期 20 ms，对应 50 Hz。",
+        "纯正弦峰值 2 V，有效值约 1.414 V。",
+        "同频波形延迟 5 ms，占周期四分之一，对应滞后 90°。"
+      ],
+      "misconception": "用峰值代替有效值计算电阻平均功耗，会把纯正弦功耗算成两倍。",
+      "practice": "画一段低压正弦波，标出周期、峰值和有效值；再画同频滞后四分之一周期的波形。",
+      "acceptance": "每个“电压数值”都附上度量类型，并能完成周期/频率换算。",
+      "quiz": {
+        "question": "周期 1 ms 的频率是？",
+        "options": [
+          "1 kHz",
+          "1 Hz",
+          "100 Hz"
+        ],
+        "answer": 0,
+        "explanation": "1/0.001 s=1000 Hz，即 1 kHz。"
+      },
+      "sources": [
+        {
+          "title": "Measurements of AC Magnitude",
+          "url": "https://www.allaboutcircuits.com/textbook/alternating-current/chpt-1/measurements-ac-magnitude/"
+        },
+        {
+          "title": "AC Phase",
+          "url": "https://www.allaboutcircuits.com/textbook/alternating-current/chpt-1/ac-phase/"
+        }
+      ],
+      "lab": "",
+      "terms": "交流 AC 周期 频率 相位 RMS 有效值 正弦",
+      "minutes": 30,
+      "prerequisites": [
+        "inductor"
+      ]
+    },
+    {
+      "id": "filter",
+      "stage": "signals",
+      "title": "12 · 阻抗、滤波与谐振",
+      "question": "“加个电容滤波”到底滤掉什么，也损失什么？",
+      "concepts": [
+        "交流稳态中阻抗同时描述幅值和相位关系。电容的电抗幅值随频率升高而下降，电感则相反；复数记法把相位一并记下来。",
+        "电阻串联、电容对地、输出取电容两端构成一阶 RC 低通。低频较容易通过，高频被逐渐衰减，响应速度也变慢。",
+        "截止频率不是一道硬墙：在理想无负载 RC 低通的截止点，电压幅值约为输入的 0.707。LC 谐振还涉及储能交换与阻尼，不能只看一个元件。"
+      ],
+      "formula": "X_C=1/(2πfC)；X_L=2πfL；RC 低通 f_c=1/(2πRC)",
+      "example": [
+        "R=1 kΩ、C=1 μF，RC=1 ms。",
+        "f_c≈159 Hz；在此频率，幅值比约为 0.707，相位滞后约 45°。",
+        "把 C 增大十倍，截止频率降为约 15.9 Hz，同时响应更慢。"
+      ],
+      "misconception": "电容接在哪里决定电路功能；“越大越好”会忽视带宽、启动过程和负载影响。",
+      "practice": "结合 RC 动画解释平滑与响应速度的取舍；纸上计算两个 C 值的截止频率。",
+      "acceptance": "能说明输出取点、假设无负载，并避免把截止频率当成完全阻断。",
+      "quiz": {
+        "question": "理想一阶 RC 低通在截止点的幅值比约为？",
+        "options": [
+          "0",
+          "1",
+          "0.707"
+        ],
+        "answer": 2,
+        "explanation": "幅值比是 1/√2，约 0.707；更高频率仍是渐进衰减。"
+      },
+      "sources": [
+        {
+          "title": "Review of R, X, and Z (Resistance, Reactance and Impedance)",
+          "url": "https://www.allaboutcircuits.com/textbook/alternating-current/chpt-5/review-of-r-x-and-z/"
+        },
+        {
+          "title": "Low-pass Filters",
+          "url": "https://www.allaboutcircuits.com/textbook/alternating-current/chpt-8/low-pass-filters/"
+        },
+        {
+          "title": "Q Factor and Bandwidth of a Resonant Circuit",
+          "url": "https://www.allaboutcircuits.com/textbook/alternating-current/chpt-6/q-and-bandwidth-resonant-circuit/"
+        }
+      ],
+      "lab": "rc",
+      "terms": "滤波 低通 截止频率 阻抗 复数 谐振 噪声 带宽",
+      "minutes": 30,
+      "prerequisites": [
+        "wave"
+      ]
+    },
+    {
+      "id": "diode",
+      "stage": "devices",
+      "title": "13 · 二极管、LED 与保护",
+      "question": "为什么 LED 不能像电阻那样直接接电源？",
+      "concepts": [
+        "二极管的电流与电压关系是非线性的。正向压降会随材料、温度与电流变化，不能把 0.7 V 或某个 LED 压降当作绝对常数。",
+        "LED 发光与通过的电流有关，常用串联电阻限制电流；先取工作电流与压降估值，再核对数据表和实际条件。",
+        "给直流线圈并联续流二极管时，正常供电期间应反偏，关断时提供电流路径。真实选型还需反向耐压、电流、速度及释放时间要求。"
+      ],
+      "formula": "LED 限流近似 R=(V_s−V_f)/I",
+      "example": [
+        "假设 V_s=5 V、V_f≈2 V、目标 I=5 mA。",
+        "估算 R=(5−2)/0.005=600 Ω；选 680 Ω 时近似 4.41 mA。",
+        "电阻耗散约 3²/680=13.2 mW；V_f 的实际变化会影响电流。"
+      ],
+      "misconception": "LED 不是自带限流的灯泡；续流二极管方向接反也可能造成短路。",
+      "practice": "画出 LED 和限流电阻的回路，分别标正常电流方向与线圈关断续流方向。",
+      "acceptance": "算例注明压降是假设，保护图注明二极管正常反偏。",
+      "quiz": {
+        "question": "保持电源与近似压降不变，限流电阻增大后 LED 电流？",
+        "options": [
+          "增大",
+          "减小",
+          "不变"
+        ],
+        "answer": 1,
+        "explanation": "I≈(V_s−V_f)/R，所以 R 增大时电流减小。"
+      },
+      "sources": [
+        {
+          "title": "Special-purpose Diodes",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-3/special-purpose-diodes/"
+        },
+        {
+          "title": "Inductor Commutating Circuits",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-3/inductor-commutating-circuits/"
+        }
+      ],
+      "lab": "switching",
+      "terms": "二极管 LED 整流 限流 续流二极管 压降",
+      "minutes": 30,
+      "prerequisites": [
+        "filter"
+      ]
+    },
+    {
+      "id": "switch",
+      "stage": "devices",
+      "title": "14 · BJT、MOSFET 与 GPIO",
+      "question": "为什么 GPIO 能点灯，却不该直接带电机？",
+      "concepts": [
+        "GPIO 是逻辑接口，有电压和电流能力限制。大负载的电流应经电源、负载和驱动器返回，由 GPIO 控制驱动器。",
+        "BJT 开关需要足够基极电流，不能只拿小信号放大倍数保证饱和。MOSFET 则要看指定栅源电压下的导通电阻，阈值电压只表示开始导通。",
+        "即使 MOSFET 静态栅极电流很小，切换时仍需给栅电荷充放电；开关损耗、启动峰值和散热都会约束驱动方案。"
+      ],
+      "formula": "MOSFET 导通损耗近似 P=I²R_DS(on)；栅源电压 V_GS=V_G−V_S",
+      "example": [
+        "假设目标 V_GS 下 R_DS(on)=0.1 Ω，负载电流 0.5 A。",
+        "导通压降约 0.05 V，导通损耗约 0.025 W。",
+        "电流变成 2 A，导通损耗变成 0.4 W；此处未计开关损耗。"
+      ],
+      "misconception": "V_GS(th)=2 V 不代表 3.3 V GPIO 一定能充分驱动；要查对应条件的 R_DS(on)。",
+      "practice": "打开驱动预算练习，分别追踪控制信号和负载电流路径，列出仍需查数据表的参数。",
+      "acceptance": "能指出 GPIO、驱动器与负载的边界，不把网页预算当实物驱动成功。",
+      "quiz": {
+        "question": "判断 MOSFET 是否适合 3.3 V 驱动，最该查哪项？",
+        "options": [
+          "实际 V_GS 条件下的导通电阻规格",
+          "只看阈值电压",
+          "只看外壳大小"
+        ],
+        "answer": 0,
+        "explanation": "导通电阻必须在实际可用栅源电压下有保证；还要核对电流、温度等条件。"
+      },
+      "sources": [
+        {
+          "title": "The Bipolar Junction Transistor (BJT) as a Switch",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-4/transistor-switch-bjt/"
+        },
+        {
+          "title": "Enhancement-type IGFETs",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-6/enhancement-type-igfets/"
+        }
+      ],
+      "lab": "switching",
+      "terms": "GPIO 晶体管 BJT MOSFET 栅极 驱动 阈值 饱和",
+      "minutes": 30,
+      "prerequisites": [
+        "diode"
+      ]
+    },
+    {
+      "id": "opamp",
+      "stage": "devices",
+      "title": "15 · 放大器、反馈与饱和",
+      "question": "运放为什么有时按公式放大，有时顶在电源边上？",
+      "concepts": [
+        "放大器使用供电能量，把输入变化映射成更大的输出变化。电压增益是输出与输入之比，不意味着凭空创造能量。",
+        "在稳定的负反馈、线性工作和足够环路增益等条件下，运放两输入电压近似相等，可推导闭环增益；并不是两输入真的短接。",
+        "输出范围、输入共模范围、带宽和压摆率都会限制公式。要求的输出超出范围时会饱和，不能继续套“虚短”求解。"
+      ],
+      "formula": "同相放大器 A_v≈1+R_f/R_g；V_out≈A_v V_in",
+      "example": [
+        "R_f=9 kΩ，R_g=1 kΩ，闭环增益约 10。",
+        "0.2 V 输入，理想输出 2 V；仍须检查器件输入输出范围。",
+        "0.8 V 输入要求 8 V，单 5 V 供电的普通运放无法达到，公式进入失效区域。"
+      ],
+      "misconception": "“虚短”是特定工作条件下的近似，不是任何运放电路都成立的规则。",
+      "practice": "画负反馈路径，列出理想增益与三个数据表限制；为 0.2 V 和 0.8 V 输入判断线性可能性。",
+      "acceptance": "能解释为什么供电限制可能先于理想增益公式决定输出。",
+      "quiz": {
+        "question": "单 5 V 供电、理想增益 10、输入 0.8 V，能保证输出 8 V 吗？",
+        "options": [
+          "能",
+          "只要电阻精确就能",
+          "不能"
+        ],
+        "answer": 2,
+        "explanation": "输出要求超出供电所能支持的范围，实际会受输出摆幅等条件限制。"
+      },
+      "sources": [
+        {
+          "title": "Negative Feedback",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-8/negative-feedback/"
+        },
+        {
+          "title": "Op-Amp Practical Considerations",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-8/op-amp-practical-considerations/"
+        },
+        {
+          "title": "Decibels Equations",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-1/decibels-equations/"
+        }
+      ],
+      "lab": "",
+      "terms": "运放 放大器 增益 反馈 虚短 饱和 dB",
+      "minutes": 30,
+      "prerequisites": [
+        "switch"
+      ]
+    },
+    {
+      "id": "motor",
+      "stage": "devices",
+      "title": "16 · 电机、变压器与能量转换",
+      "question": "为什么电机启动和正常转动时的电流差很多？",
+      "concepts": [
+        "电磁系统把电能、磁场和机械运动联系起来。电机转动产生反电动势，抵消一部分供电电压；起动或堵转时这部分作用减弱，电流可能更大。",
+        "变压器依赖变化的磁通传能，匝数比影响电压比；理想情况下升压伴随可用电流按比例减小，能量不会凭空增加。",
+        "电机与电力交流是较深的分支。本节先做能量和额定值推理，实际驱动需查电机与驱动器规格；不安排市电变压器接线。"
+      ],
+      "formula": "理想变压器 V₂/V₁=N₂/N₁；近似 V₁I₁=V₂I₂",
+      "example": [
+        "理想变压器匝数比 N₂/N₁=2，输入 6 V 交流。",
+        "输出约 12 V；若输出 0.1 A，输出功率 1.2 W。",
+        "无损理想输入电流约 0.2 A；真实还有损耗与额定值限制。"
+      ],
+      "misconception": "变压器不是接任意直流都能持续变压；电机堵转电流也不能拿正常运行电流代替。",
+      "practice": "列一张电机供电检查表：额定电压、运行/堵转电流、驱动限制、保护路径；未知项保留待查。",
+      "acceptance": "把平均功率与瞬态/堵转能力分开，并解释理想变压器功率守恒。",
+      "quiz": {
+        "question": "理想变压器把电压升为两倍、功率不变时，电流变为？",
+        "options": [
+          "两倍",
+          "一半",
+          "不变"
+        ],
+        "answer": 1,
+        "explanation": "P=VI，在相同功率下电压加倍，电流减半。"
+      },
+      "sources": [
+        {
+          "title": "Step-up and Step-down Transformers",
+          "url": "https://www.allaboutcircuits.com/textbook/alternating-current/chpt-9/step-up-and-step-down-transformers/"
+        },
+        {
+          "title": "Polyphase Motor Design",
+          "url": "https://www.allaboutcircuits.com/textbook/alternating-current/chpt-10/polyphase-motor-design/"
+        },
+        {
+          "title": "Inductor Commutating Circuits",
+          "url": "https://www.allaboutcircuits.com/textbook/semiconductors/chpt-3/inductor-commutating-circuits/"
+        }
+      ],
+      "lab": "exploration",
+      "terms": "电机 变压器 匝数 反电动势 堵转 三相 能量",
+      "minutes": 30,
+      "prerequisites": [
+        "opamp"
+      ]
+    },
+    {
+      "id": "levels",
+      "stage": "digital",
+      "title": "17 · 二进制背后仍然是电压",
+      "question": "3.3 V 的 1 能直接接到 5 V 的输入吗？",
+      "concepts": [
+        "数字 0 和 1 是对一段电压范围的解释，不是所有芯片统一的两个电压值。输入阈值由逻辑系列与供电条件决定。",
+        "应比较输出低/高电平的保证值与接收端阈值，还要检查输入绝对最大额定值。达到逻辑阈值不等于电气连接安全。",
+        "二进制用位权表示数值。N 位有 2^N 个不同编码，但编码代表电压、字符还是状态，需要系统定义。"
+      ],
+      "formula": "高电平裕量=V_OH(min)−V_IH(min)；N 位有 2^N 个码",
+      "example": [
+        "某接收器要求高电平至少 3.5 V，发送器只能保证 3.0 V。",
+        "高电平裕量 3.0−3.5=−0.5 V，不能保证识别。",
+        "即使实物偶尔识别，也不能据此认定全温度/供电条件下兼容。"
+      ],
+      "misconception": "“它们都是数字信号”不能证明电平兼容；悬空输入也不等于可靠的 0。",
+      "practice": "用假想规格表判断一组接口能否可靠连接，写明阈值、绝对最大值和共同参考。",
+      "acceptance": "用保证值作判断，而不是只看 3.3 V/5 V 名称。",
+      "quiz": {
+        "question": "4 位可以表示多少种不同编码？",
+        "options": [
+          "4",
+          "8",
+          "16"
+        ],
+        "answer": 2,
+        "explanation": "每位两种可能，4 位一共有 2^4=16 种。"
+      },
+      "sources": [
+        {
+          "title": "Logic Signal Voltage Levels",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-3/logic-signal-voltage-levels/"
+        },
+        {
+          "title": "Decimal versus Binary Numeration",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-1/decimal-versus-binary-numeration/"
+        }
+      ],
+      "lab": "logic",
+      "terms": "数字 电平 逻辑阈值 噪声裕量 3.3V 5V 二进制",
+      "minutes": 30,
+      "prerequisites": [
+        "motor"
+      ]
+    },
+    {
+      "id": "logic",
+      "stage": "digital",
+      "title": "18 · 逻辑门与布尔表达式",
+      "question": "“满足条件才启动”怎样变成能检查的规则？",
+      "concepts": [
+        "与、或、非把输入条件组合成输出。先用自然语言明确规则，再列真值表，比直接堆代码更容易发现遗漏。",
+        "组合逻辑的输出只由当前输入决定；半加器、选择器和译码器都属于这类组织方式。",
+        "德摩根定律帮助理解条件取反：不是“都满足”等于“至少一个不满足”。它也用于化简与逻辑门实现。"
+      ],
+      "formula": "NOT(A AND B) = (NOT A) OR (NOT B)",
+      "example": [
+        "定义 A=已使能，B=无故障，输出 Y=A AND B。",
+        "输入 00、01、10 时输出均为 0，11 时输出为 1。",
+        "停止条件 NOT Y = NOT A OR NOT B。这里只是逻辑示例，不是认证安全控制器。"
+      ],
+      "misconception": "“与”的整体取反不是分别取反后继续相与。",
+      "practice": "在逻辑练习中逐项枚举两个输入，记录四行真值表，再写出停止条件。",
+      "acceptance": "自然语言、真值表和表达式三者一致。",
+      "quiz": {
+        "question": "NOT(A AND B) 等价于？",
+        "options": [
+          "NOT A OR NOT B",
+          "NOT A AND NOT B",
+          "A OR B"
+        ],
+        "answer": 0,
+        "explanation": "德摩根定律：整体取反后，每个输入取反，同时 AND 变 OR。"
+      },
+      "sources": [
+        {
+          "title": "DeMorgan’s Theorems",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-7/demorgans-theorems/"
+        },
+        {
+          "title": "Finite State Machines",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-11/finite-state-machines/"
+        }
+      ],
+      "lab": "logic",
+      "terms": "逻辑门 AND OR NOT 布尔 真值表 德摩根 组合逻辑",
+      "minutes": 30,
+      "prerequisites": [
+        "levels"
+      ]
+    },
+    {
+      "id": "state",
+      "stage": "digital",
+      "title": "19 · 按键抖动、锁存与状态机",
+      "question": "为什么按一次按钮会被程序数成好几次？",
+      "concepts": [
+        "机械触点闭合时可能短暂反复接触与分离，数字输入看到多个边沿。需要把电气波形与“用户按了一次”的事件区分开。",
+        "锁存器能保存状态，输出与历史有关；不同门实现的 SR 锁存器有不同的有效电平与禁止输入组合，先确认具体电路。",
+        "去抖可以要求输入稳定一段时间再接受变化，代价是延迟。状态机把状态、输入、转移和输出明确写出，帮助处理重复事件。"
+      ],
+      "formula": "去抖示例：连续稳定 Δt 后确认一次变化；Δt 要按实际波形选择",
+      "example": [
+        "假设采样得到 0、1、0、1、1、1。",
+        "若规则是连续三次相同才确认，最后三个 1 才使稳定状态变为 1。",
+        "这是离散教学规则；真实还需定义采样间隔、释放事件与长按行为。"
+      ],
+      "misconception": "锁存器与去抖不是同义词，软件延时也不是对所有按键都有效的固定常数。",
+      "practice": "在按键练习中比较原始边沿与去抖事件，再画“释放→待确认→按下”的状态图。",
+      "acceptance": "说明一次按下如何只产生一个事件，同时保留响应延迟信息。",
+      "quiz": {
+        "question": "去抖时间增大通常带来什么代价？",
+        "options": [
+          "ADC 位数下降",
+          "确认按下更迟",
+          "电源电压上升"
+        ],
+        "answer": 1,
+        "explanation": "稳定时间要求越长，确认输入变化的时间越晚。"
+      },
+      "sources": [
+        {
+          "title": "Contact “Bounce”",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-4/contact-bounce/"
+        },
+        {
+          "title": "The S-R Latch",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-10/s-r-latch/"
+        },
+        {
+          "title": "Finite State Machines",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-11/finite-state-machines/"
+        }
+      ],
+      "lab": "logic",
+      "terms": "按键 去抖 锁存 SR 状态机 时序 边沿",
+      "minutes": 30,
+      "prerequisites": [
+        "logic"
+      ]
+    },
+    {
+      "id": "adc",
+      "stage": "digital",
+      "title": "20 · ADC、量化与采样",
+      "question": "12 位 ADC 就代表传感器一定很精确吗？",
+      "concepts": [
+        "ADC 把输入电压映射成有限的数字编码。分辨率描述台阶大小，准确度还受参考电压、偏置、噪声和非线性等影响。",
+        "时间上也只能在采样时刻观察。对经过限带的信号，采样率须高于最高频率的两倍才能满足理想重建条件，实际还需要滤波过渡带和余量。",
+        "采样输入不是永远无限大阻抗；驱动源、采样电容和采集时间会影响建立误差。查看 ADC 数据表，把静态精度和动态采样分别考虑。"
+      ],
+      "formula": "理想量化步长约 q=V_ref/2^N；理想限带采样要求 f_s>2f_max",
+      "example": [
+        "12 位、3.3 V 参考时，共有 4096 个编码。",
+        "台阶约 3.3/4096=0.806 mV；量程端点的具体编码约定看数据表。",
+        "即使台阶很小，参考偏差 1% 也会带来明显比例误差，不能等同于 0.806 mV 的准确度。"
+      ],
+      "misconception": "提高位数不能挽救欠采样混叠，也不能自动消除传感器误差。",
+      "practice": "在 ADC 练习比较不同位数和采样间隔；记录丢失的是幅值细节还是时间变化。",
+      "acceptance": "能分开说明分辨率、准确度、采样率和抗混叠滤波。",
+      "quiz": {
+        "question": "只提高 ADC 位数能解决欠采样混叠吗？",
+        "options": [
+          "能",
+          "信号大时能",
+          "不能"
+        ],
+        "answer": 2,
+        "explanation": "位数改变幅值量化，混叠来自时间采样不足，需要限带与合适采样率。"
+      },
+      "sources": [
+        {
+          "title": "Practical Considerations of ADC Circuits",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-13/practical-considerations-adc-circuits/"
+        },
+        {
+          "title": "Decimal versus Binary Numeration",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-1/decimal-versus-binary-numeration/"
+        }
+      ],
+      "lab": "interface",
+      "terms": "ADC DAC 采样 量化 混叠 奈奎斯特 分辨率 准确度",
+      "minutes": 30,
+      "prerequisites": [
+        "state"
+      ]
+    },
+    {
+      "id": "pwm",
+      "stage": "system",
+      "title": "21 · PWM 与数字通信",
+      "question": "PWM 输出 50%，是不是就得到稳定的一半电压？",
+      "concepts": [
+        "PWM 用固定或可控周期中的高电平比例表达控制量。占空比影响平均值，但引脚瞬时仍在高低电平之间切换。",
+        "0 到 V_H 的理想 PWM，平均电压为 D·V_H；电阻负载平均功率却由电压平方的平均值决定，不能用平均电压直接平方替代。",
+        "通信还要约定信息如何编码、帧如何划分和速率如何匹配。电气层连得通，不代表协议一致；长线和快速边沿还要考虑信号完整性。"
+      ],
+      "formula": "D=t_on/T；V_avg=D·V_H；电阻负载 P_avg=D·V_H²/R",
+      "example": [
+        "5 V、50% 占空比的理想 PWM，平均电压 2.5 V。",
+        "接 100 Ω 纯电阻，平均功率为 0.5×25/100=0.125 W。",
+        "稳定 2.5 V 直流接同电阻只有 0.0625 W，二者不同。"
+      ],
+      "misconception": "PWM 的平均值不是稳定直流；滤波器、负载和开关频率决定实际响应。",
+      "practice": "画 25%、50%、75% 占空比波形，分别算平均电压；标明这是理想信号，不代表电机速度一定同比例。",
+      "acceptance": "区分瞬时波形、平均电压与电阻平均功耗，并写出通信需要的共同约定。",
+      "quiz": {
+        "question": "5 V、50% PWM 驱动 100 Ω 纯电阻的平均功率？",
+        "options": [
+          "0.125 W",
+          "0.0625 W",
+          "0.25 W"
+        ],
+        "answer": 0,
+        "explanation": "高电平时功率为 25/100=0.25 W，占一半时间，平均 0.125 W。"
+      },
+      "sources": [
+        {
+          "title": "Analog Lab - PWM Power Controller",
+          "url": "https://www.allaboutcircuits.com/textbook/experiments/chpt-6/pwm-power-controller/"
+        },
+        {
+          "title": "Introduction to Digital Communication",
+          "url": "https://www.allaboutcircuits.com/textbook/digital/chpt-14/introduction-to-digital-communication/"
+        }
+      ],
+      "lab": "interface",
+      "terms": "PWM 占空比 通信 总线 协议 串口 平均功率",
+      "minutes": 30,
+      "prerequisites": [
+        "adc"
+      ]
+    },
+    {
+      "id": "reference",
+      "stage": "system",
+      "title": "22 · 会查公式，也会检查模型",
+      "question": "复杂公式出现时，怎样知道自己该补哪块数学？",
+      "concepts": [
+        "先把问题归到“直流稳态、暂态、交流稳态或数字状态”，再选模型。同一个电容在不同时间尺度下会有不同的近似处理方式。",
+        "参考卷是工具箱：单位与符号用于读图，代数用于解网络，三角与复数用于相位，微积分用于变化率与积累。按问题补数学即可。",
+        "SPICE 在给定元件模型和分析选项下计算结果。它能发现设计问题，但不会自动包含所有布局、热、噪声和器件离散性；网页教学模型与 SPICE 也要分开记录。"
+      ],
+      "formula": "dB 功率比=10log₁₀(P₂/P₁)；电压比用 20log₁₀ 需明确比较与阻抗条件",
+      "example": [
+        "功率放大 100 倍，对应 10log₁₀(100)=20 dB。",
+        "同阻抗下电压放大 10 倍，功率也放大 100 倍。",
+        "因此该条件下电压增益为 20log₁₀(10)=20 dB。"
+      ],
+      "misconception": "一张仿真曲线不能证明硬件可靠；单位正确、模型适用和测量对照缺一不可。",
+      "practice": "为前面一个算例写“模型—公式—参数—预期—限制”；选读 SPICE 入门，列出仿真还需配置的内容。",
+      "acceptance": "说明用了哪些假设，能找到参考卷中对应工具，区分计算/仿真/实测。",
+      "quiz": {
+        "question": "功率增加 10 倍对应多少 dB？",
+        "options": [
+          "20 dB",
+          "10 dB",
+          "100 dB"
+        ],
+        "answer": 1,
+        "explanation": "功率比使用 10log₁₀(10)=10 dB。"
+      },
+      "sources": [
+        {
+          "title": "Introduction to SPICE",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-7/introduction-to-spice/"
+        },
+        {
+          "title": "Decibels Equations",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-1/decibels-equations/"
+        },
+        {
+          "title": "Metric Prefixes and Unit Conversions",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-1/metric-prefixes-and-unit-conversions/"
+        }
+      ],
+      "lab": "",
+      "terms": "SPICE 仿真 dB 分贝 复数 微积分 参考公式 模型",
+      "minutes": 30,
+      "prerequisites": [
+        "pwm"
+      ]
+    },
+    {
+      "id": "debug",
+      "stage": "system",
+      "title": "23 · 排障：让每次测量排除一个猜想",
+      "question": "电路不工作，是不是先把所有东西换一遍？",
+      "concepts": [
+        "先记录预期与实际差异，再列候选原因。检查供电、参考地、连接和配置，优先选择成本低、区分力高的测量。",
+        "每次只改变一个条件，保留修改前后的记录。否则即使恢复工作，也不知道哪一步真正起作用。",
+        "排障的核心是证据：一个节点读数可能与多个故障相容，不能把模型给出的候选当成唯一诊断。负结果同样有价值。"
+      ],
+      "formula": "记录链：现象 → 候选原因 → 区分测量 → 观察 → 更新判断",
+      "example": [
+        "分压输出接近 0 V，候选包括无供电、上方开路、输出短接等。",
+        "先测电源两端是否符合预期，再检查节点连通关系。",
+        "如果仅知道输出为 0，证据仍不足；下一次测量应区分剩余候选。"
+      ],
+      "misconception": "“换完好了”只是现象，不能证明所有被换掉的元件原来都有问题。",
+      "practice": "打开直流排查或连接检查，写下至少两种解释，再选择能区分它们的一次观察。",
+      "acceptance": "记录预测和实际结果，保留无法排除的候选，不编造测量值。",
+      "quiz": {
+        "question": "一个读数符合两种故障时，下一步应该？",
+        "options": [
+          "随便选一个故障",
+          "同时换掉全部部件",
+          "选择能区分二者的测量"
+        ],
+        "answer": 2,
+        "explanation": "新测量应减少不确定性；证据不足时应保留多个候选。"
+      },
+      "sources": [
+        {
+          "title": "General Troubleshooting Tips",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-8/general-troubleshooting-tips/"
+        },
+        {
+          "title": "Multimeters",
+          "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-8/multimeters/"
+        }
+      ],
+      "lab": "dc",
+      "terms": "排障 故障 证据 测量 连接 焊接",
+      "minutes": 30,
+      "prerequisites": [
+        "reference"
+      ]
+    },
+    {
+      "id": "project",
+      "stage": "system",
+      "title": "24 · 毕业小项目：从传感器到执行器",
+      "question": "学完这些，怎样证明自己能用而不是只看过？",
+      "concepts": [
+        "搭建一条纸上或仿真的信号链：传感器等效电压 → 分压/缓冲与低通 → ADC → 状态逻辑 → 驱动器 → 指示负载。每块都要标明输入输出和供电。",
+        "先做最小版本，用电阻与 LED 等低功耗指示负载检验控制逻辑；接真实电机前单独验证电流、驱动、保护和干扰条件。",
+        "成果不是一张“运行成功”截图，而是别人能复核的设计、参数、预测、观察和局限。只做纸上计算也可交付，但必须如实标记。"
+      ],
+      "formula": "验收链：量纲 → 静态值 → 时间响应 → 阈值/状态 → 驱动预算 → 证据",
+      "example": [
+        "给定 0–3 V 传感器模型与 3.3 V ADC，先检查输入范围。",
+        "选 R=1 kΩ、C=1 μF 的低通，计算约 159 Hz 截止并说明它是否适合目标信号。",
+        "设双阈值状态逻辑避免边界抖动，使用独立驱动与指示负载；所有阈值需由项目目标决定。"
+      ],
+      "misconception": "课程自测通过不等于完成实物项目；没有做的步骤写待验证，不用模板替代观察。",
+      "practice": "提交一份记录：系统框图、参数表、三个预测、一次故障假设与区分方法、真实观察（若有）、结论边界。",
+      "acceptance": "每个数值注明来源；至少重算分压、RC 与驱动中的两项；他人能按记录复核，未实测项明确留空。",
+      "quiz": {
+        "question": "只有计算和网页模型时，成果应标为什么？",
+        "options": [
+          "硬件实测成功",
+          "计算/模型结果，硬件待验证",
+          "工业级验证"
+        ],
+        "answer": 1,
+        "explanation": "证据类型必须与实际活动一致。模型结果可支持理解，不能替代硬件观察。"
+      },
+      "sources": [
+        {
+          "title": "DC Lab - Voltage Divider",
+          "url": "https://www.allaboutcircuits.com/textbook/experiments/chpt-3/voltage-divider/"
+        },
+        {
+          "title": "DC Lab - Capacitor Charging and Discharging",
+          "url": "https://www.allaboutcircuits.com/textbook/experiments/chpt-3/capacitor-charging-and-discharging/"
+        },
+        {
+          "title": "Analog Lab - PWM Power Controller",
+          "url": "https://www.allaboutcircuits.com/textbook/experiments/chpt-6/pwm-power-controller/"
+        },
+        {
+          "title": "General Troubleshooting Tips",
+          "url": "https://www.allaboutcircuits.com/textbook/reference/chpt-8/general-troubleshooting-tips/"
+        }
+      ],
+      "lab": "interface",
+      "terms": "综合项目 传感器 执行器 验收 机器人",
+      "minutes": 30,
+      "prerequisites": [
+        "debug"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "question": "视频只说“接地”，到底接哪里？",
+      "lesson": "circuit"
+    },
+    {
+      "question": "mA、μF 换算总是出错",
+      "lesson": "units"
+    },
+    {
+      "question": "万用表该串联还是并联？",
+      "lesson": "meter"
+    },
+    {
+      "question": "分压为什么带不动负载？",
+      "lesson": "divider"
+    },
+    {
+      "question": "1000 mAh 究竟能用多久？",
+      "lesson": "power"
+    },
+    {
+      "question": "电容为什么能延时或平滑？",
+      "lesson": "rc"
+    },
+    {
+      "question": "滤波会不会让信号变慢？",
+      "lesson": "filter"
+    },
+    {
+      "question": "继电器为什么要加二极管？",
+      "lesson": "diode"
+    },
+    {
+      "question": "GPIO 为什么不能直接带电机？",
+      "lesson": "switch"
+    },
+    {
+      "question": "运放的“虚短”什么时候成立？",
+      "lesson": "opamp"
+    },
+    {
+      "question": "按一次为什么触发好几次？",
+      "lesson": "state"
+    },
+    {
+      "question": "位数和采样率是同一回事吗？",
+      "lesson": "adc"
+    },
+    {
+      "question": "PWM 50% 是稳定的一半电压吗？",
+      "lesson": "pwm"
+    },
+    {
+      "question": "仿真对了，实物为什么不对？",
+      "lesson": "debug"
+    }
+  ]
+}

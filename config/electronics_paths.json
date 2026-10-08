@@ -1,0 +1,163 @@
+{
+  "book": "Make: Electronics, 3rd edition",
+  "source_url": "https://www.oreilly.com/library/view/make-electronics-3rd/9781680456868/xhtml/toc.xhtml",
+  "note": "实验编号按英文第三版目录定位。以下是面向目标的学习建议，非原书要求；原书接线、参数与材料请对照正版教材。",
+  "units": [
+    {
+      "id": "dc",
+      "title": "电压、电流、电阻与功率",
+      "experiments": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        13
+      ],
+      "goal": "理解闭合回路、欧姆定律、限流与负载影响。",
+      "acceptance": "能预测电压和电流变化，解释限流电阻的选择；注明计算或实测依据。"
+    },
+    {
+      "id": "measurement",
+      "title": "接线、参考地与测量",
+      "experiments": [
+        6
+      ],
+      "goal": "从原理图找到节点，理解面包板连通关系和万用表接法。",
+      "acceptance": "独立画出电流路径，说明测量位置，并用检查结果定位一个接线问题。"
+    },
+    {
+      "id": "switching",
+      "title": "晶体管、继电器与负载驱动",
+      "experiments": [
+        7,
+        8,
+        10,
+        11
+      ],
+      "goal": "分清控制信号和负载供电，理解开关与驱动条件。",
+      "acceptance": "看懂一种开关驱动电路，说明负载电流路径、额定值和需要检查的保护条件。"
+    },
+    {
+      "id": "capacitors",
+      "title": "电容、充放电与定时",
+      "experiments": [
+        9,
+        14,
+        15,
+        16
+      ],
+      "goal": "理解时间尺度与状态随时间变化，先预测再观察。",
+      "acceptance": "改变 R 或 C 后预测快慢，记录观察并解释与预测的差异。"
+    },
+    {
+      "id": "logic",
+      "title": "逻辑、按键与状态",
+      "experiments": [
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "goal": "理解逻辑关系、状态保持与机械按键抖动。",
+      "acceptance": "画出输入与输出关系，解释一次按下被重复识别的原因和处理思路。"
+    },
+    {
+      "id": "soldering",
+      "title": "焊接与可靠连接",
+      "experiments": [
+        12
+      ],
+      "goal": "理解焊接步骤、连接质量与通断检查；需要实物练习。",
+      "acceptance": "留下自己的连接与检查记录；网页阅读不能代替实际焊接。"
+    },
+    {
+      "id": "interface",
+      "title": "程序与硬件输入输出",
+      "experiments": [
+        29,
+        30
+      ],
+      "goal": "将输入、程序状态和输出连接起来，区分接线与程序问题。",
+      "acceptance": "完成一个输入控制输出的小任务，并说明供电、参考地、引脚模式和验证方法。"
+    },
+    {
+      "id": "exploration",
+      "title": "电磁、发电、声音与无线电",
+      "experiments": [
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "goal": "按兴趣继续探索电磁与信号现象，理解模型和实物差别。",
+      "acceptance": "选择一个问题说明预测、观察与解释；系统读书时逐项对照原书完成本组记录。"
+    }
+  ],
+  "paths": [
+    {
+      "id": "robotics",
+      "name": "机器人入门",
+      "tag": "推荐",
+      "description": "先具备接线、测量、驱动与输入输出的基础，再按项目需要补课。",
+      "core": [
+        "dc",
+        "measurement",
+        "switching",
+        "interface"
+      ],
+      "elective": [
+        "capacitors",
+        "logic",
+        "soldering"
+      ],
+      "extension": [
+        "exploration"
+      ],
+      "outcome": "能解释一个输入控制输出的电路，独立检查供电、连接与驱动条件。"
+    },
+    {
+      "id": "embedded",
+      "name": "电子制作与嵌入式",
+      "tag": "深入实践",
+      "description": "希望自己搭电路、焊接并编程，系统补齐电子制作基础。",
+      "core": [
+        "dc",
+        "measurement",
+        "switching",
+        "capacitors",
+        "logic",
+        "soldering",
+        "interface"
+      ],
+      "elective": [
+        "exploration"
+      ],
+      "extension": [],
+      "outcome": "完成可重复运行的小制作，留下接线、程序与验证记录。"
+    },
+    {
+      "id": "book",
+      "name": "全书探索",
+      "tag": "自选",
+      "description": "按兴趣系统阅读全书，八个知识单元索引覆盖实验1–30；第31章用于复盘。",
+      "core": [
+        "dc",
+        "measurement",
+        "switching",
+        "capacitors",
+        "logic",
+        "soldering",
+        "interface",
+        "exploration"
+      ],
+      "elective": [],
+      "extension": [],
+      "outcome": "按原书逐项探索，整理每组实验的理解、记录与未解决问题。"
+    }
+  ]
+}

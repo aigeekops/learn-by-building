@@ -1,0 +1,53 @@
+[
+  {
+    "id": "electronics-first",
+    "title": "从看懂电路，到解释输入与输出",
+    "track": "robotics",
+    "stage": "robotics-1",
+    "description": "从八个主题练习中选一个起点：改变参数、检查连接、运行逻辑，再记录自己的预测和观察。机器人路线优先接线、测量、驱动与输入输出。",
+    "resources": [
+      {
+        "title": "爱上电子学 第三版",
+        "role": "主教材",
+        "note": "按实验建立元件、接线和测量的直觉。中文阅读可选对应译本。",
+        "url": "https://www.makershed.com/products/make-electronics-3rd-edition-print"
+      },
+      {
+        "title": "All About Circuits",
+        "role": "深入原理",
+        "note": "按需补直流电路、串并联、负载与戴维南等效。",
+        "url": "https://www.allaboutcircuits.com/textbook/"
+      },
+      {
+        "title": "Falstad Circuit Simulator",
+        "role": "快速验证",
+        "note": "修改参数前先写预测；模型现象与硬件测量分别记录。",
+        "url": "https://www.falstad.com/circuit/"
+      }
+    ],
+    "steps": [
+      {
+        "title": "看清电路与负载",
+        "body": "输入5V，两个10kΩ串联，空载输出2.5V。并联一个10kΩ负载后，下方等效为5kΩ，输出约1.67V。这些数值来自理想直流模型计算。",
+        "caption": "观察电压时，注明测量节点、共同参考地与负载条件。"
+      },
+      {
+        "title": "让下一次检查能区分原因",
+        "body": "相同的1.67V读数，可能来自负载、输入下降或阻值错误。先确认实际输入，再在仿真中控制其他条件、移除负载，比较结果是否符合各自预测。",
+        "caption": "图中只比较三个候选原因。真实观察不符时，需要扩大检查范围。"
+      },
+      {
+        "title": "解释改善方案的代价",
+        "body": "两个电阻都改为100Ω，空载分压比例不变；接10kΩ负载后输出约2.49V。但空载支路电流从0.25mA增为25mA。改善负载影响时，也要考虑电源能力与元件额定值。",
+        "caption": "输出为接负载工况；支路电流为空载工况，分别计算。"
+      }
+    ],
+    "exercise": {
+      "title": "分压电路的三个1.67V",
+      "question": "负载、供电、阻值分别怎样产生相同的输出？下一次检查怎样区分它们？",
+      "prediction": "在运行前，分别计算三个条件下的输出，并写出测量实际输入后的两种可能结果。",
+      "procedure": "仅在仿真中：5V+两个10kΩ+并联10kΩ负载；约3.33V+两个10kΩ无额外负载；5V+上方20kΩ/下方10kΩ无额外负载。",
+      "evidence_type": "simulation"
+    }
+  }
+]

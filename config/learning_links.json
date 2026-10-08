@@ -1,0 +1,325 @@
+{
+  "version": 1,
+  "note": "配套内容按机器人六个月路线选用；原理课、交互练习与阶段项目分别留下证据，不要求完成全部教材才进入下一阶段。",
+  "labs": {
+    "basics": "从零点亮 LED",
+    "dc": "分压与负载",
+    "measurement": "接线与测量",
+    "switching": "开关与驱动",
+    "rc": "电容与时间",
+    "logic": "逻辑与按键",
+    "interface": "程序输入输出",
+    "soldering": "连接质量检查",
+    "exploration": "电磁感应"
+  },
+  "modules": [
+    {
+      "id": "first-circuit",
+      "stage": "robotics-1",
+      "title": "点亮第一盏灯",
+      "why": "先认识单位和闭合回路，再理解电阻为什么能限流。",
+      "lessons": [
+        "units",
+        "circuit",
+        "ohm"
+      ],
+      "labs": [
+        "basics"
+      ],
+      "exercise": "先预测开关断开、LED 反接或电阻增大时的变化，再逐项对照网页模型。",
+      "acceptance": "画出电流路径，算一次限流电阻与功率；注明是假设条件下的模型结果。",
+      "optional": false
+    },
+    {
+      "id": "measurement",
+      "stage": "robotics-1",
+      "title": "会接线，也会选测量方法",
+      "why": "知道表笔接在哪里，才能区分模型、读数与猜测。",
+      "lessons": [
+        "meter"
+      ],
+      "labs": [
+        "measurement"
+      ],
+      "exercise": "分别选择电压、电流、电阻测量，解释每一种接法和需要断电的步骤。",
+      "acceptance": "画对三种测量接法，识别电流档跨接电源的错误。",
+      "optional": false
+    },
+    {
+      "id": "divider",
+      "stage": "robotics-1",
+      "title": "看懂分压与负载影响",
+      "why": "用串并联与守恒规律解释接上负载后的变化。",
+      "lessons": [
+        "networks",
+        "divider",
+        "thevenin"
+      ],
+      "labs": [
+        "dc"
+      ],
+      "exercise": "先算空载输出，再接一个与下方电阻相同的负载，比较预测与模型读数。",
+      "acceptance": "写出下方并联等效关系，解释电压为何下降；保留参数与单位。",
+      "optional": false
+    },
+    {
+      "id": "driver",
+      "stage": "robotics-1",
+      "title": "供电与负载驱动",
+      "why": "把控制信号、供电能力和负载电流路径分开考虑。",
+      "lessons": [
+        "power",
+        "diode",
+        "switch",
+        "motor"
+      ],
+      "labs": [
+        "switching"
+      ],
+      "exercise": "画出 GPIO 控制路径和负载电流路径，检查供电预算、器件条件与保护需求。",
+      "acceptance": "分清额定、平均和峰值；未知器件参数标为待查，不把预算当成驱动成功。",
+      "optional": false
+    },
+    {
+      "id": "storage",
+      "stage": "robotics-1",
+      "title": "电容与电感怎样储能",
+      "why": "完成直流基础后按需理解变化过程，为滤波与电机保护打底。",
+      "lessons": [
+        "rc",
+        "inductor"
+      ],
+      "labs": [
+        "rc",
+        "exploration"
+      ],
+      "exercise": "改变 R 或 C，预测到达相同电压比例的时间；再观察磁通变化与感应方向。",
+      "acceptance": "解释时间常数与断电尖峰，分别记录模型假设。",
+      "optional": true
+    },
+    {
+      "id": "digital-state",
+      "stage": "robotics-2",
+      "title": "让按键产生可靠的事件",
+      "why": "在写微控制器程序前，先理解电平、逻辑和状态。",
+      "lessons": [
+        "levels",
+        "logic",
+        "state"
+      ],
+      "labs": [
+        "logic"
+      ],
+      "exercise": "画输入输出真值表，比较原始按键边沿和去抖后的事件。",
+      "acceptance": "说清阈值、状态与去抖延迟；一次按下不能只靠看到一次输出就算验证完整。",
+      "optional": false
+    },
+    {
+      "id": "io-chain",
+      "stage": "robotics-2",
+      "title": "从传感器读数到输出控制",
+      "why": "连接电压、ADC 数值和 PWM，理解程序与硬件之间的接口。",
+      "lessons": [
+        "adc",
+        "pwm"
+      ],
+      "labs": [
+        "interface"
+      ],
+      "exercise": "比较不同采样间隔、位数和占空比，分别记录时间信息与幅值信息的变化。",
+      "acceptance": "解释分辨率、采样率和占空比的区别，画出输入—程序—输出链。",
+      "optional": false
+    },
+    {
+      "id": "motor-integration",
+      "stage": "robotics-2",
+      "title": "电机驱动与系统接线",
+      "why": "将控制信号、驱动级与电机供电连接起来，并回看第一月的电流路径。",
+      "lessons": [
+        "power",
+        "diode",
+        "switch",
+        "motor"
+      ],
+      "labs": [
+        "switching"
+      ],
+      "exercise": "画出 GPIO 控制路径和负载电流路径，检查供电预算、器件条件与保护需求。",
+      "acceptance": "分清额定、平均和峰值；未知器件参数标为待查，不把预算当成驱动成功。",
+      "optional": false
+    },
+    {
+      "id": "assembly-check",
+      "stage": "robotics-3",
+      "title": "装配后检查连接质量",
+      "why": "机械装配或接插件变动后，用可区分原因的检查减少返工。",
+      "lessons": [
+        "debug"
+      ],
+      "labs": [
+        "soldering"
+      ],
+      "exercise": "用预设连接案例练习检查顺序；真实装配另行记录自己的通断与外观观察。",
+      "acceptance": "区分网页预设案例和真实连接质量，列出下一步需要的实物检查。",
+      "optional": true
+    },
+    {
+      "id": "ros-hardware",
+      "stage": "robotics-4",
+      "title": "排查 ROS 与硬件的接口边界",
+      "why": "话题里有数值，不一定意味着底层采样、接线和输出都正确；遇到接口问题再回看。",
+      "lessons": [
+        "adc",
+        "pwm",
+        "debug"
+      ],
+      "labs": [
+        "interface"
+      ],
+      "exercise": "画硬件输入、固件、通信、ROS 消息和执行器的边界；为每层列一个观察点。",
+      "acceptance": "指出网页练习覆盖的只是输入输出模型，ROS 驱动与通信需要在实际项目中另外验证。",
+      "optional": true
+    },
+    {
+      "id": "signal-chain",
+      "stage": "robotics-5",
+      "title": "理解传感器信号与响应速度",
+      "why": "学习控制与视觉中的时间变化时，补齐波形、滤波与反馈的电路直觉。",
+      "lessons": [
+        "wave",
+        "filter",
+        "opamp"
+      ],
+      "labs": [
+        "rc"
+      ],
+      "exercise": "比较两个 RC 时间常数，说明噪声平滑和响应速度的取舍，再检查放大器输出限制。",
+      "acceptance": "写出频率、时间常数及输入输出范围；电路负反馈入门不替代完整控制理论。",
+      "optional": false
+    },
+    {
+      "id": "model-evidence",
+      "stage": "robotics-6",
+      "title": "把模型和实验变成可复核证据",
+      "why": "整理作品时，把计算、仿真、硬件观察及尚未解决的问题分开。",
+      "lessons": [
+        "reference",
+        "debug"
+      ],
+      "labs": [
+        "dc"
+      ],
+      "exercise": "选一个已做的小电路，列出模型假设、预测、观察与一个能区分故障的检查。",
+      "acceptance": "他人能按记录重算；没有实际执行的仿真或硬件步骤保留待验证。",
+      "optional": true
+    },
+    {
+      "id": "system-project",
+      "stage": "robotics-6",
+      "title": "串起传感器到执行器",
+      "why": "把前面电子知识用于自己的机器人项目说明与复盘。",
+      "lessons": [
+        "project"
+      ],
+      "labs": [
+        "interface"
+      ],
+      "exercise": "完成一份从传感器到执行器的框图、参数表和验证计划，链接已有学习记录。",
+      "acceptance": "重算至少两项关键参数，写出真实观察及结论边界；阅读不算硬件验证。",
+      "optional": false
+    }
+  ],
+  "units": {
+    "dc": {
+      "modules": [
+        "first-circuit",
+        "divider"
+      ],
+      "lessons": [
+        "circuit",
+        "ohm",
+        "divider"
+      ],
+      "lab": "dc",
+      "stage": "robotics-1"
+    },
+    "measurement": {
+      "modules": [
+        "measurement"
+      ],
+      "lessons": [
+        "meter"
+      ],
+      "lab": "measurement",
+      "stage": "robotics-1"
+    },
+    "switching": {
+      "modules": [
+        "driver"
+      ],
+      "lessons": [
+        "diode",
+        "switch",
+        "power"
+      ],
+      "lab": "switching",
+      "stage": "robotics-1"
+    },
+    "capacitors": {
+      "modules": [
+        "storage"
+      ],
+      "lessons": [
+        "rc",
+        "inductor"
+      ],
+      "lab": "rc",
+      "stage": "robotics-1"
+    },
+    "logic": {
+      "modules": [
+        "digital-state"
+      ],
+      "lessons": [
+        "levels",
+        "logic",
+        "state"
+      ],
+      "lab": "logic",
+      "stage": "robotics-2"
+    },
+    "interface": {
+      "modules": [
+        "io-chain"
+      ],
+      "lessons": [
+        "adc",
+        "pwm"
+      ],
+      "lab": "interface",
+      "stage": "robotics-2"
+    },
+    "soldering": {
+      "modules": [
+        "assembly-check"
+      ],
+      "lessons": [
+        "debug"
+      ],
+      "lab": "soldering",
+      "stage": "robotics-3"
+    },
+    "exploration": {
+      "modules": [
+        "storage",
+        "driver"
+      ],
+      "lessons": [
+        "inductor",
+        "motor"
+      ],
+      "lab": "exploration",
+      "stage": "robotics-1"
+    }
+  }
+}

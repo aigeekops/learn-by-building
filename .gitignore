@@ -1,0 +1,26 @@
+data/
+.env
+.env.*
+__pycache__/
+*.pyc
+node_modules/
+.venv-x/
+qa/*.png
+qa/report.json
+.DS_Store
+
+qa/journal-review.md
+qa/study-report.json
+qa/*-acceptance.json
+
+# Generated public site
+/dist/
+
+# 打包脚本产物与本地文档
+/MANIFEST.sha256
+/DELIVERY.md
+/.workbuddy/
+/output/
+*.tar.gz
+*.tar.gz.sha256
+.DELIVERY.md

@@ -1,0 +1,50 @@
+title: "[学习求助] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        不需要会写代码，也不需要先把所有方法试完。请写清卡在哪一步；回答者会帮助你找到下一小步。
+        发帖前删除姓名、账号、密钥、私人学习记录等不宜公开的信息。
+  - type: input
+    id: environment
+    attributes:
+      label: 学习环境
+      description: 设备、系统、浏览器或软件版本；硬件练习请写器件与电源条件。
+      placeholder: 例如 macOS + Chrome；只有网页模拟，尚无硬件
+    validations:
+      required: true
+  - type: input
+    id: course
+    attributes:
+      label: 课程或学习块
+      description: 路线、学习块名称或编号，以及相关页面链接。
+    validations:
+      required: true
+  - type: textarea
+    id: progress
+    attributes:
+      label: 做到哪一步
+      description: 写出已经完成的动作，以及开始卡住的具体步骤。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望发生什么
+      description: 对照课程说明，预期看到什么输出或现象？
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际发生什么
+      description: 粘贴最小错误信息或脱敏截图；未运行的部分请直接说明。
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: 已经尝试过什么
+      description: 写下改过的条件和观察结果；还没尝试也可以写“不知道从哪开始”。
+    validations:
+      required: true

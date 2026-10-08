@@ -1,0 +1,40 @@
+title: "[作品分享] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        小练习、失败记录和完整项目都欢迎。请区分计算、模拟、实物实验和待验证内容，不以完成计划代替实际证据。
+        发布前检查图片、日志、链接与附件，移除个人信息、密钥和私人记录。
+  - type: input
+    id: course
+    attributes:
+      label: 对应课程或学习块
+      description: 路线、学习块名称或编号；自主项目可写主题。
+    validations:
+      required: true
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 做了什么，想解决什么问题
+      description: 简单说明目标、当前成果和仍未完成的部分。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 环境与复现步骤
+      description: 设备、软件或器件条件，以及读者可以照做的最小步骤。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 真实输出与证据
+      description: 可填写脱敏后的运行输出、计算过程、截图或作品链接，并注明计算／模拟／实物／待验证。
+    validations:
+      required: true
+  - type: textarea
+    id: reflection
+    attributes:
+      label: 踩过的坑和想收到的反馈
+      description: 哪一步最难？如何排查？希望大家帮你看什么？

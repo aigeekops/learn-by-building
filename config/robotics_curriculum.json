@@ -1,0 +1,2805 @@
+{
+  "version": 5,
+  "title": "机器人 · 从零到作品",
+  "pace": "六个月是六个能力阶段，共 24 个学习块。参考用时按内容难度编排，再结合每日预算拆分；实际卡住就续练，允许跨周。",
+  "rhythm": "先看懂 → 跟做 → 改一个条件 → 解释 → 独立复现。每七天回看旧知识，未通过本块验收就继续或重排。",
+  "selection": "先看零基础能否跟着学、步骤是否连续、练习是否有反馈，再考虑权威性与费用。主线课程负责带着学，参考文档负责解决具体问题。",
+  "spine": "先用《爱上电子学》建立电路直觉，再连接程序、机械结构、ROS 2、控制与机器人数据。没有硬件也可从站内模型开始。",
+  "language": "先读本站中文导读，再看指定外部章节。遇到陌生词先写下它的输入、输出和用途，不要求一次记住全部术语。",
+  "months": [
+    {
+      "stage": "robotics-1",
+      "month": 1,
+      "title": "电路与编程起步",
+      "goal": "从闭合电路与测量，走到用程序保存、画出并复现一组带时间的观察。",
+      "prerequisite": "会四则运算、保存文件、打开浏览器即可；Python、终端与版本都在本阶段从第一步开始。",
+      "project": "电路观察日志：预测 → 网页核对 → Python/CSV → 时间曲线 → 新目录复现",
+      "gate": [
+        "能解释 LED 限流，带单位计算两组电流；能区分电压/电流/电阻测量并保存预测与网页结果的差异。",
+        "能独立运行函数、列表与循环，把至少三条带单位和时间的记录写入并读回 CSV，生成对应曲线，说明数据来源与模型边界。",
+        "保留修改前后两版代码、输入/输出与 README；关闭终端后从新目录仅按说明复现，不要求 GitHub 账户。"
+      ],
+      "defer": "暂缓焊接、大型仪器采购和六卷教材通读。",
+      "no_hardware": "网页模型与 Python 自建日志可完成本阶段主线；输出必须注明计算/模型，不能写成万用表实测。",
+      "blocks": [
+        {
+          "id": "circuit-foundation",
+          "week": 1,
+          "title": "看懂第一个电路",
+          "source": "make",
+          "scope": "先完成本站完整跟练，外部阅读按下面的具体范围补充；原书实验另按其材料与步骤进行。",
+          "why": "先从实验现象与器件建立直觉，再用 AAC 和站内模型补足解释；本块练习是本站原创，不冒充书中逐页实验。",
+          "exercise": "按课例比较 330 Ω 与 1000 Ω 的模型电流，先计算再观察。",
+          "acceptance": "不看答案也能画出完整路径；能用带单位的计算解释两次读数；能指出至少一个模型与实物的区别",
+          "first_step": "按本站第 1 课画闭合路径，在 LED 模型比较断开与闭合。",
+          "companion": "first-circuit",
+          "lesson": "ohm",
+          "lab": "basics",
+          "intuition": "电压是两点间的电势差；电流表示单位时间内通过某处的电荷量。先找回路，再算数值。",
+          "remedy": {
+            "text": "先分清 V、A、Ω 与 mA。把 10 mA 写成 0.01 A，再代入公式；不懂回路时从中文导学开始。",
+            "block": ""
+          },
+          "readings": [
+            {
+              "title": "第 3 版目录：实验 2 Go with the Flow（p.13）→ 实验 3 Applying Pressure（p.22）",
+              "url": "https://api.pageplace.de/preview/DT0400.9781680456851_A49421020/preview-9781680456851_A49421020.pdf#page=7",
+              "note": "已核对英文第三版目录；预览不是全书。先完成本站 LED 跟练，再按手中原书对应实验阅读。本站 5 V 模型不是书中电路的复刻，中文译本页码可能不同。"
+            },
+            {
+              "title": "先认识闭合回路",
+              "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-1/electric-circuits/",
+              "note": "能在图上指出电流回到电源的路径即可。",
+              "optional": false
+            },
+            {
+              "title": "再用欧姆定律算一次",
+              "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-2/voltage-current-resistance-relate/",
+              "note": "代入一组带单位的数，检查计算与模型是否一致。",
+              "optional": false
+            },
+            {
+              "title": "最后检查电阻功率",
+              "url": "https://www.allaboutcircuits.com/textbook/direct-current/chpt-2/calculating-electric-power/",
+              "note": "理解电阻也有功率限制；只读本节。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "按本站第 1 课画闭合路径，在 LED 模型比较断开与闭合。",
+            "按课例比较 330 Ω 与 1000 Ω 的模型电流，先计算再观察。",
+            "独立预测 3 V、330 Ω 时的结果，解释单位、限流与模型边界。"
+          ],
+          "prerequisite": "只需会四则运算。还不懂 V、A、Ω 时先读下方中文导学的单位说明，再画回路。",
+          "resource_role": "实验主教材",
+          "references": [
+            "aac"
+          ],
+          "extension_exercise": "在 LED 模型中改变电源或电阻，每次先预测电流变化方向，再记录模型值。",
+          "extension_acceptance": "给出一张带单位的对照表，能解释限流电阻的作用。",
+          "walkthrough": {
+            "title": "第 1 课：让 LED 亮起来，并解释电流",
+            "goal": "能从电压、电阻和闭合回路解释一次模型变化。",
+            "setup": [
+              "无需器材，点击本课“打开交互练习”。先只使用网页模型。",
+              "模型假设：电源 5 V、LED 正向压降固定 2 V、限流电阻 330 Ω。实际 LED 压降会变化。"
+            ],
+            "terms": [
+              {
+                "term": "V（伏）",
+                "meaning": "表示两点电压差；本例电阻两端承担 5−2=3 V。"
+              },
+              {
+                "term": "A 与 mA",
+                "meaning": "表示电流，1 A=1000 mA。"
+              },
+              {
+                "term": "Ω（欧）",
+                "meaning": "电阻的单位；相同电压下，阻值越大，电流越小。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "先找回路",
+                "instruction": "在 LED 交互中选 5 V、330 Ω，取消“闭合开关”，确认未反转 LED、未移除电阻。沿正端→开关→电阻→LED→负端画一圈。",
+                "expected": "模型电流 0 mA，LED 不亮。",
+                "why": "开关把路径断开，电荷不能持续绕完整回路运动。",
+                "model_case": {
+                  "kind": "led",
+                  "input": {
+                    "voltage": 5,
+                    "resistance": 330,
+                    "closed": false,
+                    "reversed": false,
+                    "bypass": false
+                  },
+                  "current": 0
+                }
+              },
+              {
+                "title": "先预测，再闭合",
+                "instruction": "在纸上算 (5−2)÷330，再勾选“闭合开关”。把 A 换成 mA，与页面核对。",
+                "expected": "约 9.09 mA；电阻功率约 0.027 W。",
+                "why": "串联电路中电流相同，电阻承担 3 V。电阻限制电流，并把部分电能转成热。",
+                "model_case": {
+                  "kind": "led",
+                  "input": {
+                    "voltage": 5,
+                    "resistance": 330,
+                    "closed": true,
+                    "reversed": false,
+                    "bypass": false
+                  },
+                  "current": 0.00909090909090909
+                }
+              },
+              {
+                "title": "只改一个量",
+                "instruction": "保持电压、方向、开关不变，把电阻滑块改为 1000 Ω。先说电流增大还是减小，再读结果。",
+                "expected": "电流约 3.00 mA，示意灯更暗。",
+                "why": "电阻两端仍按 3 V 计算，3÷1000=0.003 A。网页亮度是示意，不能当成实物亮度测量。",
+                "model_case": {
+                  "kind": "led",
+                  "input": {
+                    "voltage": 5,
+                    "resistance": 1000,
+                    "closed": true,
+                    "reversed": false,
+                    "bypass": false
+                  },
+                  "current": 0.003
+                }
+              },
+              {
+                "title": "区分知道与不知道",
+                "instruction": "仅在网页中勾选“移除限流电阻”，观察提示，然后恢复电阻。不要把这个条件照搬到实物。",
+                "expected": "页面不提供可信电流数值。",
+                "why": "固定 LED 压降不足以确定此时的电流，不能靠除以零得到真实结果。"
+              }
+            ],
+            "mistakes": [
+              {
+                "symptom": "灯不亮",
+                "check": "先看开关，再看返回路径、LED 方向和电压；每次只改一个条件。"
+              },
+              {
+                "symptom": "算出 15.15 mA",
+                "check": "检查是否把完整的 5 V 都除以 330 Ω；本例 LED 已分去假设的 2 V。"
+              },
+              {
+                "symptom": "把 0.009 A 当成 0.009 mA",
+                "check": "先乘 1000 换算成 mA，再与页面比较。"
+              }
+            ],
+            "practice": "把电源换成 3 V，电阻恢复 330 Ω，保持正向且闭合。先写预测，再验证；解释与 5 V 时有什么不同。",
+            "answer": "本模型 I=(3−2)/330≈3.03 mA。不是把 3 V 全部除以电阻。真实结果还受 LED 特性影响。",
+            "rubric": [
+              "不看答案也能画出完整路径",
+              "能用带单位的计算解释两次读数",
+              "能指出至少一个模型与实物的区别"
+            ],
+            "attribution": "本站原创跟练。代码、教学假设和预期结果供核对，不是你的已完成记录；外部教材用于补充阅读。"
+          },
+          "diagnostics": [
+            {
+              "symptom": "灯不亮",
+              "check": "先看开关，再看返回路径、LED 方向和电压；每次只改一个条件。"
+            },
+            {
+              "symptom": "算出 15.15 mA",
+              "check": "检查是否把完整的 5 V 都除以 330 Ω；本例 LED 已分去假设的 2 V。"
+            },
+            {
+              "symptom": "把 0.009 A 当成 0.009 mA",
+              "check": "先乘 1000 换算成 mA，再与页面比较。"
+            }
+          ],
+          "reading_stop": "本次先完成：按本站第 1 课画闭合路径，在 LED 模型比较断开与闭合。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 90,
+            "deep_minutes": 180,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "measurement-basics",
+          "week": 2,
+          "title": "学会测量与排错",
+          "source": "make",
+          "scope": "先完成本站完整跟练，外部阅读按下面的具体范围补充；原书实验另按其材料与步骤进行。",
+          "why": "先从实验现象与器件建立直觉，再用 AAC 和站内模型补足解释；本块练习是本站原创，不冒充书中逐页实验。",
+          "exercise": "在网页断电后测电阻，再把电流表串入 P—A 断口，核对预期读数。",
+          "acceptance": "能用图标出三种档位的接法；能解释正负号与读数单位；能先判断接法是否合法，再使用读数",
+          "first_step": "按本站第 2 课用模型测 P 对 G 的电压，并交换表笔解释符号。",
+          "companion": "measurement",
+          "lesson": "meter",
+          "lab": "measurement",
+          "intuition": "测量是在回答一个具体问题：两点差多少电压，或这条路径是否导通。",
+          "remedy": {
+            "text": "测量前先画出两个节点。若还分不清串联和并联，回到第一个电路，把回路画完整。",
+            "block": "circuit-foundation"
+          },
+          "readings": [
+            {
+              "title": "第 3 版目录：实验 6 Getting Connected（p.50）· 接线补充",
+              "url": "https://api.pageplace.de/preview/DT0400.9781680456851_A49421020/preview-9781680456851_A49421020.pdf#page=7",
+              "note": "目录用于定位接线内容，正文需自备。万用表的当次操作先跟本站课例，再读下方 Adafruit 的电压／电流测量小节；不要求整章做完。"
+            },
+            {
+              "title": "断电检查是否导通",
+              "url": "https://learn.adafruit.com/multimeters/continuity",
+              "note": "先学通断测试，弄清蜂鸣提示能说明什么。",
+              "optional": false
+            },
+            {
+              "title": "带电测两点间的电压",
+              "url": "https://learn.adafruit.com/multimeters/voltage",
+              "note": "跟着低压直流例子确认量程、插孔与并联位置。",
+              "optional": false
+            },
+            {
+              "title": "理解电流测量的串联接法",
+              "url": "https://learn.adafruit.com/multimeters/current",
+              "note": "重点看如何接入回路；实物操作前先完成站内测量练习。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "按本站第 2 课用模型测 P 对 G 的电压，并交换表笔解释符号。",
+            "在网页断电后测电阻，再把电流表串入 P—A 断口，核对预期读数。",
+            "独立预测 M 对 G 的电压；用图解释三种档位怎样接。"
+          ],
+          "prerequisite": "先检查：测量前先画出两个节点。若还分不清串联和并联，回到第一个电路，把回路画完整。",
+          "resource_role": "实验主教材",
+          "references": [
+            "meter"
+          ],
+          "extension_exercise": "在站内测量实验中选择接法，比较断路与正常回路；有万用表再做低压复核。",
+          "extension_acceptance": "能说明电压表并联、电流表串联，断电测电阻，并辨认一处错误接法。",
+          "walkthrough": {
+            "title": "第 2 课：用表笔回答一个具体问题",
+            "goal": "区分电压、电阻和电流的测量位置，并解释读数正负。",
+            "setup": [
+              "打开本课的“接线与测量”交互。所有改接法步骤都在网页内完成。",
+              "模型是 5 V 电源与 1 kΩ、2 kΩ 串联网络；P 是正端，A 是电阻上端，M 是中点，G 是参考地。"
+            ],
+            "terms": [
+              {
+                "term": "电压档 V",
+                "meaning": "测红表笔节点相对黑表笔节点的电位差，通常并联在两点间。"
+              },
+              {
+                "term": "电阻档 Ω",
+                "meaning": "用表内电源测量；先移除外部供电。"
+              },
+              {
+                "term": "电流档 mA",
+                "meaning": "需要成为电流路径的一部分，在模型断口中串联。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "先测整个网络",
+                "instruction": "选电压档，开启电源，关闭断口。红表笔选 P、黑表笔选 G。先写下预期电压再看读数。",
+                "expected": "5.000 V。",
+                "why": "读数是红端电位减黑端电位，即 5−0。",
+                "model_case": {
+                  "kind": "meter",
+                  "input": {
+                    "mode": "V",
+                    "red": "P",
+                    "black": "G",
+                    "power": true,
+                    "broken": false
+                  },
+                  "value": 5
+                }
+              },
+              {
+                "title": "交换表笔",
+                "instruction": "仍用电压档，只把红表笔改为 G、黑表笔改为 P。",
+                "expected": "−5.000 V。",
+                "why": "负号来自测量参考方向反过来，不表示电源突然坏了。",
+                "model_case": {
+                  "kind": "meter",
+                  "input": {
+                    "mode": "V",
+                    "red": "G",
+                    "black": "P",
+                    "power": true,
+                    "broken": false
+                  },
+                  "value": -5
+                }
+              },
+              {
+                "title": "测电阻前断电",
+                "instruction": "关闭模型电源，再选电阻档，红表笔选 A、黑表笔选 M。",
+                "expected": "1000 Ω；若外部电源仍开着，页面提示先断电。",
+                "why": "A 到 M 是 1 kΩ。真实带电电路不应使用电阻档。",
+                "model_case": {
+                  "kind": "meter",
+                  "input": {
+                    "mode": "R",
+                    "red": "A",
+                    "black": "M",
+                    "power": false,
+                    "broken": false
+                  },
+                  "value": 1000
+                }
+              },
+              {
+                "title": "把电流表串进路径",
+                "instruction": "在网页选电流档，打开 P—A 断口，红表笔 P、黑表笔 A，再开启模型电源。",
+                "expected": "约 1.667 mA。",
+                "why": "表笔桥接断口，路径总电阻为 3000 Ω，I=5/3000 A；电流档不能像电压档那样随意并联。",
+                "model_case": {
+                  "kind": "meter",
+                  "input": {
+                    "mode": "I",
+                    "red": "P",
+                    "black": "A",
+                    "power": true,
+                    "broken": true
+                  },
+                  "value": 0.0016666666666666668
+                }
+              }
+            ],
+            "mistakes": [
+              {
+                "symptom": "电压总是 0",
+                "check": "确认电源状态和两支表笔是否在同一节点；先从 P 对 G 的简单测量开始。"
+              },
+              {
+                "symptom": "电阻档提示先断电",
+                "check": "关闭模型外部电源后重试。实物还要核对断电及储能释放条件。"
+              },
+              {
+                "symptom": "电流档提示接法不正确",
+                "check": "检查是否打开 P—A 断口，表笔是否分别接在 P 与 A；不要尝试并联电源。"
+              }
+            ],
+            "practice": "恢复闭合的串联网络，开电源、用电压档，红 M 黑 G。预测中点电压，再验证。",
+            "answer": "约 3.333 V：电流是 5/3000 A，下方 2 kΩ 上电压为 (5/3000)×2000 V。",
+            "rubric": [
+              "能用图标出三种档位的接法",
+              "能解释正负号与读数单位",
+              "能先判断接法是否合法，再使用读数"
+            ],
+            "attribution": "本站原创跟练。代码、教学假设和预期结果供核对，不是你的已完成记录；外部教材用于补充阅读。"
+          },
+          "diagnostics": [
+            {
+              "symptom": "电压总是 0",
+              "check": "确认电源状态和两支表笔是否在同一节点；先从 P 对 G 的简单测量开始。"
+            },
+            {
+              "symptom": "电阻档提示先断电",
+              "check": "关闭模型外部电源后重试。实物还要核对断电及储能释放条件。"
+            },
+            {
+              "symptom": "电流档提示接法不正确",
+              "check": "检查是否打开 P—A 断口，表笔是否分别接在 P 与 A；不要尝试并联电源。"
+            }
+          ],
+          "recall": {
+            "block": "circuit-foundation",
+            "prompt": "先不看资料，复现或解释“看懂第一个电路”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：按本站第 2 课用模型测 P 对 G 的电压，并交换表笔解释符号。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 150,
+            "deep_minutes": 300,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "python-data",
+          "week": 3,
+          "title": "用 Python 整理观察",
+          "source": "python",
+          "scope": "先做本站七小课。CS50P 第 0、1、2、6 课分别补变量/函数、条件、循环与文件；每次只读当前卡住的部分。",
+          "why": "从可运行的小程序入手，后面能直接复用来处理机器人日志。",
+          "exercise": "分次完成小课 3 循环、小课 4 函数，每次换一组输入并解释输出。",
+          "acceptance": "独立写出两组电流函数调用；从带单位和时间的 CSV 读回三条记录并生成曲线，指出三个点与表格的对应，解释为什么它们不是实测波形。",
+          "first_step": "先完成小课 1 的变量与输出；后续独立一天做小课 2 的列表。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "程序就是把明确的步骤交给电脑重复做；日志是这些步骤处理过的数据。",
+          "remedy": {
+            "block": "measurement-basics",
+            "text": "先把模型读数写成三列表格，标明条件、数值和单位；不会解释 9.09 mA 的来源时回看测量与电路。"
+          },
+          "readings": [
+            {
+              "title": "变量与函数",
+              "url": "https://cs50.harvard.edu/python/notes/0/",
+              "note": "会定义一个小函数，并用不同参数调用它。",
+              "optional": false
+            },
+            {
+              "title": "条件判断",
+              "url": "https://cs50.harvard.edu/python/notes/1/",
+              "note": "能处理零电阻或缺失输入等不符合预期的情况。",
+              "optional": false
+            },
+            {
+              "title": "循环",
+              "url": "https://cs50.harvard.edu/python/notes/2/",
+              "note": "对一组观察值逐个计算，不必手写重复语句。",
+              "optional": false
+            },
+            {
+              "title": "文件读写与 CSV",
+              "url": "https://cs50.harvard.edu/python/notes/6/",
+              "note": "完成前三项后再读，只做与日志表格有关的例子。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "先完成小课 1 的变量与输出；后续独立一天做小课 2 的列表。",
+            "分次完成小课 3 循环、小课 4 函数，每次换一组输入并解释输出。",
+            "分次完成小课 5 CSV、小课 6 时间列、小课 7 曲线；独立修改条件并保存结果。"
+          ],
+          "prerequisite": "已完成电路与测量两课：能带单位算出 5 V、330 Ω 与 1000 Ω 的 LED 模型电流，并分清计算、网页模型和实测；不要求预先会编程。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "读入别人提供的同结构 CSV，检查空值、时间倒退与无效电阻，并给出行号。",
+          "extension_acceptance": "正常数据可生成曲线；错误输入有明确提示，不把缺失值默认为零。",
+          "diagnostics": [
+            {
+              "symptom": "提示 NameError",
+              "check": "检查变量名拼写及赋值是否在使用之前；回到本课第一段，不直接调画图代码。"
+            },
+            {
+              "symptom": "提示 IndentationError",
+              "check": "冒号下面的循环或函数体统一缩进四个空格，先重跑循环小例子。"
+            },
+            {
+              "symptom": "找不到 CSV 或图",
+              "check": "输出在程序的运行目录；先用编辑器运行并找文件，下块再系统练当前目录。"
+            },
+            {
+              "symptom": "图与预期不一致",
+              "check": "先核对 CSV 中的时间与数值，再检查坐标公式；本图范围为 0–2 s、0–10 mA。"
+            }
+          ],
+          "reading_stop": "先完成本站跟练第一小课，写下自己的预测和输出再停下。每小课可跨多天，不把本块所有内容塞进一次学习。",
+          "study_load": {
+            "core_minutes": 420,
+            "deep_minutes": 840,
+            "note": "编排参考，非实测用时。按小课分多天；每天先回忆上次输入与结果，再完成一个可核对动作。卡住就续练，不因日期自动升级。"
+          },
+          "walkthrough": {
+            "title": "第 3 块：七小课把电路观察变成时间曲线",
+            "goal": "从一个数开始，逐步积累变量、列表、循环、函数、CSV、时间列与曲线。",
+            "setup": [
+              "每个“小课”是一段学习，可用 15–45 分钟或更久，七课建议分多次完成，不要求压进同一天；上一步能独立改一次再继续。",
+              "准备 Python 3 和纯文本代码编辑器；先在文件管理器创建 robotics-notes 文件夹。可用已安装 Python 的 IDLE 新建文件、保存 .py、按 F5 运行；代码区写程序，Shell 区看输出。若未安装，先从本块 CS50P 第 0 课跟着完成环境准备。",
+              "除课内命名的 CSV/SVG 外不需要其他文件。再次运行会重建同名教学输出，请使用专门学习文件夹；先手写预测，再对照结果。"
+            ],
+            "terms": [
+              {
+                "term": "变量",
+                "meaning": "给一个值取名字，例如 resistance_ohm 保存以 Ω 为单位的电阻。"
+              },
+              {
+                "term": "列表与循环",
+                "meaning": "列表保存多个值，循环对每个值做相同步骤。"
+              },
+              {
+                "term": "函数",
+                "meaning": "接收参数并交回结果的一段可复用步骤。"
+              },
+              {
+                "term": "CSV",
+                "meaning": "一行一条记录、逗号分列的文字表格；首行写列名与单位。"
+              },
+              {
+                "term": "时间列",
+                "meaning": "说明每个观察值对应哪个时刻；本课是自建时间，不是采集证据。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "小课 1：给数字起名字，再看输出",
+                "instruction": "在 Python 编辑器新建 lesson1.py，逐行输入代码并运行。= 把右边结果保存到左边名字；print 把结果显示出来。先把最后一行的结果写在纸上。",
+                "expected": "输出 9.09 mA。把 resistance_ohm 改成 1000 再运行，输出 3.0 mA。",
+                "why": "括号先算电阻承担的电压；代码内部先用 A，显示时乘 1000 变成 mA。变量名末尾标单位能减少混淆。",
+                "code": "supply_v = 5\nled_v = 2\nresistance_ohm = 330\ncurrent_ma = (supply_v - led_v) / resistance_ohm * 1000\nprint(round(current_ma, 2), \"mA\")",
+                "language": "python",
+                "stdin": "",
+                "stdout": "9.09 mA\n"
+              },
+              {
+                "title": "小课 2：列表保存多个观察条件",
+                "instruction": "另一天回忆变量后运行本例。方括号组成列表；[0] 取第一个元素，[1] 取第二个。只练取值和长度，今天不急着写循环。",
+                "expected": "三行分别是 330、1000、2。",
+                "why": "列表把同类数据按顺序放在一起。Python 下标从 0 开始，len 返回元素个数。",
+                "code": "resistances_ohm = [330, 1000]\nprint(resistances_ohm[0])\nprint(resistances_ohm[1])\nprint(len(resistances_ohm))",
+                "language": "python",
+                "stdin": "",
+                "stdout": "330\n1000\n2\n"
+              },
+              {
+                "title": "小课 3：循环替你重复同一动作",
+                "instruction": "运行后指出哪几行位于 for 下方。冒号后的缩进行属于循环，每次把列表中的一个值交给 resistance_ohm；先不要修改多个条件。",
+                "expected": "两行依次为 330 ohm: 9.09 mA、1000 ohm: 3.0 mA。",
+                "why": "一次循环只处理一个电阻，避免复制两份公式后改漏一处。",
+                "code": "resistances_ohm = [330, 1000]\nfor resistance_ohm in resistances_ohm:\n    current_ma = (5 - 2) / resistance_ohm * 1000\n    print(resistance_ohm, \"ohm:\", round(current_ma, 2), \"mA\")",
+                "language": "python",
+                "stdin": "",
+                "stdout": "330 ohm: 9.09 mA\n1000 ohm: 3.0 mA\n"
+              },
+              {
+                "title": "小课 4：函数把输入和计算分开",
+                "instruction": "先读 def 这一行：括号里是参数，return 交回结果。if 检查不合适的电阻。用两个参数调用函数，随后取消最后一行前的 #，观察错误再恢复。",
+                "expected": "330 Ω 返回约 9.09 mA，1000 Ω 返回 3.00 mA；取消注释后，零电阻触发 ValueError 而不是继续计算。",
+                "why": "函数复用同一规则。max 保证这个固定压降模型不产生负的正向电流；这不等于模拟真实 LED 的全部特性。",
+                "code": "def led_current_ma(supply_v, resistance_ohm):\n    if resistance_ohm <= 0:\n        raise ValueError(\"resistance must be positive\")\n    return max(0, supply_v - 2) / resistance_ohm * 1000\n\nprint(round(led_current_ma(5, 330), 2))\nprint(round(led_current_ma(5, 1000), 2))\n# print(led_current_ma(5, 0))",
+                "language": "python",
+                "stdin": "",
+                "stdout": "9.09\n3.0\n"
+              },
+              {
+                "title": "小课 5：把表格写成 CSV，再读回来",
+                "instruction": "这次只学文件。运行本例后，在脚本的运行目录找 observations.csv，用文本编辑器打开再关上。import 引入 Python 自带 csv 工具；with 打开文件并在结束时关闭。",
+                "expected": "文件包含列名 resistance_ohm,current_ma 与两条数据；终端输出 2 rows 和 9.09。",
+                "why": "writerows 写入多行，DictReader 按列名读数据。读回的单元格是文字，float 把数值文字变为可计算的数。newline=\"\" 避免 CSV 多出空行。",
+                "code": "import csv\n\nrows = [[330, 9.09], [1000, 3.00]]\nwith open(\"observations.csv\", \"w\", newline=\"\", encoding=\"utf-8\") as file:\n    writer = csv.writer(file)\n    writer.writerow([\"resistance_ohm\", \"current_ma\"])\n    writer.writerows(rows)\nwith open(\"observations.csv\", newline=\"\", encoding=\"utf-8\") as file:\n    observations = list(csv.DictReader(file))\nprint(len(observations), \"rows\")\nprint(float(observations[0][\"current_ma\"]))",
+                "language": "python",
+                "stdin": "",
+                "stdout": "2 rows\n9.09\n"
+              },
+              {
+                "title": "小课 6：给每个值加一个时间",
+                "instruction": "另一天运行这段完整小例子。time_s 是人为安排的观察时刻，不是电脑实测时间；三行表示 0、1、2 秒分别观察一次。前一课的两列 CSV 与本课三列不同，不能混用表头。",
+                "expected": "生成 timed.csv；输出 0.0 s: 3.0 mA、1.0 s: 9.09 mA、2.0 s: 3.0 mA。",
+                "why": "有时间才能知道先后与间隔。这里只把已有模型值放进时间线；这些值不证明真实电路在一秒内完成过变化。",
+                "code": "import csv\n\nrows = [[0, 1000, 3.00], [1, 330, 9.09], [2, 1000, 3.00]]\nwith open(\"timed.csv\", \"w\", newline=\"\", encoding=\"utf-8\") as file:\n    writer = csv.writer(file)\n    writer.writerow([\"time_s\", \"resistance_ohm\", \"current_ma\"])\n    writer.writerows(rows)\nwith open(\"timed.csv\", newline=\"\", encoding=\"utf-8\") as file:\n    for row in csv.DictReader(file):\n        print(float(row[\"time_s\"]), \"s:\", float(row[\"current_ma\"]), \"mA\")",
+                "language": "python",
+                "stdin": "",
+                "stdout": "0.0 s: 3.0 mA\n1.0 s: 9.09 mA\n2.0 s: 3.0 mA\n"
+              },
+              {
+                "title": "小课 7：把同一份时间表画成最简单曲线",
+                "instruction": "把这份完整整合代码保存为 led_log.py，在一个学习文件夹里运行。它从头生成数据、读 CSV 并画图，无需安装第三方库。用浏览器打开 curve.svg：横轴时间 s、纵轴电流 mA。先只理解 points.append 那一行。",
+                "expected": "终端输出 saved timed.csv and curve.svg (3 points)。曲线在 t=0 为 3 mA，t=1 约 9.09 mA，t=2 回到 3 mA。",
+                "why": "SVG 是浏览器能显示的文字图片。x=40+time×120 把秒映射为横坐标；y=140−current×10 把电流映射为向上的高度。点之间的直线仅帮助阅读，不是实测连续波形。f\"...\" 将变量值填进文字。",
+                "code": "import csv\n\ndef led_current_ma(supply_v, resistance_ohm):\n    if resistance_ohm <= 0:\n        raise ValueError(\"resistance must be positive\")\n    return max(0, supply_v - 2) / resistance_ohm * 1000\n\nconditions = [[0, 1000], [1, 330], [2, 1000]]\nwith open(\"timed.csv\", \"w\", newline=\"\", encoding=\"utf-8\") as file:\n    writer = csv.writer(file)\n    writer.writerow([\"time_s\", \"resistance_ohm\", \"current_ma\"])\n    for time_s, resistance_ohm in conditions:\n        writer.writerow([time_s, resistance_ohm,\n                         round(led_current_ma(5, resistance_ohm), 2)])\npoints = []\nwith open(\"timed.csv\", newline=\"\", encoding=\"utf-8\") as file:\n    for row in csv.DictReader(file):\n        x = 40 + float(row[\"time_s\"]) * 120\n        y = 140 - float(row[\"current_ma\"]) * 10\n        points.append(f\"{x},{y}\")\nline = \" \".join(points)\nsvg = f'''<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 340 190\">\n<rect width=\"340\" height=\"190\" fill=\"white\"/>\n<path d=\"M40 30V140H300\" fill=\"none\" stroke=\"black\"/>\n<text x=\"4\" y=\"20\">current (mA)</text><text x=\"255\" y=\"180\">time (s)</text>\n<text x=\"20\" y=\"145\">0</text><text x=\"12\" y=\"44\">10</text>\n<text x=\"38\" y=\"158\">0</text><text x=\"158\" y=\"158\">1</text><text x=\"278\" y=\"158\">2</text>\n<polyline points=\"{line}\" fill=\"none\" stroke=\"blue\" stroke-width=\"2\"/>\n</svg>'''\nwith open(\"curve.svg\", \"w\", encoding=\"utf-8\") as file:\n    file.write(svg)\nprint(\"saved timed.csv and curve.svg (3 points)\")",
+                "language": "python",
+                "stdin": "",
+                "stdout": "saved timed.csv and curve.svg (3 points)\n"
+              }
+            ],
+            "practice": "不看整合代码，先复现两组函数计算。再把 conditions 中 t=1 的电阻改为 500 Ω，预测数值、重新运行、核对 CSV 和曲线；保留修改前后的文件。",
+            "answer": "5 V、500 Ω 时 I=(5−2)/500=0.006 A=6 mA；中间点应位于 t=1、6 mA，对应 SVG 坐标 (160,80)。首尾两点不变。能解释每一列与每个点才算通过。",
+            "rubric": [
+              "能解释变量、列表、循环和函数各解决什么问题，并独立改参数。",
+              "CSV 至少三行数据，表头有时间和单位；能重新读取而不是只写文件。",
+              "曲线与同一份 CSV 一一对应，能说明输入、公式、输出文件和模拟证据边界。"
+            ],
+            "mistakes": [
+              {
+                "symptom": "提示 NameError",
+                "check": "检查变量名拼写及赋值是否在使用之前；回到本课第一段，不直接调画图代码。"
+              },
+              {
+                "symptom": "提示 IndentationError",
+                "check": "冒号下面的循环或函数体统一缩进四个空格，先重跑循环小例子。"
+              },
+              {
+                "symptom": "找不到 CSV 或图",
+                "check": "输出在程序的运行目录；先用编辑器运行并找文件，下块再系统练当前目录。"
+              },
+              {
+                "symptom": "图与预期不一致",
+                "check": "先核对 CSV 中的时间与数值，再检查坐标公式；本图范围为 0–2 s、0–10 mA。"
+              }
+            ],
+            "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          }
+        },
+        {
+          "id": "engineering-tools",
+          "week": 4,
+          "title": "留下可复现的过程",
+          "source": "shell",
+          "scope": "先做本站路径→最小命令→本地版本→新目录复现。原 Shell 课程补路径与运行；Git 课程作为可选升级，无需 GitHub 账户。",
+          "why": "尽早掌握最小工具集，后面遇到问题能定位到改了什么。",
+          "exercise": "分次完成终端运行、保存 v1/v2 和单条件修改；写一条变化说明。",
+          "acceptance": "新目录只凭脚本和 README 能生成 CSV/曲线；有两版代码、输入/输出和一条可解释差异，能分清路径错误与程序错误。",
+          "first_step": "找到上块脚本并完成小课 1 的路径辨认；另一段学习练 pwd/cd/ls。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "终端让操作可重复，Git 让修改过程可追溯；它们帮你保存“怎么做到的”。",
+          "remedy": {
+            "block": "python-data",
+            "text": "先回到 Python 整合课，确认同一个脚本能够生成 timed.csv 与 curve.svg，再练终端与版本。"
+          },
+          "readings": [
+            {
+              "title": "Shell：进入目录并运行程序",
+              "url": "https://missing.csail.mit.edu/2026/course-shell/",
+              "note": "先完成路径、目录与运行命令相关练习。",
+              "optional": false
+            },
+            {
+              "title": "Git：保存与查看修改",
+              "url": "https://missing.csail.mit.edu/2026/version-control/",
+              "note": "完成文件夹版本保存后，可选用本地 Git 练 status、diff、add、commit；不要求注册 GitHub，复杂历史操作留到需要时。",
+              "optional": true
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "找到上块脚本并完成小课 1 的路径辨认；另一段学习练 pwd/cd/ls。",
+            "分次完成终端运行、保存 v1/v2 和单条件修改；写一条变化说明。",
+            "写 README；关闭终端后，在只含脚本与说明的新目录独立复现。"
+          ],
+          "prerequisite": "已完成 python-data 七小课，有自己运行过的 led_log.py、CSV 与曲线；能说出运行所需输入和两个输出文件。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "可选：在本地 Git 仓库保存 v1/v2 的差异，练 status、diff、add、commit，不要求远程托管。",
+          "extension_acceptance": "能找到某次修改及理由，并按 README 复现该版输出；文件夹版本完成后即可进入下一块。",
+          "diagnostics": [
+            {
+              "symptom": "No such file 或找不到文件",
+              "check": "先运行 pwd/ls，确认当前目录与脚本名；保留路径中的空格引用。"
+            },
+            {
+              "symptom": "command not found: python3",
+              "check": "回到 Python 环境准备，确认本机可用的 Python 3 命令，记录实际命令，别反复改业务代码。"
+            },
+            {
+              "symptom": "输出与 README 不一致",
+              "check": "核对正在运行的版本和 conditions；修改代码后同步更新说明，再从新目录复现。"
+            }
+          ],
+          "recall": {
+            "block": "python-data",
+            "prompt": "先不看资料，复现或解释“用 Python 整理观察”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "先完成本站跟练第一小课，写下自己的预测和输出再停下。每小课可跨多天，不把本块所有内容塞进一次学习。",
+          "study_load": {
+            "core_minutes": 240,
+            "deep_minutes": 480,
+            "note": "编排参考，非实测用时。按小课分多天；每天先回忆上次输入与结果，再完成一个可核对动作。卡住就续练，不因日期自动升级。"
+          },
+          "walkthrough": {
+            "title": "第 4 块：把一次成功变成可复现过程",
+            "goal": "找到文件、运行文件、保留版本，并在新目录独立复现。",
+            "setup": [
+              "复用上块的 robotics-notes，不需注册网站。每个小课完成一个动作；不懂路径时先停在前两课。",
+              "命令示例默认 macOS/Linux。Windows 先完成等价的目录和 Python 运行操作即可；不要求为本课更换系统。",
+              "只操作自己新建的学习目录；本块不需要删除命令、管理员权限或远程上传。"
+            ],
+            "terms": [
+              {
+                "term": "当前目录",
+                "meaning": "终端此刻所在的文件夹，相对路径从这里出发。"
+              },
+              {
+                "term": "绝对路径",
+                "meaning": "包含完整文件位置的路径；不同电脑通常不同。"
+              },
+              {
+                "term": "版本",
+                "meaning": "某次修改时保留下来的输入、代码与结果。"
+              },
+              {
+                "term": "复现",
+                "meaning": "按写下来的说明，从干净目录重新得到可核对结果。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "小课 1：找到脚本真实保存的位置",
+                "instruction": "在文件管理器打开 robotics-notes，确认有上块的 led_log.py、timed.csv、curve.svg。开启扩展名显示，写下完整目录路径；打开终端，把该文件夹拖到终端窗口可查看路径。",
+                "expected": "能指出文件夹和文件的区别；脚本名确实以 .py 结尾，不是 .py.txt。",
+                "why": "文件名回答“哪一个”，路径回答“在哪里”。终端看不见你在文件管理器当前打开的目录，必须显式进入。"
+              },
+              {
+                "title": "小课 2：只学三个最小命令",
+                "instruction": "本示例面向 macOS/Linux 终端。先输入 pwd 看当前位置，再输入 cd 加空格，拖入 robotics-notes 文件夹得到实际路径并回车，最后输入 ls。若路径含空格，保留拖入时生成的引用或转义，不要抄别人的用户名。",
+                "expected": "pwd 显示当前目录；进入学习目录后，ls 应列出 led_log.py。",
+                "why": "cd 改变当前目录，pwd 显示它，ls 列出其中的文件。相对路径从当前目录开始；绝对路径包含完整位置。",
+                "code": "pwd\n# 然后输入 cd 加空格，拖入你的学习文件夹，按回车\nls",
+                "language": "shell"
+              },
+              {
+                "title": "小课 3：在终端重跑同一个文件",
+                "instruction": "确认 ls 能找到脚本，再逐行运行以下命令。第一行确认解释器，第二行运行课程脚本。Windows 可在 PowerShell 用 Get-Location、Set-Location 和 Get-ChildItem 对应操作；Python 命令按本机安装使用 py 或 python。",
+                "expected": "第一行显示本机 Python 3 版本，第二行显示 saved timed.csv and curve.svg (3 points)，学习目录内两个输出更新。",
+                "why": "解释器负责执行 .py；程序报错与“找不到命令/文件”属于不同层面。运行结果由输入和代码共同决定。",
+                "code": "python3 --version\npython3 led_log.py",
+                "language": "shell"
+              },
+              {
+                "title": "小课 4：先留版本，再只改一个条件",
+                "instruction": "在文件管理器新建 v1 文件夹，把 led_log.py、timed.csv、curve.svg 复制进去。原目录中只把 t=1 的 330 Ω 改成 500 Ω，再运行，随后将新三文件复制到 v2。写 changes.txt 记录“330→500，预计 9.09→6 mA”。",
+                "expected": "v1、v2 都能各自运行；两版中间点不同，首尾相同；版本文件夹内保留当时的输入、代码和输出。",
+                "why": "版本的用途是找到修改前后的差别。先用本地文件夹掌握这个概念；以后用本地 Git 保存 status/diff/add/commit，无需 GitHub 账户。"
+              },
+              {
+                "title": "小课 5：写一份别人能照着运行的说明",
+                "instruction": "在 v2 里新建 README.txt，按模板填自己的实际值：Python 版本、命令、输入条件、输出文件、预期中间点、模型假设。把“我已完成”留给真正的运行记录，模板不算证据。",
+                "expected": "说明中有运行目录、python3 led_log.py、timed.csv/curve.svg、t=1 为 6 mA，并说明本课固定 LED 压降 2 V。",
+                "why": "复现需要知道用哪份代码、输入是什么、如何运行、怎样判断结果，而不只是截图里“看起来成功”。",
+                "code": "运行目录：本 README 所在目录\n环境：填写你实际看到的 Python 3 版本\n命令：python3 led_log.py\n输入：0 s/1000 Ω，1 s/500 Ω，2 s/1000 Ω；电源 5 V\n输出：timed.csv 与 curve.svg\n核对：中间点 6 mA，首尾 3 mA\n限制：固定 LED 压降 2 V 的教学计算，无实物测量",
+                "language": "text"
+              },
+              {
+                "title": "小课 6：关闭窗口后从空目录复现",
+                "instruction": "关闭终端，新建 reproduction 文件夹，只复制 v2 的 led_log.py 和 README.txt；不要复制输出文件。重新打开终端，按照 README 进入新目录运行，检查生成的 CSV/SVG，再写下一条真正的运行记录。",
+                "expected": "新目录重新生成输出，三个点为 3、6、3 mA；无需依赖旧终端、旧输出或未记录的文件。",
+                "why": "新目录复现能暴露遗漏依赖。重复运行只证明这个输入下可运行，不能自动证明所有数据都正确。"
+              }
+            ],
+            "practice": "把 v2 再复制成 v3，将中间电阻改回 1000 Ω；先在变化说明中预测，再在新目录运行并更新 README。",
+            "answer": "三个点都应为 3 mA，曲线为水平线。README 必须同步写 1000 Ω；若说明还写 6 mA，即使代码能运行也未通过。",
+            "rubric": [
+              "能定位脚本并用终端运行，不靠旧窗口碰巧处于正确目录。",
+              "能展示两个版本的一处输入差异与对应结果。",
+              "从新目录独立生成文件，README 的条件、命令和结果相符。"
+            ],
+            "mistakes": [
+              {
+                "symptom": "No such file 或找不到文件",
+                "check": "先运行 pwd/ls，确认当前目录与脚本名；保留路径中的空格引用。"
+              },
+              {
+                "symptom": "command not found: python3",
+                "check": "回到 Python 环境准备，确认本机可用的 Python 3 命令，记录实际命令，别反复改业务代码。"
+              },
+              {
+                "symptom": "输出与 README 不一致",
+                "check": "核对正在运行的版本和 conditions；修改代码后同步更新说明，再从新目录复现。"
+              }
+            ],
+            "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          }
+        }
+      ],
+      "lead_source": "make",
+      "main_note": "实验主线：《爱上电子学》。AAC 是补原理的参考教材，不要求按六卷从头读完。",
+      "deeper": "比较同一电压下不同电阻的电流与功率，用欧姆定律解释；再对照真实 LED 的非线性，说明模型边界。"
+    },
+    {
+      "stage": "robotics-2",
+      "month": 2,
+      "title": "传感器到执行器",
+      "goal": "让有时间和单位的输入，经状态规则产生虚拟电机命令，并用可复现日志验收。",
+      "prerequisite": "完成阶段一的电路/测量、Python 七小课、CSV/时间曲线和新目录复现；本阶段先练二值条件，再逐步加入状态。",
+      "project": "避障控制最小系统：固定距离与按钮 → idle/forward/stop → 虚拟电机命令 → 时间 CSV",
+      "gate": [
+        "能独立解释按键极性/去抖、ADC 采样/量程与原始值/标定量，保存带时间和单位的数据并识别无效输入。",
+        "必做固定输入回放：idle、forward、stop 对应正确虚拟命令；等待、前进、障碍、按钮停止、无效输入和停止保持都有预期与实际时间日志。",
+        "能解释供电、信号与驱动的分工，从新目录复现控制程序；未经器件额定值和官方接线确认，不进行实物接线，模拟不替代硬件验收。"
+      ],
+      "defer": "先完成网页与 Python 可回放闭环；有确认兼容的 Arduino 板卡再补实物，ESP32、RTOS、FOC 等按项目需要再加。",
+      "no_hardware": "无硬件可用固定距离序列、网页模型、虚拟电机命令和时间日志完成逻辑验收。实物输入、驱动和机械响应在有匹配硬件后单独补验。",
+      "blocks": [
+        {
+          "id": "gpio",
+          "week": 5,
+          "title": "按钮与 LED",
+          "source": "paul",
+          "scope": "先做本站输入语义、逻辑门、上拉和去抖。原 Paul/Arduino 教材用于硬件环境和已确认板型的 Blink/Button；硬件可后补。",
+          "why": "小示例只引入少量变量，容易判断是接线还是代码出错。",
+          "exercise": "运行上拉输入逻辑脚本；另一次学习比较网页 0/15 ms 去抖。",
+          "acceptance": "能把上拉的原始低电平解释为按下，正确输出四行日志；解释网页波形极性与上拉例子的区别、去抖的收益与延迟。",
+          "first_step": "画按钮输入→规则→LED 输出，并在网页 AND 逻辑中核对四种组合。",
+          "companion": "digital-state",
+          "lesson": "levels",
+          "lab": "logic",
+          "intuition": "GPIO 是程序和外部电路交接的引脚；读入电平和输出电平是两件事。",
+          "remedy": {
+            "block": "engineering-tools",
+            "text": "先确认脚本能运行并保存输入/输出；不会解释闭合回路时回到 circuit-foundation，路径问题先补新目录复现。"
+          },
+          "readings": [
+            {
+              "title": "Arduino 第 1 课：环境与第一个程序",
+              "url": "https://toptechboy.com/arduino-tutorial-1-getting-started-with-the-arduino-for-beginners/",
+              "note": "先跑通第一个示例，再读按键；板卡和 IDE 界面不同就对照官方说明。"
+            },
+            {
+              "title": "点亮并闪烁板载 LED",
+              "url": "https://docs.arduino.cc/built-in-examples/basics/Blink/",
+              "note": "先确认程序能正确上传与运行。",
+              "optional": false
+            },
+            {
+              "title": "让按钮控制输出",
+              "url": "https://docs.arduino.cc/built-in-examples/digital/Button/",
+              "note": "区分按钮实际接法与代码里的高低电平。",
+              "optional": false
+            },
+            {
+              "title": "观察并处理按键抖动",
+              "url": "https://docs.arduino.cc/built-in-examples/digital/Debounce/",
+              "note": "按一次被识别为多次时再补这一节。",
+              "optional": true
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "画按钮输入→规则→LED 输出，并在网页 AND 逻辑中核对四种组合。",
+            "运行上拉输入逻辑脚本；另一次学习比较网页 0/15 ms 去抖。",
+            "独立完成输入/输出表；无硬件保留逻辑日志，有硬件另按已确认型号的官方例子补观察。"
+          ],
+          "prerequisite": "完成阶段一验收：能解释限流、运行 Python 的列表/循环/函数，并从新目录复现；会用 True/False 表示两种情况即可，本课教条件判断。",
+          "resource_role": "连续视频课",
+          "extension_exercise": "有板卡且已确认额定值后，记录真实按键的输入极性，再比较去抖前后的响应。",
+          "extension_acceptance": "保留型号、代码和实物观察，区分板卡测量与网页固定波形。",
+          "bridge": {
+            "title": "可选硬件过渡：从 Python 到 Arduino",
+            "explanation": "无硬件先完成本站 Python 与网页主线即可。有已确认兼容的板卡后再读这段 Arduino 草图：setup() 在启动时执行一次，loop() 不断重复；花括号包住代码块，多数语句以分号结束。LED_BUILTIN 及亮灭极性由具体板卡定义。",
+            "example": "void setup() {\n  pinMode(LED_BUILTIN, OUTPUT);\n}\nvoid loop() {\n  digitalWrite(LED_BUILTIN, HIGH);\n  delay(1000);\n  digitalWrite(LED_BUILTIN, LOW);\n  delay(1000);\n}",
+            "language": "cpp",
+            "question": "把两个 1000 都改成 500，会改变什么？为什么后面还要学不用 delay 的计时？",
+            "answer": "板载 LED 每半秒切换一次。delay 会暂停当前程序的后续执行；需要同时响应按键时，要再学基于时间差的非阻塞写法。",
+            "before": "无硬件先用虚拟输出完成本块；有硬件时先核对官方板载 LED 示例，额定值与引脚定义未确认前不接外部按钮或负载。"
+          },
+          "diagnostics": [
+            {
+              "symptom": "按下时 LED 反而灭",
+              "check": "先核对 raw==0 的含义与板载 LED 极性，别同时改接线和条件。"
+            },
+            {
+              "symptom": "网页结果与脚本相反",
+              "check": "网页去抖使用高电平视为按下，上拉脚本用原始低电平视为按下；先统一语义再比较。"
+            },
+            {
+              "symptom": "按一次产生多个触发",
+              "check": "先比较原始边沿与去抖后次数，再检查稳定门槛，不能仅凭次数宣称硬件已消抖。"
+            }
+          ],
+          "recall": {
+            "block": "circuit-foundation",
+            "prompt": "先不看资料，复现或解释“看懂第一个电路”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "先完成本站跟练第一小课，写下自己的预测和输出再停下。每小课可跨多天，不把本块所有内容塞进一次学习。",
+          "study_load": {
+            "core_minutes": 300,
+            "deep_minutes": 600,
+            "note": "编排参考，非实测用时。按小课分多天；每天先回忆上次输入与结果，再完成一个可核对动作。卡住就续练，不因日期自动升级。"
+          },
+          "walkthrough": {
+            "title": "第 5 块：从一个按钮到可解释的输出",
+            "goal": "先建立输入与输出的对应，再看浮空、上拉和去抖。",
+            "setup": [
+              "主线不要求硬件：网页逻辑练习和 Python 脚本即可完成。一次只做一个小课，保留输入与输出表。",
+              "有硬件时先完成厂商确认的板载 LED 示例；未经额定值、引脚定义与电平确认，不接外部器件。"
+            ],
+            "terms": [
+              {
+                "term": "GPIO",
+                "meaning": "可由程序配置为输入或输出的通用引脚；不是电机供电口。"
+              },
+              {
+                "term": "HIGH/LOW",
+                "meaning": "数字逻辑状态；具体电压门槛依板卡而定。"
+              },
+              {
+                "term": "上拉",
+                "meaning": "让未主动驱动的输入有确定的高电平默认值；按钮接地时通常按下为低。"
+              },
+              {
+                "term": "去抖",
+                "meaning": "只接受持续稳定的状态变化，避免一次机械按下制造多个触发。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "小课 1：先拆成输入、规则和输出",
+                "instruction": "画三个框：按钮是否按下 → 是否允许点亮 → LED 是否亮。先使用“按下=1”的逻辑语义，在表格写未按/按下两种情况。",
+                "expected": "未按下时输出 0，按下时输出 1；此处 1 是布尔意义，不是已经测得某引脚 5 V。",
+                "why": "GPIO 引脚可以配置为输入或输出；读到的电平需要程序解释后才能决定另一引脚的输出。"
+              },
+              {
+                "title": "小课 2：在网页验证两个条件",
+                "instruction": "打开“逻辑与按键”，观察内容选“逻辑门”，关系选 AND。把 A 理解为“已经按下”，B 理解为“允许点亮”；依次尝试 00、01、10、11。",
+                "expected": "只有 A=1 且 B=1 时 Q=1。网页是理想逻辑示意，没有模拟上拉电阻或真实引脚电压。",
+                "why": "AND 要求两个条件同时成立；图中的 A 是解释后的按键含义，不一定等于实物按键原始电平。",
+                "model_case": {
+                  "kind": "gate",
+                  "input": {
+                    "kind": "and",
+                    "a": true,
+                    "b": true
+                  },
+                  "output": 1
+                }
+              },
+              {
+                "title": "小课 3：看懂上拉输入为何反过来",
+                "instruction": "运行 Python 逻辑演练。假定输入已正确设置为上拉且按钮按下连接到参考地：松开读 1，按下读 0。== 比较两边是否相等，if/else 按真假选择输出。",
+                "expected": "四行依次输出 1 0、0 1、0 1、1 0，左列是原始电平，右列是希望的 LED 状态。",
+                "why": "上拉给未按下的输入提供确定默认电平，避免悬空。真实上拉阻值、允许电压与引脚模式由具体板卡决定；本代码只处理假定输入。",
+                "code": "raw_levels = [1, 0, 0, 1]\nfor raw in raw_levels:\n    pressed = raw == 0\n    if pressed:\n        led = 1\n    else:\n        led = 0\n    print(raw, led)",
+                "language": "python",
+                "stdin": "",
+                "stdout": "1 0\n0 1\n0 1\n1 0\n"
+              },
+              {
+                "title": "小课 4：一次按下为什么像按了四次",
+                "instruction": "网页观察内容改为“按键去抖”，观察时刻设 130 ms，持续稳定门槛先设 0 ms，记录两项次数；然后只把门槛设为 15 ms。",
+                "expected": "0 ms：原始上升沿 4 次，接受按下 4 次。15 ms：原始仍为 4 次，接受按下变为 1 次；过滤后在 42 ms 接受按下，103 ms 接受释放。",
+                "why": "网页固定波形使用高电平表示按下，与前课上拉例子的原始电平相反。去抖要求新状态持续稳定，减少重复边沿，也会引入延迟。",
+                "model_case": {
+                  "kind": "bounce",
+                  "input": {
+                    "delay": 15,
+                    "end": 130
+                  },
+                  "output": {
+                    "rawCount": 4,
+                    "count": 1,
+                    "filtered": [
+                      [
+                        0,
+                        0
+                      ],
+                      [
+                        42,
+                        1
+                      ],
+                      [
+                        103,
+                        0
+                      ]
+                    ]
+                  }
+                }
+              },
+              {
+                "title": "小课 5：可选硬件先只看板载 LED",
+                "instruction": "没有硬件：用上面的脚本输出当作虚拟 LED，记录“逻辑演练”。有兼容板：先查板卡型号、逻辑电压和官方板载 LED 示例，再按原教材上传 Blink，比较 1000 ms 与 500 ms。先不要接外部负载。",
+                "expected": "无硬件可独立解释输入→判断→输出。有硬件完成时另记板卡、草图和真实观察；Blink 成功只证明板载 LED 示例运行。",
+                "why": "Arduino 的 setup 只启动一次，loop 反复运行，digitalWrite 发出输出命令；板载 LED 的电平极性、引脚定义以板卡文档为准。"
+              },
+              {
+                "title": "小课 6：把逻辑映射写清再考虑按钮",
+                "instruction": "写出表格：原始电平→pressed→led。无硬件独立改脚本即可；有硬件接按钮前，先核对板卡官方 INPUT_PULLUP 示例、按钮连通脚、允许输入电压与供电，断电连接后再复核，不凭本课通用图猜引脚。",
+                "expected": "表格包含松开 1→False→0，按下 0→True→1；能说明“网页高有效波形”和“上拉低有效输入”是两种约定。",
+                "why": "把物理接法、原始读数和程序语义分开，才能判断反亮是逻辑映射错还是接线/板卡差异。"
+              }
+            ],
+            "practice": "把 raw_levels 改成 [1, 0, 1, 0, 1]，先写五行输出；网页保持观察时刻 130 ms，把去抖门槛从 15 改成 30 ms，预测次数与接受时间。",
+            "answer": "脚本 LED 应为 0、1、0、1、0。30 ms 时接受按下仍为 1 次，接受时间从 42 变为 57 ms，释放从 103 变为 118 ms；更慢不等于更好。",
+            "rubric": [
+              "独立画出输入→判断→输出并解释低有效。",
+              "保存脚本与一份四行以上预测/实际日志；不把脚本当作实物测量。",
+              "说明浮空、上拉、去抖分别解决的问题，有硬件记录时注明型号与依据。"
+            ],
+            "mistakes": [
+              {
+                "symptom": "按下时 LED 反而灭",
+                "check": "先核对 raw==0 的含义与板载 LED 极性，别同时改接线和条件。"
+              },
+              {
+                "symptom": "网页结果与脚本相反",
+                "check": "网页去抖使用高电平视为按下，上拉脚本用原始低电平视为按下；先统一语义再比较。"
+              },
+              {
+                "symptom": "按一次产生多个触发",
+                "check": "先比较原始边沿与去抖后次数，再检查稳定门槛，不能仅凭次数宣称硬件已消抖。"
+              }
+            ],
+            "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          }
+        },
+        {
+          "id": "sensor-input",
+          "week": 6,
+          "title": "读数、标定与噪声",
+          "source": "arduino",
+          "scope": "Basics / AnalogReadSerial；Analog / Calibration、Smoothing。",
+          "why": "把原始读数转换成可解释量，比先堆传感器更容易定位问题。",
+          "exercise": "逐项检查无效输入；分次运行原始/平滑时间序列与线性标定小例子。",
+          "acceptance": "解释 204 与 512 的来源、阈值边界和无效状态；保留原始/平滑时间序列，说明标定依据与延迟；能提供有来源和单位的控制输入。",
+          "first_step": "在 ADC 网页预测并读取 1 V；另一次学习比较改变电压与再次读取。",
+          "companion": "io-chain",
+          "lesson": "adc",
+          "lab": "interface",
+          "intuition": "传感器给出的是读数；先知道读数怎样对应真实量，才谈判断与控制。",
+          "remedy": {
+            "block": "gpio",
+            "text": "先把一个二值输入正确映射为输出，再加入 ADC 码值；CSV/时间有困难时回到 python-data 第 5–7 小课。"
+          },
+          "readings": [
+            {
+              "title": "读出模拟输入",
+              "url": "https://docs.arduino.cc/built-in-examples/basics/AnalogReadSerial/",
+              "note": "先让串口连续输出原始值，保留原始数据。",
+              "optional": false
+            },
+            {
+              "title": "把输入范围映射到可用范围",
+              "url": "https://docs.arduino.cc/built-in-examples/analog/Calibration/",
+              "note": "先理解示例中的范围映射；真实物理量标定还需要已知参考量。",
+              "optional": false
+            },
+            {
+              "title": "比较平滑前后的数据",
+              "url": "https://docs.arduino.cc/built-in-examples/analog/Smoothing/",
+              "note": "比较波动与响应延迟，不能只保留看起来更平滑的图。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "在 ADC 网页预测并读取 1 V；另一次学习比较改变电压与再次读取。",
+            "逐项检查无效输入；分次运行原始/平滑时间序列与线性标定小例子。",
+            "独立保存时间、原始值、单位、有效性，并给出后续控制器的自建距离序列。"
+          ],
+          "prerequisite": "能完成 gpio 的输入→判断→输出表；能读 Python 列表、函数与带时间列 CSV，知道模型与实物证据不同。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "获得已确认兼容的传感器后，用至少两个已知参考量建立自己的标定，比较原始与平滑响应。",
+          "extension_acceptance": "记录板卡与传感器型号、参考条件、单位、有效范围及误差，不能用本课虚构关系替代。",
+          "diagnostics": [
+            {
+              "symptom": "拖动滑块后读数没变",
+              "check": "点击执行一次读取；先区分当前输入和上次采样。"
+            },
+            {
+              "symptom": "平滑数据看起来更稳定",
+              "check": "对比突变出现的时间和幅度，不能因此删掉原始数据。"
+            },
+            {
+              "symptom": "输入无效却想继续算距离",
+              "check": "先恢复参考、共地和 INPUT；超出标定范围用 unknown，别填成零。"
+            }
+          ],
+          "recall": {
+            "block": "gpio",
+            "prompt": "先不看资料，复现或解释“按钮与 LED”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "先完成本站跟练第一小课，写下自己的预测和输出再停下。每小课可跨多天，不把本块所有内容塞进一次学习。",
+          "study_load": {
+            "core_minutes": 300,
+            "deep_minutes": 600,
+            "note": "编排参考，非实测用时。按小课分多天；每天先回忆上次输入与结果，再完成一个可核对动作。卡住就续练，不因日期自动升级。"
+          },
+          "walkthrough": {
+            "title": "第 6 块：读数先有来历，才能拿来判断",
+            "goal": "把采样、原始码、标定、时间与有效范围逐件分清。",
+            "setup": [
+              "无需传感器，使用“程序输入输出”网页与自建 Python 序列。每次先预测再按读取。",
+              "本课的 10 位 ADC 是网页教学假设；真实板卡分辨率与参考电压需另查。Python 标定数据是虚构练习，不能拿去校准实物。"
+            ],
+            "terms": [
+              {
+                "term": "ADC",
+                "meaning": "把输入电压编码为整数；分辨率、参考和采样时刻决定如何理解它。"
+              },
+              {
+                "term": "量程与有效范围",
+                "meaning": "只有符合输入条件和标定范围的数据才可按当前关系解释。"
+              },
+              {
+                "term": "标定",
+                "meaning": "用已知参考量建立读数与物理量的对应，需记录条件。"
+              },
+              {
+                "term": "平滑",
+                "meaning": "用邻近样本降低波动，通常也会增加响应延迟。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "小课 1：从电压到数字码",
+                "instruction": "打开“程序输入输出”，参考电压选 5 V，当前传感器电压设 1 V，点亮阈值设 512，勾选共地与 INPUT，点击“执行一次读取”。先用 1÷5×1024 算一遍，取不大于它的整数。",
+                "expected": "上次码值 204，输出低；码宽约为 5/1024=0.0048828125 V。",
+                "why": "本网页是理想 10 位 ADC：floor(V/Vref×1024)，最大码 1023。码值是编码，不自带厘米或温度单位。",
+                "model_case": {
+                  "kind": "sample",
+                  "input": {
+                    "voltage": 1,
+                    "reference": 5,
+                    "threshold": 512,
+                    "ground": true,
+                    "input": true
+                  },
+                  "output": {
+                    "valid": true,
+                    "code": 204,
+                    "output": false
+                  }
+                }
+              },
+              {
+                "title": "小课 2：输入变了，旧读数不会自己更新",
+                "instruction": "先保持上次 1 V 的读取，拖动当前电压到 2.5 V 但先不点读取，比较“当前”和“上次”。再点击读取。",
+                "expected": "未重读时仍保留旧码值 204；重读后变为 512，输出高。",
+                "why": "输入、采样时刻、存下的读数是三件事。阈值采用 >=，所以恰好 512 已达到。",
+                "model_case": {
+                  "kind": "sample",
+                  "input": {
+                    "voltage": 2.5,
+                    "reference": 5,
+                    "threshold": 512,
+                    "ground": true,
+                    "input": true
+                  },
+                  "output": {
+                    "valid": true,
+                    "code": 512,
+                    "output": true
+                  }
+                }
+              },
+              {
+                "title": "小课 3：先拒绝无效输入",
+                "instruction": "仅在网页把参考电压改成 3.3 V、当前电压设 4 V并读取，再恢复 5 V；也可分别取消共地或 INPUT 后读取，观察无效提示，每次恢复后再改下一项。",
+                "expected": "超过参考范围、未共地或不是输入模式时，本模型返回无效，不给可信码值与输出。",
+                "why": "未知不是零。真实板卡的允许输入范围还要查额定值；网页过范围试验绝不能照搬为实物过压接线。",
+                "model_case": {
+                  "kind": "sample",
+                  "input": {
+                    "voltage": 4,
+                    "reference": 3.3,
+                    "threshold": 512,
+                    "ground": true,
+                    "input": true
+                  },
+                  "output": {
+                    "valid": false,
+                    "code": null,
+                    "output": null
+                  }
+                }
+              },
+              {
+                "title": "小课 4：先保存原始时间序列，再谈平滑",
+                "instruction": "运行这段自建读数示例；列表中的每对数是模拟毫秒与原始码值。切片 [max(0,i-2):i+1] 取最近至多三次，sum/len 算均值。",
+                "expected": "输出五行时间、原始码与平滑码；突然变到 400 时，均值仅为 266.7。",
+                "why": "三点平均会减弱小幅波动，也会让突变响应延后；必须同时保留原始值，不能只存平滑曲线。本例不是传感器实测噪声。",
+                "code": "samples = [[0, 200], [100, 202], [200, 198], [300, 400], [400, 402]]\nraw_values = []\nfor time_ms, raw in samples:\n    raw_values.append(raw)\n    i = len(raw_values) - 1\n    recent = raw_values[max(0, i - 2):i + 1]\n    smooth = sum(recent) / len(recent)\n    print(time_ms, raw, round(smooth, 1))",
+                "language": "python",
+                "stdin": "",
+                "stdout": "0 200 200.0\n100 202 201.0\n200 198 200.0\n300 400 266.7\n400 402 333.3\n"
+              },
+              {
+                "title": "小课 5：标定关系需要已知参考量",
+                "instruction": "运行一个假想线性传感器例子：两次参考检查给出码值 200 对应 10 cm、码值 800 对应 40 cm；只在此区间内做线性换算。这个约定只为练公式，不代表任何真实测距器件。",
+                "expected": "200→10.0 cm，500→25.0 cm，800→40.0 cm，900→unknown。",
+                "why": "(raw−200)/(800−200) 表示区间里的比例，再映射到 10–40 cm。真实传感器需要自己的参考点、误差和有效范围，不能把 ADC 码直接叫距离。",
+                "code": "def distance_cm(raw):\n    if raw < 200 or raw > 800:\n        return None\n    return 10 + (raw - 200) / (800 - 200) * (40 - 10)\n\nfor raw in [200, 500, 800, 900]:\n    value = distance_cm(raw)\n    if value is None:\n        print(raw, \"unknown\")\n    else:\n        print(raw, round(value, 1), \"cm\")",
+                "language": "python",
+                "stdin": "",
+                "stdout": "200 10.0 cm\n500 25.0 cm\n800 40.0 cm\n900 unknown\n"
+              },
+              {
+                "title": "小课 6：交给下一块的输入合同",
+                "instruction": "无硬件：把时间、原始值、单位、是否有效写进 CSV，并注明 self-built。准备一组 distance_cm=[50,50,15,50] 给后面的避障逻辑，这组厘米值是手工构造，不从网页 ADC 自动推得。有硬件：确认板型、参考电压、传感器输出类型和允许电压后，按原示例采集；还没有这些信息就继续模型路线。",
+                "expected": "能说明何时采样、原始字段含义、何时无效，以及后续控制器收到的距离由哪里来。",
+                "why": "控制器需要可解释的数据合同。模拟输入能检验逻辑分支，但不能证明真实距离准确或传感器实时性。"
+              }
+            ],
+            "practice": "网页恢复 5 V 参考、共地、INPUT、阈值 512。先预测 2.45 V 与 2.50 V 的码和输出，每次显式读取；再说明为什么原始 900 的假想距离不能继续外推。",
+            "answer": "2.45 V 为 floor(2.45/5×1024)=501，输出低；2.50 V 为 512，输出高。假想标定只覆盖 200–800，900 标为 unknown；网页本身并不模拟这条距离标定。",
+            "rubric": [
+              "能解释采样之前的旧值与采样之后的新值。",
+              "原始值与平滑值同时保留时间和单位，能举例说明延迟。",
+              "不把 ADC 码自动叫厘米，不把未知写成 0，有硬件结果时另记额定值与标定依据。"
+            ],
+            "mistakes": [
+              {
+                "symptom": "拖动滑块后读数没变",
+                "check": "点击执行一次读取；先区分当前输入和上次采样。"
+              },
+              {
+                "symptom": "平滑数据看起来更稳定",
+                "check": "对比突变出现的时间和幅度，不能因此删掉原始数据。"
+              },
+              {
+                "symptom": "输入无效却想继续算距离",
+                "check": "先恢复参考、共地和 INPUT；超出标定范围用 unknown，别填成零。"
+              }
+            ],
+            "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          }
+        },
+        {
+          "id": "motor-drive",
+          "week": 7,
+          "title": "为什么电机需要驱动板",
+          "source": "driver",
+          "scope": "阅读 Overview、Pinouts 和 DC Motor 使用部分；重点看逻辑输入与电机供电的区别。",
+          "why": "从一块具体驱动板追踪电流路径，比只记「接哪根线」更可靠。",
+          "exercise": "分次比较两组导通预算、共地与关断续流提示，只在网页改变危险条件。",
+          "acceptance": "独立解释 GPIO、驱动与电源的分工；正确判断模型预算不足和未知状态；能把 idle/forward/stop 映射为虚拟 STOP/FORWARD 命令。",
+          "first_step": "画信号/功率两条路径，辨认网页 NPN 与原教材驱动板的区别。",
+          "companion": "motor-integration",
+          "lesson": "motor",
+          "lab": "switching",
+          "intuition": "控制器负责发命令，驱动级负责让电机得到所需电流；两者不能混为一谈。",
+          "remedy": {
+            "block": "sensor-input",
+            "text": "先明确输入有效性，再处理输出；看不懂供电回路时回到 circuit-foundation，不能靠照抄接线越过原理。"
+          },
+          "readings": [
+            {
+              "title": "区分电源、控制和电机引脚",
+              "url": "https://learn.adafruit.com/adafruit-drv8833-dc-stepper-motor-driver-breakout-board/pinouts",
+              "note": "本页只适用于该驱动板；先标出信号与功率路径。",
+              "optional": false
+            },
+            {
+              "title": "阅读一个直流电机控制例子",
+              "url": "https://learn.adafruit.com/adafruit-drv8833-dc-stepper-motor-driver-breakout-board/arduino-dc-motor",
+              "note": "只接着做直流电机部分，不同时学习步进电机。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "画信号/功率两条路径，辨认网页 NPN 与原教材驱动板的区别。",
+            "分次比较两组导通预算、共地与关断续流提示，只在网页改变危险条件。",
+            "运行虚拟电机命令并保存日志；有硬件先完成额定值匹配表，未确认不得接线通电。"
+          ],
+          "prerequisite": "已完成 gpio 的逻辑映射和 sensor-input 的有效数据合同；能区分控制信号、供电与参考地，遇到未知会保留 unknown。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "只有额定值、官方接线与保护条件全部确认后，才按具体驱动板教材做受控硬件验证。",
+          "extension_acceptance": "另记实际命令、驱动响应与电机状态；虚拟命令成功不替代启动、停止和故障条件的硬件验证。",
+          "diagnostics": [
+            {
+              "symptom": "预算不足却想继续算实际电流",
+              "check": "本模型没有工作在放大区的完整器件模型，标记未知，别用预算数冒充实测。"
+            },
+            {
+              "symptom": "关断后想从页面读取尖峰电压",
+              "check": "网页未模拟瞬态幅度，只解释保护路径；不能据此证明保护设计有效。"
+            },
+            {
+              "symptom": "教材引脚与网页图不一样",
+              "check": "两者器件不同，网页是 NPN 教学模型，按实际驱动板官方文档识别引脚。"
+            }
+          ],
+          "recall": {
+            "block": "circuit-foundation",
+            "prompt": "先不看资料，复现或解释“看懂第一个电路”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "先完成本站跟练第一小课，写下自己的预测和输出再停下。每小课可跨多天，不把本块所有内容塞进一次学习。",
+          "study_load": {
+            "core_minutes": 300,
+            "deep_minutes": 600,
+            "note": "编排参考，非实测用时。按小课分多天；每天先回忆上次输入与结果，再完成一个可核对动作。卡住就续练，不因日期自动升级。"
+          },
+          "walkthrough": {
+            "title": "第 7 块：命令与供电不是同一件事",
+            "goal": "用模型理解驱动预算，用虚拟命令为下一块状态机搭好输出端。",
+            "setup": [
+              "主线是网页、纸面图与 Python 虚拟输出，不需要电机。",
+              "原主教材保留为具体驱动板参考；本站 NPN 模型不是 DRV8833 仿真，不提供通用实物接线图。"
+            ],
+            "terms": [
+              {
+                "term": "驱动级",
+                "meaning": "根据控制信号切换负载电流的电路，额定值必须匹配负载。"
+              },
+              {
+                "term": "导通预算",
+                "meaning": "本网页按假设估算能否保证开关充分导通，不是实测电流。"
+              },
+              {
+                "term": "续流路径",
+                "meaning": "开关关闭后给线圈储能释放提供的路径。"
+              },
+              {
+                "term": "命令",
+                "meaning": "控制程序提出的目标动作；发出命令与实际电机动作需要分别验证。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "小课 1：画出两条不同的路径",
+                "instruction": "画控制器→驱动输入的信号路径，再画电源正端→负载→驱动开关→电源负端的功率路径。网页“开关与驱动”为 NPN 低端开关模型，外部 DRV8833 教材是另一种器件，不可按网页猜其引脚。",
+                "expected": "图里 GPIO 只提供控制信号，负载电流来自负载电源；两条路径有共同参考，角色不同。",
+                "why": "给出指令不等于提供电机所需电流。真实电机的启动、堵转与持续需求也不等于稳态等效电阻。"
+              },
+              {
+                "title": "小课 2：同一个高电平也可能驱动不足",
+                "instruction": "打开驱动网页，控制信号高、共地开启，Rb=1000 Ω、负载等效电阻=100 Ω，保持线圈和二极管开启。分别算 2.6/1000 与 4.8/100，再比较网页。",
+                "expected": "基极电流 2.60 mA，目标负载 48.00 mA，10×Ib 预算 26.00 mA，预算不足；实际负载电流未知。",
+                "why": "本例假定 3.3−0.7=2.6 V、5−0.2=4.8 V、强迫增益 10。预算不足不能把 26 mA 宣称为实测负载电流。",
+                "model_case": {
+                  "kind": "driver",
+                  "input": {
+                    "on": true,
+                    "rb": 1000,
+                    "load": 100,
+                    "ground": true
+                  },
+                  "output": {
+                    "base": 0.0026,
+                    "required": 0.048,
+                    "budget": 0.026,
+                    "saturated": false,
+                    "current": null
+                  }
+                }
+              },
+              {
+                "title": "小课 3：只改变负载，再检验共地",
+                "instruction": "保持 Rb=1000 Ω，把负载改为 200 Ω。预测后观察；随后仅在网页取消共地，再恢复。",
+                "expected": "共地时目标 24.00 mA，预算 26.00 mA，满足本练习导通预算；取消共地时基极电流与预算未知，不预测负载状态。",
+                "why": "共同参考地使控制电压有明确含义。满足简化模型预算不是已核对实际器件额定值。",
+                "model_case": {
+                  "kind": "driver",
+                  "input": {
+                    "on": true,
+                    "rb": 1000,
+                    "load": 200,
+                    "ground": true
+                  },
+                  "output": {
+                    "required": 0.024,
+                    "budget": 0.026,
+                    "saturated": true,
+                    "current": 0.024
+                  }
+                }
+              },
+              {
+                "title": "小课 4：关断线圈时，能量走哪里",
+                "instruction": "在网页保留线圈、共地和二极管，关闭控制信号，标出二极管 K 接正电源、A 接开关端的示意方向。仅在网页取消二极管，再读警告后恢复。",
+                "expected": "稳态负载电流显示关闭；有线圈而无续流保护时页面警告，模型不提供尖峰幅度或真实关断波形。",
+                "why": "线圈电流不能瞬间消失，需要泄放能量路径。这个 NPN 示意帮助理解续流，真实驱动板可能采用内部路径，不能直接套用外部二极管接法。"
+              },
+              {
+                "title": "小课 5：先定义虚拟电机命令",
+                "instruction": "运行本例，规定 forward 表示“请求前进”，idle/stop 表示“请求停止”。数值 50 是练习中的百分比请求，不是转速，也没有向硬件发送任何命令。",
+                "expected": "依次输出 idle STOP 0、forward FORWARD 50、stop STOP 0。",
+                "why": "状态机负责产生请求，驱动接口负责将请求映射到具体板卡支持的方向、PWM、使能和停止方式；两层可分开测试。",
+                "code": "for state in [\"idle\", \"forward\", \"stop\"]:\n    if state == \"forward\":\n        command = \"FORWARD\"\n        request_percent = 50\n    else:\n        command = \"STOP\"\n        request_percent = 0\n    print(state, command, request_percent)",
+                "language": "python",
+                "stdin": "",
+                "stdout": "idle STOP 0\nforward FORWARD 50\nstop STOP 0\n"
+              },
+              {
+                "title": "小课 6：有硬件也先完成匹配表",
+                "instruction": "无硬件：保存两条路径图、网页预算比较和虚拟命令日志即可。有硬件：先记录实际板卡逻辑电平、GPIO 允许电流，驱动板供电范围/持续与峰值电流，电机额定电压/启动或堵转需求、电源限流与保护、散热以及官方接线依据；任何关键额定值未确认就不接线通电。",
+                "expected": "匹配表中每项有具体型号与来源，或明确写待确认；未确认时继续虚拟路线，不把本课数字拿作实物选型参数。",
+                "why": "驱动器、电机、电源必须在同一组工况下匹配。网页中的 8 mA、增益 10、压降只是本练习假设，不是某款板卡规格。"
+              }
+            ],
+            "practice": "网页保持高电平、Rb=1000 Ω、负载=200 Ω，先预测取消共地后的状态；恢复后关闭控制信号。再在脚本中增加第二个 stop，确认请求仍为零。",
+            "answer": "取消共地时 base/budget/current 未知；恢复共地且控制关闭时稳态电流为 0。重复 stop 仍为 STOP 0，这只是命令可重复，不是制动性能证明。",
+            "rubric": [
+              "能画出信号与负载供电路径，解释为什么 GPIO 不直接带电机。",
+              "保留预算不足、预算满足、未知三种模型判断及其条件。",
+              "虚拟输出有状态和命令记录；未经额定值确认不进行实物接线。"
+            ],
+            "mistakes": [
+              {
+                "symptom": "预算不足却想继续算实际电流",
+                "check": "本模型没有工作在放大区的完整器件模型，标记未知，别用预算数冒充实测。"
+              },
+              {
+                "symptom": "关断后想从页面读取尖峰电压",
+                "check": "网页未模拟瞬态幅度，只解释保护路径；不能据此证明保护设计有效。"
+              },
+              {
+                "symptom": "教材引脚与网页图不一样",
+                "check": "两者器件不同，网页是 NPN 教学模型，按实际驱动板官方文档识别引脚。"
+              }
+            ],
+            "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          }
+        },
+        {
+          "id": "nonblocking-control",
+          "week": 8,
+          "title": "组合成不会卡住的控制程序",
+          "source": "arduino",
+          "scope": "先完成本站六小课与完整回放；原 BlinkWithoutDelay/StateChangeDetection 用来对照板卡上计时与变化检测，真实硬件另验收。",
+          "why": "非阻塞定时让程序在动作期间仍能处理新输入。",
+          "exercise": "分次完成非阻塞时间判断、整合 controller.py；手推再核对七行状态和虚拟电机日志。",
+          "acceptance": "必做：固定距离/按钮输入→idle、forward、stop→虚拟电机命令→时间 CSV；覆盖等待、前进、障碍、按钮停止和停止保持，并解释非阻塞计时与真实响应的边界。",
+          "first_step": "先手写 idle/forward/stop 状态与优先级，再用固定距离核对边界与未知输入。",
+          "companion": "digital-state",
+          "lesson": "state",
+          "lab": "logic",
+          "intuition": "状态机先判断“现在处于哪种状态”，再决定收到事件后做什么。",
+          "remedy": {
+            "block": "motor-drive",
+            "text": "先让单个状态正确映射到虚拟命令；输入判断卡住时回到 gpio/sensor-input，先手推两行再扩展状态。"
+          },
+          "readings": [
+            {
+              "title": "计时而不阻塞整个程序",
+              "url": "https://docs.arduino.cc/built-in-examples/digital/BlinkWithoutDelay/",
+              "note": "理解定时判断与等待的区别。",
+              "optional": false
+            },
+            {
+              "title": "只在输入发生变化时触发",
+              "url": "https://docs.arduino.cc/built-in-examples/digital/StateChangeDetection/",
+              "note": "把电平状态与变化事件分开。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "先手写 idle/forward/stop 状态与优先级，再用固定距离核对边界与未知输入。",
+            "分次完成非阻塞时间判断、整合 controller.py；手推再核对七行状态和虚拟电机日志。",
+            "独立注入无效输入与停止条件变化，在新目录复现输入→状态→命令的完整证据。"
+          ],
+          "prerequisite": "完成 gpio 的按键语义、sensor-input 的时间/单位/有效性、motor-drive 的虚拟命令映射；能运行函数、循环并保存 CSV。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "增加明确的输入超时规则和原因字段，先用自建时间注入超时，再考虑移植到已确认兼容的板卡。",
+          "extension_acceptance": "超时、有效恢复和复位各有独立预期/实际日志；移植后另测真实输入、驱动响应与电机状态。",
+          "diagnostics": [
+            {
+              "symptom": "障碍消失后意外自动前进",
+              "check": "先检查 stop 是否有记忆以及 reset/start 优先级；按手写状态表逐行核对。"
+            },
+            {
+              "symptom": "状态正确但命令错误",
+              "check": "检查输出是否由当前 state 统一生成，避免沿用上一行的 FORWARD。"
+            },
+            {
+              "symptom": "想用网页锁存器证明整个控制器正确",
+              "check": "锁存器只能帮助理解记忆，网页没有运行本 Python 控制器；必须查看自己的完整时间日志。"
+            },
+            {
+              "symptom": "日志中的距离为空",
+              "check": "本课 csv.writer 将 None 写为空；回读时保留无效语义，不默认补零或沿用旧值。"
+            }
+          ],
+          "recall": {
+            "block": "gpio",
+            "prompt": "先不看资料，复现或解释“按钮与 LED”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "先完成本站跟练第一小课，写下自己的预测和输出再停下。每小课可跨多天，不把本块所有内容塞进一次学习。",
+          "study_load": {
+            "core_minutes": 420,
+            "deep_minutes": 840,
+            "note": "编排参考，非实测用时。按小课分多天；每天先回忆上次输入与结果，再完成一个可核对动作。卡住就续练，不因日期自动升级。"
+          },
+          "walkthrough": {
+            "title": "第 8 块：一个能回放核对的避障控制程序",
+            "goal": "让固定输入经过状态判断产生虚拟命令，并留下时间日志。",
+            "setup": [
+              "无需硬件，使用 Python 3、自建距离序列和前块的虚拟输出。一个小课一段学习，先手算状态再运行。",
+              "本课模拟时间不读取真实传感器，也不向电机发命令。实物接线必须在额定值和官方连接方案确认后另做。",
+              "把每次变更保存为新版本；不把课程预期表直接作为个人完成证据。"
+            ],
+            "terms": [
+              {
+                "term": "状态",
+                "meaning": "程序保存的当前阶段；本例只有 idle、forward、stop。"
+              },
+              {
+                "term": "事件/输入",
+                "meaning": "某一时刻的按钮与距离；相同输入在不同状态下可能产生不同结果。"
+              },
+              {
+                "term": "非阻塞计时",
+                "meaning": "比较当前时间与上次时间，未到点也继续检查其他输入。"
+              },
+              {
+                "term": "日志合同",
+                "meaning": "每行把时间、输入、状态和命令放在一起；便于逐行核对。"
+              }
+            ],
+            "steps": [
+              {
+                "title": "小课 1：先画三状态及优先级",
+                "instruction": "写状态表：idle 等待开始、forward 请求前进、stop 保持停止。规定距离≤20 cm、停止按钮或无效距离优先进入 stop；清障后仍停在 stop，只有 reset 返回 idle，下一次 start 才前进。",
+                "expected": "能手推“开始→障碍→清障→复位→再次开始→停止按钮”分别到哪一状态。",
+                "why": "先把规则写清再写代码。停止保持可防止障碍一消失就自行继续；这是本教学任务选择的规则，不是已验证的安全控制器。"
+              },
+              {
+                "title": "小课 2：用固定距离先只做一个判断",
+                "instruction": "运行函数，distance_cm 是手工输入的厘米数。None 表示无效；or 从左到右判断，已确认 None 时不会继续做 <= 比较。",
+                "expected": "50→forward，20→stop，15→stop，None→stop。",
+                "why": "边界包含 20 cm，未知输入选择停止请求；这一步只检验一个判断，还没有按钮或记忆状态。",
+                "code": "def distance_decision(distance_cm):\n    if distance_cm is None or distance_cm <= 20:\n        return \"stop\"\n    return \"forward\"\n\nfor distance_cm in [50, 20, 15, None]:\n    print(distance_cm, distance_decision(distance_cm))",
+                "language": "python",
+                "stdin": "",
+                "stdout": "50 forward\n20 stop\n15 stop\nNone stop\n"
+              },
+              {
+                "title": "小课 3：读时间，而不是睡过去",
+                "instruction": "运行固定时刻序列。last_tick_ms 保存上次切换时间；now_ms−last_tick_ms 达到 100 才翻转 heartbeat。每一行无论是否到时间，都走到 print。",
+                "expected": "在 0、50 ms 为 0，100、150 ms 为 1，200 ms 回到 0；每个输入时刻都能处理。",
+                "why": "这是用模拟时间检查程序结构，不是真实时钟。没有 sleep/delay，因此计时逻辑不会主动阻塞下一行输入；实际响应仍取决于采样和执行频率。",
+                "code": "last_tick_ms = 0\nheartbeat = 0\nfor now_ms in [0, 50, 100, 150, 200]:\n    if now_ms - last_tick_ms >= 100:\n        heartbeat = 1 - heartbeat\n        last_tick_ms = now_ms\n    print(now_ms, heartbeat)",
+                "language": "python",
+                "stdin": "",
+                "stdout": "0 0\n50 0\n100 1\n150 1\n200 0\n"
+              },
+              {
+                "title": "小课 4：把输入、状态、虚拟电机和日志连起来",
+                "instruction": "把完整例子保存为 controller.py。events 每行按注释给出时间、开始、停止、复位、距离；先手填七行预期状态，再运行。现在复用 GPIO 的条件、传感器的时间/单位与驱动的虚拟命令。",
+                "expected": "七行状态依次为 idle、forward、stop、idle、forward、stop、stop；生成 control_log.csv。100 ms 因障碍停止，250 ms 因停止按钮停止；heartbeat 仍按时间切换。",
+                "why": "每次先处理当前输入，再更新状态，再计算输出；stop 状态有记忆。虚拟 FORWARD 50 与 STOP 0 只写日志，没有实际电机控制。CSV 保存同一时刻的输入与命令，便于发现误判。",
+                "code": "import csv\n\n# time_ms, start, stop, reset, distance_cm: fixed teaching inputs\nevents = [[0, 0, 0, 0, 50], [50, 1, 0, 0, 50],\n          [100, 0, 0, 0, 15], [150, 0, 0, 1, 50],\n          [200, 1, 0, 0, 50], [250, 0, 1, 0, 50],\n          [300, 0, 0, 0, 50]]\nstate = \"idle\"\nlast_tick_ms = 0\nheartbeat = 0\nwith open(\"control_log.csv\", \"w\", newline=\"\", encoding=\"utf-8\") as file:\n    writer = csv.writer(file)\n    writer.writerow([\"time_ms\", \"distance_cm\", \"state\", \"command\", \"request_percent\", \"heartbeat\"])\n    for now_ms, start, stop, reset, distance_cm in events:\n        # Process the newest input before a timer; no sleep or delay here.\n        if stop or distance_cm is None or distance_cm <= 20:\n            state = \"stop\"\n        elif state == \"stop\":\n            if reset:\n                state = \"idle\"\n        elif state == \"idle\" and start:\n            state = \"forward\"\n        if now_ms - last_tick_ms >= 100:\n            heartbeat = 1 - heartbeat\n            last_tick_ms = now_ms\n        if state == \"forward\":\n            command, request_percent = \"FORWARD\", 50\n        else:\n            command, request_percent = \"STOP\", 0\n        writer.writerow([now_ms, distance_cm, state, command, request_percent, heartbeat])\n        print(now_ms, distance_cm, state, command, request_percent, heartbeat)",
+                "language": "python",
+                "stdin": "",
+                "stdout": "0 50 idle STOP 0 0\n50 50 forward FORWARD 50 0\n100 15 stop STOP 0 1\n150 50 idle STOP 0 1\n200 50 forward FORWARD 50 0\n250 50 stop STOP 0 0\n300 50 stop STOP 0 1\n"
+              },
+              {
+                "title": "小课 5：独立改一个故障条件",
+                "instruction": "复制 controller.py 为一份新版本，只把 100 ms 那行距离 15 改成 None，运行并与旧 CSV 对比。再恢复后，另一次把 250 ms 那行 stop 改成 0，先预测最后两行再运行。",
+                "expected": "None 时 100 ms 仍进入 stop，CSV 中距离单元格为空；取消 250 ms 停止按钮后，250/300 ms 都保持 forward。",
+                "why": "一次只改一个条件可定位因果。无效输入应有明确表示；本例 CSV 的空距离对应 None，读回时不能转成 0 当成真实距离。"
+              },
+              {
+                "title": "小课 6：从日志证明规则覆盖到哪里",
+                "instruction": "把 controller.py、README、control_log.csv 和手写预期表放进新目录复现。逐项找 idle 停止请求、forward 前进请求、障碍停止、按钮停止和停止保持的行；单独说明真实硬件响应尚未验证。有硬件也先沿用这套日志合同，额定值未确认前不接电机。",
+                "expected": "每条规则都能指向具体行号与输入。能够解释为什么“程序发 STOP”不等于“真实电机已经停止”。",
+                "why": "固定输入回放可证明这组测试中的逻辑和输出一致；串口通信、板卡时钟、机械惯性与真正停止距离属于后续硬件验收，不能由本次模拟推出。"
+              }
+            ],
+            "practice": "从原始七行例子开始，把 100 ms 距离改为 20，再独立删除 150 ms 的 reset（设为 0）；手推后运行。在 README 写出哪条规则使 200 ms 的 start 无法重新前进。",
+            "answer": "20 cm 属于停止边界；没有 reset 时，100 ms 起一直保持 stop，200 ms 即使 start=1 也不前进，所有后续命令都是 STOP 0。heartbeat 仍在 100/200/300 ms 翻转。",
+            "rubric": [
+              "日志逐行包含时间、厘米输入、状态、命令和请求百分比，预期/实际可核对。",
+              "覆盖等待、开始、障碍、按钮停止、无效输入与停止保持；能独立改一个条件解释差异。",
+              "计时逻辑中没有 sleep/delay；说明固定时间回放不能证明真实电机的停止速度或实时性。"
+            ],
+            "mistakes": [
+              {
+                "symptom": "障碍消失后意外自动前进",
+                "check": "先检查 stop 是否有记忆以及 reset/start 优先级；按手写状态表逐行核对。"
+              },
+              {
+                "symptom": "状态正确但命令错误",
+                "check": "检查输出是否由当前 state 统一生成，避免沿用上一行的 FORWARD。"
+              },
+              {
+                "symptom": "想用网页锁存器证明整个控制器正确",
+                "check": "锁存器只能帮助理解记忆，网页没有运行本 Python 控制器；必须查看自己的完整时间日志。"
+              },
+              {
+                "symptom": "日志中的距离为空",
+                "check": "本课 csv.writer 将 None 写为空；回读时保留无效语义，不默认补零或沿用旧值。"
+              }
+            ],
+            "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          }
+        }
+      ],
+      "lead_source": "paul",
+      "main_note": "按 Paul 的连续入门课学输入和输出，再查 Arduino 示例；电机驱动另看本站分步练习。",
+      "deeper": "在按键与传感器都正常后引入一次故障，解释去抖、超时和停止状态怎样协作。"
+    },
+    {
+      "stage": "robotics-3",
+      "month": 3,
+      "title": "机械与 CAD",
+      "goal": "为自己的传感器或小车设计一个能修改、能制造的零件。",
+      "prerequisite": "知道第 2 月组件尺寸与安装位置；会读毫米和角度。",
+      "project": "一个参数化传感器支架与制造说明",
+      "gate": [
+        "保留可编辑 CAD 源文件和关键尺寸。",
+        "改一个安装孔距后，模型仍能正确更新。",
+        "有装配检查表；未打印时明确标为设计验证。"
+      ],
+      "defer": "先做单个支架；复杂机械臂装配、有限元分析与打印机改装暂缓。",
+      "no_hardware": "可完成 CAD、纸样和切片预览；借用或外包打印后再写实物装配结论。",
+      "blocks": [
+        {
+          "id": "cad-sketch",
+          "week": 9,
+          "title": "从尺寸画出草图",
+          "source": "onshape",
+          "scope": "按 CAD Basics 顺序学习视图、草图平面、尺寸与约束；先画一个矩形和一个孔。",
+          "why": "课程面向从未接触 CAD 的学习者，从空间与界面进入草图；每次只增加一个操作。",
+          "exercise": "给矩形长宽加尺寸，再放一个有定位尺寸的孔。",
+          "acceptance": "修改长宽，检查孔的位置是否仍符合约束，并保存草图截图。",
+          "first_step": "先认识视图与草图平面，画一个矩形；不要一次设计整个底盘。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "草图约束是在说明几何关系；尺寸是设计意图，不只是画面上的标注。",
+          "remedy": {
+            "text": "先掌握缩放、旋转与回到正视图。分不清二维草图和三维视图时，先只画一个矩形。",
+            "block": ""
+          },
+          "readings": [
+            {
+              "title": "CAD Basics · 按课程顺序从空间与草图进入零件",
+              "url": "https://learn.onshape.com/learn/learning-path/introduction-to-cad?hostDomain=cad",
+              "note": "草图块只学平面、尺寸、约束；实体块再学拉伸和孔。旧 CAD 参考不与这门课混用操作界面。"
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "先认识视图与草图平面，画一个矩形；不要一次设计整个底盘。",
+            "给矩形长宽加尺寸，再放一个有定位尺寸的孔。",
+            "修改长宽，检查孔的位置是否仍符合约束，并保存草图截图。"
+          ],
+          "prerequisite": "先检查：先掌握缩放、旋转与回到正视图。分不清二维草图和三维视图时，先只画一个矩形。",
+          "resource_role": "零基础课程",
+          "references": [
+            "cad"
+          ],
+          "extension_exercise": "根据实际模块尺寸画矩形底板和安装孔草图，区分已知尺寸与待测尺寸。",
+          "extension_acceptance": "草图关键尺寸有依据；修改尺寸时没有意外漂移。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先掌握缩放、旋转与回到正视图。分不清二维草图和三维视图时，先只画一个矩形。"
+            }
+          ],
+          "reading_stop": "本次先完成：先认识视图与草图平面，画一个矩形；不要一次设计整个底盘。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 240,
+            "deep_minutes": 480,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "cad-solid",
+          "week": 10,
+          "title": "把草图变成可调整零件",
+          "source": "onshape",
+          "scope": "继续 CAD Basics 的零件建模：拉伸、去除材料与孔；不混用 FreeCAD 的 Pad / Pocket 菜单。",
+          "why": "拉伸、挖孔与参数修改就能覆盖第一块支架的大部分需求。",
+          "exercise": "只做一次拉伸和一个通孔，核对单位为毫米。",
+          "acceptance": "改变厚度，检查孔是否仍贯穿，说明草图与实体的关系。",
+          "first_step": "打开上一块草图，预测拉伸后从哪边能看到厚度。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "拉伸是在增加材料，挖孔是在移除材料；参数让零件能按意图修改。",
+          "remedy": {
+            "text": "草图还会乱动时先补约束，不要通过更多三维特征掩盖问题。",
+            "block": "cad-sketch"
+          },
+          "readings": [
+            {
+              "title": "CAD Basics · 按课程顺序从空间与草图进入零件",
+              "url": "https://learn.onshape.com/learn/learning-path/introduction-to-cad?hostDomain=cad",
+              "note": "草图块只学平面、尺寸、约束；实体块再学拉伸和孔。旧 CAD 参考不与这门课混用操作界面。"
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "打开上一块草图，预测拉伸后从哪边能看到厚度。",
+            "只做一次拉伸和一个通孔，核对单位为毫米。",
+            "改变厚度，检查孔是否仍贯穿，说明草图与实体的关系。"
+          ],
+          "prerequisite": "先检查：草图还会乱动时先补约束，不要通过更多三维特征掩盖问题。",
+          "resource_role": "零基础课程",
+          "references": [
+            "cad"
+          ],
+          "extension_exercise": "由草图生成支架，保留孔距与厚度参数，另存一个修改孔距的版本。",
+          "extension_acceptance": "展示两个尺寸版本；模型无错误特征，源文件可再次编辑。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "草图还会乱动时先补约束，不要通过更多三维特征掩盖问题。"
+            }
+          ],
+          "recall": {
+            "block": "cad-sketch",
+            "prompt": "先不看资料，复现或解释“从尺寸画出草图”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：打开上一块草图，预测拉伸后从哪边能看到厚度。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 240,
+            "deep_minutes": 480,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "design-for-print",
+          "week": 11,
+          "title": "让模型适合打印",
+          "source": "print",
+          "scope": "只读打印方向、悬垂、壁厚与 Tolerances。",
+          "why": "把制造限制提前放进设计，比拿到不合适的零件后返工更容易理解。",
+          "exercise": "比较两个摆放方向，标注哪个需要更多支撑；只做切片预览也可。",
+          "acceptance": "给一个装配间隙写设计值与依据，注明尚未打印验证。",
+          "first_step": "选自己的零件，找出一个可能悬空的面并画出打印方向。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "屏幕里能画出来的形状，不一定能按预期打印；制造方式会限制设计。",
+          "remedy": {
+            "text": "先把零件简化成底板、孔和支撑三部分，再逐个判断打印方向和间隙。",
+            "block": "cad-solid"
+          },
+          "readings": [
+            {
+              "title": "打印方向、壁厚与装配间隙",
+              "url": "https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135",
+              "note": "在文章中依次找 Orientation、Wall thickness、Tolerances；只处理自己的零件会遇到的限制。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "选自己的零件，找出一个可能悬空的面并画出打印方向。",
+            "比较两个摆放方向，标注哪个需要更多支撑；只做切片预览也可。",
+            "给一个装配间隙写设计值与依据，注明尚未打印验证。"
+          ],
+          "prerequisite": "先检查：先把零件简化成底板、孔和支撑三部分，再逐个判断打印方向和间隙。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "对同一支架比较两种摆放方向，标出支撑、受力方向和需要留间隙的位置。",
+          "extension_acceptance": "能说明选择依据；间隙作为待验证参数，不宣称固定数值通用。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先把零件简化成底板、孔和支撑三部分，再逐个判断打印方向和间隙。"
+            }
+          ],
+          "recall": {
+            "block": "cad-solid",
+            "prompt": "先不看资料，复现或解释“把草图变成可调整零件”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：选自己的零件，找出一个可能悬空的面并画出打印方向。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 180,
+            "deep_minutes": 360,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "assembly-review",
+          "week": 12,
+          "title": "装配与迭代一次",
+          "source": "print",
+          "scope": "回看 Iterations of your design；围绕自己的零件做一轮改版。",
+          "why": "一件可说明修改原因的零件，比收集多个未经验证的模型更有价值。",
+          "exercise": "只核对一处螺钉长度、工具空间或连接器插拔空间。",
+          "acceptance": "修改一处冲突并记录前后尺寸，区分图纸核对与实物装配。",
+          "first_step": "用纸上尺寸核对一个模块与底板的孔距，圈出不确定项。",
+          "companion": "assembly-check",
+          "lesson": "debug",
+          "lab": "soldering",
+          "intuition": "装配检查关注的不只是“能装上”，还包括走线、维修和下一次修改是否方便。",
+          "remedy": {
+            "text": "先做纸样或尺寸核对，列待测项；没有实物时不要猜测最终配合效果。",
+            "block": "design-for-print"
+          },
+          "readings": [
+            {
+              "title": "设计迭代：给下一版留下依据",
+              "url": "https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135",
+              "note": "阅读 Iterations of your design，再对照自己的 v1 与 v2 说明修改原因。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "用纸上尺寸核对一个模块与底板的孔距，圈出不确定项。",
+            "只核对一处螺钉长度、工具空间或连接器插拔空间。",
+            "修改一处冲突并记录前后尺寸，区分图纸核对与实物装配。"
+          ],
+          "prerequisite": "先检查：先做纸样或尺寸核对，列待测项；没有实物时不要猜测最终配合效果。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "做纸样、切片预览或实物试装；检查孔位、走线、维护空间，保存 v1 → v2 修改记录。",
+          "extension_acceptance": "列出至少一个发现、对应修改和下一次验证方式；注明是设计、仿真还是实物证据。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先做纸样或尺寸核对，列待测项；没有实物时不要猜测最终配合效果。"
+            }
+          ],
+          "recall": {
+            "block": "design-for-print",
+            "prompt": "先不看资料，复现或解释“让模型适合打印”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：用纸上尺寸核对一个模块与底板的孔距，圈出不确定项。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 180,
+            "deep_minutes": 360,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        }
+      ],
+      "lead_source": "onshape",
+      "main_note": "先学 CAD Basics 的空间、草图、尺寸、拉伸，再做自己的底板；旧版 CAD 目录作为参考。",
+      "deeper": "改变组件尺寸，检查约束是否传播到孔位；对比切片估计与真实打印误差（有实物时）。"
+    },
+    {
+      "stage": "robotics-4",
+      "month": 4,
+      "title": "ROS 2 与仿真",
+      "goal": "把机器人拆成能观察、能复现的软件组件。",
+      "prerequisite": "能运行 Python 脚本和终端命令；认识状态、传感器与坐标轴。",
+      "project": "ROS 2 入门仿真与回放记录",
+      "gate": [
+        "能按记录的顺序启动节点与仿真，版本写清楚；统一 launch 入口作为后续改进。",
+        "能解释一条消息从发布者到订阅者的路径。",
+        "能回放一段记录，并定位一个自己引入的故障。"
+      ],
+      "defer": "先完成通信与可观测性；Nav2、SLAM、复杂 ros2_control 项目作为后续扩展。",
+      "no_hardware": "全月可以仿真完成。Mac / Windows 可准备兼容的 Ubuntu 环境；虚拟机图形与设备转发需另行验证。",
+      "blocks": [
+        {
+          "id": "ros-messages",
+          "week": 13,
+          "title": "节点、话题与消息",
+          "source": "ros",
+          "scope": "Beginner CLI Tools：turtlesim、nodes、topics、services；再做 Python publisher/subscriber。",
+          "why": "官方顺序能把终端观察结果和自己写的节点对应起来。",
+          "exercise": "成功安装后启动 turtlesim 并列出节点；只解释其中一个节点的职责。",
+          "acceptance": "观察一条话题并改一个运动指令，解释节点、话题和消息的区别。",
+          "first_step": "先记录电脑系统与架构，按 Jazzy 安装指南检查环境；卡住就暂停安装后的任务。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "节点像分工不同的小程序，话题是它们交换消息的渠道。",
+          "remedy": {
+            "text": "先确认终端能找到 ROS 命令。路径或环境变量不熟时，先回到 Shell 练习。",
+            "block": "engineering-tools"
+          },
+          "readings": [
+            {
+              "title": "先准备 ROS 2 Jazzy 运行环境",
+              "url": "https://docs.ros.org/en/jazzy/Installation.html",
+              "note": "先确认系统、架构和安装方式，按同一版本说明完成；环境没通就留在这一步。",
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Installation.rst"
+            },
+            {
+              "title": "用 turtlesim 认识节点",
+              "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html",
+              "note": "先启动、控制并观察示例，不急着写自己的节点。",
+              "optional": false,
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.rst"
+            },
+            {
+              "title": "沿一条话题追踪消息",
+              "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html",
+              "note": "能说明发布者、订阅者、消息类型与频率。",
+              "optional": false,
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.rst"
+            },
+            {
+              "title": "写自己的 Python 发布者与订阅者",
+              "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.html",
+              "note": "先按本页先修项完成工作空间与包创建，再运行两个节点。",
+              "optional": false,
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.rst"
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "先记录电脑系统与架构，按 Jazzy 安装指南检查环境；卡住就暂停安装后的任务。",
+            "成功安装后启动 turtlesim 并列出节点；只解释其中一个节点的职责。",
+            "观察一条话题并改一个运动指令，解释节点、话题和消息的区别。"
+          ],
+          "prerequisite": "先检查：先确认终端能找到 ROS 命令。路径或环境变量不熟时，先回到 Shell 练习。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "启动两个节点传递一条状态消息，使用命令行查看类型、频率和连接关系。",
+          "extension_acceptance": "能从输出判断谁在发布、谁在订阅；说明消息内容与单位。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先确认终端能找到 ROS 命令。路径或环境变量不熟时，先回到 Shell 练习。"
+            }
+          ],
+          "recall": {
+            "block": "engineering-tools",
+            "prompt": "先不看资料，复现或解释“留下可复现的过程”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：先记录电脑系统与架构，按 Jazzy 安装指南检查环境；卡住就暂停安装后的任务。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 600,
+            "deep_minutes": 1200,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "ros-frames",
+          "week": 14,
+          "title": "坐标与机器人描述",
+          "source": "ros",
+          "scope": "Intermediate 中 tf2 与 URDF 的入门部分；先做固定底座、轮子和一个传感器。",
+          "why": "软件中的坐标关系要对应真实安装位置，后续标定才能说清误差来源。",
+          "exercise": "给两原点一个距离，手算同一点在两坐标系的坐标。",
+          "acceptance": "用 tf2 示例核对一个变换，解释坐标系名字与方向。",
+          "first_step": "在纸上画底座和传感器两套 x、y 轴，只考虑平移。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "同一个点在不同坐标系里数值不同；坐标变换让它们描述同一个位置。",
+          "remedy": {
+            "text": "先画底座与传感器的坐标轴，只做平移；再补第 5 月的旋转矩阵。不要用调正负号代替坐标定义。",
+            "block": "ros-messages"
+          },
+          "readings": [
+            {
+              "title": "先理解 tf2 的作用",
+              "url": "https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.html",
+              "note": "看清坐标系之间如何关联；数学推导稍后按需补。",
+              "optional": false,
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.rst"
+            },
+            {
+              "title": "建立最小 URDF 外观模型",
+              "url": "https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.html",
+              "note": "只做底座与一个传感器，说明 link 与 joint 的关系。",
+              "optional": false,
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Intermediate/URDF/Building-a-Visual-Robot-Model-with-URDF-from-Scratch.rst"
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "在纸上画底座和传感器两套 x、y 轴，只考虑平移。",
+            "给两原点一个距离，手算同一点在两坐标系的坐标。",
+            "用 tf2 示例核对一个变换，解释坐标系名字与方向。"
+          ],
+          "prerequisite": "先检查：先画底座与传感器的坐标轴，只做平移；再补第 5 月的旋转矩阵。不要用调正负号代替坐标定义。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "建立最小 URDF，在可视化工具中检查 base 与 sensor 坐标；复杂旋转留到第 5 月补。",
+          "extension_acceptance": "能画出坐标树，解释传感器前方在底座坐标中是什么方向。",
+          "bridge": {
+            "title": "在 tf2 前先用纸笔理解坐标",
+            "explanation": "同一个点在不同原点下会有不同坐标。先约定两组轴方向相同：传感器原点在底座原点右边 0.2 m。物体在传感器右边 1 m，它在底座坐标中就是 1.2 m。",
+            "example": "底座原点 ──0.2 m── 传感器原点 ──1.0 m── 物体\n底座坐标 x = 0.2 + 1.0 = 1.2 m\n二维旋转：点 (1,0) 逆时针 90° → (0,1)",
+            "language": "text",
+            "question": "如果传感器坐标系的轴旋转了 90°，还能直接把 x 坐标相加吗？",
+            "answer": "不能，必须先把方向转换到同一坐标系。先画箭头，再讨论旋转；本月先理解方向和单位，第五阶段再系统学习矩阵计算。",
+            "before": "能解释原点、轴方向、单位，再进入 tf2 示例。"
+          },
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先画底座与传感器的坐标轴，只做平移；再补第 5 月的旋转矩阵。不要用调正负号代替坐标定义。"
+            }
+          ],
+          "recall": {
+            "block": "ros-messages",
+            "prompt": "先不看资料，复现或解释“节点、话题与消息”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：在纸上画底座和传感器两套 x、y 轴，只考虑平移。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 360,
+            "deep_minutes": 720,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "ros-simulation",
+          "week": 15,
+          "title": "接通仿真控制",
+          "source": "gazebo",
+          "scope": "先核对 ROS/Gazebo 版本配对，再从侧栏学习 Moving the robot 与 ROS 2 integration。",
+          "why": "固定兼容版本组合，减少把接口差异误认为概念错误的机会。",
+          "exercise": "只启动一个现成世界，找到一个传感器输出；环境不通先回补。",
+          "acceptance": "改变一个场景条件并记录输出，注明这是仿真结果。",
+          "first_step": "写下 OS、ROS 和 Gazebo 版本，用官方配对表核对。",
+          "companion": "ros-hardware",
+          "lesson": "pwm",
+          "lab": "interface",
+          "intuition": "仿真接收命令并产生状态；ROS 与仿真交换消息时，需要匹配的数据接口。",
+          "remedy": {
+            "text": "先验证节点之间能传消息，再查仿真桥接。环境问题先固定版本与报错，不要随意混装多个发行版。",
+            "block": "ros-messages"
+          },
+          "readings": [
+            {
+              "title": "先核对 ROS 与 Gazebo 版本配对",
+              "url": "https://gazebosim.org/docs/harmonic/ros_installation/",
+              "note": "本路线继续使用 Jazzy 与 Harmonic；按官方说明准备对应系统。",
+              "optional": false
+            },
+            {
+              "title": "让仿真中的机器人运动",
+              "url": "https://gazebosim.org/docs/harmonic/moving_robot/",
+              "note": "先在仿真内部控制，再接入 ROS。",
+              "optional": false
+            },
+            {
+              "title": "ROS 与 Gazebo 交换消息",
+              "url": "https://gazebosim.org/docs/harmonic/ros2_integration/",
+              "note": "只桥接当前需要的一条命令与一条状态消息。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "写下 OS、ROS 和 Gazebo 版本，用官方配对表核对。",
+            "只启动一个现成世界，找到一个传感器输出；环境不通先回补。",
+            "改变一个场景条件并记录输出，注明这是仿真结果。"
+          ],
+          "prerequisite": "先检查：先验证节点之间能传消息，再查仿真桥接。环境问题先固定版本与报错，不要随意混装多个发行版。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "控制一个差速小车前进、转弯与停止，记录发出的命令和观察到的状态。",
+          "extension_acceptance": "说明命令、桥接与仿真之间的关系；保留启动配置和演示记录。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先验证节点之间能传消息，再查仿真桥接。环境问题先固定版本与报错，不要随意混装多个发行版。"
+            }
+          ],
+          "recall": {
+            "block": "ros-messages",
+            "prompt": "先不看资料，复现或解释“节点、话题与消息”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：写下 OS、ROS 和 Gazebo 版本，用官方配对表核对。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 480,
+            "deep_minutes": 960,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "ros-replay",
+          "week": 16,
+          "title": "用日志复现一个问题",
+          "source": "ros",
+          "scope": "Beginner CLI Tools 中 ros2 bag 录制回放；补充 Launch 与参数入门。",
+          "why": "遇到问题时保留输入与环境，才能比较修改前后的行为。",
+          "exercise": "录一小段 bag 后停止节点，再尝试回放其中一条话题。",
+          "acceptance": "比较录制与回放的时间和字段，说明哪些环境条件仍需记录。",
+          "first_step": "选一条已有话题，写下字段、单位和计划录制时长。",
+          "companion": "ros-hardware",
+          "lesson": "debug",
+          "lab": "interface",
+          "intuition": "录制保存当时的消息，回放重新提供这些输入；它不等于重新做了一次实物实验。",
+          "remedy": {
+            "text": "先确定要复现的症状和相关话题；如果不知道数据来自哪里，先回到消息追踪练习。",
+            "block": "ros-messages"
+          },
+          "readings": [
+            {
+              "title": "录制并回放一段话题数据",
+              "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.html",
+              "note": "记录所选话题、时长与环境版本，再比较回放行为。",
+              "optional": false,
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.rst"
+            },
+            {
+              "title": "用 launch 一起启动节点",
+              "url": "https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes.html",
+              "note": "把反复输入的启动步骤集中起来，保留启动顺序与参数说明。",
+              "optional": false,
+              "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Beginner-CLI-Tools/Launching-Multiple-Nodes/Launching-Multiple-Nodes.rst"
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "选一条已有话题，写下字段、单位和计划录制时长。",
+            "录一小段 bag 后停止节点，再尝试回放其中一条话题。",
+            "比较录制与回放的时间和字段，说明哪些环境条件仍需记录。"
+          ],
+          "prerequisite": "先检查：先确定要复现的症状和相关话题；如果不知道数据来自哪里，先回到消息追踪练习。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "录制一段控制与传感器话题，故意改错一个参数或话题名，再按日志排查。",
+          "extension_acceptance": "同一段输入可回放；记录症状、证据、修改和修复后的结果。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先确定要复现的症状和相关话题；如果不知道数据来自哪里，先回到消息追踪练习。"
+            }
+          ],
+          "recall": {
+            "block": "ros-messages",
+            "prompt": "先不看资料，复现或解释“节点、话题与消息”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：选一条已有话题，写下字段、单位和计划录制时长。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 300,
+            "deep_minutes": 600,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        }
+      ],
+      "lead_source": "ros",
+      "main_note": "按 ROS 2 Jazzy 的 Beginner: CLI tools → Client libraries 顺序。本路线固定 Ubuntu 24.04 / Jazzy / Harmonic，先解决运行环境再写节点。",
+      "deeper": "把一次命令、传感器读数、坐标变换放到同一时间线上，用录制回放定位一个不一致。"
+    },
+    {
+      "stage": "robotics-5",
+      "month": 5,
+      "title": "机器人用得上的数学",
+      "goal": "用坐标、反馈和误差解释机器人的行为。",
+      "prerequisite": "能画简单曲线。三角函数、向量和矩阵不熟也可先做第一块二维图示，再进入控制；不要跳过数学回补。",
+      "project": "小车诊断 Notebook：坐标变换＋控制曲线＋误差分析",
+      "gate": [
+        "能完成一个二维坐标变换并检查单位。",
+        "能对比控制参数变化后的曲线，而不只展示成功视频。",
+        "能区分测量噪声、系统偏差和算法效果。"
+      ],
+      "defer": "先做二维和一维案例；完整动力学推导、MPC 与高阶滤波暂缓。",
+      "no_hardware": "使用自建模拟数据或标明来源的样例图；只在采集自己的数据后报告硬件表现。",
+      "blocks": [
+        {
+          "id": "robot-math",
+          "week": 17,
+          "title": "先学二维坐标变换",
+          "source": "modern",
+          "scope": "第 3 章：右手坐标、3.2.1 Rotation Matrices、3.3.1 Homogeneous Transformations；先理解二维例子。",
+          "why": "作者将公式和空间动作对应起来，可用小例子检查自己是否理解。",
+          "exercise": "看向量与线性变换的直观解释，再手算一个 2×2 矩阵乘向量。",
+          "acceptance": "用 Python 核对同一个旋转，说明角度单位；再看齐次变换的作用。",
+          "first_step": "先画 x、y 轴和点 (1,0)，逆时针转 90°，写出新坐标。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "坐标变换是在换一种描述位置的方式；先用能画出来的二维例子检查公式。",
+          "remedy": {
+            "text": "先补平面坐标、sin/cos 和 2×2 矩阵乘法。能手算一个 90° 旋转后再看三维符号。",
+            "block": ""
+          },
+          "readings": [
+            {
+              "title": "先补直觉：向量与线性变换",
+              "url": "https://www.3blue1brown.com/topics/linear-algebra",
+              "note": "先在二维画图解释，再看矩阵符号；只选向量和变换相关视频。"
+            },
+            {
+              "title": "旋转矩阵：先看二维直觉",
+              "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/3-2-1-rotation-matrices-part-1-of-2/",
+              "note": "把视频中的旋转关系画成自己的坐标图。",
+              "optional": false
+            },
+            {
+              "title": "齐次变换：合并旋转与平移",
+              "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/3-3-1-homogeneous-transformation-matrices/",
+              "note": "先会使用并验证逆变换；李群与指数映射暂缓。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "先画 x、y 轴和点 (1,0)，逆时针转 90°，写出新坐标。",
+            "看向量与线性变换的直观解释，再手算一个 2×2 矩阵乘向量。",
+            "用 Python 核对同一个旋转，说明角度单位；再看齐次变换的作用。"
+          ],
+          "prerequisite": "先检查：先补平面坐标、sin/cos 和 2×2 矩阵乘法。能手算一个 90° 旋转后再看三维符号。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "用 Python 把传感器坐标中的点变换到底座坐标，再做逆变换。",
+          "extension_acceptance": "同一点往返变换后恢复；能解释先旋转后平移与反过来的差别。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先补平面坐标、sin/cos 和 2×2 矩阵乘法。能手算一个 90° 旋转后再看三维符号。"
+            }
+          ],
+          "reading_stop": "本次先完成：先画 x、y 轴和点 (1,0)，逆时针转 90°，写出新坐标。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 360,
+            "deep_minutes": 720,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "feedback",
+          "week": 18,
+          "title": "看懂 P、I、D 各自做什么",
+          "source": "pid",
+          "scope": "从开环与闭环概念开始，选择比例、积分、微分作用的说明。",
+          "why": "用响应曲线建立直觉，再决定何时需要更完整的控制理论。",
+          "exercise": "在 Python 的简单一阶对象上只调 P，画目标与输出曲线。",
+          "acceptance": "改一次增益对比快慢和振荡；能解释后再读 I、D。",
+          "first_step": "画目标值、测量值和误差，先用水温或速度解释反馈。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "反馈控制反复比较目标和实际结果，再根据误差调整输入。",
+          "remedy": {
+            "block": "python-data",
+            "text": "回到第 6–7 小课，先从 CSV 画出带单位时间曲线；再重读 nonblocking-control 的状态与命令日志，才引入连续反馈。"
+          },
+          "readings": [
+            {
+              "title": "从闭环概念看到 P、I、D 的作用",
+              "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+              "note": "按系列顺序理解反馈与误差，再对比比例、积分、微分。练习用 Python，无须购买视频中使用的软件。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "画目标值、测量值和误差，先用水温或速度解释反馈。",
+            "在 Python 的简单一阶对象上只调 P，画目标与输出曲线。",
+            "改一次增益对比快慢和振荡；能解释后再读 I、D。"
+          ],
+          "prerequisite": "已完成 python-data 的 CSV、时间列和 SVG 曲线，并能复现 nonblocking-control 的输入→状态→命令日志；先区分目标值、测量值与控制量。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "用 Python 写一个简单一阶模型，对比 P 与 PI 控制，保存目标值、输出和控制量。",
+          "extension_acceptance": "比较误差、超调和响应时间；说明模型假设及输出限幅。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先用固定输入画出系统响应；还不会处理一列数据和画图时，先补 Python 日志练习。"
+            }
+          ],
+          "recall": {
+            "block": "python-data",
+            "prompt": "先不看资料，复现或解释“用 Python 整理观察”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：画目标值、测量值和误差，先用水温或速度解释反馈。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 420,
+            "deep_minutes": 840,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "state-estimation",
+          "week": 19,
+          "title": "从噪声中估计状态",
+          "source": "filter",
+          "scope": "先读 g-h filter 与一维滤波；需要时补概率和高斯分布章节。",
+          "why": "可修改的 Notebook 适合观察参数如何改变估计结果。",
+          "exercise": "先实现滑动平均并画曲线，观察平滑与延迟。",
+          "acceptance": "对比原始与平滑结果，解释为什么不能把滤波曲线当真实位置；Kalman 推导后补。",
+          "first_step": "列一小段真实位置与带噪观测数值，先区分状态和测量。",
+          "companion": "signal-chain",
+          "lesson": "filter",
+          "lab": "rc",
+          "intuition": "估计把“之前认为会发生什么”和“这次测到了什么”结合起来。",
+          "remedy": {
+            "text": "先把无噪曲线和观测曲线画在一起，弄清误差；不要先调一堆没有物理含义的参数。",
+            "block": "python-data"
+          },
+          "readings": [
+            {
+              "title": "先用 g-h 滤波建立直觉",
+              "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/01-g-h-filter.ipynb",
+              "note": "先运行并修改一个简单例子；这里只做教学估计。",
+              "optional": false
+            },
+            {
+              "title": "再进入一维卡尔曼滤波",
+              "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/04-One-Dimensional-Kalman-Filters.ipynb",
+              "note": "理解预测和更新；概率基础不够时先补书中对应章节。",
+              "optional": true
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "列一小段真实位置与带噪观测数值，先区分状态和测量。",
+            "先实现滑动平均并画曲线，观察平滑与延迟。",
+            "对比原始与平滑结果，解释为什么不能把滤波曲线当真实位置；Kalman 推导后补。"
+          ],
+          "prerequisite": "先检查：先把无噪曲线和观测曲线画在一起，弄清误差；不要先调一堆没有物理含义的参数。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "为一维位置生成带噪观测，对比原始值、滑动平均和一种简单估计方法。",
+          "extension_acceptance": "在同一输入上比较误差和滞后；明确哪些曲线来自模拟。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先把无噪曲线和观测曲线画在一起，弄清误差；不要先调一堆没有物理含义的参数。"
+            }
+          ],
+          "recall": {
+            "block": "python-data",
+            "prompt": "先不看资料，复现或解释“用 Python 整理观察”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：列一小段真实位置与带噪观测数值，先区分状态和测量。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 360,
+            "deep_minutes": 720,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "camera-calibration",
+          "week": 20,
+          "title": "理解标定与验证",
+          "source": "vision",
+          "scope": "先读畸变、相机矩阵，再做棋盘格角点和重投影误差示例。",
+          "why": "官方代码将每个计算结果关联到图像，便于检查而非盲信参数。",
+          "exercise": "用教程样例图片检查一个棋盘角点检测结果，失败时先检查图案与清晰度。",
+          "acceptance": "看一组重投影误差，解释为什么样例参数不等于自己相机的参数。",
+          "first_step": "画相机、三维点与图像平面；解释像素坐标与空间坐标。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "标定是在找相机把空间映射成像素的规律；参数只对相应成像条件有意义。",
+          "remedy": {
+            "text": "先区分真实长度和像素坐标；角点都没识别稳定时，不要急着比较最终误差。",
+            "block": "robot-math"
+          },
+          "readings": [
+            {
+              "title": "棋盘格标定与重投影误差",
+              "url": "https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html",
+              "note": "先完成角点识别，再求参数、检查误差；用留出的图片作额外检查。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "画相机、三维点与图像平面；解释像素坐标与空间坐标。",
+            "用教程样例图片检查一个棋盘角点检测结果，失败时先检查图案与清晰度。",
+            "看一组重投影误差，解释为什么样例参数不等于自己相机的参数。"
+          ],
+          "prerequisite": "先检查：先区分真实长度和像素坐标；角点都没识别稳定时，不要急着比较最终误差。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "用来源清楚的样例图运行标定，保留角点可视化，并用留出的图片检查效果。",
+          "extension_acceptance": "说明标定参数属于哪组图像；报告重投影误差，列出一个失败样例。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先区分真实长度和像素坐标；角点都没识别稳定时，不要急着比较最终误差。"
+            }
+          ],
+          "recall": {
+            "block": "robot-math",
+            "prompt": "先不看资料，复现或解释“先学二维坐标变换”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：画相机、三维点与图像平面；解释像素坐标与空间坐标。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 300,
+            "deep_minutes": 600,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        }
+      ],
+      "lead_source": "pid",
+      "main_note": "先补向量与二维旋转，再学 PID 的反馈直觉；Modern Robotics、滤波与标定只选需要的章节深入。",
+      "deeper": "固定对象与输入，比较 P 与 PI 的稳态误差和响应；再解释噪声对 D 的影响，滤波推导按需补。"
+    },
+    {
+      "stage": "robotics-6",
+      "month": 6,
+      "title": "机器人学习与作品集",
+      "goal": "完成一个可以检查数据、复现结果和说明局限的作品。",
+      "prerequisite": "能读 Python 项目、处理时序日志；理解输入、状态、动作和实验对照。",
+      "project": "机器人演示数据审查与可复现作品包",
+      "gate": [
+        "能把一小段演示的时间、状态和动作对应起来，说明对齐与质量检查范围。查看器可作为进阶项目。",
+        "有环境、数据来源、步骤、指标和失败样例。",
+        "训练未运行就写「未运行」；学习记录、离线结果与实机效果明确区分。"
+      ],
+      "defer": "先完成一个方向：数据工具或机器人集成。大模型微调、RL 与购买机械臂按需求另立项目。",
+      "no_hardware": "公开数据和录制日志足以完成数据工具作品；没有 GPU 时将训练列为后续验证。",
+      "blocks": [
+        {
+          "id": "robot-learning",
+          "week": 21,
+          "title": "弄清机器人如何从示范中学习",
+          "source": "hf-course",
+          "scope": "从 Unit 0 导览进入课程，先认识观测、动作、示范数据和策略。",
+          "why": "在开始训练前先搞清楚任务和数据是什么，后面才知道模型究竟学了什么。",
+          "exercise": "选一段公开演示，逐帧指出一次观测与后续动作。",
+          "acceptance": "解释演示数据与策略的关系，并写一个分布变化后可能失败的情形。",
+          "first_step": "用拾起一个物体的例子写出任务、观测、动作和成功标准。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "示范学习用“当时看到了什么”和“当时做了什么”来学习动作选择。",
+          "remedy": {
+            "text": "先对照自己的状态机说明：哪些决策原来是规则，哪些现在想让模型学习。",
+            "block": "nonblocking-control"
+          },
+          "readings": [
+            {
+              "title": "从机器人学习的基本问题开始",
+              "url": "https://huggingface.co/learn/robotics-course/unit1/1",
+              "note": "先识别观测、动作、示范与策略的角色，再按课程链接继续。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "用拾起一个物体的例子写出任务、观测、动作和成功标准。",
+            "选一段公开演示，逐帧指出一次观测与后续动作。",
+            "解释演示数据与策略的关系，并写一个分布变化后可能失败的情形。"
+          ],
+          "prerequisite": "先检查：先对照自己的状态机说明：哪些决策原来是规则，哪些现在想让模型学习。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "分别画出自己第 4 月的规则控制流程与示范学习流程，标出输入和需要评估的输出。",
+          "extension_acceptance": "能解释训练数据与评估数据的区别；写出一个足够小的任务定义。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先对照自己的状态机说明：哪些决策原来是规则，哪些现在想让模型学习。"
+            }
+          ],
+          "recall": {
+            "block": "nonblocking-control",
+            "prompt": "先不看资料，复现或解释“组合成不会卡住的控制程序”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：用拾起一个物体的例子写出任务、观测、动作和成功标准。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 180,
+            "deep_minutes": 360,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "dataset-inspection",
+          "week": 22,
+          "title": "把数据变成可检查的时间线",
+          "source": "hf-data",
+          "scope": "Dataset Tools 的可视化部分；先查看一个公开 episode，再阅读对应元数据。",
+          "why": "机器人学习首先依赖可用数据，前端经验也能直接用于时间线与诊断工具。",
+          "exercise": "检查一小段时间戳是否递增、动作是否对齐观测。",
+          "acceptance": "记录一个质量问题或无异常的检查范围，不把抽样结论推广到全部数据。",
+          "first_step": "只看一个公开 episode 的三个字段，确认单位、频率与含义。",
+          "companion": "model-evidence",
+          "lesson": "reference",
+          "lab": "dc",
+          "intuition": "一个 episode 是一段有起止的任务过程；图像、状态和动作要能沿同一时间线核对。",
+          "remedy": {
+            "block": "python-data",
+            "text": "先重跑第 5–7 小课，明确一行、一列、单位和时间；再把 control_log.csv 中同一行的输入与命令对应起来，然后查看外部 episode。"
+          },
+          "readings": [
+            {
+              "title": "先看一个 episode 的时间线",
+              "url": "https://huggingface.co/docs/lerobot/using_dataset_tools",
+              "note": "先使用可视化工具检查图像与信号，不急着下载整个数据集。",
+              "optional": false
+            },
+            {
+              "title": "再理解数据布局与元数据",
+              "url": "https://huggingface.co/docs/lerobot/lerobot-dataset-v3",
+              "note": "只读目录、episode 边界与字段相关部分；格式以所选数据集版本为准。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "只看一个公开 episode 的三个字段，确认单位、频率与含义。",
+            "检查一小段时间戳是否递增、动作是否对齐观测。",
+            "记录一个质量问题或无异常的检查范围，不把抽样结论推广到全部数据。"
+          ],
+          "prerequisite": "已完成 python-data 的带时间 CSV 与曲线、sensor-input 的原始值/单位/有效性，以及 nonblocking-control 的同一时刻输入与命令日志。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "选择一小段公开数据，做时间、图像、状态和动作联动；检查缺帧、缺值或突变。",
+          "extension_acceptance": "保留数据集标识、版本、episode 与字段解释；定位一条异常或说明检查结果。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先从一段数据、三个字段开始。读不懂表格结构时，先回到 Python 文件读写。"
+            }
+          ],
+          "recall": {
+            "block": "python-data",
+            "prompt": "先不看资料，复现或解释“用 Python 整理观察”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：只看一个公开 episode 的三个字段，确认单位、频率与含义。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 360,
+            "deep_minutes": 720,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "imitation-experiment",
+          "week": 23,
+          "title": "读懂并复现最小训练实验",
+          "source": "hf-notebook",
+          "scope": "只选 ACT Notebook，先检查数据加载、训练配置与产物；SmolVLA 暂缓。",
+          "why": "一份完整 Notebook 能说明数据、配置和模型文件如何连接，便于固定版本复现。",
+          "exercise": "无 GPU 时追踪一个 batch 的输入输出形状；有条件再跑最小示例。",
+          "acceptance": "写下已执行与未执行步骤；未运行就保留训练结果为空，不编造指标。",
+          "first_step": "阅读一个官方 Notebook，列数据、依赖和算力要求，决定只读还是试运行。",
+          "companion": "",
+          "lesson": "",
+          "lab": "",
+          "intuition": "训练损失是在训练数据上的学习信号；它不能直接证明机器人能完成任务。",
+          "remedy": {
+            "text": "先完成数据检查，再按 episode 分组划分训练与评估，避免相邻帧分散到两边。没有合适算力时，保留运行计划和数据报告，继续完成作品。",
+            "block": "dataset-inspection"
+          },
+          "readings": [
+            {
+              "title": "选 ACT Notebook，先读懂再运行",
+              "url": "https://huggingface.co/docs/lerobot/notebooks",
+              "note": "先看依赖、数据加载、配置和保存产物；只在准备好算力后试运行。",
+              "optional": false
+            },
+            {
+              "title": "运行前核对算力要求",
+              "url": "https://huggingface.co/docs/lerobot/hardware_guide",
+              "note": "以具体策略与配置为准，不把文档示例的训练时间当作自己的承诺。",
+              "optional": false
+            }
+          ],
+          "optional": true,
+          "sessions": [
+            "阅读一个官方 Notebook，列数据、依赖和算力要求，决定只读还是试运行。",
+            "无 GPU 时追踪一个 batch 的输入输出形状；有条件再跑最小示例。",
+            "写下已执行与未执行步骤；未运行就保留训练结果为空，不编造指标。"
+          ],
+          "prerequisite": "先检查：先完成数据检查，再按 episode 分组划分训练与评估，避免相邻帧分散到两边。没有合适算力时，保留运行计划和数据报告，继续完成作品。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "先整理训练与评估计划；有合适算力再试最小运行，保存配置、日志和模型。模型行为另行评估。",
+          "extension_acceptance": "无算力交付可执行计划与数据检查报告；已运行则记录真实设置。训练损失不能当成功率。",
+          "bridge": {
+            "title": "从数据检查过渡到训练",
+            "explanation": "一条样本把观测与目标动作配对；batch 是一小组样本。训练通过损失衡量预测和目标差异，再调整模型参数；推理用已学参数产生动作。训练损失下降不自动证明新场景表现更好。",
+            "example": "4 个 episode → 按整段划分训练 / 评估\n一批输入：若干时刻的观测\n一批目标：与观测对齐的动作\n训练更新参数；评估检查未参加训练的演示",
+            "language": "text",
+            "question": "把同一段视频的相邻帧随机分到训练与测试里，会出现什么问题？",
+            "answer": "两边可能包含非常相似的场景，评估容易过于乐观。应先按完整 episode 划分，再核对具体任务是否还需按物体或场景划分。",
+            "before": "能解释样本、batch、损失和数据划分，再打开训练 Notebook。没有运行训练就只报告数据与流程检查。"
+          },
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "先完成数据检查，再按 episode 分组划分训练与评估，避免相邻帧分散到两边。没有合适算力时，保留运行计划和数据报告，继续完成作品。"
+            }
+          ],
+          "recall": {
+            "block": "dataset-inspection",
+            "prompt": "先不看资料，复现或解释“把数据变成可检查的时间线”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：阅读一个官方 Notebook，列数据、依赖和算力要求，决定只读还是试运行。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 600,
+            "deep_minutes": 1200,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        },
+        {
+          "id": "portfolio",
+          "week": 24,
+          "title": "把六个月收束成一个作品",
+          "source": "readme",
+          "scope": "阅读 README 的项目介绍与使用说明建议，再整理自己的主线项目。",
+          "why": "能让别人独立复现和判断结果，才算把学习转化为可交流的能力。",
+          "exercise": "从新目录按自己的 README 复现一个关键步骤。",
+          "acceptance": "补上失败案例、环境版本与下一项改进，删除未验证的效果承诺。",
+          "first_step": "选前面已完成的一个作品，写它解决的问题和可展示结果。",
+          "companion": "system-project",
+          "lesson": "project",
+          "lab": "interface",
+          "intuition": "作品集让别人看清你解决了什么、怎样验证，以及还有什么没解决。",
+          "remedy": {
+            "text": "如果只能展示一个视频，先补可重放输入、运行步骤和失败记录，再写效果结论。",
+            "block": "ros-replay"
+          },
+          "readings": [
+            {
+              "title": "让 README 说明项目如何使用",
+              "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes",
+              "note": "以自己的结果为主，按问题、环境、输入、步骤、证据和局限组织。",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "sessions": [
+            "选前面已完成的一个作品，写它解决的问题和可展示结果。",
+            "从新目录按自己的 README 复现一个关键步骤。",
+            "补上失败案例、环境版本与下一项改进，删除未验证的效果承诺。"
+          ],
+          "prerequisite": "先检查：如果只能展示一个视频，先补可重放输入、运行步骤和失败记录，再写效果结论。",
+          "resource_role": "配套参考与练习",
+          "extension_exercise": "整理机器人日志查看器或仿真工程：问题、架构、启动步骤、示例输入、指标与失败案例。附上数据审查支线。",
+          "extension_acceptance": "在新目录按说明重跑一次；每个效果声明能找到证据，写清未完成项与下一步。",
+          "diagnostics": [
+            {
+              "symptom": "当前练习做不下去",
+              "check": "如果只能展示一个视频，先补可重放输入、运行步骤和失败记录，再写效果结论。"
+            }
+          ],
+          "recall": {
+            "block": "ros-replay",
+            "prompt": "先不看资料，复现或解释“用日志复现一个问题”中的一个例子。写出输入、结果和理由，再与旧记录核对。"
+          },
+          "reading_stop": "本次先完成：选前面已完成的一个作品，写它解决的问题和可展示结果。 能解释这一步就先停下，不必一次读完整章。",
+          "study_load": {
+            "core_minutes": 300,
+            "deep_minutes": 600,
+            "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          }
+        }
+      ],
+      "lead_source": "hf-course",
+      "main_note": "先读 Robotics Course 导览，明确观测、动作和演示数据；LeRobot 工具文档用于动手时查阅，模型训练选做。",
+      "deeper": "固定数据划分与评估任务，比较策略或数据清洗前后的结果；条件不足时只完成评估方案，不报告训练提升。"
+    }
+  ],
+  "sources": {
+    "aac": {
+      "title": "All About Circuits · 电路教材",
+      "url": "https://www.allaboutcircuits.com/textbook/",
+      "format": "图文教材",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；六卷按问题查阅，先用站内中文导学。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "meter": {
+      "title": "Adafruit · Multimeters",
+      "url": "https://learn.adafruit.com/multimeters",
+      "format": "图解指南",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；实物测量需万用表，只练习低压直流。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "python": {
+      "title": "Harvard CS50P",
+      "url": "https://cs50.harvard.edu/python/",
+      "format": "视频＋练习",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "公开课程可免费阅读；证书和作业提交按课程平台规则，不作为本路线要求。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "shell": {
+      "title": "MIT Missing Semester",
+      "url": "https://missing.csail.mit.edu/",
+      "format": "视频＋讲义",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；选 Shell 与 Git，不要求完成整个课程。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "arduino": {
+      "title": "Arduino · Built-in Examples",
+      "url": "https://docs.arduino.cc/built-in-examples/",
+      "format": "官方代码示例",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；选定一款板卡后查对应引脚和电压，仿真记录与实物记录分开。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对官方目录中的章节入口；部分正文由网页动态加载"
+    },
+    "driver": {
+      "title": "Adafruit · DRV8833 电机驱动指南",
+      "url": "https://learn.adafruit.com/adafruit-drv8833-dc-stepper-motor-driver-breakout-board",
+      "format": "官方接线指南",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；此指南对应指定驱动板。其他型号必须查自己的规格与引脚。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "cad": {
+      "title": "FreeCAD · 入门建模教程（官方存档）",
+      "url": "https://github.com/FreeCAD/FreeCAD-documentation/blob/main/wiki/Basic_Part_Design_Tutorial_019.md",
+      "format": "官方教程存档",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；FreeCAD 可本地使用。教程基于较早版本，界面名称以所用版本为准。",
+      "checked_on": "2026-10-07",
+      "verification": "官方存档已核对；仓库于 2026-04 归档"
+    },
+    "print": {
+      "title": "Prusa · 面向 3D 打印的建模",
+      "url": "https://help.prusa3d.com/article/modeling-with-3d-printing-in-mind_164135",
+      "format": "制造商图文指南",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；建模与切片可先做，打印或外包另有成本。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "ros": {
+      "title": "ROS 2 Jazzy · Tutorials",
+      "url": "https://docs.ros.org/en/jazzy/Tutorials.html",
+      "format": "官方分步教程",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；本路线固定 Jazzy，跟随同一版本教程。",
+      "checked_on": "2026-10-07",
+      "verification": "文档站自动读取受限；已核对官方 jazzy 文档源文件",
+      "fallback_url": "https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials.rst"
+    },
+    "gazebo": {
+      "title": "Gazebo Harmonic · ROS 版本配套",
+      "url": "https://gazebosim.org/docs/harmonic/ros_installation/",
+      "format": "官方安装与教程",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费软件与文档；此路线采用 Ubuntu 24.04 / ROS 2 Jazzy / Gazebo Harmonic，按设备条件配置。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "modern": {
+      "title": "Modern Robotics · 作者配套视频",
+      "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/",
+      "format": "章节视频",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "作者网站免费学习；嵌入视频访问取决于网络，仅选本块列出的章节。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "pid": {
+      "title": "Brian Douglas · Understanding PID Control",
+      "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+      "format": "短视频系列",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "视频页公开；练习用 Python 实现，不要求购买 MATLAB 或 Simulink。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "filter": {
+      "title": "Kalman and Bayesian Filters in Python",
+      "url": "https://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/",
+      "format": "作者交互教材",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费书与 Notebook；先学一维案例，软件依赖按仓库说明。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "vision": {
+      "title": "OpenCV · Camera Calibration",
+      "url": "https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html",
+      "format": "官方教程＋代码",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；可用样例图。要报告自己的相机参数时必须使用自己的标定数据。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "hf-course": {
+      "title": "Hugging Face · Robotics Course",
+      "url": "https://huggingface.co/learn/robotics-course/unit0/1",
+      "format": "课程导览",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；先理解数据与策略，再决定是否投入硬件或算力。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "hf-data": {
+      "title": "LeRobot · Dataset Tools",
+      "url": "https://huggingface.co/docs/lerobot/using_dataset_tools",
+      "format": "官方工具指南",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费文档；从公开小样本开始，私有数据访问可能需要账户。注意录制工具的上传设置。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "hf-notebook": {
+      "title": "LeRobot · 官方训练 Notebooks",
+      "url": "https://huggingface.co/docs/lerobot/notebooks",
+      "format": "可运行 Notebook",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费代码；Colab 需账户，GPU 额度与费用不保证免费。先检查当前算力要求。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "readme": {
+      "title": "GitHub Docs · About READMEs",
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes",
+      "format": "官方写作指南",
+      "language": "英文 · 可配合浏览器翻译",
+      "access": "免费阅读；作品可先在本地整理，是否公开由你决定。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对原始页面"
+    },
+    "make": {
+      "title": "《爱上电子学》· Make: Electronics 第 3 版",
+      "url": "https://make.co/gift-guides/make-electronics-3rd-edition-pdf/",
+      "format": "实验主教材",
+      "language": "英文原文，本站提供中文任务导读；可配合浏览器翻译。",
+      "access": "书籍和器材需另备；本站不提供全书。暂时没有书可用站内中文原理导学与交互模型完成起步，后续实物仍需材料。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对出版方介绍与第三版授权预览目录；中文译本页码、全书实验未逐项核对。"
+    },
+    "paul": {
+      "title": "Paul McWhorter · Arduino 入门系列",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "format": "作者连续视频课",
+      "language": "英文原文，本站提供中文任务导读；可配合浏览器翻译。",
+      "access": "视频公开；英文，硬件另备。先核对示范板卡与本机 IDE，旧视频界面可能不同；官方示例用于查错。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对官方或作者课程入口；练习为本站编排，未逐项实机验证。"
+    },
+    "onshape": {
+      "title": "Onshape · CAD Basics",
+      "url": "https://learn.onshape.com/learn/learning-path/introduction-to-cad?hostDomain=cad",
+      "format": "官方零基础课程",
+      "language": "英文原文，本站提供中文任务导读；可配合浏览器翻译。",
+      "access": "课程与建模可能需要账户，课程页动态加载；选择账户前确认当前费用和设计公开规则。先完成草图与零件，不急于购买或打印。",
+      "checked_on": "2026-10-07",
+      "verification": "官方课程目录列为零基础 CAD 路线；动态课程正文未完整读取。"
+    },
+    "linear": {
+      "title": "3Blue1Brown · 线性代数的本质",
+      "url": "https://www.3blue1brown.com/topics/linear-algebra",
+      "format": "直观数学视频",
+      "language": "英文原文，本站提供中文任务导读；可配合浏览器翻译。",
+      "access": "免费阅读；练习先在本地完成。",
+      "checked_on": "2026-10-07",
+      "verification": "已核对官方或作者课程入口；练习为本站编排，未逐项实机验证。"
+    }
+  },
+  "reading_note": "每块先做起步自检，再完成三步练习；没有理解就回补。推荐阅读范围是本站编排，不代表已学完整门外部课程。",
+  "track": "robotics",
+  "hero": "从点亮一盏灯，走到能解释的机器人作品。",
+  "orientation": "起点只要求会四则运算、保存文件和打开浏览器。不需要预先懂电路、写代码或学过机器人。",
+  "starter": "先画出电池、限流电阻、LED 和回流线；再用站内交互观察开关断开后会怎样。"
+}

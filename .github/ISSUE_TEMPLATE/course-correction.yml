@@ -1,0 +1,33 @@
+name: 课程勘误
+description: 报告错字、断链、解释不清、步骤遗漏或与实际输出不一致。
+title: "[课程勘误] "
+body:
+  - type: markdown
+    attributes:
+      value: 不会写代码也可以提交。只描述已经观察到的现象；发帖前删除个人信息和密钥。
+  - type: input
+    id: course
+    attributes:
+      label: 课程位置
+      description: 路线、学习块、课例名称和具体步骤；有链接请附上。
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: 哪一处有问题
+      description: 粘贴相关短句或描述位置，并说明为什么困惑或认为有误。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 观察与依据
+      description: 说明环境、操作、预期和实际输出；可以附脱敏截图或原始参考来源。不确定时请说明。
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议如何改进（可选）
+      description: 没有修改方案也欢迎报告。

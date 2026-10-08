@@ -1,0 +1,41 @@
+name: 网站问题
+description: 报告页面、导航、交互、保存或数据展示问题。
+title: "[网站问题] "
+body:
+  - type: markdown
+    attributes:
+      value: 请提供可以公开的最小复现，不要上传私人数据库、备份、API 密钥或完整个人学习记录。
+  - type: input
+    id: environment
+    attributes:
+      label: 环境
+      description: 操作系统、浏览器版本，以及项目版本或提交号（如已知）。
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: 出问题的页面或功能
+      description: 路线、页面名称和相关入口；链接含私人信息时请先脱敏。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 从哪个页面开始，依次做了哪些操作？
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为与证据
+      description: 写明错误提示，可附脱敏截图或最小日志；偶发现象请说明出现频率。
+    validations:
+      required: true

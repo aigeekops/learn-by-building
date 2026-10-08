@@ -1,0 +1,2330 @@
+[
+  {
+    "id": "agent",
+    "name": "AI / Agent 工程",
+    "description": "以 Ronin 六个月路线为顺序参考，按验收结果调整节奏；无需同时学完所有资源。",
+    "stages": [
+      {
+        "id": "agent-1",
+        "name": "补齐编程与基础能力",
+        "outcome": "编写脚本、API 与数据库，建立可复现的工程基础。",
+        "month": 1,
+        "projects": [
+          {
+            "id": "agent-1-p1",
+            "title": "Python 文件与 API 小练习",
+            "instruction": "写脚本读取 JSON、请求一个公开 API，再将结果写入文件；处理超时和缺失字段。",
+            "acceptance": "提交脚本、输入输出样例，以及一次失败处理记录。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-1-p2",
+            "title": "用 SQL 保存与查询数据",
+            "instruction": "建立 SQLite 表，插入 API 返回值，写筛选、排序与聚合查询。",
+            "acceptance": "保存建表语句和三个可复现查询，说明字段含义。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-1-p3",
+            "title": "交付一个 FastAPI 小服务",
+            "instruction": "将脚本封装为 HTTP 接口，用 Git 管理版本并编写运行说明。",
+            "acceptance": "从新环境按 README 启动，演示正常请求和错误请求。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          }
+        ],
+        "topics": [
+          "1. Python",
+          "2. Git 与 GitHub",
+          "3. 命令行与终端基础",
+          "4. JSON、API、HTTP 与异步基础",
+          "5. SQL 与 Pandas 基础",
+          "6. FastAPI"
+        ],
+        "resources": [
+          {
+            "title": "Python for Everybody",
+            "url": "https://www.coursera.org/specializations/python",
+            "section": "1. Python",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "freeCodeCamp Python 课程",
+            "url": "https://www.youtube.com/watch?v=rfscVS0vtbw",
+            "section": "1. Python",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "CS50P：Introduction to Programming with Python",
+            "url": "https://cs50.harvard.edu/python/",
+            "section": "1. Python",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Python 官方教程",
+            "url": "https://docs.python.org/3/tutorial/",
+            "section": "1. Python",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "GitHub Skills",
+            "url": "https://skills.github.com/",
+            "section": "2. Git 与 GitHub",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Learn Git Branching",
+            "url": "https://learngitbranching.js.org/",
+            "section": "2. Git 与 GitHub",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pro Git",
+            "url": "https://git-scm.com/book/en/v2",
+            "section": "2. Git 与 GitHub",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "The 50 Most Popular Linux & Terminal Commands",
+            "url": "https://www.youtube.com/watch?v=ZtqBQ68cfJc",
+            "section": "3. 命令行与终端基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "The Missing Semester of Your CS Education",
+            "url": "https://missing.csail.mit.edu/",
+            "section": "3. 命令行与终端基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MDN：HTTP 概述",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview",
+            "section": "4. JSON、API、HTTP 与异步基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "REST API Tutorial",
+            "url": "https://restfulapi.net/",
+            "section": "4. JSON、API、HTTP 与异步基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Python Requests 文档",
+            "url": "https://requests.readthedocs.io/en/latest/",
+            "section": "4. JSON、API、HTTP 与异步基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Python async/await 教程",
+            "url": "https://realpython.com/async-io-python/",
+            "section": "4. JSON、API、HTTP 与异步基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SQLBolt",
+            "url": "https://sqlbolt.com/",
+            "section": "5. SQL 与 Pandas 基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pandas 官方入门指南",
+            "url": "https://pandas.pydata.org/docs/getting_started/index.html",
+            "section": "5. SQL 与 Pandas 基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Kaggle Pandas 课程",
+            "url": "https://www.kaggle.com/learn/pandas",
+            "section": "5. SQL 与 Pandas 基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "FastAPI 官方教程",
+            "url": "https://fastapi.tiangolo.com/tutorial/",
+            "section": "6. FastAPI",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Python API Development，19 小时课程",
+            "url": "https://www.youtube.com/watch?v=ZtqBQ68cfJc",
+            "section": "6. FastAPI",
+            "origin": "原文资源",
+            "verified": false,
+            "note": "原文与终端课程链接重复，待核实；优先使用 FastAPI 官方教程。"
+          }
+        ]
+      },
+      {
+        "id": "agent-2",
+        "name": "掌握 LLM 应用开发",
+        "outcome": "让模型返回可验证结果，理解工具、会话、成本与失败边界。",
+        "month": 2,
+        "projects": [
+          {
+            "id": "agent-2-p1",
+            "title": "结构化收据解析",
+            "instruction": "定义收据 JSON Schema，验证模型返回的金额、日期和条目；对缺失信息保留空值。",
+            "acceptance": "保存正常、缺失、非法字段样例与校验结果。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-2-p2",
+            "title": "实现三工具助手",
+            "instruction": "连接天气、计算和笔记搜索工具；验证参数，计算工具采用受限解析器。",
+            "acceptance": "展示工具选择、参数校验与工具失败三类记录。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-2-p3",
+            "title": "会话与成本实验",
+            "instruction": "实现流式聊天、历史重置、token 记录；模拟超时与提示词注入，设置调用上限。",
+            "acceptance": "提交对话记录、成本统计，以及失败时的停止或降级行为。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          }
+        ],
+        "topics": [
+          "1. 提示词基础",
+          "2. 结构化输出与 JSON Schema",
+          "3. 函数调用与工具调用",
+          "4. 流式响应",
+          "5. 会话状态",
+          "6. 成本、延迟与 Token 基础",
+          "7. 失败处理",
+          "8. 认识提示词注入"
+        ],
+        "resources": [
+          {
+            "title": "Anthropic 交互式提示词工程教程",
+            "url": "https://github.com/anthropics/prompt-eng-interactive-tutorial",
+            "section": "1. 提示词基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic 提示词工程文档",
+            "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "section": "1. 提示词基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI 提示词工程指南",
+            "url": "https://platform.openai.com/docs/guides/prompt-engineering",
+            "section": "1. 提示词基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "PromptingGuide.ai",
+            "url": "https://www.promptingguide.ai/",
+            "section": "1. 提示词基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI 结构化输出指南",
+            "url": "https://platform.openai.com/docs/guides/structured-outputs",
+            "section": "2. 结构化输出与 JSON Schema",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Instructor",
+            "url": "https://python.useinstructor.com/",
+            "section": "2. 结构化输出与 JSON Schema",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Cookbook：Structured Outputs Introduction",
+            "url": "https://developers.openai.com/cookbook/examples/structured_outputs_intro/",
+            "section": "2. 结构化输出与 JSON Schema",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI 函数调用指南",
+            "url": "https://platform.openai.com/docs/guides/function-calling",
+            "section": "3. 函数调用与工具调用",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic 工具使用文档",
+            "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use",
+            "section": "3. 函数调用与工具调用",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Cookbook：How to Call Functions with Chat Models",
+            "url": "https://github.com/openai/openai-cookbook/blob/main/examples/How_to_call_functions_with_chat_models.ipynb",
+            "section": "3. 函数调用与工具调用",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI 流式响应文档",
+            "url": "https://platform.openai.com/docs/api-reference/streaming",
+            "section": "4. 流式响应",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic 流式响应文档",
+            "url": "https://docs.anthropic.com/en/api/messages-streaming",
+            "section": "4. 流式响应",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Simon Willison：How Streaming LLM APIs Work",
+            "url": "https://til.simonwillison.net/llms/streaming-llm-apis",
+            "section": "4. 流式响应",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI：Conversation State",
+            "url": "https://platform.openai.com/docs/guides/conversation-state",
+            "section": "5. 会话状态",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic Messages API 文档",
+            "url": "https://docs.anthropic.com/en/api/messages",
+            "section": "5. 会话状态",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI API 定价",
+            "url": "https://openai.com/api/pricing",
+            "section": "6. 成本、延迟与 Token 基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic 定价",
+            "url": "https://www.anthropic.com/pricing",
+            "section": "6. 成本、延迟与 Token 基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Tokenizer",
+            "url": "https://platform.openai.com/tokenizer",
+            "section": "6. 成本、延迟与 Token 基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Tiktoken",
+            "url": "https://github.com/openai/tiktoken",
+            "section": "6. 成本、延迟与 Token 基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI 错误码参考",
+            "url": "https://platform.openai.com/docs/guides/error-codes",
+            "section": "7. 失败处理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic 错误处理文档",
+            "url": "https://docs.anthropic.com/en/api/errors",
+            "section": "7. 失败处理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Tenacity",
+            "url": "https://tenacity.readthedocs.io/",
+            "section": "7. 失败处理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OWASP LLM Top 10：LLM01 Prompt Injection",
+            "url": "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+            "section": "8. 认识提示词注入",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OWASP 提示词注入防范速查表",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/LLM_Prompt_Injection_Prevention_Cheat_Sheet.html",
+            "section": "8. 认识提示词注入",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Evidently AI：What Is Prompt Injection",
+            "url": "https://www.evidentlyai.com/llm-guide/prompt-injection-llm",
+            "section": "8. 认识提示词注入",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "agent-3",
+        "name": "真正学懂 RAG",
+        "outcome": "做一个带引用的文档问答，分开检查检索与生成质量。",
+        "month": 3,
+        "projects": [
+          {
+            "id": "agent-3-p1",
+            "title": "建立文档检索基线",
+            "instruction": "选择自己的文档，保留来源与段落 ID，完成切分、向量化和检索。",
+            "acceptance": "给出问题、命中文段和原文位置，说明未命中的情况。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-3-p2",
+            "title": "比较切分与重排",
+            "instruction": "固定问题集，对比切分大小、元数据过滤和重排效果。",
+            "acceptance": "保存同一问题集上的检索结果对比，记录是否找到了正确依据。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-3-p3",
+            "title": "交付有依据的 RAG 问答",
+            "instruction": "把检索接入生成，显示引用；资料不足时明确说明。",
+            "acceptance": "演示能回答、无依据、过时资料三类问题，引用可回到原文。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          }
+        ],
+        "topics": [
+          "1. Embedding：向量表示",
+          "2. 文档切分",
+          "3. 向量数据库",
+          "4. 元数据过滤",
+          "5. 重排",
+          "6. 检索质量问题",
+          "7. 减少幻觉",
+          "8. 引用与依据",
+          "9. 选择 RAG 框架：LangChain 或 LlamaIndex"
+        ],
+        "resources": [
+          {
+            "title": "Stack Overflow：An Intuitive Introduction to Text Embeddings",
+            "url": "https://stackoverflow.blog/2023/11/09/an-intuitive-introduction-to-text-embeddings/",
+            "section": "1. Embedding：向量表示",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Google Machine Learning Crash Course：Embeddings",
+            "url": "https://developers.google.com/machine-learning/crash-course/embeddings",
+            "section": "1. Embedding：向量表示",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hugging Face：Getting Started with Embeddings",
+            "url": "https://huggingface.co/blog/getting-started-with-embeddings",
+            "section": "1. Embedding：向量表示",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Embeddings 指南",
+            "url": "https://platform.openai.com/docs/guides/embeddings",
+            "section": "1. Embedding：向量表示",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Weaviate：Chunking Strategies for RAG",
+            "url": "https://weaviate.io/blog/chunking-strategies-for-rag",
+            "section": "2. 文档切分",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Unstructured：Chunking for RAG Best Practices",
+            "url": "https://unstructured.io/blog/chunking-for-rag-best-practices",
+            "section": "2. 文档切分",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangChain Text Splitters 文档",
+            "url": "https://python.langchain.com/docs/concepts/text_splitters/",
+            "section": "2. 文档切分",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Chroma 官方文档",
+            "url": "https://docs.trychroma.com/",
+            "section": "3. 向量数据库",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pinecone Learning Center",
+            "url": "https://www.pinecone.io/learn/",
+            "section": "3. 向量数据库",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Qdrant 文档",
+            "url": "https://qdrant.tech/documentation/",
+            "section": "3. 向量数据库",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "pgvector",
+            "url": "https://github.com/pgvector/pgvector",
+            "section": "3. 向量数据库",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pinecone：Metadata Filtering",
+            "url": "https://docs.pinecone.io/guides/data/filter-with-metadata",
+            "section": "4. 元数据过滤",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LlamaIndex：Node Postprocessors",
+            "url": "https://docs.llamaindex.ai/en/stable/module_guides/querying/node_postprocessors/node_postprocessors/",
+            "section": "4. 元数据过滤",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Cohere Reranking 文档",
+            "url": "https://docs.cohere.com/docs/reranking-with-cohere",
+            "section": "5. 重排",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangChain：Cohere Reranker 集成",
+            "url": "https://python.langchain.com/docs/integrations/retrievers/cohere-reranker/",
+            "section": "5. 重排",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangChain：Query Analysis 与查询转换",
+            "url": "https://python.langchain.com/docs/how_to/#query-analysis",
+            "section": "6. 检索质量问题",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pinecone：Improving Retrieval Quality",
+            "url": "https://www.pinecone.io/learn/retrieval-augmented-generation/#retrieval-quality",
+            "section": "6. 检索质量问题",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Zep：Reducing LLM Hallucinations — A Developer’s Guide",
+            "url": "https://www.getzep.com/ai-agents/reducing-llm-hallucinations/",
+            "section": "7. 减少幻觉",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Voiceflow：5 Ways to Reduce LLM Hallucinations",
+            "url": "https://www.voiceflow.com/blog/prevent-llm-hallucinations",
+            "section": "7. 减少幻觉",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic：Citations",
+            "url": "https://docs.anthropic.com/en/docs/build-with-claude/citations",
+            "section": "8. 引用与依据",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangChain：RAG with Sources",
+            "url": "https://python.langchain.com/docs/how_to/qa_sources/",
+            "section": "8. 引用与依据",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LlamaIndex：Introduction to RAG",
+            "url": "https://developers.llamaindex.ai/python/framework/understanding/rag/",
+            "section": "9. 选择 RAG 框架：LangChain 或 LlamaIndex",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LlamaIndex Starter Tutorial",
+            "url": "https://developers.llamaindex.ai/python/framework/getting_started/starter_example/",
+            "section": "9. 选择 RAG 框架：LangChain 或 LlamaIndex",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangChain：Build a RAG Agent",
+            "url": "https://docs.langchain.com/oss/python/langchain/rag",
+            "section": "9. 选择 RAG 框架：LangChain 或 LlamaIndex",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "agent-4",
+        "name": "Agent、工具、工作流与评估",
+        "outcome": "理解 Agent 循环与工作流，用评估验证改动。",
+        "month": 4,
+        "projects": [
+          {
+            "id": "agent-4-p1",
+            "title": "手写有上限的 Agent 循环",
+            "instruction": "实现模型选择工具、执行、更新状态的循环，加入步数上限和失败退出。",
+            "acceptance": "保存正常与失败轨迹，证明不会无限重试。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-4-p2",
+            "title": "比较固定工作流与 Agent",
+            "instruction": "为同一内容处理任务写固定三步流程与 Agent 版本，记录结果和调用次数。",
+            "acceptance": "说明何时固定流程足够、何时需要动态选择，并保留对比样例。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-4-p3",
+            "title": "建立评估回归集",
+            "instruction": "收集正常、边界和失败任务；定义成功标准，对比两次提示词或模型配置。",
+            "acceptance": "提交评估集、成功率分母、失败分类及成本与延迟记录。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          }
+        ],
+        "topics": [
+          "1. Agent 循环",
+          "2. 工具选择",
+          "3. 状态管理",
+          "4. Agent 中的重试与失败处理",
+          "5. 哪些时候不该使用 Agent",
+          "6. 多步工作流",
+          "7. 评估框架",
+          "8. 任务成功指标"
+        ],
+        "resources": [
+          {
+            "title": "Anthropic：Building Effective Agents",
+            "url": "https://www.anthropic.com/research/building-effective-agents",
+            "section": "1. Agent 循环",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI：A Practical Guide to Building Agents",
+            "url": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf",
+            "section": "1. Agent 循环",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "freeCodeCamp：The Open Source LLM Agent Handbook",
+            "url": "https://www.freecodecamp.org/news/the-open-source-llm-agent-handbook/",
+            "section": "1. Agent 循环",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangChain Academy：Introduction to LangGraph",
+            "url": "https://academy.langchain.com/courses/intro-to-langgraph",
+            "section": "1. Agent 循环",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI：Function Calling Best Practices",
+            "url": "https://platform.openai.com/docs/guides/function-calling/best-practices",
+            "section": "2. 工具选择",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic：Tool Definitions Best Practices",
+            "url": "https://docs.anthropic.com/en/docs/build-with-claude/tool-use/implement-tool-use#best-practices-for-tool-definitions",
+            "section": "2. 工具选择",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangGraph：State",
+            "url": "https://langchain-ai.github.io/langgraph/concepts/low_level/#state",
+            "section": "3. 状态管理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "DataCamp：LangGraph Agents Tutorial",
+            "url": "https://www.datacamp.com/tutorial/langgraph-agents",
+            "section": "3. 状态管理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Real Python：LangGraph in Python",
+            "url": "https://realpython.com/langgraph-python/",
+            "section": "3. 状态管理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangGraph：工具错误处理",
+            "url": "https://langchain-ai.github.io/langgraph/how-tos/autofill-tool-errors/",
+            "section": "4. Agent 中的重试与失败处理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Agent 实践指南：Guardrails 部分",
+            "url": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf",
+            "section": "4. Agent 中的重试与失败处理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic：Building Effective Agents",
+            "url": "https://www.anthropic.com/research/building-effective-agents",
+            "section": "5. 哪些时候不该使用 Agent",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Simon Willison：Designing Agentic Loops",
+            "url": "https://simonwillison.net/2025/Sep/30/designing-agentic-loops/",
+            "section": "5. 哪些时候不该使用 Agent",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic：Workflow Patterns",
+            "url": "https://www.anthropic.com/research/building-effective-agents#workflow-patterns",
+            "section": "6. 多步工作流",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangGraph：Multi-Agent Networks",
+            "url": "https://langchain-ai.github.io/langgraph/concepts/multi_agent/",
+            "section": "6. 多步工作流",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "DeepEval",
+            "url": "https://deepeval.com/docs/getting-started",
+            "section": "7. 评估框架",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Promptfoo",
+            "url": "https://github.com/promptfoo/promptfoo",
+            "section": "7. 评估框架",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangSmith",
+            "url": "https://smith.langchain.com/",
+            "section": "7. 评估框架",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Ragas",
+            "url": "https://docs.ragas.io/",
+            "section": "7. 评估框架",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hamel Husain：Your AI Product Needs Evals",
+            "url": "https://hamel.dev/blog/posts/evals/",
+            "section": "8. 任务成功指标",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Evals",
+            "url": "https://github.com/openai/evals",
+            "section": "8. 任务成功指标",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "agent-5",
+        "name": "部署、产品思维与可靠性",
+        "outcome": "把原型部署为可用服务，控制凭据、延迟、故障与成本。",
+        "month": 5,
+        "projects": [
+          {
+            "id": "agent-5-p1",
+            "title": "容器化与部署说明",
+            "instruction": "给现有 FastAPI 项目添加 Docker 配置、环境变量说明和健康检查。",
+            "acceptance": "在干净环境启动；重启后数据仍在，仓库不含 API 密钥。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-5-p2",
+            "title": "后台任务与可观测性",
+            "instruction": "将慢任务移入后台，记录任务状态、请求 ID、错误和耗时。",
+            "acceptance": "展示任务成功、失败、取消或超时路径，以及对应日志。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-5-p3",
+            "title": "验证缓存和限额",
+            "instruction": "为相同输入复用结果，加入每日调用预算、限流与提示词版本。",
+            "acceptance": "证明重复请求命中缓存，预算耗尽后停止新请求；记录实际与估算用量。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          }
+        ],
+        "topics": [
+          "1. FastAPI 的生产部署方式",
+          "2. Docker",
+          "3. 后台任务与队列",
+          "4. 身份验证与 API Key 安全",
+          "5. 日志与可观测性",
+          "6. 提示词与版本管理",
+          "7. 成本监控与限流",
+          "8. 缓存"
+        ],
+        "resources": [
+          {
+            "title": "FastAPI 部署文档",
+            "url": "https://fastapi.tiangolo.com/deployment/",
+            "section": "1. FastAPI 的生产部署方式",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "CYS：FastAPI Production Deployment Guide",
+            "url": "https://craftyourstartup.com/cys-docs/fastapi-production-deployment/",
+            "section": "1. FastAPI 的生产部署方式",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "FastLaunchAPI：FastAPI Best Practices for Production",
+            "url": "https://fastlaunchapi.dev/blog/fastapi-best-practices-production-2026",
+            "section": "1. FastAPI 的生产部署方式",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Docker 官方入门指南",
+            "url": "https://docs.docker.com/get-started/",
+            "section": "2. Docker",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "freeCodeCamp：用 Python 与 Docker 构建和部署多 Agent 系统",
+            "url": "https://www.freecodecamp.org/news/build-and-deploy-multi-agent-ai-with-python-and-docker/",
+            "section": "2. Docker",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "DataCamp：Deploy LLM Applications Using Docker",
+            "url": "https://www.datacamp.com/tutorial/deploy-llm-applications-using-docker",
+            "section": "2. Docker",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "ApXML：Containerization with Docker for LLM Apps",
+            "url": "https://apxml.com/courses/python-llm-workflows/chapter-10-deployment-operational-practices/containerization-docker-llm-apps",
+            "section": "2. Docker",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Celery 入门指南",
+            "url": "https://docs.celeryq.dev/en/stable/getting-started/introduction.html",
+            "section": "3. 后台任务与队列",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "FastAPI Background Tasks",
+            "url": "https://fastapi.tiangolo.com/tutorial/background-tasks/",
+            "section": "3. 后台任务与队列",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "FastAPI Security",
+            "url": "https://fastapi.tiangolo.com/tutorial/security/",
+            "section": "4. 身份验证与 API Key 安全",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OWASP API Security Top 10",
+            "url": "https://owasp.org/API-Security/",
+            "section": "4. 身份验证与 API Key 安全",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Auth0：Authentication and Authorization",
+            "url": "https://auth0.com/docs/get-started/authentication-and-authorization",
+            "section": "4. 身份验证与 API Key 安全",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Langfuse Observability",
+            "url": "https://langfuse.com/docs/observability/overview",
+            "section": "5. 日志与可观测性",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangSmith",
+            "url": "https://smith.langchain.com/",
+            "section": "5. 日志与可观测性",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Structlog",
+            "url": "https://www.structlog.org/",
+            "section": "5. 日志与可观测性",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Langfuse Prompt Management",
+            "url": "https://langfuse.com/docs/prompts",
+            "section": "6. 提示词与版本管理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic 提示词工程文档",
+            "url": "https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview",
+            "section": "6. 提示词与版本管理",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Usage Dashboard",
+            "url": "https://platform.openai.com/usage",
+            "section": "7. 成本监控与限流",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Anthropic Console",
+            "url": "https://console.anthropic.com/",
+            "section": "7. 成本监控与限流",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Helicone",
+            "url": "https://www.helicone.ai/",
+            "section": "7. 成本监控与限流",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LiteLLM",
+            "url": "https://github.com/BerriAI/litellm",
+            "section": "7. 成本监控与限流",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Redis 官方文档",
+            "url": "https://redis.io/docs/",
+            "section": "8. 缓存",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "GPTCache",
+            "url": "https://github.com/zilliztech/GPTCache",
+            "section": "8. 缓存",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "agent-6",
+        "name": "选择方向，准备就业",
+        "outcome": "选择一个主方向，把已有作品打磨成可展示、可解释的工程项目。",
+        "month": 6,
+        "projects": [
+          {
+            "id": "agent-6-p1",
+            "title": "分支：AI 产品工程师",
+            "instruction": "围绕一个具体用户需求完成端到端产品，打磨等待、失败、引用与重试体验。",
+            "acceptance": "提供可运行版本、用户流程、两到三个项目的取舍说明。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-6-p2",
+            "title": "分支：应用 ML / LLM 工程师",
+            "instruction": "比较提示词、RAG 和微调的适用条件；运行开源模型并测量推理表现。",
+            "acceptance": "保留基线、数据划分、配置、指标及硬件条件，解释是否值得微调。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          },
+          {
+            "id": "agent-6-p3",
+            "title": "分支：AI 自动化工程师",
+            "instruction": "做端到端销售线索筛选或文档业务工作流，加入人工复核和失败恢复。",
+            "acceptance": "展示输入、业务输出、异常恢复和审计记录；说明自动化边界。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2033587293064204349"
+          }
+        ],
+        "topics": [
+          "方向一：AI 产品工程师",
+          "方向二：应用机器学习／LLM 工程师",
+          "方向三：AI 自动化工程师"
+        ],
+        "resources": [
+          {
+            "title": "Vercel AI SDK",
+            "url": "https://sdk.vercel.ai/docs",
+            "section": "1. 端到端产品开发",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Streamlit",
+            "url": "https://docs.streamlit.io/",
+            "section": "1. 端到端产品开发",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Gradio",
+            "url": "https://www.gradio.app/docs",
+            "section": "1. 端到端产品开发",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Google：People + AI Guidebook",
+            "url": "https://pair.withgoogle.com/guidebook/",
+            "section": "2. AI 产品的交互体验",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Nielsen Norman Group：AI 相关交互研究",
+            "url": "https://www.nngroup.com/topic/artificial-intelligence/",
+            "section": "2. AI 产品的交互体验",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Google Machine Learning Crash Course：Tuning",
+            "url": "https://developers.google.com/machine-learning/crash-course/llm/tuning",
+            "section": "1. 什么时候微调，什么时候优化提示词",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Codecademy：Prompt Engineering vs. Fine-Tuning",
+            "url": "https://www.codecademy.com/article/prompt-engineering-vs-fine-tuning",
+            "section": "1. 什么时候微调，什么时候优化提示词",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "IBM：RAG vs. Fine-Tuning vs. Prompt Engineering",
+            "url": "https://www.ibm.com/think/topics/rag-vs-fine-tuning-vs-prompt-engineering",
+            "section": "1. 什么时候微调，什么时候优化提示词",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI 微调指南",
+            "url": "https://platform.openai.com/docs/guides/fine-tuning",
+            "section": "2. 动手微调",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hugging Face Transformers 训练教程",
+            "url": "https://huggingface.co/docs/transformers/training",
+            "section": "2. 动手微调",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Unsloth",
+            "url": "https://github.com/unslothai/unsloth",
+            "section": "2. 动手微调",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LLaMA-Factory",
+            "url": "https://github.com/hiyouga/LLaMA-Factory",
+            "section": "2. 动手微调",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Ollama",
+            "url": "https://ollama.ai/",
+            "section": "3. 开源模型",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hugging Face Model Hub",
+            "url": "https://huggingface.co/models",
+            "section": "3. 开源模型",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "vLLM",
+            "url": "https://github.com/vllm-project/vllm",
+            "section": "3. 开源模型",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hugging Face：Optimizing LLM Inference",
+            "url": "https://huggingface.co/docs/transformers/llm_optims",
+            "section": "4. 推理优化",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "NVIDIA TensorRT-LLM",
+            "url": "https://github.com/NVIDIA/TensorRT-LLM",
+            "section": "4. 推理优化",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "n8n 文档",
+            "url": "https://docs.n8n.io/",
+            "section": "1. 工作流编排",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangGraph：Multi-Agent Workflows",
+            "url": "https://langchain-ai.github.io/langgraph/concepts/multi_agent/",
+            "section": "1. 工作流编排",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Temporal",
+            "url": "https://docs.temporal.io/",
+            "section": "1. 工作流编排",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Zapier AI",
+            "url": "https://zapier.com/ai",
+            "section": "2. 业务流程自动化",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Make，原 Integromat",
+            "url": "https://www.make.com/",
+            "section": "2. 业务流程自动化",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenAI Cookbook",
+            "url": "https://github.com/openai/openai-cookbook",
+            "section": "3. CRM、文档、邮件与客服自动化",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LangChain：Document Loaders",
+            "url": "https://python.langchain.com/docs/how_to/#document-loaders",
+            "section": "3. CRM、文档、邮件与客服自动化",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      }
+    ],
+    "source": {
+      "author": "Ronin",
+      "url": "https://x.com/DeRonin_/status/2033587293064204349",
+      "basis": "用户提供原文的完整中文译稿",
+      "resource_status": "沿用原文链接，未逐条实时核验；价格、版本和课程可用性以资源页面为准。",
+      "translation_sha256": "00cf242e11c345910bf8014bed424428b59445783d1400fde6e509e48db8512a"
+    },
+    "planning_note": "阶段顺序与资源目录来自原文。实践卡、验收条件和单次 45 分钟安排由平台整理，可编辑；不是原文耗时承诺。第六阶段分支按目标选择。"
+  },
+  {
+    "id": "robotics",
+    "name": "AI 机器人工程",
+    "description": "以 Ronin 六个月路线为顺序参考，按验收结果调整节奏；无需同时学完所有资源。",
+    "stages": [
+      {
+        "id": "robotics-1",
+        "name": "电子基础、工作台与常用工具",
+        "outcome": "建立电子与编程基础，能测量、排障和记录。",
+        "month": 1,
+        "projects": [
+          {
+            "id": "robotics-1-p1",
+            "title": "搭建并测量基础电路",
+            "instruction": "在仿真或面包板上搭 LED 与分压电路，先计算再测量电压、电流。",
+            "acceptance": "保存原理图、计算与测量对比；标明仿真或实物。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-1-p2",
+            "title": "完成焊接与电气检查",
+            "instruction": "练习通孔焊接，用万用表查通断，记录一次故障定位。",
+            "acceptance": "提交焊点照片和通断检查记录；暂缺工具可安排为后续实物任务。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-1-p3",
+            "title": "建立硬件项目仓库",
+            "instruction": "用 Python 读写文件和 JSON，整理终端命令与 Git 版本记录。",
+            "acceptance": "README 包含照片或仿真截图、接线说明、运行方法及故障复盘。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          }
+        ],
+        "topics": [
+          "1. 电子基础",
+          "2. 工作台、工具与预算",
+          "3. 焊接",
+          "4. Python、终端与 Git"
+        ],
+        "resources": [
+          {
+            "title": "Falstad Circuit Simulator",
+            "url": "https://www.falstad.com/circuit/",
+            "section": "1. 电子基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Tinkercad Circuits",
+            "url": "https://www.tinkercad.com/circuits",
+            "section": "1. 电子基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "All About Circuits：Lessons in Electric Circuits",
+            "url": "https://www.allaboutcircuits.com/textbook/",
+            "section": "1. 电子基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Afrotechmods Tutorials",
+            "url": "https://afrotechmods.com/tutorials/",
+            "section": "1. 电子基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Make: Electronics，第三版，Charles Platt",
+            "url": "https://www.makershed.com/products/make-electronics-3rd-edition-print",
+            "section": "1. 电子基础",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Elegoo UNO R3 Super Starter Kit",
+            "url": "https://www.elegoo.com/products/elegoo-uno-r3-super-starter-kit",
+            "section": "2. 工作台、工具与预算",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Elegoo UNO Basic Starter Kit",
+            "url": "https://www.elegoo.com/products/elegoo-uno-basic-starter-kit",
+            "section": "2. 工作台、工具与预算",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SparkFun Inventor’s Kit v4.1.2",
+            "url": "https://www.sparkfun.com/sparkfun-inventor-s-kit-v4-1-2.html",
+            "section": "2. 工作台、工具与预算",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Adafruit 9205B+ 数字万用表",
+            "url": "https://www.adafruit.com/product/2034",
+            "section": "2. 工作台、工具与预算",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pinecil V2 电烙铁",
+            "url": "https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/",
+            "section": "2. 工作台、工具与预算",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Adafruit Guide to Excellent Soldering",
+            "url": "https://learn.adafruit.com/adafruit-guide-excellent-soldering",
+            "section": "3. 焊接",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SparkFun：How to Use a Multimeter",
+            "url": "https://learn.sparkfun.com/tutorials/how-to-use-a-multimeter",
+            "section": "3. 焊接",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "CS50P：Introduction to Programming with Python",
+            "url": "https://cs50.harvard.edu/python/",
+            "section": "4. Python、终端与 Git",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Python for Everybody",
+            "url": "https://www.coursera.org/specializations/python",
+            "section": "4. Python、终端与 Git",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "The Missing Semester of Your CS Education",
+            "url": "https://missing.csail.mit.edu/",
+            "section": "4. Python、终端与 Git",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Learn Git Branching",
+            "url": "https://learngitbranching.js.org/",
+            "section": "4. Python、终端与 Git",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "robotics-2",
+        "name": "微控制器、电机、传感器与第一台会动的机器人",
+        "outcome": "连接微控制器、执行器和传感器，做出第一台会动的机器人。",
+        "month": 2,
+        "projects": [
+          {
+            "id": "robotics-2-p1",
+            "title": "Arduino / ESP32 输入输出",
+            "instruction": "实现按键、模拟量读取、串口输出和 PWM，了解阻塞代码影响。",
+            "acceptance": "提交接线图、代码和串口数据；解释采样与控制周期。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-2-p2",
+            "title": "电机与传感器联调",
+            "instruction": "用驱动器控制电机，采集编码器或 IMU 数据，观察供电与噪声问题。",
+            "acceptance": "记录驱动参数、传感器曲线和一个异常案例。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-2-p3",
+            "title": "循迹或平衡机器人",
+            "instruction": "先完成循迹，再按条件挑战平衡机器人，记录控制参数与调试过程。",
+            "acceptance": "展示连续运行视频及失败原因；保留参数，不只展示一次成功。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          }
+        ],
+        "topics": [
+          "1. Arduino",
+          "2. ESP32",
+          "3. 电机、驱动与执行器",
+          "4. 传感器与物理世界",
+          "5. 最初的两台机器人"
+        ],
+        "resources": [
+          {
+            "title": "Paul McWhorter：Arduino Lessons",
+            "url": "https://toptechboy.com/arduino-lessons/",
+            "section": "1. Arduino",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Arduino Built-in Examples",
+            "url": "https://docs.arduino.cc/built-in-examples/",
+            "section": "1. Arduino",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Arduino 官方 Learn 文档",
+            "url": "https://docs.arduino.cc/learn/",
+            "section": "1. Arduino",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Arduino Project Hub",
+            "url": "https://projecthub.arduino.cc/",
+            "section": "1. Arduino",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Random Nerd Tutorials：Getting Started with ESP32",
+            "url": "https://randomnerdtutorials.com/getting-started-with-esp32/",
+            "section": "2. ESP32",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "ESP-IDF Programming Guide",
+            "url": "https://docs.espressif.com/projects/esp-idf/en/stable/esp32/get-started/index.html",
+            "section": "2. ESP32",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Arduino ESP32 Core 文档",
+            "url": "https://docs.espressif.com/projects/arduino-esp32/en/latest/",
+            "section": "2. ESP32",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "DroneBot Workshop ESP32 专题",
+            "url": "https://dronebotworkshop.com/esp32-2/",
+            "section": "2. ESP32",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "ESP32-S3-DevKitC-1，8MB Flash",
+            "url": "https://www.adafruit.com/product/5312",
+            "section": "2. ESP32",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "经典 ESP32 开发板",
+            "url": "https://www.adafruit.com/product/3269",
+            "section": "2. ESP32",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Seeed XIAO ESP32-C3",
+            "url": "https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html",
+            "section": "2. ESP32",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "DroneBot Workshop：Controlling DC Motors with the L298N",
+            "url": "https://dronebotworkshop.com/dc-motors-l298n-h-bridge/",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SparkFun TB6612FNG Hookup Guide",
+            "url": "https://learn.sparkfun.com/tutorials/tb6612fng-hookup-guide/all",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "DroneBot Workshop：Stepper Motors with Arduino",
+            "url": "https://dronebotworkshop.com/stepper-motors-with-arduino/",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SimpleFOC 文档",
+            "url": "https://docs.simplefoc.com/",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Adafruit DRV8833",
+            "url": "https://www.adafruit.com/product/3297",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SparkFun TB6612FNG",
+            "url": "https://www.sparkfun.com/sparkfun-motor-driver-dual-tb6612fng-1a.html",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pololu 带编码器减速电机组件",
+            "url": "https://www.pololu.com/product/3675",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Pololu A4988 步进驱动板",
+            "url": "https://www.pololu.com/product/1182",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "FeeTech STS3215 智能舵机",
+            "url": "https://www.robotshop.com/products/feetech-12v-30kgcm-magnetic-encoding-servo-sts3215",
+            "section": "3. 电机、驱动与执行器",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Adafruit BNO085 9-DoF IMU 指南",
+            "url": "https://learn.adafruit.com/adafruit-9-dof-orientation-imu-fusion-breakout-bno085/overview",
+            "section": "4. 传感器与物理世界",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Kalman and Bayesian Filters in Python，Roger Labbe",
+            "url": "https://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/",
+            "section": "4. 传感器与物理世界",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MathWorks：Understanding Sensor Fusion and Tracking",
+            "url": "https://www.mathworks.com/videos/series/understanding-sensor-fusion-and-tracking.html",
+            "section": "4. 传感器与物理世界",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "robotics-3",
+        "name": "机械设计、CAD 与制造自己的零件",
+        "outcome": "能设计、制造和修改零件，为后续学习建立机械臂平台。",
+        "month": 3,
+        "projects": [
+          {
+            "id": "robotics-3-p1",
+            "title": "参数化 CAD 与装配",
+            "instruction": "根据数据表设计支架或夹爪，约束草图并检查安装尺寸。",
+            "acceptance": "提交可编辑 CAD、尺寸图与装配检查记录。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-3-p2",
+            "title": "打印公差与材料实验",
+            "instruction": "设计间隙样件，比较打印方向、配合和材料选择；可借用或外包打印。",
+            "acceptance": "记录实测间隙、材料、打印参数与修改前后差异。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-3-p3",
+            "title": "机械臂装配、校准与改装",
+            "instruction": "按条件组装 SO-101 或原文替代平台，校准关节并改造夹爪。",
+            "acceptance": "保存校准记录，在三种形状物体上记录抓取表现；无硬件先完成设计。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          }
+        ],
+        "topics": [
+          "1. CAD",
+          "2. 3D 打印",
+          "3. 执行器、传动与机器人为什么难做",
+          "4. 做一台真正的机械臂"
+        ],
+        "resources": [
+          {
+            "title": "Onshape Learning Center：Fundamentals: CAD",
+            "url": "https://learn.onshape.com/learning-paths/onshape-fundamentals-cad",
+            "section": "1. CAD",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Product Design Online：Learn Autodesk Fusion in 30 Days",
+            "url": "https://productdesignonline.com/learn-autodesk-fusion-360-in-30-days-official-course/",
+            "section": "1. CAD",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MangoJelly Solutions FreeCAD 教程",
+            "url": "https://www.youtube.com/@MangoJellySolutions",
+            "section": "1. CAD",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Protolabs Network：Design for 3D Printing",
+            "url": "https://www.hubs.com/knowledge-base/design-for-3d-printing/",
+            "section": "1. CAD",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Creality Ender-3 V3 SE",
+            "url": "https://store.creality.com/products/ender-3-v3-se-3d-printer",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Bambu Lab A1 mini",
+            "url": "https://www.bestbuy.com/product/bambu-lab-a1-mini-3d-printer-silver/CZTZV9ZGGV",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Bambu Lab A1",
+            "url": "https://www.bestbuy.com/product/bambu-lab-a1-3d-printer-silver/CZW2ZH33H4",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Creality K1C",
+            "url": "https://store.creality.com/products/k1c-3d-printer",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Bambu Lab P1S",
+            "url": "https://us.store.bambulab.com/products/p1s",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OrcaSlicer Calibration Wiki",
+            "url": "https://github.com/OrcaSlicer/OrcaSlicer/wiki/Calibration",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Teaching Tech 3D Printer Calibration",
+            "url": "https://teachingtechyt.github.io/calibration.html",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "CNC Kitchen",
+            "url": "https://www.youtube.com/@CNCKitchen",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Clearance and Tolerance 3D Printer Gauge",
+            "url": "https://www.printables.com/model/57067-clearance-and-tolerance-3d-printer-gauge",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Fab Labs",
+            "url": "https://fablabs.io/labs",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "公共图书馆创客空间查询指南",
+            "url": "https://action.everylibrary.org/how_to_find_a_makerspace_near_you",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Craftcloud",
+            "url": "https://craftcloud3d.com/",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "JLC3DP",
+            "url": "https://jlc3dp.com/",
+            "section": "2. 3D 打印",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenCycloid 开源打印执行器",
+            "url": "https://www.instructables.com/OpenCycloid-3D-printed-Open-Source-Robotic-Actuato/",
+            "section": "3. 执行器、传动与机器人为什么难做",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "官方仓库 SO-ARM100",
+            "url": "https://github.com/TheRobotStudio/SO-ARM100",
+            "section": "4. 做一台真正的机械臂",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Seeed Studio SO-ARM101 Pro 舵机套件",
+            "url": "https://www.seeedstudio.com/SO-ARM101-Low-Cost-AI-Arm-Kit-Pro-p-6427.html",
+            "section": "4. 做一台真正的机械臂",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Seeed Studio 打印件套装",
+            "url": "https://www.seeedstudio.com/SO-ARM101-3D-printed-Enclosure-p-6428.html",
+            "section": "4. 做一台真正的机械臂",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Robonine SO-ARM101 完整套件",
+            "url": "https://robonine.com/shop/so-arm101-black-robotic-arm-kit/",
+            "section": "4. 做一台真正的机械臂",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenELAB 的 WowRobo 套件",
+            "url": "https://openelab.com/products/wowrobo-robotics-so-arm101-diykit",
+            "section": "4. 做一台真正的机械臂",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "EEZYbotARM MK2",
+            "url": "https://www.thingiverse.com/thing:1454048",
+            "section": "4. 做一台真正的机械臂",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hiwonder xArm 1S",
+            "url": "https://www.hiwonder.com/products/xarm-1s",
+            "section": "4. 做一台真正的机械臂",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "robotics-4",
+        "name": "ROS 2、仿真与企业里的机器人开发方式",
+        "outcome": "使用 ROS 2 连接机器人描述、传感器、控制与导航。",
+        "month": 4,
+        "projects": [
+          {
+            "id": "robotics-4-p1",
+            "title": "ROS 2 多节点与录制回放",
+            "instruction": "编写发布、处理与配置节点，定义消息和服务，用 Launch 启动并录制 bag。",
+            "acceptance": "提交节点图、接口、录制回放结果和一次通信故障排查。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-4-p2",
+            "title": "URDF / TF 与 Gazebo 联调",
+            "instruction": "将 xacro 机器人放入仿真，添加相机和雷达，接入 ros2_control。",
+            "acceptance": "在 RViz 检查坐标、传感器和关节；演示动作反馈与取消。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-4-p3",
+            "title": "SLAM 与自主导航",
+            "instruction": "建图并保存，切换定位模式，发送 Nav2 目标并调试 Costmap。",
+            "acceptance": "提供地图、导航录屏与避障失败复盘，记录使用的软件版本。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          }
+        ],
+        "topics": [
+          "1. 安装哪个 ROS 2，以及 ROS 1 的陷阱",
+          "2. ROS 2 核心概念",
+          "3. URDF、TF 与机器人描述",
+          "4. 仿真",
+          "5. ros2_control",
+          "6. SLAM 与导航"
+        ],
+        "resources": [
+          {
+            "title": "ROS 2 官方教程",
+            "url": "https://docs.ros.org/en/jazzy/Tutorials.html",
+            "section": "2. ROS 2 核心概念",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "The Construct",
+            "url": "https://www.theconstruct.ai/",
+            "section": "2. ROS 2 核心概念",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Edouard Renard：ROS 2 for Beginners，Level 1",
+            "url": "https://www.udemy.com/course/ros2-for-beginners/",
+            "section": "2. ROS 2 核心概念",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Articulated Robotics，Josh Newans",
+            "url": "https://articulatedrobotics.xyz/tutorials/",
+            "section": "2. ROS 2 核心概念",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MOGI-ROS 大学课程",
+            "url": "https://github.com/orgs/MOGI-ROS/repositories",
+            "section": "2. ROS 2 核心概念",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Automatic Addison",
+            "url": "https://automaticaddison.com/tutorials/",
+            "section": "2. ROS 2 核心概念",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Articulated Robotics：Coordinate Transforms for Robotics",
+            "url": "https://articulatedrobotics.xyz/category/coordinate-transforms-for-robotics",
+            "section": "3. URDF、TF 与机器人描述",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Edouard Renard：Level 2，TF、URDF、RViz、Gazebo",
+            "url": "https://www.udemy.com/course/ros2-tf-urdf-rviz-gazebo/",
+            "section": "3. URDF、TF 与机器人描述",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "官方 URDF 与 robot_state_publisher 教程",
+            "url": "https://docs.ros.org/en/jazzy/Tutorials/Intermediate/URDF/Using-URDF-with-Robot-State-Publisher-cpp.html",
+            "section": "3. URDF、TF 与机器人描述",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Gazebo 文档与教程",
+            "url": "https://gazebosim.org/docs/latest/getstarted/",
+            "section": "4. 仿真",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MuJoCo",
+            "url": "https://mujoco.readthedocs.io/en/stable/overview.html",
+            "section": "4. 仿真",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "NVIDIA Isaac Sim 安装要求",
+            "url": "https://docs.isaacsim.omniverse.nvidia.com/6.0.0/installation/requirements.html",
+            "section": "4. 仿真",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "ros2_control 文档",
+            "url": "https://control.ros.org/rolling/index.html",
+            "section": "5. ros2_control",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Articulated Robotics：ros2_control on Real Hardware",
+            "url": "https://articulatedrobotics.xyz/tutorials/mobile-robot/applications/ros2_control-real/",
+            "section": "5. ros2_control",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Nav2 Getting Started",
+            "url": "https://docs.nav2.org/rolling/getting_started/index.html",
+            "section": "6. SLAM 与导航",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Nav2 Tutorials",
+            "url": "https://docs.nav2.org/rolling/tutorials/",
+            "section": "6. SLAM 与导航",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SLAM Toolbox",
+            "url": "https://github.com/SteveMacenski/slam_toolbox",
+            "section": "6. SLAM 与导航",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "RTAB-Map for ROS 2",
+            "url": "https://github.com/introlab/rtabmap_ros",
+            "section": "6. SLAM 与导航",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hiwonder MentorPi M1",
+            "url": "https://www.hiwonder.com/products/mentorpi-m1",
+            "section": "6. SLAM 与导航",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Waveshare UGV Rover ROS 2 Kit",
+            "url": "https://www.waveshare.com/ugv-rover-ros2-kit.htm",
+            "section": "6. SLAM 与导航",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "robotics-5",
+        "name": "让机器人真正工作的数学",
+        "outcome": "用控制、运动学和视觉解释系统表现，而不只会配置工具。",
+        "month": 5,
+        "projects": [
+          {
+            "id": "robotics-5-p1",
+            "title": "PID 与 LQR 对照实验",
+            "instruction": "记录 P、PD、PID 响应；在仿真倒立摆比较 LQR 与 PID 抗扰动。",
+            "acceptance": "保存 CSV、对比曲线、参数与实验条件，解释超调和稳态误差。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-5-p2",
+            "title": "正逆运动学与 MoveIt 抓放",
+            "instruction": "推导机械臂正运动学、验证数值逆解，在仿真加入障碍物进行抓放。",
+            "acceptance": "给出计算与库结果对比，展示奇异位形、不可达和碰撞失败。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-5-p3",
+            "title": "相机标定与三维定位",
+            "instruction": "标定真实相机，结合深度或已知几何估计物体位置，改变光照测试。",
+            "acceptance": "保存内参、重投影误差、深度来源与失败案例；不把单个像素当作三维坐标。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          }
+        ],
+        "topics": [
+          "1. 控制理论：从 PID 开始",
+          "2. 状态空间、LQR 与 MPC",
+          "3. 运动学与动力学",
+          "4. 感知与计算机视觉",
+          "5. 机械臂操作与 MoveIt 2"
+        ],
+        "resources": [
+          {
+            "title": "Understanding PID Control，Brian Douglas 的 MATLAB Tech Talks",
+            "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+            "section": "1. 控制理论：从 PID 开始",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Brian Douglas：Control System Lectures",
+            "url": "https://www.youtube.com/@BrianBDouglas/playlists",
+            "section": "1. 控制理论：从 PID 开始",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "The Fundamentals of Control Theory，Brian Douglas",
+            "url": "https://engineeringmedia.com/books",
+            "section": "1. 控制理论：从 PID 开始",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Control Bootcamp，Steve Brunton",
+            "url": "https://www.youtube.com/playlist?list=PLMrJAkhIeNNR20Mz-VpzgfQs5zrYi085m",
+            "section": "1. 控制理论：从 PID 开始",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Feedback Systems，Åström 与 Murray",
+            "url": "https://fbswiki.org/wiki/index.php/Feedback_Systems:_An_Introduction_for_Scientists_and_Engineers",
+            "section": "1. 控制理论：从 PID 开始",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Understanding Model Predictive Control，MATLAB Tech Talks",
+            "url": "https://www.mathworks.com/videos/series/understanding-model-predictive-control.html",
+            "section": "2. 状态空间、LQR 与 MPC",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Underactuated Robotics，MIT 的 Russ Tedrake",
+            "url": "https://underactuated.csail.mit.edu/index.html",
+            "section": "2. 状态空间、LQR 与 MPC",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Modern Robotics，西北大学 Kevin Lynch",
+            "url": "http://hades.mech.northwestern.edu/index.php/Modern_Robotics",
+            "section": "3. 运动学与动力学",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Modern Robotics Specialization",
+            "url": "https://www.coursera.org/specializations/modernrobotics",
+            "section": "3. 运动学与动力学",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Robotics Toolbox for Python，Peter Corke",
+            "url": "https://github.com/petercorke/robotics-toolbox-python",
+            "section": "3. 运动学与动力学",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "QUT Robot Academy，Peter Corke",
+            "url": "https://robotacademy.net.au",
+            "section": "3. 运动学与动力学",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenCV 官方免费 Bootcamp",
+            "url": "https://courses.opencv.org/courses/course-v1:OpenCV+Bootcamp+CV0/about",
+            "section": "4. 感知与计算机视觉",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenCV 相机标定教程",
+            "url": "https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html",
+            "section": "4. 感知与计算机视觉",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "波恩大学 Cyrill Stachniss 机器人课程",
+            "url": "https://www.ipb.uni-bonn.de/online-training-robotics/",
+            "section": "4. 感知与计算机视觉",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Open3D 点云教程",
+            "url": "https://www.open3d.org/docs/release/tutorial/geometry/pointcloud.html",
+            "section": "4. 感知与计算机视觉",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MoveIt 2 Getting Started",
+            "url": "https://moveit.picknik.ai/main/doc/tutorials/getting_started/getting_started.html",
+            "section": "5. 机械臂操作与 MoveIt 2",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MoveIt Task Constructor 抓取放置教程",
+            "url": "https://moveit.picknik.ai/main/doc/tutorials/pick_and_place_with_moveit_task_constructor/pick_and_place_with_moveit_task_constructor.html",
+            "section": "5. 机械臂操作与 MoveIt 2",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Robotic Manipulation，MIT 的 Russ Tedrake",
+            "url": "https://manipulation.csail.mit.edu/",
+            "section": "5. 机械臂操作与 MoveIt 2",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "NVIDIA Contact-GraspNet",
+            "url": "https://github.com/NVlabs/contact_graspnet",
+            "section": "5. 机械臂操作与 MoveIt 2",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      },
+      {
+        "id": "robotics-6",
+        "name": "机器人学习、选择方向与准备求职",
+        "outcome": "跑通示范数据、策略训练与部署，并选择职业主方向。",
+        "month": 6,
+        "projects": [
+          {
+            "id": "robotics-6-p1",
+            "title": "LeRobot 数据—训练—部署",
+            "instruction": "录制简单操作示范，训练 ACT，部署评估；围绕失败补充示范再训练。",
+            "acceptance": "原文练习为先后各 50 次示范；保留数据版本、评估次数、成功率与前后对比。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-6-p2",
+            "title": "选修：VLA 或强化学习",
+            "instruction": "按目标选择 SmolVLA 等策略实验，或 MuJoCo Playground 强化学习，避免同时铺开。",
+            "acceptance": "保存环境、模型与配置，对比微调或奖励修改前后的表现；区分仿真与真机。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-6-p3",
+            "title": "选择方向并整理三个作品",
+            "instruction": "在机器人学习与具身 AI、自主系统与移动机器人、嵌入式机电集成中选主方向。",
+            "acceptance": "三个作品各有视频、架构或接线、指标与故障复盘，能解释关键代码。",
+            "minutes": 45,
+            "origin": "平台整理（基于原文）",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          },
+          {
+            "id": "robotics-6-p4",
+            "title": "补充：策略部署与运行时测量",
+            "instruction": "固定模型和设备，记录预处理、推理、动作发送延迟与内存；检查控制频率和异常停止。",
+            "acceptance": "提供端到端延迟分布、硬件与模型版本、成功率和安全停止记录；优化后重复同一评估。",
+            "minutes": 45,
+            "origin": "平台补充",
+            "source_url": "https://x.com/DeRonin_/status/2095180126359105955"
+          }
+        ],
+        "topics": [
+          "第一部分：现代机器人学习",
+          "第二部分：选择方向",
+          "4. 作品集",
+          "5. 面试"
+        ],
+        "resources": [
+          {
+            "title": "LeRobot 文档",
+            "url": "https://huggingface.co/docs/lerobot/index",
+            "section": "1. LeRobot",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "LeRobot 仓库",
+            "url": "https://github.com/huggingface/lerobot",
+            "section": "1. LeRobot",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hugging Face Robotics Course",
+            "url": "https://huggingface.co/learn/robotics-course/unit0/1",
+            "section": "1. LeRobot",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "SO-101 设置指南",
+            "url": "https://huggingface.co/docs/lerobot/so101",
+            "section": "1. LeRobot",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Physical Intelligence 的 openpi",
+            "url": "https://github.com/Physical-Intelligence/openpi",
+            "section": "2. 视觉—语言—动作模型（VLA）",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "OpenVLA",
+            "url": "https://openvla.github.io/",
+            "section": "2. 视觉—语言—动作模型（VLA）",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "NVIDIA GR00T N1.7",
+            "url": "https://github.com/Nvidia/Isaac-GR00T",
+            "section": "2. 视觉—语言—动作模型（VLA）",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Hugging Face SmolVLA",
+            "url": "https://huggingface.co/lerobot/smolvla_base",
+            "section": "2. 视觉—语言—动作模型（VLA）",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "MuJoCo Playground",
+            "url": "https://github.com/google-deepmind/mujoco_playground",
+            "section": "3. 机器人强化学习",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "NVIDIA Isaac Lab",
+            "url": "https://github.com/isaac-sim/IsaacLab",
+            "section": "3. 机器人强化学习",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "UC Berkeley CS 285，Sergey Levine",
+            "url": "https://rail.eecs.berkeley.edu/deeprlcourse",
+            "section": "3. 机器人强化学习",
+            "origin": "原文资源",
+            "verified": false
+          },
+          {
+            "title": "Glassdoor 机器人面试问题",
+            "url": "https://www.glassdoor.com/Interview/robotics-engineer-interview-questions-SRCH_KO0,17.htm",
+            "section": "5. 面试",
+            "origin": "原文资源",
+            "verified": false
+          }
+        ]
+      }
+    ],
+    "source": {
+      "author": "Ronin",
+      "url": "https://x.com/DeRonin_/status/2095180126359105955",
+      "basis": "用户提供原文的完整中文译稿",
+      "resource_status": "沿用原文链接，未逐条实时核验；价格、版本和课程可用性以资源页面为准。",
+      "translation_sha256": "6a8f1302472d5a51f37abb3cfe934fc438669c15f24847351dca48599523f639"
+    },
+    "planning_note": "阶段顺序与资源目录来自原文。实践卡、验收条件和单次 45 分钟安排由平台整理，可编辑；不是原文耗时承诺。第六阶段分支按目标选择。"
+  }
+]

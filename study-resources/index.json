@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "resources": [
+    {
+      "id": "agentic-llm-textbook-chapter-map",
+      "category": "agent",
+      "title": "《Agentic Large Language Models》全书章节地图",
+      "file": "agent/agentic-llm-textbook-chapter-map.md",
+      "format": "md",
+      "added": "2026-10-15",
+      "source_article": "Articles/articles/2026-10-15-agentic-llm-textbook",
+      "note": "原书 arXiv:2610.13455，472 页 / 23 章；本文件为章节结构衍生整理，非原书正文。"
+    }
+  ]
+}

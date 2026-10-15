@@ -153,7 +153,8 @@ python3 server.py --port 9000       # 换端口
 ├── radar/                 # SQLite、记录、计划、备份
 ├── web/                   # 页面、样式与全部前端模块（含静态版运行时）
 ├── config/                # 课程、路线、练习与社区配置（JSON，可直接编辑）
-├── scripts/               # 静态构建、源码打包、资源导入
+├── scripts/               # 静态构建、源码打包、资源导入、学习资料一键转移
+├── study-resources/       # 免费学习资料库（章节地图/笔记/链接合集，按 agent/robotics 分类）
 ├── tests/                 # Python unittest + Node test
 ├── qa/                    # 浏览器验收脚本（Playwright）
 ├── data/                  # 运行时数据（git 忽略）

@@ -30,7 +30,7 @@ def build(destination):
     if destination==ROOT or destination in ROOT.parents or destination==ROOT/'web' or destination==ROOT/'config':
         raise ValueError('构建目录不能覆盖项目源码')
     # Derive backup fields from an empty temporary schema, never the real database.
-    from radar import core,backup,routes,community
+    from radar import core,backup,routes,community,resources
     previous=core.DATA
     try:
         with tempfile.TemporaryDirectory(prefix='static-schema-') as tmp:
@@ -40,6 +40,7 @@ def build(destination):
     config={name:json.loads((ROOT/'config'/f'{name}.json').read_text()) for name in PUBLIC_CONFIG}
     config['community']=community.clean(config['community'])
     config.update(learning_routes=routes.ROUTES,record_schemas=schemas)
+    config['study_resources']=resources.build(ROOT)
     html=(ROOT/'web/index.html').read_text()
     files=set(re.findall(r'(?:src|href)="/([^"?#]+\.(?:js|css))"',html))
     html=html.replace('<script src="/dashboard.js">',''.join(f'<script src="/{name}"></script>' for name in RUNTIME)+'<script src="/dashboard.js">')

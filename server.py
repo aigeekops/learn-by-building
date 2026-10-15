@@ -5,7 +5,7 @@ import json
 import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit, parse_qs
-from radar import core, journal, plans, backup, community
+from radar import core, journal, plans, backup, community, resources
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self,*args): pass
@@ -38,6 +38,7 @@ class Handler(BaseHTTPRequestHandler):
             tables['learning_routes']=routes.ROUTES
             tables['learning_plans']={goal:plans.state(goal) for goal in routes.ROUTES}
             tables['roadmaps']=core.config('roadmaps')
+            tables['study_resources']=resources.build(core.ROOT)
             return self.send(tables)
         if route=='/api/journal/review':
             try:
@@ -54,6 +55,7 @@ class Handler(BaseHTTPRequestHandler):
         files.update({'/site-route.js':('site-route.js','text/javascript; charset=utf-8'),'/site-route.css':('site-route.css','text/css; charset=utf-8'),'/ee-textbook.js':('ee-textbook.js','text/javascript; charset=utf-8'),'/ee-textbook.css':('ee-textbook.css','text/css; charset=utf-8')})
         files.update({'/learning-links.js':('learning-links.js','text/javascript; charset=utf-8'),'/learning-links.css':('learning-links.css','text/css; charset=utf-8')})
         files.update({'/robotics-curriculum.js':('robotics-curriculum.js','text/javascript; charset=utf-8'),'/robotics-curriculum.css':('robotics-curriculum.css','text/css; charset=utf-8')})
+        files.update({'/study-resources.js':('study-resources.js','text/javascript; charset=utf-8'),'/study-resources.css':('study-resources.css','text/css; charset=utf-8')})
         for name in ('divider-load','diagnosis-path','load-current-tradeoff'):
             files[f'/assets/{name}.png']=(f'assets/{name}.png','image/png')
         if route not in files:return self.send({'error':'Not found'},404)

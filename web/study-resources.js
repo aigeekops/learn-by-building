@@ -54,11 +54,19 @@ function renderMarkdown(src) {
   return html;
 }
 
+function srTags(r) {
+  const raw = r && r.tags;
+  const list = Array.isArray(raw) ? raw : (typeof raw === "string" && raw.trim() ? raw.split(/[,，、]/) : []);
+  const tags = list.map(t => String(t).trim()).filter(Boolean);
+  return tags.length ? '<span class="sr-tags">' + tags.map(t => '<span class="sr-tag">' + esc(t) + "</span>").join("") + "</span>" : "";
+}
+
 function renderResourceDetail(r) {
   return heading("STUDY RESOURCES", "学习资料 · " + r.title, "",
       btn("← 返回列表", "sr-back", "", "small"))
     + '<article class="sr-detail">'
     + '<div class="sr-detail-meta"><span class="sr-badge ' + r.category + '">' + (r.category === "agent" ? "Agent 工程" : "机器人工程") + "</span>"
+    + srTags(r)
     + '<span class="sr-date">' + esc(r.added || "") + "</span>"
     + (r.source_article ? '<span class="sr-src">来源：' + esc(r.source_article) + "</span>" : "")
     + "</div>"
@@ -85,6 +93,7 @@ function renderStudyResources() {
     + filtered.map(r => '<article class="sr-card"><div class="sr-card-head"><span class="sr-badge ' + r.category + '">' + (r.category === "agent" ? "Agent 工程" : "机器人工程") + "</span>"
         + '<span class="sr-date">' + esc(r.added || "") + "</span></div>"
         + "<h3>" + esc(r.title) + "</h3>"
+        + srTags(r)
         + '<p class="sr-note">' + esc(r.note || "") + "</p>"
         + '<div class="actions">' + btn("查看资料", "sr-open", r.id, "small primary") + "</div></article>").join("")
     + "</div>";

@@ -18,7 +18,8 @@ study-resources/
 ```
 
 - 每个资料一个文件，放进对应分类目录。
-- 每条都在 `index.json` 登记：`id` / `category` / `title` / `file` / `format` / `added`，可选 `source_article` / `note`。
+- 每条都在 `index.json` 登记：`id` / `category` / `title` / `file` / `format` / `added`，可选 `source_article` / `note` / `tags`。
+- `category` 只有 `agent` / `robotics` 两类（决定列在哪个筛选里）；细粒度的主题用 `tags` 表达（字符串数组，如 `["软件开发"]`），站内卡片与详情页都会显示。
 
 ## 怎么加一个新资料（一键转移）
 
@@ -52,6 +53,7 @@ python3 scripts/transfer_study_resource.py chapter-map.md -c agent -y
 - `-y/--yes` 跳过所有交互确认（分类用默认、搬移不追问）
 - `-f/--force` 覆盖已存在目标；`--dry` 只预览不写入
 - `-s/--slug` `-t/--title` `-n/--note` `--source-article` 想手动覆盖推断值时才用
+- `-T/--tag` 标签，可多次给（`-T 软件开发 -T 上下文工程`）；省略时保留已有标签
 
 ## 版权边界
 
@@ -63,3 +65,4 @@ python3 scripts/transfer_study_resource.py chapter-map.md -c agent -y
 | 方向 | 资料 | 说明 |
 |---|---|---|
 | Agent | 《Agentic Large Language Models》全书章节地图 | 原书 arXiv:2610.13455，472 页 / 23 章；本文件为章节结构衍生整理，非原书正文 |
+| Agent | CS146S · 现代软件开发者（Stanford, Fall 2026）课程地图 | 11 周骨架 + 6 次作业要求 + 2025→2026 迭代对比 + 无学籍 6 周自学改造表；取自课程官网、官方作业仓库与公开课堂转录，Slides 需 Stanford 账号 |

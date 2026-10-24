@@ -10,6 +10,16 @@
       "added": "2026-10-15",
       "source_article": "Articles/articles/2026-10-15-agentic-llm-textbook",
       "note": "原书 arXiv:2610.13455，472 页 / 23 章；本文件为章节结构衍生整理，非原书正文。"
+    },
+    {
+      "id": "cs146s-modern-software-dev-2026",
+      "category": "agent",
+      "title": "CS146S · 现代软件开发者（Stanford, Fall 2026）课程地图",
+      "file": "agent/cs146s-modern-software-dev-2026.md",
+      "format": "md",
+      "added": "2026-10-24",
+      "tags": ["软件开发"],
+      "note": "Stanford CS146S Fall 2026 全课地图：11 周骨架、6 次作业的真实要求、2025→2026 迭代轨迹，附「无学籍 6 周自学改造表」。"
     }
   ]
 }

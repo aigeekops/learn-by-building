@@ -18,6 +18,9 @@
   # 全自动不交互（脚本/CI 用）
   python3 scripts/transfer_study_resource.py chapter-map.md -c agent -y
 
+  # 带标签（可多次 -T，站内卡片与详情都会显示）
+  python3 scripts/transfer_study_resource.py chapter-map.md -c agent -T 软件开发 -y
+
 推断规则：
   · slug（清单 id / 文件名）：取源文件名（去扩展名）做 slugify；纯中文文件名则原样保留
   · title（展示标题）：优先取文件首行 `# 一级标题`；否则用文件名（去连字符）
@@ -142,6 +145,8 @@ def main() -> None:
     ap.add_argument("-s", "--slug", help="清单 id 与目标文件名（省略则从源文件名推断）")
     ap.add_argument("-t", "--title", help="展示标题（省略则从文件首行 # 标题 推断）")
     ap.add_argument("-n", "--note", help="备注，写进清单")
+    ap.add_argument("-T", "--tag", action="append", metavar="TAG",
+                    help="标签，可多次指定（如 -T 软件开发 -T 上下文工程）；省略则沿用已有标签")
     ap.add_argument("--source-article", help="来源文章路径（写进清单，便于回溯）")
     ap.add_argument("-m", "--move", action="store_true", help="搬移：复制后删除源文件")
     ap.add_argument("-f", "--force", action="store_true", help="目标已存在时覆盖")
@@ -178,6 +183,12 @@ def main() -> None:
         entry["source_article"] = args.source_article
     if args.note:
         entry["note"] = args.note
+    tags = [t.strip() for t in (args.tag or []) if t.strip()]
+    if tags:
+        entry["tags"] = tags
+    elif existing and existing.get("tags"):
+        # 未指定新标签时不要抹掉已有标签
+        entry["tags"] = existing["tags"]
     if existing:
         entry["added"] = existing.get("added", entry["added"])
         manifest["resources"] = [entry if r.get("id") == slug else r for r in manifest["resources"]]
@@ -188,6 +199,8 @@ def main() -> None:
     print(f"目标   : {dest}")
     print(f"分类   : {CAT_LABEL[category]} ({category})")
     print(f"标题   : {title}")
+    if tags:
+        print(f"标签   : {'、'.join(tags)}")
     print(f"清单   : 已登记 {rel_file}")
     if args.move:
         print("模式   : 搬移（复制后删除源文件）")

@@ -1,0 +1,451 @@
+{
+  "id": "kinematics",
+  "title": "坐标、运动学与动力学",
+  "subtitle": "从二维机械臂走向三维变换、扭矩与时间轨迹",
+  "courseLabel": "Modern Robotics 配套基础专题",
+  "officialUrl": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/",
+  "scope": "7节原创配套：原二维坐标与正逆运动学，加SO(3)、SE(3)坐标链、两杆动力学和关节时间轨迹。",
+  "boundary": "原创理想刚体与数值模型；未包含真实标定、碰撞检查、传动、执行器和硬件运动验证。",
+  "lessons": [
+    {
+      "id": "rf-transform",
+      "title": "同一个点，为什么会有两组坐标",
+      "question": "传感器中的点 (1,0)，换到旋转并平移后的世界坐标里在哪里？",
+      "prerequisites": [
+        "认识二维 x/y 坐标",
+        "知道角度与弧度的换算，可以按需回补正弦余弦"
+      ],
+      "objectives": [
+        "明确点、坐标系与变换方向",
+        "用 p_world=R·p_local+t 计算二维点",
+        "用逆变换和距离不变性核对，并说明变换次序为什么重要"
+      ],
+      "explanation": [
+        "把一张带方格的透明纸放在桌面上：纸上的点不动，纸旋转和平移后，点在桌面上的位置就改变了。局部坐标是纸上的读数，世界坐标是桌面上的读数。写一个坐标前，先说明使用哪组轴。",
+        "本课采用列向量、向右为 +x、向上为 +y，逆时针角度为正。若局部坐标系相对世界转 θ，旋转矩阵 R=[[cosθ,−sinθ],[sinθ,cosθ]]。它先把局部向量换到世界轴的方向，保持向量长度不变。",
+        "局部原点在世界中的位置为 t=(tx,ty)，所以世界点 p_world=R·p_local+t。画面先显示旋转后的向量，再加世界坐标的平移。三维刚体变换的思想相同；此处只用二维 3×3 齐次矩阵降低算例难度。",
+        "逆变换不是把两步照原顺序各取反，而是 p_local=Rᵀ(p_world−t)。先减去原点位移，再反向旋转。另算 R(p+t) 可以看到顺序反例；一般而言它与 Rp+t 不相等。"
+      ],
+      "modelId": "rf-transform",
+      "practice": [
+        {
+          "title": "先关掉平移",
+          "instruction": "将 tx、ty 设为 0，选择一个非零局部点，把角度从 0 改到 90°。记录变换前后的距离。",
+          "expectedObservation": "点沿圆转动，距原点长度不变；(1,0) 变成约 (0,1)。"
+        },
+        {
+          "title": "让原点位移单独显现",
+          "instruction": "把局部点设为 (0,0)，分别修改角度和平移。",
+          "expectedObservation": "世界点总等于 (tx,ty)，因为零向量旋转后仍是零。"
+        },
+        {
+          "title": "检查变换顺序",
+          "instruction": "用非零角度和非零平移，对比最后一帧两种顺序的结果。再观察逆变换误差。",
+          "expectedObservation": "两个顺序通常不同；正确逆变换返回原局部点，残差仅为浮点舍入。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立输入：局部点 (0,2) m，逆时针旋转 90°，局部原点世界坐标为 (1,−1) m。世界点的 x 坐标是多少？",
+        "expected": -1,
+        "tolerance": 0.0001,
+        "unit": "m",
+        "explanation": "先旋转 (0,2)→(−2,0)，再平移得到 (−1,−1) m，所以 x=−1 m。",
+        "transfer": "用 Rᵀ(p_world−t) 把 (−1,−1) 还原为 (0,2)，并写出先平移再旋转会得到的另一结果。"
+      },
+      "sources": [
+        {
+          "title": "Modern Robotics 3.3.1 · Homogeneous Transformation Matrices",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/3-3-1-homogeneous-transformation-matrices/",
+          "locator": "作者视频说明与公开转录：坐标变换、逆、乘法次序及左/右乘。本课把三维概念缩为二维原创算例。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/kinematics/kinematics.py",
+          "label": "二维变换 Python 复算",
+          "command": "python3 examples/robotics-foundations/kinematics/kinematics.py transform --x 0 --y 2 --angle 90 --tx 1 --ty -1"
+        }
+      ]
+    },
+    {
+      "id": "rf-forward-kinematics",
+      "title": "给定两个关节角，末端会到哪里",
+      "question": "第一杆转 30°、第二杆相对第一杆再转 60°，末端坐标怎样一步步算出？",
+      "prerequisites": [
+        "完成二维坐标变换",
+        "会把一个长度分解到 x/y 方向"
+      ],
+      "objectives": [
+        "区分相对关节角与连杆世界方向",
+        "分段计算肘关节和末端的位置",
+        "以平面位置 Jacobian 的行列式识别共线奇异位形"
+      ],
+      "explanation": [
+        "把机械臂看成两个首尾相接的位移向量。第一个关节角 θ₁ 从世界 x 轴量起；第二个关节角 θ₂ 从第一根杆的方向量起。因此第二杆在世界中的绝对角是 θ₁+θ₂，不能只用 θ₂。",
+        "第一根杆长 L₁，它的端点也就是肘关节 e=(L₁cosθ₁,L₁sinθ₁)。第二根杆位移 d=(L₂cos(θ₁+θ₂),L₂sin(θ₁+θ₂))。末端 p=e+d。长度统一用 m，代码中的三角函数使用弧度。",
+        "关节角给定时，正运动学给出一个确定的末端位置。两杆总能伸到的最远距离是 L₁+L₂，最近是 |L₁−L₂|；改变肩角会转动整个构形，改变肘角会改变两杆张合和末端距基座的距离。",
+        "进一步观察微小关节变化到末端速度的映射：平面 2R 位置 Jacobian 的 det J=L₁L₂sinθ₂。两杆伸直或折叠共线时为零，瞬时不能独立地产生任意二维末端速度。这不表示正运动学无法计算，也不等于机器人一定发生碰撞。"
+      ],
+      "modelId": "rf-forward-kinematics",
+      "practice": [
+        {
+          "title": "用直角算例检查约定",
+          "instruction": "设 L₁=1 m、L₂=1 m、θ₁=0°、θ₂=90°。先手画，再看分步结果。",
+          "expectedObservation": "肘关节在 (1,0)，第二杆位移 (0,1)，末端 (1,1) m。"
+        },
+        {
+          "title": "只转肩关节",
+          "instruction": "固定长度和肘角，把肩角增加 90°，比较末端距离与方向。",
+          "expectedObservation": "整个机械臂旋转，末端距基座的距离不变。"
+        },
+        {
+          "title": "观察可达但奇异的边界",
+          "instruction": "把肘角设为 0°，再设为 180°，比较末端位置与 det J。",
+          "expectedObservation": "两者都能计算位置；det J 约为 0，分别对应外边界和内边界共线构形。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：L₁=1 m，L₂=0.5 m，θ₁=90°，θ₂=−90°。末端的 y 坐标是多少？",
+        "expected": 1,
+        "tolerance": 0.0001,
+        "unit": "m",
+        "explanation": "第一杆到 (0,1) m，第二杆世界角 0°，再向右走 0.5 m，所以末端 (0.5,1) m，y=1 m。",
+        "transfer": "将两角同时改为 θ₁=0°、θ₂=0°，算末端位置与 det J，并解释为什么位置有定义但局部速度映射退化。"
+      },
+      "sources": [
+        {
+          "title": "Modern Robotics 4.1.1 · Forward Kinematics",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/4-1-1-product-of-exponentials-formula-in-the-space-frame/",
+          "locator": "第 4 章作者视频说明与转录：由关节配置求末端配置。本站从二维两向量相加起步，不声称本例覆盖乘积指数公式。",
+          "accessed": "2026-11-08"
+        },
+        {
+          "title": "Modern Robotics 5.3 · Singularities",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/5-3-singularities/",
+          "locator": "作者公开转录中的平面 2R 与完全伸直构形、Jacobian 秩及瞬时运动方向。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/kinematics/kinematics.py",
+          "label": "两连杆正运动学 Python 复算",
+          "command": "python3 examples/robotics-foundations/kinematics/kinematics.py fk --l1 1 --l2 0.5 --theta1 90 --theta2 -90"
+        }
+      ]
+    },
+    {
+      "id": "rf-inverse-kinematics",
+      "title": "目标点给定后，机械臂为什么可能有两种姿势",
+      "question": "两根 1 m 连杆要到达 (1,1) m，关节角是否只有一组？哪些目标根本到不了？",
+      "prerequisites": [
+        "完成两连杆正运动学",
+        "理解圆环范围，能按需使用余弦定理和 atan2"
+      ],
+      "objectives": [
+        "先检查目标是否落在几何工作空间内",
+        "用余弦定理和 atan2 求两肘角分支",
+        "用正运动学回代检查残差，并正确区分边界、无解和退化多解"
+      ],
+      "explanation": [
+        "逆运动学把方向反过来：已知目标点，寻找关节角。与正运动学不同，一个位置可能没有解、只有一个几何分支，或者有多个分支。本课的机械臂没有关节角限制，也不考虑与环境碰撞，先研究纯几何问题。",
+        "目标距基座 r=√(x²+y²)。可达范围是 |L₁−L₂|≤r≤L₁+L₂；超过外圈太远，落在内孔太近。必须先检查范围，再求 acos。若先把任何余弦值都截到 [−1,1]，就可能把不可达目标伪装成边界成功。",
+        "在一般可达位置，cosθ₂=(x²+y²−L₁²−L₂²)/(2L₁L₂)，肘角有 ±acos 两个分支。随后 θ₁=atan2(y,x)−atan2(L₂sinθ₂,L₁+L₂cosθ₂)。两组角度都要代回正运动学，确认末端回到同一目标。",
+        "工作空间边界上，两分支按角度模 2π 合并，且两杆共线导致位置 Jacobian 奇异。另有一个容易漏掉的特例：两杆等长、目标在原点时，θ₂=π，但肩角任意，所以有无穷多个解。页面只画一个代表解，明确保留这个退化状态。",
+        "图中能到达并不意味着真机可以执行。下一步仍要检查关节范围、连杆碰撞、轨迹连续性、速度与扭矩；切换两个几何解也不能直接当作无碰撞的运动轨迹。"
+      ],
+      "modelId": "rf-inverse-kinematics",
+      "practice": [
+        {
+          "title": "寻找同一目标的两个姿势",
+          "instruction": "保持两杆 1 m、目标 (1,1) m，切换肘角分支；记录角度并检查回代残差。",
+          "expectedObservation": "两组典型角分别为 (0°,90°) 与 (90°,−90°)，两者都到达 (1,1)，残差接近 0。"
+        },
+        {
+          "title": "分别制造太远和太近",
+          "instruction": "先用两杆 1 m、目标 (3,0) m；再用 L₁=2 m、L₂=0.5 m、目标 (0.5,0) m。",
+          "expectedObservation": "分别超出外圈与落入内孔；页面不计算 acos 成功解，也不画已经到达目标的机械臂。"
+        },
+        {
+          "title": "区分两种退化",
+          "instruction": "设等长两杆，依次把目标设为 (2,0) 和 (0,0) m。",
+          "expectedObservation": "前者是两分支合并的外边界解；后者肩角任意、解数无穷，二者均为奇异构形。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：两杆均为 1 m，目标在 (0,1) m。选择 θ₂ 非负分支，肘关节角 θ₂ 是多少度？",
+        "expected": 120,
+        "tolerance": 0.001,
+        "unit": "°",
+        "explanation": "cosθ₂=(0²+1²−1²−1²)/(2×1×1)=−1/2，所以非负肘角为 120°；肩角为 30°。代回正运动学得到 (0,1) m。",
+        "transfer": "把目标改为 (0,3) m，说明为什么应返回不可达，而不是把 cosθ₂ 截断后继续报告成功。"
+      },
+      "sources": [
+        {
+          "title": "Modern Robotics · Inverse Kinematics of Open Chains",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/inverse-kinematics-of-open-chains/",
+          "locator": "第 6 章作者视频说明与公开转录：平面 2R、atan2、余弦定理、内外工作空间边界与双解。等长原点的退化处理为本例明确补充。",
+          "accessed": "2026-11-08"
+        },
+        {
+          "title": "Modern Robotics 5.3 · Singularities",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/5-3-singularities/",
+          "locator": "平面两连杆共线构形与瞬时运动方向丢失；用来区分奇异和位置不可达。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/kinematics/kinematics.py",
+          "label": "解析逆运动学 Python 复算",
+          "command": "python3 examples/robotics-foundations/kinematics/kinematics.py ik --l1 1 --l2 1 --x 0 --y 1"
+        }
+      ]
+    },
+    {
+      "id": "rf-rotation3d",
+      "title": "三维旋转：轴的顺序与SO(3)检查",
+      "question": "绕x、y、z依次旋转时，为什么合成矩阵写成Rz Ry Rx？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "绕x、y、z依次旋转时，为什么合成矩阵写成Rz Ry Rx？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "先固定右手坐标系和列向量约定。对向量做主动旋转，依次绕固定世界x、y、z轴，最右边矩阵先作用，因此R=Rz Ry Rx。内禀旋转与外禀旋转的约定不能只按角度名字混用。",
+        "每个基本矩阵只在垂直于旋转轴的平面改变两维。逐步计算Rx p、Ry(Rx p)、Rz(Ry Rx p)，再与一次R p相对照。图用固定等距投影，屏幕线段长度不等于三维长度。",
+        "合法SO(3)矩阵满足RᵀR=I和det R=1，逆为Rᵀ。把结果逆变换回原点、检查长度保持、检查行列式，是三个不同的可复算证据。",
+        "欧拉角在某些姿态存在表示奇异，矩阵的旋转本身仍然有定义。本讲不处理姿态测量、标定噪声或真实关节限制。"
+      ],
+      "modelId": "rf-rotation3d",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "交换roll与yaw对应的矩阵顺序，比较结果；对每种顺序都检查RᵀR、detR和逆变换残差。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/kinematics/expanded.py rotation；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：向量[0,0,1]绕固定世界y轴按右手规则旋转90°。新向量的x分量是多少？",
+        "expected": 1,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "Ry(90°)[0,0,1]=[1,0,0]，x分量为1。",
+        "transfer": "交换roll与yaw对应的矩阵顺序，比较结果；对每种顺序都检查RᵀR、detR和逆变换残差。"
+      },
+      "sources": [
+        {
+          "title": "Modern Robotics 配套基础专题",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/3-2-1-rotation-matrices-part-1-of-2/",
+          "locator": "Modern Robotics 3.2.1 Rotation Matrices；固定轴主动旋转与矩阵性质，角度算例为原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/kinematics/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/kinematics/expanded.py rotation"
+        }
+      ]
+    },
+    {
+      "id": "rf-se3-chain",
+      "title": "三维坐标链：相机、机体与世界的SE(3)",
+      "question": "相机相对机体的偏移，为什么要随机体旋转后才能放进世界坐标？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "相机相对机体的偏移，为什么要随机体旋转后才能放进世界坐标？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "写T_WB表示把B坐标映射到W坐标，T_BC把C映射到B。相邻下标对齐时T_WC=T_WB T_BC；顺序由坐标系定义决定，不靠记忆“先旋转后平移”的口号。",
+        "相机与机体轴平行，固定机体偏移[0.2,0,0.5]m。相机点先加这个偏移变为机体点，再乘机体R，最后加世界平移t。机体偏移必须一起被R旋转。",
+        "齐次矩阵T=[[R,t],[0,1]]同时容纳两种操作。逆变换先减世界平移再乘Rᵀ，再撤销相机偏移；错误顺序通常产生不同世界点。",
+        "本例坐标静态且人工给定。实际机器人还要核对变换时间、标定误差、坐标命名和坐标约定，不能把算术正确当成TF标定通过。"
+      ],
+      "modelId": "rf-se3-chain",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "把yaw改为90°，先预测相机偏移的世界方向，再计算世界点和逆变换；比较错误地把偏移直接加到世界的结果。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/kinematics/expanded.py transform；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：机体无旋转，世界平移[0.5,1,1]m，相机机体偏移[0.2,0,0.5]m，相机点[1,0,0]m。世界点x是多少m？",
+        "expected": 1.7,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "无旋转时x=1+0.2+0.5=1.7m。",
+        "transfer": "把yaw改为90°，先预测相机偏移的世界方向，再计算世界点和逆变换；比较错误地把偏移直接加到世界的结果。"
+      },
+      "sources": [
+        {
+          "title": "Modern Robotics 配套基础专题",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/3-3-1-homogeneous-transformation-matrices/",
+          "locator": "Modern Robotics 3.3.1 Homogeneous Transformation Matrices：乘法、逆与坐标系变换。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/kinematics/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/kinematics/expanded.py transform"
+        }
+      ]
+    },
+    {
+      "id": "rf-arm-dynamics",
+      "title": "两杆动力学：惯性、速度耦合与重力矩",
+      "question": "机械臂保持同一姿态不动，为什么仍可能需要关节扭矩？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "机械臂保持同一姿态不动，为什么仍可能需要关节扭矩？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "两根均匀细杆均为1m、1kg，质心在中点，质心惯量I=mL²/12。q1从世界水平轴量起，q2为相对角，重力朝负y。角度参考决定重力项里的cos，不能换成另一教材约定而不改公式。",
+        "方程τ=M(q)q̈+C(q,q̇)+G(q)把惯性、速度相关项和重力分开。对称正定的质量矩阵包含非对角项，表示两个关节加速度相互耦合。",
+        "本例显式计算均匀两杆的M、C与G，再给定q̈1、q̈2=0求逆动力学扭矩。速度归零会让C归零，角加速度归零会让Mq̈归零，但水平伸出时G仍不为0。",
+        "最后用相同扭矩解M q̈=τ−C−G，检查是否还原原加速度，并检查动能非负。模型未计摩擦、传动、碰撞或实际电机限幅。"
+      ],
+      "modelId": "rf-arm-dynamics",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "将两个速度都设为0，只改姿态，观察G；再加入角加速度，解释哪个扭矩项改变，并用正动力学还原检查。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/kinematics/expanded.py dynamics；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：两杆都水平向右，杆2质量1kg、长1m且质心距关节2为0.5m，完全静止。关节2抵消重力所需扭矩是多少N·m？",
+        "expected": 4.905,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "τ₂=1×9.81×0.5×cos0=4.905N·m。",
+        "transfer": "将两个速度都设为0，只改姿态，观察G；再加入角加速度，解释哪个扭矩项改变，并用正动力学还原检查。"
+      },
+      "sources": [
+        {
+          "title": "Modern Robotics 配套基础专题",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/8-1-3-understanding-the-mass-matrix/",
+          "locator": "Modern Robotics 8.1.3 Understanding the Mass Matrix及第8章动力学；均匀两杆公式与数值计算为原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/kinematics/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/kinematics/expanded.py dynamics"
+        }
+      ]
+    },
+    {
+      "id": "rf-joint-trajectory",
+      "title": "轨迹规划：让位置、速度和加速度来自同一条曲线",
+      "question": "相同起终点，把运动时间减半，速度和加速度需求分别怎样变化？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "相同起终点，把运动时间减半，速度和加速度需求分别怎样变化？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "路径告诉关节从哪里到哪里，时间标度s(t)再决定每一时刻走到多少。关节路径q=q0+(q1−q0)s；同一s的导数给出一致的速度和加速度。",
+        "三次s=3u²−2u³、u=t/T，保证起终点速度为0。五次s=10u³−15u⁴+6u⁵额外保证端点加速度0，因此不同约束需要不同时间标度。",
+        "速度随1/T缩放，加速度随1/T²缩放。离散画面可能漏掉峰值，因此另外给出解析峰值：三次速度1.5Δq/T、加速度6Δq/T²；五次速度1.875Δq/T、加速度(10/√3)Δq/T²。",
+        "曲线平滑不等于机器人可执行，还要检查关节限位、速度、加速度、扭矩和障碍物。本讲只规划一关节，不产生真实运动命令。"
+      ],
+      "modelId": "rf-joint-trajectory",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "固定目标角，将T减半，比较解析峰值速度和加速度；检查三次与五次的端点加速度差异。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/kinematics/expanded.py trajectory；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：三次时间标度，角度从0到60°，总时间T=2s。解析峰值速度是多少°/s？",
+        "expected": 45,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "峰值速度=1.5×60/2=45°/s。",
+        "transfer": "固定目标角，将T减半，比较解析峰值速度和加速度；检查三次与五次的端点加速度差异。"
+      },
+      "sources": [
+        {
+          "title": "Modern Robotics 配套基础专题",
+          "url": "https://modernrobotics.northwestern.edu/nu-gm-book-resource/9-1-and-9-2-point-to-point-trajectories-part-2-of-2/",
+          "locator": "Modern Robotics 9.1–9.2 Point-to-Point Trajectories Part 2：三次、五次和其他时间标度。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/kinematics/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/kinematics/expanded.py trajectory"
+        }
+      ]
+    }
+  ]
+}

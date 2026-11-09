@@ -1,0 +1,839 @@
+{
+  "checked": "2026-11-09",
+  "course": {
+    "id": "underactuated",
+    "label": "Underactuated Robotics",
+    "title": "欠驱动机器人：动力学、稳定性与优化控制",
+    "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+    "position": "机器人动力学与反馈控制之后的进阶选读",
+    "description": "从驱动秩与耦合动力学开始，经摆、线性化、LQR、Lyapunov和能量法走到轨迹优化与MPC。",
+    "prerequisites": [
+      "线性代数、微分方程、机器人动力学",
+      "反馈控制、求导与最小二乘基础"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "欠驱动与耦合：没有电机为何仍会动？",
+        "lessons": [
+          "underactuated-actuation"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.1 Definitions；Ch.3 Acrobot / Manipulator Equations。"
+      },
+      {
+        "unit": "2",
+        "title": "摆与相图：状态不是只有角度",
+        "lessons": [
+          "underactuated-pendulum"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.2 The Simple Pendulum；Phase Portraits。"
+      },
+      {
+        "unit": "3",
+        "title": "局部线性化：向上平衡为何会倒？",
+        "lessons": [
+          "underactuated-linearization"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.3 Balancing；Linearizing the Manipulator Equations。"
+      },
+      {
+        "unit": "4",
+        "title": "LQR：如何从代价反推反馈增益？",
+        "lessons": [
+          "underactuated-lqr"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.8 Linear Quadratic Regulators；Finite-horizon / Discrete-time Riccati。"
+      },
+      {
+        "unit": "5",
+        "title": "Lyapunov：曲线下降为什么还不是稳定性证明？",
+        "lessons": [
+          "underactuated-lyapunov"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.9 Lyapunov Analysis；Regions of Attraction。"
+      },
+      {
+        "unit": "6",
+        "title": "能量整形：怎样把摆荡到高处？",
+        "lessons": [
+          "underactuated-energy"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.2 Torque-limited Pendulum；Energy-shaping Control。"
+      },
+      {
+        "unit": "7",
+        "title": "轨迹优化：低代价轨迹为什么可能是假解？",
+        "lessons": [
+          "underactuated-collocation"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Trajectory Optimization；Direct Transcription / Collocation。"
+      },
+      {
+        "unit": "8",
+        "title": "MPC：预测完为什么只执行第一步？",
+        "lessons": [
+          "underactuated-mpc"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Model Predictive Control；Receding-horizon Planning。"
+      }
+    ],
+    "pending": "首页工作讲义标注2024，本站按2026-11-09可见目录选编，不改称2026年度课程。完整Acrobot/Cart-Pole、步行、SOS与Drake求解器另见原课。",
+    "sources": [
+      "underactuated-official"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "underactuated-actuation",
+      "course": "underactuated",
+      "unit": "1",
+      "title": "第1讲 欠驱动与耦合：没有电机为何仍会动？",
+      "summary": "用输入矩阵秩识别欠驱动，求耦合质量矩阵下的加速度。",
+      "question": "两关节只有一个输入，未驱动关节是否一定静止？",
+      "outcome": "用输入矩阵秩识别欠驱动，求耦合质量矩阵下的加速度。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "欠驱动描述可独立施加的广义力不足以覆盖全部配置自由度。判断依赖输入矩阵的秩，不是看机器人是否看起来会动。",
+        "质量矩阵耦合使一个力矩可以同时改变多个关节加速度。本例忽略重力和速度项，用2×2矩阵直接回代动力学。",
+        "欠驱动与不可控不同。某些欠驱动系统能靠动力学耦合完成复杂运动，但需要针对动力学与工作点分析。"
+      ],
+      "formula": "M qddot = Bu；rank(B)<dim(q)",
+      "worked": "M=[[2,1],[1,2]]，Bu=[0,1]，qddot=[−1/3,2/3]；第一个关节虽然无直接输入也有加速度。",
+      "misconception": "电机数、独立输入数和局部可控性不能直接画等号。",
+      "sections": [
+        {
+          "title": "写出两自由度单输入系统",
+          "explanation": "教学质量矩阵M=[[2,1],[1,2]]，B=[0,1]；暂忽略重力和速度项。"
+        },
+        {
+          "title": "用输入矩阵判断欠驱动",
+          "explanation": "rank(B)=1<2，因此不能独立指定任意两关节广义力。"
+        },
+        {
+          "title": "耦合质量矩阵使未驱动关节也加速",
+          "explanation": "M逆为1/3[[2,−1],[−1,2]]，没有电机不等于不能运动。"
+        },
+        {
+          "title": "回代动力学核对",
+          "explanation": "欠驱动不自动等于不可控；可控性还取决于动力学和工作点。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"torque\":1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 写出两自由度单输入系统\nObject.assign(s, ((s,p)=>({mass:[[2,1],[1,2]],input:[0,p.torque],configurationDof:2,actuatorRank:1}))(s, p));\n// 用输入矩阵判断欠驱动\nObject.assign(s, ((s,p)=>({underactuated:s.actuatorRank<s.configurationDof}))(s, p));\n// 耦合质量矩阵使未驱动关节也加速\nObject.assign(s, ((s,p)=>({acceleration:[-p.torque/3,2*p.torque/3]}))(s, p));\n// 回代动力学核对\nObject.assign(s, ((s,p)=>({recoveredForce:[2*s.acceleration[0]+s.acceleration[1],s.acceleration[0]+2*s.acceleration[1]]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-actuation.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立回代两行方程得到[0,1]；将力矩反号检查方向，列出被省略的动力学项。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：两关节只有一个输入，未驱动关节是否一定静止？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立回代两行方程得到[0,1]；将力矩反号检查方向，列出被省略的动力学项。"
+      ],
+      "exercise": {
+        "prompt": "默认未驱动关节加速度是多少？",
+        "expected": -0.3333333333333333,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "M逆为(1/3)[[2,−1],[−1,2]]，乘[0,1]得[−1/3,2/3]。",
+        "transfer": "独立回代两行方程得到[0,1]；将力矩反号检查方向，列出被省略的动力学项。"
+      },
+      "sources": [
+        "underactuated-actuation-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-pendulum",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "underactuated-actuation",
+      "demos": [
+        {
+          "modelId": "underactuated-actuation",
+          "title": "欠驱动与耦合：没有电机为何仍会动？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "underactuated-pendulum",
+      "course": "underactuated",
+      "unit": "2",
+      "title": "第2讲 摆与相图：状态不是只有角度",
+      "summary": "列出非线性状态导数，计算机械能并识别角度零点。",
+      "question": "同一摆角配上不同速度，未来运动为什么不同？",
+      "outcome": "列出非线性状态导数，计算机械能并识别角度零点。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "二阶机械系统的状态同时包括位置和速度。相图中的箭头表示状态变化率，不是摆球在空间里的移动方向。",
+        "本例θ=0向下，动力学含重力sinθ、阻尼和输入力矩。改变角度零点会改变公式符号，必须先固定约定。",
+        "机械能以向下势能为零；无输入、无阻尼时守恒。当前演示有阻尼项，因此不能同时声称能量恒定。"
+      ],
+      "formula": "θdot=ω；ωdot=u−0.1ω−9.81sinθ；E=ω²/2+9.81(1−cosθ)",
+      "worked": "θ=60°、ω=u=0：加速度约−8.49571，机械能4.905；向上静止能量19.62。",
+      "misconception": "只给角度不能确定下一步；相空间速度和笛卡尔速度单位也不同。",
+      "sections": [
+        {
+          "title": "先确定角度零点",
+          "explanation": "m=l=1，g=9.81，θ=0向下，阻尼0.1；状态为[θ,ω]。"
+        },
+        {
+          "title": "由力矩平衡求加速度",
+          "explanation": "θddot=(u−bω−mgl sinθ)/(ml²)。非线性来自sinθ。"
+        },
+        {
+          "title": "计算相空间中的速度向量",
+          "explanation": "相图箭头是(θdot,ωdot)，不同于摆球的空间速度。"
+        },
+        {
+          "title": "算机械能并保留势能零点",
+          "explanation": "向下势能为0，向上静止的能量是2mgl。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"angle\":60,\"velocity\":0,\"torque\":0};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先确定角度零点\nObject.assign(s, ((s,p)=>({theta:p.angle*Math.PI/180,omega:p.velocity}))(s, p));\n// 由力矩平衡求加速度\nObject.assign(s, ((s,p)=>({acceleration:p.torque-.1*s.omega-9.81*Math.sin(s.theta)}))(s, p));\n// 计算相空间中的速度向量\nObject.assign(s, ((s,p)=>({stateDerivative:[s.omega,s.acceleration]}))(s, p));\n// 算机械能并保留势能零点\nObject.assign(s, ((s,p)=>({energy:.5*s.omega*s.omega+9.81*(1-Math.cos(s.theta))}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-pendulum.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "保持θ=60°改ω=±1，比较状态导数与能量；另令阻尼为0独立积分检查能量误差。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：同一摆角配上不同速度，未来运动为什么不同？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "保持θ=60°改ω=±1，比较状态导数与能量；另令阻尼为0独立积分检查能量误差。"
+      ],
+      "exercise": {
+        "prompt": "向上静止时本例机械能是多少？",
+        "expected": 19.62,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "9.81×(1−cosπ)=19.62。",
+        "transfer": "保持θ=60°改ω=±1，比较状态导数与能量；另令阻尼为0独立积分检查能量误差。"
+      },
+      "sources": [
+        "underactuated-pendulum-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-actuation",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "underactuated-linearization",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "underactuated-pendulum",
+      "demos": [
+        {
+          "modelId": "underactuated-pendulum",
+          "title": "摆与相图：状态不是只有角度 · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "underactuated-linearization",
+      "course": "underactuated",
+      "unit": "3",
+      "title": "第3讲 局部线性化：向上平衡为何会倒？",
+      "summary": "围绕向上点展开，比较非线性重力与局部线性模型。",
+      "question": "摆竖直向上偏一点，重力会把它推回还是推远？",
+      "outcome": "围绕向上点展开，比较非线性重力与局部线性模型。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "线性化是工作点附近的近似。围绕向上θ=π，令δ=θ−π，重力项变为+g sinδ，小偏差会被放大。",
+        "加入u=−kδ后，局部位置系数变成g−k。k大于g提供恢复方向，但如果没有速度阻尼，不能仅凭此认定渐近稳定。",
+        "偏差变大时sinδ≈δ不再准确。局部设计需要检查可用区域、输入饱和和真实闭环行为。"
+      ],
+      "formula": "δddot≈(g−k)δ",
+      "worked": "δ=0.1、k=12：线性加速度−0.219；非线性重力与线性重力差约−0.001634。",
+      "misconception": "线性化稳定性结论有适用条件；恢复力不等于渐近收敛。",
+      "sections": [
+        {
+          "title": "围绕向上平衡点定义小量",
+          "explanation": "θ=π+δ，真实无阻尼摆的δddot=g sinδ+u。"
+        },
+        {
+          "title": "比较非线性与线性重力项",
+          "explanation": "sinδ≈δ仅在局部成立，向上平衡点的线性重力是正反馈。"
+        },
+        {
+          "title": "加入位置负反馈",
+          "explanation": "u=−kδ时线性位置系数为g−k，尚未加入速度阻尼。"
+        },
+        {
+          "title": "区分恢复力与渐近稳定",
+          "explanation": "k>g产生恢复方向，但无阻尼不能据此宣称渐近稳定。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"deviation\":0.1,\"gain\":12};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 围绕向上平衡点定义小量\nObject.assign(s, ((s,p)=>({delta:p.deviation,gravity:9.81}))(s, p));\n// 比较非线性与线性重力项\nObject.assign(s, ((s,p)=>({nonlinear:s.gravity*Math.sin(s.delta),linear:s.gravity*s.delta}))(s, p));\n// 加入位置负反馈\nObject.assign(s, ((s,p)=>({control:-p.gain*s.delta,positionCoefficient:s.gravity-p.gain}))(s, p));\n// 区分恢复力与渐近稳定\nObject.assign(s, ((s,p)=>({linearAcceleration:s.positionCoefficient*s.delta,restoring:p.gain>s.gravity,approximationError:s.nonlinear-s.linear}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-linearization.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "令k=8与12比较符号；增加δ到0.4，记录线性近似误差并说明应如何加入速度反馈。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：摆竖直向上偏一点，重力会把它推回还是推远？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "令k=8与12比较符号；增加δ到0.4，记录线性近似误差并说明应如何加入速度反馈。"
+      ],
+      "exercise": {
+        "prompt": "默认g−k是多少？",
+        "expected": -2.19,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "9.81−12=−2.19。",
+        "transfer": "令k=8与12比较符号；增加δ到0.4，记录线性近似误差并说明应如何加入速度反馈。"
+      },
+      "sources": [
+        "underactuated-linearization-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-pendulum",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "underactuated-lqr",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "underactuated-linearization",
+      "demos": [
+        {
+          "modelId": "underactuated-linearization",
+          "title": "局部线性化：向上平衡为何会倒？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "underactuated-lqr",
+      "course": "underactuated",
+      "unit": "4",
+      "title": "第4讲 LQR：如何从代价反推反馈增益？",
+      "summary": "反向递推有限时域标量Riccati方程，执行最初一步反馈。",
+      "question": "状态误差和控制能量都要小，反馈系数如何计算？",
+      "outcome": "反向递推有限时域标量Riccati方程，执行最初一步反馈。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "LQR针对线性动力学与二次代价，权衡状态偏离和控制输入。有限时域还要指定终端代价，并从终点反向求解。",
+        "本例x′=ax+u、Q=1、R可调、终端P=1，递推三步。每个时刻的增益不同，数组反向存储时要取正确的K0。",
+        "无约束LQR不处理输入饱和；对非线性系统应用通常依赖局部线性化和有效区域。"
+      ],
+      "formula": "K=aP_next/(R+P_next)；P=Q+a²P_next−a²P_next²/(R+P_next)",
+      "worked": "从终端向前递推P与K，再对x0=1用u0=−K0；改变R可观察控制力度。",
+      "misconception": "有限时域的最后一步增益不是第一步增益，LQR也不自动满足硬约束。",
+      "sections": [
+        {
+          "title": "固定有限时域标量系统",
+          "explanation": "x′=ax+u，状态代价Q=1，终端P_N=1，三步时域。"
+        },
+        {
+          "title": "反向Riccati递推",
+          "explanation": "K=aP/(R+P)，P=Q+a²P−a²P²/(R+P)。"
+        },
+        {
+          "title": "提取最初一步反馈",
+          "explanation": "有限时域K随时间变化，不能取递推数组第一项当K0。"
+        },
+        {
+          "title": "从x=1执行第一步",
+          "explanation": "u=−Kx，闭环下一状态a−K；未加入输入饱和。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"a\":1.1,\"r\":1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 固定有限时域标量系统\nObject.assign(s, ((s,p)=>({q:1,terminal:1,horizon:3}))(s, p));\n// 反向Riccati递推\nObject.assign(s, ((s,p)=>{let P=s.terminal;const backwards=[];for(let k=2;k>=0;k--){const K=p.a*P/(p.r+P),next=1+p.a*p.a*P-p.a*p.a*P*P/(p.r+P);backwards.push({k,Pnext:P,K,P:next});P=next;}return {backwards,initialP:P};})(s, p));\n// 提取最初一步反馈\nObject.assign(s, ((s,p)=>({gain:s.backwards[s.backwards.length-1].K}))(s, p));\n// 从x=1执行第一步\nObject.assign(s, ((s,p)=>({control:-s.gain,nextState:p.a-s.gain}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-lqr.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立用枚举控制核对一小步代价最小值；将R提高，记录K0与控制输入如何变化。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：状态误差和控制能量都要小，反馈系数如何计算？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立用枚举控制核对一小步代价最小值；将R提高，记录K0与控制输入如何变化。"
+      ],
+      "exercise": {
+        "prompt": "a=1、R=1、只看终端前一步P_next=1，K是多少？",
+        "expected": 0.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "K=1×1/(1+1)=0.5。",
+        "transfer": "独立用枚举控制核对一小步代价最小值；将R提高，记录K0与控制输入如何变化。"
+      },
+      "sources": [
+        "underactuated-lqr-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-linearization",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "underactuated-lyapunov",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "underactuated-lqr",
+      "demos": [
+        {
+          "modelId": "underactuated-lqr",
+          "title": "LQR：如何从代价反推反馈增益？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 210
+    },
+    {
+      "id": "underactuated-lyapunov",
+      "course": "underactuated",
+      "unit": "5",
+      "title": "第5讲 Lyapunov：曲线下降为什么还不是稳定性证明？",
+      "summary": "对明确系统求Vdot，区分点值检查与区域符号论证。",
+      "question": "一个状态下V在下降，能否证明整个区域都收敛？",
+      "outcome": "对明确系统求Vdot，区分点值检查与区域符号论证。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "Lyapunov方法用一个正的状态函数及其沿动力学的变化讨论稳定性。看一条仿真曲线下降，只提供有限轨迹上的观察。",
+        "本例xdot=−x+x³，选V=x²/2，则Vdot=−x²+x⁴。在0<|x|<1严格为负，|x|>1则可能增加。",
+        "这个简单多项式可以直接作区域代数分析。一般系统需要证明条件、闭集或不变性等论证，不能用几个滑块点代替。"
+      ],
+      "formula": "V=x²/2；Vdot=x xdot=x²(x²−1)",
+      "worked": "x=0.5时V=0.125、Vdot=−0.1875；x=1导数0，x=2导数12。",
+      "misconception": "V正定本身不足以证明收敛，Vdot在单点为负也不足以证明整个区域。",
+      "sections": [
+        {
+          "title": "给出非线性一维系统",
+          "explanation": "xdot=−x+x³，候选V=x²/2，只在明确区域检查。"
+        },
+        {
+          "title": "沿动力学求Vdot",
+          "explanation": "Vdot=x×xdot=−x²+x⁴，V正不够，还要看导数。"
+        },
+        {
+          "title": "比较单点检查与区域符号",
+          "explanation": "0<|x|<1时Vdot<0；边界|x|=1导数0。"
+        },
+        {
+          "title": "陈述可支持的结论",
+          "explanation": "本例可用代数在开区间(−1,1)论证收敛；有限点采样不是一般Lyapunov证明。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"x\":1,\"limit\":1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 给出非线性一维系统\nObject.assign(s, ((s,p)=>({state:p.x,derivative:-p.x+p.x**3}))(s, p));\n// 沿动力学求Vdot\nObject.assign(s, ((s,p)=>({value:p.x*p.x/2,valueDerivative:p.x*s.derivative}))(s, p));\n// 比较单点检查与区域符号\nObject.assign(s, ((s,p)=>({pointDecreasing:s.valueDerivative<0,strictDomain:p.limit<1}))(s, p));\n// 陈述可支持的结论\nObject.assign(s, ((s,p)=>({insideCertifiedRegion:Math.abs(p.x)<1,atTargetEquilibrium:p.x===0,atEquilibrium:Math.abs(s.derivative)<1e-12}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-lyapunov.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立证明开区间(−1,1)内的符号，解释±1为何不能作为严格下降点；再比较区间外行为。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：一个状态下V在下降，能否证明整个区域都收敛？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立证明开区间(−1,1)内的符号，解释±1为何不能作为严格下降点；再比较区间外行为。"
+      ],
+      "exercise": {
+        "prompt": "x=0.5时Vdot是多少？",
+        "expected": -0.1875,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.5²×(0.5²−1)=0.25×(−0.75)=−0.1875。",
+        "transfer": "独立证明开区间(−1,1)内的符号，解释±1为何不能作为严格下降点；再比较区间外行为。"
+      },
+      "sources": [
+        "underactuated-lyapunov-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-lqr",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "underactuated-energy",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "underactuated-lyapunov",
+      "demos": [
+        {
+          "modelId": "underactuated-lyapunov",
+          "title": "Lyapunov：曲线下降为什么还不是稳定性证明？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 210
+    },
+    {
+      "id": "underactuated-energy",
+      "course": "underactuated",
+      "unit": "6",
+      "title": "第6讲 能量整形：怎样把摆荡到高处？",
+      "summary": "计算能量差、能量注入方向与饱和，识别静止盲点。",
+      "question": "力矩受限时，为什么不总沿最短角度直接推？",
+      "outcome": "计算能量差、能量注入方向与饱和，识别静止盲点。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "摆起控制可以先调机械能，再在向上附近切换稳定器。能量目标不等于姿态目标：相同能量可能对应不同相位和速度。",
+        "本例无阻尼，u=k(E*−E)ω使能量变化率uω朝目标调整，再施加力矩限幅。饱和影响速度，不能假装执行了未限幅输入。",
+        "ω=0时这个规则输入0，精确向下静止会卡住；真实方案还需启动扰动和切换逻辑。"
+      ],
+      "formula": "E*=2g；u=clip(k(E*−E)ω)；Edot=uω",
+      "worked": "θ=90°、ω=1时E=10.31，E*−E=9.31；k=0.5得原始4.655，限幅2后Edot=2。",
+      "misconception": "到达目标能量不代表已在向上静止，更不代表稳定保持。",
+      "sections": [
+        {
+          "title": "计算当前能量和向上目标能量",
+          "explanation": "无阻尼，m=l=1，E*=2g；能量只有标量，不能决定完整相位。"
+        },
+        {
+          "title": "用能量差决定注入方向",
+          "explanation": "选择u=k(E*−E)ω，k=0.5；下方比较饱和前后。"
+        },
+        {
+          "title": "施加执行器饱和",
+          "explanation": "只裁剪控制输入，真实系统能量变化仍由uω决定。"
+        },
+        {
+          "title": "检查能量变化率和静止盲点",
+          "explanation": "ω=0时此规则力矩为0，精确向下静止不会自己启动；接近向上通常需切换稳定器。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={clamp:(x,a,b)=>Math.max(a,Math.min(b,x))};\nconst p={\"angle\":90,\"velocity\":1,\"limit\":2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 计算当前能量和向上目标能量\nObject.assign(s, ((s,p)=>({theta:p.angle*Math.PI/180,energy:.5*p.velocity*p.velocity+9.81*(1-Math.cos(p.angle*Math.PI/180)),desired:19.62}))(s, p));\n// 用能量差决定注入方向\nObject.assign(s, ((s,p)=>({rawTorque:.5*(s.desired-s.energy)*p.velocity}))(s, p));\n// 施加执行器饱和\nObject.assign(s, ((s,p)=>({torque:H.clamp(s.rawTorque,-p.limit,p.limit)}))(s, p));\n// 检查能量变化率和静止盲点\nObject.assign(s, ((s,p)=>({energyRate:s.torque*p.velocity,energyError:s.desired-s.energy,stalled:p.velocity===0}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-energy.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "将ω设0记录静止盲点；把能量高于目标时的速度取正负，检查能量变化方向。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：力矩受限时，为什么不总沿最短角度直接推？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "将ω设0记录静止盲点；把能量高于目标时的速度取正负，检查能量变化方向。"
+      ],
+      "exercise": {
+        "prompt": "默认限幅后力矩是多少？",
+        "expected": 2,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "原始4.655超过上限2，实际模型使用2。",
+        "transfer": "将ω设0记录静止盲点；把能量高于目标时的速度取正负，检查能量变化方向。"
+      },
+      "sources": [
+        "underactuated-energy-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-lyapunov",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "underactuated-collocation",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "underactuated-energy",
+      "demos": [
+        {
+          "modelId": "underactuated-energy",
+          "title": "能量整形：怎样把摆荡到高处？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "underactuated-collocation",
+      "course": "underactuated",
+      "unit": "7",
+      "title": "第7讲 轨迹优化：低代价轨迹为什么可能是假解？",
+      "summary": "计算离散动力学缺陷，同时检查边界、代价和可行性。",
+      "question": "控制输入为零、代价最小，但起终点不同，这条轨迹能成立吗？",
+      "outcome": "计算离散动力学缺陷，同时检查边界、代价和可行性。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "直接法把轨迹离散为节点状态和控制，再把动力学写成约束。目标值很低也可能只是候选违反动力学。",
+        "本例xdot=u，三个节点[0,x1,1]、步长0.5，用梯形公式求每段缺陷。缺陷非零表示离散轨迹与控制不一致。",
+        "这里没有调用优化器，只评价给定候选。即使离散约束通过，也应独立积分和细化网格检查连续误差。"
+      ],
+      "formula": "d_k=x_{k+1}−x_k−dt(u_k+u_{k+1})/2",
+      "worked": "x1=0.5、u=1时两段缺陷为0，控制代价1；u=0时缺陷均0.5，不能接受。",
+      "misconception": "优化器给出一个数字不等于找到可执行轨迹；必须查状态与约束残差。",
+      "sections": [
+        {
+          "title": "把连续问题变成节点与约束",
+          "explanation": "xdot=u，节点时刻[0,0.5,1]，状态[0,x1,1]。"
+        },
+        {
+          "title": "计算梯形离散的动力学缺陷",
+          "explanation": "每段d=x_next−x−dt(u+u_next)/2；非零意味着轨迹不满足离散动力学。"
+        },
+        {
+          "title": "积分控制代价",
+          "explanation": "恒定输入时∫u²dt=u²；本例只是给定候选的评价，没有优化求解。"
+        },
+        {
+          "title": "同时核对边界与缺陷",
+          "explanation": "低代价但非零缺陷不可接受；网格可行也需要独立积分检查连续误差。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"middle\":0.5,\"control\":1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 把连续问题变成节点与约束\nObject.assign(s, ((s,p)=>({states:[0,p.middle,1],dt:.5,controls:[p.control,p.control,p.control]}))(s, p));\n// 计算梯形离散的动力学缺陷\nObject.assign(s, ((s,p)=>({defects:[p.middle-.5*p.control,1-p.middle-.5*p.control]}))(s, p));\n// 积分控制代价\nObject.assign(s, ((s,p)=>({cost:p.control*p.control}))(s, p));\n// 同时核对边界与缺陷\nObject.assign(s, ((s,p)=>({maxDefect:Math.max(...s.defects.map(Math.abs)),discreteFeasible:s.defects.every(x=>Math.abs(x)<1e-9)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-collocation.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "手算所有可行恒定输入与中间状态；另换成非线性动力学，说明网格误差如何检查。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：控制输入为零、代价最小，但起终点不同，这条轨迹能成立吗？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "手算所有可行恒定输入与中间状态；另换成非线性动力学，说明网格误差如何检查。"
+      ],
+      "exercise": {
+        "prompt": "x1=0.4、u=1时第一段缺陷是多少？",
+        "expected": -0.1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.4−0−0.5×1=−0.1。",
+        "transfer": "手算所有可行恒定输入与中间状态；另换成非线性动力学，说明网格误差如何检查。"
+      },
+      "sources": [
+        "underactuated-collocation-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-energy",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "underactuated-mpc",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "underactuated-collocation",
+      "demos": [
+        {
+          "modelId": "underactuated-collocation",
+          "title": "轨迹优化：低代价轨迹为什么可能是假解？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 210
+    },
+    {
+      "id": "underactuated-mpc",
+      "course": "underactuated",
+      "unit": "8",
+      "title": "第8讲 MPC：预测完为什么只执行第一步？",
+      "summary": "穷举有限候选输入，加入外扰后用新测量重新规划。",
+      "question": "模型预测和真实测量不一致，下一次控制应从哪个状态开始？",
+      "outcome": "穷举有限候选输入，加入外扰后用新测量重新规划。",
+      "prerequisites": [
+        "线性代数、微分方程、机器人动力学",
+        "反馈控制、求导与最小二乘基础"
+      ],
+      "explanation": [
+        "MPC每轮根据当前测量预测并优化，只执行当前控制，再用新观测滚动更新。未来计划会随着实际状态变化而调整。",
+        "本例候选输入−1、0、1，单步成本(x+u)²+0.1u²。这个最小切片用于区分预测与测量，没有连续优化器。",
+        "外扰使实际状态偏离预测，下一轮必须用测量重算。实际工程还需检查求解时限、约束和失效时的控制策略。"
+      ],
+      "formula": "u*=argmin[(x+u)²+0.1u²]；重新测量后再次优化",
+      "worked": "x=1时选u=−1，预测0；外扰0.25后测得0.25，下一轮以0.25重算。",
+      "misconception": "滚动优化不代表每个问题都有可行解，也不能把预测轨迹当执行证据。",
+      "sections": [
+        {
+          "title": "给出候选输入和预测模型",
+          "explanation": "x′=x+u，单步成本(x+u)²+0.1u²，候选u∈[−1,0,1]。"
+        },
+        {
+          "title": "只用模型选择当前动作",
+          "explanation": "穷举有限输入，是MPC思路的最小切片，不是连续求解器。"
+        },
+        {
+          "title": "执行第一动作并测量新状态",
+          "explanation": "真实新状态包含滑块外扰，不把预测值当测量。"
+        },
+        {
+          "title": "基于新测量重新规划",
+          "explanation": "每轮只执行当前控制，接着滚动；需另查约束可行性和求解时限。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"state\":1,\"disturbance\":0.25};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 给出候选输入和预测模型\nObject.assign(s, ((s,p)=>({actions:[-1,0,1]}))(s, p));\n// 只用模型选择当前动作\nObject.assign(s, ((s,p)=>({costs:s.actions.map(u=>(p.state+u)**2+.1*u*u)}))(s, p));\n// 执行第一动作并测量新状态\nObject.assign(s, ((s,p)=>{const best=s.costs.indexOf(Math.min(...s.costs)),u=s.actions[best];return {action:u,predicted:p.state+u,measured:p.state+u+p.disturbance};})(s, p));\n// 基于新测量重新规划\nObject.assign(s, ((s,p)=>({nextCosts:s.actions.map(u=>(s.measured+u)**2+.1*u*u),predictionError:s.measured-s.predicted}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node underactuated-mpc.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "改外扰正负，独立算下一轮三个候选成本；记录输入限制导致无法立即消除误差的例子。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：模型预测和真实测量不一致，下一次控制应从哪个状态开始？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "改外扰正负，独立算下一轮三个候选成本；记录输入限制导致无法立即消除误差的例子。"
+      ],
+      "exercise": {
+        "prompt": "默认首步的预测误差是多少？",
+        "expected": 0.25,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "测量0.25减预测0等于0.25。",
+        "transfer": "改外扰正负，独立算下一轮三个候选成本；记录输入限制导致无法立即消除误差的例子。"
+      },
+      "sources": [
+        "underactuated-mpc-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "underactuated-collocation",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "manipulation-control",
+          "label": "连接后续课程：第7讲 柔顺控制：刚度和阻尼分别做什么？"
+        }
+      ],
+      "modelId": "underactuated-mpc",
+      "demos": [
+        {
+          "modelId": "underactuated-mpc",
+          "title": "MPC：预测完为什么只执行第一步？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 210
+    }
+  ],
+  "sources": {
+    "underactuated-official": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · 官方目录",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Fully-actuated vs Underactuated；Simple Pendulum；LQR；Lyapunov；Trajectory Optimization；MPC",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-actuation-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Ch.1 Definitions；Ch.3 Acrobot / Manipulator Equations",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Ch.1 Definitions；Ch.3 Acrobot / Manipulator Equations",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-pendulum-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Ch.2 The Simple Pendulum；Phase Portraits",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Ch.2 The Simple Pendulum；Phase Portraits",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-linearization-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Ch.3 Balancing；Linearizing the Manipulator Equations",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Ch.3 Balancing；Linearizing the Manipulator Equations",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-lqr-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Ch.8 Linear Quadratic Regulators；Finite-horizon / Discrete-time Riccati",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Ch.8 Linear Quadratic Regulators；Finite-horizon / Discrete-time Riccati",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-lyapunov-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Ch.9 Lyapunov Analysis；Regions of Attraction",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Ch.9 Lyapunov Analysis；Regions of Attraction",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-energy-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Ch.2 Torque-limited Pendulum；Energy-shaping Control",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Ch.2 Torque-limited Pendulum；Energy-shaping Control",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-collocation-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Trajectory Optimization；Direct Transcription / Collocation",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Trajectory Optimization；Direct Transcription / Collocation",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "underactuated-mpc-reading": {
+      "kind": "官方公开材料",
+      "label": "Underactuated Robotics · Model Predictive Control；Receding-horizon Planning",
+      "url": "https://underactuated.mit.edu/",
+      "locator": "Model Predictive Control；Receding-horizon Planning",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 首页标注Spring 2024 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    }
+  }
+}

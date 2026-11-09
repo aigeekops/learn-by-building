@@ -1,0 +1,903 @@
+{
+  "checked": "2026-11-09",
+  "course": {
+    "id": "nav2",
+    "label": "Nav2",
+    "title": "自主导航工程：从接口契约到任务验收",
+    "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+    "position": "Bonn原理与ROS 2基础之后的导航分支",
+    "description": "将生命周期、TF、定位、costmap、规划、跟踪、行为树与任务评测串成一条工程排错流程。",
+    "prerequisites": [
+      "ROS 2节点、话题、Action、TF与仿真时钟",
+      "移动机器人定位和路径规划；可先做离线算例"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "系统启动：为什么节点存在却不接任务？",
+        "lessons": [
+          "nav2-lifecycle"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Navigation Concepts / ROS 2；Lifecycle Manager。"
+      },
+      {
+        "unit": "2",
+        "title": "TF与时钟：目标正确为何仍报变换失败？",
+        "lessons": [
+          "nav2-tf"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：First-Time Setup / Setting Up Transformations；State Estimation。"
+      },
+      {
+        "unit": "3",
+        "title": "地图与定位：格子索引如何变成目标坐标？",
+        "lessons": [
+          "nav2-localization"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：First-Time Setup / Mapping and Localization。"
+      },
+      {
+        "unit": "4",
+        "title": "代价地图：通道中心空闲为何仍过不去？",
+        "lessons": [
+          "nav2-costmap"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Costmap 2D；Footprint；Inflation Layer。"
+      },
+      {
+        "unit": "5",
+        "title": "全局规划：最短路与低代价路怎样权衡？",
+        "lessons": [
+          "nav2-planner"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Navigation Servers；Planner Server；Navigation Plugins。"
+      },
+      {
+        "unit": "6",
+        "title": "局部跟踪：前视距离怎样影响转向？",
+        "lessons": [
+          "nav2-controller"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Controller Server；Regulated Pure Pursuit概念。"
+      },
+      {
+        "unit": "7",
+        "title": "行为树与恢复：失败后还能试几次？",
+        "lessons": [
+          "nav2-behavior"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Nav2 Behavior Trees；RecoveryNode；Detailed Walkthrough。"
+      },
+      {
+        "unit": "8",
+        "title": "任务验收：一次到达能证明什么？",
+        "lessons": [
+          "nav2-validation"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Simple Commander API；反馈、取消与TaskResult。"
+      }
+    ],
+    "pending": "本课制作八讲工程配套与离线模型。ROS 2/Gazebo实际启动、插件兼容与真机运行尚未在本机验证；Jazzy文档快照不替代已安装包版本。",
+    "sources": [
+      "nav2-official"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "nav2-lifecycle",
+      "course": "nav2",
+      "unit": "1",
+      "title": "第1讲 系统启动：为什么节点存在却不接任务？",
+      "summary": "区分未配置、inactive、active与依赖就绪，编写启动检查清单。",
+      "question": "节点已经在列表里，为什么导航目标仍无法受理？",
+      "outcome": "区分未配置、inactive、active与依赖就绪，编写启动检查清单。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "ROS节点存在不等于导航服务就绪。生命周期节点将参数与资源建立、激活和运行分开，inactive是可检查的状态而非自动表示故障。",
+        "本例先配置，再检查传感依赖，条件满足才进入active。实际系统还需Lifecycle Manager回执、bond和Action Server可用性。",
+        "本地规则显示acceptGoal只证明这段逻辑的结果。环境复现时应保存各节点状态和目标受理日志，不能凭按钮变化认定系统已启动。"
+      ],
+      "formula": "ready = configured AND dependencies_ready AND active",
+      "worked": "参数有效且传感就绪时状态经过unconfigured→inactive→active；缺一项则不受理目标。",
+      "misconception": "进程活着、生命周期active和目标执行成功不能混作同一指标。",
+      "sections": [
+        {
+          "title": "启动时处于未配置状态",
+          "explanation": "生命周期状态机将资源建立和对外服务分开。"
+        },
+        {
+          "title": "配置资源并检查参数",
+          "explanation": "教学门控为显式规则；真实节点转移由服务回执决定。"
+        },
+        {
+          "title": "满足依赖后激活",
+          "explanation": "inactive不是故障，也不代表可以接收导航目标。"
+        },
+        {
+          "title": "为目标受理给出条件",
+          "explanation": "此处ready仅代表本地规则；没有连接Lifecycle Manager或Action Server。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"configured\":\"yes\",\"sensor\":\"yes\"};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 启动时处于未配置状态\nObject.assign(s, ((s,p)=>({states:['unconfigured'],active:false}))(s, p));\n// 配置资源并检查参数\nObject.assign(s, ((s,p)=>({states:s.states.concat(p.configured==='yes'?'inactive':'unconfigured'),configured:p.configured==='yes'}))(s, p));\n// 满足依赖后激活\nObject.assign(s, ((s,p)=>({active:s.configured&&p.sensor==='yes',states:s.states.concat(s.configured&&p.sensor==='yes'?'active':'blocked')}))(s, p));\n// 为目标受理给出条件\nObject.assign(s, ((s,p)=>({acceptGoal:s.active,readyCount:Number(s.configured)+Number(p.sensor==='yes')}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-lifecycle.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "切换全部四种配置/依赖组合；在Jazzy环境记录planner_server生命周期状态和Action Server是否出现。"
+        },
+        {
+          "title": "目标环境实验：启动依赖与生命周期",
+          "explanation": "在已配置的Jazzy仿真中，分别保存未激活与激活后的节点状态；把未出现的节点与inactive状态分开诊断。",
+          "code": "ros2 node list\nros2 lifecycle get /planner_server\nros2 lifecycle get /controller_server\nros2 action list -t\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "保存节点状态、Action类型和实际启动参数；如果节点有命名空间，先替换为实际全名。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：节点已经在列表里，为什么导航目标仍无法受理？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "切换全部四种配置/依赖组合；在Jazzy环境记录planner_server生命周期状态和Action Server是否出现。"
+      ],
+      "exercise": {
+        "prompt": "参数有效但传感器未就绪，ready条件满足的输入项有几个？",
+        "expected": 1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "configured=true、sensor_ready=false，两个输入只满足1个，acceptGoal仍false。",
+        "transfer": "切换全部四种配置/依赖组合；在Jazzy环境记录planner_server生命周期状态和Action Server是否出现。"
+      },
+      "sources": [
+        "nav2-lifecycle-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-tf",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "nav2-lifecycle",
+      "demos": [
+        {
+          "modelId": "nav2-lifecycle",
+          "title": "系统启动：为什么节点存在却不接任务？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 150
+    },
+    {
+      "id": "nav2-tf",
+      "course": "nav2",
+      "unit": "2",
+      "title": "第2讲 TF与时钟：目标正确为何仍报变换失败？",
+      "summary": "复合一致方向的变换，分别检查几何链和时间有效性。",
+      "question": "map、odom、base_link与laser的关系怎样检查？",
+      "outcome": "复合一致方向的变换，分别检查几何链和时间有效性。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "导航在全局地图、连续里程计、机体和传感器坐标之间转换。TF树连通只是第一步，查询时刻、数据时间戳和仿真时钟也必须一致。",
+        "一维平移切片中，map到laser偏移是三段平移之和。三维系统带旋转时不能简单逐轴相加，应按变换顺序复合。",
+        "本例以0.3秒作为教学新鲜度条件，并非Nav2统一默认。真实transform tolerance与缓存、插件和消息时间相关，应读取实际配置和报错。"
+      ],
+      "formula": "p_map = T_map_odom T_odom_base T_base_laser p_laser",
+      "worked": "三段x平移0.5、1、0.2，laser端点x=2，变到map后x=3.7。",
+      "misconception": "机器人看起来位于正确位置，不说明过去时间戳的TF查询也能成功。",
+      "sections": [
+        {
+          "title": "先检查坐标链",
+          "explanation": "一维平移切片：map→odom→base_link→laser，laser相对base偏移0.2m。"
+        },
+        {
+          "title": "复合相同时间的变换",
+          "explanation": "同一方向的纯平移相加；三维旋转时必须按矩阵顺序复合。"
+        },
+        {
+          "title": "把观测从laser变到map",
+          "explanation": "激光端点在laser坐标x=2，计算结果不等于已证明TF时序正确。"
+        },
+        {
+          "title": "用教学阈值检查时效",
+          "explanation": "0.3s是本例约定，不是Nav2全局默认值；真实查询要看时间戳和缓存。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"mapOdom\":0.5,\"odomBase\":1,\"age\":0.2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先检查坐标链\nObject.assign(s, ((s,p)=>({chain:['map','odom','base_link','laser'],laserOffset:.2}))(s, p));\n// 复合相同时间的变换\nObject.assign(s, ((s,p)=>({laserMap:p.mapOdom+p.odomBase+s.laserOffset}))(s, p));\n// 把观测从laser变到map\nObject.assign(s, ((s,p)=>({endpointMap:s.laserMap+2}))(s, p));\n// 用教学阈值检查时效\nObject.assign(s, ((s,p)=>({fresh:p.age<=.3,usable:p.age<=.3,ageSeconds:p.age}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-tf.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把TF年龄设0.5秒，解释数值仍可相加但时效检查失败；在目标环境保存TF查询及/clock证据。"
+        },
+        {
+          "title": "目标环境实验：TF与仿真时间",
+          "explanation": "在已运行的仿真中检查map到base_link；另外核对所有使用仿真时间的节点是否读取同一/clock。",
+          "code": "ros2 run tf2_ros tf2_echo map base_link\n# 上一条持续显示变换，Ctrl-C后继续\nros2 topic echo /clock --once\nros2 param get /planner_server use_sim_time\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "保留变换查询时间、帧名称、错误和时钟配置；坐标数值正确与时序正确分别检查。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：map、odom、base_link与laser的关系怎样检查？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把TF年龄设0.5秒，解释数值仍可相加但时效检查失败；在目标环境保存TF查询及/clock证据。"
+      ],
+      "exercise": {
+        "prompt": "默认laser原点的map坐标x是多少？",
+        "expected": 1.7,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.5+1+0.2=1.7。",
+        "transfer": "把TF年龄设0.5秒，解释数值仍可相加但时效检查失败；在目标环境保存TF查询及/clock证据。"
+      },
+      "sources": [
+        "nav2-tf-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-lifecycle",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-localization",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "nav2-tf",
+      "demos": [
+        {
+          "modelId": "nav2-tf",
+          "title": "TF与时钟：目标正确为何仍报变换失败？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 150
+    },
+    {
+      "id": "nav2-localization",
+      "course": "nav2",
+      "unit": "3",
+      "title": "第3讲 地图与定位：格子索引如何变成目标坐标？",
+      "summary": "核对resolution、origin、格心与机器人定位，避免单位和坐标混用。",
+      "question": "地图第4格是不是世界坐标x=4？",
+      "outcome": "核对resolution、origin、格心与机器人定位，避免单位和坐标混用。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "栅格索引是离散编号，世界位置依赖地图原点、分辨率和原点朝向。本例原点朝向为零，计算一维格心而非格角。",
+        "加载地图没有提供机器人位姿。AMCL还依赖运动、激光观测、初始位姿和TF；本讲用明确给出的位姿修正解释相对目标计算。",
+        "在真环境要检查地图frame、传感器外参和粒子收敛过程。给了初始位姿不代表定位误差已得到验证。"
+      ],
+      "formula": "x_center = origin + (column+0.5)×resolution",
+      "worked": "origin=−1m、resolution=0.1m、column=4，格心x=−0.55m；定位x=0.1m时目标相对位移−0.65m。",
+      "misconception": "地图分辨率不是机器人定位精度，OccupancyGrid也不是机器人位姿消息。",
+      "sections": [
+        {
+          "title": "读取地图元数据",
+          "explanation": "此例原点朝向0，只讨论一维格心；地图栅格不是机器人位姿。"
+        },
+        {
+          "title": "将栅格中心换到世界坐标",
+          "explanation": "使用(i+0.5)×resolution，避免把格心和格角混用。"
+        },
+        {
+          "title": "区分先验位姿和定位结果",
+          "explanation": "给定初始机器人估计x=0.2，独立测距修正−0.1；只是算例，不运行AMCL。"
+        },
+        {
+          "title": "写出目标相对位移",
+          "explanation": "同为map坐标才能相减；初始化并不代表粒子已收敛。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"cell\":4,\"resolution\":0.1,\"origin\":-1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 读取地图元数据\nObject.assign(s, ((s,p)=>({column:p.cell,resolution:p.resolution,origin:p.origin}))(s, p));\n// 将栅格中心换到世界坐标\nObject.assign(s, ((s,p)=>({world:p.origin+(p.cell+.5)*p.resolution}))(s, p));\n// 区分先验位姿和定位结果\nObject.assign(s, ((s,p)=>({initialPose:.2,correction:-.1,localizedPose:.1}))(s, p));\n// 写出目标相对位移\nObject.assign(s, ((s,p)=>({relativeGoal:s.world-s.localizedPose,cellRoundTrip:Math.floor((s.world-p.origin)/p.resolution)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-localization.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把resolution改成0.2并回算索引；在Jazzy中保存地图元数据、初始位姿和定位后的独立误差。"
+        },
+        {
+          "title": "目标环境实验：地图和初始定位",
+          "explanation": "用自己保存的地图配置和Gazebo场景，按官方Jazzy快速入门初始化机器人位姿，记录定位前后与已知地标的误差。",
+          "code": "ros2 topic echo /map --once --field info\nros2 topic echo /amcl_pose --once\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "保存地图resolution、origin与frame、初始位姿来源，以及独立测得的位姿误差；不要只保存RViz截图。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：地图第4格是不是世界坐标x=4？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把resolution改成0.2并回算索引；在Jazzy中保存地图元数据、初始位姿和定位后的独立误差。"
+      ],
+      "exercise": {
+        "prompt": "默认目标格心x是多少m？",
+        "expected": -0.55,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "−1+(4+0.5)×0.1=−0.55。",
+        "transfer": "把resolution改成0.2并回算索引；在Jazzy中保存地图元数据、初始位姿和定位后的独立误差。"
+      },
+      "sources": [
+        "nav2-localization-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-tf",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-costmap",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "nav2-localization",
+      "demos": [
+        {
+          "modelId": "nav2-localization",
+          "title": "地图与定位：格子索引如何变成目标坐标？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 180
+    },
+    {
+      "id": "nav2-costmap",
+      "course": "nav2",
+      "unit": "4",
+      "title": "第4讲 代价地图：通道中心空闲为何仍过不去？",
+      "summary": "分开检查footprint几何碰撞与规划缓冲偏好。",
+      "question": "机器人中心能穿过门缝，为什么规划仍可能失败？",
+      "outcome": "分开检查footprint几何碰撞与规划缓冲偏好。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "规划对象有外形，不能只看中心格。footprint和碰撞模型决定机器人与障碍的几何关系，costmap的各层则表达不同环境信息。",
+        "本例圆形机器人在0.9m通道中，先检查直径，再加入教学硬缓冲。Nav2实际膨胀层是代价值模型，本例不复刻其完整公式。",
+        "要用实际传感器数据、未知空间策略和局部/全局地图排错。盲目减小footprint可能让规划通过，却把真实碰撞问题藏起来。"
+      ],
+      "formula": "geometric_margin = width−2r；buffer_margin = width−2(r+b)",
+      "worked": "r=0.2、b=0.2：物理余量0.5m，缓冲余量0.1m，两项均通过。",
+      "misconception": "膨胀半径、机器人半径和传感器量程不是可以互相代替的参数。",
+      "sections": [
+        {
+          "title": "给出通道净宽",
+          "explanation": "两侧障碍之间净宽0.9m；以圆形footprint近似。"
+        },
+        {
+          "title": "先检查几何可通过性",
+          "explanation": "机器人外轮廓与障碍的距离决定碰撞，中心点空闲还不够。"
+        },
+        {
+          "title": "加入规划缓冲要求",
+          "explanation": "本例硬缓冲用于解释几何，不复刻Nav2连续膨胀代价值。"
+        },
+        {
+          "title": "区分碰撞与偏好",
+          "explanation": "真实costmap还包括未知值、传感器射线和多层合成。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"radius\":0.2,\"inflation\":0.2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 给出通道净宽\nObject.assign(s, ((s,p)=>({width:.9,diameter:2*p.radius}))(s, p));\n// 先检查几何可通过性\nObject.assign(s, ((s,p)=>({physicalMargin:s.width-2*p.radius,geometricPass:s.width>2*p.radius}))(s, p));\n// 加入规划缓冲要求\nObject.assign(s, ((s,p)=>({preferredWidth:2*(p.radius+p.inflation),bufferMargin:s.width-2*(p.radius+p.inflation)}))(s, p));\n// 区分碰撞与偏好\nObject.assign(s, ((s,p)=>({bufferPass:s.bufferMargin>0,geometricPass:s.geometricPass}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-costmap.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "保持机器人半径固定只改缓冲；解释何时几何可过而偏好不通过，并在实际costmap检查边界。"
+        },
+        {
+          "title": "目标环境实验：footprint与两种地图",
+          "explanation": "在相同通道中固定机器人几何，分别调整缓冲相关配置。先记录原值，重新加载后核对实际参数和地图。",
+          "code": "ros2 param get /local_costmap/local_costmap robot_radius\nros2 param get /local_costmap/local_costmap footprint\nros2 topic list -t\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "核对实际使用的是圆形半径还是多边形footprint、传感器层及未知空间策略；参数名和命名空间以目标版本为准。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：机器人中心能穿过门缝，为什么规划仍可能失败？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "保持机器人半径固定只改缓冲；解释何时几何可过而偏好不通过，并在实际costmap检查边界。"
+      ],
+      "exercise": {
+        "prompt": "r=0.3、b=0.2、宽0.9，缓冲余量是多少m？",
+        "expected": -0.1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.9−2×(0.3+0.2)=−0.1。",
+        "transfer": "保持机器人半径固定只改缓冲；解释何时几何可过而偏好不通过，并在实际costmap检查边界。"
+      },
+      "sources": [
+        "nav2-costmap-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-localization",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-planner",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "nav2-costmap",
+      "demos": [
+        {
+          "modelId": "nav2-costmap",
+          "title": "代价地图：通道中心空闲为何仍过不去？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 150
+    },
+    {
+      "id": "nav2-planner",
+      "course": "nav2",
+      "unit": "5",
+      "title": "第5讲 全局规划：最短路与低代价路怎样权衡？",
+      "summary": "固定代价定义，比较长度与障碍邻近成本。",
+      "question": "两条都可走的路，为什么规划器选择较长的一条？",
+      "outcome": "固定代价定义，比较长度与障碍邻近成本。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "全局规划首先需要可行路径，再根据目标函数选择候选。长度最短并不自动意味着离障碍远、曲率合适或跟踪容易。",
+        "本例定义长度加λ乘邻近代价，两条路线的长度和邻近值固定。它用于观察目标权衡，不是任一Nav2插件的内部成本实现。",
+        "实际工程还需选择适合机器人运动学的插件，核对地图、起终点有效性和参数。规划成功只是导航流程的一环。"
+      ],
+      "formula": "J = path_length + λ × proximity_cost",
+      "worked": "短路3m、邻近2；绕行4m、邻近0.2；λ=2时成本分别7和4.4，选择绕行。",
+      "misconception": "“规划失败”可能来自坐标、碰撞、不可达或超时，不能一律归因于搜索算法。",
+      "sections": [
+        {
+          "title": "定义同一地图上的两条候选路径",
+          "explanation": "短路3m但累计障碍邻近代价2；绕行4m且邻近代价0.2。"
+        },
+        {
+          "title": "把路径成本写明",
+          "explanation": "教学成本=长度+λ×邻近代价；不等同任一Nav2插件内部公式。"
+        },
+        {
+          "title": "按同一个目标选择",
+          "explanation": "先假设两条已通过碰撞检查；不可行候选不应参与此比较。"
+        },
+        {
+          "title": "保存选择依据",
+          "explanation": "可行、最短、跟踪平滑是不同要求，规划成功也不代表执行成功。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"penalty\":2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 定义同一地图上的两条候选路径\nObject.assign(s, ((s,p)=>({lengths:[3,4],proximity:[2,.2]}))(s, p));\n// 把路径成本写明\nObject.assign(s, ((s,p)=>({costs:s.lengths.map((x,i)=>x+p.penalty*s.proximity[i])}))(s, p));\n// 按同一个目标选择\nObject.assign(s, ((s,p)=>({choice:s.costs[0]<=s.costs[1]?0:1}))(s, p));\n// 保存选择依据\nObject.assign(s, ((s,p)=>({selectedLength:s.lengths[s.choice],selectedCost:s.costs[s.choice]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-planner.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立求两路平分时λ=5/9；在实际场景保存起终点、地图版本、插件和规划耗时。"
+        },
+        {
+          "title": "目标环境实验：规划器受控比较",
+          "explanation": "在同一地图、起终点与初始位姿下，对照两组已记录的规划配置；保存路径、耗时、约束和失败原因。",
+          "code": "ros2 param get /planner_server planner_plugins\nros2 action list -t\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "用官方Simple Commander或RViz提交目标；成功路径先验碰撞有效性，再比较长度与间隙，不用本例成本冒充插件成本。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：两条都可走的路，为什么规划器选择较长的一条？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立求两路平分时λ=5/9；在实际场景保存起终点、地图版本、插件和规划耗时。"
+      ],
+      "exercise": {
+        "prompt": "默认绕行成本是多少？",
+        "expected": 4.4,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "4+2×0.2=4.4。",
+        "transfer": "独立求两路平分时λ=5/9；在实际场景保存起终点、地图版本、插件和规划耗时。"
+      },
+      "sources": [
+        "nav2-planner-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-costmap",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-controller",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "nav2-planner",
+      "demos": [
+        {
+          "modelId": "nav2-planner",
+          "title": "全局规划：最短路与低代价路怎样权衡？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 180
+    },
+    {
+      "id": "nav2-controller",
+      "course": "nav2",
+      "unit": "6",
+      "title": "第6讲 局部跟踪：前视距离怎样影响转向？",
+      "summary": "复算pure pursuit的曲率与角速度，识别几何切片的边界。",
+      "question": "目标在车体左侧，速度命令应如何带出转向方向？",
+      "outcome": "复算pure pursuit的曲率与角速度，识别几何切片的边界。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "路径跟踪把几何路径转成速度控制。pure pursuit在机体系选择前视点，利用圆弧几何求曲率，再结合线速度得到角速度。",
+        "本例的L是目标到车体中心的欧氏距离，κ=2y/L²。y为负会产生负角速度；前视距离变大通常使几何响应更缓。",
+        "Nav2的Regulated Pure Pursuit还包含减速、碰撞和其他约束。本讲只解释其基础几何，不能把算例当完整控制器或稳定性保证。"
+      ],
+      "formula": "κ=2y/L²；ω=vκ",
+      "worked": "L=1m、y=0.2m、v=0.5m/s：κ=0.4m⁻¹，ω=0.2rad/s，20Hz一个周期转0.01rad。",
+      "misconception": "前视距离不是控制周期，增加速度也不会自动保持相同角速度。",
+      "sections": [
+        {
+          "title": "把前视目标放到机体系",
+          "explanation": "目标距离L，横向坐标y；本例|y|≤L。"
+        },
+        {
+          "title": "由圆弧几何求曲率",
+          "explanation": "κ=2y/L²；这是pure pursuit几何切片，不含RPP的完整减速机制。"
+        },
+        {
+          "title": "速度乘曲率得到角速度",
+          "explanation": "角速度符号跟随横向目标方向，单位rad/s。"
+        },
+        {
+          "title": "检查离散控制周期",
+          "explanation": "20Hz周期0.05s，本周期航向变化ωdt，不是整条轨迹保证。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"lookahead\":1,\"speed\":0.5,\"y\":0.2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 把前视目标放到机体系\nObject.assign(s, ((s,p)=>({target:[Math.sqrt(p.lookahead*p.lookahead-p.y*p.y),p.y]}))(s, p));\n// 由圆弧几何求曲率\nObject.assign(s, ((s,p)=>({curvature:2*p.y/(p.lookahead*p.lookahead)}))(s, p));\n// 速度乘曲率得到角速度\nObject.assign(s, ((s,p)=>({omega:p.speed*s.curvature}))(s, p));\n// 检查离散控制周期\nObject.assign(s, ((s,p)=>({headingStep:s.omega*.05,travelStep:p.speed*.05}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-controller.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "L改2而y保持0.2，手算ω=0.05；在仿真记录横向误差、控制频率和碰撞检查配置。"
+        },
+        {
+          "title": "目标环境实验：跟踪误差与延迟",
+          "explanation": "固定全局路径和场景，记录速度命令、里程计与传感器时间，按同一口径比较前视与速度参数。",
+          "code": "ros2 param get /controller_server controller_plugins\nros2 topic list -t\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "先按实际版本核对cmd_vel类型，再记录速度、横向误差、控制频率与取消结果；不能用离线几何值代替控制实测。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：目标在车体左侧，速度命令应如何带出转向方向？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "L改2而y保持0.2，手算ω=0.05；在仿真记录横向误差、控制频率和碰撞检查配置。"
+      ],
+      "exercise": {
+        "prompt": "默认角速度是多少rad/s？",
+        "expected": 0.2,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.5×2×0.2/1²=0.2。",
+        "transfer": "L改2而y保持0.2，手算ω=0.05；在仿真记录横向误差、控制频率和碰撞检查配置。"
+      },
+      "sources": [
+        "nav2-controller-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-planner",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-behavior",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "nav2-controller",
+      "demos": [
+        {
+          "modelId": "nav2-controller",
+          "title": "局部跟踪：前视距离怎样影响转向？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 180
+    },
+    {
+      "id": "nav2-behavior",
+      "course": "nav2",
+      "unit": "7",
+      "title": "第7讲 行为树与恢复：失败后还能试几次？",
+      "summary": "跟踪有界恢复流程，区分尝试数、恢复数和最终状态。",
+      "question": "清理代价地图再试，什么时候必须停止重试？",
+      "outcome": "跟踪有界恢复流程，区分尝试数、恢复数和最终状态。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "导航组合规划、跟踪和恢复。行为树节点可能返回RUNNING、SUCCESS或FAILURE，父节点据此推进，不能把一次tick理解成整个任务结束。",
+        "本例用有限规则展示失败后恢复再试，恢复预算b允许最多b+1次规划尝试。输入的连续失败次数是预设数据，不是实际插件故障。",
+        "真实Nav2 XML要按所用节点语义、取消和重规划机制核对。本例不是BehaviorTree.CPP执行器；恢复也无法保证物理障碍消失。"
+      ],
+      "formula": "attempts ≤ recovery_budget + 1",
+      "worked": "连续失败1次、恢复预算2：先plan0失败，recover，再plan1和follow成功，尝试2次、恢复1次。",
+      "misconception": "重试次数与尝试总数相差一次初始尝试；不要写无限重试来掩盖错误。",
+      "sections": [
+        {
+          "title": "先初始化一个有界恢复流程",
+          "explanation": "规划→跟踪；失败时清理一次教学缓存再试，达到预算就退出。"
+        },
+        {
+          "title": "执行明确的有限规则",
+          "explanation": "这里是简化控制流，不是Nav2 XML或BehaviorTree.CPP执行器。"
+        },
+        {
+          "title": "区分运行、成功和失败",
+          "explanation": "重试次数不等于尝试总数；恢复也不是必然能消除物理障碍。"
+        },
+        {
+          "title": "记录结束原因",
+          "explanation": "有限预算避免无限转圈；真实行为树还需处理取消和恢复节点返回值。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"failures\":1,\"budget\":2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先初始化一个有界恢复流程\nObject.assign(s, ((s,p)=>({events:[],attempts:0}))(s, p));\n// 执行明确的有限规则\nObject.assign(s, ((s,p)=>{const events=[];let success=false,recoveries=0;for(let attempt=0;attempt<=p.budget;attempt++){events.push('plan '+attempt);if(attempt>=p.failures){events.push('follow');success=true;break;}if(attempt<p.budget){recoveries++;events.push('recover');}}return {events,success,recoveries,attempts:Math.min(p.failures+1,p.budget+1)};})(s, p));\n// 区分运行、成功和失败\nObject.assign(s, ((s,p)=>({status:s.success?'SUCCESS':'FAILURE'}))(s, p));\n// 记录结束原因\nObject.assign(s, ((s,p)=>({stoppedBy:s.success?'路径与跟踪分支成功':'恢复预算耗尽'}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-behavior.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "穷举预算0、1、2与失败次数0–4；目标环境分别注入不可达目标、取消和临时障碍并保存结束状态。"
+        },
+        {
+          "title": "目标环境实验：有限恢复和取消",
+          "explanation": "按匹配版本的默认行为树，在仿真分别注入临时障碍、不可达目标与取消请求，保存各分支的最终Action状态。",
+          "code": "ros2 param dump /bt_navigator\nros2 action list -t\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "保留所用XML及插件版本、恢复次数、取消时刻和最终状态；预期失败是有效实验结果。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：清理代价地图再试，什么时候必须停止重试？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "穷举预算0、1、2与失败次数0–4；目标环境分别注入不可达目标、取消和临时障碍并保存结束状态。"
+      ],
+      "exercise": {
+        "prompt": "连续失败4次、恢复预算2，最多规划几次？",
+        "expected": 3,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "初始1次加最多2次恢复后的尝试，共3次，然后失败退出。",
+        "transfer": "穷举预算0、1、2与失败次数0–4；目标环境分别注入不可达目标、取消和临时障碍并保存结束状态。"
+      },
+      "sources": [
+        "nav2-behavior-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-controller",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-validation",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "nav2-behavior",
+      "demos": [
+        {
+          "modelId": "nav2-behavior",
+          "title": "行为树与恢复：失败后还能试几次？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 180
+    },
+    {
+      "id": "nav2-validation",
+      "course": "nav2",
+      "unit": "8",
+      "title": "第8讲 任务验收：一次到达能证明什么？",
+      "summary": "定义固定场景集、到达率、碰撞与超时，记录有限样本不确定性。",
+      "question": "仿真中成功到达一次，是否足以说明导航已可靠？",
+      "outcome": "定义固定场景集、到达率、碰撞与超时，记录有限样本不确定性。",
+      "prerequisites": [
+        "ROS 2节点、话题、Action、TF与仿真时钟",
+        "移动机器人定位和路径规划；可先做离线算例"
+      ],
+      "explanation": [
+        "验收从任务和成功条件开始：起终点、初始定位、地图、障碍和时间限制都要固定。否则不同参数的结果没有可比性。",
+        "本例10回合，分别报告到达、碰撞和超时；标签可交叉，例如到达后仍发生接触。成功率之外还要保留误差、耗时和失败轨迹。",
+        "Wilson区间说明样本有限。浏览器中的人工计数只是统计核对；Gazebo结果与真机结果必须分别保存，不由页面演示自动生成。"
+      ],
+      "formula": "success_rate = reached/N；报告碰撞、超时与区间",
+      "worked": "8/10到达、0碰撞、1超时满足本例预先约定的0.8门槛；成功率估计仍有较宽区间。",
+      "misconception": "没有碰撞记录与证明不会碰撞不是一回事，仿真结果也不能直接当真机验收。",
+      "sections": [
+        {
+          "title": "在同一场景集上比较",
+          "explanation": "10次为独立回合的教学数据，到达、碰撞、超时可有交叉标记。"
+        },
+        {
+          "title": "计算成功率和区间",
+          "explanation": "Wilson区间体现小样本不确定性，不能把8/10当长期精确成功率。"
+        },
+        {
+          "title": "按预先写下的门槛核对",
+          "explanation": "本例要求到达率≥0.8、零碰撞、超时≤1，不是Nav2官方验收规范。"
+        },
+        {
+          "title": "为下一步保留证据类型",
+          "explanation": "所有数字都是人工输入，未执行Gazebo或真机，也没有生成学习完成记录。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={wilson:(success,n)=>{const z=1.96,p=success/n,d=1+z*z/n,m=(p+z*z/(2*n))/d,h=z*Math.sqrt(p*(1-p)/n+z*z/(4*n*n))/d;return [m-h,m+h];}};\nconst p={\"successes\":8,\"contacts\":0,\"timeouts\":1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 在同一场景集上比较\nObject.assign(s, ((s,p)=>({episodes:10,successes:p.successes,contacts:p.contacts,timeouts:p.timeouts}))(s, p));\n// 计算成功率和区间\nObject.assign(s, ((s,p)=>({rate:s.successes/s.episodes,interval:H.wilson(s.successes,s.episodes)}))(s, p));\n// 按预先写下的门槛核对\nObject.assign(s, ((s,p)=>({pass:s.rate>=.8&&s.contacts===0&&s.timeouts<=1}))(s, p));\n// 为下一步保留证据类型\nObject.assign(s, ((s,p)=>({evidence:'人工教学数据',targetEnvironment:'ROS 2 Jazzy + Gazebo Harmonic'}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node nav2-validation.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "用同一场景集比较两组参数，保留每回合原始日志和失败原因；不要只保存一个平均分。"
+        },
+        {
+          "title": "目标环境实验：导航最小验收集",
+          "explanation": "按官方Jazzy Quickstart搭建Gazebo Harmonic目标环境。固定至少10个起终点/障碍场景，先预写到达误差、时限、碰撞定义，再运行每回合。",
+          "code": "ros2 doctor --report\nros2 pkg prefix nav2_bringup\nros2 pkg prefix nav2_simple_commander\n",
+          "language": "bash",
+          "execution": "需另配Ubuntu 24.04 / ROS 2 Jazzy与匹配的仿真、包和机器人配置；这些命令未在本机运行。",
+          "exercise": "提交场景清单、地图和参数摘要、每回合日志、失败分类及版本；仿真与真机分开，不把本页人工计数当运行记录。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：仿真中成功到达一次，是否足以说明导航已可靠？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "用同一场景集比较两组参数，保留每回合原始日志和失败原因；不要只保存一个平均分。"
+      ],
+      "exercise": {
+        "prompt": "10回合中8次到达，成功率是多少？",
+        "expected": 0.8,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "8/10=0.8。",
+        "transfer": "用同一场景集比较两组参数，保留每回合原始日志和失败原因；不要只保存一个平均分。"
+      },
+      "sources": [
+        "nav2-validation-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "nav2-behavior",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "lerobot-schema",
+          "label": "连接后续课程：第1讲 数据契约：一条动作记录必须说明什么？"
+        }
+      ],
+      "modelId": "nav2-validation",
+      "demos": [
+        {
+          "modelId": "nav2-validation",
+          "title": "任务验收：一次到达能证明什么？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做有限的几何、约束和流程计算；未执行ROS 2、Gazebo、MoveIt或Nav2，不代表目标环境或真机验证。",
+      "study_minutes": 180
+    }
+  ],
+  "sources": {
+    "nav2-official": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · 官方目录",
+      "url": "https://docs.nav2.org/jazzy/",
+      "locator": "Getting Started / Navigation Concepts；First-Time Robot Setup Guide；Configuration Guide；Simple Commander API",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-lifecycle-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · Navigation Concepts / ROS 2；Lifecycle Manager",
+      "url": "https://docs.nav2.org/jazzy/",
+      "locator": "Navigation Concepts / ROS 2；Lifecycle Manager",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-tf-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · First-Time Setup / Setting Up Transformations；State Estimation",
+      "url": "https://docs.nav2.org/jazzy/configuration_and_development/first_time_robot_setup_guide/",
+      "locator": "First-Time Robot Setup Guide",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-localization-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · First-Time Setup / Mapping and Localization",
+      "url": "https://docs.nav2.org/jazzy/configuration_and_development/first_time_robot_setup_guide/",
+      "locator": "Mapping and Localization",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-costmap-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · Costmap 2D；Footprint；Inflation Layer",
+      "url": "https://docs.nav2.org/jazzy/",
+      "locator": "Costmap 2D；Footprint；Inflation Layer",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-planner-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · Navigation Servers；Planner Server；Navigation Plugins",
+      "url": "https://docs.nav2.org/jazzy/",
+      "locator": "Navigation Servers；Planner Server；Navigation Plugins",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-controller-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · Controller Server；Regulated Pure Pursuit概念",
+      "url": "https://docs.nav2.org/jazzy/",
+      "locator": "Controller Server；Regulated Pure Pursuit概念",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-behavior-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · Nav2 Behavior Trees；RecoveryNode；Detailed Walkthrough",
+      "url": "https://docs.nav2.org/jazzy/",
+      "locator": "Nav2 Behavior Trees；RecoveryNode；Detailed Walkthrough",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "nav2-validation-reading": {
+      "kind": "官方公开材料",
+      "label": "Nav2 · Simple Commander API；反馈、取消与TaskResult",
+      "url": "https://docs.nav2.org/jazzy/configuration_and_development/simple_commander_api/simple_commander_api/",
+      "locator": "Simple Commander API",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "ROS 2 Jazzy / Gazebo Harmonic · Nav2 Jazzy文档快照",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    }
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "id": "control",
+  "title": "反馈与离散控制",
+  "subtitle": "从误差与积分走向噪声、调参与多环采样",
+  "courseLabel": "Understanding PID Control · 本站原创配套基础课",
+  "officialUrl": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+  "scope": "6节原创配套：比例反馈、离散PID、抗饱和，加微分滤波、指标化PD调参、快慢串级控制。",
+  "boundary": "依据公开控制概念原创编排。浏览器数值计算、记录回放和真实控制实验分别说明；本专题没有执行真实电机命令。",
+  "lessons": [
+    {
+      "id": "rf-p-feedback",
+      "title": "01 比例反馈：为什么一直加速，仍可能追不上目标？",
+      "question": "目标速度1m/s，控制器每次看误差再下指令，为什么比例控制还可能留下稳定误差？",
+      "prerequisites": [
+        "能用变量表示一个数，并按顺序计算表达式",
+        "理解速度m/s、时间s与目标减实际的差值"
+      ],
+      "objectives": [
+        "按采样顺序计算误差、比例指令和下一步速度",
+        "区分有限步输出与解析稳态",
+        "解释本例稳态误差来自何处，并指出模型未覆盖的条件"
+      ],
+      "explanation": [
+        "先把小车想成一件不会立即响应指令的东西。目标速度r是希望它达到的速度，当前速度y是这次采样看到的速度，误差e=r−y。比例控制使用u=Kp·e：差得越远，给的有效速度指令越大；越来越接近时，指令也跟着减小。",
+        "本例用一阶方程dy/dt=(u−y)/τ描述对象，τ固定为1s。u和y都按m/s表示，这只是把驱动能力折算成速度的理想模型，并非真实电机电压。每次采样采用前向Euler：y下一步=y+Δt·(u−y)/τ。先计算当前误差和u，再更新y，不能把新旧时刻混着用。",
+        "如果已经达到稳态，速度不再变化，就有u=y。又因为u=Kp(r−y)，可以得到y稳态=Kp·r/(1+Kp)，误差稳态=r/(1+Kp)。Kp有限时误差通常不为0；提高Kp会减小本模型的稳态误差，但真实系统还有噪声、饱和、延迟和稳定性约束。",
+        "动画只计算16次采样。末帧速度可能仍在变化，不能直接叫稳态值。本课把它与解析稳态同时列出，并限定Δt(1+Kp)/τ≤1，避免用过大的离散步长制造出本课尚未讲解的振荡。"
+      ],
+      "modelId": "rf-p-feedback",
+      "practice": [
+        {
+          "title": "先手算第一步",
+          "instruction": "保持目标1、Kp=2、Δt=0.2。先写出e、u和第一次更新后的y，再前进一步核对。",
+          "expectedObservation": "e=1，u=2m/s，y从0变为0.4m/s。数值正确后，再解释三个量分别代表什么。"
+        },
+        {
+          "title": "改增益并检查稳态",
+          "instruction": "依次选择Kp=0、1、3，保持目标不变；比较末帧与各自解析稳态。",
+          "expectedObservation": "解析稳态分别为0、0.5、0.75m/s。有限步结果可能尚未到达这些值。"
+        },
+        {
+          "title": "只改采样间隔",
+          "instruction": "在同一Kp下对比Δt=0.05和0.2，说明为什么16步对应的总时间不同；再用本地代码计算相同总时长。",
+          "expectedObservation": "相同步数不等于相同实验时间。小步长的16步尚未经历同样长的响应过程。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：r=2m/s，初始y=0，Kp=3，τ=1s，Δt=0.1s。第一次更新后的速度是多少？",
+        "expected": 0.6,
+        "tolerance": 0.001,
+        "unit": "m/s",
+        "explanation": "e=2，u=3×2=6m/s；y₁=0+0.1×(6−0)/1=0.6m/s。这里6m/s是模型的有效速度指令，不能据此推断真实电机能力。",
+        "transfer": "把初始速度改为1m/s，重新算第一步；再说明增加真实输出上限后哪一条公式需要改。"
+      },
+      "sources": [
+        {
+          "title": "MathWorks · Understanding PID Control",
+          "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+          "locator": "What Is PID Control?；3 Ways to Build a Model。本站一阶方程与数值案例为原创简化。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/control/reproduce.py",
+          "label": "标准库Python：复算比例更新",
+          "command": "python3 examples/robotics-foundations/control/reproduce.py --case feedback --target 2 --kp 3 --dt 0.1"
+        }
+      ]
+    },
+    {
+      "id": "rf-discrete-pid",
+      "title": "02 离散PID：把当前误差、过去面积和测量变化分开算",
+      "question": "同一段速度记录里，P、I、D三项分别用了什么信息？采样间隔为什么不能省略？",
+      "prerequisites": [
+        "完成比例反馈小课，能解释目标减测量",
+        "能用列表保存一段测量记录，并逐项循环处理"
+      ],
+      "objectives": [
+        "明确积分的状态、更新时间和单位",
+        "按约定使用测量微分并解释首帧初始化",
+        "独立复算一次PID合成，并区分控制器回放与闭环响应"
+      ],
+      "explanation": [
+        "比例项只看当前误差。如果一个小误差持续存在，积分项会把它随时间积起来；微分项则关注变化。本课先不接入运动对象，而是反复使用同一段原创测量记录，让控制器的内部计算能逐项对照。目标r=1，测量和指令都归一化。",
+        "第k次先得到eₖ=r−yₖ，再更新Iₖ=Iₖ₋₁+eₖΔt。归一化误差没有量纲，I的单位是s，因此Ki的单位为1/s。漏乘Δt会让同一秒内更频繁采样的控制器凭空积累更多误差；把积分状态每次清零则会失去记忆。",
+        "本课使用对测量微分Dₖ=−(yₖ−yₖ₋₁)/Δt，Kd的单位是s。与对误差微分相比，这个约定避免仅由目标跳变产生微分冲击。第一条记录没有前一段变化，本课明确约定D₀=0。测量在第5个点略有下降，可以检查D项是否按约定变为正值。",
+        "最后uₖ=Kp·eₖ+Ki·Iₖ+Kd·Dₖ。动画会把三项和各自的状态列出来，但这些指令不会改变预设测量记录；所以本课只能验证控制器算术，不能从曲线推断某组参数能稳定真实小车。理想微分还会放大高频测量噪声，下一阶段需要结合对象与滤波设计。"
+      ],
+      "modelId": "rf-discrete-pid",
+      "practice": [
+        {
+          "title": "先分别关闭两项",
+          "instruction": "先令Ki=Kd=0，只核对P；再令Kp=Kd=0，逐步检查I是否保存前一采样的面积。",
+          "expectedObservation": "纯P每步只依赖当前误差；纯I会累计正误差，初值为0并不表示以后仍为0。"
+        },
+        {
+          "title": "检查Δt的两种作用",
+          "instruction": "把Δt从0.5改为0.25：分别预测同一条相邻记录的积分增量和微分值如何变化，再运行核对。",
+          "expectedObservation": "每步积分增量减半；相同相邻差值对应的微分幅值加倍。这是假定这些记录的实际采样时间也随之改变。"
+        },
+        {
+          "title": "追踪一条下降记录",
+          "instruction": "前进到测量从0.7降为0.65处，写出D项符号，并在完整源码中找到初始化和previousY更新的位置。",
+          "expectedObservation": "−Δy/Δt为正；previousY必须在本步微分计算之后更新。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立单步：r=1，y=0.5，上一测量0.4，更新前I=0.8s，Δt=0.2s；Kp=2，Ki=0.5/s，Kd=0.1s。先更新积分，再按测量微分，合成u是多少？",
+        "expected": 1.4,
+        "tolerance": 0.001,
+        "unit": "归一化指令",
+        "explanation": "e=0.5；I新=0.8+0.5×0.2=0.9s；D=−(0.5−0.4)/0.2=−0.5/s。u=2×0.5+0.5×0.9+0.1×(−0.5)=1.4。",
+        "transfer": "保持其余条件，把当前测量改为0.3；重新计算三项，并解释微分贡献为什么改了符号。"
+      },
+      "sources": [
+        {
+          "title": "MathWorks · Understanding PID Control",
+          "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+          "locator": "What Is PID Control?；Expanding Beyond a Simple Derivative；Important PID Concepts。离散约定与固定记录是本站原创案例。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/control/reproduce.py",
+          "label": "标准库Python：复算独立PID单步",
+          "command": "python3 examples/robotics-foundations/control/reproduce.py --case pid"
+        }
+      ]
+    },
+    {
+      "id": "rf-anti-windup",
+      "title": "03 输出已经到顶，积分为什么还会继续积？",
+      "question": "把指令夹到−1到1之间后，为什么目标下降时系统仍可能长时间加速？",
+      "prerequisites": [
+        "能逐步计算PI控制器的误差和积分状态",
+        "理解min/max限幅，以及一阶对象的离散更新"
+      ],
+      "objectives": [
+        "区分控制器原始输出与执行器实际接受的指令",
+        "跟踪饱和期间的积分状态",
+        "在相同目标切换下比较持续积分与条件积分，并解释其局限"
+      ],
+      "explanation": [
+        "真实执行器有能力范围。控制器算出u原始=3，并不表示对象真的收到3；若有效指令上限为1，实际使用的是u=clip(u原始,−1,1)。本课在同一个一阶对象上比较两套PI控制器，前8次采样目标为2，之后降为0.3。",
+        "只限制输出时，误差仍然进入积分器。当前目标根本达不到，正误差持续存在，I越积越多。目标降下来了，存下的积分贡献仍可能把原始指令顶在上限，这叫积分饱和或windup。动画同时画两条对象轨迹，并在每步列出候选积分、原始输出和实际输出。",
+        "本课的条件积分先提出候选I候选=I+eΔt，再计算候选原始输出。如果候选将超过上限且e为正，或低于下限且e为负，就暂停这一步积分；否则接受候选。误差转向帮助解除饱和时允许积分，因此不是把积分永远关闭。",
+        "这个对照固定Kp=1、Δt=0.25s、τ=1s，输出限制为±1，未加入D项。条件积分只是一种抗饱和策略；它不保证所有对象、所有切换都没有超调。应比较切换时储存了多少积分、切换后的第一条指令和恢复过程，再讨论是否适合自己的对象。"
+      ],
+      "modelId": "rf-anti-windup",
+      "practice": [
+        {
+          "title": "观察被限制的量",
+          "instruction": "选择“仅限制输出”，停在前8次中的任一步，记录candidateRaw、raw、u和integral，指出哪些量超过了1。",
+          "expectedObservation": "u始终在±1内，但raw、候选raw与积分状态可以继续增长。"
+        },
+        {
+          "title": "切换积分策略",
+          "instruction": "保持目标和Ki相同，只把观察方式改为条件积分；比较第8次更新后的I与目标下降后的第一条指令。",
+          "expectedObservation": "持续正向饱和时，条件积分会拒绝把饱和推深的更新；目标下降后，两种内部状态产生不同指令。"
+        },
+        {
+          "title": "关闭积分作对照",
+          "instruction": "把Ki改为0，再看两条速度曲线；解释为什么即使I数值不同，指令仍可能完全相同。",
+          "expectedObservation": "没有积分贡献时两种策略对实际输出没有差别，曲线重合。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立记录：连续3次误差均为2，Δt=0.25s，初始I=0，且每次正向饱和判断都成立。持续积分与条件积分在第3次后的I相差多少？",
+        "expected": 1.5,
+        "tolerance": 0.001,
+        "unit": "s",
+        "explanation": "持续积分每步加2×0.25=0.5s，三次后为1.5s；条件积分三次都拒绝这项更新，保持0，差为1.5s。题目给定饱和判断成立，不需要假设这三个误差来自某个真实对象。",
+        "transfer": "若下一步误差变为负值但原始输出仍在上限，条件积分应该允许还是拒绝积分？结合两条判断条件解释。"
+      },
+      "sources": [
+        {
+          "title": "MathWorks · Understanding PID Control",
+          "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+          "locator": "Anti-windup for PID control；A PID Tuning Guide。本站原创对照采用候选输出判断的条件积分。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/control/reproduce.py",
+          "label": "标准库Python：复算限幅与积分状态",
+          "command": "python3 examples/robotics-foundations/control/reproduce.py --case windup"
+        }
+      ]
+    },
+    {
+      "id": "rf-derivative-filter",
+      "title": "微分滤波：噪声为什么被放大，滤波又付出什么代价",
+      "question": "采样越快，直接差分的固定测量噪声为什么可能越明显？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "采样越快，直接差分的固定测量噪声为什么可能越明显？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "微分近似−Kd(y[k]−y[k−1])/Δt。固定幅度的测量抖动经过相减，再除以很小时间，会变成很大指令。把微分放在测量支路也可避免目标阶跃直接造成微分冲击。",
+        "用一阶低通处理差分：d滤=αd滤旧+(1−α)d原，α=τ/(τ+Δt)。它来自一种明确离散化；τ=0时退化为原微分，τ增大会更平滑也更滞后。",
+        "本课真实信号是匀速斜坡，加固定交替扰动。首帧没有前一测量，明确初始化为0；不把第一次读取之前的未知状态假装成实测值。",
+        "对照无噪声导数计算这段记录的均方误差，帮助看见降噪与延迟的取舍。真实噪声频谱、采样抖动和闭环稳定性需要另外测量和分析。"
+      ],
+      "modelId": "rf-derivative-filter",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "分别设置τ=0和0.3，再把噪声关掉；比较原始微分、滤波微分与已知导数，解释延迟为何没有凭空消失。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/control/expanded.py derivative；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：滤波τ=0.3s，采样Δt=0.1s。α=τ/(τ+Δt)是多少？",
+        "expected": 0.75,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "α=0.3/(0.3+0.1)=0.75。",
+        "transfer": "分别设置τ=0和0.3，再把噪声关掉；比较原始微分、滤波微分与已知导数，解释延迟为何没有凭空消失。"
+      },
+      "sources": [
+        {
+          "title": "Understanding PID Control · 本站原创配套基础课",
+          "url": "https://www.mathworks.com/videos/understanding-pid-control-part-3-expanding-beyond-a-simple-derivative-1531120808026.html",
+          "locator": "Understanding PID Control Part 3：微分放大高频噪声与低通微分。离散公式与固定信号为本站原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/control/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/control/expanded.py derivative"
+        }
+      ]
+    },
+    {
+      "id": "rf-pid-tuning",
+      "title": "有指标地调参：响应快、超调小、执行器不饱和",
+      "question": "提高比例增益以后，怎样用同一组指标判断得失？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "提高比例增益以后，怎样用同一组指标判断得失？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "先固定对象m q̈+b q̇=u、质量1kg和阻尼0.4N·s/m。PD控制u=Kp(1−q)−Kd q̇，再进行力限幅；积分与抗饱和由前面的课程单独覆盖。",
+        "比例增益提高刚度和响应需求，速度反馈增加阻尼。无饱和连续线性近似下ζ=(b+Kd)/(2√(mKp))，但实际离散积分、限幅和观察窗口会影响结果。",
+        "每次只改一个参数，记录超调、绝对误差积分、饱和次数和满足位置/速度条件的时间。最后仍未进入条件时，稳定时间保持未知，不硬填4秒。",
+        "数值更新采用先速度后位置的半隐式Euler。调参目标应来自任务和执行器约束，而不是只追求一条看起来漂亮的曲线。真实延迟、弹性和辨识误差本例未覆盖。"
+      ],
+      "modelId": "rf-pid-tuning",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "固定Kp提高Kd，再固定Kd提高Kp；比较超调、误差积分和限幅次数，写出取舍而非只说“更稳定”。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/control/expanded.py tuning；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：初始位置与速度都为0，Kp=2N/m，目标1m，无饱和，dt=0.05s，m=1kg。先更新速度再位置，第一步位置是多少m？",
+        "expected": 0.005,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "u=2N，a=2m/s²，v新=0.05×2=0.1m/s；q新=0.05×0.1=0.005m。",
+        "transfer": "固定Kp提高Kd，再固定Kd提高Kp；比较超调、误差积分和限幅次数，写出取舍而非只说“更稳定”。"
+      },
+      "sources": [
+        {
+          "title": "Understanding PID Control · 本站原创配套基础课",
+          "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+          "locator": "Understanding PID Control Part 4 A PID Tuning Guide、Part 6 Manual and Automatic Tuning Methods；本站二阶PD实验。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/control/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/control/expanded.py tuning"
+        }
+      ]
+    },
+    {
+      "id": "rf-cascade-control",
+      "title": "串级控制：慢位置环怎样交给快速度环",
+      "question": "外环两次采样之间，内环应该继续更新还是停下来等？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "外环两次采样之间，内环应该继续更新还是停下来等？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "串级结构把位置误差先换成速度目标，再由更快的速度环处理速度误差。外环和内环关注不同变量，不能把两层P控制叫作一次更大的比例增益。",
+        "本例外环每0.1s更新，内环每0.02s更新，外环之间保持速度目标。目标速度限制±1m/s，内环有效指令限制±2m/s，速度对象时间常数0.3s。",
+        "1秒后加入恒定负载扰动，观察内环先受到的影响以及外环如何继续修正。没有积分的速度环仍可能留有偏差；串级本身不保证所有对象更好。",
+        "真实设计要先辨识内环，再考虑带宽分离、饱和、传感器和延迟。此处只用给定模型说明数据流和采样时序，不控制真实电机。"
+      ],
+      "modelId": "rf-cascade-control",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "改变内外环增益并打开负载，指出速度目标、速度和位置各在哪条曲线上；解释饱和和无积分为什么仍可能留下误差。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/control/expanded.py cascade；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：外环周期0.1s、内环周期0.02s。每两个外环更新之间，内环更新几次？",
+        "expected": 5,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "0.1/0.02=5次。",
+        "transfer": "改变内外环增益并打开负载，指出速度目标、速度和位置各在哪条曲线上；解释饱和和无积分为什么仍可能留下误差。"
+      },
+      "sources": [
+        {
+          "title": "Understanding PID Control · 本站原创配套基础课",
+          "url": "https://www.mathworks.com/videos/series/understanding-pid-control.html",
+          "locator": "Understanding PID Control Part 7 Important PID Concepts：串级环和离散系统；采样、对象与数值实验为本站原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/control/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/control/expanded.py cascade"
+        }
+      ]
+    }
+  ]
+}

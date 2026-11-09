@@ -1,0 +1,2017 @@
+{
+  "course": {
+    "id": "cs336",
+    "label": "CS336",
+    "title": "从实现走向训练与优化",
+    "edition": "Spring 2026",
+    "position": "模型研发分支",
+    "description": "把模型原理变成可核算、可执行、可验证的训练工程。",
+    "prerequisites": [
+      "熟悉 Python 与 PyTorch",
+      "了解 Transformer、梯度与训练循环"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "分词与课程全景：先确定模型看到什么",
+        "lessons": [
+          "cs336-tokenization"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "2",
+        "title": "PyTorch 与资源核算：形状、计算、显存一起算",
+        "lessons": [
+          "compute"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "3",
+        "title": "架构与超参数：从一个 block 看现代 Transformer",
+        "lessons": [
+          "cs336-architecture"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "4",
+        "title": "注意力替代与 MoE：把稀疏计算放在哪里",
+        "lessons": [
+          "cs336-attention-moe"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "5",
+        "title": "GPU 与 TPU：计算之外还有搬运",
+        "lessons": [
+          "cs336-hardware"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "6",
+        "title": "Kernel 与 Triton：把计算按数据复用组织起来",
+        "lessons": [
+          "cs336-kernels"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "7",
+        "title": "并行 I：集合通信、复制与分片",
+        "lessons": [
+          "parallel"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "8",
+        "title": "并行 II：组合策略与流水线空泡",
+        "lessons": [
+          "cs336-parallel-systems"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "9",
+        "title": "Scaling Laws I：在同一预算里分配模型与数据",
+        "lessons": [
+          "cs336-scaling-basics"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "10",
+        "title": "推理：prefill、decode 与 KV 缓存",
+        "lessons": [
+          "cs336-inference"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "11",
+        "title": "Scaling Laws II：拟合、学习率与配方迁移",
+        "lessons": [
+          "cs336-scaling-practice"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "12",
+        "title": "评测：先定义想测什么，再定义分数",
+        "lessons": [
+          "cs336-evaluation-lecture"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "13",
+        "title": "数据 I：语料从哪里来，怎样保留来源",
+        "lessons": [
+          "cs336-data-origins"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "14",
+        "title": "数据 II：过滤、去重、混合与合成数据",
+        "lessons": [
+          "dedup"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "15",
+        "title": "Mid/Post-training：从模仿回复到学习偏好",
+        "lessons": [
+          "cs336-post-training"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "16",
+        "title": "RLVR：验证奖励、组相对优势与裁剪",
+        "lessons": [
+          "cs336-rlvr"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "17",
+        "title": "多模态：图像怎样进入语言模型",
+        "lessons": [
+          "cs336-multimodal"
+        ],
+        "material": "2026 官方讲义/代码与视频已核对；已配套原创讲解、步骤动画、代码与独立练习"
+      },
+      {
+        "unit": "Guest · Dan Fu",
+        "title": "Dan Fu 嘉宾讲：从模型到可服务的推理系统",
+        "lessons": [
+          "cs336-guest-danfu"
+        ],
+        "material": "官方视频已发布，相关字幕段落已核对；已配套原创课程与调度演示"
+      }
+    ],
+    "pending": "2026 第 1–17 讲与已发布 Dan Fu 嘉宾讲座已配套。Daniel Selsam 仅在官网有排期、当前未核实公开视频/课件，待材料发布后再加入。",
+    "sources": [
+      "cs336-syllabus"
+    ]
+  },
+  "sources": {
+    "cs336-l01-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 1 · lecture_01.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_01.py",
+      "locator": "tokenization / byte_tokenizer / train_bpe",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6"
+    },
+    "cs336-l01-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 1: Overview, Tokenization",
+      "url": "https://www.youtube.com/watch?v=JuoVZkPBiKk&t=1713s",
+      "locator": "存档字幕相关词 BPE 首次定位 28:33",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l02-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 2 · lecture_02.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_02.py",
+      "locator": "motivating_questions / tensor_einops / gradients_flops / train_loop",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "f731b3849afc970a062f1fe692d7d80f5952cf82c2a4f6f2803a8fb9a9dabfd6"
+    },
+    "cs336-l02-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 2: PyTorch (einops)",
+      "url": "https://www.youtube.com/watch?v=kuYAsz7zspQ&t=2235s",
+      "locator": "存档字幕相关词 utilization 首次定位 37:15",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l03-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 3 · lecture_03.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_03.pdf",
+      "locator": "PDF 第 4、10–15、20–23、30–32、50–51 页；架构与超参数",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e"
+    },
+    "cs336-l03-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 3: Architectures",
+      "url": "https://www.youtube.com/watch?v=lVynu4bo1rY&t=135s",
+      "locator": "存档字幕相关词 norm 首次定位 02:15",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l04-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 4 · lecture_04.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_04.pdf",
+      "locator": "PDF 第 4–13、15–18、26–28、39–45 页；线性/混合注意力与 MoE",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5"
+    },
+    "cs336-l04-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 4: Attention Alternatives",
+      "url": "https://www.youtube.com/watch?v=cKSwj_qZ8Jg&t=538s",
+      "locator": "存档字幕相关词 linear attention 首次定位 08:58",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l05-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 5 · lecture_05.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_05.pdf",
+      "locator": "PDF 第 8–16 页执行/内存层级及后续性能分析",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe"
+    },
+    "cs336-l05-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 5: GPUs, TPUs",
+      "url": "https://www.youtube.com/watch?v=izZba4UA7iY&t=615s",
+      "locator": "存档字幕相关词 memory 首次定位 10:15",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l06-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 6 · lecture_06.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_06.py",
+      "locator": "benchmarking / triton_softmax_example / triton_row_sum_example / triton_matmul_relu_example",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "4be1200d93d1f38963d40d7c46a5be72dd67a230ebf8a48d446f018d5e8fa788"
+    },
+    "cs336-l06-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 6: Kernels, Triton, XLA",
+      "url": "https://www.youtube.com/watch?v=xnDHaNUvHBg&t=25s",
+      "locator": "存档字幕相关词 triton 首次定位 00:25",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l07-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 7 · lecture_07.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_07.py",
+      "locator": "collective_operations / data_parallelism / tensor_parallelism / pipeline_parallelism",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "7cdec6c6e2b78afd667c98e2826efea637bb076cd926c45b4f404b0528c42e60"
+    },
+    "cs336-l07-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 7: Parallelism",
+      "url": "https://www.youtube.com/watch?v=SzpOcwdIL0Y&t=439s",
+      "locator": "存档字幕相关词 all reduce 首次定位 07:19",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l08-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 8 · lecture_08.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf",
+      "locator": "PDF 第 14–26、31 页起并行策略；流水线与张量并行相关页",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1"
+    },
+    "cs336-l08-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 8: Parallelism",
+      "url": "https://www.youtube.com/watch?v=6-cXp-aOmdg&t=1892s",
+      "locator": "存档字幕相关词 pipeline 首次定位 31:32",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l09-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 9 · lecture_09.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf",
+      "locator": "PDF 第 13–16、45–49 页；幂律与等算力拟合",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa"
+    },
+    "cs336-l09-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 9: Scaling Laws",
+      "url": "https://www.youtube.com/watch?v=Q15rhEWZPQ4&t=3715s",
+      "locator": "存档字幕相关词 chinchilla 首次定位 61:55",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l10-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 10 · lecture_10.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_10.py",
+      "locator": "arithmetic_intensity_of_inference / reduce_kv_cache_size / speculative_sampling / continuous_batching / paged_attention",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "e79acd9115d75f0b8bf4902d97dc41c1f6b5016778321f19c2dc241a90cfe9b9"
+    },
+    "cs336-l10-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 10: Inference",
+      "url": "https://www.youtube.com/watch?v=EfM546A79aM&t=1478s",
+      "locator": "存档字幕相关词 prefill 首次定位 24:38",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l11-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 11 · lecture_11.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_11.pdf",
+      "locator": "PDF 第 5–16 页公开配方、μP、WSD 与后续数据约束讨论",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890"
+    },
+    "cs336-l11-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 11:  Scaling Laws",
+      "url": "https://www.youtube.com/watch?v=vTfEyOyzV9E&t=673s",
+      "locator": "存档字幕相关词 warm 首次定位 11:13",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l12-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 12 · lecture_12.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_12.py",
+      "locator": "perplexity / exam_benchmarks / agentic_benchmarks / realism / validity",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "93e4049c9ee2665a7e5c883fee2c213e2eaa45aa5d452e447b5a15a5f353fd09"
+    },
+    "cs336-l12-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 12: Evaluation",
+      "url": "https://www.youtube.com/watch?v=JpAxdTWQJxM&t=341s",
+      "locator": "存档字幕相关词 perplexity 首次定位 05:41",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l13-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 13 · lecture_13.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_13.py",
+      "locator": "raw_sources / copyright / common_crawl / wikipedia / github / dolma / dclm",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "321fbab635378c275f65c41487119f3b9b171fc0ddef1454a4c607c9db72163b"
+    },
+    "cs336-l13-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 13: Data (Sources, Datasets)",
+      "url": "https://www.youtube.com/watch?v=-qm0ln33G24&t=73s",
+      "locator": "存档字幕相关词 copyright 首次定位 01:13",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l14-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 14 · lecture_14.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_14.py",
+      "locator": "transformation / filtering / exact_deduplication / jaccard_minhash / locality_sensitive_hashing / data_mixing",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "8e0e17f868002f2e8f73afed018b2dd787c0a1b371eec599c44d8dbfe555ae9b"
+    },
+    "cs336-l14-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 14: Data",
+      "url": "https://www.youtube.com/watch?v=5sxHosTLPF8&t=57s",
+      "locator": "存档字幕相关词 dedup 首次定位 00:57",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l15-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 15 · lecture_15.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_15.pdf",
+      "locator": "PDF 第 7–17、32–37、49 页起；SFT、偏好与 DPO",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "42a4bc02408a96e0b414f789f32780ae1d8461000f872d93aa38c94fe369e862"
+    },
+    "cs336-l15-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 15: Mid/Post-Training",
+      "url": "https://www.youtube.com/watch?v=2oH6PWPrYFo&t=1209s",
+      "locator": "存档字幕相关词 preference 首次定位 20:09",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l16-material": {
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 16 · lecture_16.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_16.pdf",
+      "locator": "PDF 第 5–20 页 PPO→GRPO；后续变体与推理现象",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "1a2bea825499f226b1c3fe990606253ad1b4fdbdf2ae90b4d12d7d0c07f2c8b3"
+    },
+    "cs336-l16-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 16: Post-Training - RLVR",
+      "url": "https://www.youtube.com/watch?v=dIFAi87Ws4E&t=876s",
+      "locator": "存档字幕相关词 group 首次定位 14:36",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-l17-material": {
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 17 · lecture_17.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_17.py",
+      "locator": "clip / siglip / llava / qwen_vl / chameleon",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "d8c3054ecce42fda3d92b4f21677a83d65cb525e8b3fbd4361c079f3cd20da52"
+    },
+    "cs336-l17-recording": {
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 17: Alignment - Multimodality",
+      "url": "https://www.youtube.com/watch?v=26FtD08ZpOU&t=265s",
+      "locator": "存档字幕相关词 clip 首次定位 04:25",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official"
+    },
+    "cs336-guest-danfu": {
+      "kind": "官方嘉宾视频与英文字幕",
+      "label": "CS336 Spring 2026 · Guest Lecture: Dan Fu",
+      "url": "https://www.youtube.com/watch?v=9EEm4iMAF5s&t=991s",
+      "locator": "16:31 continuous batching；37:35 Megakernels；64:47 起 co-design 问答；结尾 71:30 感谢 Dan",
+      "status": "已取得官方视频英文自动字幕（1914段），并与既有时间戳字幕的选定段落核对；未取得官方独立课件，不伪造页码。",
+      "role": "official",
+      "sha256": "5cb9d64f7fa89d09bc4b9a44ed58180f41d28942c5bdad6a509c9267c9f11a71"
+    }
+  },
+  "lessons": [
+    {
+      "id": "cs336-tokenization",
+      "course": "cs336",
+      "unit": "1",
+      "title": "分词与课程全景：先确定模型看到什么",
+      "summary": "从文本到 token ID 走通可逆流程，手算 BPE 的相邻对统计，并解释训练与编码的差别。",
+      "question": "同一段文字，为什么不同 tokenizer 会产生不同长度的输入？",
+      "outcome": "从文本到 token ID 走通可逆流程，手算 BPE 的相邻对统计，并解释训练与编码的差别。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-bpe",
+      "demos": [
+        {
+          "modelId": "cs336-bpe",
+          "title": "实际执行 BPE 合并"
+        }
+      ],
+      "sections": [
+        {
+          "title": "从文本到从零训练的闭环",
+          "explanation": "这门课的目标是把数据、分词、网络、优化、系统和评测连成一个可核查的训练过程。先固定原始文本与 tokenizer 版本，才能解释后续 token 预算、损失和上下文长度；下载一个预训练模型不能替代这些组件的实现。",
+          "code": "text = \"low low lower\"\nwords = [list(w) for w in text.split()]",
+          "exercise": "把一次输入的原文字节数、字符数、token 数分别记录；说明它们为什么不能混作一种单位。"
+        },
+        {
+          "title": "字符、字节与词的取舍",
+          "explanation": "字符级切分直观但词表依赖字符集；字节级天然覆盖任意 UTF-8 序列，但单个字符可能占多个字节；按空格分词会遇到未知词和无空格语言。子词方法在压缩与覆盖之间折中，编码规则必须与训练时保持一致。",
+          "code": "raw = \"模型\".encode(\"utf-8\")\nprint(len(raw), len(\"模型\"))",
+          "exercise": "独立核对“模型”的 UTF-8 长度为 6，而 Python 字符数为 2；解释这仍不能给出某个 LLM 的 token 数。"
+        },
+        {
+          "title": "BPE 的训练与编码",
+          "explanation": "训练时统计相邻对并逐步更新规则；编码新文本时按已经学到的合并秩执行，不再对每个新输入重新训练词表。本动画保留词边界、非重叠替换和并列规则，便于复算；完整 byte-level BPE 还要明确预分词与特殊标记。",
+          "code": "pairs = count_adjacent_pairs(words)\nrule = max(pairs, key=pairs.get)\nwords = [merge_nonoverlapping(w, rule) for w in words]",
+          "exercise": "自己统计第一轮全部相邻对；用解码拼回原词，检查合并后是否丢失内容。"
+        },
+        {
+          "title": "把分词选择连接到训练成本",
+          "explanation": "相同字节文本被切成更多 token，可能增加序列长度与计算成本；损失也按该 tokenizer 的条件概率定义。比较模型时要注明 tokenizer，必要时用 bits-per-byte 等更接近原文本的口径。分词器压缩好并不单独证明模型最终质量更高。",
+          "code": "compression = byte_count / token_count",
+          "exercise": "换一段含数字、代码与中文的文本，保留真实 tokenizer 的版本和 token 列表，再解释差异。"
+        }
+      ],
+      "formula": "token 数 ≠ 字符数 ≠ UTF-8 字节数；BPE 每轮合并最高频相邻对",
+      "worked": "用 low、low、lower 作为小语料，初始字符 token 共 11 个。第一轮 l+o 出现 3 次，合并后剩 8 个；再合并 lo+w 后剩 5 个，词边界保持。",
+      "misconception": "词表越大不一定在所有语言或任务上都更好；“一个字一个 token”不是通用规则，特殊 token 也不能与普通文本无条件混用。",
+      "explanation": [
+        "这门课的目标是把数据、分词、网络、优化、系统和评测连成一个可核查的训练过程。先固定原始文本与 tokenizer 版本，才能解释后续 token 预算、损失和上下文长度；下载一个预训练模型不能替代这些组件的实现。",
+        "字符级切分直观但词表依赖字符集；字节级天然覆盖任意 UTF-8 序列，但单个字符可能占多个字节；按空格分词会遇到未知词和无空格语言。子词方法在压缩与覆盖之间折中，编码规则必须与训练时保持一致。",
+        "相同字节文本被切成更多 token，可能增加序列长度与计算成本；损失也按该 tokenizer 的条件概率定义。比较模型时要注明 tokenizer，必要时用 bits-per-byte 等更接近原文本的口径。分词器压缩好并不单独证明模型最终质量更高。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "对 low、low、lower 的 11 个初始字符 token，第一轮合并 l+o（出现 3 次）后共剩几个 token？",
+        "expected": 8,
+        "tolerance": 0,
+        "unit": "个",
+        "hint": "每次替换两个相邻 token 为一个，长度减少 1。",
+        "solution": "11−3=8。注意每个词的边界都保留。",
+        "transfer": "把合并次数设为 0、1、2，核对 token 数 11、8、5，解码始终为 low、low、lower。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l01-material",
+        "cs336-l01-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "attention",
+          "label": "回补 CME 295：Attention 计算"
+        },
+        {
+          "lesson": "compute",
+          "label": "下一讲：PyTorch 与资源核算"
+        }
+      ]
+    },
+    {
+      "id": "compute",
+      "course": "cs336",
+      "unit": "2",
+      "title": "PyTorch 与资源核算：形状、计算、显存一起算",
+      "summary": "读懂张量维度、存储与梯度的关系，核算 FLOP、算术强度和训练状态，解释时间估算的边界。",
+      "question": "一段能运行的张量程序，怎样先算清它会花多少资源？",
+      "outcome": "读懂张量维度、存储与梯度的关系，核算 FLOP、算术强度和训练状态，解释时间估算的边界。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "explanation": [
+        "shape 描述每个轴的含义，stride 描述如何在底层存储中定位元素。转置常只改变视图而不复制；contiguous、reshape 和广播可能改变实际分配。先写清 batch、sequence、feature 轴，再用元素数×dtype 字节数核算逻辑容量。",
+        "一次 m×k 乘 k×n 的稠密矩阵乘约为 2mkn FLOP；反向还要对输入和权重求梯度。原课先用简单网络推导，再得到稠密训练常用的 6ND 数量级。长序列 Attention、重计算和不同稀疏结构需要另核算。",
+        "参数、梯度、优化器状态与激活分别占内存。梯度累积把一次大 batch 拆成微批，需保持正确的损失缩放和更新频率；activation checkpointing 用重算换激活容量。它们减少的是不同部分，不能把一个固定字节系数当所有实现的真值。"
+      ],
+      "formula": "训练 FLOP ≈ 6ND；小时 ≈ 6ND / (GPU数 × 每卡FLOP/s × MFU) / 3600",
+      "worked": "默认 N=1B、D=20B、8 张卡、每卡 100 TFLOP/s、MFU=0.5：工作量 120 EFLOP，有效速度 400 TFLOP/s，用时约 83.33 小时。另设的未分片 Adam 状态约 16 GB。",
+      "misconception": "有足够显存，只说明部分容量约束可能满足；不能推出速度足够。MFU 应按同精度与同稀疏口径比较。",
+      "practice": [
+        "先预测：只把 MFU 从 0.5 降到 0.25，用时变成多少？",
+        "单步看工作量、峰值、有效速度与小时，说明哪一项改变、哪一项未变。",
+        "将 GPU 数翻倍，解释这个理想估计额外依赖的条件。"
+      ],
+      "exercise": {
+        "prompt": "沿用默认案例的 N、D、每卡峰值和 MFU，仅把 GPU 数由 8 增加到 16。理想粗估需要多少小时？保留两位小数。",
+        "expected": 41.67,
+        "tolerance": 0.02,
+        "unit": "小时",
+        "hint": "工作量不变，有效速度翻倍。先用 83.333… 除以 2。",
+        "solution": "6×10⁹×20×10⁹ ÷ (16×100×10¹²×0.5) ÷ 3600 ≈ 41.67 小时。真实扩展时 MFU 可能变化。",
+        "transfer": "独立验证：N=2B、D=20B、GPU=8、峰值=100 TFLOP/s、MFU=0.5。用时应约 166.67 小时；列出真实训练可能偏离的两项额外成本。"
+      },
+      "sources": [
+        "cs336-l02-material",
+        "cs336-l02-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-tokenization",
+          "label": "上一讲：分词与课程全景"
+        },
+        {
+          "lesson": "cs336-architecture",
+          "label": "下一讲：架构与超参数"
+        }
+      ],
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 GPU 吞吐、通信时间、缓存峰值需在实际硬件上独立测量。",
+      "modelId": "compute",
+      "demos": [
+        {
+          "modelId": "compute",
+          "title": "训练工作量与用时"
+        },
+        {
+          "modelId": "cs336-roofline",
+          "title": "附加：算术强度与瓶颈"
+        }
+      ],
+      "sections": [
+        {
+          "title": "张量的形状与内存不是一回事",
+          "explanation": "shape 描述每个轴的含义，stride 描述如何在底层存储中定位元素。转置常只改变视图而不复制；contiguous、reshape 和广播可能改变实际分配。先写清 batch、sequence、feature 轴，再用元素数×dtype 字节数核算逻辑容量。",
+          "code": "elements = 2 * 3 * 4\nlogical_bytes = elements * 2  # bf16",
+          "exercise": "一个 shape=(2,3,4) 的 bf16 张量逻辑大小是多少字节？得到 48 后，再说明 view 与独立副本在分配上的差别。"
+        },
+        {
+          "title": "从矩阵乘到训练 FLOP",
+          "explanation": "一次 m×k 乘 k×n 的稠密矩阵乘约为 2mkn FLOP；反向还要对输入和权重求梯度。原课先用简单网络推导，再得到稠密训练常用的 6ND 数量级。长序列 Attention、重计算和不同稀疏结构需要另核算。",
+          "code": "forward_flops = 2*m*k*n\ntraining_flops_approx = 6*N*D",
+          "exercise": "手算 2×3 乘 3×4 的前向约为 48 FLOP，再检查你的工具是否采用一次乘加算 2 FLOP 的口径。"
+        },
+        {
+          "title": "算术强度与性能上限",
+          "explanation": "相同 FLOP 的程序可以有不同的内存搬运量。算术强度 I=FLOP/byte，与硬件计算峰值、带宽一起决定简化 roofline 上限。逐元素运算常受带宽限制，数据复用好的矩阵乘才更可能受计算限制；实际仍要 benchmark 和 profile。",
+          "code": "intensity = flops / bytes_moved\nroof = min(peak_flops_per_s, bandwidth_bytes_per_s*intensity)",
+          "exercise": "用附加 roofline 演示固定计算量，仅改变 I，指出瓶颈何时从内存转向计算。"
+        },
+        {
+          "title": "训练循环、优化器与容量换速度",
+          "explanation": "参数、梯度、优化器状态与激活分别占内存。梯度累积把一次大 batch 拆成微批，需保持正确的损失缩放和更新频率；activation checkpointing 用重算换激活容量。它们减少的是不同部分，不能把一个固定字节系数当所有实现的真值。",
+          "code": "optimizer.zero_grad()\nfor micro in microbatches:\n    (loss(micro)/len(microbatches)).backward()\noptimizer.step()",
+          "exercise": "解释把 microbatch 数翻倍时，哪类状态仍然常驻，哪些激活峰值可能下降；给出实际验证命令而非凭内存账猜速度。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-architecture",
+      "course": "cs336",
+      "unit": "3",
+      "title": "架构与超参数：从一个 block 看现代 Transformer",
+      "summary": "按 pre-norm 残差路径追踪一次前向，核算 FFN 参数，并用控制变量思路讨论架构选择。",
+      "question": "现代 Transformer 的 norm、位置编码、FFN 和宽深配置，分别解决什么问题？",
+      "outcome": "按 pre-norm 残差路径追踪一次前向，核算 FFN 参数，并用控制变量思路讨论架构选择。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-rms",
+      "demos": [
+        {
+          "modelId": "cs336-rms",
+          "title": "RMSNorm、门控与残差"
+        }
+      ],
+      "sections": [
+        {
+          "title": "用一个 block 建立结构图",
+          "explanation": "现代 decoder block 常用 pre-norm：先归一化，再计算 Attention 或 FFN 分支，最后加回残差。残差保留直接路径，但分支尺度、层数与初始化仍会影响稳定性。不要只看网络图中方框数量，先标出每一步的张量形状。",
+          "code": "h = x + attention(norm(x))\ny = h + ffn(norm(h))",
+          "exercise": "画出 x→norm→branch→加回 x 的两条路径，解释 post-norm 把归一化移到哪里。"
+        },
+        {
+          "title": "RMSNorm 与门控 FFN",
+          "explanation": "LayerNorm 同时使用均值和方差，RMSNorm 只按均方根缩放。本例省略可学习增益，方便核算。SwiGLU 用一条门控支路调节另一条值支路，最后投影回 d_model；比较门控与非门控 MLP 时要匹配参数/计算预算。",
+          "code": "rms = (x.square().mean()+eps).sqrt()\ny = x/rms",
+          "exercise": "独立算 x=[1,−1] 的 RMSNorm，核对均方根约为 1；再解释给向量整体加常数时为何不等同 LayerNorm。"
+        },
+        {
+          "title": "位置、head 与参数形状",
+          "explanation": "没有位置机制的自注意力不能直接区分排列顺序。RoPE 对 Q/K 的成对维度旋转，让点积包含相对位置信息；head 数、head 维度及 KV 分组还会影响缓存和通信。位置编码、长上下文外推与 KV 压缩属于不同问题。",
+          "code": "attention_parameters_approx = 4*d*d\nffn_parameters = 3*d*h",
+          "exercise": "对 d=6、h=12 算出 FFN 参数 216；区分它与 Attention 参数 144 的来源。"
+        },
+        {
+          "title": "超参数靠控制实验决定",
+          "explanation": "学习率、初始化、batch、深宽比例与 weight decay 相互作用。原课用多种架构与经验结果说明取舍；本站不把某次结果改写为永恒规则。一次只更改一个因素，固定数据、训练 token、随机性与验证口径，保留失败运行。",
+          "code": "for width in candidate_widths:\n    run(config={**base, \"width\":width}, fixed_data=True)",
+          "exercise": "写一份两组对照实验的表头：参数、token、FLOP、学习率、验证损失；先说明怎样使比较公平。"
+        }
+      ],
+      "formula": "RMSNorm(x)=x/√(mean(x²)+ε)；SwiGLU(x)=SiLU(xWg)⊙(xWu)Wd",
+      "worked": "d=4、FFN 扩张倍数 2 时，三个标准门控 FFN 矩阵合计 3×4×8=96 参数（不计偏置）。动画另用受控重复映射展示门控与残差，不假装这些参数已训练。",
+      "misconception": "某一种 norm、激活或 head 大小并非脱离训练配方的万能答案；更改架构时同时变化的参数量、FLOP 与优化稳定性必须拆开核对。",
+      "explanation": [
+        "现代 decoder block 常用 pre-norm：先归一化，再计算 Attention 或 FFN 分支，最后加回残差。残差保留直接路径，但分支尺度、层数与初始化仍会影响稳定性。不要只看网络图中方框数量，先标出每一步的张量形状。",
+        "LayerNorm 同时使用均值和方差，RMSNorm 只按均方根缩放。本例省略可学习增益，方便核算。SwiGLU 用一条门控支路调节另一条值支路，最后投影回 d_model；比较门控与非门控 MLP 时要匹配参数/计算预算。",
+        "学习率、初始化、batch、深宽比例与 weight decay 相互作用。原课用多种架构与经验结果说明取舍；本站不把某次结果改写为永恒规则。一次只更改一个因素，固定数据、训练 token、随机性与验证口径，保留失败运行。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "标准 SwiGLU 的 d=6、h=12，不计偏置，gate/up/down 三个矩阵共多少参数？",
+        "expected": 216,
+        "tolerance": 0,
+        "unit": "个",
+        "hint": "每个矩阵含 d×h 参数。",
+        "solution": "3×6×12=216。",
+        "transfer": "设 d=4、扩张倍数 2 再 4，核对参数 96 与 192；解释宽度翻倍时参数为何不是简单翻倍。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l03-material",
+        "cs336-l03-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "compute",
+          "label": "上一讲：PyTorch 与资源核算"
+        },
+        {
+          "lesson": "cs336-attention-moe",
+          "label": "下一讲：注意力替代与 MoE"
+        }
+      ]
+    },
+    {
+      "id": "cs336-attention-moe",
+      "course": "cs336",
+      "unit": "4",
+      "title": "注意力替代与 MoE：把稀疏计算放在哪里",
+      "summary": "区分改变 Attention 机制与按 token 选择 FFN 专家，复算路由权重、激活参数和线性状态。",
+      "question": "长上下文与大模型都太贵时，线性状态、稀疏注意力和稀疏专家怎样分担成本？",
+      "outcome": "区分改变 Attention 机制与按 token 选择 FFN 专家，复算路由权重、激活参数和线性状态。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-moe",
+      "demos": [
+        {
+          "modelId": "cs336-moe",
+          "title": "top-k 专家路由与汇总"
+        },
+        {
+          "modelId": "cs336-linear-attention",
+          "title": "附加：线性 Attention 状态"
+        }
+      ],
+      "sections": [
+        {
+          "title": "先看长上下文的二次项",
+          "explanation": "标准全注意力形成 QKᵀ 的配对关系，序列长时成本增长很快。局部/滑窗、全局 token、稀疏选择与系统优化都可降低不同成本。FlashAttention 主要改变访存和中间矩阵物化方式，不是把标准 Attention 改成另一种近似。",
+          "code": "score_elements = sequence_length**2",
+          "exercise": "把长度 128 改为 256，完整分数矩阵元素数增到几倍？再说明滑窗宽度固定时的不同增长方式。"
+        },
+        {
+          "title": "线性与递归状态是机制取舍",
+          "explanation": "当特征映射允许结合律重排时，可以先累计 KᵀV 或递归更新状态，避免保存所有 token 对。本站补充演示给非负特征加归一化分母的线性变体；它与 softmax 不等价。Mamba、gated delta 等还会加入不同的状态更新与遗忘机制。",
+          "code": "S = S + outer(k, v)\nz = z + k\ny = (q @ S)/(q @ z)",
+          "exercise": "用附加演示的前三个 token，直接逐 token 算权重与状态读取两种形式，核对结果一致。"
+        },
+        {
+          "title": "MoE 路由和专家输出分开算",
+          "explanation": "专家层把单一大 FFN 变成多个专家，路由器按 token 选择子集并赋权。token-choice、expert-choice、容量限制和路由归一化存在不同设计。本例只固定一种 top-k + 所选 softmax，先保证前向结果可复算。",
+          "code": "chosen = top_k(router_logits,k)\ny = sum(gate[j]*expert[i](x) for j,i in enumerate(chosen))",
+          "exercise": "手算 k=1 与 k=2 的结果，解释为何第二个专家激活后不能简单对两个输出取平均。"
+        },
+        {
+          "title": "训练稳定性与系统代价",
+          "explanation": "专家负载不均会产生拥塞或 token 丢弃，辅助损失、共享专家和容量策略都在处理不同问题。专家跨卡时还有 all-to-all 与设备布局；总参数、激活参数、训练数据需求和有效吞吐需要分别报告。",
+          "code": "active_expert_parameters = k * parameters_per_expert",
+          "exercise": "给出一个“激活参数更少但通信更慢”的可能场景，并列出 profiler 中需要采集的证据。"
+        }
+      ],
+      "formula": "MoE(x)=Σselected gᵢ(x)Eᵢ(x)；线性状态示例 Sₜ=Sₜ₋₁+kₜvₜᵀ",
+      "worked": "默认 4 专家、top-2、路由分数 [2,1,0,−1]、x=2。所选权重约 [0.7311,0.2689]，专家输出 [2,4]，汇总约 2.5379；专家部分总参数 400、激活 200。",
+      "misconception": "激活专家少不意味着总权重存储少或吞吐一定提升。线性 Attention 也不能把 softmax 原式随意交换括号后宣称完全等价。",
+      "explanation": [
+        "标准全注意力形成 QKᵀ 的配对关系，序列长时成本增长很快。局部/滑窗、全局 token、稀疏选择与系统优化都可降低不同成本。FlashAttention 主要改变访存和中间矩阵物化方式，不是把标准 Attention 改成另一种近似。",
+        "当特征映射允许结合律重排时，可以先累计 KᵀV 或递归更新状态，避免保存所有 token 对。本站补充演示给非负特征加归一化分母的线性变体；它与 softmax 不等价。Mamba、gated delta 等还会加入不同的状态更新与遗忘机制。",
+        "专家负载不均会产生拥塞或 token 丢弃，辅助损失、共享专家和容量策略都在处理不同问题。专家跨卡时还有 all-to-all 与设备布局；总参数、激活参数、训练数据需求和有效吞吐需要分别报告。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "8 个专家，每个 100 参数，一个 token 只激活 top-2。不计共享层，本 token 激活多少专家参数？",
+        "expected": 200,
+        "tolerance": 0,
+        "unit": "个",
+        "hint": "不要把专家总数直接代入激活数量。",
+        "solution": "2×100=200；总专家参数为 800。",
+        "transfer": "把 k=1、2 分别核算，保留路由权重、实际输出与总/激活参数；说明其中哪些不等于真实耗时。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l04-material",
+        "cs336-l04-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-architecture",
+          "label": "上一讲：架构与超参数"
+        },
+        {
+          "lesson": "cs336-hardware",
+          "label": "下一讲：GPU 与 TPU"
+        }
+      ]
+    },
+    {
+      "id": "cs336-hardware",
+      "course": "cs336",
+      "unit": "5",
+      "title": "GPU 与 TPU：计算之外还有搬运",
+      "summary": "用执行层级、内存层级和 roofline 解释瓶颈，并设计有口径的 benchmark。",
+      "question": "为什么同一块 GPU，矩阵乘很快，逐元素小操作却可能跑不满？",
+      "outcome": "用执行层级、内存层级和 roofline 解释瓶颈，并设计有口径的 benchmark。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-roofline",
+      "demos": [
+        {
+          "modelId": "cs336-roofline",
+          "title": "计算与带宽的双重限制"
+        }
+      ],
+      "sections": [
+        {
+          "title": "执行层级：thread、warp、block 与 SM",
+          "explanation": "GPU 用大量线程吞吐相似工作，warp 中线程执行结构相关的指令，block 映射到 SM 并共享一部分资源。分支分歧、线程数、寄存器和共享内存使用都会影响可同时驻留的工作量；增加线程并不保证线性提速。",
+          "code": "threads_per_block = 256\nblocks = (elements + threads_per_block - 1)//threads_per_block",
+          "exercise": "给 N=1000 算出 4 个 block，并指出最后一个 block 为什么需要边界检查。"
+        },
+        {
+          "title": "内存层级与数据复用",
+          "explanation": "HBM 容量大但离算术单元远，片上 cache、共享内存和寄存器更近。让相邻线程访问连续地址、复用已装入数据、避免无谓中间写回，通常比只数数学运算更接近真实性能问题。cache 命中和 bank conflict 需结合实际布局核对。",
+          "code": "bytes_moved = reads*element_bytes + writes*element_bytes",
+          "exercise": "为 y=2x+1 逐项列出读取和写入，解释融合两步可能节省哪次临时数组访问。"
+        },
+        {
+          "title": "Tensor core、精度与 TPU 取舍",
+          "explanation": "专用矩阵单元能提升合适形状与精度下的吞吐，但输入对齐、累加精度和数值容差仍需验证。TPU 也围绕高吞吐矩阵计算与内存/互连组织设计；比较不能只取两个不同口径的峰值数字。",
+          "code": "flops = 2*m*k*n\ncheck_close(reference, accelerated, atol=..., rtol=...)",
+          "exercise": "为相同矩阵乘列明 dtype、稀疏口径、形状与误差阈值，再讨论硬件性能。"
+        },
+        {
+          "title": "Roofline 与可复现测量",
+          "explanation": "本章动画只算硬件上限，不跑 GPU。真实 benchmark 要 warmup、同步异步工作、多次重复，并报告分布；profiler 用来解释 kernel、内存和间隙。知道瓶颈后才决定融合、分块或改算法。",
+          "code": "warmup()\nsynchronize()\nmeasure_repeated_runs()",
+          "exercise": "固定峰值与带宽，改变算术强度，找出理论转折点 I=峰值/带宽；再写出可证伪该理想假设的实际测量方案。"
+        }
+      ],
+      "formula": "算术强度 I=FLOP/byte；性能上界=min(峰值计算速度,内存带宽×I)",
+      "worked": "固定 10¹² FLOP，I=16 FLOP/byte，需要搬 62.5 GB。峰值 50 TFLOP/s、带宽 1000 GB/s 时，计算下界 20 ms、搬运下界 62.5 ms，简化上限 16 TFLOP/s。",
+      "misconception": "峰值规格不是任意程序都能达到的速度；bandwidth、occupancy 与 MFU 也不是同一个指标。",
+      "explanation": [
+        "GPU 用大量线程吞吐相似工作，warp 中线程执行结构相关的指令，block 映射到 SM 并共享一部分资源。分支分歧、线程数、寄存器和共享内存使用都会影响可同时驻留的工作量；增加线程并不保证线性提速。",
+        "HBM 容量大但离算术单元远，片上 cache、共享内存和寄存器更近。让相邻线程访问连续地址、复用已装入数据、避免无谓中间写回，通常比只数数学运算更接近真实性能问题。cache 命中和 bank conflict 需结合实际布局核对。",
+        "本章动画只算硬件上限，不跑 GPU。真实 benchmark 要 warmup、同步异步工作、多次重复，并报告分布；profiler 用来解释 kernel、内存和间隙。知道瓶颈后才决定融合、分块或改算法。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "峰值 50 TFLOP/s、带宽 1000 GB/s、I=8 FLOP/byte，简化 roofline 上界是多少 TFLOP/s？",
+        "expected": 8,
+        "tolerance": 1e-06,
+        "unit": "TFLOP/s",
+        "hint": "先把 GB/s×FLOP/byte 转成 TFLOP/s。",
+        "solution": "min(50,1000×8/1000)=8 TFLOP/s。",
+        "transfer": "默认 I=16 时核对 16 TFLOP/s；I=64 时核对 50 TFLOP/s，说明图上限不是实测值。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 GPU 吞吐、通信时间、缓存峰值需在实际硬件上独立测量。",
+      "sources": [
+        "cs336-l05-material",
+        "cs336-l05-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-attention-moe",
+          "label": "上一讲：注意力替代与 MoE"
+        },
+        {
+          "lesson": "cs336-kernels",
+          "label": "下一讲：Kernel 与 Triton"
+        }
+      ]
+    },
+    {
+      "id": "cs336-kernels",
+      "course": "cs336",
+      "unit": "6",
+      "title": "Kernel 与 Triton：把计算按数据复用组织起来",
+      "summary": "逐块执行一个实际矩阵乘累加，说明 fusion、mask、tiling 与 benchmark 的不同职责。",
+      "question": "怎样既写对一个 kernel，又证明优化减少了真正的瓶颈？",
+      "outcome": "逐块执行一个实际矩阵乘累加，说明 fusion、mask、tiling 与 benchmark 的不同职责。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-tiling",
+      "demos": [
+        {
+          "modelId": "cs336-tiling",
+          "title": "实际乘加与分块读取估算"
+        }
+      ],
+      "sections": [
+        {
+          "title": "先做基准与数值对照",
+          "explanation": "原课从 benchmarking/profiling 到 GeLU、softmax、row sum 和 matmul+ReLU 的逐级例子。第一步要对齐输入、dtype、容差和输出；同一个程序的编译时间、warmup 与稳定执行时间必须分开。",
+          "code": "reference = A @ B\nassert_close(kernel(A,B), reference)",
+          "exercise": "为一个新 kernel 写出误差、边界尺寸、空输入和不同 dtype 的检查列表，说明为什么只测整齐尺寸不够。"
+        },
+        {
+          "title": "融合与逐行 softmax",
+          "explanation": "多个逐元素操作分成多 kernel 会产生 launch 与中间数组读写；融合可以将中间结果留近处。row-wise softmax 还要先求行最大值保持稳定，再指数与归一化。数学等价不保证有限精度结果逐位相等。",
+          "code": "shifted = row-row.max()\nweights = exp(shifted)/exp(shifted).sum()",
+          "exercise": "用 [1000,1001] 说明为何要减最大值；给出浮点误差允许范围而非要求字符串完全相同。"
+        },
+        {
+          "title": "Triton 的 block 思维与 mask",
+          "explanation": "用 program id 选择处理块，用 arange 构造局部索引，再对越界项 mask。load/compute/store 的形状必须一致；尾块不足时不能偷读下一行。本站动画用 JavaScript 逐块实际计算，完整 GPU 练习仍需在 Triton 环境执行。",
+          "code": "idx = block_id*BLOCK + arange(BLOCK)\nx = load(ptr+idx, mask=idx<N, other=0)",
+          "exercise": "对 N=10、BLOCK=4，列出第三块的有效索引 8、9，并说明其余位置该怎样处理。"
+        },
+        {
+          "title": "矩阵乘分块与性能证据",
+          "explanation": "分块把 A/B 子块装入近处，重复使用后跨 K 累加 C。边界、布局、转置、epilogue 融合和寄存器压力都会影响性能。先核对完整输出，再用 profiler 与重复测量解释变化，而不是把理想读取次数当作实测时间。",
+          "code": "for k0 in range(0,N,TILE):\n    accumulator += A_tile @ B_tile",
+          "exercise": "换 tile=2、4、8，核对同一 C[0,0] 不变；在真实 GPU 作业中另报告延迟与显存，不填动画中的估算当证据。"
+        }
+      ],
+      "formula": "Cᵢⱼ=ΣₖAᵢₖBₖⱼ；朴素简化读取约2n³；理想分块示例约2n²ceil(n/tile)",
+      "worked": "n=8、tile=4 时，C[0,0] 分两个 K 块累加；朴素模型读 1024 个输入元素，理想复用模型读 256 个。数值由浏览器算，读次数是假设下的估算。",
+      "misconception": "更大的 tile 可能消耗更多寄存器/共享内存，降低并发；减少估算访存不等于已经取得 GPU 加速。",
+      "explanation": [
+        "原课从 benchmarking/profiling 到 GeLU、softmax、row sum 和 matmul+ReLU 的逐级例子。第一步要对齐输入、dtype、容差和输出；同一个程序的编译时间、warmup 与稳定执行时间必须分开。",
+        "多个逐元素操作分成多 kernel 会产生 launch 与中间数组读写；融合可以将中间结果留近处。row-wise softmax 还要先求行最大值保持稳定，再指数与归一化。数学等价不保证有限精度结果逐位相等。",
+        "分块把 A/B 子块装入近处，重复使用后跨 K 累加 C。边界、布局、转置、epilogue 融合和寄存器压力都会影响性能。先核对完整输出，再用 profiler 与重复测量解释变化，而不是把理想读取次数当作实测时间。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "按本章简化模型 n=8、tile=4，2n²ceil(n/tile) 共读多少个输入元素？",
+        "expected": 256,
+        "tolerance": 0,
+        "unit": "个",
+        "hint": "先算 ceil(8/4)=2。",
+        "solution": "2×8²×2=256，未计现实缓存与边界浪费。",
+        "transfer": "设 n=12，分别用 tile=4 和 8，C[0,0] 应相同；列出不整除尾块，并用完整矩阵参考验证。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 GPU 吞吐、通信时间、缓存峰值需在实际硬件上独立测量。",
+      "sources": [
+        "cs336-l06-material",
+        "cs336-l06-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-hardware",
+          "label": "上一讲：GPU 与 TPU"
+        },
+        {
+          "lesson": "parallel",
+          "label": "下一讲：并行 I"
+        }
+      ]
+    },
+    {
+      "id": "parallel",
+      "course": "cs336",
+      "unit": "7",
+      "title": "并行 I：集合通信、复制与分片",
+      "summary": "解释 all-reduce、reduce-scatter、all-gather 的作用，复算梯度同步与状态容量，区分 DP/TP/PP。",
+      "question": "把计算放到多卡后，怎样保证数学结果一致，并看清通信和状态代价？",
+      "outcome": "解释 all-reduce、reduce-scatter、all-gather 的作用，复算梯度同步与状态容量，区分 DP/TP/PP。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "explanation": [
+        "单卡内的寄存器/共享内存/HBM 之外，多卡还有节点内互连、跨节点网络与更大系统。减少通信量、提升数据复用与让通信重叠计算是共同主题；同一个集体操作在不同拓扑和消息大小下可能表现不同。",
+        "broadcast 一份到多份，gather 多份到一份，all-gather 让每卡得到所有分片；reduce-scatter 先聚合再按片分发，all-reduce 让每卡得到完整聚合结果。先说明输入输出布局，再选择 API，不要只记通信名词。",
+        "原课有 torch.distributed、DP、tensor parallel 与 pipeline 小程序。验证分布式实现时，固定相同全局 batch、损失 reduction 和随机性，再与单进程参考对照；每卡样本数不同需加权平均，不能盲目除 world_size。"
+      ],
+      "formula": "DDP 每卡持久状态 ≈ 16N 字节；ZeRO-3 理想均分 ≈ 16N/G 字节",
+      "worked": "2B 参数、4 张卡：DDP 每卡状态约 32 GB；ZeRO-1 约 14 GB；ZeRO-2 约 11 GB；ZeRO-3 约 8 GB。只比较所列持久状态。",
+      "misconception": "显存均分不代表通信免费。ZeRO-3 临时 all-gather 会引入峰值；实际不等量 batch 的梯度需要按样本数加权。",
+      "practice": [
+        "先预测 DDP 从 4 张卡变成 8 张卡后，每卡持久状态是否减半。",
+        "切换 ZeRO-1、2、3，逐项指出哪一类状态开始被分片。",
+        "查看各卡两维梯度，手算平均值，再核对更新结果。"
+      ],
+      "exercise": {
+        "prompt": "N=2B、G=4、ZeRO-3，采用本例 16 字节/参数口径。每卡理想持久状态是多少 GB（十进制）？",
+        "expected": 8,
+        "tolerance": 1e-06,
+        "unit": "GB",
+        "hint": "先计算 2×10⁹×16 字节，再除以 4，最后除以 10⁹。",
+        "solution": "2×10⁹×16/4/10⁹=8 GB。不含激活、临时通信缓冲与 all-gather 峰值。",
+        "transfer": "独立验证：N=1B、G=8、ZeRO-2。每卡应为 2+14/8=3.75 GB；写清保留完整的那一类状态。"
+      },
+      "sources": [
+        "cs336-l07-material",
+        "cs336-l07-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-kernels",
+          "label": "上一讲：Kernel 与 Triton"
+        },
+        {
+          "lesson": "cs336-parallel-systems",
+          "label": "下一讲：并行 II"
+        }
+      ],
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 GPU 吞吐、通信时间、缓存峰值需在实际硬件上独立测量。",
+      "modelId": "parallel",
+      "demos": [
+        {
+          "modelId": "parallel",
+          "title": "梯度同步与训练状态分片"
+        },
+        {
+          "modelId": "cs336-tensorparallel",
+          "title": "附加：切输入维或输出维"
+        }
+      ],
+      "sections": [
+        {
+          "title": "网络层级成为新的内存层级",
+          "explanation": "单卡内的寄存器/共享内存/HBM 之外，多卡还有节点内互连、跨节点网络与更大系统。减少通信量、提升数据复用与让通信重叠计算是共同主题；同一个集体操作在不同拓扑和消息大小下可能表现不同。",
+          "code": "communication_seconds_ideal = bytes / effective_bandwidth",
+          "exercise": "把每步需要传的字节数与消息次数分别记录，说明为何仅除以标称带宽不能预测小消息延迟。"
+        },
+        {
+          "title": "集合通信从数学语义开始",
+          "explanation": "broadcast 一份到多份，gather 多份到一份，all-gather 让每卡得到所有分片；reduce-scatter 先聚合再按片分发，all-reduce 让每卡得到完整聚合结果。先说明输入输出布局，再选择 API，不要只记通信名词。",
+          "code": "sum_g = all_reduce(local_gradient)\nmean_g = sum_g / world_size",
+          "exercise": "给两卡梯度 [1,3] 与 [3,1]，分别写出 reduce-scatter 和 all-reduce 的预期布局。"
+        },
+        {
+          "title": "数据并行与分片训练状态",
+          "explanation": "普通 DDP 在不同样本上求梯度，并复制模型和状态；FSDP/ZeRO 按阶段分片状态、临时集合所需参数。本站给明 16 字节/参数的 Adam 状态假设，容量账不包括激活和瞬时 all-gather。",
+          "code": "local_state = partition(optimizer_state, ranks)\nparameters = all_gather(parameter_shards)",
+          "exercise": "在动画逐级切换 ZeRO，逐项指出哪个状态开始均分，不要只看最后一个总数。"
+        },
+        {
+          "title": "把数值验证扩展到程序验证",
+          "explanation": "原课有 torch.distributed、DP、tensor parallel 与 pipeline 小程序。验证分布式实现时，固定相同全局 batch、损失 reduction 和随机性，再与单进程参考对照；每卡样本数不同需加权平均，不能盲目除 world_size。",
+          "code": "assert_close(distributed_global_grad, single_process_grad)",
+          "exercise": "用附加 TP 演示分别切输入/输出维，确认最终结果一致，再指出对应真实通信在何处发生。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-parallel-systems",
+      "course": "cs336",
+      "unit": "8",
+      "title": "并行 II：组合策略与流水线空泡",
+      "summary": "画出形状与通信布局，实际排一次前向流水线，计算空泡并识别理想模型的假设。",
+      "question": "模型、激活和互连都有限时，数据、张量、流水线与专家并行如何组合？",
+      "outcome": "画出形状与通信布局，实际排一次前向流水线，计算空泡并识别理想模型的假设。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-pipeline",
+      "demos": [
+        {
+          "modelId": "cs336-pipeline",
+          "title": "逐槽运行前向流水线"
+        },
+        {
+          "modelId": "cs336-tensorparallel",
+          "title": "层内矩阵分片验证"
+        }
+      ],
+      "sections": [
+        {
+          "title": "拓扑与集体通信约束组合方式",
+          "explanation": "节点内快互连适合频繁同步，跨节点慢链路更需要控制消息频率和量。树、mesh 与更灵活互连的取舍影响 all-reduce 与 all-to-all；没有只由卡数决定的最优并行策略。先把通信所在维度与硬件域配对。",
+          "code": "mesh = {\"data\":DP, \"tensor\":TP, \"pipeline\":PP}",
+          "exercise": "为 8 卡构造 DP=2、TP=2、PP=2 的布局，说明哪类通信最频繁，为什么应优先放在快链路。"
+        },
+        {
+          "title": "ZeRO、tensor 与 sequence parallel",
+          "explanation": "ZeRO 减少复制的训练状态，tensor parallel 切层内矩阵，sequence parallel 按序列轴分配部分激活。它们处理的对象不同，往往能组合；切分后下一层需要何种布局，决定是否要 all-gather、reduce-scatter 或 all-reduce。",
+          "code": "x_partial = local_matmul(x_shard, W_shard)\ny = all_reduce(x_partial)",
+          "exercise": "用附加 TP 案例验证：切输入维要加部分和；切输出维可保留分片或拼接。用形状说明，避免“切列永远用某个通信”的死记。"
+        },
+        {
+          "title": "流水线调度与空泡",
+          "explanation": "把层段分到不同设备，微批沿阶段流动；首尾填充与排空造成空泡，阶段不均匀会进一步拉低效率。训练中的 GPipe、1F1B、interleaving 等还要调度反向、激活生命周期和梯度版本。本动画只落实均匀前向的可核查部分。",
+          "code": "for t in range(m+p-1):\n    stage_s_runs_microbatch = t-s",
+          "exercise": "把每个时间槽的空闲阶段圈出来，验证有效阶段槽始终为 pm，而不是把图里所有槽都算作有效。"
+        },
+        {
+          "title": "专家并行、上下文与真实吞吐",
+          "explanation": "MoE 把 token 路由到专家，常带来 all-to-all；长序列又增加激活和 Attention 通信。选择组合时应同时记录参数状态、激活峰值、通信次数/大小、端到端 step time 与验证误差。一个方案的局部 kernel 更快并不保证全局训练更快。",
+          "code": "step_time = profile_end_to_end_step()",
+          "exercise": "提出一种 TP 更大但跨节点同步增加的配置，列出用于判断成败的三项实测指标。"
+        }
+      ],
+      "formula": "均匀前向 fill/drain 流水线：槽数=m+p−1；利用率=m/(m+p−1)",
+      "worked": "p=4、m=4 时，共 7 个时间槽、16 个有效阶段槽、12 个空泡，理想利用率为 4/7。改 m=8 后利用率为 8/11；这里不模拟反向。",
+      "misconception": "前向流水线利用率不是实际训练 MFU；ZeRO 持久状态均分也不是 GPU 峰值显存预测。",
+      "explanation": [
+        "节点内快互连适合频繁同步，跨节点慢链路更需要控制消息频率和量。树、mesh 与更灵活互连的取舍影响 all-reduce 与 all-to-all；没有只由卡数决定的最优并行策略。先把通信所在维度与硬件域配对。",
+        "ZeRO 减少复制的训练状态，tensor parallel 切层内矩阵，sequence parallel 按序列轴分配部分激活。它们处理的对象不同，往往能组合；切分后下一层需要何种布局，决定是否要 all-gather、reduce-scatter 或 all-reduce。",
+        "MoE 把 token 路由到专家，常带来 all-to-all；长序列又增加激活和 Attention 通信。选择组合时应同时记录参数状态、激活峰值、通信次数/大小、端到端 step time 与验证误差。一个方案的局部 kernel 更快并不保证全局训练更快。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "均匀前向流水线 p=4、m=8，理想有效阶段槽利用率是多少？填写 0 到 1 的数，保留四位小数。",
+        "expected": 0.7272727272727273,
+        "tolerance": 0.0001,
+        "unit": "比例",
+        "hint": "先算总时间槽 8+4−1。",
+        "solution": "8/11≈0.7273；不包含反向与通信。",
+        "transfer": "将 p=3、m=2，核对槽数 4、有效阶段槽 6、空泡 6、利用率 0.5；自己画排程。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 GPU 吞吐、通信时间、缓存峰值需在实际硬件上独立测量。",
+      "sources": [
+        "cs336-l08-material",
+        "cs336-l08-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "parallel",
+          "label": "上一讲：并行 I"
+        },
+        {
+          "lesson": "cs336-scaling-basics",
+          "label": "下一讲：Scaling Laws I"
+        }
+      ]
+    },
+    {
+      "id": "cs336-scaling-basics",
+      "course": "cs336",
+      "unit": "9",
+      "title": "Scaling Laws I：在同一预算里分配模型与数据",
+      "summary": "用可约损失项和等算力约束推演取舍，区分经验拟合、解析最优与实际训练结果。",
+      "question": "更多算力应该用于更大的模型，还是让模型读更多数据？",
+      "outcome": "用可约损失项和等算力约束推演取舍，区分经验拟合、解析最优与实际训练结果。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-scaling",
+      "demos": [
+        {
+          "modelId": "cs336-scaling",
+          "title": "等预算分配与解析最优"
+        }
+      ],
+      "sections": [
+        {
+          "title": "经验规律先回答可预测什么",
+          "explanation": "Scaling laws 把规模、数据、算力与损失用简单函数近似，价值在于做预算前可测试的预测。历史工作采用过不同变量与拟合方法；“看起来像直线”不能替代留出规模验证和误差记录。",
+          "code": "fit = fit_small_runs(train_runs)\nerror = predict(fit, heldout_scale)-observed_loss",
+          "exercise": "选择一个从未用于拟合的中间规模作验证，写出怎样判定外推开始失效。"
+        },
+        {
+          "title": "区分不可约与可约损失",
+          "explanation": "常见形式把不可约项与模型/数据不足项分开。它们的系数、指数都要估计，且可能互相补偿。动画给定一个明确函数，让你先看清变量关系，再理解真实拟合的困难。",
+          "code": "loss = floor + a/N**alpha + b/D**beta",
+          "exercise": "增加 N、固定 D 时损失怎样变？再解释同预算时 D 不再能固定，因此答案为何不同。"
+        },
+        {
+          "title": "等算力曲线与 compute-optimal",
+          "explanation": "稠密模型训练常先用 C≈6ND 做约束，等算力实验在同一预算下改变 N/D。Kaplan 与 Chinchilla 等工作采用不同训练与拟合设计，得到的最佳分配需要在相应口径下解读，不能把某条经验比例脱离条件套用。",
+          "code": "D = compute_budget/(6*N)",
+          "exercise": "在动画固定预算，仅改 N，找出先下降后上升的损失；用两个可约项解释极小点。"
+        },
+        {
+          "title": "从小实验到训练决策",
+          "explanation": "做多条计算预算曲线、控制训练充分程度、观察验证损失而非只看训练误差。还要考虑推理成本、可获得的数据和目标能力；计算最优不一定等同总生命周期成本最优。",
+          "code": "report = {\"N\":N,\"D\":D,\"FLOPs\":C,\"val_loss\":L}",
+          "exercise": "列出预算翻倍时除 N/D 外还需要重新核对的学习率、batch、数据质量和验证口径。"
+        }
+      ],
+      "formula": "示例 L(N,D)=1+10/√N+20/√D；约束 ND=C，故 N*=0.5√C",
+      "worked": "归一化预算 C=1600、N=20 时 D=80；模型项与数据项均为 √5，L≈5.4721。这些系数是本站人为定义，专用于演示，不是 Chinchilla 的拟合常数。",
+      "misconception": "幂律关系是特定数据、配方和规模范围的经验模型；外推不是运行，最优参数/token 比也不是普适固定常数。",
+      "explanation": [
+        "Scaling laws 把规模、数据、算力与损失用简单函数近似，价值在于做预算前可测试的预测。历史工作采用过不同变量与拟合方法；“看起来像直线”不能替代留出规模验证和误差记录。",
+        "常见形式把不可约项与模型/数据不足项分开。它们的系数、指数都要估计，且可能互相补偿。动画给定一个明确函数，让你先看清变量关系，再理解真实拟合的困难。",
+        "做多条计算预算曲线、控制训练充分程度、观察验证损失而非只看训练误差。还要考虑推理成本、可获得的数据和目标能力；计算最优不一定等同总生命周期成本最优。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "在本章归一化约束 ND=1600 下，选择 N=20，D 必须是多少？",
+        "expected": 80,
+        "tolerance": 1e-06,
+        "unit": "单位",
+        "hint": "把预算除以 N。",
+        "solution": "D=1600/20=80。本章单位是人为归一化，不直接表示真实 token。",
+        "transfer": "C=3600 时解析 N*=30、D*=120。分别计算两项损失；说明假设系数改变后最优点也会变。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l09-material",
+        "cs336-l09-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-parallel-systems",
+          "label": "上一讲：并行 II"
+        },
+        {
+          "lesson": "cs336-inference",
+          "label": "下一讲：推理"
+        }
+      ]
+    },
+    {
+      "id": "cs336-inference",
+      "course": "cs336",
+      "unit": "10",
+      "title": "推理：prefill、decode 与 KV 缓存",
+      "summary": "核算 KV 缓存、区分吞吐和延迟，并解释压缩、推测解码、连续批处理与分页管理的作用。",
+      "question": "同一个模型，为什么处理长提示和连续生成 token 的瓶颈不同？",
+      "outcome": "核算 KV 缓存、区分吞吐和延迟，并解释压缩、推测解码、连续批处理与分页管理的作用。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-kv",
+      "demos": [
+        {
+          "modelId": "cs336-kv",
+          "title": "KV 容量与 prefill/decode"
+        },
+        {
+          "modelId": "cs336-serving",
+          "title": "附加：连续批处理排程"
+        }
+      ],
+      "sections": [
+        {
+          "title": "先定义服务目标与推理负载",
+          "explanation": "prefill 同时处理提示的多个位置，decode 每轮生成少量新 token；batch 与序列长度改变算术强度。延迟、time-to-first-token、每 token 间隔、总吞吐与成本是不同目标，比较服务引擎必须同时注明 workload。",
+          "code": "request_metrics = {\"ttft\":..., \"tpot\":..., \"tokens_per_s\":...}",
+          "exercise": "设计两个负载：长输入短输出与短输入长输出。预测它们分别更偏向哪部分工作，再说明需要测量什么。"
+        },
+        {
+          "title": "缓存与架构共同决定状态大小",
+          "explanation": "缓存每层的历史 K/V，避免每轮重算旧表示。MQA、GQA、MLA 等采用不同的头或潜表示组织；它们对 cache 大小、读取和质量的影响不能只看一个参数。动画使用固定 KV head 计数，真实模型层数与 dtype 需从配置读。",
+          "code": "cache_bytes = layers*2*B*T*kv_heads*head_dim*element_bytes",
+          "exercise": "单层算完后再乘实际层数；独立核对 MHA/GQA/MQA 的 KV head 数，而不是把 Query heads 代进去。"
+        },
+        {
+          "title": "量化、剪枝与推测校验",
+          "explanation": "量化压缩权重或 KV 的表示，可能引入误差与反量化成本；剪枝与蒸馏改变模型容量，需要质量评估。推测解码由小模型先提议、目标模型批量校验，正确的接受/拒绝与重采样才能保持目标分布，不能把猜中的比例直接当最终速度。",
+          "code": "draft = propose_tokens()\naccepted = verify_with_target(draft)",
+          "exercise": "为一个量化方案同时报告模型质量、cache 容量和实际延迟，给出不接受该方案的条件。"
+        },
+        {
+          "title": "调度和存储管理也在推理路径上",
+          "explanation": "continuous batching 在请求结束后补入新请求，减少槽位空闲；paged attention 通过块式管理 KV 内存减少碎片并支持共享。它们改变服务组织，不直接改逻辑 token 数或 Attention 的数学答案；前后处理与网络也会影响端到端体验。",
+          "code": "active = admit_under_token_and_cache_budget(waiting)",
+          "exercise": "比较相同模型、相同输入输出长度和相同并发下的调度结果，不把不同硬件或采样预算藏在比较里。"
+        }
+      ],
+      "formula": "单层 KV bytes=2×batch×T×KVheads×headDim×bytes_per_element",
+      "worked": "默认 batch=2、T=64、KVheads=2、headDim=32、每元素 2 字节，单层 KV 为 32768 字节；生成下一 token 后为 33280 字节。8 个 Query heads 与 KV heads 分开计数。",
+      "misconception": "缓存不会让新 Query 不看历史；量化/剪枝属于可能有损的捷径，而正确的 speculative sampling 需用目标模型校验并保持目标分布。",
+      "explanation": [
+        "prefill 同时处理提示的多个位置，decode 每轮生成少量新 token；batch 与序列长度改变算术强度。延迟、time-to-first-token、每 token 间隔、总吞吐与成本是不同目标，比较服务引擎必须同时注明 workload。",
+        "缓存每层的历史 K/V，避免每轮重算旧表示。MQA、GQA、MLA 等采用不同的头或潜表示组织；它们对 cache 大小、读取和质量的影响不能只看一个参数。动画使用固定 KV head 计数，真实模型层数与 dtype 需从配置读。",
+        "continuous batching 在请求结束后补入新请求，减少槽位空闲；paged attention 通过块式管理 KV 内存减少碎片并支持共享。它们改变服务组织，不直接改逻辑 token 数或 Attention 的数学答案；前后处理与网络也会影响端到端体验。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "单层 KV：batch=1、T=32、KVheads=2、headDim=16，每元素 2 字节。K 和 V 合计多少字节？",
+        "expected": 4096,
+        "tolerance": 0,
+        "unit": "字节",
+        "hint": "K、V 两份各为 batch×T×KVheads×headDim 个元素。",
+        "solution": "2×1×32×2×16×2=4096 字节。",
+        "transfer": "保持 T=64、batch=2、headDim=32，依次选 KVheads=1、2、8，核对单层缓存按 1:2:8 变化。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 GPU 吞吐、通信时间、缓存峰值需在实际硬件上独立测量。",
+      "sources": [
+        "cs336-l10-material",
+        "cs336-l10-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-scaling-basics",
+          "label": "上一讲：Scaling Laws I"
+        },
+        {
+          "lesson": "cs336-scaling-practice",
+          "label": "下一讲：Scaling Laws II"
+        }
+      ]
+    },
+    {
+      "id": "cs336-scaling-practice",
+      "course": "cs336",
+      "unit": "11",
+      "title": "Scaling Laws II：拟合、学习率与配方迁移",
+      "summary": "复算一个幂律拟合与留出验证，解释初始化、学习率、batch、数据重复和训练配方的迁移约束。",
+      "question": "拿到几次小模型实验，怎样避免做出漂亮却错误的大模型预测？",
+      "outcome": "复算一个幂律拟合与留出验证，解释初始化、学习率、batch、数据重复和训练配方的迁移约束。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-fit",
+      "demos": [
+        {
+          "modelId": "cs336-fit",
+          "title": "手工拟合与留出规模验证"
+        },
+        {
+          "modelId": "cs336-scaling",
+          "title": "回看：同预算分配"
+        }
+      ],
+      "sections": [
+        {
+          "title": "配方是 scaling 实验的一部分",
+          "explanation": "本讲用 MiniCPM、DeepSeek 等公开案例讨论实际 scaling。初始化、参数化、宽深比例、优化器和学习率安排若同时改变，观察到的差异不能都归因于规模。先写清配方与可迁移假设，再解释实验图。",
+          "code": "config = {\"parameterization\":...,\"init\":...,\"lr\":...,\"batch\":...}",
+          "exercise": "写一张“保持固定/允许缩放”的参数表，并说明每个选择的理由。"
+        },
+        {
+          "title": "参数化与超参数迁移",
+          "explanation": "μP 等方法通过特定参数化与缩放约定帮助不同宽度的优化行为对齐。并不是把所有模型的学习率固定为同一数字就自动有效；模型实现、初始化与读出层缩放都属于约定，需要相同小规模实验核查。",
+          "code": "for width in widths:\n    validate_parameterization_and_lr(width)",
+          "exercise": "提出一个测试：在几个宽度下扫描学习率，检查最佳区域是否真的稳定；保留训练不稳定的结果。"
+        },
+        {
+          "title": "WSD 与同一运行中的不同预算",
+          "explanation": "warmup-stable-decay 把学习率分成预热、稳定和衰减阶段，方便从稳定段的检查点展开不同训练预算分支。比较时要匹配衰减段、总 token 与 checkpoint 选择；从末尾较低损失推断另一规模表现仍需验证。",
+          "code": "lr = warmup(step) if step<warm_end else stable_or_decay(step)",
+          "exercise": "画出一条 WSD 与余弦计划，说明怎样从同一稳定检查点比较两个 token 预算。"
+        },
+        {
+          "title": "拟合误差、数据限制和总成本",
+          "explanation": "动画特意用已知函数产生数据，展示 L∞ 假设如何影响 α 和外推误差；真实运行没有已知真值。数据重复、质量与域混合可能改变收益，推理负载又改变模型/数据最优分配。报告留出误差、敏感性和适用范围比只报告 R² 更有用。",
+          "code": "heldout_error = abs(prediction-observed_heldout_loss)",
+          "exercise": "用 floor=1 与 2 分别外推到 N=160，对照本例已知真值；解释真实情况需要怎样获得验证数据。"
+        }
+      ],
+      "formula": "log(L−L∞)=log a−α log N；拟合假设必须先满足 L>L∞",
+      "worked": "人工数据 N=[10,20,40,80]、L=[4,3,2.5,2.25] 来自 L=2+20/N。设 L∞=2 可拟合 α=1、a=20；在 N=160 预测 2.125。",
+      "misconception": "小规模最优学习率和 loss 曲线不能在任意参数化下无条件迁移；用错 L∞ 时仍可得到一条看似合理的线。",
+      "explanation": [
+        "本讲用 MiniCPM、DeepSeek 等公开案例讨论实际 scaling。初始化、参数化、宽深比例、优化器和学习率安排若同时改变，观察到的差异不能都归因于规模。先写清配方与可迁移假设，再解释实验图。",
+        "μP 等方法通过特定参数化与缩放约定帮助不同宽度的优化行为对齐。并不是把所有模型的学习率固定为同一数字就自动有效；模型实现、初始化与读出层缩放都属于约定，需要相同小规模实验核查。",
+        "动画特意用已知函数产生数据，展示 L∞ 假设如何影响 α 和外推误差；真实运行没有已知真值。数据重复、质量与域混合可能改变收益，推理负载又改变模型/数据最优分配。报告留出误差、敏感性和适用范围比只报告 R² 更有用。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "本章数据生成函数 L=2+20/N，在 N=160 的留出真值是多少？",
+        "expected": 2.125,
+        "tolerance": 1e-06,
+        "unit": "loss",
+        "hint": "先计算 20/160。",
+        "solution": "2+0.125=2.125。该数仅为人为函数，不是某个真实 LLM 指标。",
+        "transfer": "把拟合 floor 改为 1，查看拟合指数与留出误差；写下为什么训练点拟合好不代表远距离外推可靠。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l11-material",
+        "cs336-l11-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-inference",
+          "label": "上一讲：推理"
+        },
+        {
+          "lesson": "cs336-evaluation-lecture",
+          "label": "下一讲：评测"
+        }
+      ]
+    },
+    {
+      "id": "cs336-evaluation-lecture",
+      "course": "cs336",
+      "unit": "12",
+      "title": "评测：先定义想测什么，再定义分数",
+      "summary": "区分语言建模、任务与 Agent 评测，复算 pass@k 和 BPB，检查现实性、有效性与污染。",
+      "question": "一个更高的榜单分数，究竟说明模型、方法还是评测预算发生了变化？",
+      "outcome": "区分语言建模、任务与 Agent 评测，复算 pass@k 和 BPB，检查现实性、有效性与污染。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-evaluation",
+      "demos": [
+        {
+          "modelId": "cs336-evaluation",
+          "title": "采样预算与 pass@k"
+        },
+        {
+          "modelId": "cs336-bpb",
+          "title": "附加：PPL 与 bits-per-byte"
+        }
+      ],
+      "sections": [
+        {
+          "title": "从目标行为选择评测",
+          "explanation": "预训练损失、知识考试、聊天偏好、代码 Agent、推理与安全评测分别衡量不同对象。先写清任务分布、提示、工具、成功标准和允许预算；模型参数相同不保证方法相同，也不存在一个涵盖所有用途的唯一分数。",
+          "code": "evaluation = {\"task\":...,\"tools\":...,\"budget\":...,\"grader\":...}",
+          "exercise": "把一个真实使用目标写成 5 个可独立核查的任务，明确什么算失败，而不是只找最热门榜单。"
+        },
+        {
+          "title": "语言建模指标要统一分母",
+          "explanation": "NLL 与 perplexity 依赖 tokenizer 和样本聚合方式。BPB 用原文本字节数归一化，有助于控制切分分母差异，但模型总似然仍可能不同。附加动画让同一文本、同一总 NLL 在两种切分下得到不同 PPL、相同 BPB。",
+          "code": "ppl = exp(total_nll/token_count)\nbpb = total_nll/(log(2)*byte_count)",
+          "exercise": "比较两种切分之前先固定原始文本；说明为什么不能把平均段损失再不加权平均。"
+        },
+        {
+          "title": "采样方法与判题器要一起评估",
+          "explanation": "pass@k 允许一题生成多个候选，成绩随预算变化。判题器、测试覆盖与 LLM judge 的偏差会影响结论；候选间相关性、测试集规模和随机性也要记录。动画计算明确的组合估计式，不从一次结果推断普适成功率。",
+          "code": "pass_k = 1 - choose(n-c,k)/choose(n,k)",
+          "exercise": "手算 c=0、c=n 与 k>n−c 的边界，再解释候选数量改变为什么要保持评测口径。"
+        },
+        {
+          "title": "现实性、有效性与误差分析",
+          "explanation": "困难并不等于贴近目标；答案可格式化也不等于测到真实能力。检查污染、任务构造、反馈泄漏、选择偏差和失败类型，用多组证据判断。Agent 评测尤其要保留环境状态、工具观察和停止原因，避免把“程序结束”当作成功。",
+          "code": "for failure in failures:\n    categorize_and_reproduce(failure)",
+          "exercise": "为你自己的数据与 Agent 作品设计一组留出任务，规定不能用来调 prompt 的边界，并逐条复现失败。"
+        }
+      ],
+      "formula": "pass@k 估计=1−C(n−c,k)/C(n,k)；BPB=总 NLL/(ln2×原文本字节数)",
+      "worked": "每题 n=4、成功数 [2,0,1,4]，k=2 时逐题估计 [5/6,0,1/2,1]，宏平均 7/12≈0.5833。把 k 改成 1 后，推理预算与方法已改变。",
+      "misconception": "通过更多采样、工具或更强验证器得到的成绩不能隐去成本后叫作同一模型单次准确率；跨 tokenizer 的 perplexity 也不能直接比较。",
+      "explanation": [
+        "预训练损失、知识考试、聊天偏好、代码 Agent、推理与安全评测分别衡量不同对象。先写清任务分布、提示、工具、成功标准和允许预算；模型参数相同不保证方法相同，也不存在一个涵盖所有用途的唯一分数。",
+        "NLL 与 perplexity 依赖 tokenizer 和样本聚合方式。BPB 用原文本字节数归一化，有助于控制切分分母差异，但模型总似然仍可能不同。附加动画让同一文本、同一总 NLL 在两种切分下得到不同 PPL、相同 BPB。",
+        "困难并不等于贴近目标；答案可格式化也不等于测到真实能力。检查污染、任务构造、反馈泄漏、选择偏差和失败类型，用多组证据判断。Agent 评测尤其要保留环境状态、工具观察和停止原因，避免把“程序结束”当作成功。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "同一文本总 NLL=8 nat、原文本 20 字节，BPB 是多少？保留四位小数。",
+        "expected": 0.5770780163555853,
+        "tolerance": 0.0001,
+        "unit": "bit/byte",
+        "hint": "自然对数转 bit 要除以 ln2。",
+        "solution": "8/(ln2×20)≈0.5771 bit/byte。",
+        "transfer": "将 tokenizer A 与 B 切换，验证总 NLL 和 BPB 不变、PPL 改变；解释本例人为控制了什么。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l12-material",
+        "cs336-l12-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-scaling-practice",
+          "label": "上一讲：Scaling Laws II"
+        },
+        {
+          "lesson": "cs336-data-origins",
+          "label": "下一讲：数据 I"
+        }
+      ]
+    },
+    {
+      "id": "cs336-data-origins",
+      "course": "cs336",
+      "unit": "13",
+      "title": "数据 I：语料从哪里来，怎样保留来源",
+      "summary": "追踪 live service→dump/crawl→processed dataset，区分来源、许可、过滤与最终 token 混合。",
+      "question": "一个训练文本文件，经历过哪些采集、处理与选择，才来到模型面前？",
+      "outcome": "追踪 live service→dump/crawl→processed dataset，区分来源、许可、过滤与最终 token 混合。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-data-sources",
+      "demos": [
+        {
+          "modelId": "cs336-data-sources",
+          "title": "从虚构 dump 到可追踪样本"
+        }
+      ],
+      "sections": [
+        {
+          "title": "从在线服务到数据快照",
+          "explanation": "原课把数据来源看成活服务、原始导出/抓取、再处理的层次。Common Crawl、Wikipedia、GitHub、arXiv、书籍和问答来源的结构、重复、更新与可用条件不同；你应保存取得时间、版本与原始 ID，而不是只保留一份混合文本。",
+          "code": "record = {\"id\":id,\"source\":url,\"snapshot\":version,\"raw\":payload}",
+          "exercise": "为一个你有权使用的小文本来源定义最少 provenance 字段，说明下一次来源更新后如何重现旧训练集。"
+        },
+        {
+          "title": "处理流程本身决定数据分布",
+          "explanation": "HTML 正文提取、代码/自然语言识别、语言筛选与质量过滤改变了样本。看似小的启发式也可能偏向某些网站或语体；本章用小型确定性处理追踪每次保留/删除，后续再引入去重和数据混合。",
+          "code": "processed = transform(raw)\nretained = filter_with_recorded_reason(processed)",
+          "exercise": "把每条样本的删除原因列出来，再抽查是否误删有价值的短文本。"
+        },
+        {
+          "title": "许可、隐私与元数据分开记录",
+          "explanation": "课程讨论数据的法律与社会背景；技术流水线不能自动替代许可与适用用途判断。本例只保留虚构许可标签，既不提供法律结论，也不把元数据缺失解释为可自由使用。涉及个人信息时还要考虑去标识、访问与保留范围。",
+          "code": "metadata = {\"license\":known_license_or_unknown,\"processing_version\":v}",
+          "exercise": "给一个 unknown 状态写出后续核查任务，保持其与“已排除”“可用”的状态不同。"
+        },
+        {
+          "title": "已有语料集是流程案例而非同质资源",
+          "explanation": "C4、The Pile、RefinedWeb、Dolma、DCLM、The Stack 等语料体现不同来源、处理规则和研究目标。比较时要看构成、过滤/去重、版本、语言与目标任务，而非只比总 TB。数据质量需要通过目标评测和消融实验验证。",
+          "code": "experiment = {\"mixture\":...,\"filters\":...,\"token_budget\":...,\"heldout\":...}",
+          "exercise": "设计一次相同 token 预算的数据来源消融，规定训练与评测各保存哪些版本信息。"
+        }
+      ],
+      "formula": "来源记录 + 原始快照 + 确定性处理版本 → 可审计训练样本",
+      "worked": "四条原创虚构记录带有来源、许可与语言标记。默认保留英文并要求至少 15 字符，留下 w1 与 w4；unknown 许可不会被程序擅自改成授权。",
+      "misconception": "下载到数据不等于获得所有使用权；公开权重也不能反推训练集来源完全公开。数据集名称更不能代替处理记录。",
+      "explanation": [
+        "原课把数据来源看成活服务、原始导出/抓取、再处理的层次。Common Crawl、Wikipedia、GitHub、arXiv、书籍和问答来源的结构、重复、更新与可用条件不同；你应保存取得时间、版本与原始 ID，而不是只保留一份混合文本。",
+        "HTML 正文提取、代码/自然语言识别、语言筛选与质量过滤改变了样本。看似小的启发式也可能偏向某些网站或语体；本章用小型确定性处理追踪每次保留/删除，后续再引入去重和数据混合。",
+        "C4、The Pile、RefinedWeb、Dolma、DCLM、The Stack 等语料体现不同来源、处理规则和研究目标。比较时要看构成、过滤/去重、版本、语言与目标任务，而非只比总 TB。数据质量需要通过目标评测和消融实验验证。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "三条已通过语言筛选的文本长度为 10、30、60 字符，最小长度设为 20。按本例规则保留几条？",
+        "expected": 2,
+        "tolerance": 0,
+        "unit": "条",
+        "hint": "逐项检查 length≥20。",
+        "solution": "30 和 60 通过，共 2 条。长度阈值不是普适质量判据。",
+        "transfer": "把默认最小长度从 15 改成 35，核对保留 ID，再解释一条代码样本为何可能被误删；不要改写原始文本。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l13-material",
+        "cs336-l13-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-evaluation-lecture",
+          "label": "上一讲：评测"
+        },
+        {
+          "lesson": "dedup",
+          "label": "下一讲：数据 II"
+        }
+      ]
+    },
+    {
+      "id": "dedup",
+      "course": "cs336",
+      "unit": "14",
+      "title": "数据 II：过滤、去重、混合与合成数据",
+      "summary": "稳定执行精确去重与去污染，解释近似候选、混合权重与合成数据验证的不同职责。",
+      "question": "数据流水线的每个筛选与混合决定，怎样改变模型实际读到的训练分布？",
+      "outcome": "稳定执行精确去重与去污染，解释近似候选、混合权重与合成数据验证的不同职责。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "explanation": [
+        "本讲从原始数据转换、语言/质量/毒性分类器等过滤讲起。处理规则、模型与阈值都是训练配方的一部分；标签不等于真值，需抽样查误删/漏删。先保存原文和原因，再判断一次过滤是否值得保留。",
+        "精确去重依赖比较键和稳定保留规则；近似重复可先构造 shingles，再使用 Jaccard、MinHash 和 LSH 找候选。去污染则有明确方向：从训练集排除评测重合，不能把两者混在一起随意保留先出现的一条。",
+        "混合概率决定每个来源在固定 token 预算下被重复多少轮。小规模消融与外推可帮助分配来源，但高质量数据稀缺与域差异仍需评测。合成数据也要核对生成器、验证器、重复和污染；更多条数不自动带来更多有效信息。"
+      ],
+      "formula": "训练候选 = stable_unique(训练文本键)；净化训练集 = 训练候选 − 评测文本键集合",
+      "worked": "原始训练有 a、b、c、d。a 与 b 只差一个空格；归一化后留 a。c 与 eval-e 相同；去污染后训练剩 a、d，评测集仍是 eval-e。",
+      "misconception": "精确去重不能识别改写或语义相似，去重通过也不能证明评测集绝无污染。",
+      "practice": [
+        "先预测关闭空白合并时，a 与 b 是否还算重复。",
+        "分别切换集内比较规则和去污染开关，对比最终保留的 ID。",
+        "解释为什么评测集固定保留，以及怎样记录误删与漏删风险。"
+      ],
+      "exercise": {
+        "prompt": "新案例：训练文本依次为 A、A、B、C，评测文本为 B、D。先稳定去重，再从训练集中排除评测精确重合项。训练最终剩几条？",
+        "expected": 2,
+        "tolerance": 0,
+        "unit": "条",
+        "hint": "稳定去重后是 A、B、C；评测集只作为参照。",
+        "solution": "去除与评测重合的 B 后，训练剩 A、C，共 2 条。评测仍保留 B、D。",
+        "transfer": "独立验证：在页面关闭空白合并、保留去污染。训练应剩 train-a、train-b、train-d 共 3 条；再说明近似重复为什么仍会遗漏。"
+      },
+      "sources": [
+        "cs336-l14-material",
+        "cs336-l14-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-data-origins",
+          "label": "上一讲：数据 I"
+        },
+        {
+          "lesson": "cs336-post-training",
+          "label": "下一讲：Mid/Post-training"
+        }
+      ],
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "modelId": "dedup",
+      "demos": [
+        {
+          "modelId": "dedup",
+          "title": "稳定去重与训练集去污染"
+        },
+        {
+          "modelId": "cs336-jaccard",
+          "title": "附加：Jaccard 与 LSH 候选概率"
+        }
+      ],
+      "sections": [
+        {
+          "title": "变换与过滤规则需要留痕",
+          "explanation": "本讲从原始数据转换、语言/质量/毒性分类器等过滤讲起。处理规则、模型与阈值都是训练配方的一部分；标签不等于真值，需抽样查误删/漏删。先保存原文和原因，再判断一次过滤是否值得保留。",
+          "code": "decision = {\"sample_id\":id,\"rule\":rule_version,\"keep\":keep,\"reason\":reason}",
+          "exercise": "为同一批文本设置两个过滤阈值，列出差异样本并人工解释，而不是只看最终通过率。"
+        },
+        {
+          "title": "精确、近似与评测污染是不同关系",
+          "explanation": "精确去重依赖比较键和稳定保留规则；近似重复可先构造 shingles，再使用 Jaccard、MinHash 和 LSH 找候选。去污染则有明确方向：从训练集排除评测重合，不能把两者混在一起随意保留先出现的一条。",
+          "code": "key = normalize(text)\nkeep_first_in_training(key)\nexclude_training_keys_in_evaluation()",
+          "exercise": "用主动画四条训练文本逐步核对 ID，并用附加动画解释候选概率为何不是删除概率。"
+        },
+        {
+          "title": "哈希扩展检索，精确复核控制错误",
+          "explanation": "哈希让大规模比较变得可行，但普通哈希碰撞、MinHash 估计误差、LSH 假阴性是不同问题。附加演示直接计算 Jaccard 真值，再展示理想独立签名的候选概率，不把它假装成真实执行 MinHash 的测量结果。",
+          "code": "candidate_probability = 1-(1-similarity**rows)**bands",
+          "exercise": "集合各 4 个元素、交集 3 个时，先算并集 5 与 Jaccard 0.6，再比较 b/r 的变化。"
+        },
+        {
+          "title": "数据混合与合成样本靠验证闭环",
+          "explanation": "混合概率决定每个来源在固定 token 预算下被重复多少轮。小规模消融与外推可帮助分配来源，但高质量数据稀缺与域差异仍需评测。合成数据也要核对生成器、验证器、重复和污染；更多条数不自动带来更多有效信息。",
+          "code": "expected_epochs = training_tokens*mixture_probability/source_tokens",
+          "exercise": "某来源 10B token，混合占 0.2，总训练 100B token，预期重复 2 轮。为真实方案列出必须保留的验证数据。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-post-training",
+      "course": "cs336",
+      "unit": "15",
+      "title": "Mid/Post-training：从模仿回复到学习偏好",
+      "summary": "区分 SFT、奖励模型/RLHF 与 DPO，实际核算监督 mask 和一对偏好损失。",
+      "question": "预训练预测下一个 token，怎样变成可控的指令行为与偏好对齐？",
+      "outcome": "区分 SFT、奖励模型/RLHF 与 DPO，实际核算监督 mask 和一对偏好损失。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-posttrain",
+      "demos": [
+        {
+          "modelId": "cs336-posttrain",
+          "title": "SFT mask 与 DPO 单对损失"
+        }
+      ],
+      "sections": [
+        {
+          "title": "中训练与指令数据改变目标分布",
+          "explanation": "预训练学广泛文本模式，中训练/后训练用更聚焦的长上下文、领域、指令或推理数据调整能力与行为。指令数据来源、格式、长度、多轮结构、质量和覆盖很重要；混合进更多对话不自动形成可靠助手。",
+          "code": "example = {\"messages\":messages,\"source\":source,\"verification\":checks}",
+          "exercise": "对同一个任务写一个高质量和一个含糊的监督回复，说明它们分别会教给模型什么。"
+        },
+        {
+          "title": "SFT 的训练目标与消息边界",
+          "explanation": "SFT 仍可使用 next-token 交叉熵，但常只监督助手回复位置。padding、角色边界、多轮 mask 与样本 packing 都会影响实际损失。动画把提示与回复位置显式分开，避免用全序列平均掩盖监督对象。",
+          "code": "loss = (token_nll*assistant_mask).sum()/assistant_mask.sum()",
+          "exercise": "给出一条两轮对话，标出哪些位置贡献损失；解释为什么不能把 prompt 当作同样的目标回复。"
+        },
+        {
+          "title": "奖励学习与 RLHF 的基本分工",
+          "explanation": "偏好反馈区分同一输入的多条输出，奖励模型据此学习排序信号；策略优化再试图提高奖励，同时控制偏离参考策略。反馈噪声、分布偏移与 reward hacking 都可能使训练指标偏离真实需要。这个流程不同于只拟合一条理想回复。",
+          "code": "preference = {\"prompt\":x,\"chosen\":yw,\"rejected\":yl}",
+          "exercise": "为一个偏好对说明判断依据与不确定性，再列出一个奖励上升但真实质量下降的可能例子。"
+        },
+        {
+          "title": "DPO 把偏好写成可复算损失",
+          "explanation": "DPO 使用策略与参考模型的序列 log 概率差构造 pairwise logistic 目标，减少显式在线 RL 的一部分复杂性。参考模型、β、长度与数据分布都会影响行为；本例只计算单对目标，不冒充完整训练或可替代评测。",
+          "code": "margin = beta*((logp_w-logpref_w)-(logp_l-logpref_l))\nloss = -log_sigmoid(margin)",
+          "exercise": "把 chosen/rejected 的相对参考 log-ratio 交换，核对损失上升；解释为什么这里的 β 不是采样温度。"
+        }
+      ],
+      "formula": "SFT: −Σmaskₜlogπ(yₜ|prefix)/Σmaskₜ；DPO: −logσ(β[(logπw−logπref,w)−(logπl−logπref,l)])",
+      "worked": "提示两位置 NLL=[1,1]、回复两位置 [0.3,0.7]，助手 mask 后平均为 0.5 nat/token。DPO 相对参考 log-ratio 差为 1、β=0.5，损失约 0.4741。",
+      "misconception": "SFT 能模仿数据里的回复，不能由一次低损失证明任务能力与偏好完全一致；偏好概率也不是事实正确率。",
+      "explanation": [
+        "预训练学广泛文本模式，中训练/后训练用更聚焦的长上下文、领域、指令或推理数据调整能力与行为。指令数据来源、格式、长度、多轮结构、质量和覆盖很重要；混合进更多对话不自动形成可靠助手。",
+        "SFT 仍可使用 next-token 交叉熵，但常只监督助手回复位置。padding、角色边界、多轮 mask 与样本 packing 都会影响实际损失。动画把提示与回复位置显式分开，避免用全序列平均掩盖监督对象。",
+        "DPO 使用策略与参考模型的序列 log 概率差构造 pairwise logistic 目标，减少显式在线 RL 的一部分复杂性。参考模型、β、长度与数据分布都会影响行为；本例只计算单对目标，不冒充完整训练或可替代评测。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "DPO 的 margin=0 时，−logσ(0) 等于多少？保留四位小数。",
+        "expected": 0.6931471805599453,
+        "tolerance": 0.0001,
+        "unit": "nat",
+        "hint": "σ(0)=0.5。",
+        "solution": "−ln0.5=ln2≈0.6931。",
+        "transfer": "在动画选 DPO，chosen=2、rejected=1、β=0.5，核对损失约 0.4741；交换二者后解释方向变化。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l15-material",
+        "cs336-l15-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "dedup",
+          "label": "上一讲：数据 II"
+        },
+        {
+          "lesson": "cs336-rlvr",
+          "label": "下一讲：RLVR"
+        }
+      ]
+    },
+    {
+      "id": "cs336-rlvr",
+      "course": "cs336",
+      "unit": "16",
+      "title": "RLVR：验证奖励、组相对优势与裁剪",
+      "summary": "追踪 verifier、组均值/标准差与 clipped surrogate，处理全对/全错边界，并说明完整 RL 的额外部分。",
+      "question": "当答案可以自动核查时，怎样把同题多个回答变成学习信号，又如何避免误读训练奖励？",
+      "outcome": "追踪 verifier、组均值/标准差与 clipped surrogate，处理全对/全错边界，并说明完整 RL 的额外部分。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-grpo",
+      "demos": [
+        {
+          "modelId": "cs336-grpo",
+          "title": "可验证奖励、优势与裁剪"
+        }
+      ],
+      "sections": [
+        {
+          "title": "从 PPO 到组相对信号",
+          "explanation": "策略梯度用采样回报调整回答概率，PPO 加入新旧策略比裁剪、优势估计等实现细节。GRPO 以同一题的一组回答建立相对基线，省去一种显式 value 模型需求，但仍需处理采样、概率、KL 和分布更新。",
+          "code": "rollouts = sample_group(prompt)\nrewards = verify(rollouts)",
+          "exercise": "画出采样策略、旧策略、参考策略三个角色，说明它们为何不能只写成一个不带版本的模型。"
+        },
+        {
+          "title": "Verifier 必须与任务条件绑定",
+          "explanation": "数学或程序任务能提供较明确的校验，但解析、单位、格式、测试覆盖与对抗性答案会带来问题。本章的 2+3 案例仅用数值相等验证；不能把它推广成“任意回答都有无误差自动评分”。",
+          "code": "reward = int(parsed_answer == expected_answer)",
+          "exercise": "给出一个解析成功但语义错误的回复，说明 verifier 怎样误判；为独立留出题设计更强检查。"
+        },
+        {
+          "title": "组归一化与零方差边界",
+          "explanation": "同题奖励减均值再按标准差缩放，把表现变成组内相对量。全对或全错的组没有这种相对差异，标准差为零需明确规则。不同 GRPO 变体对标准差、长度与 token/sequence 聚合不同，应对照公式和代码，而非只照抄名字。",
+          "code": "advantage = zeros_like(reward) if std==0 else (reward-mean)/std",
+          "exercise": "将全对与全错分别运行，解释两者都为零优势，但任务表现完全不同。"
+        },
+        {
+          "title": "裁剪、KL 与长推理的评估",
+          "explanation": "正负优势都要正确处理 ratio 和 min，裁剪项不是无条件把梯度归零。完整训练还可能加入 KL、长度处理、数据筛选与 rollout 预算。长 CoT、训练题成绩和留出题正确率需要分别评估，保持总推理预算与 verifier 版本透明。",
+          "code": "surrogate = minimum(ratio*A, clip(ratio,1-eps,1+eps)*A)",
+          "exercise": "改变负优势样本的 ratio，手算 clipped surrogate；再列出本例没有计算的完整训练项。"
+        }
+      ],
+      "formula": "Aᵢ=(rᵢ−mean(r))/std(r)；J=mean[min(ρᵢAᵢ,clip(ρᵢ,1−ε,1+ε)Aᵢ)]",
+      "worked": "候选 [4,5,6,5] 回答 2+3，实际精确检查得奖励 [0,1,0,1]，均值 0.5、总体标准差 0.5，优势 [−1,1,−1,1]。全错时本例显式给零优势。",
+      "misconception": "组内相对优势、可验证奖励和最终泛化能力不是同一个概念；奖励模型/验证器漏洞与数据污染可能把训练曲线带偏。",
+      "explanation": [
+        "策略梯度用采样回报调整回答概率，PPO 加入新旧策略比裁剪、优势估计等实现细节。GRPO 以同一题的一组回答建立相对基线，省去一种显式 value 模型需求，但仍需处理采样、概率、KL 和分布更新。",
+        "数学或程序任务能提供较明确的校验，但解析、单位、格式、测试覆盖与对抗性答案会带来问题。本章的 2+3 案例仅用数值相等验证；不能把它推广成“任意回答都有无误差自动评分”。",
+        "正负优势都要正确处理 ratio 和 min，裁剪项不是无条件把梯度归零。完整训练还可能加入 KL、长度处理、数据筛选与 rollout 预算。长 CoT、训练题成绩和留出题正确率需要分别评估，保持总推理预算与 verifier 版本透明。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "奖励 [0,1,0,1]，总体标准差为 0.5。第一个回答的组归一化优势是多少？",
+        "expected": -1,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先减均值 0.5，再除以 0.5。",
+        "solution": "(0−0.5)/0.5=−1。",
+        "transfer": "选择全错组与全对组，核对标准差和优势均为 0；再说明为什么不能把“没有相对梯度”解释成任务已经学会。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l16-material",
+        "cs336-l16-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-post-training",
+          "label": "上一讲：Mid/Post-training"
+        },
+        {
+          "lesson": "cs336-multimodal",
+          "label": "下一讲：多模态"
+        }
+      ]
+    },
+    {
+      "id": "cs336-multimodal",
+      "course": "cs336",
+      "unit": "17",
+      "title": "多模态：图像怎样进入语言模型",
+      "summary": "核算图像 patch/token 成本，实际计算小图 patch 特征与 CLIP 单向损失，区分几类多模态路线。",
+      "question": "Transformer 接受 token，图像表示、图文对齐与视觉语言模型怎样连接？",
+      "outcome": "核算图像 patch/token 成本，实际计算小图 patch 特征与 CLIP 单向损失，区分几类多模态路线。",
+      "prerequisites": [
+        "能读 Python、向量与矩阵形状",
+        "已了解前向、反向、训练与验证的基本分工"
+      ],
+      "modelId": "cs336-patches",
+      "demos": [
+        {
+          "modelId": "cs336-patches",
+          "title": "图像 patch 与统一序列成本"
+        },
+        {
+          "modelId": "cs336-clip",
+          "title": "附加：CLIP 图文对齐损失"
+        }
+      ],
+      "sections": [
+        {
+          "title": "把不同模态变成可处理的序列",
+          "explanation": "原课先指出 Transformer 需要离散或连续的 token 表示。图像可切成 patch 并投影为向量，文本经 tokenizer；时间、空间与多图关系还需位置/模态信息。统一成序列并不等于这些 token 已有相同语义，需要训练来建立联系。",
+          "code": "patches = split_image(image, patch_size)\nfeatures = patch_projection(patches)",
+          "exercise": "为同一图像比较 patch=14、16、32，说明 token 数怎样变化；再指出实际架构必须额外核对的项。"
+        },
+        {
+          "title": "CLIP 与 SigLIP 的图文对齐",
+          "explanation": "CLIP 用双编码器将图像/文本映射到相近表示，在 batch 内做对比学习；SigLIP 使用成对 sigmoid 目标，负样本组织与目标不同。附加动画只算给定单位向量的 image→text 单向 CLIP 损失，省略真实编码器与反向项。",
+          "code": "scores = image_embeddings @ text_embeddings.T / temperature\nloss = cross_entropy(scores, diagonal_labels)",
+          "exercise": "把前两条文本标签交换，核对正样本概率下降与损失升高；解释它是在检查配对标签，不是在测真实视觉能力。"
+        },
+        {
+          "title": "从视觉编码器到 LLaVA/Qwen-VL",
+          "explanation": "视觉编码器提特征，经 projector 与语言模型输入空间衔接，再通过对齐/指令等训练组织回答。多分辨率、多图、视频帧与空间位置会改变 token 预算及训练数据；Qwen-VL 等实现的细节应回到相应版本配置与论文核对。",
+          "code": "visual = vision_encoder(image)\ninputs = concatenate(text_embeddings, projector(visual))",
+          "exercise": "画出冻结/可训练模块边界，并为一次变更列出数据、损失与评测的最小对照。"
+        },
+        {
+          "title": "理解与生成的路线不同",
+          "explanation": "连续视觉特征适合输入理解，统一离散图像 token 等路线可支持文本与图像生成的组合，但训练和解码代价不同。原课以 Chameleon 等讨论统一建模；不能从“能看图”推断模型也能生成图，或从上下文容量推断可靠性。",
+          "code": "evaluation = {\"understanding\":tests_u,\"generation\":tests_g}",
+          "exercise": "分别写出两条图像理解和图像生成验收任务，给出它们不能共享同一评分指标的理由。"
+        }
+      ],
+      "formula": "patch 数=(H/P)(W/P)；CLIP 单向损失=mean[−log softmax(similarity/T)ᵢᵢ]",
+      "worked": "224×224 图像、16×16 patch，共 196 patch。采用本站每图加 1 CLS 的约定，配 32 文本 token 共 229 token；4×4 玩具图的四个 2×2 patch 均值为 [2.5,4.5,10.5,12.5]。",
+      "misconception": "视觉 token 数量不是图像理解质量；不同架构可能有动态分辨率、crop、token merging 或根本不使用 CLS，不能把一个固定公式套给所有模型。",
+      "explanation": [
+        "原课先指出 Transformer 需要离散或连续的 token 表示。图像可切成 patch 并投影为向量，文本经 tokenizer；时间、空间与多图关系还需位置/模态信息。统一成序列并不等于这些 token 已有相同语义，需要训练来建立联系。",
+        "CLIP 用双编码器将图像/文本映射到相近表示，在 batch 内做对比学习；SigLIP 使用成对 sigmoid 目标，负样本组织与目标不同。附加动画只算给定单位向量的 image→text 单向 CLIP 损失，省略真实编码器与反向项。",
+        "连续视觉特征适合输入理解，统一离散图像 token 等路线可支持文本与图像生成的组合，但训练和解码代价不同。原课以 Chameleon 等讨论统一建模；不能从“能看图”推断模型也能生成图，或从上下文容量推断可靠性。"
+      ],
+      "practice": [
+        "先不运行，写出默认例子的关键中间值与预计结果。",
+        "用单步执行核对变量，再改变一个参数，说明变化来自哪个步骤。",
+        "完成独立数值题，换新输入复算，并记录代码、参数、计算或实际实验的证据类型。"
+      ],
+      "exercise": {
+        "prompt": "224×224 图像切 16×16 patch，本例每图另加 1 个 CLS，再加 32 个文本 token，总数是多少？",
+        "expected": 229,
+        "tolerance": 0,
+        "unit": "token",
+        "hint": "先算 14×14，再加 CLS 和文本。",
+        "solution": "196+1+32=229。此计数只适用于题目指定约定。",
+        "transfer": "用 patch=32 复算总数为 82；核对 4×4 玩具图 patch 均值，再说明二者不是同一张真实图像的模型输出。"
+      },
+      "boundary": "本章演示为浏览器实际执行的原创小规模计算、确定性调度或明确公式估算，不是官方完整训练/GPU 实验。 真实模型质量、训练收敛或泛化需另做完整实践。",
+      "sources": [
+        "cs336-l17-material",
+        "cs336-l17-recording",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-rlvr",
+          "label": "上一讲：RLVR"
+        },
+        {
+          "lesson": "agent",
+          "label": "连接 CS146S：工程工作流"
+        }
+      ]
+    },
+    {
+      "id": "cs336-guest-danfu",
+      "course": "cs336",
+      "unit": "Guest · Dan Fu",
+      "title": "Dan Fu 嘉宾讲：从模型到可服务的推理系统",
+      "summary": "按请求与系统目标理解 prefill/decode、连续 batching、缓存与跨操作优化。",
+      "question": "训练好的模型怎样变成同时满足延迟、吞吐与成本目标的推理服务？",
+      "outcome": "实际排一次连续批处理，计算槽位利用率；解释 workload、KV 热度与融合/协同设计的取舍。",
+      "prerequisites": [
+        "理解 prefill、decode 与 KV cache",
+        "会读请求输出长度与调度时间槽"
+      ],
+      "explanation": [
+        "讲座从服务侧看模型：请求经过路由、缓存、prefill 与 decode，优化对象是完整工作流。相同模型在批处理与交互 Agent 中会遇到不同的延迟与状态复用约束。",
+        "连续 batching 在一个请求结束后补入下一个，能减少特定负载的空槽；实际还必须满足 KV 容量、token 预算与公平性。本章用全部同时到达的四个请求做实际确定性排程。",
+        "跨操作融合与 Megakernel 试图减少边界和调度成本；模型架构、硬件、缓存精度与应用目标需要协同考虑。讲座中报告的硬件数据不作为本站运行结果。"
+      ],
+      "formula": "本例有效槽位利用率=总输出 token/(调度时间槽×并发槽位)",
+      "worked": "四请求输出长度 [2,5,1,3]，两槽并发。静态分组需 5+3=8 槽；连续补入需 6 槽，共生成 11 token，槽位利用率为 11/12≈0.9167。",
+      "misconception": "调度时间槽不是实测毫秒；吞吐更高不证明每个用户的延迟都更低，也不能将槽位利用率叫作 GPU MFU。",
+      "sections": [
+        {
+          "title": "从端到端服务流程定位瓶颈",
+          "explanation": "字幕 08:26 起讨论 prefill/decode 分离与请求缓存，13:52 起展开推理负载。模型计算只是请求路径的一部分，调度、缓存检查、数据搬运、网络和 token 预算都会影响体验。先固定 workload 与服务目标，再选择优化方向。",
+          "code": "request = route_and_check_prefix_cache(request)\nprefill(request)\nwhile not finished: decode_one_step(request)",
+          "exercise": "画出一个交互 Agent 请求的路径，并标明哪个状态希望跨多轮保持热度。"
+        },
+        {
+          "title": "连续 batching 的实际排程",
+          "explanation": "16:31 起讲 continuous batching。短请求结束后立即补入等待请求，可避免静态分组一直等最慢项。本站动画每槽实际更新剩余 token，全部请求同时到达、每活跃项速度相同；实际服务还要处理到达时间、优先级和容量约束。",
+          "code": "while waiting or active:\n    admit_to_free_slots()\n    advance_one_decode_step()\n    release_finished()",
+          "exercise": "手工排 [2,5,1,3]，验证两槽时连续 6 槽、静态 8 槽，再解释迟到请求会怎样改变结论。"
+        },
+        {
+          "title": "把 kernel 边界当作优化对象",
+          "explanation": "37:35 起引入 Megakernels：跨多个操作组织执行，减少多个 kernel 之间的间隙与组织成本。它不是无条件把整模型塞成一个越大越好的 kernel；资源占用、异构工作、通信与可维护性会改变收益，必须用端到端测量验证。",
+          "code": "total = useful_compute + launch_and_boundary_overhead",
+          "exercise": "若十个操作各 2µs 调度开销、总有用计算 20µs，忽略其他因素，分开发射 40µs、合成一次 22µs。列出这个估算忽略的实际成本。"
+        },
+        {
+          "title": "协同设计随应用而变化",
+          "explanation": "64:47 起问答讨论 co-design，68:28 起指出 Agent 多轮工作流希望 KV cache 保持热，而一次性批处理的复用方式不同。缓存压缩、架构、模型大小与训练/推理预算都要在目标应用下选择；一项硬件上的结果不能直接迁移到所有服务形态。",
+          "code": "compare(workload, quality, ttft, tpot, throughput, memory, cost)",
+          "exercise": "对比交互代码 Agent 与离线翻译，分别指定一个主要目标和一组不能退步的约束。"
+        }
+      ],
+      "modelId": "cs336-serving",
+      "demos": [
+        {
+          "modelId": "cs336-serving",
+          "title": "连续批处理的逐槽调度"
+        },
+        {
+          "modelId": "cs336-kv",
+          "title": "回看：KV 缓存容量"
+        }
+      ],
+      "practice": [
+        "先预测两槽并发时四个请求的完成顺序。",
+        "逐槽查看 active、waiting 与 finished，再切换 1、2、3、4 个槽，核对工作量不变。",
+        "解释哪部分是实际确定性调度，哪部分需要真实推理引擎测量；完成独立排程。"
+      ],
+      "exercise": {
+        "prompt": "四个同时到达请求的输出长度为 [2,5,1,3]，两槽并发，每槽每个请求生成一个 token，完成后下一槽补入新请求。连续调度共需几个时间槽？",
+        "expected": 6,
+        "tolerance": 0,
+        "unit": "槽",
+        "hint": "A 完成后先补 C，C 完成后补 D；B 不必等 D 所在的静态分组。",
+        "solution": "时间槽 0–5 共 6 槽；静态组为 max(2,5)+max(1,3)=8 槽。",
+        "transfer": "独立验证三槽并发：连续调度 5 槽，静态分组 8 槽；说明这些不是实测 GPU 延迟。"
+      },
+      "sources": [
+        "cs336-guest-danfu",
+        "original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs336-inference",
+          "label": "回看第10讲：推理工作负载"
+        },
+        {
+          "lesson": "cs336-kernels",
+          "label": "回看第6讲：融合与分块"
+        }
+      ],
+      "boundary": "官方已发布视频配套的原创教学调度；不复刻嘉宾的真实推理系统，不把讲座硬件指标标成本站实测。"
+    }
+  ]
+}

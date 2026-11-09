@@ -1,0 +1,32 @@
+#lbb-course-prototype .atlas-plan-note.cms-availability{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 14px;line-height:1.5;padding:10px 13px;border:1px solid #ded5eb;background:#f4effa;border-radius:10px;min-width:0}
+#lbb-course-prototype .cms-robot-title{font-size:12px;font-weight:650;color:#6e5297;white-space:normal}
+#lbb-course-prototype .cms-availability .cms-robot-links{display:flex;align-items:center;flex-wrap:wrap;gap:6px;min-width:0;margin:0}
+#lbb-course-prototype .cms-robot-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 9px;background:#fff;border:1px solid #dacfe7;border-radius:7px;color:#69517e;font:inherit;font-size:12px;line-height:1.5;cursor:pointer;white-space:nowrap}
+#lbb-course-prototype .cms-robot-chip small{font-size:10px;color:#9784a8}
+#lbb-course-prototype .cms-robot-chip:hover,#lbb-course-prototype .cms-robot-chip:focus-visible{border-color:#9270b5;background:#eee6f8;outline-offset:2px}
+#lbb-course-prototype .is-authored-course .atlas-course-phase>span:first-child{color:#52766c;font-weight:650}
+#lbb-course-prototype .cms-first-lesson{border-color:#cdbce0;color:#6a4a8c}
+#lbb-course-prototype .cms-pending-count{color:#85818d;font-weight:500}
+#lbb-course-prototype .cms-map-audit{position:relative;flex:none;font-size:10px;color:#69517e}
+#lbb-course-prototype .cms-map-audit summary{cursor:pointer;padding:7px 9px;border:1px solid #ded5eb;border-radius:7px;background:#faf8fd;white-space:nowrap}
+#lbb-course-prototype .cms-map-audit-panel{position:absolute;left:0;top:100%;z-index:40;width:310px;max-width:calc(100vw - 34px);box-sizing:border-box;padding:12px;background:#fff;border:1px solid #ded5eb;border-radius:9px;box-shadow:0 8px 28px #34244b22;line-height:1.6}
+#lbb-course-prototype .cms-map-audit-panel p{margin:0 0 9px}
+#lbb-course-prototype .cms-map-audit-panel>div{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 12px}
+#lbb-course-prototype .cms-map-audit-panel button{font:inherit;color:#644b80;border:1px solid #e4daef;background:#f9f7fc;padding:4px 6px;border-radius:5px;cursor:pointer}
+#lbb-course-prototype .cms-map-audit-panel small{display:block;color:#7f758b}
+@media(max-width:650px){#lbb-course-prototype .cms-map-audit{position:static}#lbb-course-prototype .cms-map-audit-panel{left:8px;top:100%;width:310px}}
+@media(max-width:670px){#lbb-course-prototype .atlas-plan-note.cms-availability{gap:9px;padding:10px}#lbb-course-prototype .cms-robot-links{gap:5px}#lbb-course-prototype .cms-robot-chip{padding:5px 7px;font-size:11px}#lbb-course-prototype .cms-robot-title{font-size:11px}}
+#lbb-course-prototype .atlas-plan-note.cms-availability{display:grid;gap:8px}
+#lbb-course-prototype .cms-availability>.cms-foundation-group,#lbb-course-prototype .cms-availability>.cms-robot-group{display:flex;align-items:center;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;min-width:0;margin:0;font-size:11px}
+#lbb-course-prototype .cms-node-status{display:block;font-size:10px;line-height:1.5;color:#7554a3}
+#lbb-course-prototype .cms-origin-count{font-size:10px;font-weight:500;color:#7554a3}
+#lbb-course-prototype .origin-topics [data-cms-course=cs50p],#lbb-course-prototype .origin-topics [data-cms-course=tools]{border-color:#c5b2e5;background:#f9f6fd}
+#lbb-course-prototype .course-row[data-cms-course]>.row{flex-wrap:wrap}
+#lbb-course-prototype .branching-screen:has(.learning-atlas:not(.atlas-full))>.atlas-plan-note.cms-availability{display:grid;padding:6px 10px}
+#lbb-course-prototype .branching-screen:has(.learning-atlas:not(.atlas-full))>.cms-availability>.cms-robot-group{display:none}
+#lbb-course-prototype .branching-screen .atlas-plan-note.cms-availability>.cms-foundation-group{display:flex}
+#lbb-course-prototype .branching-screen:has(.atlas-full) .atlas-plan-note.cms-availability>.cms-robot-group{display:flex}
+@media(max-width:670px){#lbb-course-prototype .cms-foundation-group .cms-robot-title{flex-basis:100%}#lbb-course-prototype .cms-foundation-group .cms-robot-chip{font-size:10px;padding:3px 5px;gap:5px}#lbb-course-prototype .cms-foundation-group .cms-robot-chip small{font-size:10px}}
+#lbb-course-prototype .cms-availability>.cms-application-group{display:flex;align-items:center;justify-content:space-between;gap:6px 14px;flex-wrap:wrap;margin:0;font-size:11px}
+#lbb-course-prototype .branching-screen .atlas-plan-note.cms-availability>.cms-application-group{display:flex}
+@media(max-width:670px){#lbb-course-prototype .cms-application-group .cms-robot-chip{font-size:10px;padding:3px 5px}#lbb-course-prototype .cms-application-group .cms-robot-title{font-size:11px}}

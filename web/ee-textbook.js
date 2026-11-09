@@ -36,6 +36,7 @@ if(typeof document!=='undefined'){
     ${l.prerequisites.length?`<p class="note">建议先读：${l.prerequisites.map(id=>eeLessonButton(d.lessons.find(x=>x.id===id))).join('')} 可按已有基础跳读。</p>`:'<p class="note">起点：会四则运算即可。先读解释，遇到公式跟着算一次。</p>'}
     <h3>先把概念说清楚</h3>${l.concepts.map(p=>`<p>${esc(p)}</p>`).join('')}
     <div class="ee-formula"><span>关键关系与适用条件</span><p>${esc(l.formula)}</p></div>
+    ${l.teaching&&window.CourseTeaching?CourseTeaching.render(l.teaching,l.title):''}
     <h3>跟着算一次</h3><ol class="ee-example">${l.example.map(s=>`<li>${esc(s)}</li>`).join('')}</ol><p class="note">平台原创教学算例；不是你的实验结果。</p>
     <div class="ee-misconception"><b>容易误解的地方</b><p>${esc(l.misconception)}</p></div>
     <h3>现在做一个小练习</h3><p>${esc(l.practice)}</p><p><b>过关标准：</b>${esc(l.acceptance)}</p>${l.lab?btn('打开对应交互练习','ee-lab',l.id,'small'):''}

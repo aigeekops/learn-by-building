@@ -1,0 +1,527 @@
+{
+  "course": {
+    "id": "probability",
+    "label": "MIT 18.05",
+    "title": "从概率分布到可信评测的统计基础",
+    "edition": "MIT 18.05 · 2022公开版选编",
+    "position": "采样、估计与评测共同基础",
+    "description": "六讲原创配套围绕有限分布、条件概率、矩、估计、区间与检验展开。官方原课使用R；本站使用Python标准库复算，不宣称覆盖官方全部单元。",
+    "prerequisites": [
+      "基本代数、分数、平方根与Python基础",
+      "微积分只在需要推导时补充；完整原课先修见官方大纲"
+    ],
+    "pending": "本批未系统覆盖连续分布、联合分布、共轭先验、未知方差t检验、Bootstrap、ANOVA及原课全部R工作坊。",
+    "published": [
+      {
+        "unit": "1",
+        "title": "第1讲 二项分布：次数概率从哪里来",
+        "lessons": [
+          "probability-binomial"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "2",
+        "title": "第2讲 贝叶斯：报警以后有多大概率是次品",
+        "lessons": [
+          "probability-bayes"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "3",
+        "title": "第3讲 期望与方差：平均相同就一样吗",
+        "lessons": [
+          "probability-moments"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "4",
+        "title": "第4讲 极大似然：数据固定后比较参数",
+        "lessons": [
+          "probability-mle"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "5",
+        "title": "第5讲 置信区间：样本变多，均值为何更稳",
+        "lessons": [
+          "probability-interval"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "6",
+        "title": "第6讲 假设检验：小p值不是零假设概率",
+        "lessons": [
+          "probability-test"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      }
+    ],
+    "batch": "第二批 · 数学与机器学习",
+    "sources": [
+      "probability-2022"
+    ]
+  },
+  "sources": {
+    "probability-2022": {
+      "kind": "官方公开课程材料",
+      "label": "MIT 18.05 · Spring 2022 · Classes and Readings",
+      "url": "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/pages/classes-reading-and-in-class-materials/",
+      "locator": "Class 1–5：计数、条件概率与矩；Class 10：MLE；Class 17–18：检验；Class 22–23：区间",
+      "edition": "2022公开版；原课使用R，本站例程用Python标准库独立复算",
+      "checked": "2026-11-09",
+      "role": "official",
+      "status": "2026-11-09 已核对官方页面与章节定位；本站讲解、算例和Python代码独立创作，未复制原课讲义。"
+    }
+  },
+  "lessons": [
+    {
+      "id": "probability-binomial",
+      "title": "第1讲 二项分布：次数概率从哪里来",
+      "summary": "四次独立试验，恰好成功两次的概率为什么是0.375？",
+      "question": "四次独立试验，恰好成功两次的概率为什么是0.375？",
+      "outcome": "从排列计数到概率质量，核对总概率与期望。",
+      "prerequisites": [
+        "乘法、简单分数；Python循环"
+      ],
+      "explanation": [
+        "一次试验只有成功和失败，成功概率为q。做n次相互独立、q保持相同的试验，成功次数K取0到n。先明确假设，再讨论怎样计数。",
+        "指定一种成功失败顺序的概率是qᵏ(1−q)ⁿ⁻ᵏ，成功位置共有组合数C(n,k)种。把这些互斥顺序的概率相加，便得到二项质量函数。",
+        "所有次数的概率和为1，期望为nq。期望可以是小数，不是保证每次实验都会得到的数。本页精确枚举分布，没有随机采样，也不把理论期望当实测平均。"
+      ],
+      "formula": "P(K=k)=C(n,k)qᵏ(1−q)ⁿ⁻ᵏ；E[K]=nq",
+      "worked": "n=4、q=0.5时，k=2有6个等概率顺序，所以概率6/16=0.375；分布为[1,4,6,4,1]/16。",
+      "misconception": "四次中成功两次不是只有成功成功失败失败一种顺序。若各次相关或概率不同，二项公式的前提不成立。",
+      "practice": [
+        "列出四次中恰好两次成功的6种顺序。",
+        "把q从0.5改成0.8，观察分布中心与偏斜。",
+        "检查q=0、q=1时总概率仍为1，期望分别为0和n。"
+      ],
+      "exercise": {
+        "prompt": "四次独立公平试验，恰好两次成功的概率是多少？",
+        "expected": 0.375,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "C(4,2)=6，每种顺序概率1/16。",
+        "solution": "6×(1/2)⁴=3/8=0.375。",
+        "transfer": "改成3次、q=0.2，独立算恰好1次成功的概率0.384。"
+      },
+      "sources": [
+        "probability-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "probability-bayes",
+          "label": "继续：给定观测后改变分布"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "probability-binomial",
+      "demos": [
+        {
+          "modelId": "probability-binomial",
+          "title": "二项分布：次数概率从哪里来"
+        }
+      ],
+      "sections": [
+        {
+          "title": "样本空间与成功次数",
+          "explanation": "一个具体顺序与“成功k次”是不同事件。后者合并多个具体顺序，计数和单个顺序概率缺一不可。",
+          "exercise": "比较两个事件各包含多少结果。"
+        },
+        {
+          "title": "组合数怎样算",
+          "explanation": "C(n,k)=n!/[k!(n−k)!]。标准库comb给精确整数，乘积实现也可逐步约分；本例n最多10。",
+          "exercise": "计算C(5,2)并解释为何等于C(5,3)。"
+        },
+        {
+          "title": "分布与抽样区分",
+          "explanation": "页面列出理论分布，实际有限抽样频率会有波动。增加样本通常改善频率估计，却不使每次输出变得确定。",
+          "exercise": "说明nq=2是否保证每次恰好成功2次。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 probability-binomial.py，运行 python3 probability-binomial.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import comb, isclose\nn,q = 4,0.5\nmass = [comb(n,k)*q**k*(1-q)**(n-k) for k in range(n+1)]\nassert isclose(sum(mass),1)\nassert isclose(mass[2],0.375)\nexpectation = sum(k*v for k,v in enumerate(mass))\nassert isclose(expectation,n*q)\nprint(mass,expectation)",
+          "exercise": "改成3次、q=0.2，独立算恰好1次成功的概率0.384。"
+        }
+      ],
+      "course": "probability",
+      "unit": "1"
+    },
+    {
+      "id": "probability-bayes",
+      "title": "第2讲 贝叶斯：报警以后有多大概率是次品",
+      "summary": "报警率90%，为什么收到报警后次品概率只有50%？",
+      "question": "报警率90%，为什么收到报警后次品概率只有50%？",
+      "outcome": "用联合份额和归一化复算后验，解释基础比例作用。",
+      "prerequisites": [
+        "条件概率乘法；分数"
+      ],
+      "explanation": [
+        "假设一批虚构零件里10%为次品，次品报警率90%，良品误报率10%。这些都是模型输入，问题是已经报警的零件里有多大份额是真次品。",
+        "按1000件的直觉算，100件次品中90件报警，900件良品中也有90件报警。报警共180件，其中90件次品，所以后验是1/2。",
+        "贝叶斯公式把先验与观测似然结合，再除以观测总概率。误报率为0时本例后验是1；赔率无穷应明确显示边界含义，不能制造一个有限数。"
+      ],
+      "formula": "P(D|A)=P(D)P(A|D)/[P(D)P(A|D)+P(¬D)P(A|¬D)]",
+      "worked": "默认联合份额为0.09和0.09，报警概率0.18，后验0.09/0.18=0.5。",
+      "misconception": "P(报警|次品)与P(次品|报警)条件方向相反。忽略良品基数会高估报警后的次品概率。",
+      "practice": [
+        "先用1000件零件画四格表。",
+        "只把先验降到1%，检查后验为何下降。",
+        "令误报率为0，检查后验1和赔率文字边界。"
+      ],
+      "exercise": {
+        "prompt": "次品占10%，次品报警率90%，良品误报率10%，报警后的次品概率是多少？",
+        "expected": 0.5,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "先算两类报警的联合份额。",
+        "solution": "0.1×0.9/[0.1×0.9+0.9×0.1]=0.5。",
+        "transfer": "先验换成20%，其余不变，独立算后验9/13≈0.6923077。"
+      },
+      "sources": [
+        "probability-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "probability-moments",
+          "label": "继续：用分布描述中心与波动"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "probability-bayes",
+      "demos": [
+        {
+          "modelId": "probability-bayes",
+          "title": "贝叶斯：报警以后有多大概率是次品"
+        }
+      ],
+      "sections": [
+        {
+          "title": "四种联合情况",
+          "explanation": "次品/良品与报警/不报警构成四格。各格非负且和为1，报警后的计算只在报警两格里重新归一化。",
+          "exercise": "补全四格0.09、0.01、0.09、0.81。"
+        },
+        {
+          "title": "证据分母为何必要",
+          "explanation": "后验描述观测条件下的新比例。分母为所有能产生该观测的分支总和，不能只保留自己关心的分支。",
+          "exercise": "用文字说明分母代表的集合。"
+        },
+        {
+          "title": "概率不是质量结论",
+          "explanation": "后验依赖先验、检测机制和稳定性假设。真实检测前需核对这些输入及样本代表性；本例不估计真实设备性能。",
+          "exercise": "指出输入从哪里来仍未验证。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 probability-bayes.py，运行 python3 probability-bayes.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import isclose\nprior,sensitivity,false_positive = 0.1,0.9,0.1\na = prior*sensitivity\nb = (1-prior)*false_positive\nposterior = a/(a+b)\nassert isclose(posterior,0.5)\nassert isclose(a+b,0.18)\nprint(a,b,posterior)",
+          "exercise": "先验换成20%，其余不变，独立算后验9/13≈0.6923077。"
+        }
+      ],
+      "course": "probability",
+      "unit": "2"
+    },
+    {
+      "id": "probability-moments",
+      "title": "第3讲 期望与方差：平均相同就一样吗",
+      "summary": "均值为2的读数分布，还可能有多大的波动？",
+      "question": "均值为2的读数分布，还可能有多大的波动？",
+      "outcome": "从离散分布计算均值、方差，并用二阶矩独立核对。",
+      "prerequisites": [
+        "上一讲概率分布；平方"
+      ],
+      "explanation": [
+        "用概率[1/4,1/2,1/4]分配给结果[0,2,4]。期望不是三个数的无权平均，而是每个结果乘对应概率后相加；本例恰好等于2。",
+        "围绕期望的有符号偏差会抵消，所以用偏差平方再加权描述波动。方差为2，标准差为√2，二者单位不同。",
+        "另一条公式Var(X)=E[X²]−E[X]²可以独立核对。概率模型中的方差与从有限样本估计方差是不同问题，本讲尚未引入样本的n−1修正。"
+      ],
+      "formula": "E[X]=Σpᵢxᵢ；Var(X)=Σpᵢ(xᵢ−μ)²=E[X²]−μ²",
+      "worked": "μ=0×1/4+2×1/2+4×1/4=2；方差=4/4+0+4/4=2。E[X²]=6，因此6−4=2。",
+      "misconception": "均值相同不保证分布相同；平均偏差为0也不代表没有噪声。方差不能直接当作原单位的误差条。",
+      "practice": [
+        "分别列出结果、概率、期望贡献与方差贡献。",
+        "把第三个结果从4改成8，先预测均值与方差怎样变化。",
+        "比较恒定等于2与本例分布：期望相同但方差不同。"
+      ],
+      "exercise": {
+        "prompt": "分布P(0)=1/4、P(2)=1/2、P(4)=1/4的方差是多少？",
+        "expected": 2,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "先用期望2求偏差平方。",
+        "solution": "(0−2)²/4+(2−2)²/2+(4−2)²/4=2。",
+        "transfer": "独立计算P(1)=P(3)=1/2的均值2、方差1。"
+      },
+      "sources": [
+        "probability-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "probability-interval",
+          "label": "连接：均值的不确定性"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "probability-moments",
+      "demos": [
+        {
+          "modelId": "probability-moments",
+          "title": "期望与方差：平均相同就一样吗"
+        }
+      ],
+      "sections": [
+        {
+          "title": "概率权重不能丢",
+          "explanation": "结果清单本身不足以确定均值。换一组概率会改变分布；先核对概率总和为1，再讨论统计量。",
+          "exercise": "把中间概率提高时需要怎样同时改其他概率。"
+        },
+        {
+          "title": "中心化与平方",
+          "explanation": "平方把正负偏差变成非负贡献，也让大偏差影响更强。若单位是毫米，方差是平方毫米。",
+          "exercise": "写出标准差的单位。"
+        },
+        {
+          "title": "模型量与估计量",
+          "explanation": "已知有限分布可以精确求矩；观测样本只能估计总体矩。区分二者有助于后续理解置信区间。",
+          "exercise": "指出页面当前算的是哪一种。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 probability-moments.py，运行 python3 probability-moments.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import isclose\nvalues,mass = [0,2,4],[0.25,0.5,0.25]\nmu = sum(x*p for x,p in zip(values,mass))\nvar = sum(p*(x-mu)**2 for x,p in zip(values,mass))\nsecond = sum(p*x*x for x,p in zip(values,mass))\nassert isclose(mu,2) and isclose(var,2)\nassert isclose(var,second-mu*mu)\nprint(mu,var,second)",
+          "exercise": "独立计算P(1)=P(3)=1/2的均值2、方差1。"
+        }
+      ],
+      "course": "probability",
+      "unit": "3"
+    },
+    {
+      "id": "probability-mle",
+      "title": "第4讲 极大似然：数据固定后比较参数",
+      "summary": "十次试验七次成功，为什么估计成功率是0.7？",
+      "question": "十次试验七次成功，为什么估计成功率是0.7？",
+      "outcome": "区分概率与似然、连续估计与候选网格最佳。",
+      "prerequisites": [
+        "独立试验；幂与简单对数直觉"
+      ],
+      "explanation": [
+        "已观察到十次独立Bernoulli试验，其中七次成功。现在把数据固定，问不同q对这份数据给出多大概率；这一关于参数的函数叫似然。",
+        "指定顺序的似然是q⁷(1−q)³。若只记录成功次数，会多一个组合因子，但它与q无关，不改变最优q。对数似然求导可得q̂=k/n。",
+        "页面另列0.2、0.5、0.7、0.9四个候选帮助比较。连续最优值与网格内最佳必须分开报告，尤其成功数为0或10时。点估计本身没有表达不确定性。"
+      ],
+      "formula": "L(q)=qᵏ(1−q)ⁿ⁻ᵏ；q̂=k/n",
+      "worked": "n=10、k=7得到q̂=0.7；对数似然导数7/q−3/(1−q)=0。全成功或全失败时极大点在边界。",
+      "misconception": "似然不是参数的后验概率，不需要对所有q相加为1。候选中最好也不保证恰好是连续参数最优点。",
+      "practice": [
+        "固定k=7，比较四个候选似然。",
+        "把k设为0、10，观察连续估计与网格最佳差异。",
+        "说明十次观测无法证明真实成功率恰好等于0.7。"
+      ],
+      "exercise": {
+        "prompt": "十次独立Bernoulli试验七次成功，成功率的极大似然估计是多少？",
+        "expected": 0.7,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "成功数除以总次数。",
+        "solution": "q̂=7/10=0.7。",
+        "transfer": "改成20次、11次成功，求q̂=0.55，并说明仍缺少不确定性描述。"
+      },
+      "sources": [
+        "probability-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs229-logistic",
+          "label": "连接：用似然构造分类损失"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "probability-mle",
+      "demos": [
+        {
+          "modelId": "probability-mle",
+          "title": "极大似然：数据固定后比较参数"
+        }
+      ],
+      "sections": [
+        {
+          "title": "固定数据、改变参数",
+          "explanation": "概率通常在参数给定时比较结果，似然在结果给定后比较参数。表达式可以相同，所问问题不同。",
+          "exercise": "分别写出两种问题。"
+        },
+        {
+          "title": "对数为何方便",
+          "explanation": "独立项相乘取对数后变为求和，保留最大点且避免很小的乘积下溢。本例规模小仍可直接计算。",
+          "exercise": "写出7log q+3log(1−q)。"
+        },
+        {
+          "title": "估计的边界",
+          "explanation": "k=0或n时不能用内部导数方程硬求解，要检查区间边界。样本量不足和模型不符也不会因公式正确而消失。",
+          "exercise": "说明同为0.7时7/10与700/1000为何信息量不同。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 probability-mle.py，运行 python3 probability-mle.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import isclose\nn,k = 10,7\nestimate = k/n\ncandidates = [0.2,0.5,0.7,0.9]\nlikelihood = [q**k*(1-q)**(n-k) for q in candidates]\nbest = candidates[max(range(len(candidates)),key=likelihood.__getitem__)]\nassert isclose(estimate,0.7) and best == 0.7\nassert 0/10 == 0 and 10/10 == 1\nprint(estimate,list(zip(candidates,likelihood)))",
+          "exercise": "改成20次、11次成功，求q̂=0.55，并说明仍缺少不确定性描述。"
+        }
+      ],
+      "course": "probability",
+      "unit": "4"
+    },
+    {
+      "id": "probability-interval",
+      "title": "第5讲 置信区间：样本变多，均值为何更稳",
+      "summary": "总体标准差不变，样本均值的误差界为什么会缩小？",
+      "question": "总体标准差不变，样本均值的误差界为什么会缩小？",
+      "outcome": "在已知σ的正态模型下复算z区间，正确解释覆盖率。",
+      "prerequisites": [
+        "均值与方差；平方根"
+      ],
+      "explanation": [
+        "假设样本独立同分布且来自正态总体，已知总体标准差σ=2。样本均值的标准差为σ/√n，它描述均值的抽样波动，与单次读数的标准差不同。",
+        "双侧95%区间为x̄±1.9599639845σ/√n。默认n=16、x̄=0，标准误0.5，区间约[−0.97998,0.97998]。这里正态且已知σ，覆盖关系是模型内的结果。",
+        "95%说的是重复抽样、按同一规则构造的区间约有95%覆盖固定真均值，不是对当前固定区间赋予95%后验概率。未知σ通常应考虑t方法；本讲不混用两者。"
+      ],
+      "formula": "标准误=σ/√n；区间=x̄±z₀.₉₇₅σ/√n",
+      "worked": "σ=2、n=16时标准误0.5，半宽约0.97998199；n变64后半宽减半。",
+      "misconception": "置信区间不覆盖95%的原始观测，也不是误差为零的保证。样本相关时σ/√n公式不应直接沿用。",
+      "practice": [
+        "区分σ、标准误、区间半宽的三个数字。",
+        "把n从16改到64，核对宽度比例。",
+        "改变样本均值，观察区间平移而宽度不变。"
+      ],
+      "exercise": {
+        "prompt": "已知σ=2、n=16时，样本均值的标准误是多少？",
+        "expected": 0.5,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "2除以√16。",
+        "solution": "2/4=0.5。",
+        "transfer": "保持σ=2，把n改成64，计算标准误0.25和对应95%区间。"
+      },
+      "sources": [
+        "probability-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "probability-test",
+          "label": "继续：小p值究竟说明什么"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "probability-interval",
+      "demos": [
+        {
+          "modelId": "probability-interval",
+          "title": "置信区间：样本变多，均值为何更稳"
+        }
+      ],
+      "sections": [
+        {
+          "title": "假设放在公式前面",
+          "explanation": "独立、同分布、正态与已知σ共同支持本例。现实数据若有漂移或相关性，增加n未必按这一速度减少误差。",
+          "exercise": "列出最可能失效的一个前提。"
+        },
+        {
+          "title": "四倍样本量的含义",
+          "explanation": "标准误按平方根缩小。想把半宽减到原来的1/2，样本量需要变成4倍，而不是2倍。",
+          "exercise": "想减到1/3需要多少倍样本。"
+        },
+        {
+          "title": "频率学覆盖解释",
+          "explanation": "固定参数、随机区间是这一构造的视角。贝叶斯可信区间有不同条件与解释，不能仅因数字95%相同就互换。",
+          "exercise": "用一句话重新表述95%的含义。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 probability-interval.py，运行 python3 probability-interval.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import sqrt, isclose\nfrom statistics import NormalDist\nsigma,n,mean = 2,16,0\nse = sigma/sqrt(n)\nz = NormalDist().inv_cdf(0.975)\ninterval = [mean-z*se,mean+z*se]\nassert isclose(se,0.5)\nassert isclose(z,1.959963984540054)\nassert isclose(sigma/sqrt(64),se/2)\nprint(se,interval)",
+          "exercise": "保持σ=2，把n改成64，计算标准误0.25和对应95%区间。"
+        }
+      ],
+      "course": "probability",
+      "unit": "5"
+    },
+    {
+      "id": "probability-test",
+      "title": "第6讲 假设检验：小p值不是零假设概率",
+      "summary": "十次公平抛币出现九次正面，双侧p值怎样精确相加？",
+      "question": "十次公平抛币出现九次正面，双侧p值怎样精确相加？",
+      "outcome": "枚举二项零分布，按预设双尾统计量求p值并解释结论。",
+      "prerequisites": [
+        "二项分布；条件概率"
+      ],
+      "explanation": [
+        "零假设H₀是独立公平抛币，十次正面数K服从Binomial(10,0.5)。在看数据前规定统计量|K−5|，双侧把离5至少一样远的结果都看作更极端。",
+        "若观察到9次正面，计入K=0、1、9、10。概率为(1+10+10+1)/1024=0.021484375。这里精确枚举，不使用正态近似；其他双侧定义在非对称分布中可能不同。",
+        "把p值与预先选定的α比较，只给拒绝或未拒绝的程序性结论。p值条件在H₀上，不是H₀为真的概率，也不直接给出偏差大小或实际意义。"
+      ],
+      "formula": "p=Pₕ₀(|K−5|≥|k_obs−5|)；本例p=22/1024",
+      "worked": "k=9时p≈0.02148，小于α=0.05而拒绝H₀。k=5时所有结果都至少同样极端，p=1。",
+      "misconception": "未拒绝不能证明公平；p小也不表示假设只有p概率正确。反复试验只挑显著结果会改变错误率。",
+      "practice": [
+        "列出k=9时进入双尾的所有次数。",
+        "把k改成5和10，分别核对p=1与2/1024。",
+        "预先把α设为0.01，说明同一p值为什么对应另一决定。"
+      ],
+      "exercise": {
+        "prompt": "十次抛币出现九次正面，按|K−5|的双侧规则，精确p值是多少？",
+        "expected": 0.021484375,
+        "tolerance": 1e-10,
+        "unit": "",
+        "hint": "把0、1、9、10次的概率相加。",
+        "solution": "[C(10,0)+C(10,1)+C(10,9)+C(10,10)]/1024=22/1024。",
+        "transfer": "独立算k=8的双侧p值112/1024=0.109375，并与0.05比较。"
+      },
+      "sources": [
+        "probability-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs229-validation",
+          "label": "连接：评测与模型选择"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "probability-test",
+      "demos": [
+        {
+          "modelId": "probability-test",
+          "title": "假设检验：小p值不是零假设概率"
+        }
+      ],
+      "sections": [
+        {
+          "title": "更极端需要定义",
+          "explanation": "不能看到观测后再挑最有利的单尾或双尾。统计量与拒绝规则要提前说明，本例用距中心的绝对偏离。",
+          "exercise": "解释为何也计入K=1。"
+        },
+        {
+          "title": "边界与包含等号",
+          "explanation": "至少同样极端应包含观测值自身，否则离散分布p值会偏小。中心处p=1是合理边界，不是程序错误。",
+          "exercise": "核对k=0与k=10结果相同。"
+        },
+        {
+          "title": "统计结论与工程判断",
+          "explanation": "显著性不描述改进幅度，也不替代代表性、独立性和效应量。真实评测还需报告样本量、设计和实际差异。",
+          "exercise": "说明仅报告p<0.05缺少什么。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 probability-test.py，运行 python3 probability-test.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import comb,isclose\nn,k = 10,9\nmass = [comb(n,j)/2**n for j in range(n+1)]\npvalue = sum(v for j,v in enumerate(mass) if abs(j-5)>=abs(k-5))\nassert isclose(pvalue,22/1024)\nassert sum(v for j,v in enumerate(mass) if abs(j-5)>=0) == 1\nassert isclose(sum(v for j,v in enumerate(mass) if abs(j-5)>=3),112/1024)\nprint(pvalue,pvalue<=0.05)",
+          "exercise": "独立算k=8的双侧p值112/1024=0.109375，并与0.05比较。"
+        }
+      ],
+      "course": "probability",
+      "unit": "6"
+    }
+  ]
+}

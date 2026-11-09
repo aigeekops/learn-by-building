@@ -29,7 +29,7 @@ if(typeof document!=='undefined'){
       <div class="curated-block-top"><span>学习块 ${b.week}</span><span class="badge ${b.optional?'gray':'green'}">${b.optional?'训练选做':b.walkthrough?'有完整跟练':'分步练习'}</span></div>
       <h4>${esc(b.title)}</h4><div class="curated-source"><small>${esc(b.resource_role||'配套资料')}</small>${external(s.url,s.title)}</div>
       <p class="curated-prerequisite"><b>起步自检</b>${esc(b.prerequisite||'')}</p>${b.intuition?`<p class="curated-intuition"><b>先懂一句话</b>${esc(b.intuition)}</p>`:''}
-      ${renderBridge(b)}${renderWalkthrough(b)}
+      ${renderBridge(b)}${b.teaching&&window.CourseTeaching?`<details class="teaching-details"><summary>先看动画 · 改参数、对照代码与验证预测</summary>${CourseTeaching.render(b.teaching,b.title)}</details>`:''}${renderWalkthrough(b)}
       ${b.study_load?`<details class="curated-load"><summary>怎样分配时间 · 核心练习参考 ${b.study_load.core_minutes} 分钟</summary><p>最小体验：先用 15–30 分钟完成第一步。核心练习参考 ${b.study_load.core_minutes} 分钟；含独立修改与深入练习参考 ${b.study_load.deep_minutes} 分钟，均可分多次。</p><p>${esc(b.study_load.note)}</p></details>`:''}
       ${first?`<div class="curated-start"><small>${b.walkthrough?'配套教材 · 按问题补充':'原始教材 · 按范围阅读'}</small>${external(first.url,first.title)}<p>${esc(first.note)}</p>${first.fallback_url?external(first.fallback_url,'本节官方源文件','curated-fallback'):''}</div>`:''}
       <details class="curated-reading"><summary>阅读顺序与范围${readings.length>1?` · 共 ${readings.length} 节`:''}</summary>

@@ -1,0 +1,88 @@
+{
+  "courseId": "underactuated",
+  "courseLabel": "Underactuated Robotics 配套原创八讲",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "underactuated-actuation",
+      "experiments": ["reverse-torque"],
+      "scope": "逐格解释固定质量矩阵、Bu两个分量、配置自由度和结构输入秩；展开秩比较、2×2行列式与逆矩阵两行乘法、加速度及Mq̈逐行回代和残差。零输入时结构秩仍为1。"
+    },
+    {
+      "id": "underactuated-pendulum",
+      "experiments": ["add-unit-torque"],
+      "scope": "度转弧度与角速度输入；逐项展开输入、阻尼和重力力矩、净角加速度；相空间导数的两分量；动能、固定向下零点的势能和机械能之和。"
+    },
+    {
+      "id": "underactuated-linearization",
+      "experiments": ["cross-restoring-threshold"],
+      "scope": "向上偏差δ与完整θ=π+δ；非线性gsinδ和线性gδ；负反馈输入与g−k；闭环线性加速度、k>g恢复系数判定和有符号近似误差，保留无阻尼边界。"
+    },
+    {
+      "id": "underactuated-lqr",
+      "experiments": ["increase-input-cost"],
+      "scope": "固定Q、终端P3与三步时域；在原模型一次反向递推快照中，按k=2,1,0分别展开R+P、K、a²P、反馈扣除和更新P；正确选数组末项K0；核对x0=1的输入与首步状态。"
+    },
+    {
+      "id": "underactuated-lyapunov",
+      "experiments": ["leave-attraction-region", "include-boundary-equilibria"],
+      "scope": "动力学线性项和三次项、V及链式法则Vdot；单点严格下降与域内x²−1上界；严格域半径、吸引开区间、目标原点和导数零容限三个独立判断。"
+    },
+    {
+      "id": "underactuated-energy",
+      "experiments": ["tighten-torque-limit", "exact-downward-rest"],
+      "scope": "当前角度、动能、势能、总能量和向上目标能量；控制能量差和原始力矩；对称上下限与clamp数值代入；饱和功率uω、能量误差和零速度控制律盲点。"
+    },
+    {
+      "id": "underactuated-collocation",
+      "experiments": ["cheaper-infeasible-input", "cancelled-defects-are-not-feasible"],
+      "scope": "固定节点时差、三个状态和三个恒定输入；两段各自展开候选状态差、梯形输入积分和有符号缺陷；两段平方控制代价；最大绝对缺陷、固定边界残差和逐段严格容限判定。"
+    },
+    {
+      "id": "underactuated-mpc",
+      "experiments": ["reverse-disturbance"],
+      "scope": "三个真实候选输入；逐候选展开预测状态、状态平方项、输入代价和总成本；最小值首个索引、当前输入、预测和外扰后教学测量；由新测量计算下一轮全部成本及本轮预测误差。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs underactuated",
+      "node --test tests/course_inspector_underactuated.test.cjs"
+    ],
+    "models": 8,
+    "lessons": 8,
+    "framesChecked": 232,
+    "cellsChecked": 926,
+    "experiments": 11,
+    "semanticTests": 11,
+    "checks": [
+      "统一检查器基于实际config/extension_underactuated.json demos和原模型，检查8模型默认及各控件两个边界的全部232帧、926个有限且ID唯一的算格；11组真实before/after及共享UI验证通过。",
+      "独立测试逐个读取真实目录demos，检查32个默认当前计算快照；深冻结trace验证不可变性，算格都有具体公式、输入、边界说明与四位小数说明，并检查索引安全夹取。",
+      "11组实际控件实验检验具体数值/判断及保持量；相同前后输入与人为破坏输出均被verify拒绝。",
+      "无依赖浏览器注册通过Node VM检查；当前帧在禁止读取完整result、scene、visual和未来step的代理下仍输出完全相同算格。",
+      "耦合动力学用消元独立核对两个加速度、两行回代与残差，并核对零输入不改变结构秩。",
+      "摆用负角和负速度核对阻尼、重力、相空间导数和能量；向上静止独立核对19.62J势能。",
+      "线性化检查负偏差、零偏差、正偏差的有符号近似误差及闭环恢复方向，明确没有阻尼时不推断渐近稳定。",
+      "LQR不用Riccati作为数值oracle，独立堆叠三个控制量的二次型，通过3×3线性方程最小化获得u0、首步状态和最优总代价，核对K0、P0及正确数组索引。",
+      "Lyapunov检查0和±1三个平衡点、严格域半径与单点判断，并测试用户域条件成立但当前点在域外的情形。",
+      "能量法分别检查负速度饱和补能、超过目标能量时抽能，以及非平衡姿态零速度下stalled仅为控制律盲点。",
+      "配点法用精确连续解x(t)=ut独立核对恒定输入积分；验证两段缺陷可相互抵消但依然不可行。",
+      "MPC逐个独立复算当前及新测量下的所有候选成本，核对负初始状态和外扰、预测/测量分离，明确末帧并未选择或执行下一轮动作。"
+    ]
+  },
+  "limitations": [
+    "八讲是原创有限计算选编，不是完整官方课程；没有改变讲次ID、轨迹、数据、控件、共享模型、草稿或记录。",
+    "inspect只读取trace.params及当前steps[index].variables/title；不读取完整result、scene、visual或未来步骤。verify读取两次完整运行的末帧作最终核对。",
+    "原模型每讲均有4个真实算术快照；只解释这些快照，不增加时间仿真或伪动画。Riccati的三个反向更新在原模型同一个快照内一次完成。",
+    "耦合动力学使用固定正定M和B，忽略重力、速度项、摩擦和约束；输入秩不足不自动证明不可控。",
+    "摆是m=l=1的瞬时动力学与能量计算；有输入和阻尼时没有声称机械能守恒，没有数值积分轨迹。",
+    "向上线性化只在局部有效；位置恢复系数不是无阻尼系统的渐近稳定性证明，未包含饱和或真实执行器限制。",
+    "LQR为三步标量离散有限时域、B=1、Q=P3=1、R>0，没有输入约束；只计算首步状态，不声称无限时域稳定或硬件控制成功。",
+    "Lyapunov的Vdot区域结论来自该一维多项式代数；严格域判定不保证当前点在用户选择域内，±1为非目标平衡点。",
+    "能量整形采用无阻尼单位摆、固定增益和对称饱和；E*=19.62J不决定完整相位，不证明摆起或向上稳定。stalled只表示零速度令此控制律力矩为零，非平衡姿态仍可由重力加速。",
+    "配点法评价给定恒定输入和节点，不执行优化求解；本例线性恒定输入可精确积分，一般非线性网格可行仍需独立积分和网格误差检查。",
+    "MPC仅单步有限候选枚举和一次受扰后成本重算，测量值由输入外扰合成；没有连续优化、可行性保障、执行时限或真实传感器回执。",
+    "本分工未运行共享构建、浏览器或真机验收；这些由根任务负责。"
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "courseId": "linear",
+  "courseLabel": "MIT 18.06 线性代数原创伴学",
+  "lessons": 6,
+  "models": [
+    {
+      "id": "linear-vectors",
+      "intuition": "矩阵的两列分别按输入系数缩放，再将同一坐标相加；逐项行点积与平方长度提供独立核对。",
+      "experiments": [
+        {
+          "id": "first-coefficient",
+          "label": "只把第一列系数由1改2",
+          "prediction": "第二列贡献保持时，输出两个坐标是否都增加1？",
+          "before": {
+            "x": 1,
+            "y": 1
+          },
+          "after": {
+            "x": 2,
+            "y": 1
+          },
+          "expectation": "第二列仍为[1,−1]；输出[2,0]→[3,1]，平方长度4→10。"
+        }
+      ]
+    },
+    {
+      "id": "linear-elimination",
+      "intuition": "对增广矩阵的三个位置同时做第二行减倍数第一行；用余下系数和右端区分主元、自由变量与矛盾。",
+      "experiments": [
+        {
+          "id": "unique-to-many",
+          "label": "只把第二式改为第一式的两倍",
+          "prediction": "消元后的两个剩余位置会同时变成0吗？",
+          "before": {
+            "kind": "unique"
+          },
+          "after": {
+            "kind": "many"
+          },
+          "expectation": "第二行[0,−2|−2]变[0,0|0]；唯一解[1,1]变为无唯一向量的多解。"
+        },
+        {
+          "id": "many-to-none",
+          "label": "只将第二式右端由4改5",
+          "prediction": "系数矩阵不变时，0=0会不会变成矛盾行？",
+          "before": {
+            "kind": "many"
+          },
+          "after": {
+            "kind": "none"
+          },
+          "expectation": "相同A的剩余系数仍0，右端0→1；多解变无解，两个结果都没有唯一向量。"
+        }
+      ]
+    },
+    {
+      "id": "linear-composition",
+      "intuition": "列向量约定下先缩放再旋转是RSx；另一条路径从同一原始向量重算，每个输出坐标显示实际乘加。",
+      "experiments": [
+        {
+          "id": "scale-breaks-commutation",
+          "label": "只将横向缩放倍数由1改2",
+          "prediction": "单位缩放下相同的两条路径还会相同吗？",
+          "before": {
+            "scale": 1
+          },
+          "after": {
+            "scale": 2
+          },
+          "expectation": "两条路径原先同为[−1,1]；2倍时RSx=[−1,2]、SRx=[−2,1]。"
+        }
+      ]
+    },
+    {
+      "id": "linear-projection",
+      "intuition": "先检查方向平方长度，再按点积比例逐坐标形成投影；目标减投影的每项残差与方向点积应为零。",
+      "experiments": [
+        {
+          "id": "target-scale",
+          "label": "只把目标横坐标由2改4",
+          "prediction": "投影倍数、投影与残差会不会都翻倍？",
+          "before": {
+            "x": 2,
+            "y": 0,
+            "basis": "diagonal"
+          },
+          "after": {
+            "x": 4,
+            "y": 0,
+            "basis": "diagonal"
+          },
+          "expectation": "同一a=[1,1]，系数1→2；投影[1,1]→[2,2]，残差[1,−1]→[2,−2]，点积均0。"
+        },
+        {
+          "id": "zero-direction",
+          "label": "只把方向改为零向量",
+          "prediction": "目标不变时，能否继续用点积比例除以aᵀa？",
+          "before": {
+            "basis": "diagonal"
+          },
+          "after": {
+            "basis": "zero"
+          },
+          "expectation": "合法方向有投影；零方向返回invalid_direction，系数、投影、残差都保留null。"
+        }
+      ]
+    },
+    {
+      "id": "linear-least-squares",
+      "intuition": "中心化的每个协变项除以横坐标平方和得到斜率；逐点预测、残差平方及两列法方程都用同一组三点。",
+      "experiments": [
+        {
+          "id": "last-observation",
+          "label": "只把第三个观测由2改3",
+          "prediction": "三点能恰好共线时，斜率、截距和SSE会如何变化？",
+          "before": {
+            "last": 2
+          },
+          "after": {
+            "last": 3
+          },
+          "expectation": "x和前两项y保持；斜率0.5→1、截距7/6→1、SSE 1/6→0，两个正交检查都约为0。"
+        }
+      ]
+    },
+    {
+      "id": "linear-eigen",
+      "intuition": "每次只对上一个实际向量做矩阵乘法：横坐标乘2、纵坐标乘0.5；最后才归一化，并单独核对固定特征对。",
+      "experiments": [
+        {
+          "id": "one-more-action",
+          "label": "只把矩阵作用次数由3增至4",
+          "prediction": "已有三次轨迹会保持吗，新增一次后纵横比变成多少？",
+          "before": {
+            "iterations": 3,
+            "initial": 1
+          },
+          "after": {
+            "iterations": 4,
+            "initial": 1
+          },
+          "expectation": "前三次完全相同；向量[8,0.125]→[16,0.0625]，纵横比再乘1/4，归一化方向更近横轴。"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "commands": [
+      "node scripts/check_course_inspectors.cjs linear",
+      "node --test tests/course_inspector_linear.test.cjs"
+    ],
+    "models": 6,
+    "lessons": 6,
+    "framesChecked": 151,
+    "cellsChecked": 500,
+    "experiments": 8,
+    "semanticTests": 9,
+    "status": "passed",
+    "checks": [
+      "当前目录实际6个demos逐一覆盖；统一检查器验证默认、各控件最小/最大或首尾选项的全部实际帧。",
+      "默认轨迹深冻结、inspect不可变性、浏览器无依赖注册、禁止读取未来快照与trace.result。",
+      "每个实验前后运行实际模型并核对预期；不变输入对必须被verify拒绝。",
+      "独立矩阵行点积、增广行三格消元、三类解与秩、两种复合顺序。",
+      "投影点独立最近距离核对、零方向未知分支、独立2×2法方程解与逐项残差平方。",
+      "逐轮矩阵幂与旧向量核对；仅最终实际帧归一化；固定特征对与一般迭代向量分开。"
+    ]
+  },
+  "scope": [
+    "linear-vectors：矩阵四格、两列逐坐标贡献、输出逐坐标和、行点积与平方长度。",
+    "linear-elimination：系数四格、增广六格、消元后第二行三格、解类型/秩、回代与原方程核对。",
+    "linear-composition：两条路径从同一原始输入计算，逐坐标展示Sx、RSx、Rx、SRx和差值。",
+    "linear-projection：平方长度分母、点积贡献、倍数、投影/残差坐标、正交贡献及零方向拒绝。",
+    "linear-least-squares：设计矩阵各行、均值、每项协变/平方贡献、参数、逐点预测/残差、SSE与两列法方程。",
+    "linear-eigen：矩阵四格、初始坐标、每次真实旧向量到新向量的乘加、纵横比、独立特征对与最终归一化。"
+  ],
+  "limitations": [
+    "六讲是现有原创有限小算例的逐格检查，不代表完整MIT 18.06官方课程。",
+    "静态几何保持原有静态图示与有限计算快照；插件不创建、复制或伪造运动帧。",
+    "只有linear-eigen播放实际已记录的矩阵迭代；其初始横坐标固定1，未覆盖纯纵轴初值或一般矩阵收敛。",
+    "零方向投影保持null；多解或无解均不伪造唯一解向量。",
+    "公式显示四位小数，单元值与验证使用完整精度；最小二乘正交核对允许机器误差。",
+    "不修改共享模型、图示、配置、课程/讲次ID、草稿、学习记录或时长；浏览器与交付构建由根agent统一验收。"
+  ],
+  "files": [
+    "web/course-inspectors/linear.js",
+    "tests/course_inspector_linear.test.cjs",
+    "docs/course-inspectors/linear.json"
+  ]
+}

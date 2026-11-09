@@ -16,6 +16,18 @@ Python 3.11+ 标准库 + SQLite + 原生 HTML/CSS/JS，**零第三方依赖、�
 
 ## 快速开始
 
+### 完整课程学习版
+
+六门进阶课新增28讲，含已实跑的PyTorch、CPU DDP、FSDL完整本地项目与机械设计文件；见[课程更新与复现](docs/course-expansion-2026-11-09.md)。
+
+新版课程地图、各课程配套课件、双栏教学演示、个人路线和学习记录已纳入项目源码。第二批新增 MIT 18.06、MIT 18.05 与 CS229 各6讲，并同步地图、课程目录与新个人计划；范围与剩余课程见 [第二批说明](docs/map-math-batch2.md)，当前讲数以构建清单为准：
+
+```bash
+python3 scripts/build_learning_app.py --serve   # http://127.0.0.1:8766/
+```
+
+只构建时去掉 `--serve`，产物位于 `dist/learning/`；其中 `standalone.html` 可以离线打开。公开站点的根 `index.html` 就是同一套完整学习站，打开网站即进入课程地图与课件，`learning/` 保留同内容副本以兼容既有链接与回归脚本；旧工作台页面不再发布。开发与数据迁移说明见 [docs/learning-app.md](docs/learning-app.md)。
+
 ### 方式一 · 静态站点（推荐，不需要 Python 服务）
 
 ```bash
@@ -86,6 +98,12 @@ python3 server.py --port 9000       # 换端口
 ---
 
 ## 交互练习
+
+### 2026 AI 课程专题
+
+AI 路线新增 CME 295、CS336、CS146S 的34 讲原创配套课件：CME 295 六讲、CS336 十七讲核心课与一场嘉宾课、CS146S 十场公开课件。包含通俗讲解、逐步动画、代码与变量回放、独立练习和来源定位；原课目录、材料访问状态与本站配套范围分别显示。统一使用 2026 年材料，未公开的材料待发布后再加入。
+
+入口为 `ai-courses.html`，也可从 AI 学习路线打开。`python3 scripts/build_ai_courseware.py` 生成 `dist-courseware/interactive-courseware.html` 单文件离线课件。材料核对与演示范围见 [制作说明](docs/ai-courseware-2026.md)。
 
 ### 电路原理补课站
 
@@ -199,17 +217,29 @@ GitHub Actions 会在每次推送运行上述两套测试。
 
 ## 部署
 
-`.github/workflows/pages.yml` 已配置构建与部署。把仓库 **Settings → Pages → Source** 设为 **GitHub Actions**，推送到默认分支即发布 `dist/`。参考：[GitHub Pages 自定义工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+`.github/workflows/pages.yml` 已配置构建与部署。把仓库 **Settings → Pages → Source** 设为 **GitHub Actions**，推送到默认分支即发布 `dist/`。根 `index.html` 就是完整学习站（课程地图与课件），旧工作台页面不再发布；`learning/` 保留同内容副本以兼容既有链接。参考：[GitHub Pages 自定义工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+
+### 可选：访问统计（部署时注入）
+
+仓库源码以及提交进仓库的 `dist/` **不含任何第三方统计脚本**。只有部署构建显式提供 Umami website id 时，才会在根 `index.html` 注入一段 `defer` 脚本；`learning/` 副本、别名页与 `standalone.html` 始终保持本地自包含。
+
+- GitHub Pages：在 **Settings → Secrets and variables → Actions → Variables** 添加 `UMAMI_WEBSITE_ID`（UUID，会公开在页面源码中，不是密钥）；使用自托管 Umami 时再添加 `UMAMI_SCRIPT_URL`。未配置即不注入，fork 也不会把访问数据发到原作者账户。
+- 本地验证：
+
+```bash
+UMAMI_WEBSITE_ID=00000000-0000-0000-0000-000000000000 python3 scripts/build_static.py --output /tmp/lbb-tracked
+python3 -m http.server 8000 --bind 127.0.0.1 --directory /tmp/lbb-tracked
+```
+
+也可用等价的 CLI 参数 `--umami-website-id` / `--umami-script-url`；传空串可显式关闭。website id 必须是 UUID，脚本 URL 必须是无引号的 `https://` 地址，校验不通过会直接报错而不是写入不可信内容。
+
+> 注意：`python3 server.py` 的本地 Python 工作台使用严格 CSP（`script-src 'self'; connect-src 'self'`），会拦截外部脚本与上报。验证统计请用上面的静态站点方式或实际部署环境。
 
 ---
 
 ## 许可与致谢
 
 **MIT**（见 [LICENSE](LICENSE)）仅覆盖本项目贡献者有权授权的代码与原创内容。第三方教材、课程、图片与商标保留各自权利，不因出现在推荐链接或引用中就转为 MIT。
-
-- 课程与资料来源：《爱上电子学》（Make: Electronics）、[Lessons in Electric Circuits](https://www.allaboutcircuits.com/textbook/)（Design Science License，Tony R. Kuphaldt 及各章贡献者）、[CS50P](https://cs50.harvard.edu/python/license/)（CC BY-NC-SA 4.0）
-- **感谢 Ronin** 公开分享 Agent 与机器人两条学习路线：本站仅参考其顺序做中文编排并保留原帖链接，原帖权利归原作者，不作 MIT 再授权；权利人不希望被引用时可提交 Issue 移除
-- 站点图标、练习与配图为本站原创模型与脚本绘制
 
 ---
 

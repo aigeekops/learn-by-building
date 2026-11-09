@@ -1,0 +1,70 @@
+{
+  "courseId": "ros",
+  "courseLabel": "ROS 2 Jazzy 与 Gazebo Harmonic 配套原创基础专题",
+  "lessons": 4,
+  "models": [
+    {
+      "id": "rf-ros-pubsub",
+      "experiments": ["faster-consumer", "separate-link-loss"],
+      "scope": "按实际事件帧展开发布序号、人为丢失模运算、先入队后覆盖、深度判断、被覆盖序号、FIFO处理及发布后排空；逐队列位置与逐已发布样本去向核对；每帧守恒包含未处理的队列样本。"
+    },
+    {
+      "id": "rf-ros-tf",
+      "experiments": ["expire-transform", "rotate-before-translate"],
+      "scope": "sensor两坐标、0.2m安装偏移、base_link两坐标、度到弧度、旋转矩阵四格与行点积、world候选、T_world_sensor齐次矩阵九格及复合核对；最后检查包含等号的应用年龄阈值，拒用时明确null坐标。"
+    },
+    {
+      "id": "rf-ros-replay",
+      "experiments": ["double-rate", "shift-time-origin"],
+      "scope": "完整输入日志的五个原时间戳、当前记录相对首条时间、除以速率的累计理想等待、相邻发布间隔、保持的消息stamp与payload；末帧以此前已安排数据核对首末间隔与未改写的原时间戳。"
+    },
+    {
+      "id": "rf-ros-bridge",
+      "experiments": ["reject-type-mismatch", "reverse-direction", "scalar-is-not-clock", "choose-wall-clock"],
+      "scope": "数值索引选择的Gazebo源类型、对应ROS类型、配置类型；逐步检查类型相等、单向数据源匹配、可转发条件、Clock独立条件，最后选择仿真或墙钟并判断本例等待条件。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs ros",
+      "node --test tests/course_inspector_ros.test.cjs"
+    ],
+    "models": 4,
+    "lessons": 4,
+    "framesChecked": 281,
+    "cellsChecked": 1925,
+    "experiments": 10,
+    "semanticTests": 10,
+    "checks": [
+      "统一检查器使用真实controls默认值合并参数运行model.run，覆盖默认与各控件两端的全部实际frames；选择控件使用数值索引。",
+      "全部默认帧深冻结；检查稳定且不重复的cell id、真实值、具体算式、输入、单位、有限精度及索引夹取；inspect不修改trace。",
+      "全部10组before/after实际运行原模型，verify检查具体变化与保持量，并拒绝未变化的前值对或后值对。",
+      "无依赖浏览器注册；为所有scene、完整result及未来frame设置拒读陷阱后，所有当前帧检查结果仍一致。",
+      "以独立固定默认队列快照检查先入队再覆盖、周期FIFO处理、排空和每个序号最终去向；逐帧四类分区与守恒。",
+      "交替丢失与全部丢失案例，确认链路丢失不入队、与缓冲覆盖分账，以及零缓冲样本的守恒。",
+      "独立齐次变换矩阵乘点验证非直角30°复合、旋转四格、安装偏移旋转及world平移；后续坐标或时间判断不在早期步骤冒充结果。",
+      "TF恰好年龄阈值允许、超过50ms拒绝，空间候选保持且可用坐标置null；明确只有年龄差没有绝对时间戳。",
+      "1200ms原间隔、3倍速、不同绝对时间原点的逐条回放：stamp与payload保持，等待及相邻间隔符合独立时间差计算。",
+      "桥接正确、类型错误、反方向、成功转发普通标量、错误桥接但选择墙钟五类独立案例；已收到0秒Clock与没有Clock的ready判断不同。",
+      "维持原模型默认11/5/7/5个事件或计算帧；不新增伪动态、不声称启动ROS/DDS/Gazebo或产生学习记录。"
+    ]
+  },
+  "limitations": [
+    "四讲是现有原创ROS 2/Gazebo基础配套专题，不是完整官方教程，也不声称已在目标Jazzy/Harmonic环境运行。",
+    "inspect只读取trace.params及当前和此前frames[index].vars与当前代码；不读取scene、trace.result或未来frame。verify可使用实际前后完整运行的result做最终核对。",
+    "发布订阅模型是单订阅者、确定性内存数组与人工丢失调度；没有DDS发现、执行器、QoS兼容、可靠性确认或重试，也没有真实消息投递保证。",
+    "TF模型是二维单链刚体变换，只有年龄差；年龄阈值是本站应用规则，不替代tf2按绝对查询时间进行缓存、插值和外推检查。",
+    "TF计算快照没有机器人运动；空间候选可算不表示变换已发布、已送达或适合控制。",
+    "回放是原创五条日志的理想算术安排，未读取bag文件或运行rosbag2；真实录制时刻、header.stamp、/clock和节点时间须分别检查，墙钟等待不是实测耗时承诺。",
+    "桥接只核对给定的类型、方向与时间选择条件，未启动Gazebo Transport、ros_gz_bridge或ROS节点，未检查topic、进程、发现或QoS。",
+    "bridge ready仅代表本例时钟来源条件；收到值为0的Clock也视为可用，不等同真实ROS时间初始化、仿真推进或系统健康证明。",
+    "算式显示四位小数，计算值与verify保留完整精度；不把null当作0坐标、不把普通标量当作Clock、不把墙钟数值当作仿真时钟连通证据。",
+    "仅新增本课程插件、测试和本清单；不修改模型、共享配置、构建、课程或讲次ID、图示、草稿、记录或时长。浏览器和交付构建由根agent统一验收。"
+  ],
+  "files": [
+    "web/course-inspectors/ros.js",
+    "tests/course_inspector_ros.test.cjs",
+    "docs/course-inspectors/ros.json"
+  ]
+}

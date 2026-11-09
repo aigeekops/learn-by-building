@@ -1,0 +1,90 @@
+{
+  "courseId": "bonn",
+  "courseLabel": "Bonn Mobile Robotics · 八讲原创主题选编",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "bonn-motion",
+      "experiments": ["equal-wheels"],
+      "scope": "轮距与初始位姿各格；左右轮缘线速度合成为v与omega；圆弧精确积分及近零角速度直线分支；末位姿三格、行驶弧长与航向核对。"
+    },
+    {
+      "id": "bonn-observation",
+      "experiments": ["midpoint-measurement"],
+      "scope": "两个候选位置的地标距离、有符号残差、高斯似然密度各格；等先验公共因子抵消与离散后验归一化；区分密度、密度和与后验概率。"
+    },
+    {
+      "id": "bonn-bayes",
+      "experiments": ["uninformative-sensor"],
+      "scope": "两格先验及概率和；两列运动转移的逐项贡献与预测；观测似然乘积；本次观测边缘概率及两格归一化后验。"
+    },
+    {
+      "id": "bonn-ekf",
+      "experiments": ["larger-measurement-noise"],
+      "scope": "平方观测与当前Jacobian、创新及其方差的预测贡献和噪声贡献、Kalman增益、均值校正、Joseph先验与噪声两个非负项及后验方差。"
+    },
+    {
+      "id": "bonn-particles",
+      "experiments": ["systematic-offset"],
+      "scope": "四个等权初始粒子；逐粒子相对似然和归一化权重；平方权重、ESS与CDF前缀和；四个实际系统采样点、左闭右开区间、选中粒子及重置等权。"
+    },
+    {
+      "id": "bonn-grid",
+      "experiments": ["third-independent-hit"],
+      "scope": "未知先验与零log-odds；逆传感器后验转增量；实际history每一格及累计log-odds；恢复几率与占用概率。"
+    },
+    {
+      "id": "bonn-slam",
+      "experiments": ["consistent-loop"],
+      "scope": "固定首帧与未校正的三格位置；正规方程右端两格、A转置A四格；解析逆求锚定解；三条残差、误差平方和、A转置r两格的驻点核对。"
+    },
+    {
+      "id": "bonn-astar",
+      "experiments": ["zero-heuristic-weight"],
+      "scope": "四条边与四个启发式各格；已完成搜索帧内部的open排序、稳定平局、逐边松弛、父指针与终点出队；随后才回溯路径、累计实际边代价与统计展开数。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs bonn",
+      "node --test tests/course_inspector_bonn.test.cjs"
+    ],
+    "models": 8,
+    "lessons": 8,
+    "framesChecked": 168,
+    "cellsChecked": 722,
+    "experiments": 8,
+    "semanticTests": 10,
+    "checks": [
+      "统一检查器对真实config八个demos的默认参数与每个真实控件边界，检查全部实际计算帧、格子、不可变性、真实参数实验及共享UI的prepare/apply验证结果。",
+      "独立测试覆盖无依赖浏览器注册；默认trace深冻结；稳定且唯一的cell id、具体算式、完整精度值、输入与单位；索引夹取；不增加原模型每个四帧的快照数量。",
+      "所有当前帧在trace.result、当前scene及未来帧variables拒读陷阱下，仍与真实快照检查完全一致；inspect不读取最终结果。",
+      "八组实际before/after参数运行原模型；verify核对具体数值及保持量，并分别拒绝before/before与after/after。",
+      "差速圆弧使用独立sin/cos计算核对；交换左右轮核对镜像转向，等轮速核对无除零直线分支。",
+      "观测模型独立核对高斯常数、似然比、等距对称后验与密度可大于1；Bayes核对运动贡献、边缘概率及后验。",
+      "非默认EKF独立核对Jacobian、负创新、增益、Joseph两项及等价PR/(H²P+R)方差。",
+      "四粒子闭式相对似然核对权重、ESS、CDF；默认及零偏移核对左闭右开采样区间与复制后等权。",
+      "占用栅格用独立几率乘法核对四次观测及history各格，明确history是本帧内部记录。",
+      "位姿图独立核对正规方程、默认三残差、平方和与梯度平衡；A*核对平局、G的5到3松弛改进、实际出队、父指针回溯及路径边代价。",
+      "早期帧不显示尚未计算的末位姿、后验、证据、校正位置、重采样、占用概率、校正位姿、残差、搜索结果、回溯路径或路径汇总。"
+    ]
+  },
+  "limitations": [
+    "八讲为既有原创主题选编，不是完整Bonn原课程译本；未复制原课视频、幻灯片或作业。",
+    "所有计算保持原模型的四个实际快照；模型内部history或A*循环只在该完整stage已执行后展开复算，不创建伪造运动或中间回放帧。",
+    "运动是无打滑恒速理想里程计；观测只在已知地标下两个等先验候选归一化；Bayes只有两格；均不等于真机定位。",
+    "EKF是x以m计、z=x²以m²计的标量局部教学传感器；P单位m²，R和S单位m⁴，H单位m，K单位m⁻¹。没有完整姿态、数据关联或全局多峰表示。",
+    "粒子例省略运动采样，偏移由真实有限滑块给定；ESS只反映权重退化，不是定位精度，也不声称进行随机或真机试验。",
+    "占用例固定先验0.5并假设各次观测条件独立；不含射线清空和完整地图。同帧重复不构成独立新证据。",
+    "位姿图只解锚定的一维等权三约束最小二乘，不含旋转、信息矩阵估计、异常闭环检测或鲁棒核。",
+    "A*原模型整个搜索在单帧内完成；插件以当前已执行stage的图与真实weight复算有界内部循环。本图所有支持权重最终路径相同；w=1到0实验实际改变起点及各节点优先级，同时核对路径和代价保持，不捏造展开顺序差异。w>1不具备一般最优性保证。",
+    "公式显示四位小数；原值、计算与verify保留完整精度。极小似然显示0.0000不表示实际为0；现有控件范围内归一化分母为正。",
+    "只新增本课程插件、测试和本清单；不修改共享模型、配置、构建、课程ID、图示、草稿、学习进度、记录或时长。未运行浏览器或真机，统一交付由根agent完成。"
+  ],
+  "files": [
+    "web/course-inspectors/bonn.js",
+    "tests/course_inspector_bonn.test.cjs",
+    "docs/course-inspectors/bonn.json"
+  ]
+}

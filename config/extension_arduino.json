@@ -1,0 +1,903 @@
+{
+  "checked": "2026-11-09",
+  "course": {
+    "id": "arduino",
+    "label": "Arduino Lessons",
+    "title": "Arduino：从电路读数到非阻塞小系统",
+    "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+    "position": "电子前置练习之后的独立编程与硬件课程",
+    "description": "串联电路、数字输入、ADC、PWM、millis、消抖、执行器与故障停止，分别保存计算、仿真和实测。",
+    "prerequisites": [
+      "能识别电源、地、串联电阻和面包板连接",
+      "基础变量、条件和循环；开发板型号先核对"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "第一条电路：先算电流再接LED",
+        "lessons": [
+          "arduino-led"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 1–3；9 Ohm’s Law。"
+      },
+      {
+        "unit": "2",
+        "title": "数字输入：按钮松开为什么不能浮空？",
+        "lessons": [
+          "arduino-input"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 27 Pull Up / Pull Down；28 Pushbutton。"
+      },
+      {
+        "unit": "3",
+        "title": "模拟输入：代码值怎样换成电压？",
+        "lessons": [
+          "arduino-adc"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 10 Reading Analog Voltages；11 Serial Print。"
+      },
+      {
+        "unit": "4",
+        "title": "PWM：128不是输出128伏",
+        "lessons": [
+          "arduino-pwm"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 7 analogWrite；8 Pulse Width Modulation。"
+      },
+      {
+        "unit": "5",
+        "title": "非阻塞计时：等待时还能读传感器吗？",
+        "lessons": [
+          "arduino-timing"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 4 Variables / Loops；本站非阻塞计时延伸。"
+      },
+      {
+        "unit": "6",
+        "title": "消抖与事件：一次按下怎样只切换一次？",
+        "lessons": [
+          "arduino-debounce"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 28 Toggle Switch；34 Pushbutton；本站消抖延伸。"
+      },
+      {
+        "unit": "7",
+        "title": "执行器：信号、驱动与供电怎样分开？",
+        "lessons": [
+          "arduino-actuator"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 30–31 Servos；37–40 DC Motors。"
+      },
+      {
+        "unit": "8",
+        "title": "小系统：传感失效时输出应该怎样？",
+        "lessons": [
+          "arduino-project"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tutorial 37–40 DC Motor Control；本站传感闭环项目。"
+      }
+    ],
+    "pending": "本课是八讲主题选编，非原作者完整教程翻译。Uno R3的5V/10位ADC/8位PWM示例不可直接套用ESP32；硬件与Arduino目标编译状态单独说明。",
+    "sources": [
+      "arduino-official"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "arduino-led",
+      "course": "arduino",
+      "unit": "1",
+      "title": "第1讲 第一条电路：先算电流再接LED",
+      "summary": "复算LED串联电流与电阻功耗，核对板卡与元件规格。",
+      "question": "5V供电串LED时，电阻为什么只承受一部分电压？",
+      "outcome": "复算LED串联电流与电阻功耗，核对板卡与元件规格。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "串联电路电流相同，电源电压分配在LED和电阻上。LED正向压降随颜色、温度和电流变化，本例只取明确的教学值。",
+        "先按电阻两端电压用欧姆定律求电流，再用I²R估算功耗。安培、毫安和瓦分别表示不同量，计算时不要省掉单位。",
+        "实物先断电核对LED极性、电阻、引脚与地，再按板卡规格通电测量。计算值不应填成自己已经测得的值。"
+      ],
+      "formula": "I=(V_supply−V_LED)/R；P_R=I²R",
+      "worked": "5V、LED2V、220Ω：电流约13.636mA，电阻功耗约0.04091W。",
+      "misconception": "把GPIO视为无限电流电源会得到错误选型；LED也不是固定电阻。",
+      "sections": [
+        {
+          "title": "把板卡和电路条件写清",
+          "explanation": "仅以Uno R3的5V理想电源、串联LED和电阻为例；真实引脚压降、额定值另核对。"
+        },
+        {
+          "title": "求电阻两端电压",
+          "explanation": "电阻与LED串联，不能把5V全部算在电阻上。"
+        },
+        {
+          "title": "由欧姆定律求电流",
+          "explanation": "显示mA时将A乘1000，不能混用单位。"
+        },
+        {
+          "title": "算电阻消耗功率",
+          "explanation": "估算功耗并核对元件与板卡规格；模型计算不是实物测量。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"resistance\":220,\"drop\":2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 把板卡和电路条件写清\nObject.assign(s, ((s,p)=>({supply:5,ledDrop:p.drop,resistance:p.resistance}))(s, p));\n// 求电阻两端电压\nObject.assign(s, ((s,p)=>({resistorVoltage:s.supply-s.ledDrop}))(s, p));\n// 由欧姆定律求电流\nObject.assign(s, ((s,p)=>({currentAmp:s.resistorVoltage/s.resistance,currentMilliamp:1000*s.resistorVoltage/s.resistance}))(s, p));\n// 算电阻消耗功率\nObject.assign(s, ((s,p)=>({resistorWatt:s.currentAmp*s.currentAmp*s.resistance}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-led.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "换成300Ω独立算10mA与0.03W；分别记录计算、在线仿真和实物测量，解释差异。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "// Uno R3: pin 9 -> resistor -> LED -> GND; check polarity and ratings first.\nconst byte ledPin = 9;\nvoid setup() { pinMode(ledPin, OUTPUT); }\nvoid loop() {\n  digitalWrite(ledPin, HIGH); delay(500);\n  digitalWrite(ledPin, LOW); delay(500);\n}\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：5V供电串LED时，电阻为什么只承受一部分电压？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "换成300Ω独立算10mA与0.03W；分别记录计算、在线仿真和实物测量，解释差异。"
+      ],
+      "exercise": {
+        "prompt": "默认电阻两端电压是多少V？",
+        "expected": 3,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "5−2=3。",
+        "transfer": "换成300Ω独立算10mA与0.03W；分别记录计算、在线仿真和实物测量，解释差异。"
+      },
+      "sources": [
+        "arduino-led-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-input",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "arduino-led",
+      "demos": [
+        {
+          "modelId": "arduino-led",
+          "title": "第一条电路：先算电流再接LED · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 150
+    },
+    {
+      "id": "arduino-input",
+      "course": "arduino",
+      "unit": "2",
+      "title": "第2讲 数字输入：按钮松开为什么不能浮空？",
+      "summary": "画出低有效输入真值表，保持无偏置浮空状态未知。",
+      "question": "使用INPUT_PULLUP后，按下为何读到LOW？",
+      "outcome": "画出低有效输入真值表，保持无偏置浮空状态未知。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "按钮接地且使用上拉时，松开由电阻保持高电平，按下直接拉低。程序应把电气电平转换成“按下”这种业务含义。",
+        "没有上拉或外部偏置时，松开输入可能浮空。模型保留null而非虚构0，提醒你缺少决定电平的电路条件。",
+        "数字输入阈值和逻辑电压与板卡有关。机械按钮还会抖动，读到多个边沿并不一定代表用户按了多次。"
+      ],
+      "formula": "pressed=(raw==LOW)，仅在raw已知时计算",
+      "worked": "使用上拉且松开：raw=HIGH、pressed=false；按下：raw=LOW、pressed=true。",
+      "misconception": "上拉不等于逻辑反转错误；电路低有效和变量语义应分别表达。",
+      "sections": [
+        {
+          "title": "明确按钮接地和上拉电路",
+          "explanation": "按钮闭合连接GND；松开时由上拉保持高电平。"
+        },
+        {
+          "title": "保持浮空输入未知",
+          "explanation": "无上拉且按钮松开时电平不确定，不能伪造为LOW。"
+        },
+        {
+          "title": "将低有效电平转成语义",
+          "explanation": "pressed=(raw==LOW)，未知电平继续保持null。"
+        },
+        {
+          "title": "列出可核对的真值行",
+          "explanation": "此处没有消抖，真实机械按钮可能产生多次边沿。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"pressed\":\"no\",\"pullup\":\"yes\"};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 明确按钮接地和上拉电路\nObject.assign(s, ((s,p)=>({pressed:p.pressed==='yes',pullup:p.pullup==='yes'}))(s, p));\n// 保持浮空输入未知\nObject.assign(s, ((s,p)=>({raw:s.pressed?0:s.pullup?1:null}))(s, p));\n// 将低有效电平转成语义\nObject.assign(s, ((s,p)=>({logicalPressed:s.raw===null?null:s.raw===0}))(s, p));\n// 列出可核对的真值行\nObject.assign(s, ((s,p)=>({known:s.raw!==null,led:s.logicalPressed===null?'未知':s.logicalPressed?'开':'关'}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-input.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "列出上拉有无与按下有无四种组合；解释哪个格应标未知，再在自己的板卡上核对读数。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "// Button between pin 2 and GND. Uno R3 built-in LED shows pressed state.\nconst byte buttonPin = 2;\nvoid setup() {\n  pinMode(buttonPin, INPUT_PULLUP); pinMode(LED_BUILTIN, OUTPUT);\n  Serial.begin(9600);\n}\nvoid loop() {\n  const bool pressed = digitalRead(buttonPin) == LOW;\n  digitalWrite(LED_BUILTIN, pressed ? HIGH : LOW);\n  Serial.println(pressed ? 1 : 0); delay(20);\n}\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：使用INPUT_PULLUP后，按下为何读到LOW？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "列出上拉有无与按下有无四种组合；解释哪个格应标未知，再在自己的板卡上核对读数。"
+      ],
+      "exercise": {
+        "prompt": "上拉按钮按下时raw的二进制电平值是多少？",
+        "expected": 0,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "按下连接GND，读LOW，即0。",
+        "transfer": "列出上拉有无与按下有无四种组合；解释哪个格应标未知，再在自己的板卡上核对读数。"
+      },
+      "sources": [
+        "arduino-input-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-led",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "arduino-adc",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "arduino-input",
+      "demos": [
+        {
+          "modelId": "arduino-input",
+          "title": "数字输入：按钮松开为什么不能浮空？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 150
+    },
+    {
+      "id": "arduino-adc",
+      "course": "arduino",
+      "unit": "3",
+      "title": "第3讲 模拟输入：代码值怎样换成电压？",
+      "summary": "区分端点标定与量化步距，按参考电压和分压比换算。",
+      "question": "ADC读到512，为什么不能直接说输入精确等于2.5V？",
+      "outcome": "区分端点标定与量化步距，按参考电压和分压比换算。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "Uno R3的示例ADC代码范围0–1023，参考电压需由实际配置和测量确认。其他板卡的位宽、输入范围与衰减不能直接照搬。",
+        "端点线性映射常写code×Vref/1023；理想1024个量化区间的步距是Vref/1024。两种分母描述不同口径，不能混写。",
+        "用分压测外部电压还需电阻精度、输入阻抗和采样条件。代码换算只能给估计，不消除参考与硬件误差。"
+      ],
+      "formula": "V_endpoint=code×Vref/1023；LSB=Vref/1024",
+      "worked": "code=512、Vref=5：端点映射约2.502444V；量化步距0.0048828125V。",
+      "misconception": "ADC代码不是直接以伏为单位，参考5V也不自动代表实测恰为5.000V。",
+      "sections": [
+        {
+          "title": "固定ADC分辨率与板卡",
+          "explanation": "Uno R3以10位代码0–1023为例；ESP32的位宽、参考和衰减另按板卡核对。"
+        },
+        {
+          "title": "计算端点线性标定值",
+          "explanation": "本例使用V=code×Vref/1023的端点映射；不能等同精确ADC传输函数。"
+        },
+        {
+          "title": "给出量化步距",
+          "explanation": "理想10位ADC的区间步距为Vref/1024，跟端点映射分母区分。"
+        },
+        {
+          "title": "按分压比还原外部值",
+          "explanation": "假设已核对的等阻分压比1/2；此算例不授权把超限电压接到引脚。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"raw\":512,\"reference\":5};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 固定ADC分辨率与板卡\nObject.assign(s, ((s,p)=>({raw:p.raw,maxCode:1023,reference:p.reference}))(s, p));\n// 计算端点线性标定值\nObject.assign(s, ((s,p)=>({voltage:s.raw*s.reference/s.maxCode}))(s, p));\n// 给出量化步距\nObject.assign(s, ((s,p)=>({lsb:s.reference/1024}))(s, p));\n// 按分压比还原外部值\nObject.assign(s, ((s,p)=>({sourceVoltage:2*s.voltage,quantizationOnly:2*s.lsb}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-adc.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "用万用表核对实际参考和一组输入；保存原始代码与换算值，注明ESP32等板卡需另行标定。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "// Uno R3 only: input must stay within board limits; measure Vref independently.\nconst float measuredReference = 5.0f;\nvoid setup() { Serial.begin(9600); }\nvoid loop() {\n  const int raw = analogRead(A0);\n  const float endpointVolts = raw * measuredReference / 1023.0f;\n  Serial.print(raw); Serial.print(','); Serial.println(endpointVolts, 4);\n  delay(100);\n}\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：ADC读到512，为什么不能直接说输入精确等于2.5V？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "用万用表核对实际参考和一组输入；保存原始代码与换算值，注明ESP32等板卡需另行标定。"
+      ],
+      "exercise": {
+        "prompt": "5V、10位ADC的理想量化步距是多少V？",
+        "expected": 0.0048828125,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "5/1024=0.0048828125。",
+        "transfer": "用万用表核对实际参考和一组输入；保存原始代码与换算值，注明ESP32等板卡需另行标定。"
+      },
+      "sources": [
+        "arduino-adc-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-input",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "arduino-pwm",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "arduino-adc",
+      "demos": [
+        {
+          "modelId": "arduino-adc",
+          "title": "模拟输入：代码值怎样换成电压？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 180
+    },
+    {
+      "id": "arduino-pwm",
+      "course": "arduino",
+      "unit": "4",
+      "title": "第4讲 PWM：128不是输出128伏",
+      "summary": "计算占空比、周期和高低电平时间，区分理想平均与负载响应。",
+      "question": "占空比一半时，输出真的变成恒定2.5V了吗？",
+      "outcome": "计算占空比、周期和高低电平时间，区分理想平均与负载响应。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "PWM是高低电平切换，改变高电平占时间比例。Uno R3示例analogWrite使用8位代码，但具体引脚频率需查板卡和定时器。",
+        "本例用code/255作端点占空比模型。周期等于1/f，高电平时长为占空比乘周期，电源幅值并未因此变小。",
+        "理想平均电压不等于所有负载都线性响应。LED感知亮度、电机速度和RC滤波电压需要各自模型与测量。"
+      ],
+      "formula": "D=code/255；T=1/f；t_on=D×T",
+      "worked": "code=128、教学频率500Hz：D约0.50196，周期2ms，高电平约1.00392ms。",
+      "misconception": "PWM不是DAC，舵机脉宽也不能直接等同电机PWM代码。",
+      "sections": [
+        {
+          "title": "区分开关输出和模拟电压",
+          "explanation": "Uno R3的8位PWM代码0–255；所选频率是教学输入，不是特定引脚默认值。"
+        },
+        {
+          "title": "换算占空比",
+          "explanation": "用code/255作端点占空比模型，0关、255持续开。"
+        },
+        {
+          "title": "计算高低电平时长",
+          "explanation": "改变占空比不自动改变电源幅值；高电平仍为板卡逻辑电平。"
+        },
+        {
+          "title": "区分理想平均值和负载响应",
+          "explanation": "5×duty是理想时间平均，电机转速、LED亮度和滤波电压并非都与之线性对应。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"code\":128,\"frequency\":500};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 区分开关输出和模拟电压\nObject.assign(s, ((s,p)=>({code:p.code,supply:5}))(s, p));\n// 换算占空比\nObject.assign(s, ((s,p)=>({duty:s.code/255,period:1/p.frequency}))(s, p));\n// 计算高低电平时长\nObject.assign(s, ((s,p)=>({onTime:s.duty*s.period,offTime:(1-s.duty)*s.period}))(s, p));\n// 区分理想平均值和负载响应\nObject.assign(s, ((s,p)=>({idealAverage:5*s.duty}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-pwm.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "用代码0、128、255比较波形；在目标板用合适测量工具核对频率和占空比，记录引脚。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "// Uno R3 pin 9 PWM; LED needs its own series resistor.\nconst byte pwmPin = 9;\nconst byte level = 128;\nvoid setup() { pinMode(pwmPin, OUTPUT); analogWrite(pwmPin, level); }\nvoid loop() { }\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：占空比一半时，输出真的变成恒定2.5V了吗？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "用代码0、128、255比较波形；在目标板用合适测量工具核对频率和占空比，记录引脚。"
+      ],
+      "exercise": {
+        "prompt": "教学频率500Hz时周期是多少ms？",
+        "expected": 2,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "1000/500=2ms。",
+        "transfer": "用代码0、128、255比较波形；在目标板用合适测量工具核对频率和占空比，记录引脚。"
+      },
+      "sources": [
+        "arduino-pwm-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-adc",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "arduino-timing",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "arduino-pwm",
+      "demos": [
+        {
+          "modelId": "arduino-pwm",
+          "title": "PWM：128不是输出128伏 · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 150
+    },
+    {
+      "id": "arduino-timing",
+      "course": "arduino",
+      "unit": "5",
+      "title": "第5讲 非阻塞计时：等待时还能读传感器吗？",
+      "summary": "用无符号时间差处理millis回绕，解释不同节拍更新策略。",
+      "question": "LED要隔200ms切换，为何不一定使用delay？",
+      "outcome": "用无符号时间差处理millis回绕，解释不同节拍更新策略。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "delay会阻塞当前循环中的其他工作。用时间条件决定是否执行一小步，可以继续读取输入和处理状态机。",
+        "Arduino常用unsigned long保存millis。使用now−last的无符号差可跨一次回绕；不要直接用now≥last+interval这种易溢出的比较。",
+        "last=now是从实际执行时刻重新计时；last+=interval保留原节拍并可能追赶。这是不同策略，不能在解释与代码间混用。"
+      ],
+      "formula": "elapsed=(uint32_t)(now−last)；due=(elapsed≥interval)",
+      "worked": "last=2³²−100，过300ms后now=200；无符号差仍为300，200ms任务到期。",
+      "misconception": "回绕差法仍假设检查跨度不跨过完整计数周期，不能无限期不检查。",
+      "sections": [
+        {
+          "title": "让计时跨越32位回绕",
+          "explanation": "last=2³²−100，now由last+elapsed模2³²得到。Arduino侧使用unsigned long。"
+        },
+        {
+          "title": "使用无符号时间差",
+          "explanation": "(now−last)模2³²；条件要求实际间隔未跨越整个计数周期。"
+        },
+        {
+          "title": "达到间隔才运行一次任务",
+          "explanation": "没有delay，其他传感器或通信步骤可继续执行；本例不补跑所有漏掉周期。"
+        },
+        {
+          "title": "更新时间基准",
+          "explanation": "last=now避免积压补跑；last+=interval是另一种节拍策略，必须明确区别。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"interval\":200,\"elapsed\":300};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 让计时跨越32位回绕\nObject.assign(s, ((s,p)=>({last:4294967196,now:(4294967196+p.elapsed)>>>0}))(s, p));\n// 使用无符号时间差\nObject.assign(s, ((s,p)=>({difference:(s.now-s.last)>>>0}))(s, p));\n// 达到间隔才运行一次任务\nObject.assign(s, ((s,p)=>({due:s.difference>=p.interval}))(s, p));\n// 更新时间基准\nObject.assign(s, ((s,p)=>({nextLast:s.due?s.now:s.last,executions:s.due?1:0}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-timing.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立测试elapsed=0、100、300、600；同时增加按钮读取，记录循环是否仍能响应。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "const unsigned long intervalMs = 200;\nunsigned long last = 0;\nbool on = false;\nvoid setup() { pinMode(LED_BUILTIN, OUTPUT); }\nvoid loop() {\n  const unsigned long now = millis();\n  if ((unsigned long)(now - last) >= intervalMs) {\n    last = now; on = !on;\n    digitalWrite(LED_BUILTIN, on ? HIGH : LOW);\n  }\n  // Other non-blocking sensor/state work can run here.\n}\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：LED要隔200ms切换，为何不一定使用delay？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立测试elapsed=0、100、300、600；同时增加按钮读取，记录循环是否仍能响应。"
+      ],
+      "exercise": {
+        "prompt": "默认回绕后的now是多少ms？",
+        "expected": 200,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "(2³²−100+300) mod 2³²=200。",
+        "transfer": "独立测试elapsed=0、100、300、600；同时增加按钮读取，记录循环是否仍能响应。"
+      },
+      "sources": [
+        "arduino-timing-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-pwm",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "arduino-debounce",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "arduino-timing",
+      "demos": [
+        {
+          "modelId": "arduino-timing",
+          "title": "非阻塞计时：等待时还能读传感器吗？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 180
+    },
+    {
+      "id": "arduino-debounce",
+      "course": "arduino",
+      "unit": "6",
+      "title": "第6讲 消抖与事件：一次按下怎样只切换一次？",
+      "summary": "跟踪候选电平、稳定时间与已确认事件。",
+      "question": "原始输入出现两个下降沿，为什么可能只有一次真实按下？",
+      "outcome": "跟踪候选电平、稳定时间与已确认事件。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "机械按钮在接触过程中可能快速来回变化。直接把每个下降沿当按下，会让一次操作切换多次。",
+        "本例在候选电平持续达到门槛后才接受新稳定电平，只对稳定HIGH→LOW产生一次事件。长按保持LOW不重复触发。",
+        "稳定时间增加延迟，采样稀疏又可能漏掉短按。门槛应结合按钮与循环负载实测，而非只用一个固定常数。"
+      ],
+      "formula": "accept_change ⇔ now−candidate_since≥quiet",
+      "worked": "采样[0,5,10,15,40,70]ms、电平[1,0,1,0,0,0]，门槛20ms时40ms确认一次按下，原始下降沿有2个。",
+      "misconception": "消抖不是简单给整个程序加长delay；它需要分开原始、候选和稳定状态。",
+      "sections": [
+        {
+          "title": "提供一次有抖动的按键采样",
+          "explanation": "低有效原始序列，采样时刻[0,5,10,15,40,70]ms，电平[1,0,1,0,0,0]。"
+        },
+        {
+          "title": "跟踪候选电平的持续时间",
+          "explanation": "每次原始电平变动重置候选起点；只在当前采样时判断稳定时间。"
+        },
+        {
+          "title": "只把稳定下降沿算成一次按下",
+          "explanation": "长按持续LOW不重复触发切换。"
+        },
+        {
+          "title": "比较原始边沿与稳定事件",
+          "explanation": "滤波门槛增加响应延迟；采样稀疏还可能漏掉短按。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"quiet\":20};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 提供一次有抖动的按键采样\nObject.assign(s, ((s,p)=>({times:[0,5,10,15,40,70],raw:[1,0,1,0,0,0]}))(s, p));\n// 跟踪候选电平的持续时间\nObject.assign(s, ((s,p)=>{let candidate=1,since=0,stable=1;const history=[],presses=[];s.times.forEach((t,i)=>{if(s.raw[i]!==candidate){candidate=s.raw[i];since=t;}if(candidate!==stable&&t-since>=p.quiet){stable=candidate;if(stable===0)presses.push(t);}history.push({t,candidate,stable,since});});return {history,presses};})(s, p));\n// 只把稳定下降沿算成一次按下\nObject.assign(s, ((s,p)=>({pressCount:s.presses.length}))(s, p));\n// 比较原始边沿与稳定事件\nObject.assign(s, ((s,p)=>({rawFallingEdges:s.raw.filter((v,i)=>i>0&&s.raw[i-1]===1&&v===0).length,firstConfirmed:s.presses[0]??null}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-debounce.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把门槛改10和50，分别记录确认时间或尚未确认；添加一次松开与第二次按下验证事件数。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "const byte buttonPin = 2;\nconst unsigned long quietMs = 20;\nint candidate = HIGH, stable = HIGH;\nunsigned long since = 0;\nbool on = false;\nvoid setup() { pinMode(buttonPin, INPUT_PULLUP); pinMode(LED_BUILTIN, OUTPUT); }\nvoid loop() {\n  const unsigned long now = millis();\n  const int raw = digitalRead(buttonPin);\n  if (raw != candidate) { candidate = raw; since = now; }\n  if (candidate != stable && (unsigned long)(now - since) >= quietMs) {\n    stable = candidate;\n    if (stable == LOW) { on = !on; digitalWrite(LED_BUILTIN, on ? HIGH : LOW); }\n  }\n}\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：原始输入出现两个下降沿，为什么可能只有一次真实按下？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把门槛改10和50，分别记录确认时间或尚未确认；添加一次松开与第二次按下验证事件数。"
+      ],
+      "exercise": {
+        "prompt": "默认确认的按下事件有几个？",
+        "expected": 1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "15ms后候选LOW保持，到40ms超过20ms门槛，只产生一次事件。",
+        "transfer": "把门槛改10和50，分别记录确认时间或尚未确认；添加一次松开与第二次按下验证事件数。"
+      },
+      "sources": [
+        "arduino-debounce-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-timing",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "arduino-actuator",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "arduino-debounce",
+      "demos": [
+        {
+          "modelId": "arduino-debounce",
+          "title": "消抖与事件：一次按下怎样只切换一次？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 180
+    },
+    {
+      "id": "arduino-actuator",
+      "course": "arduino",
+      "unit": "7",
+      "title": "第7讲 执行器：信号、驱动与供电怎样分开？",
+      "summary": "分别计算舵机脉宽标定和驱动导通损耗，列出器件检查项。",
+      "question": "GPIO能给控制脉冲，是否也能直接给电机供电？",
+      "outcome": "分别计算舵机脉宽标定和驱动导通损耗，列出器件检查项。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "控制信号告诉执行器做什么，驱动和电源承担负载电流。舵机、电机和步进驱动的接口不同，不应把GPIO当负载电源。",
+        "本例0–180°映射1000–2000μs只是教学标定，真实舵机端点需按型号确认。DC驱动用等效电阻估算I²R导通损耗。",
+        "启动、堵转、反电动势、散热和共地需按实际电路核对。模型不连接设备，也不声称这个简式覆盖驱动选型全部条件。"
+      ],
+      "formula": "pulse=1000+angle/180×1000 μs；P=I²R",
+      "worked": "90°对应1500μs；I=0.5A、R=0.4Ω时压降0.2V、导通功耗0.1W。",
+      "misconception": "舵机目标角、PWM占空比和电机功率是不同量。",
+      "sections": [
+        {
+          "title": "把控制信号和供电分开",
+          "explanation": "舵机使用周期脉冲信号，电机经合适驱动和独立供电；共地与器件规格需实物核对。"
+        },
+        {
+          "title": "用教学标定映射脉宽",
+          "explanation": "本例0–180°映射1000–2000μs，实际舵机范围必须重新标定。"
+        },
+        {
+          "title": "估算驱动导通损耗",
+          "explanation": "I²R只包含等效导通损耗，不含启动、堵转、开关和热阻模型。"
+        },
+        {
+          "title": "报告控制和功率的不同单位",
+          "explanation": "PWM代码、舵机脉宽、驱动功耗不得互换；本页没有驱动实际设备。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"angle\":90,\"current\":0.5,\"resistance\":0.4};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 把控制信号和供电分开\nObject.assign(s, ((s,p)=>({angle:p.angle,current:p.current}))(s, p));\n// 用教学标定映射脉宽\nObject.assign(s, ((s,p)=>({pulseMicroseconds:1000+s.angle/180*1000}))(s, p));\n// 估算驱动导通损耗\nObject.assign(s, ((s,p)=>({voltageDrop:p.current*p.resistance,conductionWatt:p.current*p.current*p.resistance}))(s, p));\n// 报告控制和功率的不同单位\nObject.assign(s, ((s,p)=>({signal:'脉宽 μs',power:'外部驱动与供电核对'}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-actuator.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "按真实器件手册列电压、峰值电流、脉宽与地线；在无负载限幅条件下另行测试并记录结果。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "// Requires the Servo library and separately checked servo power/wiring.\n// The example only commands the documented/calibrated center pulse.\n#include <Servo.h>\nServo joint;\nvoid setup() { joint.attach(9); joint.writeMicroseconds(1500); }\nvoid loop() { }\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：GPIO能给控制脉冲，是否也能直接给电机供电？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "按真实器件手册列电压、峰值电流、脉宽与地线；在无负载限幅条件下另行测试并记录结果。"
+      ],
+      "exercise": {
+        "prompt": "默认驱动导通损耗是多少W？",
+        "expected": 0.1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.5²×0.4=0.1。",
+        "transfer": "按真实器件手册列电压、峰值电流、脉宽与地线；在无负载限幅条件下另行测试并记录结果。"
+      },
+      "sources": [
+        "arduino-actuator-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-debounce",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "arduino-project",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "arduino-actuator",
+      "demos": [
+        {
+          "modelId": "arduino-actuator",
+          "title": "执行器：信号、驱动与供电怎样分开？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 180
+    },
+    {
+      "id": "arduino-project",
+      "course": "arduino",
+      "unit": "8",
+      "title": "第8讲 小系统：传感失效时输出应该怎样？",
+      "summary": "把输入有效性、人工使能和距离条件组合成可检查状态机。",
+      "question": "距离传感器超时，能否当成“前方很远”？",
+      "outcome": "把输入有效性、人工使能和距离条件组合成可检查状态机。",
+      "prerequisites": [
+        "能识别电源、地、串联电阻和面包板连接",
+        "基础变量、条件和循环；开发板型号先核对"
+      ],
+      "explanation": [
+        "把前面输入、计时和输出组织起来，先定义每种观测的有效性。超时没有可用距离，不是0cm，也不是无限远。",
+        "本例只有距离已知、人工使能且距离≥15cm才给PWM100；否则停止并保存具体原因。它是桌面逻辑练习。",
+        "真实运动系统还需独立急停、驱动保护和实物验证。计算、仿真、串口日志与实际运动记录应分别保留。"
+      ],
+      "formula": "run=known AND enabled AND distance≥15cm",
+      "worked": "距离20cm、观测有效、已使能时PWM100；任一条件失败则PWM0并给出原因。",
+      "misconception": "一个合理的软件分支不能替代独立硬件保护；页面通过也不是实物通过。",
+      "sections": [
+        {
+          "title": "先定义输入有效性和目标",
+          "explanation": "教学桌面小项目：距离小于15cm停止；大于等于15cm且使能才允许运动。"
+        },
+        {
+          "title": "无效观测不当作0或远处",
+          "explanation": "超时没有可用距离，应独立进入停止分支。"
+        },
+        {
+          "title": "按显式规则决定输出",
+          "explanation": "只是逻辑演练，不代替独立急停、驱动限流或硬件验证。"
+        },
+        {
+          "title": "保留导致输出的原因",
+          "explanation": "区分传感器失效、未使能、过近和满足条件，以便串口排错。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"distance\":20,\"sensor\":\"valid\",\"enable\":\"yes\"};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先定义输入有效性和目标\nObject.assign(s, ((s,p)=>({distance:p.sensor==='valid'?p.distance:null,enabled:p.enable==='yes'}))(s, p));\n// 无效观测不当作0或远处\nObject.assign(s, ((s,p)=>({known:s.distance!==null}))(s, p));\n// 按显式规则决定输出\nObject.assign(s, ((s,p)=>({run:s.known&&s.enabled&&s.distance>=15}))(s, p));\n// 保留导致输出的原因\nObject.assign(s, ((s,p)=>({pwm:s.run?100:0,reason:!s.known?'传感器超时':!s.enabled?'人工关闭':s.distance<15?'障碍过近':'允许本例运行'}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node arduino-project.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "穷举超时、未使能、距离过近和允许运行四类输入；先断开负载验证输出，再按硬件条件测试。"
+        },
+        {
+          "title": "开发板实验：独立Arduino Sketch",
+          "explanation": "这是本站原创Uno R3示例，与上方离线计算分开。先核对本讲电路与引脚，IDE中选择真实板卡和端口。未在本机进行AVR目标编译或实物测试；不要把桌面语法检查当开发板运行。",
+          "code": "// Bench-only logic: Serial sends distance_cm then newline; -1 means invalid.\n// Pin 9 drives an LED with a resistor for this exercise, not a motor.\nconst byte outputPin = 9, enablePin = 2;\nchar digits[12]; byte used = 0; bool malformed = false;\nlong distanceCm = -1;\nunsigned long observedAt = 0;\nbool observed = false;\nvoid setup() { pinMode(outputPin, OUTPUT); pinMode(enablePin, INPUT_PULLUP); Serial.begin(9600); }\nvoid loop() {\n  while (Serial.available()) {\n    const char c = (char)Serial.read();\n    if (c == '\\n') {\n      if (used == 0) malformed = true;\n      long value = 0; bool negative = used > 0 && digits[0] == '-';\n      if (negative && used == 1) malformed = true;\n      for (byte i = negative ? 1 : 0; i < used; ++i) {\n        if (digits[i] < '0' || digits[i] > '9') { malformed = true; break; }\n        value = value * 10 + (digits[i] - '0');\n        if (value > 1000) { malformed = true; break; }\n      }\n      distanceCm = malformed || negative ? -1 : value;\n      observed = true; observedAt = millis(); used = 0; malformed = false;\n    } else if (c != '\\r') {\n      if (used < sizeof(digits)) digits[used++] = c; else malformed = true;\n    }\n  }\n  const unsigned long now = millis();\n  const bool fresh = observed && (unsigned long)(now - observedAt) <= 300;\n  const bool enabled = digitalRead(enablePin) == LOW;\n  analogWrite(outputPin, fresh && enabled && distanceCm >= 15 ? 100 : 0);\n}\n",
+          "language": "cpp",
+          "execution": "Arduino IDE / Uno R3；Servo示例另外需要Servo库。项目课用串口人工距离和LED做桌面逻辑验收，不直接驱动电机。",
+          "exercise": "先在不接负载的条件下检查输入输出，保存编译结果、板卡型号、接线和实测；将计算、仿真、硬件分别标注。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：距离传感器超时，能否当成“前方很远”？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "穷举超时、未使能、距离过近和允许运行四类输入；先断开负载验证输出，再按硬件条件测试。"
+      ],
+      "exercise": {
+        "prompt": "有效距离10cm且已使能时PWM输出是多少？",
+        "expected": 0,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "10<15，停止分支输出0。",
+        "transfer": "穷举超时、未使能、距离过近和允许运行四类输入；先断开负载验证输出，再按硬件条件测试。"
+      },
+      "sources": [
+        "arduino-project-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "arduino-actuator",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-lifecycle",
+          "label": "连接后续课程：第1讲 系统启动：为什么节点存在却不接任务？"
+        }
+      ],
+      "modelId": "arduino-project",
+      "demos": [
+        {
+          "modelId": "arduino-project",
+          "title": "小系统：传感失效时输出应该怎样？ · 逐步核对"
+        }
+      ],
+      "boundary": "浏览器仅做理想电路与控制逻辑计算；没有连接开发板，也不代表仿真器或实物结果。",
+      "study_minutes": 210
+    }
+  ],
+  "sources": {
+    "arduino-official": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · 官方目录",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "NEW Arduino Tutorials：1–11、27–30、37–40等；原作者目录指定Uno R3",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-led-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 1–3；9 Ohm’s Law",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 1–3；9 Ohm’s Law",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-input-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 27 Pull Up / Pull Down；28 Pushbutton",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 27 Pull Up / Pull Down；28 Pushbutton",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-adc-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 10 Reading Analog Voltages；11 Serial Print",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 10 Reading Analog Voltages；11 Serial Print",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-pwm-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 7 analogWrite；8 Pulse Width Modulation",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 7 analogWrite；8 Pulse Width Modulation",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-timing-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 4 Variables / Loops；本站非阻塞计时延伸",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 4 Variables / Loops；本站非阻塞计时延伸",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-debounce-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 28 Toggle Switch；34 Pushbutton；本站消抖延伸",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 28 Toggle Switch；34 Pushbutton；本站消抖延伸",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-actuator-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 30–31 Servos；37–40 DC Motors",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 30–31 Servos；37–40 DC Motors",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "arduino-project-reading": {
+      "kind": "官方公开材料",
+      "label": "Arduino Lessons · Tutorial 37–40 DC Motor Control；本站传感闭环项目",
+      "url": "https://toptechboy.com/arduino-lessons/",
+      "locator": "Tutorial 37–40 DC Motor Control；本站传感闭环项目",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Paul McWhorter NEW Arduino Lessons · Uno R3 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    }
+  }
+}

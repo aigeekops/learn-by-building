@@ -1,0 +1,499 @@
+{
+  "id": "estimation",
+  "title": "测量、多维状态与非线性估计",
+  "subtitle": "从一维均值走向协方差、二维跟踪和非线性观测",
+  "courseLabel": "Kalman and Bayesian Filters in Python · 本站原创配套基础课",
+  "officialUrl": "https://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/",
+  "scope": "8节原创配套：原一维估计，加位置/速度联合状态、协方差、二维跟踪、EKF测距与UKF无迹变换组件。",
+  "boundary": "原创固定数据和理想噪声假设；不提供实测定位性能保证。无迹变换是UKF组件，不冒充完整UKF跟踪器。",
+  "lessons": [
+    {
+      "id": "rf-noisy-measurements",
+      "title": "01 多测几次再平均，哪些误差会留下？",
+      "question": "六个读数的平均值很稳定，为什么仍可能偏离真实位置？",
+      "prerequisites": [
+        "能计算一组数的和与均值",
+        "能区分cm与cm²，理解平方根"
+      ],
+      "objectives": [
+        "区分每次改变的扰动与不随次数改变的偏差",
+        "说明均值方差R/n成立的条件",
+        "用已知参考检查均值误差，而非仅比较读数是否稳定"
+      ],
+      "explanation": [
+        "把一把尺放到已知10cm的位置，传感器可能报9.5、11.5等读数。读数之间的来回波动与始终多报0.5cm是不同问题。本例用z=10+bias+σ·固定扰动生成读数，成对扰动方便手算；这些不是从设备采集的值，也不是每次重新随机抽样。",
+        "累计均值把已经取得的有效读数相加再除以次数。相互独立、无偏、方差同为R的测量，其均值方差为R/n，标准差为σ/√n。注意标准差和方差不同：σ单位是cm，R=σ²的单位是cm²。若读数彼此相关，或者偏差不为0，就不能照搬“多测就一定更准”的结论。",
+        "本例把扰动成对安排，最终刚好互相抵消，所以最后均值等于10+bias。增加次数能让显示看起来更稳定，却不会把固定bias消掉。要处理固定偏差，需要用参考做标定，或把偏差纳入更完整的估计模型。",
+        "动画另外列出样本方差s²=Σ(zᵢ−均值)²/(n−1)和假定标准差σ/√n。前者来自这一小段固定数据，后者来自统计模型的假设；两者没有必要数值相同，更不能凭一次成对抵消证明一个概率规律。"
+      ],
+      "modelId": "rf-noisy-measurements",
+      "practice": [
+        {
+          "title": "保留原始读数再算均值",
+          "instruction": "使用默认值逐步记录每次z与累计均值；确认第2、4、6次均值为什么相同。",
+          "expectedObservation": "每对扰动之和为0；默认固定偏差0.5cm仍留在均值中，均值为10.5cm。"
+        },
+        {
+          "title": "分开改变波动与偏差",
+          "instruction": "先只把σ从1改为2，再只把bias从0.5改为1；比较读数跨度与最终均值。",
+          "expectedObservation": "σ改变固定扰动的幅度；bias把全部读数和均值一起平移。"
+        },
+        {
+          "title": "检查理论前提",
+          "instruction": "将n从2改为8，手算σ/√n；再写一段所有读数都多报1cm的例子，说明平均为什么不能校正它。",
+          "expectedObservation": "独立无偏噪声的理论标准差随√n降低，固定偏差保持不变。"
+        }
+      ],
+      "verification": {
+        "prompt": "另一组测量：单次读数方差R=9cm²，4个读数相互独立、无偏且同方差。它们均值的理论标准差是多少？",
+        "expected": 1.5,
+        "tolerance": 0.001,
+        "unit": "cm",
+        "explanation": "单次标准差σ=√9=3cm；均值标准差=3/√4=1.5cm。若答2.25，算出的是均值方差，单位应为cm²。",
+        "transfer": "若4个读数共享同一个+2cm固定偏差，均值偏差是多少？再解释这与1.5cm随机标准差如何并存。"
+      },
+      "sources": [
+        {
+          "title": "Roger R. Labbe · Kalman and Bayesian Filters in Python",
+          "url": "https://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/",
+          "locator": "作者介绍中的噪声、测量和贝叶斯信念；配套阅读第3章Gaussians。固定扰动案例为本站原创。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/reproduce.py",
+          "label": "标准库Python：均值的理论标准差",
+          "command": "python3 examples/robotics-foundations/estimation/reproduce.py --case mean --sigma 3 --count 4"
+        }
+      ]
+    },
+    {
+      "id": "rf-kalman-update",
+      "title": "02 一维Kalman：预测与观测各相信多少？",
+      "question": "预测说位置在5m，观测说在7m，为什么结果既不是机械平均，也不是直接采用最新读数？",
+      "prerequisites": [
+        "知道均值、方差和标准差的区别",
+        "能计算带括号的四则运算，完成测量噪声小课"
+      ],
+      "objectives": [
+        "分别推进位置均值与方差",
+        "独立计算创新、创新方差、增益与后验",
+        "解释Q/R变化、零预测方差的边界，以及假设适用范围"
+      ],
+      "explanation": [
+        "估计位置时，我们同时保存“现在大约在哪”和“对这个数有多大把握”。用均值x与方差P描述这份信念。本课只有一个位置变量，已知每步移动1m；没有把速度作为另一个待估计状态。",
+        "先预测：x⁻=x+1，P⁻=P+Q。已知位移改变均值，独立的过程扰动方差Q增加不确定性。再接收观测z，观测噪声方差为R。创新ν=z−x⁻是观测与预测之间的差，创新方差S=P⁻+R。P、Q、R、S都用m²，x与ν用m。",
+        "增益K=P⁻/(P⁻+R)决定向观测移动多少：x⁺=x⁻+Kν。预测越不确定，观测所占权重越大；观测噪声越大，权重越小。本例R始终为正，所以K在0到1之间；若P⁻=0，则K=0，代表模型假定位置完全确定，并不代表设备真的完全准确。",
+        "更新方差时采用标量Joseph形式P⁺=(1−K)²P⁻+K²R，它与理想计算下的(1−K)P⁻等价，而且由非负项组成。曲线画的是线性、高斯、独立零均值扰动假设下的信念；真实系统的偏差、相关噪声和未建模运动会破坏这些条件。"
+      ],
+      "modelId": "rf-kalman-update",
+      "practice": [
+        {
+          "title": "把一次更新拆成七步",
+          "instruction": "从默认先验开始，先写出预测均值与方差，再计算创新、S、K，最后核对后验均值与方差。",
+          "expectedObservation": "默认x⁻=5m，P⁻=5m²，ν=2m，S=9m²，K=5/9，x⁺约6.111m，P⁺约2.222m²。"
+        },
+        {
+          "title": "只改变测量可信度",
+          "instruction": "保持观测和预测不变，把R从1改为9；比较K和均值移动量。",
+          "expectedObservation": "R变大后K变小，后验更靠近预测。位置更平滑不自动代表真实误差更小。"
+        },
+        {
+          "title": "检查完全确定的假设",
+          "instruction": "设置P=Q=0，保持R>0；逐步查看K和后验，再说明这种假设为什么需要谨慎。",
+          "expectedObservation": "P⁻为0、K为0，观测不能移动均值；后验方差也为0，这是模型信念的结果。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立更新：上一步x=2m、P=2m²，已知位移1m，Q=1m²，观测z=7m、R=3m²。更新后的均值是多少？",
+        "expected": 5,
+        "tolerance": 0.001,
+        "unit": "m",
+        "explanation": "预测x⁻=3m、P⁻=3m²；创新4m，K=3/(3+3)=0.5，因此x⁺=3+0.5×4=5m。额外检查：P⁺=1.5m²。",
+        "transfer": "把R改为9m²重新计算，并解释为什么后验均值更接近3m；不要仅根据这个移动量判断实际准确性。"
+      },
+      "sources": [
+        {
+          "title": "Roger R. Labbe · Chapter 4: One Dimensional Kalman Filters",
+          "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/04-One-Dimensional-Kalman-Filters.ipynb",
+          "locator": "Beliefs as Gaussians；预测、update与Kalman gain。已核对作者仓库原始Notebook正文；数值与Joseph形式展示为本站原创编排。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/reproduce.py",
+          "label": "标准库Python：独立Kalman更新",
+          "command": "python3 examples/robotics-foundations/estimation/reproduce.py --case kalman"
+        }
+      ]
+    },
+    {
+      "id": "rf-filter-assumptions",
+      "title": "03 曲线更平滑，就一定估计得更准吗？",
+      "question": "机器人忽然加速，观测又出现一次跳点，怎样区分模型失配与异常观测的可能性？",
+      "prerequisites": [
+        "完成一维Kalman预测与更新",
+        "能计算平方误差和一组误差的均值"
+      ],
+      "objectives": [
+        "说明Q/R是待检查的假设而非传感器真相",
+        "计算归一化创新平方并理解门限的局限",
+        "用独立参考轨迹比较原始观测和滤波误差，留下失败案例"
+      ],
+      "explanation": [
+        "滤波器在自己的假设里可能运行得很顺利，却没有跟上现实。本例让参考位置在前半段每步增加1m，后半段每步增加2m；滤波器仍使用每步1m的运动模型。观测叠加一组固定扰动，并在第6次额外加入一个可调偏移。参考真值只用于评价，绝不喂给滤波器。",
+        "Q控制对运动模型的信任，R控制对观测的信任。Q太小或R太大，估计可能看起来平滑，却在真实机动后落后。Q/R既可以来自标定与建模，也可能设置错误；改一个滑块看起来更好，不等于已经完成噪声识别或获得可推广的参数。",
+        "创新ν应结合S=P⁻+R来看：归一化创新平方NIS=ν²/S没有量纲。本课可选“NIS>9就跳过观测更新”，相当于标量情形的3σ门限。等于9时本例仍接受。跳过后保留预测并传播方差，不是把状态清零。门限是本站教学扩展，不是原书所有场景的统一策略。",
+        "大创新既可能是坏读数，也可能是真实机动或模型不对。门限可能把真正的转弯或加速也挡在外面。最后使用构造时留下的独立参考计算均方误差MSE，并同时报告原始观测MSE；这组小数据不保证滤波每次更准，更不能代替真实场景的独立评测与失败分析。"
+      ],
+      "modelId": "rf-filter-assumptions",
+      "practice": [
+        {
+          "title": "先去掉观测跳点",
+          "instruction": "把额外偏移设为0，使用较小Q和较大R，观察后半段真实位移改变后的误差。",
+          "expectedObservation": "即使没有额外跳点，固定1m运动模型也可能在真实2m位移阶段落后。"
+        },
+        {
+          "title": "比较创新门限",
+          "instruction": "恢复额外偏移，分别接收全部观测与启用门限，逐次记下NIS、rejected和更新后方差。",
+          "expectedObservation": "跳过只在NIS>9时发生；跳过后方差保留预测值。门限也可能拒绝真实机动带来的创新。"
+        },
+        {
+          "title": "保存一个失败条件",
+          "instruction": "找一组使滤波MSE大于原始观测MSE的参数，记录Q/R、门限、原始与估计误差，并用模型位移假设解释。",
+          "expectedObservation": "这组数据确实存在滤波更差的条件；“看起来平滑”与“参考误差小”是不同检查。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立创新：预测均值6m、预测方差2m²，R=2m²，观测12m。NIS=ν²/S是多少？",
+        "expected": 9,
+        "tolerance": 0.001,
+        "unit": "无量纲",
+        "explanation": "ν=12−6=6m，S=2+2=4m²，因此NIS=36/4=9。本课严格使用NIS>9才跳过，所以这个边界会被接受。",
+        "transfer": "将观测改为13m再算NIS；说明即使超过门限，为什么仍不能断定一定是传感器坏了。"
+      },
+      "sources": [
+        {
+          "title": "Roger R. Labbe · Chapter 8: Designing Kalman Filters",
+          "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/08-Designing-Kalman-Filters.ipynb",
+          "locator": "Introduction；Tracking a Robot；模型、测量与滤波性能检查。已核对作者原始Notebook。标量轨迹、额外偏移与3σ门限为本站原创扩展。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/reproduce.py",
+          "label": "标准库Python：创新与严格门限边界",
+          "command": "python3 examples/robotics-foundations/estimation/reproduce.py --case innovation"
+        }
+      ]
+    },
+    {
+      "id": "rf-kalman-state",
+      "title": "联合位置与速度：一次位置测量怎样改变速度",
+      "question": "传感器只测位置，为什么速度估计也能随观测改变？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "传感器只测位置，为什么速度估计也能随观测改变？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "把状态写成[x,v]，分别使用m和m/s。状态转移F=[[1,dt],[0,1]]按恒速预测。协方差不仅保存两项方差，也保存位置与速度一起偏离的关系。",
+        "先预测均值，再传播P⁻=F P Fᵀ+Q。本例Q=q[[dt⁴/4,dt³/2],[dt³/2,dt²]]来自“每步固定随机加速度”的模型，q是加速度方差；不要与连续噪声谱密度公式混用。",
+        "H=[1,0]只观察位置。增益K=P⁻Hᵀ/(HP⁻Hᵀ+R)有两项，非零交叉协方差会让位置创新同时修正速度。",
+        "使用Joseph形式P=(I−KH)P⁻(I−KH)ᵀ+KRKᵀ更新，检查对称和正定。数值模型单次正确不能证明真实噪声符合高斯或运动符合恒速。"
+      ],
+      "modelId": "rf-kalman-state",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "关闭q，改变dt观察交叉协方差和速度增益；说明不直接测速度时哪些假设让速度仍能更新。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/estimation/expanded.py state；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：dt=1s、Q=0、初始P=I、H=[1,0]、R=1。预测后P⁻=[[2,1],[1,1]]，速度增益K₁是多少？",
+        "expected": 0.3333333333333333,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "S=2+1=3，速度与位置协方差为1，因此K₁=1/3。",
+        "transfer": "关闭q，改变dt观察交叉协方差和速度增益；说明不直接测速度时哪些假设让速度仍能更新。"
+      },
+      "sources": [
+        {
+          "title": "Kalman and Bayesian Filters in Python · 本站原创配套基础课",
+          "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/06-Multivariate-Kalman-Filters.ipynb",
+          "locator": "第6章 Multivariate Kalman Filters；预测、测量函数和协方差传播。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/estimation/expanded.py state"
+        }
+      ]
+    },
+    {
+      "id": "rf-kalman-covariance",
+      "title": "协方差的非对角项：相关性决定修正方向",
+      "question": "位置创新为正时，速度修正为什么有时会向负方向？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "位置创新为正时，速度修正为什么有时会向负方向？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "位置方差4、速度方差1，相关系数ρ使交叉协方差为2ρ，矩阵P=[[4,2ρ],[2ρ,1]]。它的两条轴单位不同，是状态空间椭圆，不是世界平面小车轨迹。",
+        "用R=1的位置观测更新时，K=[4/5,2ρ/5]。位置修正与ρ无关，速度修正的大小和方向却取决于相关性。ρ=0时位置测量不直接改速度。",
+        "后验速度方差为1−(2ρ)²/5，相关符号不改变这一缩减量。协方差更新不依赖本次观测z的数值，而依赖先验P、H和R。",
+        "状态空间椭圆用于解释相关性。真实系统中错误Q、R或模型关联会让这个不确定性描述失真，不能因为椭圆变小就认定估计变准。"
+      ],
+      "modelId": "rf-kalman-covariance",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "保持观测不变，分别设置ρ为负、0、正，解释均值修正方向和速度方差变化；再只改z看协方差是否改变。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/estimation/expanded.py covariance；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：ρ=−0.4，先验均值[0,0]，位置创新z=2，R=1。速度修正量是多少？",
+        "expected": -0.32,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "K速度=2×(−0.4)/5=−0.16，速度修正=−0.16×2=−0.32。",
+        "transfer": "保持观测不变，分别设置ρ为负、0、正，解释均值修正方向和速度方差变化；再只改z看协方差是否改变。"
+      },
+      "sources": [
+        {
+          "title": "Kalman and Bayesian Filters in Python · 本站原创配套基础课",
+          "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/06-Multivariate-Kalman-Filters.ipynb",
+          "locator": "第6章多维高斯、协方差与更新；相关性反例为本站原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/estimation/expanded.py covariance"
+        }
+      ]
+    },
+    {
+      "id": "rf-kalman-2d",
+      "title": "二维目标跟踪：四维状态与两维创新",
+      "question": "同时测x、y时，怎样正确组合4×4状态协方差和2×2创新协方差？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "同时测x、y时，怎样正确组合4×4状态协方差和2×2创新协方差？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "状态为[x,y,vx,vy]，观测z=[x测,y测]，所以F是4×4、H是2×4、P是4×4、S是2×2。先列尺寸，再做乘法，可以提前发现很多把状态维与观测维混淆的问题。",
+        "每步按F预测，Q由两个轴的随机加速度模型构成。创新z−H x⁻与S=H P⁻Hᵀ+R要一起使用；存在相关项时不能只除S的对角元素。",
+        "K=P⁻HᵀS⁻¹将两项创新分配到四项状态，再用Joseph形式更新完整P。图中参考、观测和估计来自同一已计算时间段，不提前展示未来。",
+        "加入固定y偏差后，普通状态里没有偏差变量，滤波不会自动校准。用已知人工真值比较误差，区分平滑与准确；实际真值来源需独立验证。"
+      ],
+      "modelId": "rf-kalman-2d",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "打开固定y偏差，比较观测、估计与参考；检查P对称和正定，并解释为什么不能把固定偏差当作可被平均消掉的噪声。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/estimation/expanded.py tracking；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：状态[x,y,vx,vy]=[1,2,0.5,−0.5]，dt=2s，恒速预测。预测x是多少m？",
+        "expected": 2,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "x⁻=1+2×0.5=2m。",
+        "transfer": "打开固定y偏差，比较观测、估计与参考；检查P对称和正定，并解释为什么不能把固定偏差当作可被平均消掉的噪声。"
+      },
+      "sources": [
+        {
+          "title": "Kalman and Bayesian Filters in Python · 本站原创配套基础课",
+          "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/08-Designing-Kalman-Filters.ipynb",
+          "locator": "第8章 Designing Kalman Filters中的多维运动状态、测量维度与噪声设计；具体四维轨迹为原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/estimation/expanded.py tracking"
+        }
+      ]
+    },
+    {
+      "id": "rf-ekf-range",
+      "title": "EKF测距更新：Jacobian只在哪一步使用",
+      "question": "只知道到原点的距离，为什么不能唯一确定二维位置？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "只知道到原点的距离，为什么不能唯一确定二维位置？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "观测函数h(x,y)=√(x²+y²)把二维状态变成距离。一个测距值对应一个圆，不能独立确定圆周上哪个位置；先验和其他观测承担其余信息。",
+        "在先验点求Jacobian H=[x/r,y/r]，用它近似局部误差传播。创新仍为z−h(先验)，不能不加说明就用H乘状态替代非线性h。",
+        "各向同性P=I时，K沿径向，更新只缩小径向方差R/(1+R)，切向方差仍为1。图中的圆用屏幕投影显示，不是实际雷达测量。",
+        "原点处Jacobian不定义，本例限制先验远离原点。偏差很大、多模态或错误关联时，局部高斯近似可能失败；这一次更新不是完整可用的定位系统。"
+      ],
+      "modelId": "rf-ekf-range",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "改变距离观测但保持先验不变，比较均值与协方差；解释切向方差为什么没有随一次距离观测消失。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/estimation/expanded.py ekf；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：先验位置[3,4]m，到原点距离r=5m。距离观测Jacobian的x分量是多少？",
+        "expected": 0.6,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "∂h/∂x=x/√(x²+y²)=3/5=0.6。",
+        "transfer": "改变距离观测但保持先验不变，比较均值与协方差；解释切向方差为什么没有随一次距离观测消失。"
+      },
+      "sources": [
+        {
+          "title": "Kalman and Bayesian Filters in Python · 本站原创配套基础课",
+          "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/11-Extended-Kalman-Filters.ipynb",
+          "locator": "第11章 Extended Kalman Filters：非线性观测、Jacobian与创新；单距离案例为原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/estimation/expanded.py ekf"
+        }
+      ]
+    },
+    {
+      "id": "rf-unscented-transform",
+      "title": "UKF的sigma点：非线性后均值不等于均值的非线性",
+      "question": "高斯x经过平方函数，为什么E[x²]不能只写成E[x]²？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "高斯x经过平方函数，为什么E[x²]不能只写成E[x]²？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "UKF中的无迹变换选取一组确定sigma点，把每点送过非线性函数，再按权重重组均值和协方差。它不是每帧重新抽样的Monte Carlo。",
+        "一维例固定α=1、β=2、κ=0，λ=0。点为μ、μ+√P、μ−√P，均值权重[0,0.5,0.5]，协方差权重[2,0.5,0.5]。中心的两套权重不同，漏掉β修正会算错。",
+        "对y=x²，解析均值μ²+P、方差2P²+4μ²P。此处无迹变换能精确重现这两个矩；EKF的一阶近似则得到μ²和4μ²P。μ=0时一阶方差为0，恰好暴露局部线性化遗漏。",
+        "平方后的分布不是高斯，即使均值与方差一致也没有还原完整分布。本讲只是UKF的一项组件，尚未构建完整非线性时序预测和观测更新器。"
+      ],
+      "modelId": "rf-unscented-transform",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "把μ设为0，比较无迹变换、解析矩与EKF一阶结果；解释“匹配两项矩”为什么不代表输出分布仍为高斯。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/estimation/expanded.py unscented；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：高斯x的μ=2、P=0.5，y=x²。解析方差2P²+4μ²P是多少？",
+        "expected": 8.5,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "2×0.5²+4×2²×0.5=0.5+8=8.5。",
+        "transfer": "把μ设为0，比较无迹变换、解析矩与EKF一阶结果；解释“匹配两项矩”为什么不代表输出分布仍为高斯。"
+      },
+      "sources": [
+        {
+          "title": "Kalman and Bayesian Filters in Python · 本站原创配套基础课",
+          "url": "https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python/blob/master/10-Unscented-Kalman-Filter.ipynb",
+          "locator": "第10章 Unscented Kalman Filters：sigma点、均值/协方差权重及非线性变换；平方函数矩对照为原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/estimation/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/estimation/expanded.py unscented"
+        }
+      ]
+    }
+  ]
+}

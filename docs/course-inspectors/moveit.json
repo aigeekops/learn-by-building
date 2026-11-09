@@ -1,0 +1,487 @@
+{
+  "courseId": "moveit",
+  "courseLabel": "MoveIt 2 原创八讲",
+  "agent": "course_moveit",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "moveit-model",
+      "intuition": "先数独立关节，再区分整机自由度与arm规划组维数；夹爪计入整机，却不自动进入arm状态向量。",
+      "controls": [
+        {
+          "id": "arm",
+          "label": "活动关节数",
+          "type": "range",
+          "min": 1,
+          "max": 7,
+          "step": 1,
+          "value": 6,
+          "unit": ""
+        },
+        {
+          "id": "gripper",
+          "label": "独立夹爪关节数",
+          "type": "range",
+          "min": 0,
+          "max": 2,
+          "step": 1,
+          "value": 1,
+          "unit": ""
+        }
+      ],
+      "experiments": [
+        {
+          "id": "separate-gripper",
+          "label": "只把夹爪独立关节数从0改2",
+          "prediction": "整机自由度会变多少？arm组维数和消息期望长度会跟着变吗？",
+          "before": {
+            "arm": 6,
+            "gripper": 0
+          },
+          "after": {
+            "arm": 6,
+            "gripper": 2
+          },
+          "expectation": "整机6→8自由度；arm组和期望位置项数都保持6，排除的夹爪维数0→2。"
+        }
+      ]
+    },
+    {
+      "id": "moveit-limits",
+      "intuition": "位置与速度分别过门，再取逻辑与；超界不裁剪，距离除速度上限只给忽略加减速的理论时间下界。",
+      "controls": [
+        {
+          "id": "target",
+          "label": "关节目标",
+          "type": "range",
+          "min": -2,
+          "max": 2,
+          "step": 0.5,
+          "value": 1.5,
+          "unit": ""
+        },
+        {
+          "id": "velocity",
+          "label": "请求速度",
+          "type": "range",
+          "min": 0,
+          "max": 2,
+          "step": 0.5,
+          "value": 1,
+          "unit": ""
+        }
+      ],
+      "experiments": [
+        {
+          "id": "position-outside",
+          "label": "只把目标从1改1.5rad",
+          "prediction": "速度保持0.5rad/s，位置门控和时间下界怎样变化？",
+          "before": {
+            "target": 1,
+            "velocity": 0.5
+          },
+          "after": {
+            "target": 1.5,
+            "velocity": 0.5
+          },
+          "expectation": "位置由边界内变超界，速度均通过；请求true→false，下界1.25→1.875s，原目标不会被裁剪。"
+        },
+        {
+          "id": "velocity-outside",
+          "label": "只把请求速度从0.5改1rad/s",
+          "prediction": "目标保持1rad，哪道门拒绝？按固定上限计算的下界改变吗？",
+          "before": {
+            "target": 1,
+            "velocity": 0.5
+          },
+          "after": {
+            "target": 1,
+            "velocity": 1
+          },
+          "expectation": "位置均通过，速度true→false，请求true→false；时间下界仍为1/0.8=1.25s。"
+        }
+      ]
+    },
+    {
+      "id": "moveit-ik",
+      "intuition": "阻尼逆用J²+λ²作分母；得到关节速度后再乘J回算末端速度，阻尼能压低放大，也会增加跟踪偏差。",
+      "controls": [
+        {
+          "id": "desired",
+          "label": "期望末端速度",
+          "type": "range",
+          "min": -0.5,
+          "max": 0.5,
+          "step": 0.1,
+          "value": 0.2,
+          "unit": ""
+        },
+        {
+          "id": "jacobian",
+          "label": "标量Jacobian J",
+          "type": "range",
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "value": 0.5,
+          "unit": ""
+        },
+        {
+          "id": "damping",
+          "label": "阻尼 λ",
+          "type": "range",
+          "min": 0.1,
+          "max": 0.5,
+          "step": 0.1,
+          "value": 0.1,
+          "unit": ""
+        }
+      ],
+      "experiments": [
+        {
+          "id": "damping-tradeoff",
+          "label": "只把阻尼λ从0.1改0.5",
+          "prediction": "J=0.1、期望0.5m/s时，限速与跟踪残差如何取舍？",
+          "before": {
+            "desired": 0.5,
+            "jacobian": 0.1,
+            "damping": 0.1
+          },
+          "after": {
+            "desired": 0.5,
+            "jacobian": 0.1,
+            "damping": 0.5
+          },
+          "expectation": "关节速度2.5→约0.1923rad/s，限速失败→通过；回算末端0.25→约0.0192m/s，残差−0.25→约−0.4808m/s。"
+        }
+      ]
+    },
+    {
+      "id": "moveit-scene",
+      "intuition": "圆心到端点的距离和到整条线段的距离是不同证据；投影后的最近点揭示中段接触，严格大于半径才无碰撞。",
+      "controls": [
+        {
+          "id": "obstacle",
+          "label": "障碍中心x",
+          "type": "range",
+          "min": 0.5,
+          "max": 1.5,
+          "step": 0.5,
+          "value": 1,
+          "unit": ""
+        },
+        {
+          "id": "radius",
+          "label": "障碍半径",
+          "type": "range",
+          "min": 0.1,
+          "max": 0.5,
+          "step": 0.1,
+          "value": 0.2,
+          "unit": ""
+        }
+      ],
+      "experiments": [
+        {
+          "id": "touching-obstacle",
+          "label": "只把圆半径从0.1改0.2m",
+          "prediction": "端点仍在圆外时，线段刚好相切是否允许？",
+          "before": {
+            "obstacle": 1,
+            "radius": 0.1
+          },
+          "after": {
+            "obstacle": 1,
+            "radius": 0.2
+          },
+          "expectation": "端点距离均为√1.04m且都通过；整段距离恒0.2m，间隙0.1→0m，整段无碰撞true→false。"
+        }
+      ]
+    },
+    {
+      "id": "moveit-planning",
+      "intuition": "离散检查只知道采样点；固定边穿过闭障碍区间时，即使所有采样点在区间外，也不能证明连续路径有效。",
+      "controls": [
+        {
+          "id": "step",
+          "label": "离散碰撞检查间隔",
+          "type": "range",
+          "min": 0.25,
+          "max": 1,
+          "step": 0.25,
+          "value": 1,
+          "unit": ""
+        }
+      ],
+      "experiments": [
+        {
+          "id": "finer-sampling",
+          "label": "只把检查间隔从1改0.25",
+          "prediction": "原障碍和移位障碍分别会命中哪些点？连续路径结论改变吗？",
+          "before": {
+            "step": 1
+          },
+          "after": {
+            "step": 0.25
+          },
+          "expectation": "原障碍两次都命中q=1；移位障碍[0.4,0.6]从漏检变命中q=0.5，离散通过true→false；两条连续边检查始终false。"
+        }
+      ]
+    },
+    {
+      "id": "moveit-cartesian",
+      "intuition": "先分别数完成段数和累计弧长，再按本例弧长阈值接受；通过一个覆盖阈值与完成整条路径是两项判断。",
+      "controls": [
+        {
+          "id": "completed",
+          "label": "连续完成的段数",
+          "type": "range",
+          "min": 0,
+          "max": 4,
+          "step": 1,
+          "value": 3,
+          "unit": ""
+        },
+        {
+          "id": "required",
+          "label": "要求的路径覆盖比例",
+          "type": "range",
+          "min": 0.5,
+          "max": 1,
+          "step": 0.1,
+          "value": 1,
+          "unit": ""
+        }
+      ],
+      "experiments": [
+        {
+          "id": "finish-fourth-segment",
+          "label": "只把连续完成段数从3改4",
+          "prediction": "四段不等长时，段数比例、弧长比例、阈值和剩余长度怎样变化？",
+          "before": {
+            "completed": 3,
+            "required": 1
+          },
+          "after": {
+            "completed": 4,
+            "required": 1
+          },
+          "expectation": "段数比例0.75→1，弧长比例4/6→1，accepted与fullPath均false→true，剩余弧长2→0。"
+        },
+        {
+          "id": "stricter-coverage",
+          "label": "只把弧长要求从0.6改0.7",
+          "prediction": "已经完成前三段时，几何覆盖会变化吗？接受条件会如何变化？",
+          "before": {
+            "completed": 3,
+            "required": 0.6
+          },
+          "after": {
+            "completed": 3,
+            "required": 0.7
+          },
+          "expectation": "覆盖均4/6，剩余均2，fullPath均false；仅accepted由true变false。"
+        }
+      ]
+    },
+    {
+      "id": "moveit-timing",
+      "intuition": "零起终速度时，先比较位移与vmax²/amax；短行程走三角形，长行程加匀速段，最后用速度曲线面积回算位移。",
+      "controls": [
+        {
+          "id": "distance",
+          "label": "单关节位移",
+          "type": "range",
+          "min": 0.2,
+          "max": 2,
+          "step": 0.2,
+          "value": 1,
+          "unit": ""
+        },
+        {
+          "id": "vmax",
+          "label": "速度上限",
+          "type": "range",
+          "min": 0.5,
+          "max": 2,
+          "step": 0.5,
+          "value": 1,
+          "unit": ""
+        },
+        {
+          "id": "amax",
+          "label": "加速度上限",
+          "type": "range",
+          "min": 0.5,
+          "max": 2,
+          "step": 0.5,
+          "value": 1,
+          "unit": ""
+        }
+      ],
+      "experiments": [
+        {
+          "id": "lower-velocity",
+          "label": "只把速度上限从1降到0.5rad/s",
+          "prediction": "位移1rad、加速度1rad/s²时，分支、峰值和总时间如何变化？",
+          "before": {
+            "distance": 1,
+            "vmax": 1,
+            "amax": 1
+          },
+          "after": {
+            "distance": 1,
+            "vmax": 0.5,
+            "amax": 1
+          },
+          "expectation": "原来位于三角/梯形交界，rampTime=1s、无匀速，总2s；降速后梯形，加减速各0.5s、匀速1.5s，总2.5s、峰值0.5rad/s。"
+        }
+      ]
+    },
+    {
+      "id": "moveit-execution",
+      "intuition": "候选轨迹先检查起点与场景，再决定是否提交；只有提交且教学终态标签为success时，本例最终成功才为真。",
+      "controls": [
+        {
+          "id": "startError",
+          "label": "实际起点与轨迹起点偏差",
+          "type": "range",
+          "min": 0,
+          "max": 0.2,
+          "step": 0.02,
+          "value": 0.02,
+          "unit": ""
+        },
+        {
+          "id": "scene",
+          "label": "场景版本",
+          "type": "select",
+          "options": [
+            [
+              "same",
+              "未变"
+            ],
+            [
+              "changed",
+              "已变化"
+            ]
+          ],
+          "value": "same"
+        },
+        {
+          "id": "result",
+          "label": "执行返回",
+          "type": "select",
+          "options": [
+            [
+              "success",
+              "成功"
+            ],
+            [
+              "aborted",
+              "中止"
+            ]
+          ],
+          "value": "success"
+        }
+      ],
+      "experiments": [
+        {
+          "id": "start-threshold",
+          "label": "只把起点偏差从0.04改0.06rad",
+          "prediction": "场景未变且教学返回success时，阈值等号和超阈值分别能否提交？",
+          "before": {
+            "startError": 0.04,
+            "scene": "same",
+            "result": "success"
+          },
+          "after": {
+            "startError": 0.06,
+            "scene": "same",
+            "result": "success"
+          },
+          "expectation": "0.04rad等号允许，0.06rad拒绝；requested/success均true→false，outcome从本例返回成功变未提交。"
+        },
+        {
+          "id": "scene-change",
+          "label": "只把场景版本状态从same改changed",
+          "prediction": "起点偏差0.02rad已通过，选择success标签能否绕过场景检查？",
+          "before": {
+            "startError": 0.02,
+            "scene": "same",
+            "result": "success"
+          },
+          "after": {
+            "startError": 0.02,
+            "scene": "changed",
+            "result": "success"
+          },
+          "expectation": "起点均通过；场景true→false，提交与成功均true→false，changed分支为未提交。"
+        },
+        {
+          "id": "terminal-abort",
+          "label": "只把教学终态标签从success改aborted",
+          "prediction": "同一有效起点和场景下，允许请求是否等于执行成功？",
+          "before": {
+            "startError": 0.02,
+            "scene": "same",
+            "result": "success"
+          },
+          "after": {
+            "startError": 0.02,
+            "scene": "same",
+            "result": "aborted"
+          },
+          "expectation": "requested均true；success从true变false，outcome从本例返回成功变本例返回中止。"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "courseValidator": {
+      "course": "moveit",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 176,
+      "cellsChecked": 510,
+      "experiments": 12
+    },
+    "sharedValidator": "node scripts/check_course_inspectors.cjs moveit",
+    "unitTests": {
+      "passed": 10,
+      "failed": 0,
+      "command": "node --test tests/course_inspector_moveit.test.cjs"
+    },
+    "independentChecks": [
+      "共享检查器一次覆盖8模型的默认及每个控件范围/选择边界，共176帧510格；12个真实控件实验经过共享UI准备、应用与verify。",
+      "独立测试覆盖32个默认实际快照、深冻结不可变性、越界索引，以及12个实验对同输入和反向输入的拒绝。",
+      "Node导出和无依赖浏览器注册；Proxy禁止inspect读取result、scene、visual或任何非当前帧。",
+      "独立核对3臂关节加2夹爪关节得到整机5维，但arm组及期望消息长度保持3。",
+      "位置上下限均包含等号；速度单独门控；超界目标保持1.5rad且时间下界仍按1.5/0.8计算。速度0.8不满足实际0.5控件步长，未虚构该UI实验。",
+      "DLS默认值以25/13、5/13、5/26与−1/130独立复算；检查负速度符号和J=0时虽然限速通过却无法跟踪的残差。",
+      "线段投影u=0.25、最近点[0.5,0]、两端距离√0.29与√2.29、0.2m相切拒绝及负间隙独立核对。",
+      "step=0.75时检查点[0,0.75,1.5,2]，最后点夹到终点；两处窄障碍均可离散漏检，但连续区间相交仍无效。",
+      "非等长段以1/4对1/6、3/4对4/6区分口径；允许部分覆盖时accepted为true而fullPath仍为false。",
+      "d=0.2、1、2的三角形、分界和梯形解析用时与峰值，按两三角加矩形面积独立积分回给定位移。",
+      "0.04rad等号允许；场景变化压过success教学标签；可请求但aborted与未提交保持不同分支。"
+    ]
+  },
+  "teachingScope": "八讲逐帧展示独立自由度、关节限位门控与时间下界、标量DLS各平方项及残差、线段投影与接触判断、逐采样点命中及连续区间反例、两种覆盖比例、单关节解析时间参数化与执行条件。inspect只读取当前累计variables及实际输入；收尾核对标明最终核对。公式显示四位小数，格子及verify保留完整精度。计算快照不伪造物理时间。",
+  "limitations": [
+    "均为现有原创有限浏览器算例，不是MoveIt 2课程完整翻译，也没有运行ROS 2、Gazebo、FCL、OMPL、TOTG、Ruckig、控制器或真机。",
+    "自由度模型只做独立关节计数与固定分组；没有解析URDF/SRDF、读取JointState、验证名称顺序或控制器映射。",
+    "限位模型只有单关节位置和非负速度请求；没有加速度、力矩、碰撞或连续关节环绕。时间下界忽略加减速，拒绝请求仍可计算代数下界。",
+    "DLS仅一维任务速度切片，不是完整位姿IK、矩阵冗余求解或碰撞约束求解。正阻尼避免分母为零，同时引入跟踪偏差；通过限速不代表能实现目标。",
+    "场景模型是点机器人固定线段与一个二维圆的精确距离，接触算碰撞；没有自碰撞、机器人实体、附着物、场景同步或时戳检查。",
+    "规划模型只检查固定一维边与两个已知闭区间，没有进行RRT/OMPL搜索；加密采样在本例发现障碍不构成任意窄障碍的连续无碰撞保证。",
+    "笛卡尔路径模型使用[1,1,2,2]四段的自定义段数和弧长统计；不复制任何MoveIt API fraction实现，也不检查关节跳变、IK或碰撞。原段长单位未指定。",
+    "时间参数化仅零起终速度、对称恒加减速单关节解析模型；展示时明确按转动关节rad解释坐标，不指定真实机器人。没有jerk、多关节同步、路径偏差或动力学证明。",
+    "执行planned为候选存在的教学常量，result为人工选择的标签；requested和success均为本地规则值。0.04rad是本例阈值，不是MoveIt通用默认值。",
+    "步骤、检查与实验不会增加学习分钟、完成状态或硬件证据。本任务仅新增插件、测试和本清单三个文件；未运行浏览器、构建或目标环境，后续共享集成由根agent处理。"
+  ],
+  "files": [
+    "web/course-inspectors/moveit.js",
+    "tests/course_inspector_moveit.test.cjs",
+    "docs/course-inspectors/moveit.json"
+  ]
+}

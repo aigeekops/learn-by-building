@@ -1,0 +1,37 @@
+{
+  "courseId": "fsdl",
+  "course": "Full Stack Deep Learning · 2022公开版本站13讲选编",
+  "lectures": 13,
+  "models": ["fsdl-metrics", "fsdl-data", "fsdl-experiments", "fsdl-debugging", "fsdl-testing", "fsdl-serving", "fsdl-monitoring", "fsdl-release", "fsdl-foundation-models", "fsdl-ml-teams", "fsdl-ethics", "fsdl-project-train", "fsdl-project-serve"],
+  "modelCount": 13,
+  "experimentCount": 30,
+  "inspection": "逐样本阈值和混淆矩阵各格、精确率/召回率/代价、实体划分与中心减法、真实迭代权重、训练与验证版本、每样本梯度贡献和中心差分、独立边界用例、逐批选槽/开始/结束/逐请求延迟/nearest-rank p95/吞吐、逐箱归一化和TV、标签窗口错误率、制品门禁与发布事件、2×2表示和头的逐格梯度/更新、团队依赖阻塞和排程、虚构分组分母及错误率、逻辑回归旧状态概率/贡献/平均梯度/已保存更新/BCE/保留验证。",
+  "preserved": ["全部课程与讲次ID", "全部既有模型和真实轨迹", "控制量与计算规则", "来源与课程定位", "参数草稿", "个人计划", "学习记录与时长"],
+  "limitations": [
+    "只读当前及此前的实际steps，不读取trace.result，不提前展示未来观测。已有输入、规则和预期明确作为输入展示。",
+    "模型为有限确定性教学案例；没有真实云服务、实验追踪、GPU、生产流量或LLM调用。",
+    "小数据指标、单样本训练损失和六请求p95不构成泛化、生产性能或统计置信保证。",
+    "数据清单字符串不是密码学摘要；制品匹配和候选错误等是浏览器案例条件，真实文件与HTTP验证由原下载项目另行执行。",
+    "人工2×2矩阵不是预训练模型；参数个数不等于实际显存或计算成本。",
+    "团队工作日是给定排程估计；可排程不代表人员已经完成交付。",
+    "A/B审计数据完全虚构，错误率差不是伦理或公平认证；遗漏组、未返回标签、阻断后的候选观测均保留null。",
+    "数值格保留完整精度，展示格式四位小数；中心差分的接近值在inputs保留完整精度，使用容差核对。",
+    "保留原算法迭代和状态轨迹；没有给静态算术添加伪造动态。"
+  ],
+  "validation": {
+    "command": "node --test tests/course_inspector_fsdl.test.cjs tests/application_fsdl.test.cjs",
+    "testsPassed": 18,
+    "genericCheck": {"command": "node scripts/check_course_inspectors.cjs fsdl", "framesChecked": 782, "cellsChecked": 9404, "experimentsPassed": 30},
+    "checks": [
+      "全部13讲和13个实际demo逐帧检查",
+      "默认值及通用验收控制端点全帧覆盖",
+      "30组实验实际执行原模型且verify拒绝没有发生变化的前后对照",
+      "冻结trace与实验结果保持不可变",
+      "对全部默认帧以getter阻止访问未来帧与最终result",
+      "阈值判断入格前不提前累加计数，独立测试预期与候选观察分开",
+      "中心、逐样本梯度、真实尾批大小、队列等待和2×2矩阵算式的独立语义断言",
+      "下一轮梯度帧保持上一轮已保存权重与其原旧状态，不套用未来更新",
+      "延迟标签、遗漏组、阻塞工期和未执行金丝雀观测保持未知"
+    ]
+  }
+}

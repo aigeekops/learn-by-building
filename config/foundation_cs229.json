@@ -1,0 +1,576 @@
+{
+  "course": {
+    "id": "cs229",
+    "label": "CS229",
+    "title": "从可复算模型到可靠选择的机器学习",
+    "edition": "Stanford SEE · 历史公开版选编",
+    "position": "连接数学基础与深度学习",
+    "description": "六讲原创配套覆盖回归、逻辑分类、L2正则、验证、K-means与PCA。每种算法从一个能手算的小问题开始；不冒充官方全部讲次或真实模型训练报告。",
+    "prerequisites": [
+      "Python、向量点积、均值方差与基础概率",
+      "梯度两讲需要一元导数；可先回看线代、概率和D2L自动微分"
+    ],
+    "pending": "SVM、核方法、生成学习、学习理论、EM、神经网络、强化学习和完整原课作业尚未系统整理。",
+    "published": [
+      {
+        "unit": "1",
+        "title": "第1讲 线性回归：梯度一步改变了什么",
+        "lessons": [
+          "cs229-gradient"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "2",
+        "title": "第2讲 逻辑回归：概率、损失与标签分开",
+        "lessons": [
+          "cs229-logistic"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "3",
+        "title": "第3讲 L2正则：训练误差与参数大小怎样交换",
+        "lessons": [
+          "cs229-ridge"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "4",
+        "title": "第4讲 泛化与选择：训练分数最好为什么会选错",
+        "lessons": [
+          "cs229-validation"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "5",
+        "title": "第5讲 K-means：指派和移动中心是两步",
+        "lessons": [
+          "cs229-kmeans"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "6",
+        "title": "第6讲 PCA：中心化后找保留变化的方向",
+        "lessons": [
+          "cs229-pca"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      }
+    ],
+    "batch": "第二批 · 数学与机器学习",
+    "sources": [
+      "cs229-supervised",
+      "cs229-selection",
+      "cs229-kmeans-source",
+      "cs229-pca-source"
+    ]
+  },
+  "sources": {
+    "cs229-supervised": {
+      "kind": "官方公开课程材料",
+      "label": "CS229 SEE · Notes 1",
+      "url": "https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf",
+      "locator": "Linear regression；LMS gradient descent；Classification and logistic regression",
+      "edition": "SEE历史公开版；不标为2026年度课程",
+      "checked": "2026-11-09",
+      "role": "official",
+      "status": "2026-11-09 已核对官方页面与章节定位；本站讲解、算例和Python代码独立创作，未复制原课讲义。"
+    },
+    "cs229-selection": {
+      "kind": "官方公开课程材料",
+      "label": "CS229 SEE · Notes 5",
+      "url": "https://see.stanford.edu/materials/aimlcs229/cs229-notes5.pdf",
+      "locator": "Regularization and model selection；Cross validation",
+      "edition": "SEE历史公开版",
+      "checked": "2026-11-09",
+      "role": "official",
+      "status": "2026-11-09 已核对官方页面与章节定位；本站讲解、算例和Python代码独立创作，未复制原课讲义。"
+    },
+    "cs229-kmeans-source": {
+      "kind": "官方公开课程材料",
+      "label": "CS229 SEE · Notes 7a",
+      "url": "https://see.stanford.edu/materials/aimlcs229/cs229-notes7a.pdf",
+      "locator": "k-means assignment、centroid update、distortion objective",
+      "edition": "SEE历史公开版",
+      "checked": "2026-11-09",
+      "role": "official",
+      "status": "2026-11-09 已核对官方页面与章节定位；本站讲解、算例和Python代码独立创作，未复制原课讲义。"
+    },
+    "cs229-pca-source": {
+      "kind": "官方公开课程材料",
+      "label": "CS229 SEE · Notes 10",
+      "url": "https://see.stanford.edu/materials/aimlcs229/cs229-notes10.pdf",
+      "locator": "PCA preprocessing、covariance、principal component projection",
+      "edition": "SEE历史公开版",
+      "checked": "2026-11-09",
+      "role": "official",
+      "status": "2026-11-09 已核对官方页面与章节定位；本站讲解、算例和Python代码独立创作，未复制原课讲义。"
+    }
+  },
+  "lessons": [
+    {
+      "id": "cs229-gradient",
+      "title": "第1讲 线性回归：梯度一步改变了什么",
+      "summary": "两条样本y=2x，从w=0开始怎样走向w=2？",
+      "question": "两条样本y=2x，从w=0开始怎样走向w=2？",
+      "outcome": "把损失、梯度、更新前后参数逐轮对应，识别学习率发散。",
+      "prerequisites": [
+        "Python循环；最小二乘；一元导数"
+      ],
+      "explanation": [
+        "从一个特征且没有截距的模型ŷ=wx开始。数据固定为x=[1,2]、y=[2,4]，目标J(w)=Σ(wx−y)²/(2n)，默认n=2，最优权重为2。",
+        "导数为Σx(wx−y)/n=2.5(w−2)。每轮先在旧w上求损失与梯度，再更新w←w−ηg。把旧损失错误贴到新w会让曲线与代码不一致。",
+        "本例误差递推为(w_next−2)=(1−2.5η)(w−2)，因此0<η<0.8收敛。η=0不移动，η大于0.8可能发散；失败轨迹也是理解算法的一部分。"
+      ],
+      "formula": "J=1/(2n)Σ(wx−y)²；g=1/nΣx(wx−y)；w←w−ηg",
+      "worked": "默认η=0.2：梯度初值−5，第一次w=1，再依次1.5、1.75、1.875；四轮后损失0.01953125。",
+      "misconception": "负梯度不是负参数。训练损失下降也不是已经获得独立测试表现；本例甚至没有测试数据。",
+      "practice": [
+        "手算初始损失5与梯度−5。",
+        "以学习率0.2核对前两轮权重。",
+        "把学习率改为1，解释参数摆动并放大的原因。"
+      ],
+      "exercise": {
+        "prompt": "初始w=0、梯度−5、学习率0.2，第一次更新后的w是多少？",
+        "expected": 1,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "w_new=w−ηg。",
+        "solution": "0−0.2×(−5)=1。",
+        "transfer": "独立换成学习率0.4，检查一次到达w=2并保持不动。"
+      },
+      "sources": [
+        "cs229-supervised"
+      ],
+      "bridges": [
+        {
+          "lesson": "linear-least-squares",
+          "label": "回看：解析解与残差"
+        },
+        {
+          "lesson": "cs229-logistic",
+          "label": "继续：分类的似然损失"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "cs229-gradient",
+      "demos": [
+        {
+          "modelId": "cs229-gradient",
+          "title": "线性回归：梯度一步改变了什么"
+        }
+      ],
+      "sections": [
+        {
+          "title": "损失的尺度要统一",
+          "explanation": "这里取平均平方误差的一半，使导数简洁。若把损失改成平方和，梯度尺度与稳定学习率也会改变。",
+          "exercise": "比较n=2时平方和与本损失的倍数。"
+        },
+        {
+          "title": "更新使用同一轮参数",
+          "explanation": "批量梯度先看全部样本，在相同旧参数下累计，再做一次更新。不要遍历一条样本就改变w，却仍称为本例批量公式。",
+          "exercise": "记录每一轮old_w、g和new_w。"
+        },
+        {
+          "title": "收敛与泛化是两个问题",
+          "explanation": "本例凸二次目标可解析求解，适合独立核对迭代。高维非凸训练不具有同一简单保证，泛化也需独立数据。",
+          "exercise": "指出本例没有覆盖的真实训练条件。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 cs229-gradient.py，运行 python3 cs229-gradient.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import isclose\nx,y = [1,2],[2,4]\nw,rate = 0.0,0.2\nfor step in range(4):\n    loss = sum((w*a-b)**2 for a,b in zip(x,y))/4\n    gradient = sum(a*(w*a-b) for a,b in zip(x,y))/2\n    new = w-rate*gradient\n    print(step,w,loss,gradient,new)\n    w = new\nassert isclose(w,1.875)\nassert isclose(sum((w*a-b)**2 for a,b in zip(x,y))/4,0.01953125)",
+          "exercise": "独立换成学习率0.4，检查一次到达w=2并保持不动。"
+        }
+      ],
+      "course": "cs229",
+      "unit": "1"
+    },
+    {
+      "id": "cs229-logistic",
+      "title": "第2讲 逻辑回归：概率、损失与标签分开",
+      "summary": "分数z=2时，为什么预测概率约0.881而梯度约−0.119？",
+      "question": "分数z=2时，为什么预测概率约0.881而梯度约−0.119？",
+      "outcome": "复算sigmoid、二元交叉熵与分数梯度，解释错且自信的代价。",
+      "prerequisites": [
+        "概率；指数、对数与导数；上一讲梯度"
+      ],
+      "explanation": [
+        "线性模型先给出实数分数z，sigmoid把它映成标签1的模型概率p=1/(1+exp(−z))。概率是模型输出，不代表真实标签，也不保证已经校准。",
+        "给定标签y∈{0,1}，负对数似然为−y log p−(1−y)log(1−p)。对分数求导得到p−y；真正权重梯度还要按链式法则乘输入特征。",
+        "页面用数值稳定的softplus表达计算损失，避免大分数时不必要的溢出。阈值0.5只在最后将概率转为类别，改变决策阈值不会改变同一个输入的p。"
+      ],
+      "formula": "p=σ(z)；L=softplus(z)−yz；∂L/∂z=p−y",
+      "worked": "z=2、y=1时p≈0.8807971、L≈0.1269280、梯度≈−0.1192029。若标签改0，损失约2.126928，梯度变正。",
+      "misconception": "高置信错判可以有很大损失；准确率只看阈值后的类别，会丢掉这一信息。",
+      "practice": [
+        "先计算z=0时p=0.5。",
+        "固定z=2切换标签，比较损失和梯度符号。",
+        "用z=−2、y=1构造错误且更自信的预测。"
+      ],
+      "exercise": {
+        "prompt": "z=0、y=1时，交叉熵对z的梯度是多少？",
+        "expected": -0.5,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "sigmoid(0)=0.5，梯度p−y。",
+        "solution": "0.5−1=−0.5。",
+        "transfer": "对z=2分别用中心差分验证y=0和1的梯度，误差应小于1e−6。"
+      },
+      "sources": [
+        "cs229-supervised"
+      ],
+      "bridges": [
+        {
+          "lesson": "probability-mle",
+          "label": "回看：似然与参数"
+        },
+        {
+          "lesson": "cs229-ridge",
+          "label": "继续：参数约束与正则化"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "cs229-logistic",
+      "demos": [
+        {
+          "modelId": "cs229-logistic",
+          "title": "逻辑回归：概率、损失与标签分开"
+        }
+      ],
+      "sections": [
+        {
+          "title": "概率与标签",
+          "explanation": "监督标签是给定样例的一部分。不能因为p高就把y改成1；比较预测与真实信号才能定义监督损失。",
+          "exercise": "说明p=0.8与y=1各代表什么。"
+        },
+        {
+          "title": "稳定损失计算",
+          "explanation": "max(z,0)−yz+log(1+exp(−|z|))与原损失代数等价，却减少极端指数带来的数值问题。",
+          "exercise": "在z=0时手算损失log 2。"
+        },
+        {
+          "title": "从分数到权重",
+          "explanation": "若z=wx+b，则dL/dw=(p−y)x，dL/db=p−y。页面只展示分数方向，不把它冒充完整多维训练。",
+          "exercise": "给x=3时写出权重梯度。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 cs229-logistic.py，运行 python3 cs229-logistic.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import exp,log1p,isclose\nz,y = 2.0,1\nprob = 1/(1+exp(-z))\ndef loss(z): return max(z,0)-y*z+log1p(exp(-abs(z)))\ngrad = prob-y\nh = 1e-5\nnumeric = (loss(z+h)-loss(z-h))/(2*h)\nassert isclose(grad,numeric,abs_tol=1e-8)\nassert isclose(prob,0.8807970779778823)\nprint(prob,loss(z),grad,numeric)",
+          "exercise": "对z=2分别用中心差分验证y=0和1的梯度，误差应小于1e−6。"
+        }
+      ],
+      "course": "cs229",
+      "unit": "2"
+    },
+    {
+      "id": "cs229-ridge",
+      "title": "第3讲 L2正则：训练误差与参数大小怎样交换",
+      "summary": "加入λ以后，最优权重为什么从2缩小？",
+      "question": "加入λ以后，最优权重为什么从2缩小？",
+      "outcome": "求解一维ridge目标，拆开拟合项和惩罚项并验证导数。",
+      "prerequisites": [
+        "最小二乘；一元二次函数"
+      ],
+      "explanation": [
+        "对同一组x=[1,2]、y=[2,4]，普通平方损失在w=2为零。若同时希望参数不要太大，可以加入λw²/2，用λ表达对参数幅度的惩罚。",
+        "本讲使用平方和的一半，不使用样本平均：J=Σ(wx−y)²/2+λw²/2。导数设为0得到w=Σxy/(Σx²+λ)=10/(5+λ)，λ增大时向0收缩。",
+        "收缩会让训练拟合误差变大，但可能降低对有限样本噪声的敏感性。是否改善新数据必须用独立验证评估，不能根据惩罚项的存在直接宣称更好。"
+      ],
+      "formula": "w*=Σxy/(Σx²+λ)；J=1/2Σ(wx−y)²+λw²/2",
+      "worked": "λ=1时w=10/6=5/3；导数5w−10+λw=0。λ=0恢复w=2，惩罚增大则向0缩小。",
+      "misconception": "不同损失归一化下，数值相同的λ不一定有相同作用。本例没有截距，不暗示所有实现都应惩罚截距。",
+      "practice": [
+        "分别计算λ=0、1、5时的权重。",
+        "核对拟合损失与惩罚项相加才是训练目标。",
+        "用公式独立验证最优点导数为0。"
+      ],
+      "exercise": {
+        "prompt": "Σxy=10、Σx²=5、λ=5，最优权重是多少？",
+        "expected": 1,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "分母为5+5。",
+        "solution": "w*=10/(5+5)=1。",
+        "transfer": "给出λ=0与λ=5时两条样本的预测，解释训练误差为何增加。"
+      },
+      "sources": [
+        "cs229-selection"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs229-validation",
+          "label": "继续：怎样选择超参数"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "cs229-ridge",
+      "demos": [
+        {
+          "modelId": "cs229-ridge",
+          "title": "L2正则：训练误差与参数大小怎样交换"
+        }
+      ],
+      "sections": [
+        {
+          "title": "给目标写清系数",
+          "explanation": "正则强度与拟合项尺度共同决定解。把平均换成求和时，想保持同一解需要调整λ。",
+          "exercise": "写出平均损失形式下的对应λ。"
+        },
+        {
+          "title": "凸二次目标的独立检查",
+          "explanation": "Σx²+λ>0保证二阶导为正，因此导数为零就是唯一全局最小值。本例不需要反复运行优化器猜结果。",
+          "exercise": "核对λ=5时二阶导。"
+        },
+        {
+          "title": "λ是待选择的设置",
+          "explanation": "选择λ不能窥看最终测试标签。应先在训练中拟合，再用验证比较；最终冻结流程后才评测测试集。",
+          "exercise": "说明训练误差最低通常会选哪个λ。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 cs229-ridge.py，运行 python3 cs229-ridge.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import isclose\nx,y = [1,2],[2,4]\nlam = 1\nxx = sum(a*a for a in x)\nxy = sum(a*b for a,b in zip(x,y))\nw = xy/(xx+lam)\nfit = sum((w*a-b)**2 for a,b in zip(x,y))/2\npenalty = lam*w*w/2\nassert isclose(w,5/3)\nassert abs(xx*w-xy+lam*w)<1e-12\nassert xy/(xx+5) == 1\nprint(w,fit,penalty)",
+          "exercise": "给出λ=0与λ=5时两条样本的预测，解释训练误差为何增加。"
+        }
+      ],
+      "course": "cs229",
+      "unit": "3"
+    },
+    {
+      "id": "cs229-validation",
+      "title": "第4讲 泛化与选择：训练分数最好为什么会选错",
+      "summary": "穿过全部训练点的曲线，为何在新点上不如常数？",
+      "question": "穿过全部训练点的曲线，为何在新点上不如常数？",
+      "outcome": "用互不重叠的小表比较候选，区分训练、验证与最终测试。",
+      "prerequisites": [
+        "回归预测；均方误差"
+      ],
+      "explanation": [
+        "训练点为(0,0)、(1,1)、(2,0)。由训练均值得到常数1/3；由三点插值得到曲线x(2−x)。两个候选都只使用训练数据构造。",
+        "验证点为(0.5,0.4)、(1.5,0.4)。曲线训练误差为0，验证误差0.1225；常数训练误差2/9，验证误差1/225。按验证误差选择会得到常数。",
+        "验证集用于模型选择后便参与了开发过程，不能再称完全独立的最终测试。页面明确保留最终测试分数未知；反复调参后还需要冻结流程再评估。"
+      ],
+      "formula": "MSE=Σ(ŷ−y)²/n；选择规则使用独立验证数据",
+      "worked": "常数在验证点都预测1/3，误差(1/3−0.4)²=1/225；曲线都预测0.75，误差0.35²=0.1225。",
+      "misconception": "训练拟合更好不保证泛化更好。两个验证点也不足以证明常数是现实世界的真实规律；这里只说明选择机制。",
+      "practice": [
+        "独立算两个候选的训练与验证误差。",
+        "切换“按训练选择”，观察为什么会选曲线。",
+        "说明最终测试尚未开展时应怎样报告结果。"
+      ],
+      "exercise": {
+        "prompt": "曲线在两个验证点都预测0.75，标签都是0.4，验证MSE是多少？",
+        "expected": 0.1225,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "每个平方误差都是(0.75−0.4)²。",
+        "solution": "两项相同，均值为0.35²=0.1225。",
+        "transfer": "自己新增测试点x=1、y=0.4，冻结候选后算两模型误差；不要据此再调参。"
+      },
+      "sources": [
+        "cs229-selection"
+      ],
+      "bridges": [
+        {
+          "lesson": "probability-test",
+          "label": "回看：统计结论的边界"
+        },
+        {
+          "lesson": "cs229-kmeans",
+          "label": "继续：没有标签时怎样分组"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "cs229-validation",
+      "demos": [
+        {
+          "modelId": "cs229-validation",
+          "title": "泛化与选择：训练分数最好为什么会选错"
+        }
+      ],
+      "sections": [
+        {
+          "title": "数据角色先约定",
+          "explanation": "训练用于求参数，验证用于选设置，测试用于最终评估冻结流程。相同数据反复扮演多个角色会产生乐观偏差。",
+          "exercise": "给每个步骤标出允许读取的标签。"
+        },
+        {
+          "title": "简单反例的限度",
+          "explanation": "三点插值与常数是人为构造的可复算反例，不是现实数据实验。模型容量、噪声与样本量共同影响泛化。",
+          "exercise": "指出本例无法推断的一个结论。"
+        },
+        {
+          "title": "预处理也需要隔离",
+          "explanation": "均值、标准化、特征选择和PCA同样要在训练划分拟合。先在全数据预处理再划分，也可能泄漏验证信息。",
+          "exercise": "设计一个训练均值与测试均值不同的小例子。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 cs229-validation.py，运行 python3 cs229-validation.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import isclose\ntrain_x,train_y = [0,1,2],[0,1,0]\nvalid_x,valid_y = [0.5,1.5],[0.4,0.4]\nmodels = {'constant':lambda x:1/3,'curve':lambda x:x*(2-x)}\ndef mse(f,x,y): return sum((f(a)-b)**2 for a,b in zip(x,y))/len(x)\nscores = {name:(mse(f,train_x,train_y),mse(f,valid_x,valid_y)) for name,f in models.items()}\nassert isclose(scores['curve'][0],0)\nassert isclose(scores['curve'][1],0.1225)\nassert isclose(scores['constant'][1],1/225)\nassert min(scores,key=lambda n:scores[n][1]) == 'constant'\nprint(scores)",
+          "exercise": "自己新增测试点x=1、y=0.4，冻结候选后算两模型误差；不要据此再调参。"
+        }
+      ],
+      "course": "cs229",
+      "unit": "4"
+    },
+    {
+      "id": "cs229-kmeans",
+      "title": "第5讲 K-means：指派和移动中心是两步",
+      "summary": "四个点分两组，中心为什么从[0,10]变成[0.5,9.5]？",
+      "question": "四个点分两组，中心为什么从[0,10]变成[0.5,9.5]？",
+      "outcome": "实际运行交替更新，解释初值、并列与空簇策略。",
+      "prerequisites": [
+        "均值、距离；Python循环"
+      ],
+      "explanation": [
+        "给定没有标签的一维点[0,1,9,10]，先规定簇数k=2。中心只是当前猜测，不是已知类别；簇编号也没有语义顺序。",
+        "每轮先把各点指派给最近中心，再对每个非空簇求均值。初始[0,10]时前两点归簇0、后两点归簇1，新中心变[0.5,9.5]，平方距离和为1。",
+        "初值可能改变过程。距离相等时本例选较小编号；空簇保留原中心，避免除以0。有限轮演示会重新给出最终指派，但不冒称已检验任意收敛标准或全局最优。"
+      ],
+      "formula": "cᵢ=argminⱼ||xᵢ−μⱼ||²；μⱼ=簇j的样本均值",
+      "worked": "默认第一次更新的两簇为[0,1]和[9,10]，中心0.5与9.5，四个平方距离各0.25，合计1。",
+      "misconception": "K-means不自动决定簇数，也不会自动给簇赋真实类别。空簇不是均值0；必须显式定义处理策略。",
+      "practice": [
+        "手算第一次指派和中心更新。",
+        "切换相同初值[0,0]，观察第一轮空簇处理。",
+        "比较每次指派和均值更新前后的SSE，说明各步优化什么。"
+      ],
+      "exercise": {
+        "prompt": "点[0,1,9,10]以中心0.5和9.5分组，SSE是多少？",
+        "expected": 1,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "每点离最近中心0.5。",
+        "solution": "4×0.5²=1。",
+        "transfer": "换成[0,2,8,10]、初始[0,10]，独立求中心[1,9]与SSE=4。"
+      },
+      "sources": [
+        "cs229-kmeans-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs229-pca",
+          "label": "继续：无监督表示与主方向"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "cs229-kmeans",
+      "demos": [
+        {
+          "modelId": "cs229-kmeans",
+          "title": "K-means：指派和移动中心是两步"
+        }
+      ],
+      "sections": [
+        {
+          "title": "固定一部分再优化另一部分",
+          "explanation": "指派时中心固定，更新中心时指派固定。把两个阶段混画会掩盖算法实际优化路径。",
+          "exercise": "说明图中某轮指派用的是旧中心还是新中心。"
+        },
+        {
+          "title": "确定性策略要显式",
+          "explanation": "并列归簇0、空簇不移动是本例策略。真实实现可重采样或重新初始化；策略不同会有不同轨迹。",
+          "exercise": "解释相同初值为何先产生空簇。"
+        },
+        {
+          "title": "目标函数的局限",
+          "explanation": "平方欧氏距离偏好特定几何结构，对尺度与异常值敏感。即使SSE下降，也不能证明分组有现实语义。",
+          "exercise": "说明把一列单位放大100倍会怎样影响距离。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 cs229-kmeans.py，运行 python3 cs229-kmeans.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import isclose\npoints,centers = [0,1,9,10],[0.0,10.0]\nfor step in range(2):\n    groups = [0 if abs(x-centers[0])<=abs(x-centers[1]) else 1 for x in points]\n    next_centers = []\n    for j,old in enumerate(centers):\n        group = [x for x,c in zip(points,groups) if c == j]\n        next_centers.append(sum(group)/len(group) if group else old)\n    centers = next_centers\n    sse = sum((x-centers[c])**2 for x,c in zip(points,groups))\n    print(step,groups,centers,sse)\nassert centers == [0.5,9.5] and isclose(sse,1)",
+          "exercise": "换成[0,2,8,10]、初始[0,10]，独立求中心[1,9]与SSE=4。"
+        }
+      ],
+      "course": "cs229",
+      "unit": "5"
+    },
+    {
+      "id": "cs229-pca",
+      "title": "第6讲 PCA：中心化后找保留变化的方向",
+      "summary": "把对角线上的点压成一个数，为什么45度保留全部方差？",
+      "question": "把对角线上的点压成一个数，为什么45度保留全部方差？",
+      "outcome": "复算均值、协方差、投影与方差保留率，区分降维和分类。",
+      "prerequisites": [
+        "线性投影、特征方向与方差"
+      ],
+      "explanation": [
+        "四点为[−2,−2]、[−1,−1]、[1,1]、[2,2]再整体平移。先减去训练均值，整体平移就被消去；本例两列单位与尺度相同，未额外标准化。",
+        "使用1/n协方差约定得到[[2.5,2.5],[2.5,2.5]]，特征值为5与0。沿[1,1]/√2投影可保留全部变化；沿横轴只保留一半。",
+        "PCA选最大投影方差的单位方向，不读取类别标签。这里可解析知道最优45度；角度控件用于对比其他方向，而不是宣称运行完整通用特征分解。"
+      ],
+      "formula": "Σ=XcᵀXc/n；score=Xc u；保留率=Var(score)/tr(Σ)",
+      "worked": "45度时投影方差5、总方差5，比例1；0度时投影方差2.5，比例0.5。方向u与−u表达同一条主轴。",
+      "misconception": "高方差保留率不是高分类准确率。均值或标准化若使用测试数据拟合，会让后续评测泄漏。",
+      "practice": [
+        "先手算中心化结果与2×2协方差。",
+        "对比0度、45度、90度的方差保留率。",
+        "改变整体平移，检查中心化与保留率不变。"
+      ],
+      "exercise": {
+        "prompt": "本例总方差5，沿横轴投影方差2.5，保留率是多少？",
+        "expected": 0.5,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "2.5除以5。",
+        "solution": "保留率=2.5/5=0.5。",
+        "transfer": "将主方向取负，独立核对投影分数变号但方差保留率不变。"
+      },
+      "sources": [
+        "cs229-pca-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "linear-eigen",
+          "label": "回看：特征方向"
+        },
+        {
+          "lesson": "d2l-tensors",
+          "label": "连接：进入深度学习张量计算"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "cs229-pca",
+      "demos": [
+        {
+          "modelId": "cs229-pca",
+          "title": "PCA：中心化后找保留变化的方向"
+        }
+      ],
+      "sections": [
+        {
+          "title": "中心化先回答变化",
+          "explanation": "不中心化时大均值可能主导二阶矩。本讲目标是围绕样本均值的变化，拟合中心只来自训练数据。",
+          "exercise": "解释整体加5为何不改变协方差。"
+        },
+        {
+          "title": "协方差的归一化约定",
+          "explanation": "使用1/n而非1/(n−1)会缩放特征值，但不改变特征方向和保留比例。需要报告约定，避免数值对照时错配。",
+          "exercise": "计算若改用1/(n−1)，总方差是多少。"
+        },
+        {
+          "title": "投影方向不是预测器",
+          "explanation": "降维可以作为后续特征步骤，但主方向最大化方差，不直接最小化监督损失。丢失的小方差方向也可能含关键标签信息。",
+          "exercise": "给出降维后仍需验证的一个任务。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 cs229-pca.py，运行 python3 cs229-pca.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import sqrt,isclose\npoints = [[-2,-2],[-1,-1],[1,1],[2,2]]\ncenter = [sum(x[j] for x in points)/4 for j in range(2)]\nx = [[v-center[j] for j,v in enumerate(row)] for row in points]\ncov = [[sum(row[i]*row[j] for row in x)/4 for j in range(2)] for i in range(2)]\nu = [1/sqrt(2),1/sqrt(2)]\nscores = [sum(a*b for a,b in zip(row,u)) for row in x]\nvariance = sum(v*v for v in scores)/4\nratio = variance/(cov[0][0]+cov[1][1])\nassert cov == [[2.5,2.5],[2.5,2.5]]\nassert isclose(variance,5) and isclose(ratio,1)\nprint(cov,scores,variance,ratio)",
+          "exercise": "将主方向取负，独立核对投影分数变号但方差保留率不变。"
+        }
+      ],
+      "course": "cs229",
+      "unit": "6"
+    }
+  ]
+}

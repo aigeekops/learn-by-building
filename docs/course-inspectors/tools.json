@@ -1,0 +1,30 @@
+{
+  "courseId": "tools",
+  "course": "Missing Semester · 从命令行到可复现交付",
+  "lectures": 9,
+  "models": ["missing-shell", "missing-pipeline", "missing-environment", "missing-debug", "missing-git", "missing-quality", "missing-packaging", "missing-agentic", "missing-beyond"],
+  "modelCount": 9,
+  "experimentCount": 25,
+  "inspection": "逐帧展开相对路径每个分量、父目录与重定向打开、覆盖和追加前后字符串、实际输出与换行计数、退出状态；逐条管道筛选、排序位置与每组频数；解释器门槛、每个候选版本的两个约束与交集、锁定选择；独立预期、求和、分母、误差与理论操作计数；Git的HEAD/暂存区/工作区旧值到新值及两个diff范围；每项测试的预期/实际/判定；逐文件产物允许检查、入口、版本与运行时门禁；Agent实际调用、写入、前后断言、独立零边界与明确停止原因；最小复现差异和逐项协作材料缺项。只读取当前及此前快照，不读取最终result和未来帧。",
+  "preserved": ["课程与全部9讲ID", "实际模型和原有执行快照", "全部已有参数控件", "来源和排期", "浏览器参数草稿", "个人计划", "学习记录与时长", "共享UI和构建配置"],
+  "limitations": [
+    "模型仅演算既有有限原创案例；不运行Shell命令、真实管道或任意代码。",
+    "目录和文件均为内存对象；路径只做词法归一化，不覆盖符号链接、权限和真实挂载点。重定向失败保留null行数及未执行状态。",
+    "管道下游均返回0；pipefail一般规则仍是最右侧非零状态，当前数字不证明上游输出完整。",
+    "core是虚构包，版本仅离散整数候选；解释器为列出的3.x选项，不实现完整依赖求解或平台探测。",
+    "调试性能格为理论加法计数，不是CPU计时或实测加速。",
+    "Git只模拟一个已跟踪文件；C0/C1不是实际哈希，没有真实提交、钩子、冲突或仓库修改。",
+    "zipapp检查只涉及固定文件名与有限版本规则，实际执行保持not-run；没有读取.env内容，没有构建、安装或运行产物。",
+    "Agent采用固定教学动作和预设补丁，不调用LLM；工具只计算内存布尔条件。权限拒绝、预算耗尽、测试未执行null、弱测试全绿和独立边界失败分别保留。",
+    "材料ready、门禁放行、选定测试通过都不代表通用正确性、真实部署、Issue/PR发布、外部接受或学习完成。",
+    "数值算式显示四位小数，验证保留完整计算精度；没有添加额外动画帧。"
+  ],
+  "validation": {
+    "command": "node --test tests/course_inspector_tools.test.cjs",
+    "testsPassed": 14,
+    "inspectorTestsPassed": 14,
+    "genericCheck": {"command": "node scripts/check_course_inspectors.cjs tools", "models": 9, "lessons": 9, "framesChecked": 626, "cellsChecked": 8142, "experimentsPassed": 25},
+    "checks": ["全部9讲实际demos覆盖", "25组实际控件before/after实验及具体verify，拒绝未变化的对照", "默认、全部选择组合和同时范围边界的全帧有限值检查", "冻结trace不可变", "修改result与未来帧不影响当前inspect", "路径解析对照Node path.posix.resolve", "覆盖时截断和失败时无命令/无写入/null行数", "管道逐行筛选、排序、频数与组数及空结果退出状态", "逐版本交集、冲突空集与不兼容锁定", "独立均值预期、分母错误与理论操作次数", "Git三区快照与add/commit/restore来源", "弱测试门禁与独立零边界", "产物逐文件允许检查及not-run证据", "真实工具调用、权限拒绝、预算耗尽与尚未执行的测试", "模糊规格、弱测试漏错和独立评审停止原因", "协作材料逐条件缺项与外部消息0", "浏览器与Node入口注册一致"],
+    "scope": "仅本课程插件与独立语义测试；未运行浏览器验收、全站构建或重复广泛测试。"
+  }
+}

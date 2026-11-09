@@ -1,0 +1,217 @@
+{
+  "courseId": "probability",
+  "courseLabel": "MIT 18.05 概率与统计基础",
+  "lessons": 6,
+  "models": [
+    {
+      "id": "probability-binomial",
+      "intuition": "先数恰好k个成功位置的组合数，再乘每个排列的概率；最后逐项加总概率与加权次数。",
+      "experiments": [
+        {
+          "id": "success-rate",
+          "label": "只提高每次成功概率",
+          "prediction": "次数保持4时，概率质量怎样向更大的成功次数移动？",
+          "before": {
+            "prob": 0.2
+          },
+          "after": {
+            "prob": 0.8
+          },
+          "expectation": "期望0.8→3.2；零次成功概率下降，四次成功概率上升；总概率均为1。"
+        },
+        {
+          "id": "trial-count",
+          "label": "只增加独立试验次数",
+          "prediction": "成功概率不变，样本空间和期望各怎样变化？",
+          "before": {
+            "n": 4
+          },
+          "after": {
+            "n": 8
+          },
+          "expectation": "q仍为0.5；可能次数由5种变9种，期望2→4，总概率仍为1。"
+        }
+      ]
+    },
+    {
+      "id": "probability-bayes",
+      "intuition": "把报警拆成次品真报与良品误报两条互斥分支，在报警集合内重新归一化，再明确赔率的无穷边界。",
+      "experiments": [
+        {
+          "id": "base-rate",
+          "label": "只降低次品先验比例",
+          "prediction": "检测性能不变时，报警后的次品概率能保持0.5吗？",
+          "before": {
+            "prior": 0.1
+          },
+          "after": {
+            "prior": 0.01
+          },
+          "expectation": "后验0.5→1/12；真报联合份额下降，误报联合份额上升。"
+        },
+        {
+          "id": "sensitivity",
+          "label": "只提高次品报警率",
+          "prediction": "误报支路不变时，真报份额和后验如何改变？",
+          "before": {
+            "sensitivity": 0.5
+          },
+          "after": {
+            "sensitivity": 1
+          },
+          "expectation": "良品误报仍为0.09；真报0.05→0.1，后验5/14→10/19。"
+        },
+        {
+          "id": "no-false-alarm",
+          "label": "只把良品误报率降为0",
+          "prediction": "没有良品报警时，后验与赔率的边界应怎样表达？",
+          "before": {
+            "falsePositive": 0.1
+          },
+          "after": {
+            "falsePositive": 0
+          },
+          "expectation": "后验0.5→1，有限赔率1→null（无穷）；真报份额不变。"
+        }
+      ]
+    },
+    {
+      "id": "probability-moments",
+      "intuition": "每个分支先贡献概率乘结果，再减期望、平方并加权；用二阶原点矩减均值平方独立核对方差。",
+      "experiments": [
+        {
+          "id": "higher-outcome",
+          "label": "只提高第三个分支的结果值",
+          "prediction": "概率不变时，均值与方差分别增加多少？",
+          "before": {
+            "high": 4
+          },
+          "after": {
+            "high": 8
+          },
+          "expectation": "概率仍为[0.25,0.5,0.25]；期望2→3，方差2→9，二阶矩6→18。"
+        }
+      ]
+    },
+    {
+      "id": "probability-mle",
+      "intuition": "观测序列固定后，候选q逐个代入成功与失败概率乘积；连续最优估计与四点网格最佳分别报告。",
+      "experiments": [
+        {
+          "id": "all-success",
+          "label": "只把十次观测改为全成功",
+          "prediction": "连续MLE为1时，四点网格会选到1吗？",
+          "before": {
+            "successes": 7
+          },
+          "after": {
+            "successes": 10
+          },
+          "expectation": "连续MLE0.7→1；网格不包含1，最佳0.7→0.9，其似然为0.9¹⁰。"
+        }
+      ]
+    },
+    {
+      "id": "probability-interval",
+      "intuition": "先明确正态独立样本且总体σ已知，再由σ/√n计算均值标准误，双侧各留2.5%尾概率得到95%区间。",
+      "experiments": [
+        {
+          "id": "four-times-n",
+          "label": "只把样本量扩大四倍",
+          "prediction": "σ与观测均值不变时，标准误和区间宽度怎样变化？",
+          "before": {
+            "n": 16
+          },
+          "after": {
+            "n": 64
+          },
+          "expectation": "σ仍为2；标准误0.5→0.25，半宽与全宽均减半，中心不变。"
+        },
+        {
+          "id": "shift-mean",
+          "label": "只把观测样本均值增加1",
+          "prediction": "区间移动是否改变不确定性宽度？",
+          "before": {
+            "mean": 0
+          },
+          "after": {
+            "mean": 1
+          },
+          "expectation": "两端均增加1；σ、标准误、半宽、全宽均不变。"
+        }
+      ]
+    },
+    {
+      "id": "probability-test",
+      "intuition": "在独立公平抛币的零假设下枚举每个次数概率，以距5的绝对偏离筛选双尾，合计后才与预设α比较。",
+      "experiments": [
+        {
+          "id": "less-extreme",
+          "label": "只把正面观测从9改8",
+          "prediction": "同一α下，离公平期望近一步会改变尾概率与判断吗？",
+          "before": {
+            "k": 9
+          },
+          "after": {
+            "k": 8
+          },
+          "expectation": "精确双尾22/1024→112/1024；α=0.05下从拒绝变为未拒绝。"
+        },
+        {
+          "id": "threshold-only",
+          "label": "只放宽预设显著性水平",
+          "prediction": "观测和尾概率不变时，判断能否改变？",
+          "before": {
+            "alpha": 0.01
+          },
+          "after": {
+            "alpha": 0.05
+          },
+          "expectation": "观测仍为9；p值仍为22/1024，但从未拒绝变为拒绝，阈值不改变观测概率。"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "courseValidator": {
+      "course": "probability",
+      "models": 6,
+      "lessons": 6,
+      "framesChecked": 140,
+      "cellsChecked": 427,
+      "experiments": 11
+    },
+    "unitTests": {
+      "passed": 8,
+      "command": "node --test tests/course_inspector_probability.test.cjs"
+    },
+    "sharedValidator": "node scripts/check_course_inspectors.cjs probability",
+    "independentChecks": [
+      "真实六讲全部默认与单控件边界的140帧、427格；冻结trace验证不可变性",
+      "11组真实控件before/after均通过verify；before/before与after/after均被拒绝",
+      "浏览器globalThis注册及Node导出；Proxy拒绝读取未来快照与result",
+      "独立枚举16条Bernoulli序列核对二项分布逐格概率与期望，检查q=0/1的0次幂约定",
+      "用零件计数表核对贝叶斯分支与后验；无误报时保留null赔率并说明无穷",
+      "独立复算三个有限分支的加权偏差、方差贡献、二阶矩恒等式，包含重复结果值",
+      "用固定成功失败序列逐项概率乘积检查候选似然，核对内点MLE导数与0/1边界及网格限制",
+      "独立Simpson数值积分核对标准正态分位数的0.95中央覆盖率；复算区间端点及样本量扩大4倍宽度减半",
+      "独立枚举1024条公平抛币序列核对精确双尾、对称性、中心一次计数与阈值对照"
+    ]
+  },
+  "teachingScope": "六讲逐帧给出组合数、二项概率质量与期望贡献、贝叶斯两条联合分支和后验赔率、有限分布矩与逐项方差、固定序列候选似然及MLE、已知总体σ的正态区间、精确二项双侧检验。只读当前及既有快照；数值公式四位小数，验证使用完整精度；收尾核对明确标注最终核对。",
+  "limitations": [
+    "均为原有JavaScript原创有限算例，不是MIT 18.05全课程翻译，也未生成真实随机观测或评测数据。",
+    "二项分布要求各次独立且成功概率相同；贝叶斯检测参数是给定虚构模型。现有控件保证报警分母大于0。",
+    "无误报时后验概率为1，赔率无穷；有限数值格保持null，不解释为0或未检测到。",
+    "矩来自给定总体分布；未把总体方差冒充样本无偏估计。MLE仅固定独立同分布Bernoulli序列，四点候选网格不等于连续最优点。",
+    "置信区间仅适用于独立同分布正态样本且总体σ=2已知；双侧95%各留2.5%尾概率。未覆盖未知σ的t区间，固定区间不作95%后验解释。",
+    "检验只按公平Binomial(10,0.5)下预设绝对偏离规则精确计双尾，不泛化为所有离散检验定义；p值不等于H₀为真的概率。",
+    "公式舍入可能使很小的非零似然显示0.0000；格子值、候选比较和verify保留完整精度。",
+    "静态算式仅检查已有计算快照，不增加虚构时间演化，不改变课程/讲次ID、配置、共享模型、草稿、学习记录或时长。"
+  ],
+  "files": [
+    "web/course-inspectors/probability.js",
+    "tests/course_inspector_probability.test.cjs",
+    "docs/course-inspectors/probability.json"
+  ]
+}

@@ -165,6 +165,16 @@
             "core_minutes": 90,
             "deep_minutes": 180,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "python-first",
+            "map_course_id": "cs50p",
+            "model": "python",
+            "variant": "variables",
+            "question": "修改 minutes 后，打印出来的值怎样变？",
+            "stage": "agent-1",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -314,6 +324,16 @@
             "core_minutes": 180,
             "deep_minutes": 360,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "python-branches",
+            "map_course_id": "cs50p",
+            "model": "python",
+            "variant": "branches",
+            "question": "循环里哪一个数会通过条件判断？",
+            "stage": "agent-1",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -365,6 +385,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "python-functions",
+            "map_course_id": "cs50p",
+            "model": "python",
+            "variant": "functions",
+            "question": "参数进入函数后，返回值流向哪里？",
+            "stage": "agent-1",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -411,6 +441,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "python-files",
+            "map_course_id": "cs50p",
+            "model": "python",
+            "variant": "files",
+            "question": "保存后再读取，为什么不能把字符串直接相加？",
+            "stage": "agent-1",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -478,6 +518,16 @@
             "core_minutes": 150,
             "deep_minutes": 300,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "llm-basics",
+            "map_course_id": "hfagents",
+            "model": "retrieval",
+            "variant": "grounding",
+            "question": "资料没有答案时，系统应该返回什么？",
+            "stage": "agent-2",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -524,6 +574,16 @@
             "core_minutes": 150,
             "deep_minutes": 300,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "prompt-contract",
+            "map_course_id": "hfagents",
+            "model": "contract",
+            "variant": "prompt",
+            "question": "任务、输入与验收条件怎样组成一份约定？",
+            "stage": "agent-2",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -579,6 +639,16 @@
             "core_minutes": 300,
             "deep_minutes": 600,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "api-data",
+            "map_course_id": "hfagents",
+            "model": "contract",
+            "variant": "json",
+            "question": "缺少必需字段时，请求应该在哪一步停下？",
+            "stage": "agent-2",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -625,6 +695,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "chat-state",
+            "map_course_id": "hfagents",
+            "model": "agent",
+            "variant": "history",
+            "question": "工具失败后，是重试、停止还是继续编造结果？",
+            "stage": "agent-2",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -735,6 +815,16 @@
             "core_minutes": 180,
             "deep_minutes": 360,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "search-baseline",
+            "map_course_id": "hfagents",
+            "model": "retrieval",
+            "variant": "keyword",
+            "question": "查找关键词时，哪些片段真的命中？",
+            "stage": "agent-3",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -781,6 +871,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "search-chunks",
+            "map_course_id": "hfagents",
+            "model": "chunks",
+            "variant": "chunks",
+            "question": "片段变长会怎样影响命中范围和来源？",
+            "stage": "agent-3",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -827,6 +927,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "search-answer",
+            "map_course_id": "hfagents",
+            "model": "retrieval",
+            "variant": "citation",
+            "question": "回答中的判断能否回到具体证据？",
+            "stage": "agent-3",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -873,6 +983,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "search-evaluate",
+            "map_course_id": "hfagents",
+            "model": "retrieval",
+            "variant": "evaluation",
+            "question": "召回更多片段是否一定提高答案质量？",
+            "stage": "agent-3",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -940,6 +1060,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "tools-functions",
+            "map_course_id": "hfagents",
+            "model": "contract",
+            "variant": "tool",
+            "question": "工具参数无效时，函数是否应该执行？",
+            "stage": "agent-4",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -986,6 +1116,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "tools-workflow",
+            "map_course_id": "hfagents",
+            "model": "agent",
+            "variant": "workflow",
+            "question": "固定流程与自行选择工具，哪里不同？",
+            "stage": "agent-4",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1032,6 +1172,16 @@
             "core_minutes": 360,
             "deep_minutes": 720,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "agent-loop",
+            "map_course_id": "hfagents",
+            "model": "agent",
+            "variant": "loop",
+            "question": "给循环设预算后，它在哪一步停止？",
+            "stage": "agent-4",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1078,6 +1228,16 @@
             "core_minutes": 300,
             "deep_minutes": 600,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "agent-eval",
+            "map_course_id": "hfagents",
+            "model": "agent",
+            "variant": "evaluation",
+            "question": "同一输入的成功轨迹与失败轨迹怎样对照？",
+            "stage": "agent-4",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -1150,6 +1310,16 @@
             "core_minutes": 300,
             "deep_minutes": 600,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "service-first",
+            "map_course_id": "fsdl",
+            "model": "contract",
+            "variant": "service",
+            "question": "本地接口如何把输入变成响应？",
+            "stage": "agent-5",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1201,6 +1371,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "service-validation",
+            "map_course_id": "fsdl",
+            "model": "contract",
+            "variant": "validation",
+            "question": "输入越界时为什么要在业务逻辑之前返回？",
+            "stage": "agent-5",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1247,6 +1427,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "service-tests",
+            "map_course_id": "fsdl",
+            "model": "delivery",
+            "variant": "tests",
+            "question": "只检查正常输入，会漏掉什么？",
+            "stage": "agent-5",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1293,6 +1483,16 @@
             "core_minutes": 360,
             "deep_minutes": 720,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "service-package",
+            "map_course_id": "tools",
+            "model": "delivery",
+            "variant": "environment",
+            "question": "另一个目录缺依赖时，复现会停在哪？",
+            "stage": "agent-5",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -1360,6 +1560,16 @@
             "core_minutes": 180,
             "deep_minutes": 360,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "project-scope",
+            "map_course_id": "fsdl",
+            "model": "delivery",
+            "variant": "scope",
+            "question": "把作品缩小到一个问题，会减少哪些依赖？",
+            "stage": "agent-6",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1406,6 +1616,16 @@
             "core_minutes": 300,
             "deep_minutes": 600,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "project-reproduce",
+            "map_course_id": "fsdl",
+            "model": "delivery",
+            "variant": "reproduce",
+            "question": "从空目录重放，怎样定位缺少的一步？",
+            "stage": "agent-6",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1452,6 +1672,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "project-case",
+            "map_course_id": "fsdl",
+            "model": "delivery",
+            "variant": "case",
+            "question": "失败案例如何限制结论的适用范围？",
+            "stage": "agent-6",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1498,6 +1728,16 @@
             "core_minutes": 180,
             "deep_minutes": 360,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "project-demo",
+            "map_course_id": "fsdl",
+            "model": "delivery",
+            "variant": "demo",
+            "question": "演示一次成功与可重复交付有什么区别？",
+            "stage": "agent-6",
+            "route": "agent",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],

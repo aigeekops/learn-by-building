@@ -1,0 +1,15 @@
+#lbb-course-prototype .app-teaching-stage{background:#f8fbfc;border:1px solid #d8e3e7;border-radius:10px;padding:12px;min-width:0;overflow:hidden}
+#lbb-course-prototype .app-scene-heading{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:12px}
+#lbb-course-prototype .app-scene-heading strong{font-size:13px;color:#23475a}
+#lbb-course-prototype #app-scene-state{font-size:10px;color:#6c7f8b;white-space:nowrap}
+#lbb-course-prototype #app-teaching-scene{min-width:0}
+#lbb-course-prototype #app-teaching-scene svg{display:block;width:100%;height:auto;max-height:calc(var(--aid-workspace-height,620px) - 255px);min-height:145px}
+#lbb-course-prototype #app-observation,#lbb-course-prototype .app-observation-prompt{font-size:12px;line-height:1.7;color:#617580;margin:10px 0 0}
+#lbb-course-prototype .app-observation-prompt{padding:8px 2px;border-bottom:1px solid #e1e8ed}
+#lbb-course-prototype .app-teaching-stage [data-fid-motion]{animation:none;transition:none}
+#lbb-course-prototype .app-number-check{font-size:12px;margin:14px 0;color:#6e617e}
+#lbb-course-prototype .app-number-check summary,#lbb-course-prototype .app-originals summary{cursor:pointer}
+#lbb-course-prototype .app-sequence{justify-content:space-between;flex-wrap:wrap;border-top:1px solid #e7dfee;padding-top:16px;margin-top:18px}
+#lbb-course-prototype .app-sequence .button{white-space:normal;text-align:left}
+#lbb-course-prototype .app-originals{margin:24px 0;border-top:1px solid #e6dfee;padding-top:17px;font-size:13px}
+#lbb-course-prototype .app-originals>.row{flex-wrap:wrap;margin-top:14px}

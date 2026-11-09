@@ -1,0 +1,92 @@
+{
+  "courseId": "kalman",
+  "courseLabel": "Kalman and Bayesian Filters in Python · 本站原创配套基础课",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "rf-noisy-measurements",
+      "experiments": ["shift-bias"],
+      "scope": "固定生成条件、逐次读数、上次累计和加本次读数、当前count分母、每个最终离差平方、样本方差n−1、假定R/n与σ/√n及最终残留偏差。"
+    },
+    {
+      "id": "rf-kalman-update",
+      "experiments": ["raise-r"],
+      "scope": "先验位置/方差、位置预测、方差传播、创新与S、由当前创新推导的贝叶斯观测预测密度、K、修正量、后验均值、Joseph两项、后验标准差与高斯归一化分母；零方差单独显示点质量。"
+    },
+    {
+      "id": "rf-filter-assumptions",
+      "experiments": ["enable-gate"],
+      "scope": "每步真实先验到预测、创新、创新方差、NIS、数值选项0/1与严格NIS>9分支、候选增益、接受时Joseph或拒绝时保留预测、当前参考误差；仅在末帧逐个计算两类平方误差与完整MSE。"
+    },
+    {
+      "id": "rf-kalman-state",
+      "experiments": ["increase-dt"],
+      "scope": "位置/速度先验、F与Q的逐元素公式、预测状态和四格P⁻、位置创新和S、位置/速度两项增益与均值校正、AP⁻及Joseph后验的每格、对称残差与行列式。"
+    },
+    {
+      "id": "rf-kalman-covariance",
+      "experiments": ["reverse-correlation", "change-observation"],
+      "scope": "ρ到交叉协方差与行列式、两个增益、位置创新对两项均值的修正、四格P−KHP、两项后验方差；静态有限快照，区分状态空间与世界平面。"
+    },
+    {
+      "id": "rf-kalman-2d",
+      "experiments": ["add-y-bias"],
+      "scope": "四维状态与H/R、四次实际联合更新中的四项状态预测、16格P⁻传播、双轴创新、4格S、S行列式与4格逆、8格K、四项双轴均值修正、16格AP⁻与16格Joseph后验及对称残差；仅末帧显示完整位置误差。"
+    },
+    {
+      "id": "rf-ekf-range",
+      "experiments": ["raise-range-noise"],
+      "scope": "先验与人工测距输入、非线性距离、两个Jacobian偏导、非线性创新和局部S、两项K、两项径向均值修正、Joseph每格、径向/切向四项二次型以及后验均值距离。"
+    },
+    {
+      "id": "rf-unscented-transform",
+      "experiments": ["increase-zero-mean-variance"],
+      "scope": "固定尺度λ、三个sigma点、两套共六个权重与均值权重归一化、逐点平方、三项加权均值与输出、三项协方差贡献和输出方差、末帧高斯平方解析矩与EKF一阶近似对照。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs kalman",
+      "node --test tests/course_inspector_kalman.test.cjs"
+    ],
+    "models": 8,
+    "lessons": 8,
+    "framesChecked": 395,
+    "cellsChecked": 3776,
+    "experiments": 9,
+    "semanticTests": 10,
+    "checks": [
+      "统一检查器以真实controls默认值合并before/after后调用model.run，覆盖默认及每个控件两端全部frames；gate选项使用数值索引0/1。",
+      "深冻结所有默认trace和实验trace，核查不可变性、全部实际讲次/模型、稳定不重复cell id、具体算式和非空输入、有限数值以及索引夹取。",
+      "全部9组参数实验实际运行前后模型；verify核查数值变化、具体分支及保持量，并拒绝未变化的前值对和后值对。",
+      "独立浏览器全局注册；为未来frames、所有scene与完整result设置拒读陷阱，当前检查内容保持一致。",
+      "独立固定读数9/13/10/12cm、逐次均值、离差平方与10/3cm²样本方差，区分假设R/n及固定偏差。",
+      "独立标量案例x⁻=3、P⁻=3、ν=4、S=6、K=1/2、x⁺=5、P⁺=3/2；以精度相加恒等式核查后验方差，并检查高斯密度与P=Q=0点质量边界。",
+      "实际第6次观测NIS约61.1098的接受/拒绝对照，拒绝时均值和方差均保留预测；独立重算两类MSE，保留门限反使MSE增大的失败例。NIS约9的两侧用完整精度测试，显示四位小数不改变分支。",
+      "P=I、dt=1、Q=0、R=1独立闭式解检查P⁻=[[2,1],[1,1]]、K=[2/3,1/3]、后验P=[[2/3,1/3],[1/3,2/3]]和行列式1/3；另检查dt=2的Q每格。",
+      "负相关、零相关和z反号对照检查速度修正方向、方差缩减与协方差不依赖当前z。",
+      "四次二维更新以独立逐轴高斯条件更新对照原模型的同时矩阵更新；核查每格P传播、S乘所示S⁻¹为I、K乘S等于P⁻Hᵀ、四项状态和完整Joseph后验。",
+      "EKF以独立秩一更新I−HᵀH/(1+R)核对后验每格及径向/切向特征值，检查径向方差1/3和切向方差1。",
+      "UT检查sigma点重构先验矩、中心β贡献、负均值先验的平方映射均值4.25/方差26以及一阶近似方差18；零均值实验保留曲率导致的一阶近似失效。"
+    ]
+  },
+  "limitations": [
+    "八讲为现有原创配套主题，不是全书逐章翻译或完整官方课程。没有传感器、硬件、真实GPS或定位精度验证。",
+    "inspect仅使用trace.params与当前及此前frames[index].vars；不读取scene或result，不把未来后验、MSE或末位置误差写成当前结果。",
+    "均值统计使用成对固定扰动，不是随机抽样；σ/√n与R/n依赖独立、无偏、同方差假设，不能消除固定偏差。",
+    "标量高斯归一化格为当前创新和方差的解析推导；密度不等于离散概率。P=0使用点质量边界，不计算除以零的普通高斯密度。",
+    "NIS门限严格使用完整精度的NIS>9；候选增益在拒绝分支不应用，拒绝观测不能证明传感器损坏，也可能妨碍真实机动跟踪。",
+    "位置/速度协方差元素单位不同；q采用每步固定随机加速度方差，不与连续噪声谱密度公式混用。协方差缩小或正定不等于真实估计准确。",
+    "二维模型的观测轴和对应关系已固定，不执行观测数据关联；完整2×2创新相关性仍需整体求逆。未加入偏差状态，普通Kalman不会自动标定固定偏差。",
+    "EKF是单次测距的局部高斯近似，先验控件排除原点奇异；一个距离不能唯一确定二维位置，不解决全局多解或错误关联。",
+    "无迹变换仅为一维UKF组件；平方映射的解析矩匹配不代表任意非线性函数都精确，也不代表输出分布为高斯。",
+    "协方差与无迹变换保持现有静态有限计算快照，不添加时间、动态或额外播放帧。算式显示四位小数，验证和原值保留完整精度。",
+    "仅新增本课程插件、测试和清单；未改原模型、配置、讲次ID、原图、草稿、学习记录、分钟或完成状态。构建及浏览器验收由根agent统一执行。"
+  ],
+  "files": [
+    "web/course-inspectors/kalman.js",
+    "tests/course_inspector_kalman.test.cjs",
+    "docs/course-inspectors/kalman.json"
+  ]
+}

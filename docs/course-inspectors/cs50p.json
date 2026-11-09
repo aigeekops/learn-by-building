@@ -1,0 +1,26 @@
+{
+  "courseId": "cs50p",
+  "course": "CS50P · 从一条读数开始学会 Python",
+  "lectures": 11,
+  "models": ["cs50p-functions", "cs50p-conditions", "cs50p-loops", "cs50p-exceptions", "cs50p-libraries", "cs50p-tests", "cs50p-files", "cs50p-regex", "cs50p-oop", "cs50p-etcetera", "cs50p-project"],
+  "modelCount": 11,
+  "experimentCount": 25,
+  "inspection": "逐帧解释调用处与局部作用域、形参与返回通道、赋值算式、互斥分支、循环条件与旧值到新值、异常分流、排序位置与中位数、独立断言、文件打开与写入、正则候选范围与分组、实例身份与property状态转换、生成器实际消费、逐行解析与项目汇总。全部使用当前及此前trace快照，不读取完整result或未来帧。",
+  "preserved": ["课程与全部11讲ID", "实际模型与原执行快照", "来源与排期", "参数草稿", "个人计划", "学习记录与时长", "共享UI与构建配置"],
+  "limitations": [
+    "浏览器模型仅计算规定的有限案例，不运行任意Python；Python语义范围沿用原模型。",
+    "文件操作为内存字符串，传感器输入为固定数据，不代表磁盘写入或硬件测量。",
+    "正则只覆盖本页ASCII格式，整数转换只覆盖列出的输入选择。",
+    "null保留为未产生的结果、无均值或中止状态，合法零值不会改写成缺失。",
+    "实例槽、集合与生成器检查来自已有真实执行快照；不虚构额外动画或隐式迭代。",
+    "测试通过仅对应实际有限用例，不证明任意输入正确，也不等于完成官方题集或认证。",
+    "数值算式展示四位小数，验证保留完整计算精度。"
+  ],
+  "validation": {
+    "command": "node --test tests/course_inspector_cs50p.test.cjs tests/foundation_cs50p.test.cjs",
+    "testsPassed": 35,
+    "inspectorTestsPassed": 15,
+    "genericCheck": {"command": "node scripts/check_course_inspectors.cjs cs50p", "models": 11, "lessons": 11, "framesChecked": 612, "cellsChecked": 2890, "experimentsPassed": 25},
+    "checks": ["全部11讲对应的实际demos", "25组真实before/after参数实验及具体verify，原值对照不冒充变化", "默认、所有选择项、范围端点和同时边界参数的全帧安全", "冻结trace不可变", "修改result及未来帧不改变当前inspect", "作用域退出、返回接收与局部赋值区分", "循环累计与跳过的before/after", "等号边界、异常、空样本和合法零值", "打开时截断、正则候选范围、对象身份和setter拒绝", "生成器去重前seen状态、实际访问量和未访问余量", "项目行号、严格中止及空汇总区分", "浏览器和Node注册一致", "原课程Python例程、独立Python数值oracle及218组有界输入对照"]
+  }
+}

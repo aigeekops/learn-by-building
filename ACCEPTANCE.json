@@ -1,0 +1,112 @@
+{
+  "release": "20261108T204702Z",
+  "authored_courses": 26,
+  "authored_lessons": 220,
+  "models": 236,
+  "parameter_cases": 358,
+  "frames_checked": 13411,
+  "cells_checked": 91251,
+  "python_pass": 91,
+  "node_pass": 653,
+  "node_skipped": 0,
+  "browser_runs": [
+    {
+      "mode": "http",
+      "width": 1440,
+      "courses": 26,
+      "lessons": 220,
+      "experiments": 220,
+      "records_before": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      },
+      "records_after": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      }
+    },
+    {
+      "mode": "http",
+      "width": 390,
+      "courses": 26,
+      "lessons": 220,
+      "experiments": 220,
+      "records_before": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      },
+      "records_after": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      }
+    },
+    {
+      "mode": "standalone",
+      "width": 1440,
+      "courses": 26,
+      "lessons": 220,
+      "experiments": 220,
+      "records_before": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      },
+      "records_after": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      }
+    },
+    {
+      "mode": "standalone",
+      "width": 390,
+      "courses": 26,
+      "lessons": 220,
+      "experiments": 220,
+      "records_before": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      },
+      "records_after": {
+        "tasks": 0,
+        "sessions": 0,
+        "entries": 0
+      }
+    }
+  ],
+  "manual_parameter_change_runs": [
+    {
+      "mode": "http",
+      "width": 1440,
+      "courses": 26,
+      "lessons": 26
+    },
+    {
+      "mode": "http",
+      "width": 390,
+      "courses": 26,
+      "lessons": 26
+    },
+    {
+      "mode": "standalone",
+      "width": 1440,
+      "courses": 26,
+      "lessons": 26
+    },
+    {
+      "mode": "standalone",
+      "width": 390,
+      "courses": 26,
+      "lessons": 26
+    }
+  ],
+  "browser_page_errors": [],
+  "external_requests": [],
+  "standalone_sha256": "10b1a7e9824814fa22a8c3c1a2f4490254c9eab0e64f9cffeb9395cb6d7cd1e0",
+  "personal_data_included": false
+}

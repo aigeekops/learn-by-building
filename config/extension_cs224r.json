@@ -1,0 +1,839 @@
+{
+  "checked": "2026-11-09",
+  "course": {
+    "id": "cs224r",
+    "label": "CS224R",
+    "title": "深度强化学习与机器人学习",
+    "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+    "position": "D2L和强化学习基础之后，连接LeRobot实践",
+    "description": "从行为克隆和数据分布偏移，到优势估计、PPO、最大熵目标、模型误差、离线支持与目标重标记。",
+    "prerequisites": [
+      "机器学习、深度学习与张量训练循环",
+      "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "行为克隆：把示范变成监督目标",
+        "lessons": [
+          "cs224r-bc"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Imitation Learning；2026-04-03。"
+      },
+      {
+        "unit": "2",
+        "title": "分布偏移与DAgger：该向专家问哪些状态？",
+        "lessons": [
+          "cs224r-dagger"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Imitation Learning；distribution shift与交互式模仿学习延伸。"
+      },
+      {
+        "unit": "3",
+        "title": "Actor-Critic与GAE：优势从哪里来？",
+        "lessons": [
+          "cs224r-actor-critic"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Actor-Critic Methods；2026-04-10。"
+      },
+      {
+        "unit": "4",
+        "title": "PPO：概率比值为何要保守裁剪？",
+        "lessons": [
+          "cs224r-ppo"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Actor-Critic Methods；PPO补充阅读。"
+      },
+      {
+        "unit": "5",
+        "title": "最大熵目标：探索奖励如何进入优化？",
+        "lessons": [
+          "cs224r-entropy"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Off-Policy Actor Critic Methods；2026-04-15。"
+      },
+      {
+        "unit": "6",
+        "title": "模型学习：一步误差为何会变成长程偏差？",
+        "lessons": [
+          "cs224r-model"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Model-Based RL；2026-05-06。"
+      },
+      {
+        "unit": "7",
+        "title": "离线RL：数据没做过的动作能信吗？",
+        "lessons": [
+          "cs224r-offline"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Offline RL；2026-04-22；IQL阅读。"
+      },
+      {
+        "unit": "8",
+        "title": "目标条件学习：失败轨迹还能怎样利用？",
+        "lessons": [
+          "cs224r-goals"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Multi-Task and Goal-Conditioned RL；2026-05-08；HER。"
+      }
+    ],
+    "pending": "八讲是主题选编和标量/小数据模型。没有复现完整作业、深度网络训练或机器人评测；Reward Learning、Meta-RL等原课专题另见官方目录。",
+    "sources": [
+      "cs224r-official"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "cs224r-bc",
+      "course": "cs224r",
+      "unit": "1",
+      "title": "第1讲 行为克隆：把示范变成监督目标",
+      "summary": "定义观测到动作的策略，复算训练梯度与保留输入预测。",
+      "question": "记录了专家动作后，最小的模仿学习训练循环是什么？",
+      "outcome": "定义观测到动作的策略，复算训练梯度与保留输入预测。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "行为克隆把示范中的观测当输入、专家动作当标签。在给定数据分布上做监督学习，不需要从环境奖励反推每个动作。",
+        "连续动作常用回归损失，本例a=wo用两个点求平均半平方误差及梯度。动作单位和维度是训练契约的一部分。",
+        "演示数据没有覆盖的状态可能在闭环中出现。训练误差低仍可能累积成偏离，应在独立回合和场景上评测。"
+      ],
+      "formula": "L=mean((wo−a*)²)/2；∂L/∂w=mean(o(wo−a*))",
+      "worked": "w=1、观测[1,2]、标签[2,4]：L=1.25，梯度−2.5；步长0.1更新w=1.25。",
+      "misconception": "监督动作误差小不直接等于任务成功；输入与动作时间错位会让标签失真。",
+      "sections": [
+        {
+          "title": "以示范的观测动作对为监督数据",
+          "explanation": "观测[1,2]，专家动作[2,4]，策略a=wo；本例是标量行为克隆。"
+        },
+        {
+          "title": "计算预测和均方误差",
+          "explanation": "按示范分布拟合，并没有在环境里探索。"
+        },
+        {
+          "title": "明确损失归约后求导",
+          "explanation": "使用平均半平方误差，梯度是mean(o×error)。"
+        },
+        {
+          "title": "更新并检查新的观测",
+          "explanation": "示范误差下降不保证闭环稳定，另看未见观测o=3。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={mean:xs=>xs.reduce((a,b)=>a+b,0)/xs.length};\nconst p={\"weight\":1,\"rate\":0.1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 以示范的观测动作对为监督数据\nObject.assign(s, ((s,p)=>({observations:[1,2],actions:[2,4]}))(s, p));\n// 计算预测和均方误差\nObject.assign(s, ((s,p)=>({predicted:s.observations.map(o=>p.weight*o),errors:s.observations.map((o,i)=>p.weight*o-s.actions[i])}))(s, p));\n// 明确损失归约后求导\nObject.assign(s, ((s,p)=>({loss:H.mean(s.errors.map(e=>e*e))/2,gradient:H.mean(s.errors.map((e,i)=>e*s.observations[i]))}))(s, p));\n// 更新并检查新的观测\nObject.assign(s, ((s,p)=>({updatedWeight:p.weight-p.rate*s.gradient,heldOutAction:(p.weight-p.rate*s.gradient)*3}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-bc.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "保留观测3不参与训练，记录更新前后动作误差；再讨论未见视角或接触状态的风险。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：记录了专家动作后，最小的模仿学习训练循环是什么？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "保留观测3不参与训练，记录更新前后动作误差；再讨论未见视角或接触状态的风险。"
+      ],
+      "exercise": {
+        "prompt": "默认梯度是多少？",
+        "expected": -2.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "mean(1×−1,2×−2)=−2.5。",
+        "transfer": "保留观测3不参与训练，记录更新前后动作误差；再讨论未见视角或接触状态的风险。"
+      },
+      "sources": [
+        "cs224r-bc-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-dagger",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs224r-bc",
+      "demos": [
+        {
+          "modelId": "cs224r-bc",
+          "title": "行为克隆：把示范变成监督目标 · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "cs224r-dagger",
+      "course": "cs224r",
+      "unit": "2",
+      "title": "第2讲 分布偏移与DAgger：该向专家问哪些状态？",
+      "summary": "区分策略访问状态、专家标签和执行动作，聚合数据再拟合。",
+      "question": "策略偏离示范后，继续只在原示范上拟合有什么缺口？",
+      "outcome": "区分策略访问状态、专家标签和执行动作，聚合数据再拟合。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "机器人按自己的预测执行后，访问分布会改变。DAgger类方法在学习器访问到的状态上查询专家，补足单纯离线示范的覆盖。",
+        "本例访问观测2，专家动作4，学习器动作3；混合概率只决定本次执行哪个动作，不会把学习器动作自动当成专家标签。",
+        "样本聚合后再训练，仍需控制专家成本和在线交互条件。本例固定访问状态，没有运行真实策略采集或DAgger完整算法。"
+      ],
+      "formula": "D←D∪{(o_visited,a_expert)}；w*=Σoa/Σo²",
+      "worked": "已有[1,2]，新增[2,4]后闭式线性拟合w=(2+8)/(1+4)=2。",
+      "misconception": "用策略自己的输出当“专家标签”不会自动纠正策略偏差。",
+      "sections": [
+        {
+          "title": "先保留已有示范",
+          "explanation": "线性策略初始w=1.5，已有样本(o=1,a=2)。"
+        },
+        {
+          "title": "在当前策略访问状态上请求专家标签",
+          "explanation": "DAgger标签对应访问到的观测，不是把策略自己的动作当真值。"
+        },
+        {
+          "title": "聚合数据再拟合",
+          "explanation": "混合策略只决定本次执行动作；被查询的专家标签仍是4。"
+        },
+        {
+          "title": "在聚合样本上做闭式线性拟合",
+          "explanation": "这里只重拟合一个线性参数，没有实际收集机器人在线数据。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0)};\nconst p={\"expert\":0.5,\"draw\":0.6};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先保留已有示范\nObject.assign(s, ((s,p)=>({dataset:[[1,2]],learnerAction:3,expertAction:4,visitedObservation:2}))(s, p));\n// 在当前策略访问状态上请求专家标签\nObject.assign(s, ((s,p)=>({label:s.expertAction,executed:p.draw<p.expert?s.expertAction:s.learnerAction}))(s, p));\n// 聚合数据再拟合\nObject.assign(s, ((s,p)=>({aggregated:s.dataset.concat([[s.visitedObservation,s.label]])}))(s, p));\n// 在聚合样本上做闭式线性拟合\nObject.assign(s, ((s,p)=>({weight:H.sum(s.aggregated.map(([o,a])=>o*a))/H.sum(s.aggregated.map(([o])=>o*o)),sampleCount:s.aggregated.length}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-dagger.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "将专家混合概率设0和1，解释执行动作会变而专家标签仍是4；列出真实采集需记录的策略版本。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：策略偏离示范后，继续只在原示范上拟合有什么缺口？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "将专家混合概率设0和1，解释执行动作会变而专家标签仍是4；列出真实采集需记录的策略版本。"
+      ],
+      "exercise": {
+        "prompt": "默认聚合后的拟合参数w是多少？",
+        "expected": 2,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "(1×2+2×4)/(1²+2²)=10/5=2。",
+        "transfer": "将专家混合概率设0和1，解释执行动作会变而专家标签仍是4；列出真实采集需记录的策略版本。"
+      },
+      "sources": [
+        "cs224r-dagger-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-bc",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs224r-actor-critic",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs224r-dagger",
+      "demos": [
+        {
+          "modelId": "cs224r-dagger",
+          "title": "分布偏移与DAgger：该向专家问哪些状态？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "cs224r-actor-critic",
+      "course": "cs224r",
+      "unit": "3",
+      "title": "第3讲 Actor-Critic与GAE：优势从哪里来？",
+      "summary": "从TD残差构造两步GAE，冻结价值回归目标。",
+      "question": "策略说某动作比平常好，这个“好多少”如何估计？",
+      "outcome": "从TD残差构造两步GAE，冻结价值回归目标。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "Actor更新动作概率，Critic估计价值作为参照。优势将该次行动的结果与当前状态的基线相比，降低回报估计方差。",
+        "GAE以γλ衰减累计TD残差，在估计偏差和方差之间调节。本例只有两步，最后一步真正终止，便于把每一项写清。",
+        "用旧价值计算优势和回归目标后，应在此次拟合中冻结。轨迹截断、归一化和批量归约也需保持一致。"
+      ],
+      "formula": "δ_t=r_t+γV_{t+1}−V_t；A0=δ0+γλδ1",
+      "worked": "奖励[0,1]、V=[0.2,0.4,0]、γ=λ=0.9：δ=[0.16,0.6]，A=[0.646,0.6]。",
+      "misconception": "优势不是动作概率，也不能把价值网络的预测误当真实回报。",
+      "sections": [
+        {
+          "title": "把一条终止轨迹的奖励和值对齐",
+          "explanation": "奖励[0,1]，V=[0.2,0.4,0]；末端真正终止。"
+        },
+        {
+          "title": "先计算两个TD残差",
+          "explanation": "最后一个δ不从终止状态bootstrap。"
+        },
+        {
+          "title": "向前累计衰减残差",
+          "explanation": "两步GAE：A0=δ0+γλδ1，A1=δ1；λ调节估计口径。"
+        },
+        {
+          "title": "构造价值回归目标",
+          "explanation": "target=advantage+old value；该目标在此次拟合中冻结。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"gamma\":0.9,\"lambda\":0.9};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 把一条终止轨迹的奖励和值对齐\nObject.assign(s, ((s,p)=>({rewards:[0,1],values:[.2,.4,0]}))(s, p));\n// 先计算两个TD残差\nObject.assign(s, ((s,p)=>({deltas:[p.gamma*s.values[1]-s.values[0],1-s.values[1]]}))(s, p));\n// 向前累计衰减残差\nObject.assign(s, ((s,p)=>({advantages:[s.deltas[0]+p.gamma*p.lambda*s.deltas[1],s.deltas[1]]}))(s, p));\n// 构造价值回归目标\nObject.assign(s, ((s,p)=>({targets:s.advantages.map((a,i)=>a+s.values[i])}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-actor-critic.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "令λ=0与λ=1手算A0，说明使用的信息范围；把末端改成截断时重新决定bootstrap语义。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：策略说某动作比平常好，这个“好多少”如何估计？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "令λ=0与λ=1手算A0，说明使用的信息范围；把末端改成截断时重新决定bootstrap语义。"
+      ],
+      "exercise": {
+        "prompt": "默认A0是多少？",
+        "expected": 0.646,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.9×0.4−0.2+0.9×0.9×(1−0.4)=0.646。",
+        "transfer": "令λ=0与λ=1手算A0，说明使用的信息范围；把末端改成截断时重新决定bootstrap语义。"
+      },
+      "sources": [
+        "cs224r-actor-critic-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-dagger",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs224r-ppo",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs224r-actor-critic",
+      "demos": [
+        {
+          "modelId": "cs224r-actor-critic",
+          "title": "Actor-Critic与GAE：优势从哪里来？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "cs224r-ppo",
+      "course": "cs224r",
+      "unit": "4",
+      "title": "第4讲 PPO：概率比值为何要保守裁剪？",
+      "summary": "计算正负优势下的裁剪代理目标，核对损失符号。",
+      "question": "提高好动作概率时，目标何时停止继续奖励放大？",
+      "outcome": "计算正负优势下的裁剪代理目标，核对损失符号。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "PPO用旧策略采样的数据更新新策略，概率比值r衡量同一已采样动作在两策略下的变化。分母是旧动作概率，不是全体动作的平均。",
+        "裁剪代理取rA与clip(r)A的较小值。负优势也使用同一个min，因此不能凭直觉把min改成max。",
+        "这是单样本代理项。真实PPO还需批量训练、价值损失、熵项、旧概率冻结和独立评测；裁剪不等于严格KL约束。"
+      ],
+      "formula": "L=min(rA,clip(r,1−ε,1+ε)A)",
+      "worked": "r=1.3、A=1、ε=0.2时两项为1.3与1.2，取1.2；最小化损失为−1.2。",
+      "misconception": "PPO裁剪不会保证每次更新都提高真实回报。",
+      "sections": [
+        {
+          "title": "固定采样数据与旧策略",
+          "explanation": "r是已采到动作的π_new/π_old，旧概率必须正。"
+        },
+        {
+          "title": "计算未裁剪代理项",
+          "explanation": "目标按最大化方向写为rA；训练损失通常取其负。"
+        },
+        {
+          "title": "裁剪比值并保留保守项",
+          "explanation": "负优势时min仍必须保留，不能先按符号更换max。"
+        },
+        {
+          "title": "求单样本PPO目标",
+          "explanation": "裁剪不是硬KL约束，也不保证每次真实回报上升。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={clamp:(x,a,b)=>Math.max(a,Math.min(b,x))};\nconst p={\"ratio\":1.3,\"advantage\":1,\"clip\":0.2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 固定采样数据与旧策略\nObject.assign(s, ((s,p)=>({ratio:p.ratio,advantage:p.advantage}))(s, p));\n// 计算未裁剪代理项\nObject.assign(s, ((s,p)=>({unclipped:s.ratio*s.advantage}))(s, p));\n// 裁剪比值并保留保守项\nObject.assign(s, ((s,p)=>({clippedRatio:H.clamp(s.ratio,1-p.clip,1+p.clip),clipped:H.clamp(s.ratio,1-p.clip,1+p.clip)*s.advantage}))(s, p));\n// 求单样本PPO目标\nObject.assign(s, ((s,p)=>({objective:Math.min(s.unclipped,s.clipped),loss:-Math.min(s.unclipped,s.clipped)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-ppo.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "枚举r=0.5、1、1.5和A正负，绘出目标折线；检查何处梯度被裁剪以及符号如何改变。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：提高好动作概率时，目标何时停止继续奖励放大？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "枚举r=0.5、1、1.5和A正负，绘出目标折线；检查何处梯度被裁剪以及符号如何改变。"
+      ],
+      "exercise": {
+        "prompt": "r=1.3、A=−1、ε=0.2，最大化目标是多少？",
+        "expected": -1.3,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "min(−1.3,−1.2)=−1.3。",
+        "transfer": "枚举r=0.5、1、1.5和A正负，绘出目标折线；检查何处梯度被裁剪以及符号如何改变。"
+      },
+      "sources": [
+        "cs224r-ppo-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-actor-critic",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs224r-entropy",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs224r-ppo",
+      "demos": [
+        {
+          "modelId": "cs224r-ppo",
+          "title": "PPO：概率比值为何要保守裁剪？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "cs224r-entropy",
+      "course": "cs224r",
+      "unit": "5",
+      "title": "第5讲 最大熵目标：探索奖励如何进入优化？",
+      "summary": "算策略期望价值与熵，区分最大熵目标和贪心。",
+      "question": "动作价值较低的选项，为什么仍可能保留概率？",
+      "outcome": "算策略期望价值与熵，区分最大熵目标和贪心。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "最大熵强化学习同时考虑收益与策略不确定性。熵项鼓励保留多个动作选择，但不能修复奖励定义错误。",
+        "本例离散两动作Q=[1,2]，对概率加权求期望，再加αH。概率集中和分散分别影响价值与熵。",
+        "这只是SAC相关思想的离散切片，没有实现连续动作重参数化、双Q、目标网络或tanh密度修正。"
+      ],
+      "formula": "J=Σπ(a)Q(a)+αH(π)；H=−Σπ logπ",
+      "worked": "p=0.5时期望Q=1.5，H=log2；α=0.2时J约1.638629。",
+      "misconception": "熵高不等于任务表现好，随机策略也可能高熵但低回报。",
+      "sections": [
+        {
+          "title": "用离散动作切片解释熵正则",
+          "explanation": "动作价值Q=[1,2]，策略[1−p,p]，使用自然对数。"
+        },
+        {
+          "title": "计算期望价值",
+          "explanation": "没有取max，策略保留完整概率分布。"
+        },
+        {
+          "title": "计算策略熵",
+          "explanation": "熵奖励鼓励分散，无法替代奖励定义或安全约束。"
+        },
+        {
+          "title": "合成最大熵目标",
+          "explanation": "这是离散熵目标切片，不是连续SAC完整更新；不包含双Q、tanh修正和目标网络。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0),\ndot:(a,b)=>a.reduce((v,x,i)=>v+x*b[i],0)};\nconst p={\"probability\":0.5,\"temperature\":0.2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 用离散动作切片解释熵正则\nObject.assign(s, ((s,p)=>({probabilities:[1-p.probability,p.probability],q:[1,2]}))(s, p));\n// 计算期望价值\nObject.assign(s, ((s,p)=>({expectedQ:H.dot(s.probabilities,s.q)}))(s, p));\n// 计算策略熵\nObject.assign(s, ((s,p)=>({entropy:-H.sum(s.probabilities.map(x=>x*Math.log(x)))}))(s, p));\n// 合成最大熵目标\nObject.assign(s, ((s,p)=>({objective:s.expectedQ+p.temperature*s.entropy}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-entropy.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "比较p=0.1、0.5、0.9在α=0和1时的目标；说明最优概率为何随熵系数改变。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：动作价值较低的选项，为什么仍可能保留概率？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "比较p=0.1、0.5、0.9在α=0和1时的目标；说明最优概率为何随熵系数改变。"
+      ],
+      "exercise": {
+        "prompt": "均匀二元策略的熵是多少nats？",
+        "expected": 0.6931471805599453,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "−2×0.5×log0.5=log2。",
+        "transfer": "比较p=0.1、0.5、0.9在α=0和1时的目标；说明最优概率为何随熵系数改变。"
+      },
+      "sources": [
+        "cs224r-entropy-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-ppo",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs224r-model",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs224r-entropy",
+      "demos": [
+        {
+          "modelId": "cs224r-entropy",
+          "title": "最大熵目标：探索奖励如何进入优化？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "cs224r-model",
+      "course": "cs224r",
+      "unit": "6",
+      "title": "第6讲 模型学习：一步误差为何会变成长程偏差？",
+      "summary": "比较真实与学习模型的展开轨迹，分别报告一步和终点误差。",
+      "question": "模型每一步只偏0.1，预测五步还可靠吗？",
+      "outcome": "比较真实与学习模型的展开轨迹，分别报告一步和终点误差。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "模型学习用数据估计状态转移，再用预测支持规划或训练。预测不是执行，模型产生的轨迹不能当成真实环境观测。",
+        "本例真实x′=x+u，模型额外加偏差b，固定动作u=0.5。每步偏差会线性累计；非线性系统还可能进一步放大。",
+        "短模型展开与新观测修正可减少某些误差影响，但没有通用保证。评估模型要同时看一步、多步和策略实际访问分布。"
+      ],
+      "formula": "x_k=k u；xhat_k=k(u+b)；error_k=k b",
+      "worked": "b=0.1、展开3步：真实终点1.5，模型终点1.8，误差0.3。",
+      "misconception": "在训练数据上一步MSE低，不能推出规划时长程预测准确。",
+      "sections": [
+        {
+          "title": "定义真实系统与学习模型",
+          "explanation": "真实x′=x+u，模型x′=x+u+b，x0=0，固定u=0.5。"
+        },
+        {
+          "title": "先预测不执行",
+          "explanation": "模型展开并不产生真实观测；偏差会随展开长度累积。"
+        },
+        {
+          "title": "逐步比较预测误差",
+          "explanation": "这个确定性例子误差线性增长；一般非线性系统可能放大得更快。"
+        },
+        {
+          "title": "分别报告一步与多步质量",
+          "explanation": "模型一步MSE好不等于长程策略可靠；真实闭环需要新观测修正。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"bias\":0.1,\"horizon\":3};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 定义真实系统与学习模型\nObject.assign(s, ((s,p)=>({initial:0,action:.5}))(s, p));\n// 先预测不执行\nObject.assign(s, ((s,p)=>({truePath:Array.from({length:p.horizon+1},(_,k)=>k*s.action),modelPath:Array.from({length:p.horizon+1},(_,k)=>k*(s.action+p.bias))}))(s, p));\n// 逐步比较预测误差\nObject.assign(s, ((s,p)=>({errors:s.modelPath.map((x,i)=>x-s.truePath[i])}))(s, p));\n// 分别报告一步与多步质量\nObject.assign(s, ((s,p)=>({oneStepError:p.bias,terminalError:s.errors[s.errors.length-1]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-model.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把偏差改为负值，记录误差方向；另构造x′=1.2x+u比较误差是否仍线性增长。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：模型每一步只偏0.1，预测五步还可靠吗？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把偏差改为负值，记录误差方向；另构造x′=1.2x+u比较误差是否仍线性增长。"
+      ],
+      "exercise": {
+        "prompt": "每步偏差0.1，五步终点误差是多少？",
+        "expected": 0.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "5×0.1=0.5。",
+        "transfer": "把偏差改为负值，记录误差方向；另构造x′=1.2x+u比较误差是否仍线性增长。"
+      },
+      "sources": [
+        "cs224r-model-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-entropy",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs224r-offline",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs224r-model",
+      "demos": [
+        {
+          "modelId": "cs224r-model",
+          "title": "模型学习：一步误差为何会变成长程偏差？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "cs224r-offline",
+      "course": "cs224r",
+      "unit": "7",
+      "title": "第7讲 离线RL：数据没做过的动作能信吗？",
+      "summary": "检查动作支持，比较无约束选择与显式保守惩罚。",
+      "question": "数据里从没出现过的动作却有最高Q，该直接选它吗？",
+      "outcome": "检查动作支持，比较无约束选择与显式保守惩罚。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "离线RL只能利用固定数据，不能随时去环境纠正价值估计。对数据没覆盖的动作做最大化，可能放大外推误差。",
+        "本例A有20条记录且Q=2，B无记录却估成8；显式支持惩罚展示选择如何变化。这个简化规则不是CQL或IQL原损失。",
+        "保守选择仍需要任务和分布假设。离线估值、支持检查、独立回合评价与真实上线约束应分别报告。"
+      ],
+      "formula": "Q_adjusted=Q−penalty×1[count=0]（本站教学规则）",
+      "worked": "B估8、惩罚5后仍为3，高于A=2；惩罚6时平分，按固定规则选A。",
+      "misconception": "只要加一个惩罚就安全的说法不成立；没有数据支持时结论应保留不确定性。",
+      "sections": [
+        {
+          "title": "把离线数据支持范围写出",
+          "explanation": "动作A有数据且估值2；B无数据，估计由滑块给出。"
+        },
+        {
+          "title": "观察无约束贪心的外推",
+          "explanation": "没有在线交互纠正B的估计，最大化可放大误差。"
+        },
+        {
+          "title": "用显式支持惩罚作教学对照",
+          "explanation": "本例减去未覆盖惩罚，不是CQL或IQL原论文的损失实现。"
+        },
+        {
+          "title": "保留选择与不可识别范围",
+          "explanation": "选A也没有证明上线安全；需要独立离线评价、支持检查和真实任务约束。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"unseenQ\":8,\"penalty\":5};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 把离线数据支持范围写出\nObject.assign(s, ((s,p)=>({counts:[20,0],q:[2,p.unseenQ]}))(s, p));\n// 观察无约束贪心的外推\nObject.assign(s, ((s,p)=>({naiveChoice:s.q[0]>=s.q[1]?0:1}))(s, p));\n// 用显式支持惩罚作教学对照\nObject.assign(s, ((s,p)=>({adjusted:s.q.map((q,i)=>q-(s.counts[i]===0?p.penalty:0))}))(s, p));\n// 保留选择与不可识别范围\nObject.assign(s, ((s,p)=>({choice:s.adjusted[0]>=s.adjusted[1]?0:1,unseenActionCovered:false}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-offline.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把惩罚设0、6、10并解释选择；列出真实数据中动作覆盖不能仅由频次判断的原因。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：数据里从没出现过的动作却有最高Q，该直接选它吗？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把惩罚设0、6、10并解释选择；列出真实数据中动作覆盖不能仅由频次判断的原因。"
+      ],
+      "exercise": {
+        "prompt": "默认调整后B的Q是多少？",
+        "expected": 3,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "8−5=3。",
+        "transfer": "把惩罚设0、6、10并解释选择；列出真实数据中动作覆盖不能仅由频次判断的原因。"
+      },
+      "sources": [
+        "cs224r-offline-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-model",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs224r-goals",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs224r-offline",
+      "demos": [
+        {
+          "modelId": "cs224r-offline",
+          "title": "离线RL：数据没做过的动作能信吗？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "cs224r-goals",
+      "course": "cs224r",
+      "unit": "8",
+      "title": "第8讲 目标条件学习：失败轨迹还能怎样利用？",
+      "summary": "重算事后目标奖励，同时保留原任务评价。",
+      "question": "没到原目标的轨迹，能否作为另一个目标的训练样本？",
+      "outcome": "重算事后目标奖励，同时保留原任务评价。",
+      "prerequisites": [
+        "机器学习、深度学习与张量训练循环",
+        "概率、求导与策略价值；CS234可按需回补，不是强制修课链"
+      ],
+      "explanation": [
+        "目标条件策略把目标也作为输入。同一条运动轨迹可能没完成原目标，却达到了另一个位置，因而可以重标记为另一条训练任务。",
+        "HER式思想要求奖励可由已记录状态与目标重新计算。重标记改变训练目标，不改变这次原任务是否成功。",
+        "本例终点2、原目标3，原奖励−1；把目标改为2后新训练样本奖励0。不能把增广样本成功率混进原目标评测。"
+      ],
+      "formula": "r(g)=0 if achieved=g else −1；g_relabel=achieved",
+      "worked": "achieved=2、desired=3：原任务失败、奖励−1；重标记目标2后训练奖励0，原评测仍失败。",
+      "misconception": "事后成功标签是数据增广，不是对真实原任务结果的修改。",
+      "sections": [
+        {
+          "title": "保存原始目标条件轨迹",
+          "explanation": "轨迹终点与期望目标分开记录，不能事后改写原任务成功率。"
+        },
+        {
+          "title": "按原任务计算稀疏奖励",
+          "explanation": "本例到达目标给0，否则−1；终点相同才算到达。"
+        },
+        {
+          "title": "生成一个事后目标样本",
+          "explanation": "HER式重标记把已达到位置作为另一个训练目标；只在可重算奖励设定中适用。"
+        },
+        {
+          "title": "把训练增广和评测分开",
+          "explanation": "增广样本成功不应提高原目标上的成功率。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"achieved\":2,\"desired\":3};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 保存原始目标条件轨迹\nObject.assign(s, ((s,p)=>({achieved:p.achieved,desired:p.desired}))(s, p));\n// 按原任务计算稀疏奖励\nObject.assign(s, ((s,p)=>({originalReward:s.achieved===s.desired?0:-1,originalSuccess:s.achieved===s.desired}))(s, p));\n// 生成一个事后目标样本\nObject.assign(s, ((s,p)=>({relabeledGoal:s.achieved,relabeledReward:0}))(s, p));\n// 把训练增广和评测分开\nObject.assign(s, ((s,p)=>({evaluationSuccess:s.originalSuccess,augmentedTrainingPairs:2}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs224r-goals.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "穷举终点与原目标相同/不同两种情况，分别写训练数据和评测日志；检查奖励重算所需字段。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：没到原目标的轨迹，能否作为另一个目标的训练样本？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "穷举终点与原目标相同/不同两种情况，分别写训练数据和评测日志；检查奖励重算所需字段。"
+      ],
+      "exercise": {
+        "prompt": "默认原任务的奖励是多少？",
+        "expected": -1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "达到2并未达到目标3，按稀疏规则得−1。",
+        "transfer": "穷举终点与原目标相同/不同两种情况，分别写训练数据和评测日志；检查奖励重算所需字段。"
+      },
+      "sources": [
+        "cs224r-goals-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs224r-offline",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "lerobot-evaluation",
+          "label": "连接后续课程：第8讲 独立评测：策略究竟比基线好多少？"
+        }
+      ],
+      "modelId": "cs224r-goals",
+      "demos": [
+        {
+          "modelId": "cs224r-goals",
+          "title": "目标条件学习：失败轨迹还能怎样利用？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    }
+  ],
+  "sources": {
+    "cs224r-official": {
+      "kind": "官方公开材料",
+      "label": "CS224R · 官方目录",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "2026 Timeline：Imitation Learning、Policy Gradients、Actor-Critic、Off-Policy、Offline RL、Model-Based RL、Goal-Conditioned RL",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-bc-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Imitation Learning；2026-04-03",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Imitation Learning；2026-04-03",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-dagger-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Imitation Learning；distribution shift与交互式模仿学习延伸",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Imitation Learning；distribution shift与交互式模仿学习延伸",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-actor-critic-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Actor-Critic Methods；2026-04-10",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Actor-Critic Methods；2026-04-10",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-ppo-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Actor-Critic Methods；PPO补充阅读",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Actor-Critic Methods；PPO补充阅读",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-entropy-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Off-Policy Actor Critic Methods；2026-04-15",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Off-Policy Actor Critic Methods；2026-04-15",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-model-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Model-Based RL；2026-05-06",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Model-Based RL；2026-05-06",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-offline-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Offline RL；2026-04-22；IQL阅读",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Offline RL；2026-04-22；IQL阅读",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs224r-goals-reading": {
+      "kind": "官方公开材料",
+      "label": "CS224R · Multi-Task and Goal-Conditioned RL；2026-05-08；HER",
+      "url": "https://cs224r.stanford.edu/",
+      "locator": "Multi-Task and Goal-Conditioned RL；2026-05-08；HER",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Spring 2026 公开目录 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    }
+  }
+}

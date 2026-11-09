@@ -1,0 +1,244 @@
+{
+  "courses": 26,
+  "lessons": 220,
+  "models": 236,
+  "framesChecked": 13411,
+  "cellsChecked": 91251,
+  "experiments": 358,
+  "courseReports": [
+    {
+      "course": "cme295",
+      "models": 16,
+      "lessons": 6,
+      "framesChecked": 1110,
+      "cellsChecked": 2477,
+      "experiments": 16,
+      "agent": "course_cme295"
+    },
+    {
+      "course": "cs336",
+      "models": 23,
+      "lessons": 18,
+      "framesChecked": 1099,
+      "cellsChecked": 3063,
+      "experiments": 23,
+      "agent": "course_cs336"
+    },
+    {
+      "course": "cs146s",
+      "models": 11,
+      "lessons": 10,
+      "framesChecked": 705,
+      "cellsChecked": 2706,
+      "experiments": 23,
+      "agent": "course_cs146s"
+    },
+    {
+      "course": "cs50p",
+      "models": 11,
+      "lessons": 11,
+      "framesChecked": 781,
+      "cellsChecked": 3678,
+      "experiments": 25,
+      "agent": "course_cs50p"
+    },
+    {
+      "course": "tools",
+      "models": 9,
+      "lessons": 9,
+      "framesChecked": 771,
+      "cellsChecked": 9876,
+      "experiments": 25,
+      "agent": "course_tools"
+    },
+    {
+      "course": "d2l",
+      "models": 16,
+      "lessons": 16,
+      "framesChecked": 1007,
+      "cellsChecked": 3486,
+      "experiments": 17,
+      "agent": "course_d2l"
+    },
+    {
+      "course": "linear",
+      "models": 6,
+      "lessons": 6,
+      "framesChecked": 219,
+      "cellsChecked": 732,
+      "experiments": 8,
+      "agent": "course_linear"
+    },
+    {
+      "course": "probability",
+      "models": 6,
+      "lessons": 6,
+      "framesChecked": 200,
+      "cellsChecked": 624,
+      "experiments": 11,
+      "agent": "course_probability"
+    },
+    {
+      "course": "cs229",
+      "models": 6,
+      "lessons": 6,
+      "framesChecked": 360,
+      "cellsChecked": 1943,
+      "experiments": 10,
+      "agent": "course_cs229"
+    },
+    {
+      "course": "hfagents",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 759,
+      "cellsChecked": 1836,
+      "experiments": 16,
+      "agent": "course_hfagents"
+    },
+    {
+      "course": "fsdl",
+      "models": 13,
+      "lessons": 13,
+      "framesChecked": 1007,
+      "cellsChecked": 12269,
+      "experiments": 30,
+      "agent": "course_fsdl"
+    },
+    {
+      "course": "mit2007",
+      "models": 6,
+      "lessons": 6,
+      "framesChecked": 424,
+      "cellsChecked": 1479,
+      "experiments": 10,
+      "agent": "course_mit2007"
+    },
+    {
+      "course": "modern",
+      "models": 7,
+      "lessons": 7,
+      "framesChecked": 477,
+      "cellsChecked": 3945,
+      "experiments": 9,
+      "agent": "course_modern"
+    },
+    {
+      "course": "pid",
+      "models": 6,
+      "lessons": 6,
+      "framesChecked": 1319,
+      "cellsChecked": 27157,
+      "experiments": 10,
+      "agent": "course_pid"
+    },
+    {
+      "course": "kalman",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 499,
+      "cellsChecked": 4978,
+      "experiments": 9,
+      "agent": "course_kalman"
+    },
+    {
+      "course": "ros",
+      "models": 4,
+      "lessons": 4,
+      "framesChecked": 338,
+      "cellsChecked": 2349,
+      "experiments": 10,
+      "agent": "course_ros"
+    },
+    {
+      "course": "cs234",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 240,
+      "cellsChecked": 560,
+      "experiments": 8,
+      "agent": "course_cs234"
+    },
+    {
+      "course": "bonn",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 232,
+      "cellsChecked": 996,
+      "experiments": 8,
+      "agent": "course_bonn"
+    },
+    {
+      "course": "manipulation",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 248,
+      "cellsChecked": 877,
+      "experiments": 10,
+      "agent": "course_manipulation"
+    },
+    {
+      "course": "nav2",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 248,
+      "cellsChecked": 740,
+      "experiments": 13,
+      "agent": "course_nav2"
+    },
+    {
+      "course": "moveit",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 240,
+      "cellsChecked": 716,
+      "experiments": 12,
+      "agent": "course_moveit"
+    },
+    {
+      "course": "cs224r",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 232,
+      "cellsChecked": 827,
+      "experiments": 8,
+      "agent": "course_cs224r"
+    },
+    {
+      "course": "underactuated",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 232,
+      "cellsChecked": 926,
+      "experiments": 11,
+      "agent": "course_underactuated"
+    },
+    {
+      "course": "cs231n",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 208,
+      "cellsChecked": 1264,
+      "experiments": 8,
+      "agent": "course_cs231n"
+    },
+    {
+      "course": "arduino",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 232,
+      "cellsChecked": 580,
+      "experiments": 12,
+      "agent": "course_arduino"
+    },
+    {
+      "course": "lerobot",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 224,
+      "cellsChecked": 1167,
+      "experiments": 16,
+      "agent": "course_lerobot"
+    }
+  ]
+}

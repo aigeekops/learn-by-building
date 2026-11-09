@@ -1,0 +1,19 @@
+.ci-panel{border:1px solid #dce5ed;background:#fff;border-radius:10px;padding:13px;margin:12px 0;color:#35465a;font:12px/1.7 system-ui,-apple-system,sans-serif}
+.ci-kicker{font-size:10px;color:#71849b;letter-spacing:.05em}.ci-panel h3{font-size:15px;margin:4px 0 7px}.ci-summary{color:#64748b;margin:5px 0 10px}
+.ci-cells{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:5px;max-height:190px;overflow:auto;padding:3px}
+.ci-panel .ci-cells button{background:#f1f5fc;border:1px solid #dfe7f5;border-radius:6px;padding:7px 5px;min-width:0;cursor:pointer;color:#405979;font:inherit;text-align:left}
+.ci-cells button span{display:block;font-size:10px;line-height:1.5}.ci-cells button code{display:block;white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:60px;overflow:auto}
+.ci-panel button[aria-current=step]{border-color:#6793d1;background:#e8f1ff;color:#234e8c}.ci-panel button:focus-visible{outline:3px solid #d6a637;outline-offset:2px}
+.ci-formula{border-left:3px solid #d9b44f;background:#fffaec;padding:9px 11px;margin-top:10px;border-radius:4px}.ci-formula>strong{font-size:11px;color:#776029}
+.ci-panel .ci-formula pre{font:12px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:0;margin:6px 0;background:transparent;color:#5d5033;border:0}
+.ci-formula dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 9px;margin:8px 0;font-size:10px}.ci-formula dt{color:#87774d}.ci-formula dd{margin:0;overflow-wrap:anywhere;max-height:90px;overflow:auto;white-space:pre-wrap}.ci-formula p{font-size:10px;color:#88784d;margin:5px 0}
+.ci-panel details{border-top:1px solid #e7edf4;padding-top:8px;margin-top:10px}.ci-panel summary{font-size:11px;cursor:pointer;color:#5b718d}
+.ci-stages>div{display:flex;flex-wrap:wrap;gap:5px;max-height:150px;overflow:auto;margin-top:8px}.ci-panel .ci-stages button,.ci-panel .ci-experiments button{border:1px solid #dce4ee;border-radius:5px;background:#f7f9fc;color:#4a6485;font:11px/1.5 system-ui;padding:5px 7px;cursor:pointer;max-width:100%}
+.ci-experiments{margin-top:12px}.ci-experiments>strong{font-size:11px}.ci-experiments>div:not(.ci-prediction){display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.ci-prediction{padding:8px;background:#f3f7fd;border-radius:6px;margin-top:8px}.ci-prediction p{font-size:11px;overflow-wrap:anywhere;margin:4px 0 7px}.ci-verdict{font-size:11px;background:#fff6e6;padding:8px;border-radius:5px}.ci-verdict[data-ci-verified=true]{background:#edf8f1;color:#32664a}
+.ci-compare-head{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:10px;color:#7a899b;overflow-wrap:anywhere;margin:7px 0}.ci-compare-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;padding:5px 0;border-bottom:1px solid #edf1f6;font-size:10px;overflow-wrap:anywhere}.ci-compare-row code{white-space:pre-wrap;max-height:100px;overflow:auto}
+.ci-tools{margin-top:10px}.ci-panel .ci-tools button{font-size:10px;background:transparent;border-color:transparent}
+.aic-inspection-column:has(#aic-course-inspector){display:block;overflow:auto;overscroll-behavior:contain}
+.aic-inspection-column:has(#aic-course-inspector) .aic-code-grid{display:block}
+.aic-inspection-column:has(#aic-course-inspector) .aic-code-lines{max-height:260px;overflow:auto}
+.aic-inspection-column:has(#aic-course-inspector) .aic-vars{max-height:240px;overflow:auto;margin-top:12px}

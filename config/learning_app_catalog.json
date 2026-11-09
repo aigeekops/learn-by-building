@@ -1,0 +1,1575 @@
+[
+  {
+    "id": "cs50p",
+    "label": "CS50P",
+    "title": "Python 与编程",
+    "lane": "shared",
+    "phase": "基础补全",
+    "summary": "变量、函数、文件、测试、正则、对象与综合项目",
+    "prereq": "可从第一个 Python 程序开始。",
+    "check": "独立完成一个读取文件、处理异常并带测试的小程序。",
+    "sources": [
+      [
+        "Harvard CS50P",
+        "https://cs50.harvard.edu/python/"
+      ]
+    ],
+    "units": [
+      {
+        "lesson_id": "cs50p-functions",
+        "title": "第1讲 变量与函数：让读数变成有单位的结果",
+        "goal": "原始读数8格，怎样经过一次函数调用得到17毫米？",
+        "output": "画出实参、形参、局部值和返回值，独立修改一次校准函数。"
+      },
+      {
+        "lesson_id": "cs50p-conditions",
+        "title": "第2讲 条件与边界：只让一个分支决定命令",
+        "goal": "距离恰好等于20厘米时，程序该选择哪一支？",
+        "output": "写清互斥分支和等号归属，验证边界与无效输入。"
+      },
+      {
+        "lesson_id": "cs50p-loops",
+        "title": "第3讲 循环与列表：逐条筛选，再做累计",
+        "goal": "四条读数怎样只保留符合条件的值，并正确求平均？",
+        "output": "追踪每轮循环的值与累计状态，处理空列表和无保留值的情况。"
+      },
+      {
+        "lesson_id": "cs50p-exceptions",
+        "title": "第4讲 异常与恢复：失败时不继续使用无效结果",
+        "goal": "输入3.5、文字或0时，错误发生在同一个地方吗？",
+        "output": "区分文本转换错误与除零，给失败路径明确状态，避免使用旧值。"
+      },
+      {
+        "lesson_id": "cs50p-libraries",
+        "title": "第5讲 库与接口：用标准库汇总一组读数",
+        "goal": "相同四条读数，均值与中位数为什么会不同？",
+        "output": "明确导入、参数与返回值，比较两种统计量并核对库函数的结果。"
+      },
+      {
+        "lesson_id": "cs50p-tests",
+        "title": "第6讲 单元测试：让边界缺陷自己暴露",
+        "goal": "两个测试都通过，为什么程序仍会在20厘米处出错？",
+        "output": "根据规则独立写期望，用边界输入定位缺陷，修复后重跑检查。"
+      },
+      {
+        "lesson_id": "cs50p-files",
+        "title": "第7讲 文件读写：保存以后，还能重新读对吗？",
+        "goal": "同样写入30，追加与覆盖为什么得到不同的均值？",
+        "output": "解释a与w的差异，用with关闭文件，读取后独立检查条数和均值。"
+      },
+      {
+        "lesson_id": "cs50p-regex",
+        "title": "第8讲 正则表达式：格式、匹配范围与提取各管什么",
+        "goal": "“prefix AB-12cm suffix”里找得到读数，为什么整条记录仍不合格？",
+        "output": "独立写出格式合同，区分search与整条匹配，并从命名分组恢复数值。"
+      },
+      {
+        "lesson_id": "cs50p-oop",
+        "title": "第9讲 面向对象：独立状态、属性约束与名字的指向",
+        "goal": "target=a之后改target.value，为什么a会变而b不会变？",
+        "output": "说明类与实例、别名与复制，设计带验证的property，并组合继承与方法。"
+      },
+      {
+        "lesson_id": "cs50p-etcetera",
+        "title": "第10讲 更多 Python：把接口、集合与惰性求值串起来",
+        "goal": "只要前两条不同读数，为什么生成器可以少处理后面的输入？",
+        "output": "使用集合、推导式、解包、argparse和类型提示，并解释迭代消费的实际状态。"
+      },
+      {
+        "lesson_id": "cs50p-project",
+        "title": "第11讲 原创综合项目：从记录文件到可复核报告",
+        "goal": "遇到一条坏记录时，程序应该中止，还是带着明确错误清单继续？",
+        "output": "交付一个有清晰合同、函数拆分、独立测试和使用说明的原创命令行报告器。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "cs50p-functions": 120,
+        "cs50p-conditions": 120,
+        "cs50p-loops": 180,
+        "cs50p-exceptions": 180,
+        "cs50p-libraries": 180,
+        "cs50p-tests": 180,
+        "cs50p-files": 240,
+        "cs50p-regex": 180,
+        "cs50p-oop": 240,
+        "cs50p-etcetera": 240,
+        "cs50p-project": 480
+      }
+    }
+  },
+  {
+    "id": "tools",
+    "label": "Missing Semester",
+    "title": "工程工具与实验方法",
+    "lane": "shared",
+    "phase": "基础补全",
+    "summary": "Shell、Git、环境、调试、打包、Agent协作与代码质量",
+    "prereq": "能运行一个简单程序；工具与项目并行练习。",
+    "check": "复现一次环境配置、提交与错误恢复。",
+    "sources": [
+      [
+        "MIT Missing Semester",
+        "https://missing.csail.mit.edu/"
+      ]
+    ],
+    "units": [
+      {
+        "lesson_id": "missing-shell",
+        "title": "第1讲 Shell：当前位置决定写到哪里",
+        "goal": "同一句输出命令，为什么可能写错目录，或把旧报告清空？",
+        "output": "给出目标文件的完整路径，预测追加和覆盖的结果，并识别父目录不存在。"
+      },
+      {
+        "lesson_id": "missing-pipeline",
+        "title": "第2讲 管道：数字正常也可能只有半份数据",
+        "goal": "为什么日志最后打印了一个数字，仍不能认为整条处理链成功？",
+        "output": "逐步复算每段管道的数据，并区分末端命令状态与整个管道的失败状态。"
+      },
+      {
+        "lesson_id": "missing-environment",
+        "title": "第3讲 环境：找出能同时满足的版本",
+        "goal": "“我这里能运行”，为什么换一台机器就找不到包或发生版本冲突？",
+        "output": "分别定位解释器不符、依赖交集为空与锁定版本失效，写出可复现的启动说明。"
+      },
+      {
+        "lesson_id": "missing-debug",
+        "title": "第4讲 调试与性能：先找到错，再减少重复",
+        "goal": "程序输出“差不多”的平均值，又跑得慢，先从哪里查？",
+        "output": "用固定输入定位分母错误，验证修复，再区分操作计数与真实计时。"
+      },
+      {
+        "lesson_id": "missing-git",
+        "title": "第5讲 Git：提交的是暂存快照",
+        "goal": "文件已经add过，随后又改了一次，这次commit究竟保存哪一版？",
+        "output": "逐步指出三个位置保存的内容，解释未暂存差异，并说清恢复操作的来源。"
+      },
+      {
+        "lesson_id": "missing-quality",
+        "title": "第6讲 质量与交付：测试绿了，还证明了什么",
+        "goal": "测试全部通过，为什么仍可能把拒绝0的错误实现交出去？",
+        "output": "区分格式、静态检查与行为测试，补充边界用例，并解释简化门禁的覆盖范围。"
+      },
+      {
+        "lesson_id": "missing-packaging",
+        "title": "第7讲 打包与发布：交出去的究竟是哪一份程序",
+        "goal": "本机能运行，为什么把整个目录发给同伴仍然不算完成交付？",
+        "output": "明确应用产物、允许文件、解释器约定与版本变化，实际打包并从另一目录运行，同时保留失败原因。"
+      },
+      {
+        "lesson_id": "missing-agentic",
+        "title": "第8讲 Agentic Coding：让工具反馈约束修改",
+        "goal": "Agent说已经修好时，怎样判断它真的做了检查，还是只是停下来了？",
+        "output": "区分模型决策、工具执行和返回证据，给出允许范围与验收条件，并解释预算耗尽、拒绝与测试失败。"
+      },
+      {
+        "lesson_id": "missing-beyond",
+        "title": "第9讲 Beyond the Code：让别人接得住你的修改",
+        "goal": "一个能复现的问题，为什么仍可能因为缺少说明而让维护者无法接手？",
+        "output": "交付含环境、预期实际、步骤、原因和检查结果的材料，拆分无关修改，并写出可以执行的评审意见。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "missing-shell": 120,
+        "missing-pipeline": 180,
+        "missing-environment": 180,
+        "missing-debug": 180,
+        "missing-git": 180,
+        "missing-quality": 180,
+        "missing-packaging": 240,
+        "missing-agentic": 240,
+        "missing-beyond": 180
+      }
+    }
+  },
+  {
+    "id": "linear",
+    "label": "MIT 18.06",
+    "title": "线性代数",
+    "lane": "shared",
+    "phase": "第二批 · 数学与机器学习",
+    "summary": "向量、矩阵变换、投影与特征值",
+    "prereq": "基本代数与函数；按当前任务选读。",
+    "check": "手算一个矩阵变换，再用代码核对坐标与维度。",
+    "sources": [
+      [
+        "MIT 18.06 · 2010 公开版",
+        "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"
+      ]
+    ],
+    "units": [
+      {
+        "lesson_id": "linear-vectors",
+        "title": "第1讲 列向量：矩阵乘法是在组合什么",
+        "goal": "同一矩阵乘[2,1]，为什么得到[3,1]？",
+        "output": "用列组合与行点积两种方法复算二维变换。"
+      },
+      {
+        "lesson_id": "linear-elimination",
+        "title": "第2讲 消元与秩：唯一、多解还是无解",
+        "goal": "第二行变成0=0和0=1，分别说明什么？",
+        "output": "对三种二维系统做增广消元，区分自由变量与矛盾。"
+      },
+      {
+        "lesson_id": "linear-composition",
+        "title": "第3讲 变换复合：先缩放还是先旋转",
+        "goal": "横向缩放2倍与旋转90度，交换顺序后点在哪里？",
+        "output": "明确列向量约定，用一个反例解释矩阵乘法的顺序。"
+      },
+      {
+        "lesson_id": "linear-projection",
+        "title": "第4讲 正交投影：最近点为什么留下垂直残差",
+        "goal": "点[2,0]投影到y=x，为什么最近点是[1,1]？",
+        "output": "计算投影系数、向量与残差，检查正交性和零方向。"
+      },
+      {
+        "lesson_id": "linear-least-squares",
+        "title": "第5讲 最小二乘：有误差时怎样拟合直线",
+        "goal": "三个不共线的点，怎样得到一条可核对的拟合线？",
+        "output": "复算含截距回归，使用残差正交条件检查解。"
+      },
+      {
+        "lesson_id": "linear-eigen",
+        "title": "第6讲 特征方向：反复作用后谁占主导",
+        "goal": "同一个矩阵作用多次，向量为什么越来越接近横轴？",
+        "output": "区分特征值与向量，解释矩阵幂在一个可复算例子中的作用。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "linear-vectors": 180,
+        "linear-elimination": 180,
+        "linear-composition": 180,
+        "linear-projection": 180,
+        "linear-least-squares": 180,
+        "linear-eigen": 180
+      }
+    },
+    "course": "linear"
+  },
+  {
+    "id": "probability",
+    "label": "MIT 18.05",
+    "title": "概率与统计",
+    "lane": "shared",
+    "phase": "第二批 · 数学与机器学习",
+    "summary": "分布、条件概率、估计与假设检验",
+    "prereq": "基本代数；按采样、损失和评测问题回补。",
+    "check": "用一组样本比较估计结果，解释不确定性。",
+    "sources": [
+      [
+        "MIT 18.05 · 2022 公开版",
+        "https://ocw.mit.edu/courses/18-05-introduction-to-probability-and-statistics-spring-2022/"
+      ]
+    ],
+    "units": [
+      {
+        "lesson_id": "probability-binomial",
+        "title": "第1讲 二项分布：次数概率从哪里来",
+        "goal": "四次独立试验，恰好成功两次的概率为什么是0.375？",
+        "output": "从排列计数到概率质量，核对总概率与期望。"
+      },
+      {
+        "lesson_id": "probability-bayes",
+        "title": "第2讲 贝叶斯：报警以后有多大概率是次品",
+        "goal": "报警率90%，为什么收到报警后次品概率只有50%？",
+        "output": "用联合份额和归一化复算后验，解释基础比例作用。"
+      },
+      {
+        "lesson_id": "probability-moments",
+        "title": "第3讲 期望与方差：平均相同就一样吗",
+        "goal": "均值为2的读数分布，还可能有多大的波动？",
+        "output": "从离散分布计算均值、方差，并用二阶矩独立核对。"
+      },
+      {
+        "lesson_id": "probability-mle",
+        "title": "第4讲 极大似然：数据固定后比较参数",
+        "goal": "十次试验七次成功，为什么估计成功率是0.7？",
+        "output": "区分概率与似然、连续估计与候选网格最佳。"
+      },
+      {
+        "lesson_id": "probability-interval",
+        "title": "第5讲 置信区间：样本变多，均值为何更稳",
+        "goal": "总体标准差不变，样本均值的误差界为什么会缩小？",
+        "output": "在已知σ的正态模型下复算z区间，正确解释覆盖率。"
+      },
+      {
+        "lesson_id": "probability-test",
+        "title": "第6讲 假设检验：小p值不是零假设概率",
+        "goal": "十次公平抛币出现九次正面，双侧p值怎样精确相加？",
+        "output": "枚举二项零分布，按预设双尾统计量求p值并解释结论。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "probability-binomial": 180,
+        "probability-bayes": 180,
+        "probability-moments": 180,
+        "probability-mle": 180,
+        "probability-interval": 180,
+        "probability-test": 180
+      }
+    },
+    "course": "probability"
+  },
+  {
+    "id": "cs229",
+    "label": "CS229",
+    "title": "机器学习与泛化",
+    "lane": "a",
+    "phase": "第二批 · 数学与机器学习",
+    "summary": "回归、分类、泛化与无监督学习",
+    "prereq": "Python、向量与基础概率；理论按知识点补充。",
+    "check": "区分拟合与泛化，比较训练集和独立测试集。",
+    "sources": [
+      [
+        "Stanford CS229 · 历史公开版",
+        "https://see.stanford.edu/Course/CS229"
+      ]
+    ],
+    "column": "1 / 4",
+    "row": 3,
+    "mobileColumn": "1",
+    "mobileRow": 3,
+    "icon": "chart-no-axes-combined",
+    "units": [
+      {
+        "lesson_id": "cs229-gradient",
+        "title": "第1讲 线性回归：梯度一步改变了什么",
+        "goal": "两条样本y=2x，从w=0开始怎样走向w=2？",
+        "output": "把损失、梯度、更新前后参数逐轮对应，识别学习率发散。"
+      },
+      {
+        "lesson_id": "cs229-logistic",
+        "title": "第2讲 逻辑回归：概率、损失与标签分开",
+        "goal": "分数z=2时，为什么预测概率约0.881而梯度约−0.119？",
+        "output": "复算sigmoid、二元交叉熵与分数梯度，解释错且自信的代价。"
+      },
+      {
+        "lesson_id": "cs229-ridge",
+        "title": "第3讲 L2正则：训练误差与参数大小怎样交换",
+        "goal": "加入λ以后，最优权重为什么从2缩小？",
+        "output": "求解一维ridge目标，拆开拟合项和惩罚项并验证导数。"
+      },
+      {
+        "lesson_id": "cs229-validation",
+        "title": "第4讲 泛化与选择：训练分数最好为什么会选错",
+        "goal": "穿过全部训练点的曲线，为何在新点上不如常数？",
+        "output": "用互不重叠的小表比较候选，区分训练、验证与最终测试。"
+      },
+      {
+        "lesson_id": "cs229-kmeans",
+        "title": "第5讲 K-means：指派和移动中心是两步",
+        "goal": "四个点分两组，中心为什么从[0,10]变成[0.5,9.5]？",
+        "output": "实际运行交替更新，解释初值、并列与空簇策略。"
+      },
+      {
+        "lesson_id": "cs229-pca",
+        "title": "第6讲 PCA：中心化后找保留变化的方向",
+        "goal": "把对角线上的点压成一个数，为什么45度保留全部方差？",
+        "output": "复算均值、协方差、投影与方差保留率，区分降维和分类。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "cs229-gradient": 210,
+        "cs229-logistic": 210,
+        "cs229-ridge": 210,
+        "cs229-validation": 210,
+        "cs229-kmeans": 210,
+        "cs229-pca": 210
+      }
+    },
+    "course": "cs229"
+  },
+  {
+    "id": "d2l",
+    "label": "动手学深度学习",
+    "title": "神经网络与 PyTorch",
+    "lane": "a",
+    "phase": "第一批补充",
+    "summary": "张量与梯度、CNN、RNN/GRU、优化器与数据并行",
+    "prereq": "Python、基础矩阵计算与损失函数。",
+    "check": "实跑一个小CNN或GRU，核对梯度、损失与独立留出；解释分布式平均的分母。",
+    "sources": [
+      [
+        "动手学深度学习 · 中文版",
+        "https://zh.d2l.ai/"
+      ]
+    ],
+    "column": "4 / 7",
+    "row": 3,
+    "mobileColumn": "2",
+    "mobileRow": 3,
+    "icon": "network",
+    "units": [
+      {
+        "title": "张量",
+        "goal": "围绕「张量」建立直觉，并完成一个可检查的小例子。",
+        "output": "写通前向、反向和更新，并解释训练曲线。"
+      },
+      {
+        "title": "自动微分",
+        "goal": "围绕「自动微分」建立直觉，并完成一个可检查的小例子。",
+        "output": "写通前向、反向和更新，并解释训练曲线。"
+      },
+      {
+        "title": "训练循环与注意力",
+        "goal": "围绕「训练循环与注意力」建立直觉，并完成一个可检查的小例子。",
+        "output": "写通前向、反向和更新，并解释训练曲线。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "d2l-tensors": 180,
+        "d2l-matrix-probability": 180,
+        "d2l-autograd": 240,
+        "d2l-regression": 240,
+        "d2l-classification": 240,
+        "d2l-mlp": 300,
+        "d2l-generalization": 240,
+        "d2l-attention": 300,
+        "d2l-convolution": 180,
+        "d2l-cnn-pooling": 180,
+        "d2l-rnn": 180,
+        "d2l-gru": 180,
+        "d2l-momentum": 180,
+        "d2l-adam": 180,
+        "d2l-data-parallel": 180,
+        "d2l-ddp": 180
+      }
+    }
+  },
+  {
+    "id": "cme295",
+    "label": "CME 295",
+    "title": "Transformer 与大模型原理",
+    "lane": "shared",
+    "phase": "当前专题",
+    "summary": "模型、训练、推理、Agent 与评测",
+    "prereq": "线性代数、概率与基础机器学习；教学样例可先建立直觉。",
+    "check": "复算一次注意力，并说明训练、推理与工具调用的关系。",
+    "sources": [
+      [
+        "CME 295 官方目录",
+        "https://cme295.stanford.edu/syllabus/"
+      ]
+    ],
+    "column": "1 / 7",
+    "row": 4,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 4,
+    "icon": "layers",
+    "node": "a3",
+    "course": "cme295",
+    "units": [
+      {
+        "title": "Transformer",
+        "goal": "跟着 token，算清一次注意力。",
+        "output": "手算一行注意力权重与输出向量。"
+      },
+      {
+        "title": "大语言模型",
+        "goal": "从模型家族、MoE 到位置与采样。",
+        "output": "解释温度、上下文与模型结构的不同作用。"
+      },
+      {
+        "title": "LLM 训练",
+        "goal": "预训练、SFT、偏好与蒸馏怎样衔接。",
+        "output": "画出数据、训练目标与模型能力的对应关系。"
+      },
+      {
+        "title": "LLM 强化学习",
+        "goal": "奖励、策略梯度与 PPO / GRPO。",
+        "output": "区分偏好奖励与可验证奖励。"
+      },
+      {
+        "title": "LLM 系统",
+        "goal": "分布式训练、KV Cache 与推理优化。",
+        "output": "说明瓶颈在哪里，以及优化针对什么。"
+      },
+      {
+        "title": "AI Agents",
+        "goal": "工具、MCP、记忆与运行循环。",
+        "output": "解释工具结果怎样进入下一轮上下文。"
+      },
+      {
+        "title": "LLM 评测",
+        "goal": "模型裁判、偏差与 Agent 评测。",
+        "output": "为一个任务选择可检验的评价方法。"
+      },
+      {
+        "title": "Diffusion LLMs",
+        "goal": "连续、离散与掩码扩散语言模型。",
+        "output": "比较扩散式与自回归式生成。"
+      },
+      {
+        "title": "趋势与多模态",
+        "goal": "把新方向放回模型全景。",
+        "output": "用已有概念解释一项新模型设计。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "attention": 240,
+        "sampling": 240,
+        "lora": 300,
+        "cme-rl-lecture": 300,
+        "cme-systems": 300,
+        "cme-agents": 300
+      }
+    }
+  },
+  {
+    "id": "cs336",
+    "label": "CS336",
+    "title": "从零构建大模型",
+    "lane": "a",
+    "phase": "当前专题",
+    "summary": "模型、资源、训练系统、数据与后训练",
+    "prereq": "Transformer、PyTorch 与训练循环。",
+    "check": "实现小语言模型，并给出可复算的训练预算。",
+    "sources": [
+      [
+        "CS336 官方课程",
+        "https://cs336.stanford.edu/"
+      ]
+    ],
+    "column": "1 / 4",
+    "row": 5,
+    "mobileColumn": "1",
+    "mobileRow": 5,
+    "icon": "boxes",
+    "node": "a4",
+    "course": "cs336",
+    "units": [
+      {
+        "title": "概览与分词",
+        "goal": "从文本开始，理解语言建模任务。",
+        "output": "解释文本怎样变成 token。"
+      },
+      {
+        "title": "资源核算",
+        "goal": "训练要多久，一张卡能装多大。",
+        "output": "写出一份有假设、有单位的训练预算。"
+      },
+      {
+        "title": "架构与超参数",
+        "goal": "让模型结构与训练选择相互对应。",
+        "output": "说明关键超参数改变了什么。"
+      },
+      {
+        "title": "注意力与 MoE",
+        "goal": "理解信息混合与稀疏计算。",
+        "output": "比较不同架构的计算路径。"
+      },
+      {
+        "title": "GPU 与 TPU",
+        "goal": "把算子放进硬件。",
+        "output": "区分计算与访存瓶颈。"
+      },
+      {
+        "title": "Kernel 与 Triton",
+        "goal": "从算子到执行效率。",
+        "output": "解释一次内核优化的收益。"
+      },
+      {
+        "title": "并行：怎么切",
+        "goal": "模型、数据与设备怎样划分。",
+        "output": "画出一次跨设备数据流。"
+      },
+      {
+        "title": "并行：ZeRO 分片",
+        "goal": "状态怎样分散存储。",
+        "output": "解释分片节省了哪部分显存。"
+      },
+      {
+        "title": "Scaling Laws",
+        "goal": "用小实验预测更大训练。",
+        "output": "说明拟合与外推的边界。"
+      },
+      {
+        "title": "推理与 KV Cache",
+        "goal": "减少生成时的重复计算。",
+        "output": "解释缓存保存什么。"
+      },
+      {
+        "title": "缩放规律落地",
+        "goal": "把预算转成训练配置。",
+        "output": "比较不同资源分配方案。"
+      },
+      {
+        "title": "评测",
+        "goal": "分数背后是什么任务。",
+        "output": "给出合适的指标与对照。"
+      },
+      {
+        "title": "数据来源",
+        "goal": "训练数据从哪里来。",
+        "output": "记录数据来源与使用条件。"
+      },
+      {
+        "title": "过滤、去重与配比",
+        "goal": "让数据质量可讨论。",
+        "output": "比较处理前后的数据样本。"
+      },
+      {
+        "title": "SFT 与 RLHF",
+        "goal": "从预训练到指令与偏好。",
+        "output": "区分训练目标与数据。"
+      },
+      {
+        "title": "RLVR 与推理",
+        "goal": "用可验证信号推动学习。",
+        "output": "说明奖励与任务能力的关系。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "cs336-tokenization": 240,
+        "compute": 360,
+        "cs336-architecture": 300,
+        "cs336-attention-moe": 300,
+        "cs336-hardware": 240,
+        "cs336-kernels": 360,
+        "parallel": 360,
+        "cs336-parallel-systems": 360,
+        "cs336-scaling-basics": 300,
+        "cs336-inference": 300,
+        "cs336-scaling-practice": 300,
+        "cs336-evaluation-lecture": 240,
+        "cs336-data-origins": 180,
+        "dedup": 300,
+        "cs336-post-training": 360,
+        "cs336-rlvr": 360,
+        "cs336-multimodal": 240,
+        "cs336-guest-danfu": 300
+      }
+    }
+  },
+  {
+    "id": "hfagents",
+    "label": "HF Agents Course",
+    "title": "Agent 实作与工具循环",
+    "lane": "b",
+    "phase": "第二批补充",
+    "summary": "工具调用、观察行动、停止条件与评测",
+    "prereq": "编程、模型调用、结构化输出和错误处理。",
+    "check": "重放一条工具轨迹，并处理一次工具失败。",
+    "sources": [
+      [
+        "Hugging Face Agents Course",
+        "https://huggingface.co/learn/agents-course/en/unit0/introduction"
+      ]
+    ],
+    "column": "4 / 7",
+    "row": 5,
+    "mobileColumn": "2",
+    "mobileRow": 5,
+    "icon": "workflow",
+    "units": [
+      {
+        "title": "工具调用",
+        "goal": "围绕「工具调用」建立直觉，并完成一个可检查的小例子。",
+        "output": "重放一条工具轨迹，并处理一次工具失败。"
+      },
+      {
+        "title": "观察行动",
+        "goal": "围绕「观察行动」建立直觉，并完成一个可检查的小例子。",
+        "output": "重放一条工具轨迹，并处理一次工具失败。"
+      },
+      {
+        "title": "停止条件与评测",
+        "goal": "围绕「停止条件与评测」建立直觉，并完成一个可检查的小例子。",
+        "output": "重放一条工具轨迹，并处理一次工具失败。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "hfagents-state": 150,
+        "hfagents-tools": 180,
+        "hfagents-loop": 180,
+        "hfagents-context": 180,
+        "hfagents-smolagents": 240,
+        "hfagents-rag": 240,
+        "hfagents-evaluation": 180,
+        "hfagents-project": 300
+      }
+    }
+  },
+  {
+    "id": "cs146s",
+    "label": "CS146S",
+    "title": "AI 软件工程",
+    "lane": "b",
+    "phase": "当前专题",
+    "summary": "上下文、Skills、仓库、评审与交付",
+    "prereq": "编程、Git、测试和基本软件工程；不要求修完 CS336。",
+    "check": "交付一次可复现的代码改动、评审和测试结果。",
+    "sources": [
+      [
+        "CS146S 官方课程",
+        "https://themodernsoftware.dev/"
+      ]
+    ],
+    "column": "4 / 7",
+    "row": 6,
+    "mobileColumn": "2",
+    "mobileRow": 6,
+    "icon": "code-xml",
+    "node": "b4",
+    "course": "cs146s",
+    "units": [
+      {
+        "title": "Coding Agent 内部机制",
+        "goal": "任务怎样经过读文件、测试与修改。",
+        "output": "重放一次工具轨迹，解释反馈如何推动下一轮。"
+      },
+      {
+        "title": "高级上下文工程",
+        "goal": "研究、方案、计划与规格。",
+        "output": "把含糊需求整理成可执行、可检查的任务。"
+      },
+      {
+        "title": "Agent Skills 与 CLI",
+        "goal": "把常用工作流程写成可复用能力。",
+        "output": "区分工具接口与多步工作流程。"
+      },
+      {
+        "title": "定制 Agent 与仓库",
+        "goal": "长期说明、配置与 hooks。",
+        "output": "给一个真实仓库写出具体可用的工作约定。"
+      },
+      {
+        "title": "Agent-Ready Codebases",
+        "goal": "让结构、文档与检查便于理解和执行。",
+        "output": "定位仓库里最影响任务完成的阻塞点。"
+      },
+      {
+        "title": "Agentic Code Review",
+        "goal": "评审架构、规则与人工判断。",
+        "output": "给出可定位、可验证的评审意见。"
+      },
+      {
+        "title": "安全",
+        "goal": "依赖、静态检查与 Agent 攻击面。",
+        "output": "识别一次工具或上下文边界失效。"
+      },
+      {
+        "title": "后台 Agents",
+        "goal": "异步任务、并行协作与 issue→PR。",
+        "output": "说明任务怎样隔离、追踪并收回结果。"
+      },
+      {
+        "title": "AI-Native 团队",
+        "goal": "团队怎样组织人与 Agent 的分工。",
+        "output": "设计任务交接、验收与责任边界。"
+      },
+      {
+        "title": "软件工厂与未来",
+        "goal": "运行、改进与规模化工程系统。",
+        "output": "把生成、检查和反馈连成可观测流程。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "agent": 180,
+        "cs146s-harness": 240,
+        "context": 240,
+        "tools": 240,
+        "cs146s-skills": 240,
+        "cs146s-always-on": 240,
+        "cs146s-config": 240,
+        "cs146s-readiness": 240,
+        "cs146s-verification": 240,
+        "cs146s-review": 240
+      }
+    }
+  },
+  {
+    "id": "cs231n",
+    "label": "CS231n",
+    "title": "视觉模型与表示",
+    "lane": "a",
+    "phase": "后续分支",
+    "summary": "图像模型、特征与视觉表示",
+    "prereq": "深度学习与 PyTorch；图像几何、标定按任务补充。",
+    "check": "修改输入或模型，解释视觉结果与失败案例。",
+    "sources": [
+      [
+        "CS231n · 2025 公开材料",
+        "https://cs231n.stanford.edu/2025/"
+      ]
+    ],
+    "column": "1 / 4",
+    "row": 6,
+    "mobileColumn": "1",
+    "mobileRow": 6,
+    "icon": "scan-eye",
+    "units": [
+      {
+        "title": "图像模型",
+        "goal": "围绕「图像模型」建立直觉，并完成一个可检查的小例子。",
+        "output": "修改输入或模型，解释视觉结果与失败案例。"
+      },
+      {
+        "title": "特征与视觉表示",
+        "goal": "围绕「特征与视觉表示」建立直觉，并完成一个可检查的小例子。",
+        "output": "修改输入或模型，解释视觉结果与失败案例。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "fsdl",
+    "label": "Full Stack Deep Learning",
+    "title": "模型到系统的完整交付",
+    "lane": "shared",
+    "phase": "第二批补充",
+    "summary": "模型适配、团队与伦理，以及训练到HTTP和回滚",
+    "prereq": "已有一个能运行的模型或应用。",
+    "check": "生成数据与模型制品，核对哈希、HTTP契约、坏包拒绝和回滚后的版本。",
+    "sources": [
+      [
+        "Full Stack Deep Learning · 2022",
+        "https://fullstackdeeplearning.com/course/2022/"
+      ]
+    ],
+    "column": "1 / 7",
+    "row": 7,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 7,
+    "icon": "package-check",
+    "units": [
+      {
+        "title": "实验",
+        "goal": "围绕「实验」建立直觉，并完成一个可检查的小例子。",
+        "output": "为作品补齐实验记录、测试、部署和失败复现。"
+      },
+      {
+        "title": "数据",
+        "goal": "围绕「数据」建立直觉，并完成一个可检查的小例子。",
+        "output": "为作品补齐实验记录、测试、部署和失败复现。"
+      },
+      {
+        "title": "测试",
+        "goal": "围绕「测试」建立直觉，并完成一个可检查的小例子。",
+        "output": "为作品补齐实验记录、测试、部署和失败复现。"
+      },
+      {
+        "title": "部署与维护",
+        "goal": "围绕「部署与维护」建立直觉，并完成一个可检查的小例子。",
+        "output": "为作品补齐实验记录、测试、部署和失败复现。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "fsdl-metrics": 180,
+        "fsdl-data": 240,
+        "fsdl-experiments": 240,
+        "fsdl-debugging": 240,
+        "fsdl-testing": 240,
+        "fsdl-serving": 240,
+        "fsdl-monitoring": 240,
+        "fsdl-release": 300,
+        "fsdl-foundation-models": 180,
+        "fsdl-ml-teams": 180,
+        "fsdl-ethics": 180,
+        "fsdl-project-train": 180,
+        "fsdl-project-serve": 180
+      }
+    }
+  },
+  {
+    "id": "cs234",
+    "label": "CS234",
+    "title": "强化学习基础",
+    "lane": "a",
+    "phase": "后续分支",
+    "summary": "MDP、价值函数、Q-learning 与策略优化",
+    "prereq": "概率、机器学习与编程；按任务回补。",
+    "check": "在小环境中复算价值更新，比较奖励设计。",
+    "sources": [
+      [
+        "Stanford CS234",
+        "https://web.stanford.edu/class/cs234/modules.html"
+      ]
+    ],
+    "column": "1 / 7",
+    "row": 8,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 8,
+    "icon": "route",
+    "units": [
+      {
+        "title": "MDP",
+        "goal": "围绕「MDP」建立直觉，并完成一个可检查的小例子。",
+        "output": "在小环境中复算价值更新，比较奖励设计。"
+      },
+      {
+        "title": "价值函数",
+        "goal": "围绕「价值函数」建立直觉，并完成一个可检查的小例子。",
+        "output": "在小环境中复算价值更新，比较奖励设计。"
+      },
+      {
+        "title": "Q-learning 与策略优化",
+        "goal": "围绕「Q-learning 与策略优化」建立直觉，并完成一个可检查的小例子。",
+        "output": "在小环境中复算价值更新，比较奖励设计。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "arduino",
+    "label": "Arduino Lessons",
+    "title": "电子、传感器与执行器",
+    "lane": "c",
+    "phase": "深化已有引用",
+    "summary": "GPIO、PWM、测量与电机；连接 Learn ESP32",
+    "prereq": "基础编程与电路；按实际板卡核对供电和接口。",
+    "check": "分别保存计算、在线仿真与实测结果，解释差异。",
+    "sources": [
+      [
+        "Paul McWhorter Arduino Lessons",
+        "https://toptechboy.com/arduino-lessons/"
+      ],
+      [
+        "Learn ESP32 在线实验室",
+        "https://aigeekops.github.io/learn-esp32/"
+      ]
+    ],
+    "column": "7 / 10",
+    "row": 3,
+    "mobileColumn": "1",
+    "mobileRow": 10,
+    "icon": "cpu",
+    "units": [
+      {
+        "title": "GPIO",
+        "goal": "围绕「GPIO」建立直觉，并完成一个可检查的小例子。",
+        "output": "分别保存计算、在线仿真与实测结果，解释差异。"
+      },
+      {
+        "title": "PWM",
+        "goal": "围绕「PWM」建立直觉，并完成一个可检查的小例子。",
+        "output": "分别保存计算、在线仿真与实测结果，解释差异。"
+      },
+      {
+        "title": "测量与电机",
+        "goal": "围绕「测量与电机」建立直觉，并完成一个可检查的小例子。",
+        "output": "分别保存计算、在线仿真与实测结果，解释差异。"
+      },
+      {
+        "title": "连接 Learn ESP32",
+        "goal": "围绕「连接 Learn ESP32」建立直觉，并完成一个可检查的小例子。",
+        "output": "分别保存计算、在线仿真与实测结果，解释差异。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "mit2007",
+    "label": "MIT 2.007",
+    "title": "机械设计与制造",
+    "lane": "c",
+    "phase": "候选 · 选读",
+    "summary": "传动、结构强度/刚度、公差基准与设计文件",
+    "prereq": "基础力学、长度角度与简单 CAD；器材和软件另作适配。",
+    "check": "完成一套传动与支架计算、毫米图纸、BOM和待实测验收清单。",
+    "sources": [
+      [
+        "MIT 2.007 · 2009 公开版",
+        "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/"
+      ]
+    ],
+    "column": "10 / 13",
+    "row": 3,
+    "mobileColumn": "2",
+    "mobileRow": 10,
+    "icon": "component",
+    "units": [
+      {
+        "title": "机构",
+        "goal": "围绕「机构」建立直觉，并完成一个可检查的小例子。",
+        "output": "给出可修改的机构、尺寸、装配与选型依据。"
+      },
+      {
+        "title": "电机",
+        "goal": "围绕「电机」建立直觉，并完成一个可检查的小例子。",
+        "output": "给出可修改的机构、尺寸、装配与选型依据。"
+      },
+      {
+        "title": "齿轮",
+        "goal": "围绕「齿轮」建立直觉，并完成一个可检查的小例子。",
+        "output": "给出可修改的机构、尺寸、装配与选型依据。"
+      },
+      {
+        "title": "CAD 与设计迭代",
+        "goal": "围绕「CAD 与设计迭代」建立直觉，并完成一个可检查的小例子。",
+        "output": "给出可修改的机构、尺寸、装配与选型依据。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "rf-gears": 180,
+        "rf-motor-load": 240,
+        "rf-fit": 180,
+        "rf-beam-design": 180,
+        "rf-manufacturing-datums": 180,
+        "rf-design-project": 180
+      }
+    }
+  },
+  {
+    "id": "modern",
+    "label": "Modern Robotics",
+    "title": "坐标、运动学与动力学",
+    "lane": "c",
+    "phase": "深化已有引用",
+    "summary": "二维机械臂、SO(3)/SE(3)、两杆扭矩与关节轨迹",
+    "prereq": "向量、矩阵、坐标与基础微积分；按任务安排阅读。",
+    "check": "用逆变换与正动力学核对结果，并检查轨迹端点、速度与加速度。",
+    "sources": [
+      [
+        "Modern Robotics 作者配套材料",
+        "https://modernrobotics.northwestern.edu/nu-gm-book-resource/"
+      ]
+    ],
+    "column": "7 / 13",
+    "row": 4,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 11,
+    "icon": "move-3d",
+    "units": [
+      {
+        "title": "变换",
+        "goal": "围绕「变换」建立直觉，并完成一个可检查的小例子。",
+        "output": "用小车或两连杆机械臂复算一次运动。"
+      },
+      {
+        "title": "Jacobian",
+        "goal": "围绕「Jacobian」建立直觉，并完成一个可检查的小例子。",
+        "output": "用小车或两连杆机械臂复算一次运动。"
+      },
+      {
+        "title": "轨迹",
+        "goal": "围绕「轨迹」建立直觉，并完成一个可检查的小例子。",
+        "output": "用小车或两连杆机械臂复算一次运动。"
+      },
+      {
+        "title": "动力学与控制",
+        "goal": "围绕「动力学与控制」建立直觉，并完成一个可检查的小例子。",
+        "output": "用小车或两连杆机械臂复算一次运动。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "rf-transform": 240,
+        "rf-forward-kinematics": 240,
+        "rf-inverse-kinematics": 300,
+        "rf-rotation3d": 180,
+        "rf-se3-chain": 180,
+        "rf-arm-dynamics": 180,
+        "rf-joint-trajectory": 180
+      }
+    }
+  },
+  {
+    "id": "pid",
+    "label": "Understanding PID",
+    "title": "反馈、调参与串级控制",
+    "lane": "c",
+    "phase": "深化已有引用",
+    "summary": "PID、抗饱和、微分滤波、响应指标与多环采样",
+    "prereq": "目标、传感器、执行器与时间序列。",
+    "check": "用同一输入比较噪声、超调、限幅与多环采样，解释参数改变的代价。",
+    "sources": [
+      [
+        "Understanding PID Control",
+        "https://www.mathworks.com/videos/series/understanding-pid-control.html"
+      ]
+    ],
+    "column": "7 / 10",
+    "row": 5,
+    "mobileColumn": "1",
+    "mobileRow": 12,
+    "icon": "sliders-horizontal",
+    "units": [
+      {
+        "title": "误差",
+        "goal": "围绕「误差」建立直觉，并完成一个可检查的小例子。",
+        "output": "比较两组参数的响应，说明饱和与噪声影响。"
+      },
+      {
+        "title": "反馈",
+        "goal": "围绕「反馈」建立直觉，并完成一个可检查的小例子。",
+        "output": "比较两组参数的响应，说明饱和与噪声影响。"
+      },
+      {
+        "title": "饱和",
+        "goal": "围绕「饱和」建立直觉，并完成一个可检查的小例子。",
+        "output": "比较两组参数的响应，说明饱和与噪声影响。"
+      },
+      {
+        "title": "噪声与响应",
+        "goal": "围绕「噪声与响应」建立直觉，并完成一个可检查的小例子。",
+        "output": "比较两组参数的响应，说明饱和与噪声影响。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "rf-p-feedback": 180,
+        "rf-discrete-pid": 240,
+        "rf-anti-windup": 240,
+        "rf-derivative-filter": 180,
+        "rf-pid-tuning": 180,
+        "rf-cascade-control": 180
+      }
+    }
+  },
+  {
+    "id": "kalman",
+    "label": "Kalman & Bayesian Filters",
+    "title": "多维与非线性状态估计",
+    "lane": "c",
+    "phase": "深化已有引用",
+    "summary": "位置速度、协方差、二维跟踪、EKF与无迹变换",
+    "prereq": "Python、概率与基本状态模型。",
+    "check": "核对协方差、EKF Jacobian与非线性矩，并公开噪声和可观测性假设。",
+    "sources": [
+      [
+        "Kalman and Bayesian Filters in Python",
+        "https://rlabbe.github.io/Kalman-and-Bayesian-Filters-in-Python/"
+      ]
+    ],
+    "column": "10 / 13",
+    "row": 5,
+    "mobileColumn": "2",
+    "mobileRow": 12,
+    "icon": "activity",
+    "units": [
+      {
+        "title": "预测",
+        "goal": "围绕「预测」建立直觉，并完成一个可检查的小例子。",
+        "output": "修改噪声假设，比较真实状态、测量和估计。"
+      },
+      {
+        "title": "观测",
+        "goal": "围绕「观测」建立直觉，并完成一个可检查的小例子。",
+        "output": "修改噪声假设，比较真实状态、测量和估计。"
+      },
+      {
+        "title": "更新与不确定性",
+        "goal": "围绕「更新与不确定性」建立直觉，并完成一个可检查的小例子。",
+        "output": "修改噪声假设，比较真实状态、测量和估计。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "rf-noisy-measurements": 180,
+        "rf-kalman-update": 240,
+        "rf-filter-assumptions": 240,
+        "rf-kalman-state": 180,
+        "rf-kalman-covariance": 180,
+        "rf-kalman-2d": 180,
+        "rf-ekf-range": 180,
+        "rf-unscented-transform": 180
+      }
+    }
+  },
+  {
+    "id": "ros",
+    "label": "ROS 2 + Gazebo",
+    "title": "机器人软件与物理仿真",
+    "lane": "c",
+    "phase": "共同工程基础",
+    "summary": "节点、话题、TF、URDF、日志与仿真",
+    "prereq": "Linux、编程、坐标变换与基本反馈；沿用 Jazzy / Harmonic 配套。",
+    "check": "构建可重启、可回放、能定位故障的机器人示例。",
+    "sources": [
+      [
+        "ROS 2 Jazzy 官方教程",
+        "https://docs.ros.org/en/jazzy/Tutorials.html"
+      ],
+      [
+        "Gazebo Harmonic 配套说明",
+        "https://gazebosim.org/docs/harmonic/ros_installation/"
+      ]
+    ],
+    "column": "7 / 13",
+    "row": 6,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 13,
+    "icon": "boxes",
+    "units": [
+      {
+        "title": "节点",
+        "goal": "围绕「节点」建立直觉，并完成一个可检查的小例子。",
+        "output": "构建可重启、可回放、能定位故障的机器人示例。"
+      },
+      {
+        "title": "话题",
+        "goal": "围绕「话题」建立直觉，并完成一个可检查的小例子。",
+        "output": "构建可重启、可回放、能定位故障的机器人示例。"
+      },
+      {
+        "title": "TF",
+        "goal": "围绕「TF」建立直觉，并完成一个可检查的小例子。",
+        "output": "构建可重启、可回放、能定位故障的机器人示例。"
+      },
+      {
+        "title": "URDF",
+        "goal": "围绕「URDF」建立直觉，并完成一个可检查的小例子。",
+        "output": "构建可重启、可回放、能定位故障的机器人示例。"
+      },
+      {
+        "title": "日志与仿真",
+        "goal": "围绕「日志与仿真」建立直觉，并完成一个可检查的小例子。",
+        "output": "构建可重启、可回放、能定位故障的机器人示例。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。",
+      "lesson_minutes": {
+        "rf-ros-pubsub": 180,
+        "rf-ros-tf": 240,
+        "rf-ros-replay": 240,
+        "rf-ros-bridge": 300
+      }
+    }
+  },
+  {
+    "id": "bonn",
+    "label": "Bonn Mobile Robotics",
+    "title": "移动机器人原理",
+    "lane": "c",
+    "phase": "候选 · 导航分支",
+    "summary": "概率定位、滤波、建图与路径规划",
+    "prereq": "坐标、概率、状态估计与基础机器人运动。",
+    "check": "比较定位与建图结果，记录轨迹误差与失败条件。",
+    "sources": [
+      [
+        "Bonn · 2020 在线课程",
+        "https://www.ipb.uni-bonn.de/online-training-robotics/index.html"
+      ]
+    ],
+    "column": "7 / 10",
+    "row": 7,
+    "mobileColumn": "1",
+    "mobileRow": 14,
+    "icon": "navigation",
+    "units": [
+      {
+        "title": "概率定位",
+        "goal": "围绕「概率定位」建立直觉，并完成一个可检查的小例子。",
+        "output": "比较定位与建图结果，记录轨迹误差与失败条件。"
+      },
+      {
+        "title": "滤波",
+        "goal": "围绕「滤波」建立直觉，并完成一个可检查的小例子。",
+        "output": "比较定位与建图结果，记录轨迹误差与失败条件。"
+      },
+      {
+        "title": "建图与路径规划",
+        "goal": "围绕「建图与路径规划」建立直觉，并完成一个可检查的小例子。",
+        "output": "比较定位与建图结果，记录轨迹误差与失败条件。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "manipulation",
+    "label": "MIT Robotic Manipulation",
+    "title": "机械臂操作原理",
+    "lane": "c",
+    "phase": "候选 · 机械臂分支",
+    "summary": "感知、抓取、规划与控制",
+    "prereq": "坐标、正逆运动学、Jacobian 与基础控制。",
+    "check": "用小规模示例完成受约束的抓取与放置。",
+    "sources": [
+      [
+        "MIT Robotic Manipulation",
+        "https://manipulation.mit.edu/"
+      ]
+    ],
+    "column": "10 / 13",
+    "row": 7,
+    "mobileColumn": "2",
+    "mobileRow": 14,
+    "icon": "hand",
+    "units": [
+      {
+        "title": "感知",
+        "goal": "围绕「感知」建立直觉，并完成一个可检查的小例子。",
+        "output": "用小规模示例完成受约束的抓取与放置。"
+      },
+      {
+        "title": "抓取",
+        "goal": "围绕「抓取」建立直觉，并完成一个可检查的小例子。",
+        "output": "用小规模示例完成受约束的抓取与放置。"
+      },
+      {
+        "title": "规划与控制",
+        "goal": "围绕「规划与控制」建立直觉，并完成一个可检查的小例子。",
+        "output": "用小规模示例完成受约束的抓取与放置。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "nav2",
+    "label": "Nav2",
+    "title": "自主导航工程",
+    "lane": "c",
+    "phase": "候选 · 工程材料",
+    "summary": "地图、定位、规划、控制与行为树",
+    "prereq": "ROS 2、定位与规划；制作时匹配选定 ROS 2 版本。",
+    "check": "让小车完成导航任务，分别报告仿真与真机结果。",
+    "sources": [
+      [
+        "Nav2 官方文档",
+        "https://docs.nav2.org/"
+      ]
+    ],
+    "column": "7 / 10",
+    "row": 8,
+    "mobileColumn": "1",
+    "mobileRow": 15,
+    "icon": "map-pinned",
+    "units": [
+      {
+        "title": "地图",
+        "goal": "围绕「地图」建立直觉，并完成一个可检查的小例子。",
+        "output": "让小车完成导航任务，分别报告仿真与真机结果。"
+      },
+      {
+        "title": "定位",
+        "goal": "围绕「定位」建立直觉，并完成一个可检查的小例子。",
+        "output": "让小车完成导航任务，分别报告仿真与真机结果。"
+      },
+      {
+        "title": "规划",
+        "goal": "围绕「规划」建立直觉，并完成一个可检查的小例子。",
+        "output": "让小车完成导航任务，分别报告仿真与真机结果。"
+      },
+      {
+        "title": "控制与行为树",
+        "goal": "围绕「控制与行为树」建立直觉，并完成一个可检查的小例子。",
+        "output": "让小车完成导航任务，分别报告仿真与真机结果。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "moveit",
+    "label": "MoveIt 2",
+    "title": "机械臂规划与执行",
+    "lane": "c",
+    "phase": "候选 · 工程材料",
+    "summary": "机器人模型、碰撞、规划与执行",
+    "prereq": "ROS 2、运动学与关节限制；文档版本与实际环境匹配。",
+    "check": "复现无碰撞轨迹，解释执行限制与失败案例。",
+    "sources": [
+      [
+        "MoveIt 2 官方教程",
+        "https://moveit.picknik.ai/main/doc/tutorials/tutorials.html"
+      ]
+    ],
+    "column": "10 / 13",
+    "row": 8,
+    "mobileColumn": "2",
+    "mobileRow": 15,
+    "icon": "git-pull-request-arrow",
+    "units": [
+      {
+        "title": "机器人模型",
+        "goal": "围绕「机器人模型」建立直觉，并完成一个可检查的小例子。",
+        "output": "复现无碰撞轨迹，解释执行限制与失败案例。"
+      },
+      {
+        "title": "碰撞",
+        "goal": "围绕「碰撞」建立直觉，并完成一个可检查的小例子。",
+        "output": "复现无碰撞轨迹，解释执行限制与失败案例。"
+      },
+      {
+        "title": "规划与执行",
+        "goal": "围绕「规划与执行」建立直觉，并完成一个可检查的小例子。",
+        "output": "复现无碰撞轨迹，解释执行限制与失败案例。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "lerobot",
+    "label": "HF Robotics + LeRobot",
+    "title": "机器人数据与模仿学习",
+    "lane": "c",
+    "phase": "后续 · 公开单元选用",
+    "summary": "数据检查、行为克隆与独立评测",
+    "prereq": "机器人系统、深度学习与 PyTorch。规划注明部分课程单元待公开，启动时核对材料。",
+    "check": "检查观测与动作数据，在独立条件下比较基线和策略。",
+    "sources": [
+      [
+        "Hugging Face Robotics Course",
+        "https://huggingface.co/learn/robotics-course/unit0/1"
+      ],
+      [
+        "LeRobot 文档",
+        "https://huggingface.co/docs/lerobot/"
+      ]
+    ],
+    "column": "7 / 13",
+    "row": 9,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 17,
+    "icon": "database",
+    "units": [
+      {
+        "title": "数据检查",
+        "goal": "围绕「数据检查」建立直觉，并完成一个可检查的小例子。",
+        "output": "检查观测与动作数据，在独立条件下比较基线和策略。"
+      },
+      {
+        "title": "行为克隆与独立评测",
+        "goal": "围绕「行为克隆与独立评测」建立直觉，并完成一个可检查的小例子。",
+        "output": "检查观测与动作数据，在独立条件下比较基线和策略。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "cs224r",
+    "label": "CS224R",
+    "title": "机器人学习进阶",
+    "lane": "c",
+    "phase": "候选 · 机器人学习",
+    "summary": "模仿学习、深度 RL、模型学习与离线数据",
+    "prereq": "机器学习、深度学习与 PyTorch。CS234 可按需回补，并非强制修课链。",
+    "check": "复现实验配置、独立评测与失败分析。",
+    "sources": [
+      [
+        "Stanford CS224R",
+        "https://cs224r.stanford.edu/"
+      ]
+    ],
+    "column": "4 / 10",
+    "row": 10,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 18,
+    "icon": "brain-circuit",
+    "units": [
+      {
+        "title": "模仿学习",
+        "goal": "围绕「模仿学习」建立直觉，并完成一个可检查的小例子。",
+        "output": "复现实验配置、独立评测与失败分析。"
+      },
+      {
+        "title": "深度 RL",
+        "goal": "围绕「深度 RL」建立直觉，并完成一个可检查的小例子。",
+        "output": "复现实验配置、独立评测与失败分析。"
+      },
+      {
+        "title": "模型学习与离线数据",
+        "goal": "围绕「模型学习与离线数据」建立直觉，并完成一个可检查的小例子。",
+        "output": "复现实验配置、独立评测与失败分析。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  },
+  {
+    "id": "underactuated",
+    "label": "Underactuated Robotics",
+    "title": "运动控制与动力学进阶",
+    "lane": "c",
+    "phase": "后期选读",
+    "summary": "非线性动力学、轨迹优化与运动控制",
+    "prereq": "机器人动力学、控制、线性代数和微积分；按项目需要进入。",
+    "check": "复算一个控制或轨迹优化例子，说明模型假设。",
+    "sources": [
+      [
+        "MIT Underactuated Robotics",
+        "https://underactuated.mit.edu/"
+      ]
+    ],
+    "column": "10 / 13",
+    "row": 10,
+    "mobileColumn": "1 / 3",
+    "mobileRow": 19,
+    "icon": "orbit",
+    "units": [
+      {
+        "title": "非线性动力学",
+        "goal": "围绕「非线性动力学」建立直觉，并完成一个可检查的小例子。",
+        "output": "复算一个控制或轨迹优化例子，说明模型假设。"
+      },
+      {
+        "title": "轨迹优化与运动控制",
+        "goal": "围绕「轨迹优化与运动控制」建立直觉，并完成一个可检查的小例子。",
+        "output": "复算一个控制或轨迹优化例子，说明模型假设。"
+      }
+    ],
+    "study_load": {
+      "core_minutes": 180,
+      "basis": "本站对讲解、阅读、跟练与独立核对的编排估计；非原课官方课时或实测承诺。"
+    }
+  }
+]

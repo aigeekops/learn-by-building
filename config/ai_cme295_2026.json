@@ -1,0 +1,840 @@
+{
+  "course": {
+    "id": "cme295",
+    "label": "CME 295",
+    "title": "看懂大模型怎样计算",
+    "edition": "Autumn 2026",
+    "position": "共同的模型原理",
+    "description": "以2026已发布第1–6讲为范围，逐讲提供中文讲解、多个数值动画、代码轨迹与独立练习。",
+    "prerequisites": [
+      "会读向量、点积与概率",
+      "了解神经网络前向计算"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "Transformers",
+        "lessons": [
+          "attention"
+        ],
+        "material": "2026官方课件已核对；本站本讲四个教学环节已接通；公开视频/字幕已核对"
+      },
+      {
+        "unit": "2",
+        "title": "Large Language Models",
+        "lessons": [
+          "sampling"
+        ],
+        "material": "2026官方课件已核对；本站本讲四个教学环节已接通；公开视频/字幕已核对"
+      },
+      {
+        "unit": "3",
+        "title": "LLM training",
+        "lessons": [
+          "lora"
+        ],
+        "material": "2026官方课件已核对；本站本讲四个教学环节已接通；公开视频/字幕已核对"
+      },
+      {
+        "unit": "4",
+        "title": "Reinforcement learning with LLMs",
+        "lessons": [
+          "cme-rl-lecture"
+        ],
+        "material": "2026官方课件已核对；本站本讲四个教学环节已接通；公开视频/字幕已核对"
+      },
+      {
+        "unit": "5",
+        "title": "LLM systems",
+        "lessons": [
+          "cme-systems"
+        ],
+        "material": "2026官方课件已核对；本站本讲四个教学环节已接通；公开视频/字幕已核对"
+      },
+      {
+        "unit": "6",
+        "title": "AI Agents",
+        "lessons": [
+          "cme-agents"
+        ],
+        "material": "2026官方课件已核对；本站本讲四个教学环节已接通；视频尚未发布"
+      }
+    ],
+    "pending": "第7–9讲尚无官方课件或视频，等发布并核实后加入。第6讲视频仍为Coming soon，本讲仅依据已公开课件制作。",
+    "sources": [
+      "cme-syllabus"
+    ],
+    "schedule_checked": "2026-11-09",
+    "scheduled": [
+      {
+        "unit": "7",
+        "date": "2026-11-13",
+        "title": "第7讲 LLM evaluation：大模型与 Agent 评测",
+        "summary": "LLM-as-a-judge、偏差与陷阱、Agent 评测与基准"
+      },
+      {
+        "unit": "8",
+        "date": "2026-11-20",
+        "title": "第8讲 Diffusion LLMs：扩散语言模型",
+        "summary": "连续与离散扩散、掩码扩散、训练与推理"
+      },
+      {
+        "unit": "9",
+        "date": "2026-12-04",
+        "title": "第9讲 Trending topics：前沿主题",
+        "summary": "课程回顾、多模态与未来方向"
+      }
+    ]
+  },
+  "sources": {
+    "cme-syllabus": {
+      "kind": "官方大纲",
+      "label": "CME 295 · Autumn 2026",
+      "url": "https://cme295.stanford.edu/syllabus/",
+      "status": "已核对 2026 年课次与公开材料",
+      "role": "official"
+    },
+    "cme-1-slides": {
+      "kind": "官方课件",
+      "label": "Lecture 1 · Attention 与 masking",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture1.pdf#page=59",
+      "locator": "全讲118页；重点：分词/表示、Word2vec/RNN/LSTM、自注意力、Transformer与端到端例子",
+      "status": "已下载、提取文字并检查关键页",
+      "role": "official"
+    },
+    "cme-1-video": {
+      "kind": "视频与字幕",
+      "label": "Lecture 1 · Query / Key / Value",
+      "url": "https://www.youtube.com/watch?v=114i2Kz-LZA&t=3600s",
+      "locator": "约 60:00 起讲 Q/K/V；84:11 起讲 masking",
+      "status": "已取得英文字幕；公式与课件交叉核对",
+      "role": "official"
+    },
+    "cme-2-slides": {
+      "kind": "官方课件",
+      "label": "Lecture 2 · Sampling 与 temperature",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture2.pdf#page=106",
+      "locator": "全讲138页；重点：模型家族、MoE、共享KV、RoPE与采样",
+      "status": "已下载并检查温度公式页",
+      "role": "official"
+    },
+    "cme-2-video": {
+      "kind": "视频与字幕",
+      "label": "Lecture 2 · 采样策略",
+      "url": "https://www.youtube.com/watch?v=GaIeu3npx04&t=5232s",
+      "locator": "87:12 起 top-k；88:59 起 temperature",
+      "status": "已取得英文字幕并核对相关段落",
+      "role": "official"
+    },
+    "cme-3-slides": {
+      "kind": "官方课件",
+      "label": "Lecture 3 · LoRA",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture3.pdf#page=53",
+      "locator": "全讲165页；重点：预训练、SFT、LoRA、偏好、推理、OPD与蒸馏",
+      "status": "已下载并检查基座加低秩增量示意",
+      "role": "official"
+    },
+    "cme-3-video": {
+      "kind": "视频与字幕",
+      "label": "Lecture 3 · Low-Rank Adaptation",
+      "url": "https://www.youtube.com/watch?v=S3bCDcJhz4s&t=2418s",
+      "locator": "40:18 起引入 LoRA",
+      "status": "已取得英文字幕并核对相关段落",
+      "role": "official"
+    },
+    "cme-4-slides": {
+      "kind": "官方课件",
+      "label": "CME295 2026 · Lecture 4",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture4.pdf",
+      "locator": "PDF共135页（从1计数）；第22–30页奖励/梯度；43–66页PPO；70–94页GRPO；末段OPD",
+      "status": "已下载与提取正文；相关公式/示意关键页已渲染核对",
+      "role": "official"
+    },
+    "cme-5-slides": {
+      "kind": "官方课件",
+      "label": "CME295 2026 · Lecture 5",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture5.pdf",
+      "locator": "PDF共156页（从1计数）；第15–62页FlashAttention；71–78页并行；99–107页硬件/KV；139–146页投机解码",
+      "status": "已下载与提取正文；相关公式/示意关键页已渲染核对",
+      "role": "official"
+    },
+    "cme-6-slides": {
+      "kind": "官方课件",
+      "label": "CME295 2026 · Lecture 6",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture6.pdf",
+      "locator": "PDF共152页（从1计数）；第14–47页RAG与检索；工具调用/MCP；105页Harness；130–135页压缩与记忆；140–144页编码Agent/Skills",
+      "status": "已下载与提取正文；相关公式/示意关键页已渲染核对",
+      "role": "official"
+    },
+    "cme-4-video": {
+      "kind": "视频与字幕",
+      "label": "Lecture 4 官方2026录播",
+      "url": "https://www.youtube.com/watch?v=3Vaj0Oka_t4",
+      "locator": "40:40起PPO；41:03起优势；67:37起GRPO",
+      "status": "已取得公开英文字幕并对照课件；字幕自动识别可能有误，公式以课件核对",
+      "role": "official"
+    },
+    "cme-5-video": {
+      "kind": "视频与字幕",
+      "label": "Lecture 5 官方2026录播",
+      "url": "https://www.youtube.com/watch?v=25KIyaeI_Fg",
+      "locator": "17:11起FlashAttention；83:06起KV；92:57起投机解码",
+      "status": "已取得公开英文字幕并对照课件；字幕自动识别可能有误，公式以课件核对",
+      "role": "official"
+    },
+    "cme-original-code": {
+      "kind": "本站原创代码",
+      "label": "CME295 九个新增计算模型的完整源码",
+      "url": "./ai-cme295-2026.js",
+      "status": "与页面使用同一注册模块；可按Node API或浏览器运行，计算轨迹回放不执行任意代码",
+      "role": "original"
+    }
+  },
+  "lessons": [
+    {
+      "id": "attention",
+      "course": "cme295",
+      "unit": "1",
+      "title": "第1讲 Transformers：从文本表示到自回归生成",
+      "summary": "从NLP任务、分词、表示学习与循环网络，走到注意力和Transformer生成。",
+      "question": "文本怎样变成向量，又怎样利用上下文逐个生成token？",
+      "outcome": "解释文本→token→表示→注意力→预测的链路，复算一个因果注意力输出。",
+      "prerequisites": [
+        "点积：对应维相乘再相加",
+        "加权平均：权重乘数值后求和"
+      ],
+      "explanation": [
+        "把 Query 想成当前要解决的问题，Key 是候选信息的标签，Value 是真正取回的内容。先比较 Query 与 Key，再决定各取多少 Value。",
+        "用“我、学、AI”三个教学 token 和两维向量，逐格计算点积、缩放、因果遮罩、Softmax 和 Value 汇总。点任意结果格，可以追查参与运算的输入与完整算式；播放和前后单步使用同一份计算轨迹。",
+        "Q、K、V 已给定，本例展开一个头、一个位置。真实 Transformer 会先通过可学习投影生成它们，再组合多个头。改 Key 检查匹配权重，改 Value 检查取回内容，改可见范围检查未来信息是否被遮住。"
+      ],
+      "formula": "Attention(q,K,V) = softmax(qKᵀ / √dₖ + mask) V",
+      "worked": "默认位置2：q=[1,1]，点积=[1,1,2]，除以√2后权重约[0.2483,0.2483,0.5035]，与V=[[2,0],[0,2],[1,1]]汇总得到[1,1]。只把第三个Key第一维改为3，权重会变，但输出仍为[1,1]：前两个Value对称，第三个恰好等于它们的均值。恢复默认Key，只把第三个Value第一维改为3，权重不变，输出第一维变为约2.0070。",
+      "misconception": "注意力权重不是事实正确率。因果遮罩在Softmax前生效，被遮位置不进入分母。权重改变并不保证输出改变：不同Value的加权和可能相同。",
+      "practice": [
+        "先逐格核对qKᵀ：点选每个结果格，指出哪一行与哪一列相乘；再用单步检查缩放、遮罩、Softmax和两维输出。",
+        "先预测，再点“只改Key”和“只改Value”，对照权重与输出。解释为什么权重变化不一定导致输出变化。",
+        "点“检查因果遮罩”：在位置1改变未来位置的Key和Value，输出应保持不变。再手动切换双向模式，比较未来信息何时开始参与。"
+      ],
+      "exercise": {
+        "prompt": "换一个一维案例：两个可见 Value 为 2 和 6，权重分别为 0.25 和 0.75。加权输出是多少？",
+        "expected": 5,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "分别算 0.25×2 和 0.75×6，再相加。",
+        "solution": "0.25×2 + 0.75×6 = 5。这里只验证加权汇总；若原始分数给定，还需要自己计算 softmax。",
+        "transfer": "独立验证：不打开双向模式，将位置设为 1、第三个 Key 设为 4。第三个位置的权重仍应为 0；解释它为什么不受 Key 的数值影响。"
+      },
+      "sources": [
+        "cme-1-slides",
+        "cme-1-video",
+        "original-code",
+        "cme-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "sampling",
+          "label": "同样是 softmax：下一步看输出采样"
+        },
+        {
+          "lesson": "compute",
+          "label": "继续到 CS336：把计算变成资源账"
+        },
+        {
+          "lesson": "context",
+          "label": "连接 CS146S：可见信息与上下文选择"
+        }
+      ],
+      "boundary": "给定 Q/K/V 的单头前向计算；未加载或训练语言模型。",
+      "modelId": "attention",
+      "demos": [
+        {
+          "modelId": "attention",
+          "title": "Attention逐格计算 · 单步与参数验证"
+        },
+        {
+          "modelId": "cme-representations",
+          "title": "BPE、表示查表与RNN状态"
+        }
+      ],
+      "sections": [
+        {
+          "title": "1. NLP任务与自回归分解",
+          "explanation": "分类输出标签，序列标注为各位置给标签，翻译输出可变长度序列。自回归模型把长序列概率分解为逐token条件概率的乘积，让“预测下一token”成为统一训练问题；条件输入与输出目标仍需按任务明确。",
+          "code": "log_p = sum(log_p_next[t] for t in positions)",
+          "exercise": "为情感分类、实体标注、翻译各写一对输入与输出。"
+        },
+        {
+          "title": "2. 分词与BPE：规则在训练时确定",
+          "explanation": "token不等于词或字符。字符、词、子词和字节方案对词表、长度和未知内容的处理不同。BPE在训练语料里计数相邻符号并合并，推理时按已学顺序使用规则。页面low/low/lower例子不跨词合并，不代表真实tokenizer的全部字节与特殊token规则。",
+          "code": "pairs = count_adjacent_pairs(corpus)\nmerge = choose_most_frequent(pairs)\nencoded = apply_existing_merges(new_text)",
+          "exercise": "做两次合并后，low lower应得到几个token？改变词序是否应改变合并规则？"
+        },
+        {
+          "title": "3. Word2vec与表示：查表不是理解",
+          "explanation": "one-hot乘嵌入矩阵等价于取其中一行。Word2vec用代理任务学习表示：CBOW由周围词预测中心词，skip-gram由中心词预测周围词。均值词袋不区分顺序，静态词向量也不能仅靠同一个向量区分“苹果”的不同含义。页面向量表是人为指定的数值。",
+          "code": "embedding = E[token_id]\ncbow_input = mean(E[context_ids], axis=0)",
+          "exercise": "同一组向量倒序取均值应保持不变。这遗漏了哪种语言信息？"
+        },
+        {
+          "title": "4. RNN与LSTM：让历史进入状态",
+          "explanation": "RNN按位置递推隐藏状态，因此能够表示顺序，也面临长链梯度和串行计算。LSTM通过遗忘门、输入门、输出门与细胞状态控制信息流，改善长期信息传递；它仍按序更新，不能把所有位置变成互不依赖的并行计算。",
+          "code": "h = tanh(Wx @ x + Wh @ h_prev + b)\nc = forget * c_prev + input_gate * candidate",
+          "exercise": "交换low与lower的顺序，对比页面RNN末状态与均值池化的变化。"
+        },
+        {
+          "title": "5. 缩放点积注意力与多个头",
+          "explanation": "Q是当前位置的查询，K用于匹配，V提供待组合内容。点积分数除以sqrt(d_k)、加可见性mask、softmax后汇总V；多头使用不同可学习投影。注意力权重是此层的信息组合比例，不等于事实正确率。",
+          "code": "scores = Q @ K.T / sqrt(d_k) + mask\ny = softmax(scores) @ V",
+          "exercise": "位置0使用因果mask时，改变位置2的Key为什么不应改变输出？"
+        },
+        {
+          "title": "6. Transformer块与端到端生成",
+          "explanation": "编码器自注意力可双向看输入；解码器自注意力不能看未来，编码器-解码器注意力从输出位置读取输入表示。FFN处理每个位置的特征，残差与归一化帮助优化，位置编码补入顺序。训练用右移目标与teacher forcing并行算多个位置；生成则追加一个token再循环至EOS或上限。",
+          "code": "x = x + attention(norm(x))\nx = x + feed_forward(norm(x))\nnext_id = sample(model(prefix)[-1])",
+          "exercise": "为BOS→我→学习→AI写出右移输入和目标；分别说明三种注意力的Q与K/V来源。"
+        }
+      ]
+    },
+    {
+      "id": "sampling",
+      "course": "cme295",
+      "unit": "2",
+      "title": "第2讲 Large Language Models：架构、位置与采样",
+      "summary": "比较模型家族、稀疏专家、共享KV、RoPE与生成分布控制。",
+      "question": "相似的Transformer，为什么参数、缓存、可见范围和生成行为不同？",
+      "outcome": "比较架构与MHA/MQA/GQA，复算稀疏路由、RoPE相对位置和温度采样。",
+      "prerequisites": [
+        "softmax 将分数变成概率",
+        "概率区间相加为 1"
+      ],
+      "explanation": [
+        "模型先给出候选 token 的 logits。它们是分数，不是最终概率。温度把所有分数除以同一个正数：较低温度使分布更尖，较高温度使它更平。",
+        "top-k 进一步限制可被抽到的候选。截断之后仍要归一化；保留一个候选时，它的最终概率就是 1。",
+        "把概率从左到右排成长度为 1 的区间，用落点 u 找到这一次的 token。动画固定 u，方便把“分布变化”和“随机落点变化”分开研究。"
+      ],
+      "formula": "pᵢ = exp(logitᵢ / T) / Σⱼ exp(logitⱼ / T)，仅对保留候选归一化",
+      "worked": "T=1、k=4 时，[3,2,1,0] 对应概率约 [0.6439,0.2369,0.0871,0.0321]。u=0.70 落在第二个区间，因此本次得到“狗”。",
+      "misconception": "提高温度改变采样分布，不会增加模型掌握的知识；一次抽样也无法说明整个分布。",
+      "practice": [
+        "固定 u=0.70，先预测 T 从 1 降到 0.5 会抽到哪个候选。",
+        "逐步查看 logits / T、保留集合、softmax 与累计区间，核对预测。",
+        "把 k 设为 1，再改变温度和 u，解释为什么结果保持同一个候选。"
+      ],
+      "exercise": {
+        "prompt": "两个保留候选的 logits 都为 0，T=0.5，k=2。第一个候选的概率是多少？填写 0 到 1 的数。",
+        "expected": 0.5,
+        "tolerance": 1e-06,
+        "unit": "比例",
+        "hint": "两个相同分数，除以同一个温度之后仍相同。",
+        "solution": "两个 exp(0/0.5) 都为 1，所以每个概率为 1/(1+1)=0.5。",
+        "transfer": "独立验证：使用页面默认 logits，设 T=1、k=2、u=0.80。第二个候选应被取出；自己算截断后的累计概率来核对。"
+      },
+      "sources": [
+        "cme-2-slides",
+        "cme-2-video",
+        "original-code",
+        "cme-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "attention",
+          "label": "回看：注意力中的 softmax"
+        },
+        {
+          "lesson": "agent",
+          "label": "进入 CS146S：输出如何变成工具动作"
+        }
+      ],
+      "boundary": "四个给定 logits 的数值演示；未调用真实模型。T>0；并列排名的完整工程规则未展开。",
+      "modelId": "sampling",
+      "demos": [
+        {
+          "modelId": "cme-moe",
+          "title": "稀疏专家路由"
+        },
+        {
+          "modelId": "cme-kv",
+          "title": "MHA / GQA / MQA缓存"
+        },
+        {
+          "modelId": "cme-rope",
+          "title": "旋转位置与平移"
+        },
+        {
+          "modelId": "sampling",
+          "title": "温度与top-k采样"
+        }
+      ],
+      "sections": [
+        {
+          "title": "1. 模型家族与LLM定义",
+          "explanation": "encoder-only常用双向信息建立表示，decoder-only用因果目标生成，encoder-decoder把输入表示与条件输出分开。“大”没有跨时代统一的参数门槛，需同时看架构、数据、目标与用途。分类和续写不能只凭模型参数量选择输出结构。",
+          "code": "representation = encoder(input_ids)\nlogits = decoder(prefix, causal=True)",
+          "exercise": "文档分类与逐token续写，分别需要什么输出与可见范围？"
+        },
+        {
+          "title": "2. MoE的总参数与活跃参数",
+          "explanation": "路由器挑选少数专家，按权重汇总输出。稀疏激活将总容量与每token计算分开，但专家仍需存储，也带来负载均衡、溢出与通信问题。共享专家和细粒度专家是架构选项，不是把FFN拆开就必定提速。",
+          "code": "selected = top_k(router_logits,k)\ny = sum(g[i]*expert[i](x) for i in selected)",
+          "exercise": "三个专家各4个教学参数，激活两个时，总参数与活跃参数各多少？"
+        },
+        {
+          "title": "3. MHA、MQA与GQA如何共享KV",
+          "explanation": "MHA为每个Query头保留KV头，MQA共享一组KV，GQA按组共享。Query头数不必随KV头数减少。缓存与KV头数近似成正比，但实际速度还受算子、带宽与质量约束；MLA等结构进一步改变缓存表示，不可直接套同一个头数公式。",
+          "code": "kv_bytes = 2*layers*batch*seq_len*kv_heads*head_dim*dtype_bytes",
+          "exercise": "8个Query头从8组KV改为2组，其他条件相同，缓存变为几分之一？"
+        },
+        {
+          "title": "4. RoPE让点积感知相对位置",
+          "explanation": "把Q/K每两个维度作为平面向量，按位置和该组频率旋转。两位置共同平移时，点积里的相对旋转保持不变；一般向量同样满足相对旋转结构。长上下文扩展还涉及频率与训练分布，不能由此推断无限长度泛化。",
+          "code": "q_rot = rotate(q, q_pos*theta)\nk_rot = rotate(k, k_pos*theta)",
+          "exercise": "Q位置2、K位置1、θ=0.5，同时增加3后点积为何不变？只移动Q时呢？"
+        },
+        {
+          "title": "5. 上下文长度与有效使用不同",
+          "explanation": "长度上限限制可提供多少位置；KV容量随长度增加，标准稠密注意力分数矩阵还受长度平方影响。滑动窗口限制直接可见范围，位置外推调整位置表示。资料在窗口中并不能证明模型已经正确使用，需独立检验跨段依赖。",
+          "code": "visible = positions[max(0,t-window+1):t+1]",
+          "exercise": "长度为4的滑动窗口在位置5允许直接读取哪些下标？"
+        },
+        {
+          "title": "6. 温度、top-k与top-p的先后关系",
+          "explanation": "正温度缩放logits后得到分布；top-k保留固定个数，top-p保留累计概率达到阈值的最小候选前缀，再归一化采样。要约定并列排序和阈值边界。低温不增加知识，贪心也不是完整序列最优。",
+          "code": "keep = smallest_prefix_with_sum_at_least(sorted_probs, top_p)\nnext_token = sample(renormalize(keep))",
+          "exercise": "分布[0.6,0.25,0.1,0.05]，top-p=0.8保留哪些？与top-k=3比较。"
+        }
+      ]
+    },
+    {
+      "id": "lora",
+      "course": "cme295",
+      "unit": "3",
+      "title": "第3讲 LLM training：预训练、微调、偏好与蒸馏",
+      "summary": "用监督位置、更新参数、偏好信号与轨迹分布区分训练方法。",
+      "question": "从会续写到遵循指令和推理，训练数据与优化目标怎样改变？",
+      "outcome": "核算预训练/SFT的mask损失、LoRA参数、DPO与蒸馏目标，区分offline与on-policy轨迹。",
+      "prerequisites": [
+        "矩阵乘向量",
+        "冻结参数与可训练参数的区别"
+      ],
+      "explanation": [
+        "全量微调直接更新大矩阵 W₀。LoRA 保留它，在旁边增加 A 和 B 两个可训练矩阵，让它们的乘积表达更新量。",
+        "输入先通过 A 压到 r 维，再经 B 返回输出维度。旁路乘以 α/r 后，与基座输出相加；r 是中间秩的上限，α 控制缩放。",
+        "参数优势来自 r 远小于输入和输出维度。玩具矩阵很小时，r 增大后可能比全量微调参数还多，这也是必须核算而不能凭名字判断的原因。"
+      ],
+      "formula": "y = W₀x + (α/r)BAx；可训练参数数目 = r(d_in + d_out)",
+      "worked": "默认 W₀=I₄、r=1、α=1、x=[1,2,0,-1]。Ax=[1]，旁路贡献=[1,0.5,0,0]，输出=[2,2.5,0,-1]；A、B 共 8 个可训练参数，W₀ 的 16 个参数冻结。",
+      "misconception": "LoRA 并不是让整个模型只剩低秩矩阵。冻结参数仍要加载；可训练参数减少不等于总显存按同一比例减少。",
+      "practice": [
+        "先预测：α=0 时输出会怎样？再用动画核对基座路径。",
+        "固定输入，比较 r=1、2、4，观察中间形状和可训练参数。",
+        "解释为什么这个 4×4 例子在 r=4 时没有参数优势。"
+      ],
+      "exercise": {
+        "prompt": "换成一个 6×6 矩阵，用 r=2 的 A、B 做 LoRA，不计偏置。A、B 合计多少个可训练参数？",
+        "expected": 24,
+        "tolerance": 0,
+        "unit": "个",
+        "hint": "A 是 2×6，B 是 6×2。",
+        "solution": "2×6+6×2=24；全量矩阵为 36 个。这里比较的是可训练参数，不包含冻结基座的存储。",
+        "transfer": "独立验证：默认 r=1、α=1，把 x 的第一维设为 2。自行算出输出应为 [4,3,0,-1]，再核对。"
+      },
+      "sources": [
+        "cme-3-slides",
+        "cme-3-video",
+        "original-code",
+        "cme-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "compute",
+          "label": "去 CS336：区分计算量和状态显存"
+        },
+        {
+          "lesson": "parallel",
+          "label": "继续：状态如何分配到多卡"
+        }
+      ],
+      "boundary": "给定适配器的一次前向计算，不进行反向传播或训练，也不承诺微调效果。",
+      "modelId": "lora",
+      "demos": [
+        {
+          "modelId": "cme-training",
+          "title": "监督mask、偏好与蒸馏目标"
+        },
+        {
+          "modelId": "lora",
+          "title": "LoRA增量与参数核算"
+        }
+      ],
+      "sections": [
+        {
+          "title": "1. 预训练与数据分布",
+          "explanation": "自回归预训练用真实前缀预测下一token，teacher forcing使多个目标可并行计算。数据来源、混合、去重与重复次数会改变模型学到的分布。不同分词器的token交叉熵不宜直接比较，可检查按字节归一化的指标与下游任务。",
+          "code": "loss = -sum(log_prob_correct[t] for t in supervised)/len(supervised)",
+          "exercise": "正确概率为0.5、0.8的两个目标，平均负对数损失是多少？"
+        },
+        {
+          "title": "2. Mid-training与长上下文训练",
+          "explanation": "中间训练可用目标领域的高质量数据强化特定能力。长上下文训练既需位置表示与系统支持，也需有跨段结构的长样本；修改最大长度配置不等于学会长距离依赖。课程中的具体模型配方应按其数据与预算解读。",
+          "code": "batch = sample_targeted_long_examples(stage_length)",
+          "exercise": "真正要求跨段推理的样本与重复填满窗口的样本有何区别？"
+        },
+        {
+          "title": "3. SFT与指令微调的监督mask",
+          "explanation": "SFT用期望输入/输出对，instruction tuning是其中一种应用。对话里的用户和系统内容通常作为条件，回答位置进入损失。模型学到的行为依赖示例质量和提示分布，不能只靠扩大样本数保证泛化。",
+          "code": "labels[prompt_positions] = IGNORE_INDEX\nloss = cross_entropy(logits,labels)",
+          "exercise": "改变页面prompt位置概率但保持回答概率0.8，SFT损失是否变化？"
+        },
+        {
+          "title": "4. LoRA与参数高效适配",
+          "explanation": "冻结W0并加入低秩增量BA，可训练参数为r(d_in+d_out)，基座仍占存储。prefix tuning和adapters从不同位置引入自由度。小矩阵上的大r可能没有参数优势，参数少也不能直接推断任务效果或完整显存同比下降。",
+          "code": "y = W0 @ x + (alpha/rank)*(B @ (A @ x))",
+          "exercise": "6×6、r=2不计偏置有多少适配器参数？r=4还有数量优势吗？"
+        },
+        {
+          "title": "5. RLHF与DPO的偏好信号",
+          "explanation": "同一提示的chosen/rejected比较表达偏好，不直接等于真实正确率。经典RLHF先训练奖励模型再约束策略更新；DPO直接使用相对参考策略的对数概率差。β、固定参考、序列长度与偏好数据分布必须明确。",
+          "code": "margin=(logpi_c-logpi_r)-(logref_c-logref_r)\nloss=-log_sigmoid(beta*margin)",
+          "exercise": "学生与参考的chosen/rejected赔率相同时，margin和DPO损失各是多少？"
+        },
+        {
+          "title": "6. 推理训练与蒸馏：过程、结果、轨迹分开",
+          "explanation": "更长的推理token分配更多测试时计算，但长文本不保证正确。验证器只检验其定义的性质。蒸馏提供教师的软概率或生成结果；on-policy distillation在学生生成的前缀上查询教师，区别于固定外部数据。KL方向、温度和轨迹分布决定目标含义。",
+          "code": "trajectory = student.sample(prompt)\nteacher_probs = teacher(trajectory.prefixes)\nloss = distillation_objective(student,teacher_probs)",
+          "exercise": "算KL([0.8,0.2] || [0.6,0.4])，并说明交换方向、换成学生生成前缀会改变什么。"
+        }
+      ]
+    },
+    {
+      "id": "cme-rl-lecture",
+      "course": "cme295",
+      "unit": "4",
+      "title": "第4讲 强化学习：从奖励到受约束的策略更新",
+      "summary": "区分RLHF/RLVR、奖励与优势，复算组内标准化、策略梯度估计与ratio裁剪。",
+      "question": "只给一个最终奖励，怎样知道哪些生成概率应提高，又怎样避免更新过猛？",
+      "outcome": "区分RLHF/RLVR、奖励与优势，复算组内标准化、策略梯度估计与ratio裁剪。",
+      "prerequisites": [
+        "理解概率、对数、向量与基础训练循环",
+        "先完成第1–3讲对应知识点"
+      ],
+      "explanation": [
+        "把模型看成给每个下一token分配概率的策略。奖励告诉我们某次完整输出的好坏，策略梯度通过log概率把这份信号传回参数；它不是把答案直接当监督标签。",
+        "PPO用价值估计构造优势并控制新旧策略的概率比；GRPO用同一提示的回答小组估计相对优势，省去独立价值网络，但引入组内比较与归一化的边界。",
+        "页面固定三条回答、奖励和一个标量logit，实际计算候选更新与裁剪诊断。它揭示数学关系，不启动完整RL训练，也不把同组相对胜出当作外部任务已可靠解决。"
+      ],
+      "formula": "Aᵢ=(rᵢ−mean(r))/std(r)；ratioᵢ=π_new(oᵢ)/π_old(oᵢ)；L_clip=mean(min(ratioᵢAᵢ,clip(ratioᵢ)Aᵢ))",
+      "worked": "默认奖励[0,1,1]，均值2/3，总体标准差约0.4714，优势约[-1.4142,0.7071,0.7071]。旧策略均匀时，标量梯度估计约0.4714；步长1产生候选新分布，再核对各项裁剪。",
+      "misconception": "GRPO同分组没有相对信号；裁剪和KL不是同一个约束。把概率比先裁完再乘优势，会漏掉负优势的min分支。",
+      "practice": [
+        "先预测奖励全相同时梯度和新分布会怎样。",
+        "逐步看奖励、基线、优势、score梯度与候选概率；增加步长检查裁剪项。",
+        "区分课堂完整算法、本站单组算例和真实训练的稳定性证据。"
+      ],
+      "exercise": {
+        "prompt": "同一提示三个回答的奖励均为1，本例对零标准差组将优势置0。三个优势之和是多少？",
+        "expected": 0,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "每个回答相对组均值的偏离都为0。",
+        "solution": "优势为[0,0,0]，和为0；不能用除零产生任意更新。",
+        "transfer": "设rewards=equal、theta=0.5、eta=3，核对gradient=0，新旧策略一致；再用mixed检查方向。"
+      },
+      "demos": [
+        {
+          "modelId": "cme-rl",
+          "title": "组内优势、策略梯度与裁剪"
+        },
+        {
+          "modelId": "cme-training",
+          "title": "偏好与教师分布目标"
+        }
+      ],
+      "modelId": "cme-rl",
+      "sections": [
+        {
+          "title": "1. 先约定token与序列概率",
+          "explanation": "每一步action是token，完整回答的概率是各token条件概率的乘积，对数为求和。新旧序列概率比与逐token比值不是同一对象，算法公式里的平均范围、mask、KL方向与正负号必须先核对，不能把不同论文中的符号直接拼接。",
+          "code": "log_pi_response = sum(log_pi_token[t] for t in response_positions)",
+          "exercise": "用两步概率[0.5,0.2]与[0.4,0.4]算序列概率比，比较两个token比的乘积。"
+        },
+        {
+          "title": "2. 主观奖励、可验证奖励与奖励漏洞",
+          "explanation": "RLHF偏好常用Bradley–Terry形式拟合两输出的相对胜率；RLVR使用答案、单元测试等可验证结果。验证器只覆盖定义的检查，可能被格式漏洞、泄漏与投机策略利用；奖励提升必须配合独立真实目标评估。",
+          "code": "p_chosen = sigmoid(reward_chosen - reward_rejected)",
+          "exercise": "测试只检查最后一行“42”的存在，会怎样被没有解题能力的输出欺骗？"
+        },
+        {
+          "title": "3. 策略梯度与基线：把稀疏回报传回概率",
+          "explanation": "score-function关系用R乘∇logπ估计提高期望回报的方向。减去与当前动作无关的基线可降低方差，不改变期望梯度。整条回答只有一个终局奖励时，给各token分配责任仍困难；批次估计也可能噪声很大。",
+          "code": "gradient = mean((reward-baseline)*grad_log_prob)",
+          "exercise": "给固定三条回答算页面score贡献，解释一批梯度估计与长期期望梯度的区别。"
+        },
+        {
+          "title": "4. PPO：价值估计、ratio与更新幅度",
+          "explanation": "PPO通常用价值函数估计优势，并对新旧策略概率比构造裁剪目标；参考模型KL另行限制偏离。裁剪不是强制每个概率都留在一个固定区间，也不保证任何一次优化都安全。实际训练需要rollout、价值目标、mask和优化器一起核对。",
+          "code": "surrogate = min(ratio*A, clip(ratio,1-eps,1+eps)*A)",
+          "exercise": "A=-1、ratio=0.5、ε=0.2时，两个乘积和最终min各是多少？"
+        },
+        {
+          "title": "5. GRPO：组内比较替代独立价值网络",
+          "explanation": "对同一提示采样多个回答，以组均值和标准差形成相对优势。总体/样本标准差口径、回答长度归一化与奖励组合会改变尺度。同分组应明确处理，不能制造梯度。组内最优只表示相对优劣，不代表绝对正确。",
+          "code": "advantage = 0 if std_reward==0 else (reward-mean_reward)/std_reward",
+          "exercise": "奖励[0,1,1]用总体标准差与样本标准差，各自会得到什么尺度？"
+        },
+        {
+          "title": "6. On-policy distillation与RL的边界",
+          "explanation": "学生生成自身会遇到的轨迹，再从教师获得较密集的分布信号，可缓解纯终局奖励的信用分配问题；但需要教师并受教师与数据覆盖限制。KL方向、是否detach、采样策略和截断都影响真实梯度。页面蒸馏面板只算给定位置KL，不代表完整OPD。",
+          "code": "prefixes = student_rollout(prompt)\nteacher = teacher_distribution(prefixes)\nloss = specified_token_level_objective(student,teacher)",
+          "exercise": "列出用固定外部答案做SFT与在学生轨迹上查教师的两个分布差异。"
+        }
+      ],
+      "sources": [
+        "cme-4-slides",
+        "cme-4-video",
+        "original-code",
+        "cme-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "lora",
+          "label": "回看训练目标与LoRA"
+        },
+        {
+          "lesson": "compute",
+          "label": "连接CS336的资源核算"
+        }
+      ],
+      "boundary": "单组、三候选、单标量策略的数值模型；候选更新使用未裁剪梯度，随后诊断裁剪与KL，未声称实现完整PPO/GRPO优化。"
+    },
+    {
+      "id": "cme-systems",
+      "course": "cme295",
+      "unit": "5",
+      "title": "第5讲 LLM systems：IO、并行与高效推理",
+      "summary": "核算KV缓存与QK分数对，验证在线softmax和投机采样修正，区分显存、IO与实际延迟。",
+      "question": "模型公式相同，为什么移动和保存数据的方式会大幅改变运行成本？",
+      "outcome": "核算KV缓存与QK分数对，验证在线softmax和投机采样修正，区分显存、IO与实际延迟。",
+      "prerequisites": [
+        "理解概率、对数、向量与基础训练循环",
+        "先完成第1–3讲对应知识点"
+      ],
+      "explanation": [
+        "GPU不仅受算力限制，也受显存容量与数据搬运限制。先分清FLOP、FLOP/s、字节和字节/s，才能判断某个步骤是在算还是在等数据。",
+        "FlashAttention在分块中维护归一化状态，减少大中间矩阵的HBM读写；分布式训练则在设备之间安排数据、参数和计算。数学等价与执行效率必须分别验证。",
+        "推理把prefill与decode分开看。KV缓存复用旧表示，GQA/MLA与分页改变存储，投机解码则用便宜草稿加目标核验。页面只核算可复现的小模型，不给未经测量的GPU加速承诺。"
+      ],
+      "formula": "KV字节=2×L×B×S×H_KV×d_head×元素字节数；roofline上限=min(峰值算力, 带宽×算术强度)",
+      "worked": "默认prefix=8、新token=4，一个头的稠密QK分数对：无缓存64+9²+10²+11²+12²=510，有缓存64+9+10+11+12=106。4层、2个KV头、头维8、2字节元素的最终缓存为3072字节。",
+      "misconception": "分数对减少4.81倍不等于真实加速4.81倍；FlashAttention不是近似注意力；投机解码拒绝后必须使用修正分布。",
+      "practice": [
+        "预测把KV头从8改成2对缓存与Query头的影响。",
+        "对比不同块大小和大常数偏移，在线softmax输出应保持一致。",
+        "用目标[0.5,0.5]与草稿[0.8,0.2]复算接受概率及拒绝残差。"
+      ],
+      "exercise": {
+        "prompt": "目标分布[0.5,0.5]，草稿分布[0.8,0.2]，草稿提出候选0。接受概率min(1,p/q)是多少？",
+        "expected": 0.625,
+        "tolerance": 1e-06,
+        "unit": "比例",
+        "hint": "用候选0的目标概率除以草稿概率。",
+        "solution": "0.5/0.8=0.625。若拒绝，残差max(p−q,0)归一化为[0,1]。",
+        "transfer": "将投机面板p0与q0设为相同，接受概率应为1；在线softmax offset=1000也应输出约2.0830043。"
+      },
+      "demos": [
+        {
+          "modelId": "cme-kv",
+          "title": "KV缓存与共享头"
+        },
+        {
+          "modelId": "cme-online-softmax",
+          "title": "FlashAttention在线归一化"
+        },
+        {
+          "modelId": "cme-speculative",
+          "title": "投机解码的接受与修正"
+        },
+        {
+          "modelId": "parallel",
+          "title": "数据并行与ZeRO状态分片"
+        }
+      ],
+      "modelId": "cme-kv",
+      "sections": [
+        {
+          "title": "1. 容量、带宽与算力三种约束",
+          "explanation": "容量决定张量是否装得下，带宽决定每秒可搬多少字节，算力决定每秒可做多少FLOP。算术强度是FLOP/byte，roofline用min(计算峰值,带宽×强度)给出理想上界；不等于端到端实测吞吐。低精度、布局和kernel会改变这些账。",
+          "code": "bound = min(peak_flops_per_second, bandwidth_bytes_per_second*flops_per_byte)",
+          "exercise": "算力100 TFLOP/s、带宽1 TB/s、强度20 FLOP/byte，上界是多少TFLOP/s？"
+        },
+        {
+          "title": "2. FlashAttention：精确计算，改变IO次序",
+          "explanation": "普通实现可能物化QK分数和softmax概率矩阵并写回HBM。分块算法把Q/K/V块留在较快存储中，用在线最大值、分母和加权分子累积输出；反向可选择重计算而非存储所有中间值。数学上仍是相同注意力，有限精度误差需核对。",
+          "code": "m_new=max(m,block_max)\nscale=exp(m-m_new)\nl=scale*l+sum(exp(block_scores-m_new))\nz=scale*z+sum(exp(block_scores-m_new)*block_values)",
+          "exercise": "分块大小1、2、4分别运行，输出应一致。为何不能忘记旧分子和分母的scale重标定？"
+        },
+        {
+          "title": "3. 多卡并行：数据、宽度与深度分开",
+          "explanation": "DP把批次分到不同设备并汇总梯度，ZeRO逐级分片状态。TP切矩阵/注意力头等计算维度，频繁通信要求合适互联；PP按层分阶段，用微批提高流水利用率但存在气泡。混合方案必须说明拓扑、状态和通信，不能只把卡数乘峰值。",
+          "code": "global_batch = micro_batch * accumulation_steps * data_parallel_size",
+          "exercise": "4个等量微批与2个流水阶段，在填充和排空时为什么不能所有阶段一直满载？"
+        },
+        {
+          "title": "4. Prefill与decode：计算结构不同",
+          "explanation": "prefill同时处理输入位置；decode每步新增一个位置。KV缓存保存各层过去K/V，让新Query不重算所有旧Query。decode常受模型与缓存的数据搬运影响，实际是否memory-bound仍取决于batch、上下文、精度和硬件。",
+          "code": "new_k,new_v = project(new_hidden)\ncache.append(new_k,new_v)\nnew_output = attention(new_query, cache.keys, cache.values)",
+          "exercise": "用prefix8与4个新token分别复算缓存面板的510和106，列出它没有计算的工作。"
+        },
+        {
+          "title": "5. 分页、GQA与MLA解决不同存储问题",
+          "explanation": "PagedAttention把逻辑token块映射到物理缓存块，降低预留连续空间的碎片和浪费；GQA/MQA减少独立KV头，MLA用结构化压缩表示减少缓存。三者作用层级不同，额外索引、解压与算子成本也需核算。",
+          "code": "physical_block = block_table[sequence_id][logical_block]",
+          "exercise": "一个请求只用了最后一页的3个槽位，与按最大输出预留完整连续缓存相比，浪费在哪里？"
+        },
+        {
+          "title": "6. 投机解码：快草稿必须由目标模型修正",
+          "explanation": "草稿先生成多个token，目标并行核验。单位置接受概率为min(1,p/q)；拒绝时从max(p−q,0)归一化残差重采样并结束该草稿块。正确修正可保持目标分布；是否提速取决于草稿成本、接受长度和核验并行度。MTP等方法也应分别核对其训练与采样规则。",
+          "code": "accept = u < min(1,p[token]/q[token])\nif not accept: token = sample(normalize(max(p-q,0)))",
+          "exercise": "让草稿和目标分布完全相同，接受概率与残差应怎样？为什么零残差不需要被采样？"
+        },
+        {
+          "title": "7. 如何验证一次系统优化",
+          "explanation": "先校验输出/梯度误差，再在相同硬件、精度、batch和长度下测量warm-up后的时间。同步设备，记录显存峰值，区分首token延迟、每token延迟与总吞吐；并发提高吞吐可能增加单请求等待。页面只验证数字与等价关系，不替代此实验。",
+          "code": "synchronize(); start=clock()\nrun_workload(); synchronize(); elapsed=clock()-start",
+          "exercise": "写一份对照实验表，明确两种配置必须保持不变的四个条件。"
+        }
+      ],
+      "sources": [
+        "cme-5-slides",
+        "cme-5-video",
+        "original-code",
+        "cme-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "lora",
+          "label": "回看训练目标与LoRA"
+        },
+        {
+          "lesson": "compute",
+          "label": "连接CS336的资源核算"
+        }
+      ],
+      "boundary": "固定小张量、理想缓存计数与单位置投机采样；未启动GPU kernel、分布式进程或性能测量。"
+    },
+    {
+      "id": "cme-agents",
+      "course": "cme295",
+      "unit": "6",
+      "title": "第6讲 AI Agents：检索、工具、记忆与Harness",
+      "summary": "串起检索增强、工具协议、状态循环、上下文压缩与编码Agent，核对证据和停止条件。",
+      "question": "模型如何获取训练后才出现的资料，又如何把输出变成可验证的动作？",
+      "outcome": "串起检索增强、工具协议、状态循环、上下文压缩与编码Agent，核对证据和停止条件。",
+      "prerequisites": [
+        "理解概率、对数、向量与基础训练循环",
+        "先完成第1–3讲对应知识点"
+      ],
+      "explanation": [
+        "预训练权重是静态参数，任务中的新资料和外部动作要通过上下文、检索与工具接入。RAG提供可追溯信息，tool calling把结构化请求交给实际执行器。",
+        "Agent不仅是模型加几个工具。Harness安排观察、调用、错误处理、状态、预算、记忆和停止；上下文压缩与长期记忆又决定下一轮能看到什么。",
+        "编码Agent把这些机制用于仓库检索、修改与验证。Skills复用流程，plugins组合能力；调用和播放均不代表任务完成，必须依靠实际结果及独立验证。"
+      ],
+      "formula": "检索候选 → 重排 → 选证据 → 增强上下文 → 模型决策 → 工具执行 → 观察与停止检查",
+      "worked": "检索面板用人工二维向量演示候选相似度，保留policy-1等来源。默认退货问题取top2；切换没有天气资料的问题，在阈值0.7时应返回资料不足。该回答是确定性摘录，不是模型生成。",
+      "misconception": "检索相似度不是事实正确率；网页或工具返回文本也不是用户授权。上下文压缩不能静默丢失约束、来源和未完成事项。",
+      "practice": [
+        "先预测weather问题是否能从当前三条售后资料得到依据。",
+        "逐步看候选、排序、阈值、来源与回答；解释为什么相似度不是最终真实性。",
+        "切到Agent循环和工具契约，验证预算耗尽、输入错误、幂等重试与成功是不同事件。"
+      ],
+      "exercise": {
+        "prompt": "评测标注的相关片段有2条，top-3检索结果中只包含其中1条。Recall@3是多少？",
+        "expected": 0.5,
+        "tolerance": 1e-06,
+        "unit": "比例",
+        "hint": "召回率分母是所有标注相关片段，不是返回的3条。",
+        "solution": "1/2=0.5；此时precision@3=1/3，两者含义不同。",
+        "transfer": "记忆检索面板query=unknown、threshold=0.7，应选入0条并返回资料不足；别把固定摘录误当模型回答。"
+      },
+      "demos": [
+        {
+          "modelId": "cme-memory",
+          "title": "检索、证据与长期记忆"
+        },
+        {
+          "modelId": "agent",
+          "title": "有界工具循环与停止原因"
+        },
+        {
+          "modelId": "tools",
+          "title": "MCP工具契约与重试"
+        },
+        {
+          "modelId": "context",
+          "title": "上下文容量与保留信息"
+        }
+      ],
+      "modelId": "cme-memory",
+      "sections": [
+        {
+          "title": "1. RAG：召回、重排与生成各负其责",
+          "explanation": "把新资料切成带来源的片段，用语义、关键词或混合检索得到候选，再用更精细的相关性模型重排。候选检索偏向避免漏掉，重排偏向减少误收；最后仍需检查片段是否支持具体回答。生成模型看到了资料也可能误读或引用错误。",
+          "code": "candidates = retrieve(query)\nranked = rerank(query,candidates)\nanswer = generate(query,ranked[:k])",
+          "exercise": "两个真实相关片段，只命中一个时recall是多少？返回3个且仅1个相关时precision是多少？"
+        },
+        {
+          "title": "2. 检索指标需要独立标注",
+          "explanation": "Recall@k看找回多少相关片段，RR@k看首个相关结果的排名，NDCG还考虑相关程度与位置折损。它们测量检索，不直接代表最终回答正确率。要固定语料版本、问题集、相关性定义和是否存在信息泄漏。",
+          "code": "recall = retrieved_relevant / all_relevant\nrr = 1 / first_relevant_rank",
+          "exercise": "相关ID为[1,3]，返回[2,1,4]：Recall@3和RR@3各是多少？"
+        },
+        {
+          "title": "3. 工具调用与MCP：定义、调用、结果分开",
+          "explanation": "模型输出工具名和结构化参数，执行器校验并调用真实函数，再把结果加入上下文。MCP规范host/client/server间能力发现与调用形式，减少连接适配；鉴权、参数校验、限流、幂等和业务事务仍需具体实现。工具能力不等于模型已经知道当前数据。",
+          "code": "definition = tools_list()\ncall = {\"name\":\"lookup\",\"arguments\":{\"id\":101}}\nobservation = dispatch(validate(call))",
+          "exercise": "limit越界时应先返回参数错误还是执行后截断？为一种明确契约说明理由。"
+        },
+        {
+          "title": "4. Harness、计划和动作序列",
+          "explanation": "Harness管理工具、提示、记忆、预算、guardrail与停止。固定工作流与自主规划的控制方式不同，单Agent与多Agent也需要明确职责、消息与结果检查；A2A面向Agent间协作，与MCP工具接口不是同一个层级。更多循环不能自动提高可靠性。",
+          "code": "while budget_remaining and not verified_done:\n    action = decide(context)\n    observation = execute(action)\n    context.append(observation)",
+          "exercise": "在read→test→edit→test流程里，预算只有3为什么不能声称修复已验证？"
+        },
+        {
+          "title": "5. 上下文压缩与短期/长期记忆",
+          "explanation": "删除无用内容和生成摘要都能腾出窗口，但摘要可能丢掉证据或把猜测写成事实。应保留目标、约束、版本、来源、已验证结果和未解决事项。长期记忆按需检索再进入短期上下文；旧记忆仍要检查时效与权限，不能把工具返回命令提升为指令。",
+          "code": "checkpoint = {\"goal\":goal,\"constraints\":constraints,\"sources\":ids,\"verified\":results,\"pending\":todos}",
+          "exercise": "一段摘要漏掉“只读分析”约束，会给后续工具选择带来什么实际错误？"
+        },
+        {
+          "title": "6. Coding Agents、Skills与plugins",
+          "explanation": "编码Agent通常先搜索仓库、读相关实现和测试，再提出修改、执行检查与评审。Skill封装可复用流程与资源，plugin可组合工具和能力入口；它们不是更新模型权重，也不替代仓库约定或实测结果。只给工具列表与给出可靠流程，是不同设计工作。",
+          "code": "research = inspect_repo(task)\nplan = propose_change(research)\npatch = implement(plan)\nverify(patch,independent_tests)",
+          "exercise": "为“修复舍入错误”列出需要的代码、规格、回归案例与验证记录，区分工具和Skill分别负责什么。"
+        },
+        {
+          "title": "7. 评测Agent：观察结果和成本，保留失败",
+          "explanation": "除任务成功外，还要看过程错误、工具失败、越权动作、恢复能力、延迟和调用成本。单次通过或一次漂亮轨迹不足以证明稳定，需在固定案例和新输入上重试并核对外部状态。页面内存案例只展示这些检查结构，不声称真实服务已经运行。",
+          "code": "result = {\"verified_success\":ok,\"stop_reason\":reason,\"tool_calls\":n,\"external_receipt\":receipt}",
+          "exercise": "为工具错误、预算耗尽、测试通过各写一条不同的结束记录；哪些需要外部状态回读？"
+        }
+      ],
+      "sources": [
+        "cme-6-slides",
+        "original-code",
+        "cme-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "lora",
+          "label": "回看训练目标与LoRA"
+        },
+        {
+          "lesson": "compute",
+          "label": "连接CS336的资源核算"
+        }
+      ],
+      "boundary": "人工向量和内存工具的原创案例；第6讲官方课件已公开，但视频仍标Coming soon，本章没有虚构字幕或课堂时间定位。"
+    }
+  ]
+}

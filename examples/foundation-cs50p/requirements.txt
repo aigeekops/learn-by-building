@@ -1,0 +1,2 @@
+# Runtime: Python 3 standard library only; no third-party runtime dependencies.
+# pytest is an optional separate test runner, not installed by these examples.

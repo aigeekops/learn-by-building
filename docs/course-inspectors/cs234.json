@@ -1,0 +1,66 @@
+{
+  "courseId": "cs234",
+  "agent": "course_cs234",
+  "checked": "2026-11-09",
+  "lessons": 8,
+  "models": [
+    "cs234-return",
+    "cs234-bellman",
+    "cs234-planning",
+    "cs234-td",
+    "cs234-qlearning",
+    "cs234-exploration",
+    "cs234-approximation",
+    "cs234-policy-gradient"
+  ],
+  "coverage": {
+    "models": 8,
+    "lessons": 8,
+    "defaultRealFrames": 32,
+    "framesChecked": 176,
+    "cellsChecked": 406,
+    "experiments": 8,
+    "independentTests": 7,
+    "boundaries": "All actual range minima/maxima and select first/last options via scripts/check_course_inspectors.cjs; default demos inspect every frame against frozen traces and prefix-only steps."
+  },
+  "scope": [
+    "Reward-by-reward discount powers and finite sample return; immediate and discounted future portions.",
+    "Bellman success/terminal and failure/self-loop weighted contributions, one expectation backup, analytic fixed point, and the actual residual field meaning.",
+    "Every real synchronous value-iteration history sweep expanded into both state cells, followed by actual action-value comparison and explicit exit-on-tie policy.",
+    "TD single-transition target, true-terminal mask, signed error, and learning-rate update.",
+    "Same behavior sample under Q-learning max bootstrap versus SARSA recorded-action bootstrap.",
+    "Each epsilon-greedy action probability, each CDF boundary, fixed draw selection, and total probability.",
+    "Per-feature dot products, per-weight frozen-target half-gradients and updates, new prediction, and a labeled derived shared-feature probe.",
+    "Binary policy probabilities, sampled-action log score, advantage-weighted sample gradient, ascent update, and normalized new probability."
+  ],
+  "validation": [
+    {
+      "command": "node scripts/check_course_inspectors.cjs cs234",
+      "status": "passed",
+      "result": {"models": 8, "lessons": 8, "framesChecked": 176, "cellsChecked": 406, "experiments": 8}
+    },
+    {
+      "command": "node --test tests/course_inspector_cs234.test.cjs",
+      "status": "passed",
+      "tests": 7,
+      "checks": [
+        "All current demos, every real frame, stable unique cells, frozen trace immutability, no result/scene or future-frame access.",
+        "Each experiment changes actual parameters, verifies concrete before/after values, and rejects a damaged claimed output.",
+        "Independent discounted-return and Bellman expectation arithmetic, including the residual interpretation.",
+        "Independent synchronous history and one-sweep action-evaluation distinction; greedy tie handling.",
+        "True-terminal TD target and same-sample SARSA/Q-learning difference.",
+        "Exploration mass, fixed draws, and equality at a CDF boundary.",
+        "Half-gradient updates, shared-state probe, and overshoot with a larger learning rate.",
+        "Policy score checked against independent finite differences of log probability."
+      ]
+    }
+  ],
+  "limits": [
+    "Original finite arithmetic examples from the current catalog; no claim of full official CS234 lecture coverage or real policy training.",
+    "Each source model has four real computation frames. The planning loop is expanded within its actual history-producing frame; no synthetic timeline is added.",
+    "Bellman uses exact model-branch expectation; trajectory return, TD/Q update, fixed exploration draw, and policy-gradient item retain their sample meanings.",
+    "The approximation shared-feature probe is derived from already-computed weights and explicitly labeled; it is neither an extra training sample nor an asserted correct target.",
+    "Formula text uses four decimal places; numeric cells and experiment verification preserve full precision. The shared renderer controls value display.",
+    "Only the course-owned provider, tests, and this manifest are authored; no catalog, shared model, UI, build, browser, learning record, receipt, completion, or minute changes."
+  ]
+}

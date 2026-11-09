@@ -1,0 +1,839 @@
+{
+  "checked": "2026-11-09",
+  "course": {
+    "id": "bonn",
+    "label": "Bonn Mobile Robotics",
+    "title": "移动机器人：从运动到定位与建图",
+    "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+    "position": "移动机器人原理，连接Kalman基础和Nav2工程",
+    "description": "依次学习运动与观测模型、Bayes滤波、EKF、粒子定位、占用栅格、位姿图和搜索。",
+    "prerequisites": [
+      "二维坐标变换、基本概率与期望",
+      "会读数组与循环；滤波基础可回补Kalman专题"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "运动模型：两轮速度怎样改变位姿？",
+        "lessons": [
+          "bonn-motion"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Robot Locomotion；Probabilistic Motion Models。"
+      },
+      {
+        "unit": "2",
+        "title": "观测模型：测量更支持哪个位置？",
+        "lessons": [
+          "bonn-observation"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Basic Observation Models for Range Sensors。"
+      },
+      {
+        "unit": "3",
+        "title": "Bayes滤波：预测与校正为何分两步？",
+        "lessons": [
+          "bonn-bayes"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Bayes Filter。"
+      },
+      {
+        "unit": "4",
+        "title": "EKF：非线性传感器怎样局部更新？",
+        "lessons": [
+          "bonn-ekf"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Kalman Filter and Extended Kalman Filter；EKF Localization。"
+      },
+      {
+        "unit": "5",
+        "title": "粒子定位：权重退化后怎样重采样？",
+        "lessons": [
+          "bonn-particles"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Particle Filter and Monte Carlo Localization。"
+      },
+      {
+        "unit": "6",
+        "title": "占用地图：未知与空闲为什么不同？",
+        "lessons": [
+          "bonn-grid"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Occupancy Grid Maps。"
+      },
+      {
+        "unit": "7",
+        "title": "位姿图：闭环为何会改动多帧？",
+        "lessons": [
+          "bonn-slam"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Graph-based SLAM using Pose Graphs。"
+      },
+      {
+        "unit": "8",
+        "title": "A*：启发式怎样影响展开顺序？",
+        "lessons": [
+          "bonn-astar"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Robot Motion Planning using A*。"
+      }
+    ],
+    "pending": "八讲为核心主题选编。ICP、RANSAC、完整SLAM实现与原课练习另作深读，未声称完成原课全部视频。",
+    "sources": [
+      "bonn-official"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "bonn-motion",
+      "course": "bonn",
+      "unit": "1",
+      "title": "第1讲 运动模型：两轮速度怎样改变位姿？",
+      "summary": "从轮速求线速度与角速度，复算恒速圆弧积分。",
+      "question": "左右轮速度不同，机器人为什么沿圆弧走？",
+      "outcome": "从轮速求线速度与角速度，复算恒速圆弧积分。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "差速车的两轮沿同一轴布置，轮速平均决定前进速度，速度差决定转向。必须先固定轮距、单位和正方向，不能混用轮角速度与轮缘线速度。",
+        "本例从原点朝x轴出发，一段时间内速度恒定。角速度为零时走直线；非零时沿半径v/ω的圆弧积分，避免用大时间步的直线近似。",
+        "这是无打滑的理想里程计。真机轮径偏差、地面滑动和时间戳误差都会累积成漂移，需要观测来修正。"
+      ],
+      "formula": "v=(vL+vR)/2；ω=(vR−vL)/b；Δx=v sin(ωdt)/ω",
+      "worked": "vL=1、vR=1.2、b=0.5、dt=0.5：v=1.1，ω=0.4，航向变化0.2rad，Δx约0.54634，Δy约0.05482。",
+      "misconception": "不能把角速度rad/s直接当轮速m/s；模型轨迹也不等于里程计实测。",
+      "sections": [
+        {
+          "title": "写清差速模型和单位",
+          "explanation": "轮距0.5m，初始位姿(0,0,0)，轮速单位m/s。"
+        },
+        {
+          "title": "由轮速求机体速度",
+          "explanation": "向前速度是轮速平均；角速度按右减左计算。"
+        },
+        {
+          "title": "积分一段恒定速度运动",
+          "explanation": "近零角速度走直线；其他情况使用圆弧精确积分。"
+        },
+        {
+          "title": "报告里程计的假设",
+          "explanation": "没有打滑和编码器误差的理想计算；真机必须测量漂移。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"left\":1,\"right\":1.2,\"dt\":0.5};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 写清差速模型和单位\nObject.assign(s, ((s,p)=>({track:.5,pose:[0,0,0]}))(s, p));\n// 由轮速求机体速度\nObject.assign(s, ((s,p)=>({v:(p.left+p.right)/2,omega:(p.right-p.left)/s.track}))(s, p));\n// 积分一段恒定速度运动\nObject.assign(s, ((s,p)=>{const a=s.omega*p.dt;return {next:Math.abs(s.omega)<1e-9?[s.v*p.dt,0,a]:[s.v/s.omega*Math.sin(a),s.v/s.omega*(1-Math.cos(a)),a]};})(s, p));\n// 报告里程计的假设\nObject.assign(s, ((s,p)=>({distance:s.v*p.dt,heading:s.next[2]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-motion.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "将左右轮都设为1，验证0.5秒后位姿[0.5,0,0]；交换轮速检查转向符号。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：左右轮速度不同，机器人为什么沿圆弧走？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "将左右轮都设为1，验证0.5秒后位姿[0.5,0,0]；交换轮速检查转向符号。"
+      ],
+      "exercise": {
+        "prompt": "默认参数下航向变化是多少rad？",
+        "expected": 0.2,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "(1.2−1)/0.5×0.5=0.2。",
+        "transfer": "将左右轮都设为1，验证0.5秒后位姿[0.5,0,0]；交换轮速检查转向符号。"
+      },
+      "sources": [
+        "bonn-motion-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-observation",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "bonn-motion",
+      "demos": [
+        {
+          "modelId": "bonn-motion",
+          "title": "运动模型：两轮速度怎样改变位姿？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "bonn-observation",
+      "course": "bonn",
+      "unit": "2",
+      "title": "第2讲 观测模型：测量更支持哪个位置？",
+      "summary": "计算测距预测、似然和两个候选位置的后验。",
+      "question": "测到2米，为什么不能直接把机器人位置写成2米？",
+      "outcome": "计算测距预测、似然和两个候选位置的后验。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "传感器返回相对场景的测量，需要已知地标和坐标模型才能约束机器人位置。本例地标在x=5，候选位置2和3分别预测距离3和2。",
+        "高斯残差模型把预测和测量的差变成似然密度。似然是给定位置时观测有多相容，并非位置本身的概率；还要乘先验再归一化。",
+        "两候选的离散后验便于手算，但不包含连续空间、未知地标和错误数据关联。噪声模型失配时，后验可能过度自信。"
+      ],
+      "formula": "p(z|x)∝exp(−(z−h(x))²/(2σ²))；p(x|z)∝p(z|x)p(x)",
+      "worked": "z=2、σ=0.5：两个似然的比例为exp(−2):1，均匀先验下位置3后验约0.880797。",
+      "misconception": "似然密度可以超过1，不能把密度值直接当离散概率。",
+      "sections": [
+        {
+          "title": "为两个位置预测测距",
+          "explanation": "已知一维地标在x=5，两个候选机器人位置是2和3。"
+        },
+        {
+          "title": "计算残差",
+          "explanation": "同一坐标系下观测减预测，正负残差都要保留。"
+        },
+        {
+          "title": "计算高斯似然",
+          "explanation": "这只是p(z|x)的密度，不能直接叫后验概率。"
+        },
+        {
+          "title": "合并均匀先验",
+          "explanation": "在这两个离散候选上归一化；完整连续位置空间另算。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={norm:xs=>{const z=xs.reduce((a,b)=>a+b,0);if(!(z>0))throw Error('归一化总量必须为正');return xs.map(x=>x/z);}};\nconst p={\"range\":2,\"sigma\":0.5};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 为两个位置预测测距\nObject.assign(s, ((s,p)=>({positions:[2,3],predicted:[3,2]}))(s, p));\n// 计算残差\nObject.assign(s, ((s,p)=>({residuals:s.predicted.map(z=>p.range-z)}))(s, p));\n// 计算高斯似然\nObject.assign(s, ((s,p)=>({likelihoods:s.residuals.map(e=>Math.exp(-.5*(e/p.sigma)**2)/(p.sigma*Math.sqrt(2*Math.PI)))}))(s, p));\n// 合并均匀先验\nObject.assign(s, ((s,p)=>({posterior:H.norm(s.likelihoods)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-observation.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把测量改为2.5，解释两个后验为何相等；再改变σ看相等关系是否改变。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：测到2米，为什么不能直接把机器人位置写成2米？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把测量改为2.5，解释两个后验为何相等；再改变σ看相等关系是否改变。"
+      ],
+      "exercise": {
+        "prompt": "两个候选的测量残差分别−1和0，σ=0.5时似然比L2/L3是多少？",
+        "expected": 0.1353352832366127,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "公共归一化系数抵消，exp(−1²/(2×0.5²))=exp(−2)。",
+        "transfer": "把测量改为2.5，解释两个后验为何相等；再改变σ看相等关系是否改变。"
+      },
+      "sources": [
+        "bonn-observation-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-motion",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "bonn-bayes",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "bonn-observation",
+      "demos": [
+        {
+          "modelId": "bonn-observation",
+          "title": "观测模型：测量更支持哪个位置？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "bonn-bayes",
+      "course": "bonn",
+      "unit": "3",
+      "title": "第3讲 Bayes滤波：预测与校正为何分两步？",
+      "summary": "先传播两格信念，再乘观测似然并归一化。",
+      "question": "机器人移动后，旧位置的信念如何变成新位置的信念？",
+      "outcome": "先传播两格信念，再乘观测似然并归一化。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "定位保留的是位置分布。运动会把旧位置的不确定性传播到新位置，不能只移动最大概率那一个点。",
+        "预测后加入新观测。这里左右格有0.25概率交换，观测为“在左侧”；观测正确率决定左右两种位置的似然。",
+        "预测的不确定性和传感器的不确定性来自不同来源。调大观测可信度会更依赖测量，但错误模型也可能更快把信念推向错误位置。"
+      ],
+      "formula": "bel⁻(x)=Σp(x|x′,u)bel(x′)；bel(x)=ηp(z|x)bel⁻(x)",
+      "worked": "先验[0.6,0.4]经运动变为[0.55,0.45]；似然[0.8,0.2]，未归一化[0.44,0.09]，左侧后验44/53。",
+      "misconception": "观测概率应乘在预测分布上，而非每次把旧先验直接覆盖。",
+      "sections": [
+        {
+          "title": "先保存上一步信念",
+          "explanation": "左右两格先验[0.6,0.4]，动作使左右互换概率为0.25。"
+        },
+        {
+          "title": "先预测再观测",
+          "explanation": "预测需要对所有旧位置求和，不选一个最可能位置代替分布。"
+        },
+        {
+          "title": "乘入左侧观测似然",
+          "explanation": "观测模型是[正确率,1−正确率]。"
+        },
+        {
+          "title": "归一化得到后验",
+          "explanation": "归一化常数是这次观测的边缘概率。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0),\nnorm:xs=>{const z=xs.reduce((a,b)=>a+b,0);if(!(z>0))throw Error('归一化总量必须为正');return xs.map(x=>x/z);}};\nconst p={\"sensor\":0.8};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先保存上一步信念\nObject.assign(s, ((s,p)=>({prior:[.6,.4]}))(s, p));\n// 先预测再观测\nObject.assign(s, ((s,p)=>({predicted:[.75*s.prior[0]+.25*s.prior[1],.25*s.prior[0]+.75*s.prior[1]]}))(s, p));\n// 乘入左侧观测似然\nObject.assign(s, ((s,p)=>({unnormalized:[s.predicted[0]*p.sensor,s.predicted[1]*(1-p.sensor)]}))(s, p));\n// 归一化得到后验\nObject.assign(s, ((s,p)=>({evidence:H.sum(s.unnormalized),posterior:H.norm(s.unnormalized)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-bayes.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把观测正确率设0.5，证明后验等于预测；设为1，说明结论依赖哪些理想化假设。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：机器人移动后，旧位置的信念如何变成新位置的信念？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把观测正确率设0.5，证明后验等于预测；设为1，说明结论依赖哪些理想化假设。"
+      ],
+      "exercise": {
+        "prompt": "默认观测的边缘概率（归一化常数）是多少？",
+        "expected": 0.53,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.55×0.8+0.45×0.2=0.53。",
+        "transfer": "把观测正确率设0.5，证明后验等于预测；设为1，说明结论依赖哪些理想化假设。"
+      },
+      "sources": [
+        "bonn-bayes-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-observation",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "bonn-ekf",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "bonn-bayes",
+      "demos": [
+        {
+          "modelId": "bonn-bayes",
+          "title": "Bayes滤波：预测与校正为何分两步？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "bonn-ekf",
+      "course": "bonn",
+      "unit": "4",
+      "title": "第4讲 EKF：非线性传感器怎样局部更新？",
+      "summary": "求观测Jacobian、创新方差、增益和Joseph方差更新。",
+      "question": "测量是位置的平方时，为什么不能直接套线性观测系数1？",
+      "outcome": "求观测Jacobian、创新方差、增益和Joseph方差更新。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "EKF在当前预测位置对非线性观测做一阶展开。这里h(x)=x²，局部斜率H=2x；斜率随位置变化，不能沿用固定系数。",
+        "创新方差同时考虑预测不确定性通过H的传播和传感噪声。增益将观测残差映射回状态单位，不能直接拿残差加到位置上。",
+        "本例只在正区间讨论局部更新。平方观测在全空间可能对应两个位置，一团高斯未必能表达这种多峰歧义。"
+      ],
+      "formula": "H=2x；S=H²P+R；K=PH/S；x+=K(z−h(x))",
+      "worked": "x=2、P=R=0.5、z=5：H=4，S=8.5，K=4/17，更新x=38/17，方差1/34。",
+      "misconception": "EKF的协方差小不等于真实误差小；线性化点错误或关联错误会破坏假设。",
+      "sections": [
+        {
+          "title": "定义非线性传感器",
+          "explanation": "教学观测z=x²，本次z=5；在正区间讨论局部近似。"
+        },
+        {
+          "title": "传播观测不确定性",
+          "explanation": "H是观测函数对x的导数，S=H²P+R。"
+        },
+        {
+          "title": "计算Kalman增益",
+          "explanation": "这里是标量EKF，不包含移动机器人的完整姿态与关联模型。"
+        },
+        {
+          "title": "修正均值与方差",
+          "explanation": "用Joseph形式核对方差非负；EKF只是一阶近似。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"x\":2,\"variance\":0.5,\"noise\":0.5};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 定义非线性传感器\nObject.assign(s, ((s,p)=>({predicted:p.x*p.x,jacobian:2*p.x,measurement:5}))(s, p));\n// 传播观测不确定性\nObject.assign(s, ((s,p)=>({innovation:s.measurement-s.predicted,innovationVariance:s.jacobian*s.jacobian*p.variance+p.noise}))(s, p));\n// 计算Kalman增益\nObject.assign(s, ((s,p)=>({gain:p.variance*s.jacobian/s.innovationVariance}))(s, p));\n// 修正均值与方差\nObject.assign(s, ((s,p)=>({updated:p.x+s.gain*s.innovation,posteriorVariance:(1-s.gain*s.jacobian)**2*p.variance+s.gain*s.gain*p.noise}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-ekf.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立用Joseph形式(1−KH)²P+K²R复算1/34；把R增大观察增益变化。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：测量是位置的平方时，为什么不能直接套线性观测系数1？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立用Joseph形式(1−KH)²P+K²R复算1/34；把R增大观察增益变化。"
+      ],
+      "exercise": {
+        "prompt": "默认创新方差S是多少？",
+        "expected": 8.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "4²×0.5+0.5=8.5。",
+        "transfer": "独立用Joseph形式(1−KH)²P+K²R复算1/34；把R增大观察增益变化。"
+      },
+      "sources": [
+        "bonn-ekf-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-bayes",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "bonn-particles",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "bonn-ekf",
+      "demos": [
+        {
+          "modelId": "bonn-ekf",
+          "title": "EKF：非线性传感器怎样局部更新？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "bonn-particles",
+      "course": "bonn",
+      "unit": "5",
+      "title": "第5讲 粒子定位：权重退化后怎样重采样？",
+      "summary": "更新粒子权重、计算ESS并重放系统重采样。",
+      "question": "四个位置粒子能否保留多个定位假设？",
+      "outcome": "更新粒子权重、计算ESS并重放系统重采样。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "粒子用一组带权样本表示分布，可以表达多峰定位假设。完整MCL还要对运动模型采样；本讲先隔离一次观测更新。",
+        "测量后按似然乘权重并归一化。ESS估计权重集中程度，低ESS提示退化，不能把它当成位置误差或成功率。",
+        "系统重采样在累计权重上放置等距采样点。被复制粒子的权重应重置为1/N；复制位置不等于获得新的独立观测。"
+      ],
+      "formula": "ESS=1/Σwᵢ²；uₖ=u₀+k/N",
+      "worked": "粒子[0,0.5,1,2]，测量1、σ=0.5；位置1权重最高，u0=0.1时按四个固定累计区间采样。",
+      "misconception": "每次都重采样可能导致样本贫化；高ESS也可能是所有粒子共同位于错误区域。",
+      "sections": [
+        {
+          "title": "准备四个等权粒子",
+          "explanation": "位置[0,0.5,1,2]，本例省略运动采样以隔离观测更新。"
+        },
+        {
+          "title": "按似然更新权重",
+          "explanation": "等先验使权重正比于似然；常数项可在归一化中约去。"
+        },
+        {
+          "title": "检查有效样本数",
+          "explanation": "ESS=1/Σw²，低ESS提示退化但不是定位精度。"
+        },
+        {
+          "title": "系统重采样",
+          "explanation": "取u+k/N的四个固定位置，复制粒子后应重置等权。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0),\nnorm:xs=>{const z=xs.reduce((a,b)=>a+b,0);if(!(z>0))throw Error('归一化总量必须为正');return xs.map(x=>x/z);}};\nconst p={\"measurement\":1,\"sigma\":0.5,\"offset\":0.1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 准备四个等权粒子\nObject.assign(s, ((s,p)=>({particles:[0,.5,1,2]}))(s, p));\n// 按似然更新权重\nObject.assign(s, ((s,p)=>({weights:H.norm(s.particles.map(x=>Math.exp(-.5*((p.measurement-x)/p.sigma)**2)))}))(s, p));\n// 检查有效样本数\nObject.assign(s, ((s,p)=>({ess:1/H.sum(s.weights.map(x=>x*x)),cdf:s.weights.map((_,i)=>H.sum(s.weights.slice(0,i+1)))}))(s, p));\n// 系统重采样\nObject.assign(s, ((s,p)=>({draws:[0,1,2,3].map(k=>p.offset+k/4),resampled:[0,1,2,3].map(k=>s.particles[s.cdf.findIndex(x=>p.offset+k/4<x)]),newWeights:[.25,.25,.25,.25]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-particles.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "手算权重与四个累计区间，验证模型选择；再把σ调大，比较ESS和后验集中程度。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：四个位置粒子能否保留多个定位假设？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "手算权重与四个累计区间，验证模型选择；再把σ调大，比较ESS和后验集中程度。"
+      ],
+      "exercise": {
+        "prompt": "四粒子权重全部0.25时ESS是多少？",
+        "expected": 4,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "1/(4×0.25²)=4。",
+        "transfer": "手算权重与四个累计区间，验证模型选择；再把σ调大，比较ESS和后验集中程度。"
+      },
+      "sources": [
+        "bonn-particles-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-ekf",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "bonn-grid",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "bonn-particles",
+      "demos": [
+        {
+          "modelId": "bonn-particles",
+          "title": "粒子定位：权重退化后怎样重采样？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "bonn-grid",
+      "course": "bonn",
+      "unit": "6",
+      "title": "第6讲 占用地图：未知与空闲为什么不同？",
+      "summary": "用log-odds更新占用信念，说明独立性与先验。",
+      "question": "连续两次认为一个格子被占用，置信度如何累计？",
+      "outcome": "用log-odds更新占用信念，说明独立性与先验。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "占用栅格为每格维护被占据的概率。未知常用0.5表示，空闲是得到证据后较低的占用概率，两者对规划有不同含义。",
+        "将概率转成对数几率后，条件独立观测的更新可以相加。本例先验0.5，使先验log-odds为0，简化更新项。",
+        "完整地图还需要射线经过格的空闲更新、传感器外参和时间同步。反复处理同一帧会虚增信心，本讲明确把观测当独立事件。"
+      ],
+      "formula": "l=log(p/(1−p))；p=1/(1+exp(−l))",
+      "worked": "单次p=0.75，对数几率log3；两次独立观测后l=log9，占用概率0.9。",
+      "misconception": "不能把两次概率直接相加；未观测格也不应默认为可通行。",
+      "sections": [
+        {
+          "title": "从未知开始",
+          "explanation": "一格先验0.5，对数几率为0；未知不是空闲。"
+        },
+        {
+          "title": "把逆传感器概率转成对数几率",
+          "explanation": "本例固定先验0.5，更新项无需额外减去非零先验logit。"
+        },
+        {
+          "title": "累积条件独立的命中",
+          "explanation": "重复同一帧会虚增信心；此处明确假设各次观测独立。"
+        },
+        {
+          "title": "还原概率",
+          "explanation": "只更新一格，没有实现完整射线清空或地图系统。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"occupied\":0.75,\"hits\":2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 从未知开始\nObject.assign(s, ((s,p)=>({prior:.5,priorLogOdds:0}))(s, p));\n// 把逆传感器概率转成对数几率\nObject.assign(s, ((s,p)=>({increment:Math.log(p.occupied/(1-p.occupied))}))(s, p));\n// 累积条件独立的命中\nObject.assign(s, ((s,p)=>({history:Array.from({length:p.hits+1},(_,k)=>k*s.increment),logOdds:p.hits*s.increment}))(s, p));\n// 还原概率\nObject.assign(s, ((s,p)=>({probability:1/(1+Math.exp(-s.logOdds))}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-grid.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "将先验改成0.2时重新推导应减去的先验log-odds；解释为何当前简式不可直接照搬。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：连续两次认为一个格子被占用，置信度如何累计？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "将先验改成0.2时重新推导应减去的先验log-odds；解释为何当前简式不可直接照搬。"
+      ],
+      "exercise": {
+        "prompt": "单次p=0.75，三次独立相同观测后占用概率是多少？",
+        "expected": 0.9642857142857143,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "几率3³=27，概率27/(1+27)=27/28。",
+        "transfer": "将先验改成0.2时重新推导应减去的先验log-odds；解释为何当前简式不可直接照搬。"
+      },
+      "sources": [
+        "bonn-grid-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-particles",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "bonn-slam",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "bonn-grid",
+      "demos": [
+        {
+          "modelId": "bonn-grid",
+          "title": "占用地图：未知与空闲为什么不同？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "bonn-slam",
+      "course": "bonn",
+      "unit": "7",
+      "title": "第7讲 位姿图：闭环为何会改动多帧？",
+      "summary": "固定规范自由度，解一个最小二乘位姿图并回算残差。",
+      "question": "里程计走到了2.2米，闭环却测到2米，误差该放在哪里？",
+      "outcome": "固定规范自由度，解一个最小二乘位姿图并回算残差。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "SLAM同时估计运动与地图。位姿图把位姿作为变量、相对测量作为约束；闭环加入新的几何关系，调整的不应只有最后一帧。",
+        "本例固定x0=0，三个等权约束是x1≈1、x2−x1≈1.2、x2≈2。固定首帧消除整体平移的自由度，否则方程可能不唯一。",
+        "解完必须回算每条残差。实际系统还要估计测量信息矩阵、检查关联和使用鲁棒机制；一个错误闭环可能扭曲整张图。"
+      ],
+      "formula": "min (x1−1)²+(x2−x1−d)²+(x2−l)²",
+      "worked": "d=1.2、l=2：x1约0.933333，x2约2.066667，三残差分别−1/15、−1/15、1/15。",
+      "misconception": "闭环并非“最后一帧强制归位”；没有锚定时更不能直接解释绝对坐标。",
+      "sections": [
+        {
+          "title": "固定第一帧消除自由漂移",
+          "explanation": "三个一维位姿，x0=0；约束为x1=1、x2−x1=d、x2=l，等权。"
+        },
+        {
+          "title": "列出正规方程",
+          "explanation": "目标是三个约束残差的平方和；固定x0避免规范自由度。"
+        },
+        {
+          "title": "解出最小二乘位姿",
+          "explanation": "系数矩阵[[2,−1],[−1,2]]，解析逆可独立检查。"
+        },
+        {
+          "title": "回算全部残差",
+          "explanation": "闭环不是强行把误差塞给最后一帧；异常闭环需另作鲁棒处理。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"odom\":1.2,\"loop\":2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 固定第一帧消除自由漂移\nObject.assign(s, ((s,p)=>({raw:[0,1,1+p.odom]}))(s, p));\n// 列出正规方程\nObject.assign(s, ((s,p)=>({rhs:[1-p.odom,p.odom+p.loop]}))(s, p));\n// 解出最小二乘位姿\nObject.assign(s, ((s,p)=>({poses:[0,(2*s.rhs[0]+s.rhs[1])/3,(s.rhs[0]+2*s.rhs[1])/3]}))(s, p));\n// 回算全部残差\nObject.assign(s, ((s,p)=>({residuals:[s.poses[1]-1,s.poses[2]-s.poses[1]-p.odom,s.poses[2]-p.loop]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-slam.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把闭环设为2.2，验证三条约束同时零残差；再人为加入错误闭环，记录每帧被拉动的程度。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：里程计走到了2.2米，闭环却测到2米，误差该放在哪里？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把闭环设为2.2，验证三条约束同时零残差；再人为加入错误闭环，记录每帧被拉动的程度。"
+      ],
+      "exercise": {
+        "prompt": "默认解的x2是多少？",
+        "expected": 2.066666666666667,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "正规方程右端[1−1.2,1.2+2]=[−0.2,3.2]，x2=(−0.2+2×3.2)/3=31/15。",
+        "transfer": "把闭环设为2.2，验证三条约束同时零残差；再人为加入错误闭环，记录每帧被拉动的程度。"
+      },
+      "sources": [
+        "bonn-slam-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-grid",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "bonn-astar",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "bonn-slam",
+      "demos": [
+        {
+          "modelId": "bonn-slam",
+          "title": "位姿图：闭环为何会改动多帧？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "bonn-astar",
+      "course": "bonn",
+      "unit": "8",
+      "title": "第8讲 A*：启发式怎样影响展开顺序？",
+      "summary": "追踪open集合、累计代价和回溯路径，检查加权启发式的限制。",
+      "question": "更快靠近目标的搜索规则，是否仍保证最短路径？",
+      "outcome": "追踪open集合、累计代价和回溯路径，检查加权启发式的限制。",
+      "prerequisites": [
+        "二维坐标变换、基本概率与期望",
+        "会读数组与循环；滤波基础可回补Kalman专题"
+      ],
+      "explanation": [
+        "图搜索区分已走代价g与剩余估计h。A*按g+h展开，在合适条件下可减少无关搜索而保留最优性。",
+        "本例四节点、两条路线：S-A-G代价5，S-B-G代价3。启发式明确给定，允许改成加权g+wh来观察顺序变化。",
+        "w大于1时不再具备标准A*的一般最优性保证。这个小图某些权重仍找到最优解，不能反过来证明所有图都正确。"
+      ],
+      "formula": "f(n)=g(n)+w h(n)",
+      "worked": "默认w=1找到S-B-G，总代价3；算法保留改进g值后的重新入队逻辑。",
+      "misconception": "到达目标的邻居时就停，与目标作为最优待展开项出队时停并不等价。",
+      "sections": [
+        {
+          "title": "定义一个有限图",
+          "explanation": "S连A代价1、B代价2；A连G代价4，B连G代价1。h=[3,1,1,0]。"
+        },
+        {
+          "title": "从起点执行带重新打开的A*",
+          "explanation": "按f最小取点；相同f按插入顺序。w>1不再保证最优。"
+        },
+        {
+          "title": "回溯到起点",
+          "explanation": "只有在终点实际出队时报告成功。"
+        },
+        {
+          "title": "记录搜索代价和路径长度",
+          "explanation": "展开数与最短路径代价是不同指标；这个图不能代表大型地图性能。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"weight\":1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 定义一个有限图\nObject.assign(s, ((s,p)=>({names:['S','A','B','G'],edges:[[[1,1],[2,2]],[[3,4]],[[3,1]],[]],heuristic:[3,1,1,0]}))(s, p));\n// 从起点执行带重新打开的A*\nObject.assign(s, ((s,p)=>{const g=[0,Infinity,Infinity,Infinity],parent=[-1,-1,-1,-1],open=[0],expanded=[];while(open.length&&expanded.length<20){open.sort((a,b)=>(g[a]+p.weight*s.heuristic[a])-(g[b]+p.weight*s.heuristic[b]));const n=open.shift();expanded.push(n);if(n===3)break;for(const [to,c] of s.edges[n])if(g[n]+c<g[to]){g[to]=g[n]+c;parent[to]=n;if(!open.includes(to))open.push(to);}}return {costs:g.map(x=>Number.isFinite(x)?x:null),parent,expanded};})(s, p));\n// 回溯到起点\nObject.assign(s, ((s,p)=>{const path=[];if(s.expanded.includes(3)){for(let n=3;n!==-1;n=s.parent[n])path.unshift(s.names[n]);}return {path};})(s, p));\n// 记录搜索代价和路径长度\nObject.assign(s, ((s,p)=>({cost:s.costs[3],expandedCount:s.expanded.length}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node bonn-astar.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "用w=0退化到Dijkstra，记录展开顺序；再修改图构造一个w>1导致次优的反例。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：更快靠近目标的搜索规则，是否仍保证最短路径？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "用w=0退化到Dijkstra，记录展开顺序；再修改图构造一个w>1导致次优的反例。"
+      ],
+      "exercise": {
+        "prompt": "这张图中S-B-G的总代价是多少？",
+        "expected": 3,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "S到B为2，B到G为1，合计3。",
+        "transfer": "用w=0退化到Dijkstra，记录展开顺序；再修改图构造一个w>1导致次优的反例。"
+      },
+      "sources": [
+        "bonn-astar-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "bonn-slam",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "nav2-lifecycle",
+          "label": "连接后续课程：第1讲 系统启动：为什么节点存在却不接任务？"
+        }
+      ],
+      "modelId": "bonn-astar",
+      "demos": [
+        {
+          "modelId": "bonn-astar",
+          "title": "A*：启发式怎样影响展开顺序？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    }
+  ],
+  "sources": {
+    "bonn-official": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · 官方目录",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "2020 Robotics Block；Motion Models、Observation Models、Bayes Filter、EKF、MCL、Occupancy Grid、Graph-based SLAM、A*",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-motion-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Robot Locomotion；Probabilistic Motion Models",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Robot Locomotion；Probabilistic Motion Models",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-observation-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Basic Observation Models for Range Sensors",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Basic Observation Models for Range Sensors",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-bayes-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Bayes Filter",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Bayes Filter",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-ekf-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Kalman Filter and Extended Kalman Filter；EKF Localization",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Kalman Filter and Extended Kalman Filter；EKF Localization",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-particles-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Particle Filter and Monte Carlo Localization",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Particle Filter and Monte Carlo Localization",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-grid-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Occupancy Grid Maps",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Occupancy Grid Maps",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-slam-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Graph-based SLAM using Pose Graphs",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Graph-based SLAM using Pose Graphs",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "bonn-astar-reading": {
+      "kind": "官方公开材料",
+      "label": "Bonn Mobile Robotics · Robot Motion Planning using A*",
+      "url": "https://www.ipb.uni-bonn.de/online-training-robotics/index.html",
+      "locator": "Robot Motion Planning using A*",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Bonn / Stachniss 2020 在线课程 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    }
+  }
+}

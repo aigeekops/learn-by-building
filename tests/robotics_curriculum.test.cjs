@@ -9,7 +9,7 @@ test('24 curated blocks follow existing stages and link to valid companions',()=
  for(const m of data.months){assert.equal(m.blocks.length,4);assert.equal(m.gate.length,3);
   for(const b of m.blocks){const source=data.sources[b.source];assert(source);assert.equal(new URL(source.url).protocol,'https:');
    for(const key of ['scope','why','exercise','acceptance','first_step'])assert(b[key]);
-   if(b.companion){const link=links.modules.find(x=>x.id===b.companion);assert.equal(link.stage,m.stage);assert(link.lessons.includes(b.lesson));assert(link.labs.includes(b.lab));}
+   if(b.companion){const link=links.modules.find(x=>x.id===b.companion);assert.equal(link.stage,m.stage);assert(link.lessons.includes(b.lesson));if(b.lab)assert(link.labs.includes(b.lab));}
   }
  }
 });

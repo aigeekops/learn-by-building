@@ -1,0 +1,74 @@
+{
+  "courseId": "cs231n",
+  "agent": "course_cs231n",
+  "checked": "2026-11-09",
+  "lessons": 8,
+  "models": [
+    "cs231n-linear",
+    "cs231n-softmax",
+    "cs231n-backprop",
+    "cs231n-convolution",
+    "cs231n-residual",
+    "cs231n-attention",
+    "cs231n-detection",
+    "cs231n-transfer"
+  ],
+  "coverage": {
+    "models": 8,
+    "lessons": 8,
+    "defaultRealFrames": 32,
+    "framesChecked": 208,
+    "cellsChecked": 1264,
+    "experiments": 8,
+    "tests": 10,
+    "independentNumericTests": 8,
+    "boundaries": "The shared checker covered each actual control's default and minimum/maximum or first/last select option. The separate tests use the actual eight demos and frozen prefix-only traces with throwing result/scene/visual getters, without repeating a full endpoint sweep."
+  },
+  "scope": [
+    "Linear classification: both input pixels, all four weight cells and both biases, every class-feature multiplication, both score sums, explicit tie-to-class-zero rule, and every perturbed-input multiplication and score.",
+    "Softmax: each original logit, fixed label and positive temperature, temperature-scaled logits, stable maximum shift, each exponential and normalization denominator, every class probability, true-class cross entropy, every one-hot target and raw-logit gradient including the chain-rule factor 1/T.",
+    "Backpropagation: weighted input, preactivation, ReLU, signed prediction error and half-square loss, each local derivative and chain-rule product, actual central-difference perturbations/losses, smooth-interval guard and explicitly non-certifying comparison at the ReLU kink.",
+    "Convolution: all nine image and four kernel cells, each of the sixteen multiplication terms across four unflipped correlation windows, all four output sums, each ReLU cell, full-window pool candidates, maximum, spatial width and shared-parameter count.",
+    "Residual connection: identity and residual paths, scalar output sum, plain and shortcut input-gradient contributions, combined input derivative, numerical cancellation tolerance and the w=-1 counterexample.",
+    "Attention: all three scalar keys and values, current query, each scaled dot-product score, stable exponentials and normalization, every attention weight and weighted-value term, scalar output and convex-value bound.",
+    "Detection: every coordinate and supplied score of both continuous boxes, intersection width/height and area, both box areas, union and IoU, score ordering, strict NMS suppression predicate, per-box membership and retained count.",
+    "Transfer/evaluation: every supplied feature, object identity and label, every head score and thresholded prediction, each training/validation index, explicit per-object overlap, each validation correctness term, accuracy and independent-group flag."
+  ],
+  "validation": [
+    {
+      "command": "node scripts/check_course_inspectors.cjs cs231n",
+      "status": "passed",
+      "result": {"models": 8, "lessons": 8, "framesChecked": 208, "cellsChecked": 1264, "experiments": 8}
+    },
+    {
+      "command": "node --test tests/course_inspector_cs231n.test.cjs",
+      "status": "passed",
+      "tests": 10,
+      "checks": [
+        "Every actual default demo frame has unique semantic scalar cells and can inspect only the current trace prefix; traces are frozen and result/scene/visual access throws.",
+        "All eight experiments use registered controls, change actual parameters, verify concrete outcomes, retain trace immutability, and reject corrupted outputs and unapplied changes.",
+        "Biased linear-score equality selects class zero and input perturbation preserves the weights.",
+        "Temperature-scaled probabilities and all three raw-logit derivatives agree with independent finite differences, including the 1/T factor.",
+        "The ReLU kink uses the explicit zero derivative while central difference crosses the kink; active and zero-input cases check separate branches.",
+        "Independent four-window correlation arithmetic checks unflipped-kernel signs, sixteen individual products, ReLU and whole-window max pooling.",
+        "Residual input derivative agrees with independent perturbation; zero input is distinct from w=-1 gradient cancellation.",
+        "Uniform and nonuniform query cases check every attention weight and weighted-value contribution against an independent exponential formula.",
+        "Continuous-box geometry gives area without coordinate plus-one; an exact IoU=0.6 threshold equality preserves both boxes and a lower threshold suppresses B.",
+        "A head-weight case with errors checks group and row validation accuracy independently from object overlap; both A and B cross the row split."
+      ]
+    }
+  ],
+  "limits": [
+    "These are original finite topic exercises for the current eight-lesson catalog, not a complete official CS231n course, realistic image recognizer or evidence of model training.",
+    "All models retain four actual computation stages. Individual tensor cells are expanded within their generating stage without adding artificial playback frames.",
+    "The classifier, softmax and backpropagation examples are single-sample calculations with fixed labels or weights as stated; no optimizer, dataset accuracy or probability calibration is claimed.",
+    "The ReLU derivative at exactly zero is an implementation convention. A central-difference interval touching the kink is explicitly excluded from smooth derivative certification.",
+    "Correlation uses a single input/output channel, a fixed 2x2 kernel, stride one, no padding and no bias. Pooling has no trainable weights; pooling backward/argmax tie routing is not implemented.",
+    "The residual branch is linear and scalar. Its cancellation example cannot establish gradient behavior in a full ResNet.",
+    "Attention uses one scalar query, three supplied scalar keys/values, no positional encoding, no causal mask, no learned projection, and no multihead or transformer training.",
+    "NMS concerns exactly two same-class continuous-coordinate boxes with fixed scores. It does not implement cross-class policy, truth matching, recall or AP.",
+    "Transfer features are supplied manually and the head weight is a control rather than a fitted parameter. No pretrained model is loaded. Absence of shared object IDs does not establish independence of time, scenes or pretraining data.",
+    "Formula text uses four decimal places; very small fixed difference steps/tolerances use scientific notation to avoid displaying them as zero. Numeric cells and verification retain full precision.",
+    "Only the course provider, its dedicated test and this manifest were authored. No shared models, configuration, UI, builds, browser state, records, receipts, completion or study minutes were changed."
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "courseId": "lerobot",
+  "courseLabel": "HF Robotics + LeRobot 配套原创八讲",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "lerobot-schema",
+      "experiments": ["missing-joint", "wrong-unit"],
+      "scope": "逐项显示固定二关节state/action、requiredDof与动作单位；分别计算action长度、形状条件、每个分量的Number.isFinite与every合取；随后检验rad元数据，末帧合取三个已算条件。缺少分量和错误单位各有独立真实控件实验。"
+    },
+    {
+      "id": "lerobot-time",
+      "experiments": ["shift-camera", "relax-tolerance"],
+      "scope": "三条状态及三条相机时间戳逐项代入；展开3×3绝对时间差、从索引0扫描且仅差值超过1e−9s才替换的平分规则、选中索引/时刻/误差；独立检查含1e−9s余量的容差与未来信息，末帧展开离线和因果计数的每个0/1贡献。"
+    },
+    {
+      "id": "lerobot-episodes",
+      "experiments": ["split-by-frame"],
+      "scope": "逐条记录显示全局索引、A/B回合身份与回合内帧号；逐条标出训练/保留归属；针对每个回合核对两侧是否同时出现、构造身份交集；末帧解释episodeIndependent与两侧各2帧，显示等量划分不等于无泄漏。"
+    },
+    {
+      "id": "lerobot-normalization",
+      "experiments": ["leak-heldout", "move-heldout"],
+      "scope": "固定训练动作[0,2,4]和真实保留动作控件；按train/all重建实际拟合集，展开数量、逐项和、均值、每项偏差及平方、ddof=0总体方差与标准差；独立显示保留偏移/z，再展开逆尺度乘积、恢复值及泄漏标记。"
+    },
+    {
+      "id": "lerobot-bc",
+      "experiments": ["double-rate", "perfect-slope"],
+      "scope": "逐项训练观测/动作和独立保留对[3,6]；π(o)=wo的每个预测与残差；每条训练样本的e×o梯度项和半平方损失、平均梯度与更新前平均损失；末帧代入学习率乘积、一次w更新及更新后的保留预测/残差。"
+    },
+    {
+      "id": "lerobot-chunks",
+      "experiments": ["cover-latency", "slower-inference"],
+      "scope": "固定四项预测动作与20ms周期；逐项前缀成员判断和选出动作；覆盖时间k×20ms、coverage−latency余量、latency−coverage未钳位差及max(0,·)空档；最后显示gap===0与等于coverage的反馈间隔。"
+    },
+    {
+      "id": "lerobot-rollout",
+      "experiments": ["expire-observation", "too-large-step", "exceed-position"],
+      "scope": "读取教学目标/当前位置/人工新鲜性；上下界分别比较、闭区间位置合法性及有符号delta；绝对变化、每周期0.2u门槛与三条件合取；按源码优先级选择失败原因，明确submitted无论allowed如何始终false。说明0.5u控件步长下只有零变化可通过0.2u门槛。"
+    },
+      {
+      "id": "lerobot-evaluation",
+      "experiments": ["four-more-successes", "stronger-baseline"],
+      "scope": "两组各20回合人工成功计数与样本比例；对策略/基线分别展开Wilson分母、中心、二项方差项、有限样本修正、根号内和、半宽、上下界；末帧显示成功计数差、比例差和100倍后的百分点差，基线为0或负差仍有定义。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs lerobot",
+      "node --test tests/course_inspector_lerobot.test.cjs"
+    ],
+    "models": 8,
+    "lessons": 8,
+    "framesChecked": 224,
+    "cellsChecked": 1167,
+    "experiments": 16,
+    "semanticTests": 13,
+    "checks": [
+      "统一检查器使用config/extension_lerobot.json中的全部8个实际demos、原模型默认参数与各控件两端，检查224帧、1167格；数字有限、ID唯一、公式存在，16个实验均通过共享UI prepare/apply及verify。没有重复运行全端点穷举。",
+      "13项独立Node测试全部通过；32个默认快照深冻结，检查具名算式、非空输入、单位/边界说明与四位小数显示约定，索引−Infinity/负值/NaN/+Infinity安全夹取。",
+      "16组实验使用真实控件和原模型run；verify核对指定输入、具体预期值及保持量，拒绝相同前值/后值对与篡改末帧关键输出，不修改前后trace。",
+      "无依赖浏览器注册通过；所有模型所有默认帧在禁止读取result、scene、visual及未来step的代理下，inspect与原快照产生完全相同结果。",
+      "数据契约测试区分短数组仍有限、维度失败与单位失败；degree分支动作数值保持且未自动转换。",
+      "时间对齐独立核对9个候选差、0.05s平分时[0,0,1]索引、未来标记[true,false,false]与离线3/因果2；偏移0.2s且零容差时仅末对有效，拒绝配对原时刻仍保留。",
+      "回合测试核对A:0/A:1/B:0/B:1身份、交替帧划分的A/B双重泄漏以及两种模式训练/保留各2帧不变。",
+      "归一化采用独立E[X²]−E[X]²恒等式核对训练方差8/3与混入保留动作后的8.75，检查每项平方偏差、z与两次都恢复8但泄漏标记不同。",
+      "BC用独立二次函数L(w)=5(w−2)²/6与导数5(w−2)/3核对w=0.5、rate=0.15的梯度−2.5、损失1.875、更新w=0.875、保留预测2.625和残差−3.375，另核对w=2的零梯度。",
+      "动作块核对3项前缀/60ms恰好覆盖、计算耗时100ms产生40ms空档且反馈间隔不变，以及80ms覆盖/20ms耗时产生60ms余量但非负空档为0。",
+      "执行门控用实际可选值独立检查−1闭边界零变化可允许、范围内0.5u变化被拒绝、位置超界优先于变化原因、观测过期优先于其他失败；所有分支submitted为false。",
+      "Wilson区间用独立记分检验二次方程求根核对0/20、14/20、20/20的上下界、中心与半宽，并检查固定10/20基线；另核对零基线70个百分点与策略0/基线20的−100个百分点。"
+    ]
+  },
+  "limitations": [
+    "现有八讲为本站原创有限教学选编，对照HF Robotics已公开Unit 0与LeRobot文档；不是未公开官方课程正文，不复制完整数据格式或完整策略实现。",
+    "inspect只读取trace.params和当前steps[index].variables/title；不读取完整result、scene、visual或未来快照。verify只在明确的前后完整运行核对中读取各自末帧。",
+    "保留原模型每讲四个计算快照，不增加伪动态；map/every/求和在单个源码步骤中一次完成，逐项算格不是在线逐帧传感器回放。",
+    "schema只检查本例action长度、有限数值和rad字符串；没有真实字段名称、关节排序、图像编码、任务元数据、文件布局或官方数据集解析。可选动作值固定有限，实验不声称向原控件注入NaN。",
+    "时间模型仅三帧、单一时钟、秒单位与离线最近邻，平分在1e−9s内保留较早索引；没有在线缓存、插值、丢帧、跨设备时钟估计或实际同步器。future标记检查的是被选帧是否晚于该状态。",
+    "回合独立只检查固定A/B身份交集；未验证任务、场景、物体或操作者独立，也没有拟合数据统计或构造真实训练/评测数据集。",
+    "归一化固定训练[0,2,4]且采用总体标准差ddof=0，尺度不会为0；all是有意的泄漏反例。其余未声明物理单位的动作采用教学单位u，不猜测为rad、degree、米或电机原始值。未加载官方processor。",
+    "行为克隆只有无偏置线性标量π(o)=wo、三条训练对、一个保留对与一次更新；更新前损失和更新后保留误差分开，不运行ACT、视觉模型、PyTorch或真实LeRobot训练，也不以离线误差替代闭环任务成功率。",
+    "动作块采用固定4项预测与20ms同步预算；executed是原模型所选数组名称而非设备回执。不含异步重规划、ACT实现、动作融合或执行器延迟，预算无空档不证明动作正确。",
+    "rollout是单关节教学门控；fresh为人工选项而非时间戳计算，0.2u为单周期变化而非速度。当前command/current步长0.5u，所以实际控件不能单独选出0.2u等号案例；没有虚构该控件实验。submitted恒false，任何allowed值都不证明机器人动作或控制安全。",
+    "评测是两组各20回合人工计数，未运行仿真或真机；Wilson双侧约95%区间取z=1.96并依赖独立同分布二项假设。不含逐回合配对、差异检验、差异区间或实际失败原因；区间重叠与否不能直接宣称显著性。",
+    "只新增本课程插件、独立测试和本清单；未改共享模型、配置、讲次ID、原图、草稿、学习记录、构建或发布产物。浏览器与总体交付验收由根agent负责。"
+  ],
+  "files": [
+    "web/course-inspectors/lerobot.js",
+    "tests/course_inspector_lerobot.test.cjs",
+    "docs/course-inspectors/lerobot.json"
+  ]
+}

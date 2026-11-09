@@ -1,0 +1,51 @@
+/* Shared Attention lesson inspector; all selectors stay inside the teaching scene. */
+:is(#aid-visual,#aic-visual).attn-active{padding:0;background:#fff;min-height:0;overflow:auto;overscroll-behavior:contain}
+.attn-workbench{color:#263342;font:13px/1.6 system-ui,-apple-system,sans-serif;padding:14px;min-width:0}
+#lbb-course-prototype .aid-workspace:has(.attn-workbench),.aic-workspace:has(.attn-workbench){grid-template-columns:minmax(0,1.65fr) minmax(0,1fr)}
+.attn-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.attn-heading>div>span{font-size:10px;letter-spacing:.09em;color:#68788b}
+:is(#aid-visual,#aic-visual) .attn-heading h3{font-size:18px;margin:4px 0 0;color:#253244;line-height:1.45}
+.attn-position{font-size:11px;white-space:nowrap;color:#466a91;background:#edf4fd;border-radius:16px;padding:4px 9px}
+.attn-stages{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0 8px}
+:is(#aid-visual,#aic-visual) .attn-workbench button{font:inherit;cursor:pointer;box-shadow:none;transform:none;letter-spacing:0}
+:is(#aid-visual,#aic-visual) .attn-stages .attn-stage{display:flex;gap:5px;align-items:center;padding:5px 8px;border:1px solid #e0e6ec;border-radius:6px;background:#fff;color:#5d6c7c;font-size:11px;min-height:30px}
+.attn-stage small{font-size:10px;opacity:.65}
+:is(#aid-visual,#aic-visual) .attn-stages .is-current{background:#eaf2ff;border-color:#7ba2e0;color:#235cb0;font-weight:650}
+.attn-hint{font-size:11px;color:#68788b;margin:8px 0}
+.attn-matrices{display:flex;align-items:center;justify-content:flex-start;gap:12px;overflow-x:auto;padding:8px 3px 10px;min-height:124px;scrollbar-gutter:stable;outline-offset:-2px}
+.attn-matrix{border:0;border-collapse:separate;border-spacing:4px;flex:0 0 auto;width:auto;margin:0;table-layout:auto}
+.attn-matrix caption{text-align:left;caption-side:top;padding:0 0 8px 18px;white-space:nowrap}
+.attn-matrix caption strong{font-size:15px;font-weight:650;color:#536ab1}
+.attn-matrix caption small{margin-left:7px;color:#8190a0;font-size:10px}
+.attn-matrix th{font-size:10px;font-weight:500;text-align:center;padding:1px 3px;border:0;color:#788797;white-space:nowrap;background:transparent}
+.attn-matrix td{border:0;padding:0;background:transparent;text-align:center}
+:is(#aid-visual,#aic-visual) .attn-matrix .attn-cell{display:flex;align-items:center;justify-content:center;width:44px;min-width:44px;height:40px;min-height:40px;margin:0;border-radius:7px;border:1px solid transparent;background:#eff2fb;color:#34466a;font:13px/1.2 ui-monospace,SFMono-Regular,Consolas,monospace;padding:0 3px;box-sizing:border-box;white-space:nowrap}
+:is(#aid-visual,#aic-visual) .attn-matrix button.attn-cell{width:52px;min-width:52px;padding:0 1px;font-size:12px}
+:is(#aid-visual,#aic-visual) .attn-key .attn-cell{background:#f2edfc;color:#715ba1}
+:is(#aid-visual,#aic-visual) .attn-value .attn-cell{background:#eaf6f0;color:#357363}
+:is(#aid-visual,#aic-visual) .attn-matrix .attn-cell.is-source{background:#fff1c6;color:#6b4b0d;border-color:#dfb248}
+:is(#aid-visual,#aic-visual) .attn-matrix .attn-cell.is-current{background:#e8f0fe;color:#2059a6;border:2px solid #487ec9;font-weight:700}
+:is(#aid-visual,#aic-visual) .attn-matrix .attn-cell.is-masked{background:#fff0f1;color:#ad4757}
+:is(#aid-visual,#aic-visual) .attn-matrix button:hover{border-color:#7299cc;background:#e6effd}
+:is(#aid-visual,#aic-visual) .attn-workbench button:focus-visible{outline:3px solid #c58e25;outline-offset:2px}
+.attn-op{flex:0 0 auto;font:14px/1.3 system-ui;color:#7d8795;white-space:nowrap;padding-top:26px}
+.attn-calculation{border-left:3px solid #d7a942;border-radius:3px;background:#fffaed;padding:10px 13px;margin:0 0 18px}
+.attn-calculation>span{font-size:10px;color:#8d702b}
+:is(#aid-visual,#aic-visual,#aid-attention-formula,#aic-attention-formula) pre{font:13px/1.85 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;color:#655022;background:transparent;border:0;margin:4px 0 0;padding:0}
+#aid-attention-formula,#aic-attention-formula{margin:12px 0}
+#aid-attention-comparison,#aic-attention-comparison{margin:10px 0 14px;flex:0 0 auto}
+#lbb-course-prototype .aid-workspace .attn-parameters{margin:12px 0 16px;padding:10px 0;border-top:1px solid #e3eaf3;border-bottom:1px solid #e3eaf3}
+#lbb-course-prototype .aid-workspace .attn-parameters>summary{color:#466383}
+.attn-verification{border-top:1px solid #e7ecf2;padding-top:12px}
+.attn-verification>strong{font-size:12px;font-weight:600}
+.attn-experiments,.attn-tools{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+:is(#aid-visual,#aic-visual) .attn-experiments button,:is(#aid-visual,#aic-visual) .attn-tools button{padding:5px 8px;min-height:30px;border:1px solid #dde5ef;border-radius:6px;color:#466383;background:#f8fafc;font-size:11px}
+:is(#aid-visual,#aic-visual) .attn-tools button{border-color:transparent;background:transparent;color:#738092;font-size:10px}
+.attn-comparison{background:#f5f9fd;border:1px solid #dae5f1;border-radius:8px;padding:10px 12px;margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:7px 12px}
+.attn-comparison>strong,.attn-comparison>p{grid-column:1/-1}
+.attn-comparison>strong{font-size:12px;color:#335d8b}
+.attn-comparison>div>span{display:block;color:#74849a;font-size:10px;margin-bottom:3px}
+.attn-comparison code{font:11px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;color:#3a5271;overflow-wrap:anywhere}
+.attn-comparison>p{font-size:11px;color:#63768f;line-height:1.75;margin:3px 0 0}
+.attn-footnote{font-size:10px;color:#8994a2;margin:9px 0 0}
+@media(max-width:850px){.attn-workbench{padding:12px}.attn-matrices{gap:8px}#lbb-course-prototype .aid-workspace:has(.attn-workbench),.aic-workspace:has(.attn-workbench){min-width:1020px}}

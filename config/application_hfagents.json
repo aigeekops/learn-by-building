@@ -1,0 +1,850 @@
+{
+  "course": {
+    "id": "hfagents",
+    "label": "HF Agents Course",
+    "title": "做一个可追溯、可停止的资料助手",
+    "edition": "当前公开版 · Unit 1–4 与 Bonus 2 选编",
+    "position": "模型应用到AI软件工程的实践连接",
+    "description": "按当前公开Agents Course选编八讲原创中文教学。围绕同一个只读资料助手，连接工具、循环、记忆、smolagents、RAG、评测与失败恢复；本站算例不是完整原课翻译或GAIA认证。",
+    "prerequisites": [
+      "会运行Python函数、列表、字典与文件",
+      "理解基本LLM输入输出；本地框架实践需要独立环境smolagents==1.26.0"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "第1讲 Agent组件与状态：模型文字怎样成为下一步行动",
+        "lessons": [
+          "hfagents-state"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      },
+      {
+        "unit": "2",
+        "title": "第2讲 工具契约：调用之前先检查名字与参数",
+        "lessons": [
+          "hfagents-tools"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      },
+      {
+        "unit": "3",
+        "title": "第3讲 Agent循环与停止：预算耗尽不是成功",
+        "lessons": [
+          "hfagents-loop"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      },
+      {
+        "unit": "4",
+        "title": "第4讲 上下文与记忆：先保住任务、约束和来源",
+        "lessons": [
+          "hfagents-context"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      },
+      {
+        "unit": "5",
+        "title": "第5讲 smolagents实践：用一个只读工具完成可验算任务",
+        "lessons": [
+          "hfagents-smolagents"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      },
+      {
+        "unit": "6",
+        "title": "第6讲 Agentic RAG：检索、检查、再改写",
+        "lessons": [
+          "hfagents-rag"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      },
+      {
+        "unit": "7",
+        "title": "第7讲 Agent评测：失败也要留在分母里",
+        "lessons": [
+          "hfagents-evaluation"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      },
+      {
+        "unit": "8",
+        "title": "第8讲 完整小作品：让重试和重放都可追溯",
+        "lessons": [
+          "hfagents-project"
+        ],
+        "material": "官方公开单元已核对；本站中文配套、计算动画与独立练习已制作，编号为本站选编顺序"
+      }
+    ],
+    "pending": "首批仅选smolagents一条框架路径。LlamaIndex、LangGraph、多Agent、视觉浏览器与微调等保留原课选读入口；本站未提交GAIA或取得课程认证。",
+    "sources": [
+      "hfagents-overview"
+    ]
+  },
+  "sources": {
+    "hfagents-overview": {
+      "kind": "官方课程入口",
+      "label": "Hugging Face Agents Course",
+      "url": "https://huggingface.co/learn/agents-course/en/unit0/introduction",
+      "locator": "公开课程导航；Unit 1、Unit 2.1、Unit 3、Unit 4及Bonus2",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-state-source": {
+      "kind": "官方课程单元",
+      "label": "Unit 1 · What is an Agent?",
+      "url": "https://huggingface.co/learn/agents-course/en/unit1/what-are-agents",
+      "locator": "The Big Picture；模型与工具；agency层次",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-messages-source": {
+      "kind": "官方课程单元",
+      "label": "Unit 1 · Messages and Special Tokens",
+      "url": "https://huggingface.co/learn/agents-course/en/unit1/messages-and-special-tokens",
+      "locator": "消息角色与chat template；消息进入模型前的序列化",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-tools-source": {
+      "kind": "官方课程单元",
+      "label": "Unit 1 · What are Tools?",
+      "url": "https://huggingface.co/learn/agents-course/en/unit1/tools",
+      "locator": "Tools定义；描述、参数与返回；系统消息中的工具描述",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-cycle-source": {
+      "kind": "官方课程单元",
+      "label": "Unit 1 · Thought-Action-Observation",
+      "url": "https://huggingface.co/learn/agents-course/en/unit1/agent-steps-and-structure",
+      "locator": "完整Agent运行循环；工具动作与观测",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-memory-source": {
+      "kind": "官方框架文档",
+      "label": "smolagents · Manage your agent memory",
+      "url": "https://huggingface.co/docs/smolagents/tutorials/memory",
+      "locator": "Agent memory、运行步骤与消息；本站预算装箱为原创扩展示例",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-framework-source": {
+      "kind": "官方课程单元",
+      "label": "Unit 2.1 · Building Agents That Use Code",
+      "url": "https://huggingface.co/learn/agents-course/en/unit2/smolagents/code_agents",
+      "locator": "CodeAgent、工具、模型接口与执行动作",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-model-source": {
+      "kind": "官方稳定版框架文档",
+      "label": "smolagents 1.26.0 · Model",
+      "url": "https://huggingface.co/docs/smolagents/v1.26.0/en/reference/models",
+      "locator": "Model.generate接口；自定义模型返回ChatMessage；本地离线ReplayModel实跑",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-rag-source": {
+      "kind": "官方课程单元",
+      "label": "Unit 3 · Agentic RAG",
+      "url": "https://huggingface.co/learn/agents-course/en/unit3/agentic-rag/introduction",
+      "locator": "案例用途与框架选择；查询改写和人工支持检查为本站有限实践",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-eval-source": {
+      "kind": "官方扩展单元",
+      "label": "Bonus Unit 2 · Observability & Evaluation",
+      "url": "https://huggingface.co/learn/agents-course/en/bonus-unit2/introduction",
+      "locator": "运行轨迹、观察与评测；本站四题集为原创，不是GAIA成绩",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    },
+    "hfagents-final-source": {
+      "kind": "官方课程单元",
+      "label": "Unit 4 · Final Project",
+      "url": "https://huggingface.co/learn/agents-course/en/unit4/introduction",
+      "locator": "构建与评测Agent；原课使用GAIA子集，本站小作品单独标注",
+      "status": "2026-11-08 已读取当前公开页面；章节定位已核对，本站中文与算例为原创选编",
+      "role": "official"
+    }
+  },
+  "lessons": [
+    {
+      "id": "hfagents-state",
+      "course": "hfagents",
+      "unit": "1",
+      "title": "第1讲 Agent组件与状态：模型文字怎样成为下一步行动",
+      "summary": "把消息、目标、工具能力和观测放入同一份可追溯状态。",
+      "question": "一个回答问题的系统，什么时候需要调用工具，什么时候应该拒绝？",
+      "outcome": "区分消息与授权、工具能力与生成文字，并复算本轮输入消息条数。",
+      "prerequisites": [
+        "会读Python列表和字典",
+        "会区分函数输入与返回值"
+      ],
+      "explanation": [
+        "把Agent看成一个围绕任务运行的系统：模型提出动作，工具执行，观测再进入下一轮。只有文本回答而没有外部动作，也可以完成任务；是否给工具应由任务决定。",
+        "同一句“读取资料”出现在用户消息、系统说明或网页中，含义并不相同。角色告诉系统怎样组织输入，实际注册的工具与执行检查决定它究竟能做什么。",
+        "本讲从一个只读资料助手开始。页面采用预设策略：没有本次观测就读取，有来源时摘录，候选工具越界则拒绝；这里不运行真实模型，也不把步骤标题说成模型内部思考。 看图时读出各角色消息如何进入本轮状态，并检查工具越界后为什么不能进入作答分支。"
+      ],
+      "formula": "message_count = 1(system) + 2 × history_turns + 1(user) + has_observation",
+      "worked": "默认保留1轮历史，没有本次观测：1+2+1=4条消息，read允许，下一步lookup。保留2轮并加入工具观测时是7条；候选write无论历史多少都拒绝。",
+      "misconception": "能生成一段工具调用文字不等于工具已经执行。历史消息条数也不是模型token数，内容长短与chat template还会改变实际开销。",
+      "sections": [
+        {
+          "title": "任务、模型和工具各做什么",
+          "explanation": "任务定义要解决的问题，模型接口产生候选动作，执行层查工具注册与参数，工具返回观测。一个模块名称不能替代其他模块；小助手的只读能力来自明确的注册集合。",
+          "code": "allowed_tools = {\"read\"}\nallowed = requested_tool in allowed_tools",
+          "exercise": "列出一个只读资料助手需要的输入与不需要授予的能力。"
+        },
+        {
+          "title": "消息角色与状态恢复",
+          "explanation": "模型一般每次读取传入消息；没有传入的历史不会因为页面曾显示过就自动存在。本例只数每轮两条消息，并将最新工具观测与其来源作为一个独立输入。",
+          "code": "messages = [system, *history, task]\nif observation:\n    messages.append({\"role\": \"tool\", \"content\": observation})",
+          "exercise": "历史轮数从1改3，观测仍为空时，本轮应有几条消息？"
+        },
+        {
+          "title": "能力边界与下一状态",
+          "explanation": "资料不足时先取证，越界请求则停止。后面的工具契约与循环课会展开具体执行，不把这里的条件表达式误称为通用Agent智能。",
+          "code": "next_action = \"refuse\" if not allowed else \"answer_with_source\" if observation else \"lookup\"",
+          "exercise": "已有观测但候选工具write时，为什么仍然拒绝？"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为state.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "def build_state(turns=1, observation=False, tool=\"read\"):\n    system = {\"role\": \"system\", \"content\": \"只读资料，保留来源\"}\n    history = []\n    for i in range(turns):\n        history.extend([{\"role\": \"user\", \"content\": f\"旧问题{i+1}\"},\n                        {\"role\": \"assistant\", \"content\": f\"旧回答{i+1}\"}])\n    messages = [system, *history, {\"role\": \"user\", \"content\": \"采样周期是多少？\"}]\n    if observation:\n        messages.append({\"role\": \"tool\", \"content\": {\"source\": \"sampling-v1\", \"value\": \"10 ms\"}})\n    allowed = tool == \"read\"\n    next_action = \"refuse\" if not allowed else \"answer_with_source\" if observation else \"lookup\"\n    return len(messages), allowed, next_action\n\nif __name__ == \"__main__\":\n    assert build_state() == (4, True, \"lookup\")\n    assert build_state(2, True) == (7, True, \"answer_with_source\")\n    assert build_state(0, False, \"write\") == (2, False, \"refuse\")\n    print(build_state())\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "先预测：保留2轮历史并有观测，共有几条消息？",
+        "单步观察消息组成，再把工具切换到write，比较下一状态。",
+        "用本地Python验证0轮无观测、3轮有观测两种输入，解释变化来自哪里。"
+      ],
+      "exercise": {
+        "prompt": "保留3轮历史，并有一条本次工具观测，本轮消息数是多少？",
+        "expected": 9,
+        "tolerance": 1e-06,
+        "unit": "条",
+        "hint": "system和user各1条，历史6条，工具观测1条。",
+        "solution": "1+2×3+1+1=9条。",
+        "transfer": "独立验证：2轮历史、无观测时应为6条；将工具改为write，消息数不变但next_action必须为refuse。"
+      },
+      "sources": [
+        "hfagents-state-source",
+        "hfagents-messages-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-tools",
+          "label": "继续下一讲：工具契约：调用之前先检查名字与参数"
+        },
+        {
+          "lesson": "cs50p-files",
+          "label": "回补Python：文件与来源记录"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。",
+      "modelId": "hfagents-state",
+      "demos": [
+        {
+          "modelId": "hfagents-state",
+          "title": "Agent组件与状态：模型文字怎样成为下一步行动的逐步模型"
+        }
+      ]
+    },
+    {
+      "id": "hfagents-tools",
+      "course": "hfagents",
+      "unit": "2",
+      "title": "第2讲 工具契约：调用之前先检查名字与参数",
+      "summary": "把工具描述、输入校验、执行结果和失败分开。",
+      "question": "生成的工具请求为什么不能直接当成一次成功执行？",
+      "outcome": "核对注册名、参数边界与响应状态，区分契约错误和工具超时。",
+      "prerequisites": [
+        "会读函数和条件",
+        "已理解Agent工具的作用"
+      ],
+      "explanation": [
+        "工具是有输入、输出和实际作用的函数。给模型看的名称、用途和参数说明有助于选择；执行层仍要检验真实请求，不应假设模型每次都生成合法值。",
+        "本例lookup最多读3条文档。页面故意允许选择0和4，让你检查越界拒绝；未注册delete也不执行。拒绝时executed=false，返回一个明确的contract错误。",
+        "合法请求仍可能超时。超时表示工具确实被调用但没有可用资料，不能把它解释为空的成功答案；后续循环只能按声明好的错误类别和预算处理。 看图时先预测哪一道检查会拒绝请求，再核对执行标志与返回文档是否真的产生；不要把未运行与成功返回零条混在一起。"
+      ],
+      "formula": "valid = registered_name ∧ integer(limit) ∧ 1 ≤ limit ≤ 3",
+      "worked": "默认lookup(limit=2)实际读取2条样例。limit=0或delete均不运行工具；合法limit=2遇到timeout则executed=true、usable=false、count=0。",
+      "misconception": "结构正确不等于内容可靠。通过schema只说明输入符合契约，返回文档是否支持问题仍需单独核对。",
+      "sections": [
+        {
+          "title": "把接口讲清楚",
+          "explanation": "明确的工具描述应包含作用、参数、限制和返回格式。工具调用不是任意函数名字符串的执行器，注册集合之外的动作应在运行前被拒绝。",
+          "code": "registry = {\"lookup\": lookup}\nif name not in registry:\n    return {\"isError\": True, \"kind\": \"unknown_tool\"}",
+          "exercise": "为lookup写一句具体用途，不要只写“万能搜索”。"
+        },
+        {
+          "title": "边界和类型一起检查",
+          "explanation": "本例limit只接受整数1至3。Python的bool是int的子类，因此完整本地例子使用type(limit) is int；此规则与页面有限控件的行为分别说明。",
+          "code": "valid = type(limit) is int and 1 <= limit <= 3",
+          "exercise": "验证True、0、1、3、4，说明哪几项应拒绝。"
+        },
+        {
+          "title": "消费结果先看状态",
+          "explanation": "工具响应应把错误与数据分开；超时后rows为空仅是消费方不读取错误数据，并不意味着“知识库就是空的”。错误消息也应可追溯到本次请求。",
+          "code": "rows = [] if response[\"isError\"] else response[\"rows\"]",
+          "exercise": "同样count=0，契约失败与超时的executed为什么不同？"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为tools.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "def lookup(limit=2, name=\"lookup\", fault=\"none\"):\n    registered = name == \"lookup\"\n    valid = registered and type(limit) is int and 1 <= limit <= 3\n    if not valid:\n        return {\"executed\": False, \"usable\": False, \"count\": 0, \"error\": \"contract\"}\n    if fault == \"timeout\":\n        return {\"executed\": True, \"usable\": False, \"count\": 0, \"error\": \"timeout\"}\n    documents = [\"sampling-v1\", \"power-v1\", \"log-v1\"]\n    rows = documents[:limit]\n    return {\"executed\": True, \"usable\": True, \"count\": len(rows), \"error\": None}\n\nif __name__ == \"__main__\":\n    assert lookup()[\"count\"] == 2\n    assert lookup(0)[\"executed\"] is False\n    assert lookup(True)[\"error\"] == \"contract\"\n    assert lookup(2, \"delete\")[\"executed\"] is False\n    assert lookup(2, fault=\"timeout\")[\"error\"] == \"timeout\"\n    print(lookup())\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "先预测limit=4时工具是否运行。",
+        "对比未注册工具、正常请求和超时的步骤与变量。",
+        "在Python里加入type(limit)检查，验证布尔值不会被当成1。"
+      ],
+      "exercise": {
+        "prompt": "文档共有3条，合法请求limit=3且没有故障，可消费多少条？",
+        "expected": 3,
+        "tolerance": 1e-06,
+        "unit": "条",
+        "hint": "只取实际存在的文档，不补齐不存在的记录。",
+        "solution": "3条文档全部返回，所以count=3。",
+        "transfer": "独立验证limit=0与合法limit=2超时：count都为0，但前者executed=False，后者executed=True。"
+      },
+      "sources": [
+        "hfagents-tools-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-state",
+          "label": "回到前一讲：Agent组件与状态：模型文字怎样成为下一步行动"
+        },
+        {
+          "lesson": "hfagents-loop",
+          "label": "继续下一讲：Agent循环与停止：预算耗尽不是成功"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。",
+      "modelId": "hfagents-tools",
+      "demos": [
+        {
+          "modelId": "hfagents-tools",
+          "title": "工具契约：调用之前先检查名字与参数的逐步模型"
+        }
+      ]
+    },
+    {
+      "id": "hfagents-loop",
+      "course": "hfagents",
+      "unit": "3",
+      "title": "第3讲 Agent循环与停止：预算耗尽不是成功",
+      "summary": "沿着动作、观测、再决策走完一次有界任务。",
+      "question": "第一次工具失败后可以重试几次，何时才算真正输出了答案？",
+      "outcome": "分别统计决策与工具调用，识别完成、错误和预算耗尽。",
+      "prerequisites": [
+        "理解工具契约与结构化错误",
+        "会读for循环"
+      ],
+      "explanation": [
+        "一次Agent任务通常不是一个函数调用就结束。系统读取当前状态，提出动作，执行工具，再把结果变成下一轮输入；模型生成动作与工具返回结果是不同事件。",
+        "本课只让一个固定策略读取资料：没观测就lookup，有成功观测就在下一步final。这个安排能清楚观察反馈怎样改变行为，同时不把确定性if分支说成真实LLM。",
+        "预算限制的是最多决策次数。本例final也占一步，所以在最后一步刚读到资料可能仍未完成输出；永久错误立即停止，反复临时错误则会耗尽预算。 看图时分别数决策与工具调用，观察成功观测出现后还需要哪一个步骤才能输出，以及停止原因何时改变。"
+      ],
+      "formula": "completed requires observation and a later final decision; calls ≤ decisions ≤ budget",
+      "worked": "默认第一次读取失败，第二次成功，第三个决策输出10 ms：calls=2、decisions=3、status=completed。首次成功但budget=1仍为budget_exhausted且answer=null。",
+      "misconception": "把while循环跑完不等于任务成功。你需要一个可以检查的完成条件，不能把任何停止都显示成“完成”。",
+      "sections": [
+        {
+          "title": "一轮运行里有哪些事件",
+          "explanation": "动作请求、工具执行、观测接入与输出各有单独状态。日志要让人分清“提出读取”和“真的拿到资料”，否则重放会混淆动作次数与结果。",
+          "code": "action = \"final\" if observation is not None else \"lookup\"",
+          "exercise": "画出首次成功场景的两次决策。"
+        },
+        {
+          "title": "失败策略必须有边界",
+          "explanation": "可重试错误可能由暂时不可用引起，但不可恢复错误应停止。预算是系统规则，不由某条工具返回文本自行取消；真实应用还需超时与取消。",
+          "code": "if fatal_error:\n    status = \"tool_error\"\n    break",
+          "exercise": "持续失败时，budget从2改5，应增加什么而不会产生什么？"
+        },
+        {
+          "title": "定义完成条件",
+          "explanation": "只有进入final并产生有来源的输出，才把本例状态设为completed。预算耗尽或错误停止时answer保持空，避免制造成功证据。",
+          "code": "if status == \"running\":\n    status = \"budget_exhausted\"",
+          "exercise": "为什么budget=1首次读取成功仍不能显示已输出答案？"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为loop.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "def run(budget=4, scenario=\"retry\"):\n    calls, observation, status, answer = 0, None, \"running\", None\n    decisions = 0\n    for step in range(1, budget + 1):\n        decisions = step\n        if observation is not None:\n            answer, status = observation, \"completed\"\n            break\n        calls += 1\n        if scenario == \"fatal\":\n            status = \"tool_error\"\n            break\n        retryable = scenario == \"stall\" or scenario == \"retry\" and calls == 1\n        if not retryable:\n            observation = \"10 ms\"\n    if status == \"running\":\n        status = \"budget_exhausted\"\n    return {\"calls\": calls, \"decisions\": decisions, \"status\": status, \"answer\": answer}\n\nif __name__ == \"__main__\":\n    assert run() == {\"calls\": 2, \"decisions\": 3, \"status\": \"completed\", \"answer\": \"10 ms\"}\n    assert run(1, \"success\")[\"status\"] == \"budget_exhausted\"\n    assert run(6, \"stall\")[\"calls\"] == 6\n    assert run(6, \"fatal\")[\"calls\"] == 1\n    print(run())\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "预测retry场景budget=2与3的停止原因。",
+        "播放循环，分别数决策和工具调用，再用下一步核对。",
+        "用本地程序验证success、retry、stall、fatal四条路径，保留失败轨迹。"
+      ],
+      "exercise": {
+        "prompt": "第一次临时失败，第二次读取成功，随后final；最少需要几个决策步骤？",
+        "expected": 3,
+        "tolerance": 1e-06,
+        "unit": "步",
+        "hint": "读取失败、读取成功、final分别占一步。",
+        "solution": "共3个决策步骤，其中工具调用2次。",
+        "transfer": "独立验证budget=2时已经有成功观测但没有final；然后用stall、budget=4检查恰好4次工具调用且没有答案。"
+      },
+      "sources": [
+        "hfagents-cycle-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-tools",
+          "label": "回到前一讲：工具契约：调用之前先检查名字与参数"
+        },
+        {
+          "lesson": "hfagents-context",
+          "label": "继续下一讲：上下文与记忆：先保住任务、约束和来源"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。",
+      "modelId": "hfagents-loop",
+      "demos": [
+        {
+          "modelId": "hfagents-loop",
+          "title": "Agent循环与停止：预算耗尽不是成功的逐步模型"
+        }
+      ]
+    },
+    {
+      "id": "hfagents-context",
+      "course": "hfagents",
+      "unit": "4",
+      "title": "第4讲 上下文与记忆：先保住任务、约束和来源",
+      "summary": "用完整片段而非半截资料装入有限输入预算。",
+      "question": "历史越长越好吗？什么内容必须保留下来？",
+      "outcome": "按人工成本复算输入预算，解释摘要的收益与信息丢失风险。",
+      "prerequisites": [
+        "能计算加减与累计量",
+        "理解消息和来源"
+      ],
+      "explanation": [
+        "聊天界面显示过一段内容，不等于当前模型一定收到它。持续任务需要明确传入哪些历史、工具观测和约束；“记忆”也是数据选择与状态组织的问题。",
+        "输入窗口要为输出预留空间。本讲把system、task、constraint与一条带来源记忆当作必需片段，先核算能否完整放下，再考虑可选背景；不足时拒绝这次装入。",
+        "全文24单位，给定摘要10单位；这组成本是人工设定而非真实token数。摘要明确保留本例事实与source，不能据此推论任何自动摘要都不会漏掉条件。 看图时以橙色线作为输入空间边界，比较必需片段是否越界；可选背景只有实际加入后才出现绿色条段。"
+      ],
+      "formula": "input_budget = window − reserve; required_cost = 12 + 8 + 6 + memory_cost",
+      "worked": "默认65−20=45单位输入空间，摘要时必需36单位，可用剩余9，放不下12单位可选背景；全文需要50单位，因此拒绝。",
+      "misconception": "窗口满不代表信息足够，窗口空也不一定缺资料。不要用利用率替代任务与证据是否齐全的检查。",
+      "sections": [
+        {
+          "title": "短期上下文与持久记忆",
+          "explanation": "本课的“记忆”是一条待传入的来源事实，不是模型权重里的知识，也不是自动无损保存的历史。应用应明确记录版本、source和仍有效的约束。",
+          "code": "memory = {\"source\": \"sampling-v1\", \"fact\": \"周期10 ms\"}",
+          "exercise": "若只保留10 ms而丢掉来源与单位，会带来什么核对困难？"
+        },
+        {
+          "title": "先算必需材料",
+          "explanation": "原始问题、只读约束与事实来源构成完整作答输入。不能为了塞下可选资料而悄悄截掉必需约束或半个引用。 同时保留输入条件、实际输出和未完成状态，才能让另一个人独立复现并定位问题。",
+          "code": "required_cost = 12 + 8 + 6 + memory_cost\nfits = required_cost <= window - reserve",
+          "exercise": "window=50、reserve=20、摘要10时，应保留什么状态？"
+        },
+        {
+          "title": "摘要应有保真检查",
+          "explanation": "摘要长度变短只是资源变化。独立检查它是否保留任务限制、事实条件、来源和未决问题；成本足够也不自动保证摘要质量。",
+          "code": "selected = list(required) if fits else []",
+          "exercise": "写出一个会误导后续工具调用的摘要反例。"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为context.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "def pack(window=65, reserve=20, memory=\"summary\"):\n    input_budget = window - reserve\n    required = [(\"system\", 12), (\"task\", 8), (\"constraint\", 6),\n                (\"memory\", 24 if memory == \"full\" else 10)]\n    required_cost = sum(cost for _, cost in required)\n    fits = required_cost <= input_budget\n    selected = list(required) if fits else []\n    if fits and required_cost + 12 <= input_budget:\n        selected.append((\"optional\", 12))\n    used = sum(cost for _, cost in selected)\n    return {\"inputBudget\": input_budget, \"requiredCost\": required_cost,\n            \"used\": used, \"remaining\": input_budget-used, \"selected\": selected,\n            \"status\": \"ready\" if fits else \"refuse_missing_required\"}\n\nif __name__ == \"__main__\":\n    assert pack()[\"used\"] == 36\n    assert pack(memory=\"full\")[\"status\"] == \"refuse_missing_required\"\n    assert pack(90, 10, \"full\")[\"used\"] == 62\n    print(pack())\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "先预测：摘要和全文各需要多少单位。",
+        "切换memory模式，比较required_cost、used与status。",
+        "独立验证window=90、reserve=10、全文时能否加入可选背景，并说明不是实际token计数。"
+      ],
+      "exercise": {
+        "prompt": "窗口80，预留20，摘要10，固定必需开销26，可选背景12；加入可选背景后实际用多少输入单位？",
+        "expected": 48,
+        "tolerance": 1e-06,
+        "unit": "人工单位",
+        "hint": "必需36，输入空间60；36+12可以完整装入。",
+        "solution": "26+10+12=48单位，剩余12。",
+        "transfer": "独立验证窗口50、预留20：输入30小于必需36，应拒绝并保持used=0；不能截断来源。"
+      },
+      "sources": [
+        "hfagents-messages-source",
+        "hfagents-memory-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-loop",
+          "label": "回到前一讲：Agent循环与停止：预算耗尽不是成功"
+        },
+        {
+          "lesson": "hfagents-smolagents",
+          "label": "继续下一讲：smolagents实践：用一个只读工具完成可验算任务"
+        },
+        {
+          "lesson": "context",
+          "label": "连接CS146S：上下文工程"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。人工成本与给定摘要只用于容量教学，不实现真实tokenizer或摘要模型。",
+      "modelId": "hfagents-context",
+      "demos": [
+        {
+          "modelId": "hfagents-context",
+          "title": "上下文与记忆：先保住任务、约束和来源的逐步模型"
+        }
+      ]
+    },
+    {
+      "id": "hfagents-smolagents",
+      "course": "hfagents",
+      "unit": "5",
+      "title": "第5讲 smolagents实践：用一个只读工具完成可验算任务",
+      "summary": "把模型接口、工具注册、CodeAgent和最终输出接成小工程。",
+      "question": "CodeAgent产生代码后，哪些部分由框架执行，哪些结果仍要自己验证？",
+      "outcome": "运行离线ReplayModel与真实CodeAgent接口，核对工具返回3和最终结果36。",
+      "prerequisites": [
+        "会写函数和类型提示",
+        "已理解工具与预算",
+        "本地框架实验需单独环境安装smolagents==1.26.0"
+      ],
+      "explanation": [
+        "smolagents提供把模型响应接到工具与执行器的框架。CodeAgent使用代码表达动作，ToolCallingAgent偏向结构化工具调用；它们的效果仍取决于模型、工具和任务条件。",
+        "我们只选CodeAgent一条实践路径：一个count_items工具返回固定库存数量，受控模型响应调用它并将结果乘12。浏览器逐步计算同一算例，但不执行Python；本地示例则真的运行框架调度。",
+        "离线ReplayModel的响应由我们直接给定，没有真实模型推断。它能检验接口、工具注册和返回路径，不能证明LLM会正确规划；真实模型任务与沙箱权限还需另行评估。 看图时沿着固定代码中的工具调用走向计数值，再核对乘法是否在取到观测之后才出现，拒绝路径始终保持未知结果。"
+      ],
+      "formula": "amount = count_items(\"sensors\") × unit_price",
+      "worked": "默认3个传感器，每项12单位，先拿到n=3，再算amount=36并final_answer。取消注册工具后allowed=false，toolCount、amount和answer均为空。",
+      "misconception": "运行CodeAgent的代码能力不是授权运行任意用户代码。这里只提供受控只读工具与固定响应，不扩展文件、网络或安装权限。",
+      "sections": [
+        {
+          "title": "把函数注册成清楚的工具",
+          "explanation": "@tool通过类型提示和docstring表达参数与用途。工具结果来自实际函数执行；输入类别不合法时应拒绝，而不是随意选择数据。",
+          "code": "@tool\ndef count_items(category: str) -> int:\n    \"\"\"Count sensors. Args: category: exactly sensors.\"\"\"\n    if category != \"sensors\": raise ValueError(\"unknown category\")\n    return 3",
+          "exercise": "为什么工具不应该接受任意Python表达式作为category？"
+        },
+        {
+          "title": "预设模型只验证框架边界",
+          "explanation": "自定义Model.generate返回ChatMessage。本站ReplayModel只返回给定可信代码，并限制一次生成；没有调用外部模型，也不把这份响应当作智能推理结果。",
+          "code": "class ReplayModel(Model):\n    def generate(self, messages, **kwargs):\n        return ChatMessage(role=\"assistant\", content=fixed_code)",
+          "exercise": "把ReplayModel换成真实模型时，哪些验证仍不能省略？"
+        },
+        {
+          "title": "在独立环境运行真实CodeAgent",
+          "explanation": "完整离线脚本位于examples/application-hfagents/smolagents_offline.py，已在smolagents 1.26.0独立环境中实际运行，结果36、模型接口调用1次。它依赖第三方库，先安装固定版本；其余本讲标准库例子不需要框架。",
+          "code": "python3 -m venv .venv\n.venv/bin/pip install smolagents==1.26.0\nHF_HUB_OFFLINE=1 .venv/bin/python smolagents_offline.py",
+          "exercise": "保留框架版本与输出。若换成真实推理后失败，先区分模型输出、工具与执行器问题。"
+        },
+        {
+          "title": "可复制的完整smolagents离线案例",
+          "explanation": "把这一整段保存为smolagents_offline.py，在已安装smolagents==1.26.0的独立环境运行。HF_HUB_OFFLINE=1会阻止Hub在线访问；此模型本身没有网络推断，输入的代码是我们给定的可信固定片段。已实际验证输出36。",
+          "code": "\"\"\"Offline integration fixture: real smolagents, fixed trusted model output, no LLM/network.\nRun in an isolated environment with smolagents==1.26.0. Never feed untrusted code\ninto this example or add broad tools just to make a generated program succeed.\n\"\"\"\nimport json\nfrom importlib.metadata import version\nfrom smolagents import CodeAgent, Model, ChatMessage, tool\n\n\n@tool\ndef count_items(category: str) -> int:\n    \"\"\"Count one category in a fixed read-only inventory.\n\n    Args:\n        category: The inventory category, exactly sensors.\n    \"\"\"\n    if category != \"sensors\":\n        raise ValueError(\"unknown category\")\n    return 3\n\n\nclass ReplayModel(Model):\n    def __init__(self):\n        super().__init__(model_id=\"offline-replay-fixture\")\n        self.calls = 0\n\n    def generate(self, messages, stop_sequences=None, **kwargs):\n        # A test response is supplied explicitly: this does not infer a solution.\n        self.calls += 1\n        if self.calls != 1:\n            raise RuntimeError(\"this controlled fixture expects one generation\")\n        return ChatMessage(\n            role=\"assistant\",\n            content='Thought: Use the supplied inventory tool.\\n'\n                    'Code:\\n```python\\nn = count_items(\"sensors\")\\n'\n                    'final_answer(n * 12)\\n```<end_code>',\n        )\n\n\nif __name__ == \"__main__\":\n    model = ReplayModel()\n    agent = CodeAgent(tools=[count_items], model=model, max_steps=2, verbosity_level=0)\n    answer = agent.run(\"Count the sensors and multiply their count by 12.\")\n    assert answer == 36\n    assert model.calls == 1\n    print(json.dumps({\"smolagents\": version(\"smolagents\"), \"answer\": answer,\n                      \"model_calls\": model.calls, \"real_model_inference\": False,\n                      \"scope\": \"offline framework/tool integration only\"}))\n",
+          "exercise": "核对answer=36、model_calls=1和实际安装版本；不要把受控响应替换成任意不可信程序。"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为controlled_fixture.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "def controlled_fixture(quantity=3, unit_price=12, allow=True):\n    # This standalone calculation is the expected result, not a framework imitation.\n    def count_items(category):\n        if category != \"sensors\":\n            raise ValueError(\"unknown category\")\n        return quantity\n    registry = {\"count_items\": count_items} if allow else {}\n    if \"count_items\" not in registry:\n        return {\"allowed\": False, \"toolCount\": None, \"amount\": None, \"answer\": None}\n    n = registry[\"count_items\"](\"sensors\")\n    amount = n * unit_price\n    return {\"allowed\": True, \"toolCount\": n, \"amount\": amount,\n            \"answer\": {\"amount\": amount, \"source\": \"inventory-fixture\"}}\n\nif __name__ == \"__main__\":\n    assert controlled_fixture()[\"amount\"] == 36\n    assert controlled_fixture(4, 7)[\"amount\"] == 28\n    assert controlled_fixture(allow=False)[\"answer\"] is None\n    print(controlled_fixture())\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "先预测quantity=4、unitPrice=7的结果。",
+        "在浏览器单步比较已注册与未注册工具的路径。",
+        "运行完整离线框架脚本核对36与1次生成；再用标准库版本换输入独立验算。"
+      ],
+      "exercise": {
+        "prompt": "只读工具返回4，unit_price=7，final_answer应该返回多少？",
+        "expected": 28,
+        "tolerance": 1e-06,
+        "unit": "教学单位",
+        "hint": "先有工具返回值，再做乘法。",
+        "solution": "4×7=28。",
+        "transfer": "独立验证未注册工具的结果必须为空；真实框架离线脚本应输出36且model_calls=1，不能把这个受控脚本成绩称为LLM评测。"
+      },
+      "sources": [
+        "hfagents-framework-source",
+        "hfagents-model-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-context",
+          "label": "回到前一讲：上下文与记忆：先保住任务、约束和来源"
+        },
+        {
+          "lesson": "hfagents-rag",
+          "label": "继续下一讲：Agentic RAG：检索、检查、再改写"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。浏览器不是Python执行器；完整离线smolagents 1.26.0代码已实跑，使用给定受信响应而非真实LLM。",
+      "modelId": "hfagents-smolagents",
+      "demos": [
+        {
+          "modelId": "hfagents-smolagents",
+          "title": "smolagents实践：用一个只读工具完成可验算任务的逐步模型"
+        }
+      ]
+    },
+    {
+      "id": "hfagents-rag",
+      "course": "hfagents",
+      "unit": "6",
+      "title": "第6讲 Agentic RAG：检索、检查、再改写",
+      "summary": "让只读资料助手在有限预算内找证据或明确拒答。",
+      "question": "相关文档排名靠前，就足以回答问题吗？",
+      "outcome": "复算词项重合分数、top-k与支持性检查，解释预算与资料不足。",
+      "prerequisites": [
+        "会读列表排序与筛选",
+        "理解工具循环和来源"
+      ],
+      "explanation": [
+        "普通RAG常按固定流程检索一次再生成；Agentic RAG可以根据观测决定改写、补查或停止。本讲把查询计划固定为可复现步骤，重点研究反馈与证据条件。",
+        "文档只有三条，分数由查询词命中比例算出。它是透明的小检索器，不是embedding；排序之后还要检查该文档是否真能支持当前问题，而非把相似度当正确率。",
+        "资料不存在时，正确状态是明确资料不足。改写不能制造知识，工具失败也不能冒充一次“未找到”；最后输出保留文档id，以便独立核对事实与版本。 看图时逐次比较查询词、重合分数与通过支持检查的文档，答案区在证据检查之前保持等待。"
+      ],
+      "formula": "score = matched_query_terms / query_terms; evidence = topk(hits) ∩ supporting_docs",
+      "worked": "采样第一问使用“采样 频率”，命中比例0.5；阈值0.75时不收录。第二次改写“采样 周期”，比例1，取得sampling-v1，输出10 ms。预算只有1则资料不足。",
+      "misconception": "把检索阈值调低可能提高召回，但不能单独证明支持问题。本例支持规则是人工真值，不代表真实系统已经解决事实一致性。",
+      "sections": [
+        {
+          "title": "查询计划与检索器分别检查",
+          "explanation": "问题改写解决表述差异，检索器负责按资料找候选。本例预设两个采样查询，观察第一轮不足后第二轮如何进入；没有LLM实时生成查询。",
+          "code": "queries = [[\"采样\", \"频率\"], [\"采样\", \"周期\"]]",
+          "exercise": "当第一问已经满足阈值时，为什么不必继续第二次检索？"
+        },
+        {
+          "title": "分数、阈值与支持性",
+          "explanation": "词项重合只是候选信号。本例要求score>0，防止阈值0收下完全无关资料，然后用公开的人工规则检查对应问题。",
+          "code": "hits = [d for d in ranked if d[\"score\"] >= threshold and d[\"score\"] > 0][:topk]",
+          "exercise": "问未知电机速度，阈值设0为什么也不应输出3.3 V？"
+        },
+        {
+          "title": "带来源的答案与拒答",
+          "explanation": "证据通过支持检查后才摘录value与id。缺知识、权限问题、超时和索引错误在真实应用中应分开观测；不能统一伪装成一个空字符串。",
+          "code": "answer = [{\"source\": d[\"id\"], \"value\": d[\"value\"]} for d in evidence]",
+          "exercise": "自行加入另一条旧版采样资料时，要怎样让版本选择可核验？"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为rag.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "DOCUMENTS = [\n    {\"id\": \"sampling-v1\", \"tokens\": [\"采样\", \"周期\"], \"value\": \"10 ms\"},\n    {\"id\": \"power-v1\", \"tokens\": [\"电源\", \"电压\"], \"value\": \"3.3 V\"},\n    {\"id\": \"log-v1\", \"tokens\": [\"日志\", \"时间戳\"], \"value\": \"毫秒\"},\n]\n\ndef retrieve(question=\"sampling\", budget=2, topk=2, threshold=.75):\n    plan = {\"sampling\": [[\"采样\", \"频率\"], [\"采样\", \"周期\"]],\n            \"power\": [[\"电源\", \"电压\"]], \"unknown\": [[\"电机\", \"速度\"], [\"转速\", \"上限\"]]}\n    expected = {\"sampling\": \"sampling-v1\", \"power\": \"power-v1\", \"unknown\": None}\n    evidence, calls = [], 0\n    for terms in plan[question][:budget]:\n        calls += 1\n        ranked = [dict(d, score=sum(t in d[\"tokens\"] for t in terms)/len(terms)) for d in DOCUMENTS]\n        ranked.sort(key=lambda d: (-d[\"score\"], d[\"id\"]))\n        hits = [d for d in ranked if d[\"score\"] >= threshold and d[\"score\"] > 0][:topk]\n        evidence = [d for d in hits if d[\"id\"] == expected[question]]\n        if evidence:\n            break\n    answer = [{\"source\": d[\"id\"], \"value\": d[\"value\"]} for d in evidence]\n    return {\"calls\": calls, \"evidenceCount\": len(evidence),\n            \"answer\": answer or [{\"source\": None, \"value\": \"资料不足\"}]}\n\nif __name__ == \"__main__\":\n    assert retrieve()[\"calls\"] == 2\n    assert retrieve(budget=1)[\"evidenceCount\"] == 0\n    assert retrieve(\"unknown\", threshold=0)[\"evidenceCount\"] == 0\n    print(retrieve())\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "预测阈值0.75、预算1与2的差别。",
+        "单步看查询词、排名、候选、证据，再将问题改为未知速度。",
+        "用本地例子核对词项重合与拒答，在新题上验证，说明人工支持规则的局限。"
+      ],
+      "exercise": {
+        "prompt": "查询含2个词，其中1个在文档中出现，重合分数是多少？",
+        "expected": 0.5,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "按命中词数除以查询词数。",
+        "solution": "1/2=0.5；阈值0.75时不进入候选。",
+        "transfer": "独立验证：采样、threshold=.75、budget=1时无证据；budget=2时来源为sampling-v1。未知问题即使threshold=0也必须资料不足。"
+      },
+      "sources": [
+        "hfagents-rag-source",
+        "hfagents-tools-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-smolagents",
+          "label": "回到前一讲：smolagents实践：用一个只读工具完成可验算任务"
+        },
+        {
+          "lesson": "hfagents-evaluation",
+          "label": "继续下一讲：Agent评测：失败也要留在分母里"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。不运行向量模型或外部索引；查询规划与支持真值检查均为本站公开的人工规则。",
+      "modelId": "hfagents-rag",
+      "demos": [
+        {
+          "modelId": "hfagents-rag",
+          "title": "Agentic RAG：检索、检查、再改写的逐步模型"
+        }
+      ]
+    },
+    {
+      "id": "hfagents-evaluation",
+      "course": "hfagents",
+      "unit": "7",
+      "title": "第7讲 Agent评测：失败也要留在分母里",
+      "summary": "用固定任务、声明好的判定和逐题轨迹检查改动。",
+      "question": "成功返回的题目都答对了，能称为100%任务正确率吗？",
+      "outcome": "复算固定四题正确率，区分超时、无依据和格式差异。",
+      "prerequisites": [
+        "理解独立测试和比例",
+        "能读工具轨迹"
+      ],
+      "explanation": [
+        "Agent评测应从任务结果开始：问题、正确条件和允许使用的工具先说清楚。还要保存每题轨迹，区分错误来自检索、动作、格式还是预算，而不是只有一个总分。",
+        "本讲只有四题，基线含单位格式差异、无依据输出和一次超时。超时仍在分母中；答案规范化使用预先声明的单位规则，不能事后为了抬分随意改判定。",
+        "修复方案在同样四题上表现更好，仅说明这组回归检查改善。它不等于真实GAIA分数或泛化能力；还需要未见任务、失败分类、成本和延迟等条件。 看图时检查四个题格由等待变成判定结果的顺序，并验证超时虽然没有答案，仍然占着分母的一格。"
+      ],
+      "formula": "accuracy = correct_tasks / all_tasks; timeouts remain incorrect tasks",
+      "worked": "默认按单位规则规范化，基线q1与q2正确，q3无依据错误，q4超时：2/4=0.5。原样比较只有q2正确；修复方案四题均通过规范化检查。",
+      "misconception": "有source字段不等于引用真的支持答案。本课只以字段存在演示一道基础条件，不把它说成完整的事实一致性评测。",
+      "sections": [
+        {
+          "title": "先固定验收与题集",
+          "explanation": "先写明每题期望、来源规则、超时处理和规范化，再比较版本。开发调参题与最终未见题应分开，避免修好四个例子就声称通用能力。",
+          "code": "accuracy = correct / total_tasks",
+          "exercise": "如果把超时q4丢掉，2/4会被错误地改成哪个比例？"
+        },
+        {
+          "title": "从逐题轨迹定位失败",
+          "explanation": "格式差异、无依据内容和工具未完成都是不同失败。逐题结果里保留timeout及来源信息，才能选择针对性的修改。",
+          "code": "result = {\"correct\": equal and grounded, \"timeout\": predicted is None}",
+          "exercise": "为q3写一个支持性检查，解释为什么仅有source字段仍不够。"
+        },
+        {
+          "title": "用回归集检查，再用新题复验",
+          "explanation": "页面发布门槛仅比较本地四题正确率，不替代真实上线审核。模型、工具、数据版本和预算改变时，需要同条件复测及新题验证。",
+          "code": "gate = accuracy >= threshold",
+          "exercise": "新方案正确率1.0但平均调用翻三倍，你还需比较哪些任务指标？"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为evaluation.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "import re\n\ndef evaluate(version=\"baseline\", normalize=\"units\", threshold=.75):\n    cases = [(\"10\", \"10 ms\", \"sampling-v1\"), (\"3.3\", \"3.3\", \"power-v1\"),\n             (\"资料不足\", \"资料不足\" if version == \"repaired\" else \"5\", None),\n             (\"42\", \"42\" if version == \"repaired\" else None,\n              \"fixture-42\" if version == \"repaired\" else None)]\n    def clean(s):\n        return re.sub(r\"\\s*(?:ms|V)$\", \"\", s.strip()).strip() if normalize == \"units\" else s\n    correct = 0\n    for gold, predicted, source in cases:\n        equal = predicted is not None and clean(predicted) == clean(gold)\n        grounded = predicted == \"资料不足\" or source is not None\n        correct += int(equal and grounded)\n    accuracy = correct / len(cases)  # Timeouts remain in the denominator.\n    return {\"correct\": correct, \"total\": len(cases), \"accuracy\": accuracy, \"gate\": accuracy >= threshold}\n\nif __name__ == \"__main__\":\n    assert evaluate()[\"accuracy\"] == .5\n    assert evaluate(normalize=\"strict\")[\"accuracy\"] == .25\n    assert evaluate(\"repaired\")[\"accuracy\"] == 1\n    print(evaluate())\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "先预测原样比较和单位规范化分别能通过几题。",
+        "单步查看q1至q4的结果，不在检查前提前填入通过格。",
+        "换成修复方案后，用同一判定核对，再独立设计一条新题。"
+      ],
+      "exercise": {
+        "prompt": "四题全部纳入评测，两题正确、一题超时、一题错误，正确率是多少？",
+        "expected": 0.5,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "超时仍占一个任务。",
+        "solution": "2/4=0.5，而不是2/3。",
+        "transfer": "独立核对原样比较基线为1/4；按单位规则修复后为4/4。请再设计一个未见任务，防止只把这四题写死。"
+      },
+      "sources": [
+        "hfagents-eval-source",
+        "hfagents-final-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-rag",
+          "label": "回到前一讲：Agentic RAG：检索、检查、再改写"
+        },
+        {
+          "lesson": "hfagents-project",
+          "label": "继续下一讲：完整小作品：让重试和重放都可追溯"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。四题集为原创回归样例，不代表GAIA成绩或真实生产门禁。",
+      "modelId": "hfagents-evaluation",
+      "demos": [
+        {
+          "modelId": "hfagents-evaluation",
+          "title": "Agent评测：失败也要留在分母里的逐步模型"
+        }
+      ]
+    },
+    {
+      "id": "hfagents-project",
+      "course": "hfagents",
+      "unit": "8",
+      "title": "第8讲 完整小作品：让重试和重放都可追溯",
+      "summary": "把只读资料、预算、证据和请求回执连成一个最小闭环。",
+      "question": "第一次读取失败后重新运行，为什么不能重复提交或返回另一问题的旧答案？",
+      "outcome": "复现一次失败恢复与一次参数冲突，核对请求、来源和幂等回执。",
+      "prerequisites": [
+        "已完成工具、循环、检索与评测",
+        "会读写JSON文件与临时目录"
+      ],
+      "explanation": [
+        "最后把前面的部分收进一个只读资料助手：给任务稳定id，按预算读取，依据有效观测作答，完成后保存含参数与来源的回执。它是原创小作品，不是原课GAIA提交器。",
+        "临时失败与知识库确实没有事实需要分开。正常检索可以返回明确资料不足；如果读取一直失败，就保持未完成，不能把基础设施故障写成一条已完成的知识判断。",
+        "同一请求id再次到来时，参数也必须相同才能重放旧结果。参数不同就是冲突，失败未提交则没有缓存可重放。页面只使用单次内存Map，本地示例在临时目录真正写JSON回执。 看图时观察读取、提交与重放三条边界：只有有效观测才能提交，同id不同参数必须走冲突路径，而不是回放旧答案。"
+      ],
+      "formula": "idempotent replay requires same request_id and same parameters; commit only completed result",
+      "worked": "默认第一次临时失败，第二次成功：calls=2，answer=10 ms，提交1条回执。相同参数重放不再读取；把replay改conflict后，拒绝返回旧答案。",
+      "misconception": "幂等不等于“所有重复请求都成功”。同id不同参数应冲突，未提交的失败请求可以重试；真实系统还要检查并发、事务和持久化故障。",
+      "sections": [
+        {
+          "title": "把运行与提交分开",
+          "explanation": "在拿到有效found或not_found观测之前，不提交完成回执。否则短暂失败会被缓存成完成，之后即使数据恢复也无法正确重试。",
+          "code": "if completed:\n    receipts[request_id] = {\"question\": question, \"answer\": answer, \"source\": source}",
+          "exercise": "budget=1且第一次读取失败时，回执数量应是多少？"
+        },
+        {
+          "title": "请求身份还包含参数",
+          "explanation": "回放前比较question等业务参数。相同id复用于另一任务时应明确冲突，不泄露或误用前一个任务的答案。",
+          "code": "status = \"replayed\" if cached[\"question\"] == repeated_question else \"conflict\"",
+          "exercise": "重放状态为conflict时，为什么replayedAnswer必须为空？"
+        },
+        {
+          "title": "从本地小作品走向真实Agent",
+          "explanation": "标准库程序验证数据流、故障与文件回执；真实CodeAgent脚本验证框架调用。接入真实模型前，还应固定工具环境、评测题集、来源和恢复条件，不把本地算例冒充生产结果。",
+          "code": "with TemporaryDirectory() as directory:\n    result = project(directory)\n    assert result[\"replayedAnswer\"] == \"10 ms\"",
+          "exercise": "写一份包含输入、模型/工具版本、预期、失败与恢复步骤的作品说明。"
+        },
+        {
+          "title": "本地Python独立复现",
+          "explanation": "将下面完整示例保存为project.py，用Python 3运行。只用标准库，数据为本站固定小样例，断言核对预期结果。浏览器动画是JavaScript教学模型；本地输出来自这份实际Python程序，不是页面伪造的运行日志。",
+          "code": "import json\nfrom pathlib import Path\nfrom tempfile import TemporaryDirectory\n\ndef project(directory, question=\"sampling\", fault=\"once\", budget=2, replay=\"same\"):\n    values = {\"sampling\": (\"sampling-v1\", \"10 ms\"), \"power\": (\"power-v1\", \"3.3 V\")}\n    calls, evidence = 0, None\n    while calls < budget and evidence is None:\n        calls += 1\n        failed = fault == \"permanent\" or fault == \"once\" and calls == 1\n        if not failed:\n            evidence = values.get(question, (None, \"资料不足\"))\n    answer = None if evidence is None else evidence[1]\n    completed = answer is not None\n    path = Path(directory) / \"run-1.json\"\n    if completed:\n        path.write_text(json.dumps({\"question\": question, \"answer\": answer, \"source\": evidence[0]}), encoding=\"utf-8\")\n    repeated = question if replay == \"same\" else \"changed-question\"\n    cached = json.loads(path.read_text(encoding=\"utf-8\")) if path.exists() else None\n    replay_status = \"not_committed\" if cached is None else \"replayed\" if cached[\"question\"] == repeated else \"conflict\"\n    return {\"completed\": completed, \"calls\": calls, \"answer\": answer,\n            \"source\": evidence[0] if evidence else None, \"replayStatus\": replay_status,\n            \"replayedAnswer\": cached[\"answer\"] if replay_status == \"replayed\" else None}\n\nif __name__ == \"__main__\":\n    with TemporaryDirectory() as directory:\n        result = project(directory)\n        assert result[\"calls\"] == 2 and result[\"replayedAnswer\"] == \"10 ms\"\n        assert len(list(Path(directory).glob(\"*.json\"))) == 1\n        print(result)\n    with TemporaryDirectory() as directory:\n        assert project(directory, replay=\"conflict\")[\"replayStatus\"] == \"conflict\"\n    with TemporaryDirectory() as directory:\n        assert project(directory, fault=\"permanent\")[\"completed\"] is False\n",
+          "exercise": "换一组输入，先写预期，再修改函数调用核对。保留失败条件与实际输出，避免只提交一次成功截图。"
+        }
+      ],
+      "practice": [
+        "预测正常、一次失败、持续失败三种状态的区别。",
+        "观察回执提交后再切换重放参数，对比replayed、conflict与not_committed。",
+        "运行本地临时文件程序，检查只写一份JSON，并设计一条新的失败用例。"
+      ],
+      "exercise": {
+        "prompt": "第一次读取失败、第二次读取成功，之后相同参数命中回执；共进行了几次读取？",
+        "expected": 2,
+        "tolerance": 1e-06,
+        "unit": "次",
+        "hint": "重放回执不重复执行读取。",
+        "solution": "2次；读取失败与成功各一次，回执重放增加0次。",
+        "transfer": "独立验证持续失败budget=3时calls=3、completed=False、无回执；正常未知问题可以明确资料不足并提交拒答回执。"
+      },
+      "sources": [
+        "hfagents-final-source",
+        "hfagents-cycle-source",
+        "hfagents-eval-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "hfagents-evaluation",
+          "label": "回到前一讲：Agent评测：失败也要留在分母里"
+        },
+        {
+          "lesson": "missing-quality",
+          "label": "连接工程基础：独立检查与可复现交付"
+        }
+      ],
+      "boundary": "本站固定策略和内存资料的确定性教学模型；不调用LLM、外部API或实际联网工具，不代表真实Agent性能。本地例子写入临时JSON，未连接数据库、真实模型、外部工具或GAIA提交通道。",
+      "modelId": "hfagents-project",
+      "demos": [
+        {
+          "modelId": "hfagents-project",
+          "title": "完整小作品：让重试和重放都可追溯的逐步模型"
+        }
+      ]
+    }
+  ]
+}

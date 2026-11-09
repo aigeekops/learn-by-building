@@ -1,0 +1,72 @@
+{
+  "courseId": "cs224r",
+  "agent": "course_cs224r",
+  "checked": "2026-11-09",
+  "lessons": 8,
+  "models": [
+    "cs224r-bc",
+    "cs224r-dagger",
+    "cs224r-actor-critic",
+    "cs224r-ppo",
+    "cs224r-entropy",
+    "cs224r-model",
+    "cs224r-offline",
+    "cs224r-goals"
+  ],
+  "coverage": {
+    "models": 8,
+    "lessons": 8,
+    "defaultRealFrames": 32,
+    "framesChecked": 168,
+    "cellsChecked": 597,
+    "experiments": 8,
+    "tests": 10,
+    "independentNumericTests": 8,
+    "boundaries": "Current catalogs and model specs; every actual range minimum/maximum checked by scripts/check_course_inspectors.cjs. All default demo frames also checked with frozen traces, prefix-only steps and throwing result/scene/visual accessors."
+  },
+  "scope": [
+    "Behavior cloning: both fixed expert examples, per-example prediction/error, half-square loss and gradient contributions, empirical averages, one descent update and an explicitly unlabeled held-out prediction.",
+    "DAgger: fixed visited observation, learner/expert actions, strict fixed-draw mixing branch, expert labels distinct from executed actions, every aggregated observation/label cell, least-squares numerator and denominator terms.",
+    "Actor-Critic/GAE: every fixed sample reward and frozen old value, true-terminal bootstrap boundary, both TD residuals, discounted future residual contribution, both GAE advantages and frozen regression targets.",
+    "PPO: supplied single-action probability ratio and frozen advantage, raw product, lower/upper ratio limits, clipped ratio/product, sign-correct min and negated minimization loss.",
+    "Maximum entropy: both action probabilities and fixed Q values, per-action exact expectation terms, natural-log entropy terms, entropy bonus and regularized objective.",
+    "Model rollout: common initial state and true/model increments, every time-indexed true/model prediction cell, every signed error and one-step/terminal comparisons.",
+    "Offline RL support: per-action fixed data count and estimated Q, greedy tie handling, chosen-action coverage, per-action support penalty and adjusted Q, final choice and unchanged absence of unseen-action data.",
+    "Goal conditioning: original achieved/desired inputs, original sparse reward/success, relabeled goal and recomputed reward, preserved original evaluation and honest training-entry count including duplicate-goal cases."
+  ],
+  "validation": [
+    {
+      "command": "node scripts/check_course_inspectors.cjs cs224r",
+      "status": "passed",
+      "result": {"models": 8, "lessons": 8, "framesChecked": 168, "cellsChecked": 597, "experiments": 8}
+    },
+    {
+      "command": "node --test tests/course_inspector_cs224r.test.cjs",
+      "status": "passed",
+      "tests": 10,
+      "checks": [
+        "All actual demos and all four real frames per demo; unique semantic scalar cells, frozen-trace immutability, no future frame/result/scene/visual reads.",
+        "Each experiment changes a real control, verifies concrete before/after outcomes and invariant data, rejects corrupted claimed output and unapplied input changes.",
+        "Behavior-cloning gradient independently checked by finite differences of half-square loss.",
+        "DAgger strict threshold equality and closed-form fit preserve expert labels regardless of execution branch.",
+        "GAE lambda-one targets checked against finite discounted sample returns; lambda-zero and zero-discount terminal cases.",
+        "PPO positive/negative/zero advantages with high/low ratio cases verify the conservative min rule.",
+        "Natural-log entropy, mirrored distributions, uniform maximum and unchanged policy under temperature changes.",
+        "Every rollout prediction and signed negative bias accumulation, plus zero-bias agreement.",
+        "Offline adjusted-Q tie choice and support remaining absent despite penalties.",
+        "HER relabel success cannot change original-goal failure; identical goals retain two entries without claiming two independent trajectories."
+      ]
+    }
+  ],
+  "limits": [
+    "Original finite topic exercises from the current eight-lesson catalog, not complete official CS224R lecture coverage or a claim of policy/model training.",
+    "Each model has four actual computation frames; prediction-array time indices are expanded inside their actual generating frame and do not create a synthetic playback timeline.",
+    "BC uses two fixed expert samples. DAgger fixes the visited state and expert response, so its mixing control cannot change the training-state distribution in this example.",
+    "GAE is one fixed truly terminated sample trajectory, not exact environment expectation. PPO receives a ratio directly and does not invent separate old/new probabilities or update a policy.",
+    "Entropy is an exact two-action distribution calculation with fixed Q; it omits continuous SAC, double Q, tanh corrections, learned temperature and target networks.",
+    "The model-learning example is a known biased equation rollout; no dynamics are actually estimated and its reference path is computed rather than measured.",
+    "Offline support penalties are an explicit teaching contrast, not CQL/IQL implementation or an offline-policy safety evaluation. HER requires rewards that can be recomputed for alternate goals.",
+    "Formula text uses four decimal places; numeric cells and experiment verification retain full precision. The shared renderer controls value formatting.",
+    "Only this course provider, its test and this manifest were edited; no shared models/configuration/build/UI/browser checks, records, receipts, completion or study minutes were changed."
+  ]
+}

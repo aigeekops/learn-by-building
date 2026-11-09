@@ -1,0 +1,395 @@
+{
+  "id": "mechanics",
+  "title": "机械设计与传动基础",
+  "subtitle": "从传动算例走向需求、结构、图纸与可检查验收",
+  "courseLabel": "MIT 2.007 配套基础专题",
+  "officialUrl": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/",
+  "scope": "6节原创配套：传动、负载、公差，以及支架强度/刚度、制造基准与完整设计文件项目。",
+  "boundary": "输出属于简化模型的计算。未进行真实电机、材料强度、加工或装配试验。",
+  "lessons": [
+    {
+      "id": "rf-gears",
+      "title": "齿轮为什么能减速、增扭，却不能增加功率",
+      "question": "20 齿的小轮带动 60 齿的大轮，转速、方向和扭矩会怎样变化？",
+      "prerequisites": [
+        "会计算乘除与比例",
+        "能区分转速 rpm、扭矩 N·m 和功率 W"
+      ],
+      "objectives": [
+        "由齿数求一对外啮合齿轮的速度比和方向",
+        "把效率加入扭矩计算，并用机械功率复核",
+        "解释减速机构的作用与此模型没有检查的工程条件"
+      ],
+      "explanation": [
+        "想象两个齿轮的齿在接触点依次经过。它们的模数相同且不打滑时，同一段时间经过的齿数一致。主动轮有 z₁ 个齿，从动轮有 z₂ 个齿；从动轮每转需要更多齿经过接触点，就会转得更慢。",
+        "本课把减速比定义为 i=z₂/z₁，而不是其他教材中可能出现的倒数定义。一对外啮合齿轮反向旋转，因此 n₂=−n₁/i。负号只表示方向；速度大小仍是正的量。若选择 i<1，本模型也能展示增速，但不再是减速。",
+        "稳定传递时，输出扭矩大小 τ₂=τ₁·i·η，η 为给定总效率。转速要乘 2π/60 从 rpm 换成 rad/s，再用 P=τ·ω 求功率。这样 P₂=ηP₁：增扭的代价是速度下降，损耗又使机械功率减少。",
+        "画面展示的是齿数比与角度的几何示意，齿形不是可制造的渐开线设计。实际选型还要检查齿面和齿根应力、轴承、装配间隙、润滑与工作寿命；本课不会由一个算例推断这些检查已经完成。"
+      ],
+      "modelId": "rf-gears",
+      "practice": [
+        {
+          "title": "先预测速度",
+          "instruction": "保持主动轮 20 齿、输入 600 rpm，把从动轮从 60 改为 120 齿。先写下速度大小和方向，再运行。",
+          "expectedObservation": "速度大小由 200 降到 100 rpm，仍与主动轮反向；固定输入扭矩和效率时输出扭矩翻倍。"
+        },
+        {
+          "title": "让功率说明代价",
+          "instruction": "固定齿数、速度和输入扭矩，只把效率从 1 改为 0.5。比较输出速度、扭矩与功率。",
+          "expectedObservation": "几何速度比不变；输出扭矩和机械功率均减半。"
+        },
+        {
+          "title": "写出模型外的问题",
+          "instruction": "列出一个真实减速箱无法只靠齿数比回答的问题，并说明要查资料还是做测量。",
+          "expectedObservation": "例如连续承载、温升、齿隙或寿命，需要额外规格或试验证据。"
+        }
+      ],
+      "verification": {
+        "prompt": "换一组条件：主动轮 20 齿、从动轮 80 齿，输入扭矩 0.25 N·m、效率 0.8。输出扭矩大小是多少？",
+        "expected": 0.8,
+        "tolerance": 0.001,
+        "unit": "N·m",
+        "explanation": "i=80/20=4；τ₂=0.25×4×0.8=0.8 N·m。此题条件不同于默认演示。",
+        "transfer": "若输入仍为 600 rpm，输出为 −150 rpm。分别计算输入和输出功率，解释为什么增扭没有带来能量增加。"
+      },
+      "sources": [
+        {
+          "title": "MIT 2.007 Spring 2009 · Lecture Notes",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/pages/lecture-notes/",
+          "locator": "第 12 讲 Gears—basics, terminology, involute curve；第 13 讲 Gears—strength, gear trains。公式算例、代码和齿轮示意为本站原创。",
+          "accessed": "2026-11-08"
+        },
+        {
+          "title": "MIT 2.007 · 第 13 讲材料入口",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/resources/mit2_007s09_lec13/",
+          "locator": "官方资源页：gears, strength and gear trains；本课只取传动比基础，不覆盖原课强度设计。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/mechanics/mechanics.py",
+          "label": "Python 标准库复算与检查",
+          "command": "python3 examples/robotics-foundations/mechanics/mechanics.py gears --driver 20 --driven 80 --torque 0.25 --efficiency 0.8"
+        }
+      ]
+    },
+    {
+      "id": "rf-motor-load",
+      "title": "从负载和力臂反推电机扭矩",
+      "question": "把 1 kg 的物体放在 10 cm 的水平力臂末端，电机至少需要多大的工作点扭矩？",
+      "prerequisites": [
+        "完成齿轮课，知道减速比与效率",
+        "会把 cm 换成 m，并区分质量和力"
+      ],
+      "objectives": [
+        "用静态点负载计算关节所需扭矩",
+        "把关节需求折算到减速器前的电机端",
+        "区分工作点扭矩、堵转扭矩和完整真机选型"
+      ],
+      "explanation": [
+        "用手拿同一个重物时，手臂伸得越远越费力。因为关节抵抗的是力矩，而不仅是物体有多重。本例把支架放水平，让重力与力臂垂直，末端只有一个点质量；杆件自重暂时不计。",
+        "先算 F=mg，g 固定取 9.81 m/s²；再算 τ_load=F·r。质量用 kg、力臂用 m，结果才是 N·m。设计系数 k 把这个已知负载放大，得到 τ_required=k·m·g·r；它只是本模型的设计要求，并不自动覆盖未知风险。",
+        "若减速比 i、总效率 η，电机至少需要 τ_motor,min=τ_required/(iη)。同一给定工作点的输出转速为 n_motor/i。增大减速比能降低对电机扭矩的要求，却同时降低输出转速；必须把目标速度一起检查。",
+        "页面中的电机扭矩与转速要理解成同一实际可用工作点，而不是可以任意拼接的两项最大规格。堵转时机械转速为零，发热可能很大；本课不计算电机电流和温升，也不提供真实设备的连续工作结论。"
+      ],
+      "modelId": "rf-motor-load",
+      "practice": [
+        {
+          "title": "只改变一个长度",
+          "instruction": "保持其他条件，把水平力臂从 0.1 m 改为 0.2 m。预测最小电机扭矩，再运行。",
+          "expectedObservation": "负载力矩、设计所需扭矩与最小电机扭矩均翻倍。"
+        },
+        {
+          "title": "观察增扭与减速",
+          "instruction": "固定负载与工作点，把减速比从 10 改为 20。记录最小电机扭矩和输出转速。",
+          "expectedObservation": "最小电机扭矩减半，给定电机转速下的输出转速也减半。"
+        },
+        {
+          "title": "主动制造一个失败条件",
+          "instruction": "选择让可用扭矩小于所需扭矩的一组参数，解释改负载、力臂或减速比各会改变什么。",
+          "expectedObservation": "比较条显示不足；只能得到本模型的扭矩检查失败，不能据此诊断电气或控制问题。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立算例：负载 2 kg，水平力臂 0.05 m，设计系数 2，减速比 5，效率 0.8。最小电机工作点扭矩是多少？",
+        "expected": 0.4905,
+        "tolerance": 0.0001,
+        "unit": "N·m",
+        "explanation": "τ_required=2×2×9.81×0.05=1.962 N·m；τ_motor,min=1.962/(5×0.8)=0.4905 N·m。",
+        "transfer": "若再计入 0.1 kg 的均匀杆件自重，杆件重心在半长处。写出新增力矩项，并说明为什么不能把全部杆重都放在末端。"
+      },
+      "sources": [
+        {
+          "title": "MIT 2.007 · Actuators",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/resources/mit2_007s09_lec03/",
+          "locator": "第 3 讲 Actuators—DC motors, servomotors, pneumatics；本静态力臂选型算例为原创补充。",
+          "accessed": "2026-11-08"
+        },
+        {
+          "title": "MIT 2.007 · Gears and gear trains",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/resources/mit2_007s09_lec13/",
+          "locator": "第 13 讲的传动主题；此处不覆盖完整齿轮强度与电机动态设计。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/mechanics/mechanics.py",
+          "label": "负载力矩 Python 复算",
+          "command": "python3 examples/robotics-foundations/mechanics/mechanics.py load --mass 2 --lever 0.05 --safety 2 --ratio 5 --efficiency 0.8"
+        }
+      ]
+    },
+    {
+      "id": "rf-fit",
+      "title": "尺寸画对了，轴就一定能装进孔吗",
+      "question": "标着 8.2 mm 的孔与 8 mm 的轴，在制造公差下是否总能留出间隙？",
+      "prerequisites": [
+        "会读 mm 尺寸",
+        "理解最大值、最小值与减法"
+      ],
+      "objectives": [
+        "把名义尺寸与尺寸公差分开",
+        "用最不利组合计算直径间隙范围",
+        "独立检查孔边余量，并区分几何约束与强度验证"
+      ],
+      "explanation": [
+        "CAD 中的圆可以精确写成一个直径，真实制造件却会有尺寸范围。为了先学会算尺寸链，本例使用自定的对称公差：孔径 d_h±t_h，轴径 d_s±t_s。这里没有套用 ISO 标准配合等级。",
+        "想知道所有合格零件是否都能留出间隙，要比较最小孔与最大轴：c_min=(d_h−t_h)−(d_s+t_s)。另一端是 c_max=(d_h+t_h)−(d_s−t_s)。这些是直径间隙；单边径向间隙是它的一半，不能混用。",
+        "若 c_min>0，总有间隙；若 c_max<0，总有过盈；区间跨过零时，可能间隙也可能过盈。区间端点恰好为零时，只能说可能接触，不能把零间隙自动解释成自由滑动或可靠压装。",
+        "支架孔居中、板宽 W 视为精确时，最小孔边余量 e_min=(W−d_h,max)/2。边缘余量达到自定几何要求，与材料强度是否足够是两回事。本练习的图是名义轮廓；微小公差通过数值呈现，未伪装成真实加工或有限元结果。"
+      ],
+      "modelId": "rf-fit",
+      "practice": [
+        {
+          "title": "让名义有间隙但最坏情况卡住",
+          "instruction": "设置孔 8.1±0.1 mm、轴 8.0±0.1 mm。先判断最小与最大间隙，再运行。",
+          "expectedObservation": "直径间隙为 −0.1～0.3 mm，可能间隙也可能过盈；名义差为正仍不能保证装配。"
+        },
+        {
+          "title": "分开两项几何检查",
+          "instruction": "固定孔轴尺寸和公差，改变支架宽度或自定最小边缘余量。观察哪项结果改变。",
+          "expectedObservation": "孔轴配合不变，边缘余量及其通过状态可能改变。"
+        },
+        {
+          "title": "补充遗漏的制造条件",
+          "instruction": "假设孔中心可能偏移 0.2 mm，写出最小一侧边缘余量如何修正。",
+          "expectedObservation": "最不利一侧余量需再减 0.2 mm；不能把孔径公差当作孔位公差。"
+        }
+      ],
+      "verification": {
+        "prompt": "换一组零件：孔直径 10.20±0.05 mm，轴直径 10.00±0.02 mm。最小直径间隙是多少？",
+        "expected": 0.13,
+        "tolerance": 0.0001,
+        "unit": "mm",
+        "explanation": "最小孔=10.15 mm，最大轴=10.02 mm；最小直径间隙=10.15−10.02=0.13 mm。对应单边径向间隙为 0.065 mm。",
+        "transfer": "若支架宽 25 mm 且孔居中，算最大孔对应的最小边缘余量。再解释为什么这个数值不能直接证明支架不会断。"
+      },
+      "sources": [
+        {
+          "title": "MIT 2.007 · Creating CAD components 1",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/resources/mit2_007s09_lec04/",
+          "locator": "第 4 讲为 CAD 部件、术语与等轴草图的官方材料入口；本尺寸公差和最不利尺寸链练习由本站原创，不声称为原讲逐项翻译。",
+          "accessed": "2026-11-08"
+        },
+        {
+          "title": "MIT 2.007 · 课程讲次目录",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/pages/lecture-notes/",
+          "locator": "第 4–5 讲 CAD components、第 7/9 讲 CAD assemblies、第 11 讲 CAD drawings，供完成此基础练习后回看原课。",
+          "accessed": "2026-11-08"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/mechanics/mechanics.py",
+          "label": "最不利尺寸链 Python 复算",
+          "command": "python3 examples/robotics-foundations/mechanics/mechanics.py fit --hole 10.2 --hole-tolerance 0.05 --shaft 10 --shaft-tolerance 0.02"
+        }
+      ]
+    },
+    {
+      "id": "rf-beam-design",
+      "title": "支架设计：强度够了，为什么还会太软",
+      "question": "同一个悬臂支架，怎样分别检查应力和末端位移？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "同一个悬臂支架，怎样分别检查应力和末端位移？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "先画自由体图：左端完全固定、右端受竖向静载荷，截面宽b、受弯方向厚h、有效悬臂长L。计算以N和mm为单位，E与应力用MPa=N/mm²；不能把米直接混入毫米公式。",
+        "根部最大弯矩M=FL，矩形截面惯性矩I=bh³/12，最大弯曲应力σ=M(h/2)/I=6FL/(bh²)。厚度方向不能看着图随意互换；h的平方与三次方会放大尺寸错误。",
+        "末端挠度δ=FL³/(3EI)。本例E=70000MPa、许用应力60MPa、位移上限1mm都是教学给定值。强度检查和刚度检查独立记账，一项满足并不推导另一项也满足。",
+        "这是线弹性小挠度梁的简化，不包含固定端柔度、孔口应力集中、疲劳与冲击。制造项目会输出计算书和空白验收表，实际材料与承载表现仍需查规格和试验。"
+      ],
+      "modelId": "rf-beam-design",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "固定载荷，分别把厚度翻倍和长度翻倍，预测应力与挠度各变化几倍；再比较强度和刚度约束。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/mechanics/expanded.py beam；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：F=10N、L=120mm、b=30mm、h=4mm。根部弯曲应力是多少MPa？",
+        "expected": 15,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "σ=6×10×120/(30×4²)=15MPa。",
+        "transfer": "固定载荷，分别把厚度翻倍和长度翻倍，预测应力与挠度各变化几倍；再比较强度和刚度约束。"
+      },
+      "sources": [
+        {
+          "title": "MIT 2.007 配套基础专题",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/",
+          "locator": "MIT 2.007 Lecture Notes中的beam bending、材料与结构设计主题；梁算例和许用条件为本站原创。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/mechanics/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/mechanics/expanded.py beam"
+        }
+      ]
+    },
+    {
+      "id": "rf-manufacturing-datums",
+      "title": "制造基准与孔位：让图纸能说明怎样装配",
+      "question": "名义孔径比螺杆大，为什么两孔仍可能装不上？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "名义孔径比螺杆大，为什么两孔仍可能装不上？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "从左下基准A标注两个孔中心(10,15)和(10+s,15)mm，明确中心距而不是孔边距离。加工与检验必须使用同一个坐标、单位和基准。",
+        "每个孔相对A的中心线位置误差界限为±t时，孔距误差最坏可到±2t。它是最坏界限，不是随机独立误差的均方根，二者需要不同假设。",
+        "装配时先取孔径下限Dmin和螺杆直径上限dmax，径向余量c=(Dmin−dmax)/2。本例固定螺杆在名义中心，板不能整体平移补偿，若每个孔偏差≤c才有一维模型中的保证。",
+        "二维位置度、螺纹、板件转动和真实夹具要另外建模。下载项目生成毫米DXF、带20mm校核标尺的SVG和BOM；打印或外发前仍需检查缩放与工艺。"
+      ],
+      "modelId": "rf-manufacturing-datums",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "固定孔径，逐步增加位置误差，找出径向间隙不再保证装配的边界；说明这个一维结论不能直接代替GD&T。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/mechanics/expanded.py datums；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：两孔各自相对共同基准的误差界限为±0.15mm。孔距误差的最坏绝对值界限是多少mm？",
+        "expected": 0.3,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "两个偏差朝相反方向时相加，0.15+0.15=0.30mm。",
+        "transfer": "固定孔径，逐步增加位置误差，找出径向间隙不再保证装配的边界；说明这个一维结论不能直接代替GD&T。"
+      },
+      "sources": [
+        {
+          "title": "MIT 2.007 配套基础专题",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/",
+          "locator": "MIT 2.007公差、制造与装配主题；本例使用简化极限尺寸模型，不声称完整几何公差检查。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/mechanics/expanded.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/mechanics/expanded.py datums"
+        }
+      ]
+    },
+    {
+      "id": "rf-design-project",
+      "title": "完整设计制造项目：双驱小车的传动与支架",
+      "question": "怎样把加速度、车速、传动和支架尺寸连成一套可检查设计？",
+      "prerequisites": [
+        "完成本专题前面的基础算例",
+        "按本讲说明区分坐标、时间、矩阵与物理单位"
+      ],
+      "objectives": [
+        "怎样把加速度、车速、传动和支架尺寸连成一套可检查设计？",
+        "逐步复算模型、代码与当前变量，并解释关键假设",
+        "完成不同条件的独立题，保留运行输出与一次失败或边界案例"
+      ],
+      "explanation": [
+        "项目从需求开始：平地双驱小车，指定质量、目标加速度和最低速度0.5m/s。假定两轮均分驱动力，滚阻系数0.03，轮半径r；这些条件必须在计算书开头公开。",
+        "车体力F=m(a+μg)，每个驱动轮需要τreq=Fr/2。减速比i与效率η使轮端可用扭矩τout=τmotor iη，而线速度v=(rpm/i)(2πr)/60。增大减速比同时牺牲速度。",
+        "每侧支架先按半车静重m g/2估载，使用60mm悬臂和30mm宽截面检查应力与挠度。四项约束逐条报告，不合成一个掩盖失败项的总分。",
+        "运行make_project.py生成bracket.dxf、drawing.svg、bom.csv、design.json和acceptance.json。验收项的实测值初始为空，涵盖尺寸、载荷、温升与行驶；生成文件并不代表已制造。人工电机扭矩和转速也必须用真实工作点再校准。"
+      ],
+      "modelId": "rf-design-project",
+      "practice": [
+        {
+          "title": "先预测一个中间量",
+          "instruction": "暂不播放，读清本讲输入和公式，在纸上计算第一处状态或约束；逐步核对。",
+          "expectedObservation": "计算顺序、矩阵方向和单位与讲解一致；未执行的量不会提前出现。"
+        },
+        {
+          "title": "改变条件并解释结果",
+          "instruction": "提高质量后保持速度要求，尝试调整减速比和支架厚度，分别解释四项验收结果；最后导出一套图纸和待实测清单。",
+          "expectedObservation": "参数变化的结果可以由本讲公式解释；说明哪项假设仍未检验。"
+        },
+        {
+          "title": "实际运行与边界反例",
+          "instruction": "python3 examples/robotics-foundations/mechanics/make_project.py --output /tmp/lbb-mechanical-project；另保留一次边界或不满足约束的条件。",
+          "expectedObservation": "本地输出与数学复算一致；硬件、传感器或制造结果只有实际取得时才能填写。"
+        }
+      ],
+      "verification": {
+        "prompt": "独立条件：m=3kg、a=0.4m/s²、μ=0.03、g=9.81m/s²、轮半径0.05m、双轮均分。每个轮需要的扭矩是多少N·m？",
+        "expected": 0.0520725,
+        "tolerance": 1e-05,
+        "unit": "",
+        "explanation": "F=3×(0.4+0.03×9.81)=2.0829N；τ=2.0829×0.05/2=0.0520725N·m。",
+        "transfer": "提高质量后保持速度要求，尝试调整减速比和支架厚度，分别解释四项验收结果；最后导出一套图纸和待实测清单。"
+      },
+      "sources": [
+        {
+          "title": "MIT 2.007 配套基础专题",
+          "url": "https://ocw.mit.edu/courses/2-007-design-and-manufacturing-i-spring-2009/",
+          "locator": "MIT 2.007设计、执行器、齿轮、结构与项目方法；本站原创双驱支架项目，不替代真实加工验收。",
+          "accessed": "2026-11-09"
+        }
+      ],
+      "localFiles": [
+        {
+          "path": "examples/robotics-foundations/mechanics/make_project.py",
+          "label": "Python独立复算与检查",
+          "command": "python3 examples/robotics-foundations/mechanics/make_project.py --output /tmp/lbb-mechanical-project"
+        }
+      ]
+    }
+  ]
+}

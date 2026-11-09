@@ -1,0 +1,1257 @@
+{
+  "course": {
+    "id": "cs50p",
+    "label": "CS50P",
+    "title": "从一条读数开始学会 Python",
+    "edition": "当前公开版 · Week 0–9 + 原创综合项目",
+    "position": "AI 与机器人共享的编程基础",
+    "description": "以官方Week 0–9全部讲次主题和Final Project要求为参照，制作11讲原创中文配套：讲解、执行状态、代码例程、动手练习与独立验证。保留官方材料入口，项目为本站原创练习，不等于完成原课题集或认证。",
+    "prerequisites": [
+      "无需已有编程经验",
+      "本地复现需要Python 3；浏览器动画无需安装"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "Week 0 · Functions, Variables",
+        "lessons": [
+          "cs50p-functions"
+        ],
+        "material": "当前官方周次与讲义已核对；本站原创配套课件与Python片段已制作"
+      },
+      {
+        "unit": "2",
+        "title": "Week 1 · Conditionals",
+        "lessons": [
+          "cs50p-conditions"
+        ],
+        "material": "当前官方周次与讲义已核对；本站原创配套课件与Python片段已制作"
+      },
+      {
+        "unit": "3",
+        "title": "Week 2 · Loops",
+        "lessons": [
+          "cs50p-loops"
+        ],
+        "material": "当前官方周次与讲义已核对；本站原创配套课件与Python片段已制作"
+      },
+      {
+        "unit": "4",
+        "title": "Week 3 · Exceptions",
+        "lessons": [
+          "cs50p-exceptions"
+        ],
+        "material": "当前官方周次与讲义已核对；本站原创配套课件与Python片段已制作"
+      },
+      {
+        "unit": "5",
+        "title": "Week 4 · Libraries",
+        "lessons": [
+          "cs50p-libraries"
+        ],
+        "material": "当前官方周次与讲义已核对；本站原创配套课件与Python片段已制作"
+      },
+      {
+        "unit": "6",
+        "title": "Week 5 · Unit Tests",
+        "lessons": [
+          "cs50p-tests"
+        ],
+        "material": "当前官方周次与讲义已核对；本站原创配套课件与Python片段已制作"
+      },
+      {
+        "unit": "7",
+        "title": "Week 6 · File I/O",
+        "lessons": [
+          "cs50p-files"
+        ],
+        "material": "当前官方周次与讲义已核对；本站原创配套课件与Python片段已制作"
+      },
+      {
+        "unit": "8",
+        "title": "Week 7 · Regular Expressions",
+        "lessons": [
+          "cs50p-regex"
+        ],
+        "material": "2026-11-09 官方公开材料已核对；本站原创讲解、代码状态模型、Python例程与独立练习已制作"
+      },
+      {
+        "unit": "9",
+        "title": "Week 8 · Object-Oriented Programming",
+        "lessons": [
+          "cs50p-oop"
+        ],
+        "material": "2026-11-09 官方公开材料已核对；本站原创讲解、代码状态模型、Python例程与独立练习已制作"
+      },
+      {
+        "unit": "10",
+        "title": "Week 9 · Et Cetera",
+        "lessons": [
+          "cs50p-etcetera"
+        ],
+        "material": "2026-11-09 官方公开材料已核对；本站原创讲解、代码状态模型、Python例程与独立练习已制作"
+      },
+      {
+        "unit": "11",
+        "title": "Final Project · Requirements and Getting Started",
+        "lessons": [
+          "cs50p-project"
+        ],
+        "material": "2026-11-09 官方公开材料已核对；本站原创讲解、代码状态模型、Python例程与独立练习已制作"
+      }
+    ],
+    "pending": "Week 0–9主题与原创综合项目配套已制作；原课题集、个人选题开发、pytest环境验收及官方展示/提交由学习者另行完成。本站没有代交作业或生成认证。",
+    "sources": [
+      "cs50p-week-0",
+      "cs50p-week-1",
+      "cs50p-week-2",
+      "cs50p-week-3",
+      "cs50p-week-4",
+      "cs50p-week-5",
+      "cs50p-week-6",
+      "cs50p-week-7",
+      "cs50p-week-8",
+      "cs50p-week-9",
+      "cs50p-project-official"
+    ],
+    "coverage": {
+      "kind": "official-topics",
+      "label": "Week 0–9 + 原创综合项目",
+      "status": "authored",
+      "items": [
+        {
+          "unit": "Week 0",
+          "title": "Week 0 · Functions, Variables",
+          "lessons": [
+            "cs50p-functions"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 1",
+          "title": "Week 1 · Conditionals",
+          "lessons": [
+            "cs50p-conditions"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 2",
+          "title": "Week 2 · Loops",
+          "lessons": [
+            "cs50p-loops"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 3",
+          "title": "Week 3 · Exceptions",
+          "lessons": [
+            "cs50p-exceptions"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 4",
+          "title": "Week 4 · Libraries",
+          "lessons": [
+            "cs50p-libraries"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 5",
+          "title": "Week 5 · Unit Tests",
+          "lessons": [
+            "cs50p-tests"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 6",
+          "title": "Week 6 · File I/O",
+          "lessons": [
+            "cs50p-files"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 7",
+          "title": "Week 7 · Regular Expressions",
+          "lessons": [
+            "cs50p-regex"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 8",
+          "title": "Week 8 · Object-Oriented Programming",
+          "lessons": [
+            "cs50p-oop"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Week 9",
+          "title": "Week 9 · Et Cetera",
+          "lessons": [
+            "cs50p-etcetera"
+          ],
+          "status": "authored"
+        },
+        {
+          "unit": "Final Project",
+          "title": "Final Project · Requirements and Getting Started",
+          "lessons": [
+            "cs50p-project"
+          ],
+          "status": "authored"
+        }
+      ]
+    }
+  },
+  "sources": {
+    "cs50p-week-0": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 0 · Functions, Variables",
+      "url": "https://cs50.harvard.edu/python/notes/0/",
+      "locator": "Variables；Creating Your Own Functions；Return Values",
+      "status": "2026-11-08 已核对当前公开讲义；本站例子为原创配套，未声称完整翻译原课",
+      "role": "official",
+      "checked": "2026-11-08",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-1": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 1 · Conditionals",
+      "url": "https://cs50.harvard.edu/python/notes/1/",
+      "locator": "if；elif；else；比较运算",
+      "status": "2026-11-08 已核对当前公开讲义；本站例子为原创配套，未声称完整翻译原课",
+      "role": "official",
+      "checked": "2026-11-08",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-2": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 2 · Loops",
+      "url": "https://cs50.harvard.edu/python/notes/2/",
+      "locator": "For Loops；list；range；len",
+      "status": "2026-11-08 已核对当前公开讲义；本站例子为原创配套，未声称完整翻译原课",
+      "role": "official",
+      "checked": "2026-11-08",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-3": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 3 · Exceptions",
+      "url": "https://cs50.harvard.edu/python/notes/3/",
+      "locator": "ValueError；try；except；else；Creating a Function to Get an Integer",
+      "status": "2026-11-08 已核对当前公开讲义；本站例子为原创配套，未声称完整翻译原课",
+      "role": "official",
+      "checked": "2026-11-08",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-4": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 4 · Libraries",
+      "url": "https://cs50.harvard.edu/python/notes/4/",
+      "locator": "Statistics；import；mean",
+      "status": "2026-11-08 已核对当前公开讲义；本站例子为原创配套，未声称完整翻译原课",
+      "role": "official",
+      "checked": "2026-11-08",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-5": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 5 · Unit Tests",
+      "url": "https://cs50.harvard.edu/python/notes/5/",
+      "locator": "assert；AssertionError；pytest",
+      "status": "2026-11-08 已核对当前公开讲义；本站例子为原创配套，未声称完整翻译原课",
+      "role": "official",
+      "checked": "2026-11-08",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-6": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 6 · File I/O",
+      "url": "https://cs50.harvard.edu/python/notes/6/",
+      "locator": "open；with；File I/O；CSV",
+      "status": "2026-11-08 已核对当前公开讲义；本站例子为原创配套，未声称完整翻译原课",
+      "role": "official",
+      "checked": "2026-11-08",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-7": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 7 · Regular Expressions",
+      "url": "https://cs50.harvard.edu/python/notes/7/",
+      "locator": "Regular Expressions；Case Sensitivity；Cleaning Up User Input；Extracting User Input",
+      "status": "2026-11-09 已读取并核对当前官方讲义；原创主题配套，不是逐字翻译或作业答案",
+      "role": "official",
+      "checked": "2026-11-09",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-8": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 8 · Object-Oriented Programming",
+      "url": "https://cs50.harvard.edu/python/notes/8/",
+      "locator": "Classes；raise；Decorators/property；Class Methods；Static Methods；Inheritance；Operator Overloading",
+      "status": "2026-11-09 已读取并核对当前官方讲义；原创主题配套，不是逐字翻译或作业答案",
+      "role": "official",
+      "checked": "2026-11-09",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-week-9": {
+      "kind": "官方讲次与讲义",
+      "label": "CS50P Week 9 · Et Cetera",
+      "url": "https://cs50.harvard.edu/python/notes/9/",
+      "locator": "set；Global Variables；Constants；Type Hints；Docstrings；argparse；Unpacking；args and kwargs；map/filter；Comprehensions；enumerate；Generators and Iterators",
+      "status": "2026-11-09 已读取并核对当前官方讲义；原创主题配套，不是逐字翻译或作业答案",
+      "role": "official",
+      "checked": "2026-11-09",
+      "version": "当前公开版（未标为2026年度版）"
+    },
+    "cs50p-project-official": {
+      "kind": "官方综合项目规范",
+      "label": "CS50P Final Project · Requirements and Getting Started",
+      "url": "https://cs50.harvard.edu/python/project/",
+      "locator": "Final Project requirements；main与三个以上顶层函数；pytest测试；requirements.txt；Getting Started；README与展示步骤",
+      "status": "2026-11-09 已核对官方项目规范；本站只提供原创练习脚手架，不执行提交或认证",
+      "role": "official",
+      "checked": "2026-11-09",
+      "version": "当前公开要求，提交期限可能变化，实际提交以官方页面为准"
+    }
+  },
+  "lessons": [
+    {
+      "id": "cs50p-functions",
+      "course": "cs50p",
+      "unit": "1",
+      "title": "第1讲 变量与函数：让读数变成有单位的结果",
+      "summary": "原始读数8格，怎样经过一次函数调用得到17毫米？",
+      "question": "原始读数8格，怎样经过一次函数调用得到17毫米？",
+      "outcome": "画出实参、形参、局部值和返回值，独立修改一次校准函数。",
+      "prerequisites": [
+        "能输入和运行一段 Python 代码；没有基础可直接照本讲步骤开始"
+      ],
+      "explanation": [
+        "先从一条固定读数开始：8是格数，2是每格对应的毫米数，1是以毫米表示的偏移。给数字取名字，让“读到什么”和“怎样换算”分别表达。",
+        "函数把一组操作组织成可重复调用的步骤。定义 calibrate 并不会执行这次换算；调用时实参进入形参，局部变量逐句产生，return 再把一个结果交回调用处。",
+        "动画中改参数会重新计算，前后步显示同一次计算的快照。浏览器以 JavaScript 实现这个有限数值例子；下方 Python 片段可实际运行，页面不是 Python 解释器。"
+      ],
+      "formula": "distance_mm = raw × gain_mm_per_tick + offset_mm",
+      "worked": "raw=8、gain=2、offset=1：函数内先得 scaled=16，再得 corrected=17，调用处接收 distance=17。raw 仍是8。",
+      "misconception": "print 的屏幕文字不是函数返回值。若只 print(corrected) 而不 return，Python 调用结果是 None，不能当毫米数继续相加。",
+      "practice": [
+        "先预测：raw 从8变成10，其他值不变，返回值改变多少？",
+        "单步走完调用，记录 scaled 和 corrected；再把 offset 设为−1，重复计算。",
+        "说明返回值的单位，以及为什么 raw 没有跟着改变。"
+      ],
+      "exercise": {
+        "prompt": "raw=7、gain=3、offset=−2，函数返回多少毫米？",
+        "expected": 19,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先算7×3，再加−2。",
+        "solution": "7×3−2=19 mm。",
+        "transfer": "独立写第二组输入 raw=0、gain=5、offset=−1；结果应为−1。说明这条数学结果是否一定能当作真实距离，以及还缺什么范围校验。"
+      },
+      "sources": [
+        "cs50p-week-0"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-conditions",
+          "label": "继续到条件与边界"
+        }
+      ],
+      "boundary": "本站原创有限算例，由JavaScript计算并回放步骤，不运行任意Python代码；Python片段另在本地执行验证。不连接真实传感器或执行器，不自动产生学习时长或掌握证明。",
+      "modelId": "cs50p-functions",
+      "demos": [
+        {
+          "modelId": "cs50p-functions",
+          "title": "变量与函数：让读数变成有单位的结果"
+        }
+      ],
+      "sections": [
+        {
+          "title": "先给值写明含义与单位",
+          "explanation": "赋值把名字绑定到当前对象。这里全是有限整数，不涉及可变列表的共享引用。raw、gain、offset 用不同名字表达不同角色；把“格”和“毫米”写在注释中，能提前发现公式是否混用了单位。",
+          "code": "raw = 8  # 格\ngain = 2  # mm/格\noffset = 1  # mm",
+          "exercise": "把 raw 改成10，先写出期望的毫米数。"
+        },
+        {
+          "title": "调用边界与局部名字",
+          "explanation": "def 创建一个函数；calibrate(...) 才发起调用。函数里的 value 接收本次实参，scaled 和 corrected 按顺序产生。返回后局部计算不等于给调用处的 raw 重新赋值。",
+          "code": "def calibrate(value, gain, offset):\n    scaled = value * gain\n    corrected = scaled + offset\n    return corrected",
+          "exercise": "画两栏：调用处的 raw、distance；函数内的 value、scaled、corrected。"
+        },
+        {
+          "title": "返回值与显示分开",
+          "explanation": "先把换算结果作为返回值交给调用者，再决定打印、保存或交给其他函数。纯数值函数便于测试；不需要把屏幕文字再转回数字。",
+          "code": "distance = calibrate(raw, gain, offset)\nprint(distance)",
+          "exercise": "把函数改成只 print，再检查返回值是什么；随后恢复 return。"
+        },
+        {
+          "title": "本地 Python 复现：复制为独立文件运行",
+          "explanation": "将下列原创代码保存为 experiment.py，在终端运行 python3 experiment.py。该片段已用本机 Python 实际执行并通过断言；浏览器动画仍只是有限教学模型，运行结果不自动保存为学习完成证据。",
+          "code": "def calibrate(value, gain, offset):\n    scaled = value * gain\n    corrected = scaled + offset\n    return corrected\n\nraw, gain, offset = 8, 2, 1\ndistance = calibrate(raw, gain, offset)\nassert distance == 17\nassert raw == 8\nprint(distance)",
+          "exercise": "先手算输出，再运行；换一组输入，保留输入、期望与实际结果。",
+          "modelId": "cs50p-functions"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-conditions",
+      "course": "cs50p",
+      "unit": "2",
+      "title": "第2讲 条件与边界：只让一个分支决定命令",
+      "summary": "距离恰好等于20厘米时，程序该选择哪一支？",
+      "question": "距离恰好等于20厘米时，程序该选择哪一支？",
+      "outcome": "写清互斥分支和等号归属，验证边界与无效输入。",
+      "prerequisites": [
+        "会赋值、调用函数；回看“变量与函数”"
+      ],
+      "explanation": [
+        "条件把同一份输入分流到不同动作。先写清规则：测量无效先停；距离小于或等于停车边界也停；剩余距离不超过50时慢行；其余前行。",
+        "if / elif / else 按顺序选择最早满足的一支。多个独立 if 则可能先后执行；如果都给同一个变量赋值，前面的决定可能被后面的覆盖。",
+        "这里的速度0、30、60只是原创逻辑案例。停车边界可调，但不代表真实传感器量程、制动距离或机器人安全验证。动画另列布尔比较，Python 片段仍按短路分支执行。"
+      ],
+      "formula": "无效→0；distance≤stop→0；stop<distance≤50→30；distance>50→60",
+      "worked": "默认有效距离20、停车边界20：20<=20为真，所以选择stop，速度0。有效距离21时为slow、速度30；无效输入始终选invalid、速度0。",
+      "misconception": "等于20必须明确归属。把<=误写成<会只在边界改变行为，离边界很远的样例看起来仍正常。",
+      "practice": [
+        "先预测：距离20时把停车边界从20改为19，输出怎样变？",
+        "逐步检查19、20、21和50、51，再把有效性切换为无效。",
+        "说明无效输入为什么不能仅表示为距离0。"
+      ],
+      "exercise": {
+        "prompt": "停车边界20、有效距离50，案例速度是多少？",
+        "expected": 30,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先排除<=20，再判断<=50。",
+        "solution": "50不满足<=20，但满足<=50，所以是slow，速度30。",
+        "transfer": "独立验证 stop=30 时的29、30、31，并增加一个 distance=100、valid=False 的用例。"
+      },
+      "sources": [
+        "cs50p-week-1"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-loops",
+          "label": "继续到循环与列表"
+        }
+      ],
+      "boundary": "本站原创有限算例，由JavaScript计算并回放步骤，不运行任意Python代码；Python片段另在本地执行验证。不连接真实传感器或执行器，不自动产生学习时长或掌握证明。",
+      "modelId": "cs50p-conditions",
+      "demos": [
+        {
+          "modelId": "cs50p-conditions",
+          "title": "条件与边界：只让一个分支决定命令"
+        }
+      ],
+      "sections": [
+        {
+          "title": "规则先写成互斥区间",
+          "explanation": "明确输入的有效性与数值是两回事。即使界面显示了一个距离，无效性也应先决定停止。停车边界最高40，小于固定慢行上界50，因此分支的区间不会反转。",
+          "code": "valid = True\ndistance, stop = 20, 20",
+          "exercise": "分别写出 stop−1、stop、stop+1 所在区间。"
+        },
+        {
+          "title": "顺序决定只执行一支",
+          "explanation": "elif 只在前面的条件不成立时检查。不要把所有候选条件都理解成实际执行过的分支；动画显示候选真假是为了对照，而Python代码只会沿本次路径走。",
+          "code": "if not valid:\n    speed = 0\nelif distance <= stop:\n    speed = 0\nelif distance <= 50:\n    speed = 30\nelse:\n    speed = 60",
+          "exercise": "有效距离50和51分别走哪一支？"
+        },
+        {
+          "title": "让函数有可核对的输出",
+          "explanation": "把规则写成返回命令的函数，测试时无需连接电机。有效值的测试之外，再增加一个无效读数案例，确认数值条件不会覆盖无效停止。",
+          "code": "assert command(20, True) == (\"stop\", 0)\nassert command(21, True) == (\"slow\", 30)\nassert command(100, False) == (\"invalid\", 0)",
+          "exercise": "把<=改成<后，找一个最小失败用例。"
+        },
+        {
+          "title": "本地 Python 复现：复制为独立文件运行",
+          "explanation": "将下列原创代码保存为 experiment.py，在终端运行 python3 experiment.py。该片段已用本机 Python 实际执行并通过断言；浏览器动画仍只是有限教学模型，运行结果不自动保存为学习完成证据。",
+          "code": "def command(distance, valid=True, stop=20):\n    if not valid:\n        return \"invalid\", 0\n    elif distance <= stop:\n        return \"stop\", 0\n    elif distance <= 50:\n        return \"slow\", 30\n    else:\n        return \"forward\", 60\n\nassert command(20) == (\"stop\", 0)\nassert command(21) == (\"slow\", 30)\nassert command(50) == (\"slow\", 30)\nassert command(51) == (\"forward\", 60)\nassert command(100, False) == (\"invalid\", 0)\nprint(command(20))",
+          "exercise": "先手算输出，再运行；换一组输入，保留输入、期望与实际结果。",
+          "modelId": "cs50p-conditions"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-loops",
+      "course": "cs50p",
+      "unit": "3",
+      "title": "第3讲 循环与列表：逐条筛选，再做累计",
+      "summary": "四条读数怎样只保留符合条件的值，并正确求平均？",
+      "question": "四条读数怎样只保留符合条件的值，并正确求平均？",
+      "outcome": "追踪每轮循环的值与累计状态，处理空列表和无保留值的情况。",
+      "prerequisites": [
+        "会写条件判断；回看“条件与边界”"
+      ],
+      "explanation": [
+        "列表把多个值按顺序放在一起。for 每轮取出一项，条件决定是否保留，累计量则把前面各轮的成果带到下一轮。",
+        "本例固定读数为12、18、26、9厘米，默认保留不小于15的值。先在循环外准备空列表与总和，不能在每一轮重新清零。",
+        "求平均要等循环结束，并检查保留条数。没有符合条件的值时均值缺失，用 None 表示；它与一个真实均值0不同。"
+      ],
+      "formula": "total = Σ保留值；mean = total / len(accepted)，仅在条数>0时计算",
+      "worked": "默认依次跳过12、保留18、保留26、跳过9；累计44、保留2条、均值22。count=0时没有任何迭代，均值为None。",
+      "misconception": "for里的value是当前元素，不是默认的列表索引。range(4)才会给出0、1、2、3；range的终点4不包含在序列中。",
+      "practice": [
+        "先预测：保留下限从15改成18，保留条数是否改变？",
+        "单步记录每轮的value、是否保留、total；再只取前两条。",
+        "把count设为0，解释为什么总和0而均值不是0。"
+      ],
+      "exercise": {
+        "prompt": "完整读数12、18、26、9，保留下限改为10，保留值的总和是多少？",
+        "expected": 56,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "保留12、18、26，跳过9。",
+        "solution": "12+18+26=56；保留3条，均值是56/3。",
+        "transfer": "不用动画，手推count=3、minimum=20，应只保留26，均值26；再用本地Python核对。"
+      },
+      "sources": [
+        "cs50p-week-2"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-exceptions",
+          "label": "继续到异常与恢复"
+        }
+      ],
+      "boundary": "本站原创有限算例，由JavaScript计算并回放步骤，不运行任意Python代码；Python片段另在本地执行验证。不连接真实传感器或执行器，不自动产生学习时长或掌握证明。",
+      "modelId": "cs50p-loops",
+      "demos": [
+        {
+          "modelId": "cs50p-loops",
+          "title": "循环与列表：逐条筛选，再做累计"
+        }
+      ],
+      "sections": [
+        {
+          "title": "区分元素、索引和次数",
+          "explanation": "for value in readings 直接访问读数；需要同时记录位置时可用 enumerate。列表切片 readings[:count] 最多取前count项；count=0得到空列表。",
+          "code": "readings = [12, 18, 26, 9][:4]\nfor index, value in enumerate(readings):\n    print(index, value)",
+          "exercise": "写出 count=2 时访问的值与索引。"
+        },
+        {
+          "title": "累计状态必须留在循环之间",
+          "explanation": "先设置 total=0，再对满足条件的值加到旧总和。accepted记录具体保留了谁，可以帮助定位“和正确但样本选错”的问题。",
+          "code": "total = 0\naccepted = []\nfor value in readings:\n    if value >= minimum:\n        accepted.append(value)\n        total += value",
+          "exercise": "把total=0放进循环，手推结果与正确结果的区别。"
+        },
+        {
+          "title": "空结果需要单独表达",
+          "explanation": "len(accepted)为0时不能除法。None表达没有均值，不代表测到0厘米。将没有样本的情况传给后续逻辑时，还需要约定由谁处理。",
+          "code": "mean = total / len(accepted) if accepted else None",
+          "exercise": "把minimum改成30，再检查程序是否出现除零。"
+        },
+        {
+          "title": "本地 Python 复现：复制为独立文件运行",
+          "explanation": "将下列原创代码保存为 experiment.py，在终端运行 python3 experiment.py。该片段已用本机 Python 实际执行并通过断言；浏览器动画仍只是有限教学模型，运行结果不自动保存为学习完成证据。",
+          "code": "def summarize(readings, minimum):\n    total = 0\n    accepted = []\n    for value in readings:\n        if value >= minimum:\n            accepted.append(value)\n            total += value\n    mean = total / len(accepted) if accepted else None\n    return accepted, total, mean\n\nassert summarize([12, 18, 26, 9], 15) == ([18, 26], 44, 22)\nassert summarize([], 15) == ([], 0, None)\nassert summarize([12, 18], 30) == ([], 0, None)\nprint(summarize([12, 18, 26, 9], 15))",
+          "exercise": "先手算输出，再运行；换一组输入，保留输入、期望与实际结果。",
+          "modelId": "cs50p-loops"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-exceptions",
+      "course": "cs50p",
+      "unit": "4",
+      "title": "第4讲 异常与恢复：失败时不继续使用无效结果",
+      "summary": "输入3.5、文字或0时，错误发生在同一个地方吗？",
+      "question": "输入3.5、文字或0时，错误发生在同一个地方吗？",
+      "outcome": "区分文本转换错误与除零，给失败路径明确状态，避免使用旧值。",
+      "prerequisites": [
+        "理解函数、条件与文本；回看前两讲"
+      ],
+      "explanation": [
+        "程序读到的输入首先是字符串。把它交给int时可能失败；转换为整数之后，用它做除数仍可能遇到另一个错误。",
+        "try / except 处理的是可能失败的操作及对应异常。不要把所有错误都吞掉，也不要失败后仍打印一个根本没有成功赋值的变量。",
+        "本例每次只尝试一个输入，返回状态与可选结果。浏览器只模拟固定ASCII候选的转换，不实现Python int()全部语法；无限重试、权限错误和网络错误不在这个模型里。"
+      ],
+      "formula": "文本 → int转换 → 100/n；ValueError 与 ZeroDivisionError 分别返回",
+      "worked": "文本\"12\"得到12并计算100/12；\"3.5\"触发ValueError，除法不执行；\"0\"能转为0，但除法触发ZeroDivisionError。",
+      "misconception": "JavaScript parseInt(\"3.5\")会截取出3，Python int(\"3.5\")却会报错。教学实现必须按所演示语言的语义核对。",
+      "practice": [
+        "先预测：\"0\"与\"oops\"是否会走同一错误分支？",
+        "依次选12、3.5、oops、0、−2和带空格的7，记录状态与结果。",
+        "解释为什么转换成功仍不等于业务输入有效；−2是否应接受取决于什么？"
+      ],
+      "exercise": {
+        "prompt": "输入文本\"-2\"，按本课100/n公式成功路径的数值是多少？",
+        "expected": -50,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "负号属于整数字符串，100除以−2。",
+        "solution": "int(\"-2\")为−2；100/(−2)=−50。是否允许负数属于业务范围校验。",
+        "transfer": "在Python函数中增加“n必须>0”的业务规则，另给状态名；验证−2、0、2，不要把范围错误伪称ValueError。"
+      },
+      "sources": [
+        "cs50p-week-3"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-libraries",
+          "label": "继续到库与接口"
+        }
+      ],
+      "boundary": "本站原创有限算例，由JavaScript计算并回放步骤，不运行任意Python代码；Python片段另在本地执行验证。不连接真实传感器或执行器，不自动产生学习时长或掌握证明。",
+      "modelId": "cs50p-exceptions",
+      "demos": [
+        {
+          "modelId": "cs50p-exceptions",
+          "title": "异常与恢复：失败时不继续使用无效结果"
+        }
+      ],
+      "sections": [
+        {
+          "title": "转换成功才产生新值",
+          "explanation": "让try尽量聚焦于实际会失败的语句。若int抛出ValueError，赋值并没有完成；失败后不能继续把n当作已经存在的有效整数。",
+          "code": "try:\n    n = int(text)\nexcept ValueError:\n    return \"ValueError\", None",
+          "exercise": "为什么不能在except后无条件使用n？"
+        },
+        {
+          "title": "区分异常类型与处理方式",
+          "explanation": "整数0是合法转换结果，却不是合法除数。分别捕获两类异常，返回与实际失败位置一致的信息，方便调用者修正输入。",
+          "code": "try:\n    result = 100 / n\nexcept ZeroDivisionError:\n    return \"ZeroDivisionError\", None",
+          "exercise": "为输入oops和0分别写一条用户可理解的提示。"
+        },
+        {
+          "title": "结果缺失与重试策略",
+          "explanation": "失败时让结果为None，不能悄悄回用上一轮数值。若需要重试，应说明次数与退出方式；取消与失败也应区分。",
+          "code": "status, result = attempt(\"0\")\nassert status == \"ZeroDivisionError\"\nassert result is None",
+          "exercise": "设计最多三次尝试的伪代码，说明用户何时能退出。"
+        },
+        {
+          "title": "本地 Python 复现：复制为独立文件运行",
+          "explanation": "将下列原创代码保存为 experiment.py，在终端运行 python3 experiment.py。该片段已用本机 Python 实际执行并通过断言；浏览器动画仍只是有限教学模型，运行结果不自动保存为学习完成证据。",
+          "code": "def attempt(text):\n    try:\n        n = int(text)\n    except ValueError:\n        return \"ValueError\", None\n    try:\n        result = 100 / n\n    except ZeroDivisionError:\n        return \"ZeroDivisionError\", None\n    return \"ok\", result\n\nassert attempt(\"12\")[0] == \"ok\"\nassert attempt(\"3.5\") == (\"ValueError\", None)\nassert attempt(\"oops\") == (\"ValueError\", None)\nassert attempt(\"0\") == (\"ZeroDivisionError\", None)\nassert attempt(\"-2\") == (\"ok\", -50)\nassert attempt(\" 7 \")[0] == \"ok\"\nprint(attempt(\"12\"))",
+          "exercise": "先手算输出，再运行；换一组输入，保留输入、期望与实际结果。",
+          "modelId": "cs50p-exceptions"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-libraries",
+      "course": "cs50p",
+      "unit": "5",
+      "title": "第5讲 库与接口：用标准库汇总一组读数",
+      "summary": "相同四条读数，均值与中位数为什么会不同？",
+      "question": "相同四条读数，均值与中位数为什么会不同？",
+      "outcome": "明确导入、参数与返回值，比较两种统计量并核对库函数的结果。",
+      "prerequisites": [
+        "理解列表、函数与数值平均；回看“循环与列表”"
+      ],
+      "explanation": [
+        "库提供经过组织的函数，但使用者仍要弄清名称、输入条件和返回值。Python的statistics属于标准库，不需要为本例安装第三方包。",
+        "固定数据是10、12、14与可调第四项。均值把所有值相加再除以条数；四项的中位数取排序后中间两项的平均。",
+        "动画以JavaScript计算这两条明确公式，并用真实Python statistics调用做独立核对。这里不运行随机抽样、不访问API，也不把一条统计量当作测量质量证明。"
+      ],
+      "formula": "mean = sum(values)/n；偶数项 median = (中间左值+中间右值)/2",
+      "worked": "10、12、14、30的总和66，均值16.5；排序中间两项12和14，所以中位数13。将30改成50，均值21.5而中位数仍13。",
+      "misconception": "能import并不说明参数或算法选择正确。中位数不是原始列表中间任意取一项，调用随机函数也不会自动得到可复现实验。",
+      "practice": [
+        "先预测：只把最后读数30增大到50，哪一种汇总变化？",
+        "在mean和median之间切换，并记录排序副本与原列表。",
+        "把第四项改为10，解释中位数为何变成11。"
+      ],
+      "exercise": {
+        "prompt": "四条读数10、12、14、50的均值是多少？",
+        "expected": 21.5,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先求总和86，再除以4。",
+        "solution": "(10+12+14+50)/4=21.5。",
+        "transfer": "新数据为10、12、14、10；独立算出mean=11.5、median=11，并用Python标准库核对。"
+      },
+      "sources": [
+        "cs50p-week-4"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-tests",
+          "label": "继续到单元测试"
+        }
+      ],
+      "boundary": "本站原创有限算例，由JavaScript计算并回放步骤，不运行任意Python代码；Python片段另在本地执行验证。不连接真实传感器或执行器，不自动产生学习时长或掌握证明。",
+      "modelId": "cs50p-libraries",
+      "demos": [
+        {
+          "modelId": "cs50p-libraries",
+          "title": "库与接口：用标准库汇总一组读数"
+        }
+      ],
+      "sections": [
+        {
+          "title": "标准库、第三方包与自己的模块",
+          "explanation": "import statistics让代码明确使用哪个模块。第三方包通常还需安装并记录版本，自己的模块则应避免与标准库同名，否则可能导入错文件。",
+          "code": "import statistics\nvalues = [10, 12, 14, 30]",
+          "exercise": "为什么不把自己的文件命名为statistics.py？"
+        },
+        {
+          "title": "读接口而不是猜函数",
+          "explanation": "statistics.mean接收数值数据并返回平均值。真实外部数据还可能为空、含文字或缺失值，应先约定处理方法；本课动画限制为四个有限整数。",
+          "code": "mean = statistics.mean(values)\nmedian = statistics.median(values)",
+          "exercise": "给四个相同读数12，手算两个函数都应返回什么。"
+        },
+        {
+          "title": "用独立公式核对返回值",
+          "explanation": "先按定义计算，再与标准库输出比较。不要为了通过检查而把“期望”直接设成刚得到的函数结果，独立路径才能发现误用。",
+          "code": "assert statistics.mean(values) == 16.5\nassert statistics.median(values) == 13",
+          "exercise": "将最后一项改成10，排序后中间两项是什么？"
+        },
+        {
+          "title": "本地 Python 复现：复制为独立文件运行",
+          "explanation": "将下列原创代码保存为 experiment.py，在终端运行 python3 experiment.py。该片段已用本机 Python 实际执行并通过断言；浏览器动画仍只是有限教学模型，运行结果不自动保存为学习完成证据。",
+          "code": "import statistics\n\nvalues = [10, 12, 14, 30]\nassert statistics.mean(values) == 16.5\nassert statistics.median(values) == 13\nchanged = [10, 12, 14, 50]\nassert statistics.mean(changed) == 21.5\nassert statistics.median(changed) == 13\nprint(statistics.mean(values), statistics.median(values))",
+          "exercise": "先手算输出，再运行；换一组输入，保留输入、期望与实际结果。",
+          "modelId": "cs50p-libraries"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-tests",
+      "course": "cs50p",
+      "unit": "6",
+      "title": "第6讲 单元测试：让边界缺陷自己暴露",
+      "summary": "两个测试都通过，为什么程序仍会在20厘米处出错？",
+      "question": "两个测试都通过，为什么程序仍会在20厘米处出错？",
+      "outcome": "根据规则独立写期望，用边界输入定位缺陷，修复后重跑检查。",
+      "prerequisites": [
+        "会写带返回值的函数；回看“条件与边界”"
+      ],
+      "explanation": [
+        "测试把“输入是什么、按规则应得到什么”变成可运行检查。先写明确规则，再调用待测函数比较；不要让期望值由同一个待测实现计算。",
+        "本例故意提供一个把<=误写成<的函数。只测10与30，错误实现也会通过；加入19、20、21才会看见边界缺陷。",
+        "浏览器展示有限案例断言的实际比较。Python片段使用真正assert并分别检查正确与缺陷实现；pytest是官方课介绍的第三方工具，本课不要求安装它就能开始。"
+      ],
+      "formula": "passed = actual(input) == expected(input)；失败数 = 不相等的案例数",
+      "worked": "缺陷实现遇到20返回60，规则期望0；边界组五条只有这条失败。普通组10、30均通过，但不能证明20也正确。",
+      "misconception": "通过率取决于选了哪些案例。测试全绿不代表函数对所有输入都正确，也不代表真实机器人已经安全停止。",
+      "practice": [
+        "先预测：缺陷实现遇到20会返回0还是60？",
+        "保持缺陷实现，比较普通组与边界组的失败数；再切到正确实现。",
+        "用“输入、期望、实际”描述失败，不只写测试没过。"
+      ],
+      "exercise": {
+        "prompt": "缺陷实现使用distance<20；边界组0、19、20、21、100中有几条失败？",
+        "expected": 1,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "逐条和<=20的独立规则比较。",
+        "solution": "只有distance=20时实际60而期望0，所以失败1条。",
+        "transfer": "独立设计阈值改成30的规则、正确实现和边界组29/30/31，确认缺陷测试仍能定位30。"
+      },
+      "sources": [
+        "cs50p-week-5"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-files",
+          "label": "继续到文件读写"
+        }
+      ],
+      "boundary": "本站原创有限算例，由JavaScript计算并回放步骤，不运行任意Python代码；Python片段另在本地执行验证。不连接真实传感器或执行器，不自动产生学习时长或掌握证明。",
+      "modelId": "cs50p-tests",
+      "demos": [
+        {
+          "modelId": "cs50p-tests",
+          "title": "单元测试：让边界缺陷自己暴露"
+        }
+      ],
+      "sections": [
+        {
+          "title": "规则是独立期望的来源",
+          "explanation": "将停车边界的等号写进规则，并在测试中保留实际期望值。若直接调用待测函数作为期望，同一个错误会在两边同时出现。",
+          "code": "cases = [(19, 0), (20, 0), (21, 60)]",
+          "exercise": "为输入0和100增加两条期望。"
+        },
+        {
+          "title": "边界用例比数量更重要",
+          "explanation": "缺陷只在20发生。重复测很多远离边界的值仍可能漏检；应按输入分区选择代表，并在分界点两侧检查。",
+          "code": "assert speed(19) == 0\nassert speed(20) == 0\nassert speed(21) == 60",
+          "exercise": "解释smoke两条通过时遗漏了哪个条件。"
+        },
+        {
+          "title": "修复与回归要在同一规则下比较",
+          "explanation": "先保留失败用例，再把<改回<=，重跑同一组。确认失败消失后仍要检查其他输入，避免修复只迎合一个案例。",
+          "code": "def speed(distance):\n    return 0 if distance <= 20 else 60",
+          "exercise": "为什么不能修改期望值60来“消除”失败？"
+        },
+        {
+          "title": "本地 Python 复现：复制为独立文件运行",
+          "explanation": "将下列原创代码保存为 experiment.py，在终端运行 python3 experiment.py。该片段已用本机 Python 实际执行并通过断言；浏览器动画仍只是有限教学模型，运行结果不自动保存为学习完成证据。",
+          "code": "def speed(distance, bug=False):\n    near = distance < 20 if bug else distance <= 20\n    return 0 if near else 60\n\ncases = [(0, 0), (19, 0), (20, 0), (21, 60), (100, 60)]\nfailures = []\nfor distance, expected in cases:\n    try:\n        assert speed(distance, bug=True) == expected\n    except AssertionError:\n        failures.append(distance)\nassert failures == [20]\nfor distance, expected in cases:\n    assert speed(distance) == expected\nprint(failures)",
+          "exercise": "先手算输出，再运行；换一组输入，保留输入、期望与实际结果。",
+          "modelId": "cs50p-tests"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-files",
+      "course": "cs50p",
+      "unit": "7",
+      "title": "第7讲 文件读写：保存以后，还能重新读对吗？",
+      "summary": "同样写入30，追加与覆盖为什么得到不同的均值？",
+      "question": "同样写入30，追加与覆盖为什么得到不同的均值？",
+      "outcome": "解释a与w的差异，用with关闭文件，读取后独立检查条数和均值。",
+      "prerequisites": [
+        "会循环、转换整数、处理返回值；回看“循环与列表”和“异常与恢复”"
+      ],
+      "explanation": [
+        "变量里的读数通常只活在当前进程中，文件把记录保存为外部文本。写入前先约定格式：本例每行一个整数，以换行分隔。",
+        "a模式保留旧内容，在末尾追加；w模式成功打开时先截断旧文件，再写入。因此两个模式的区别早于本次write，不能等写完才决定是否保留历史。",
+        "浏览器只操作内存文本，不会访问你的磁盘。下方Python例子用临时目录进行真实文件写读，退出后清理；计算证据与真实传感器记录分别看待。"
+      ],
+      "formula": "a：旧行+新行；w：仅新行；mean = sum(重新读到的值)/条数",
+      "worked": "旧文本为12换行20换行。追加30后值为12、20、30，共3条，总和62，均值62/3；覆盖后只有30，共1条，均值30。",
+      "misconception": "write不会自动添加换行。缺少分隔符可能把20和30粘成2030；文件存在也不能证明格式、单位或条数正确。",
+      "practice": [
+        "先预测：追加与覆盖各留下几条读数？",
+        "保持新值30，比较两种模式在打开后、写入后、重新读取后的状态。",
+        "把新值改成0，解释为什么追加后的均值不为0，而覆盖后为0。"
+      ],
+      "exercise": {
+        "prompt": "旧读数12、20，使用a追加30，重新读取后的总和是多少？",
+        "expected": 62,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "追加保留原来的两行。",
+        "solution": "12+20+30=62，共3条。",
+        "transfer": "先独立预测：追加0后均值32/3，覆盖0后均值0；在临时目录的Python例子中修改写入值并验证。"
+      },
+      "sources": [
+        "cs50p-week-6"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-functions",
+          "label": "继续到变量与函数"
+        },
+        {
+          "lesson": "cs50p-regex",
+          "label": "继续到正则表达式：格式、匹配范围与提取各管什么"
+        }
+      ],
+      "boundary": "本站原创有限算例，由JavaScript计算并回放步骤，不运行任意Python代码；Python片段另在本地执行验证。文件模型仅在内存计算；本地例子使用临时目录。",
+      "modelId": "cs50p-files",
+      "demos": [
+        {
+          "modelId": "cs50p-files",
+          "title": "文件读写：保存以后，还能重新读对吗？"
+        }
+      ],
+      "sections": [
+        {
+          "title": "先约定持久化格式",
+          "explanation": "保存的是文本，不是带类型的Python整数。用str或f-string显式写成一行，读取时再转换；外部文件还可能有空行和非法内容。",
+          "code": "line = f\"{value}\\n\"",
+          "exercise": "若上一条末尾没有换行，再追加会发生什么？"
+        },
+        {
+          "title": "with与打开模式各负其责",
+          "explanation": "with负责离开上下文后关闭文件，模式负责读写行为。w截断已有内容，a在末尾追加；练习只应对临时文件操作，避免误改个人资料。",
+          "code": "with open(path, \"a\", encoding=\"utf-8\") as file:\n    file.write(f\"{value}\\n\")",
+          "exercise": "分别写出打开a和w之后、写入之前的文本内容。"
+        },
+        {
+          "title": "重读才是一次可检查的保存",
+          "explanation": "写完关闭后重新打开，按行读数并核对条数、总和和范围。对于CSV字段，应使用csv模块而不是凭逗号随意拆分；本课先只处理单列整数。",
+          "code": "with open(path, encoding=\"utf-8\") as file:\n    values = [int(line) for line in file]\nmean = sum(values) / len(values)",
+          "exercise": "为缺失文件与一行oops设计不同错误反馈。"
+        },
+        {
+          "title": "本地 Python 复现：复制为独立文件运行",
+          "explanation": "将下列原创代码保存为 experiment.py，在终端运行 python3 experiment.py。该片段已用本机 Python 实际执行并通过断言；浏览器动画仍只是有限教学模型，运行结果不自动保存为学习完成证据。",
+          "code": "from pathlib import Path\nfrom tempfile import TemporaryDirectory\n\nwith TemporaryDirectory() as directory:\n    path = Path(directory) / \"readings.txt\"\n    for mode, expected in [(\"a\", [12, 20, 30]), (\"w\", [30])]:\n        path.write_text(\"12\\n20\\n\", encoding=\"utf-8\")\n        with path.open(mode, encoding=\"utf-8\") as file:\n            file.write(\"30\\n\")\n        with path.open(encoding=\"utf-8\") as file:\n            values = [int(line) for line in file]\n        assert values == expected\n        print(mode, len(values), sum(values) / len(values))",
+          "exercise": "先手算输出，再运行；换一组输入，保留输入、期望与实际结果。",
+          "modelId": "cs50p-files"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-regex",
+      "course": "cs50p",
+      "unit": "8",
+      "title": "第8讲 正则表达式：格式、匹配范围与提取各管什么",
+      "summary": "“prefix AB-12cm suffix”里找得到读数，为什么整条记录仍不合格？",
+      "question": "“prefix AB-12cm suffix”里找得到读数，为什么整条记录仍不合格？",
+      "outcome": "独立写出格式合同，区分search与整条匹配，并从命名分组恢复数值。",
+      "prerequisites": [
+        "会处理字符串、条件与异常；回看文件读写"
+      ],
+      "explanation": [
+        "先给输入一个可检查的合同：两位ASCII来源字母、一个连字符、一到三位ASCII数字，最后是cm。模式是对合同的表达，不是“看起来像记录”就放行；文本合法也不代表测量可信。",
+        "查找子串与验证全文是两个问题。search可以从长句中找到一条读数；fullmatch要求从头到尾只有合同允许的内容。先清理两端空白会改变接受集合，必须把这项决定写明。",
+        "先拿到匹配对象，再读取sensor与value分组，最后做整数转换。失败时保持缺失；合法数字0不能因为布尔判断而被当作失败。浏览器仅计算界面列出的ASCII文本，Python例程使用真实re。"
+      ],
+      "formula": "格式 = [A-Z]{2} + \"-\" + [0-9]{1,3} + \"cm\"；fullmatch要求覆盖清理后的整个字符串",
+      "worked": "“ ab-012cm ”先strip为ab-012cm，忽略大小写后成功；sensor规范为AB，数字文本012转成整数12。前后夹杂文字仅search接受；1234有四位，不满足1–3位。",
+      "misconception": "正则里的点号不是普通句点；把search成功当成完整格式通过也会放过前后多余内容。raw string只处理Python字符串转义，不会自动把任意用户文字变成安全的正则字面量。",
+      "practice": [
+        "先选择带前后文字的输入，对比search与整条匹配；写出每种方法实际证明了什么。",
+        "保留末尾换行再检查整条匹配；随后开启strip，指出接受结果为何改变。",
+        "用AB-0cm、AB-1234cm和ab-012cm检查零值、位数边界与大小写约定。"
+      ],
+      "exercise": {
+        "prompt": "按整条ASCII合同解析“ZZ-007cm”，value应是多少？",
+        "expected": 7,
+        "tolerance": 0,
+        "unit": "cm",
+        "hint": "命名分组先拿到文本007，再调用int。",
+        "solution": "格式匹配成功，int(\"007\")=7；前导零不改变数值。",
+        "transfer": "独立新增AB-999cm与AB-1000cm两条边界，并加入一个不执行strip的末尾换行案例；先写预期再用真实Python re.fullmatch核对。"
+      },
+      "sources": [
+        "cs50p-week-7"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-oop",
+          "label": "继续到面向对象：独立状态、属性约束与名字的指向"
+        }
+      ],
+      "boundary": "本站原创、有限输入的JavaScript状态模型；不执行任意Python或官方作业。Python例程已实际运行，文件实验只使用临时目录。页面步骤、模型输出与真实设备或学习完成分别记录。",
+      "modelId": "cs50p-regex",
+      "demos": [
+        {
+          "modelId": "cs50p-regex",
+          "title": "正则表达式：格式、匹配范围与提取各管什么"
+        }
+      ],
+      "sections": [
+        {
+          "title": "从需求写出可接受的字符串集合",
+          "explanation": "先把字母数、数字位数、分隔符、单位和大小写写成明确规则。使用[0-9]有意限定ASCII；不要把这里的例子推广成电话号码、邮件地址或任意Unicode格式的完整验证器。",
+          "code": "PATTERN = r\"(?P<sensor>[A-Z]{2})-(?P<value>[0-9]{1,3})cm\"",
+          "exercise": "逐项解释AB-12cm里的每一段，再构造每一条规则单独失败的例子。"
+        },
+        {
+          "title": "字符类、量词、分组与原始字符串",
+          "explanation": "方括号表示候选字符集合，大括号限制重复次数，括号为后面提取保留分组。Python原始字符串让反斜杠按字面进入正则；正则自己的特殊字符仍然按正则语法解释。",
+          "code": "literal_dot = r\"[0-9]+\\.[0-9]+\"\nsource = r\"(?P<sensor>[A-Z]{2})\"",
+          "exercise": "比较模式[0-9]+.[0-9]+和[0-9]+\\.[0-9]+会接受哪些不同输入。"
+        },
+        {
+          "title": "search、起止锚点与全文校验",
+          "explanation": "search寻找任意位置的匹配片段；fullmatch检查整个字符串。单纯添加^和$时还要了解行尾语义，尤其末尾换行的情况；本例直接用fullmatch表达完整记录合同。",
+          "code": "import re\ntext = \"prefix AB-12cm suffix\"\nassert re.search(PATTERN, text) is not None\nassert re.fullmatch(PATTERN, text) is None",
+          "exercise": "去掉prefix与suffix再检查；最后保留一个末尾换行，不先strip。"
+        },
+        {
+          "title": "大小写、清理和替换必须各有理由",
+          "explanation": "strip只清理两端，不会删掉中间垃圾字符；IGNORECASE改变字母匹配规则。确实要做文本替换时可用re.sub，但每次替换都应能解释，不能悄悄把原本无效的业务记录改成有效。",
+          "code": "text = \" ab-012cm \".strip()\nmatch = re.fullmatch(PATTERN, text, re.IGNORECASE)\nnormalized = match.group(\"sensor\").upper()",
+          "exercise": "关闭IGNORECASE后预测同一输入是否还能通过；保留原始文本以便解释清理步骤。"
+        },
+        {
+          "title": "匹配成功后提取，格式与数值范围分层检查",
+          "explanation": "命名分组表达数据角色，int把数字文本转换成数值。格式位数上限999不代表物理设备量程也是999；业务范围校验需要在解析后单独表达，失败不能沿用上一次的结果。",
+          "code": "if match is None:\n    parsed = None\nelse:\n    parsed = (match.group(\"sensor\").upper(), int(match.group(\"value\")))",
+          "exercise": "再加一条设备只接受0至200厘米的业务规则，区分格式错误与超量程。"
+        },
+        {
+          "title": "本地 Python 复现：运行完整原创例程",
+          "explanation": "把下面代码保存为单独文件，用 Python 3 运行；先手算预期再核对实际输出。例程只使用标准库，断言与失败分支验证输入约定，不连接设备，也不自动写入个人学习完成记录。",
+          "code": "\"\"\"Bounded ASCII record parsing; this is an original example, not an assignment solution.\"\"\"\nimport json\nimport re\n\nPATTERN = r\"(?P<sensor>[A-Z]{2})-(?P<value>[0-9]{1,3})cm\"\n\n\ndef parse_record(raw, *, clean=True, ignore_case=True, mode=\"full\"):\n    text = raw.strip() if clean else raw\n    flags = re.IGNORECASE if ignore_case else 0\n    match = (re.fullmatch if mode == \"full\" else re.search)(PATTERN, text, flags)\n    return {\n        \"raw\": raw, \"text\": text, \"matched\": match is not None,\n        \"sensor\": match.group(\"sensor\").upper() if match else None,\n        \"value\": int(match.group(\"value\")) if match else None,\n    }\n\n\ndef main():\n    assert parse_record(\"ZZ-007cm\")[\"value\"] == 7\n    assert parse_record(\"AB-0cm\")[\"value\"] == 0\n    assert not parse_record(\"prefix AB-12cm suffix\")[\"matched\"]\n    assert parse_record(\"prefix AB-12cm suffix\", mode=\"search\")[\"matched\"]\n    assert not parse_record(\"AB-12cm\\n\", clean=False)[\"matched\"]\n    assert not parse_record(\"AB-1234cm\")[\"matched\"]\n    assert not parse_record(\"ab-012cm\", ignore_case=False)[\"matched\"]\n    print(json.dumps(parse_record(\" ab-012cm \"), ensure_ascii=False))\n\n\nif __name__ == \"__main__\":\n    main()\n",
+          "exercise": "改一组参数并补上独立断言，记录你预测的值、实际值以及差异原因。"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-oop",
+      "course": "cs50p",
+      "unit": "9",
+      "title": "第9讲 面向对象：独立状态、属性约束与名字的指向",
+      "summary": "target=a之后改target.value，为什么a会变而b不会变？",
+      "question": "target=a之后改target.value，为什么a会变而b不会变？",
+      "outcome": "说明类与实例、别名与复制，设计带验证的property，并组合继承与方法。",
+      "prerequisites": [
+        "会函数、异常、列表和字符串解析；回看正则表达式"
+      ],
+      "explanation": [
+        "一个读数对象把当前数值与允许的操作放在一起。类描述规则，a与b是按规则创建的两个实例；self代表当前这一个实例，实例属性不会因为来自同一类而自动共享。",
+        "赋值target=a只是让另一个名字指向同一对象。需要独立状态时必须明确创建新实例；property setter先验证候选值，再修改内部状态，拒绝负值时旧读数必须保留。",
+        "OffsetReading继承数值校验，再增加校准方法。继承复用行为，不会替你证明设计合理；本讲还对照classmethod、staticmethod、字符串表示和加法协议，实际Python例程执行这些接口。"
+      ],
+      "formula": "corrected(a)=a.value+offset；total=corrected(a)+corrected(b)；target=a与target=新对象产生不同写入范围",
+      "worked": "默认a=8、b=12、offset=2。target指向a并写入20后，总和为22+14=36；改成独立对象c后，a仍是8，总和为10+14=24；写入−1被拒绝时a也仍为8。",
+      "misconception": "一个类不是一个全局可变数据袋。target=a没有复制对象；_value的前导下划线是约定，也不是权限控制。类型提示和类继承同样不会替代输入验证。",
+      "practice": [
+        "保持a初始8，分别用别名与新实例写入20，对比a、b、target三个名字对应的对象。",
+        "把写入值改为−1，核对异常出现前后每个实例的状态是否保留。",
+        "在本地为Reading.from_text、Reading.is_valid和两个Reading相加各增加一个独立测试。"
+      ],
+      "exercise": {
+        "prompt": "a=5、b=12、offset=1，target指向a并写入9，两个对象的校准和是多少？",
+        "expected": 23,
+        "tolerance": 0,
+        "unit": "cm",
+        "hint": "a改成9，b仍为12；两个对象各加一次偏移1。",
+        "solution": "(9+1)+(12+1)=23；若target是独立副本则应为19。",
+        "transfer": "独立实现一个只允许0至100读数的类，测试构造、合法修改、非法修改后的旧值保留；再对比别名和显式新实例，不要仅检查最终打印文字。"
+      },
+      "sources": [
+        "cs50p-week-8"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-etcetera",
+          "label": "继续到更多 Python：把接口、集合与惰性求值串起来"
+        }
+      ],
+      "boundary": "本站原创、有限输入的JavaScript状态模型；不执行任意Python或官方作业。Python例程已实际运行，文件实验只使用临时目录。页面步骤、模型输出与真实设备或学习完成分别记录。",
+      "modelId": "cs50p-oop",
+      "demos": [
+        {
+          "modelId": "cs50p-oop",
+          "title": "面向对象：独立状态、属性约束与名字的指向"
+        }
+      ],
+      "sections": [
+        {
+          "title": "从元组和字典走向有行为的实例",
+          "explanation": "元组或字典能够存数据，类则还能集中表达构造和操作约束。选择类的理由应是状态与规则需要共同维护；并非把每个单独数字都包装起来就会让程序更好。",
+          "code": "class Reading:\n    def __init__(self, value):\n        self.value = value\n\na = Reading(8)\nb = Reading(12)",
+          "exercise": "分别画出a和b的实例框；明确哪个字段属于实例，哪个规则属于类。"
+        },
+        {
+          "title": "property把校验放在每次写入的入口",
+          "explanation": "只在构造器验证一次仍挡不住后续无效赋值。property getter提供读取，setter验证通过才赋内部字段；如果先写入再检查，异常留下的对象状态已经被污染。",
+          "code": "@value.setter\ndef value(self, candidate):\n    if not self.is_valid(candidate):\n        raise ValueError(\"invalid reading\")\n    self._value = candidate",
+          "exercise": "先用8创建实例，再写−1并捕获ValueError；随后断言value仍是8。"
+        },
+        {
+          "title": "名字绑定、对象身份和显式复制",
+          "explanation": "target=a让两个名字共享一个实例。target=Reading(a.value)则创建新实例并把当前数值作为输入；遇到嵌套可变对象时，浅复制是否足够又是需要单独设计的问题。",
+          "code": "target = a\nassert target is a\ncopy = Reading(a.value)\nassert copy is not a",
+          "exercise": "把target.value改为20后检查a；再改copy.value，说明两个实验为何不同。"
+        },
+        {
+          "title": "类方法、静态方法与实例方法的职责",
+          "explanation": "实例方法接收self并操作该实例；classmethod接收cls，可以做遵守子类构造约定的工厂；staticmethod不接收self或cls，适合与类相关、却不依赖某个实例的纯检查。",
+          "code": "@classmethod\ndef from_text(cls, text):\n    return cls(int(text))\n\n@staticmethod\ndef is_valid(value):\n    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value >= 0",
+          "exercise": "解释为什么bool应单独排除，再用from_text(\"7\")构造一个实例并核对value。"
+        },
+        {
+          "title": "继承扩展行为，异常保持明确",
+          "explanation": "子类OffsetReading沿用父类属性约束，并增加corrected方法。调用方法时self仍然是具体实例；如果子类改变构造参数，就必须同步检查继承工厂方法是否还符合签名。",
+          "code": "class OffsetReading(Reading):\n    def corrected(self, offset):\n        return self.value + offset",
+          "exercise": "给两个OffsetReading不同初始值；分别调用corrected，说明共享的是方法而非数值。"
+        },
+        {
+          "title": "字符串表示与运算符协议不是隐藏计算",
+          "explanation": "__str__控制面向人的表示，__add__定义两个对象相加的行为。对不支持的操作数返回NotImplemented，让Python按协议决定后续处理；不要把拒绝当成有效零值。",
+          "code": "def __add__(self, other):\n    if not isinstance(other, Reading):\n        return NotImplemented\n    return Reading(self.value + other.value)\n\ndef __str__(self):\n    return f\"Reading({self.value})\"",
+          "exercise": "核对Reading(2)+Reading(3)返回新对象，再预测Reading(2)+\"3\"为什么不应悄悄成功。"
+        },
+        {
+          "title": "本地 Python 复现：运行完整原创例程",
+          "explanation": "把下面代码保存为单独文件，用 Python 3 运行；先手算预期再核对实际输出。例程只使用标准库，断言与失败分支验证输入约定，不连接设备，也不自动写入个人学习完成记录。",
+          "code": "\"\"\"Instances, validated properties, aliasing and inheritance with independent state.\"\"\"\nimport json\nimport math\n\n\nclass Reading:\n    def __init__(self, value):\n        self.value = value\n\n    @staticmethod\n    def is_valid(value):\n        return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value) and value >= 0\n\n    @property\n    def value(self):\n        return self._value\n\n    @value.setter\n    def value(self, candidate):\n        if not self.is_valid(candidate):\n            raise ValueError(\"expected a finite nonnegative reading\")\n        self._value = candidate\n\n    @classmethod\n    def from_text(cls, text):\n        return cls(int(text))\n\n    def __add__(self, other):\n        if not isinstance(other, Reading):\n            return NotImplemented\n        return Reading(self.value + other.value)\n\n    def __str__(self):\n        return f\"Reading({self.value})\"\n\n\nclass OffsetReading(Reading):\n    def corrected(self, offset):\n        return self.value + offset\n\n\ndef simulate(initial=8, update=20, offset=2, reference=\"alias\"):\n    a, b = OffsetReading(initial), OffsetReading(12)\n    target = a if reference == \"alias\" else OffsetReading(a.value)\n    status = \"ok\"\n    try:\n        target.value = update\n    except ValueError:\n        status = \"ValueError\"\n    corrected = [a.corrected(offset), b.corrected(offset)]\n    return {\"a\": a.value, \"b\": b.value, \"target\": target.value,\n            \"targetId\": \"a\" if reference == \"alias\" else \"c\", \"status\": status,\n            \"corrected\": corrected, \"total\": sum(corrected)}\n\n\ndef main():\n    assert simulate()[\"total\"] == 36\n    assert simulate(reference=\"copy\")[\"total\"] == 24\n    assert simulate(update=-1)[\"a\"] == 8\n    assert Reading.from_text(\"7\").value == 7\n    assert (Reading(2) + Reading(3)).value == 5\n    assert not Reading.is_valid(True)\n    assert not Reading.is_valid(float(\"nan\"))\n    print(json.dumps(simulate(), ensure_ascii=False))\n\n\nif __name__ == \"__main__\":\n    main()\n",
+          "exercise": "改一组参数并补上独立断言，记录你预测的值、实际值以及差异原因。"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-etcetera",
+      "course": "cs50p",
+      "unit": "10",
+      "title": "第10讲 更多 Python：把接口、集合与惰性求值串起来",
+      "summary": "只要前两条不同读数，为什么生成器可以少处理后面的输入？",
+      "question": "只要前两条不同读数，为什么生成器可以少处理后面的输入？",
+      "outcome": "使用集合、推导式、解包、argparse和类型提示，并解释迭代消费的实际状态。",
+      "prerequisites": [
+        "会循环、库、异常与对象；回看循环与列表"
+      ],
+      "explanation": [
+        "本讲把常见语法放回同一个任务：从12、18、12、26中按下限筛选，保留每个值第一次出现的位置，再取前k条。集合负责是否见过，enumerate负责位置，循环或生成器负责实际执行顺序。",
+        "列表推导式通常马上计算并保存全部结果；生成器创建后尚未遍历，只有调用next或进入for才向前推进。取前k项时可以提前停，但生成器的已有状态不会自动回到起点。",
+        "命令行接口、类型提示、文档和常量都帮助表达合同，却不等于运行时验证。argparse负责把文本选项解析成已知类型，核心纯函数仍明确检查范围；动画访问次数不是程序性能测量。"
+      ],
+      "formula": "新结果 = value≥minimum且未见过；total=Σ实际取出的值；take=0时惰性流访问0项",
+      "worked": "默认下限10、取3条不同值：输出12、18、26，总和56，实际访问4项；只取1条时生成器访问1项，先建列表仍访问4项。下限30时无结果，总和0，不代表测到一个0值。",
+      "misconception": "set不保证业务排序；生成器不是会自动重新开始的列表。类型提示不会自动把文本变成整数，global不是让所有函数随意改共享状态的设计建议。",
+      "practice": [
+        "先把take设为0，对比生成器与先建列表的访问次数；再设为1并预测结果。",
+        "设下限15、take=2，逐步记录被跳过的值和实际输出；确认重复策略按首次出现。",
+        "在本地把同一个生成器转成list两次，解释第二次为何为空；再检查错误命令行参数的退出状态。"
+      ],
+      "exercise": {
+        "prompt": "下限15、最多取2条不同读数，输入12、18、12、26，本次总和是多少？",
+        "expected": 44,
+        "tolerance": 0,
+        "unit": "cm",
+        "hint": "12低于下限，两次都跳过；保留18和26。",
+        "solution": "18+26=44；需要访问4项才能取得2个合格结果。",
+        "transfer": "改为下限10、take=2，独立预测总和30与生成器访问2项；再对照先建完整列表访问4项。补一个空输入和一个全部重复输入，分别验证值、顺序与实际消费量。"
+      },
+      "sources": [
+        "cs50p-week-9"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-project",
+          "label": "继续到原创综合项目：从记录文件到可复核报告"
+        }
+      ],
+      "boundary": "本站原创、有限输入的JavaScript状态模型；不执行任意Python或官方作业。Python例程已实际运行，文件实验只使用临时目录。页面步骤、模型输出与真实设备或学习完成分别记录。",
+      "modelId": "cs50p-etcetera",
+      "demos": [
+        {
+          "modelId": "cs50p-etcetera",
+          "title": "更多 Python：把接口、集合与惰性求值串起来"
+        }
+      ],
+      "sections": [
+        {
+          "title": "集合去重与字典推导式各自保存什么",
+          "explanation": "集合只表达成员是否存在，不保存原始位置语义。想保留首次位置时，可以在循环中同时维护seen和输出列表；字典推导式遇到重复键则可能由后面的值覆盖前面的值。",
+          "code": "seen = set()\nfor index, value in enumerate([12, 18, 12, 26]):\n    if value not in seen:\n        seen.add(value)\n        print(index, value)",
+          "exercise": "写出{value: index for index, value in enumerate([12,18,12])}，检查12映射到哪个位置。"
+        },
+        {
+          "title": "常量、局部名字与global需要明确边界",
+          "explanation": "大写名字是常量约定，Python并不会禁止再次赋值。函数内赋值默认建立局部绑定；global会改变模块绑定，应只在确有共享状态需求时使用，本例把输入显式传入以便独立测试。",
+          "code": "MINIMUM = 10\ndef keep(value, minimum=MINIMUM):\n    return value >= minimum",
+          "exercise": "给函数传入minimum=15，再确认这次调用有没有修改模块常量MINIMUM。"
+        },
+        {
+          "title": "类型提示和docstring帮助调用者理解合同",
+          "explanation": "参数和返回值提示描述预期，docstring解释输入、输出和失败条件。它们不会自动执行验证；调用者传入错误类型时，需要明确由解析入口、核心函数或类型检查工具负责发现。",
+          "code": "def total(values: list[int]) -> int:\n    \"\"\"Return the sum of the supplied integer readings.\"\"\"\n    return sum(values)",
+          "exercise": "先预测total([\"12\"])的实际行为；不要把类型提示误当自动转换。"
+        },
+        {
+          "title": "argparse把命令行文本转成受限参数",
+          "explanation": "命令行进来的是文本，argparse可解析整数、选项与帮助，并在非法参数时退出。纯函数负责计算，main负责解析和显示，测试核心行为时无需模拟键盘输入或改全局sys.argv。",
+          "code": "parser = argparse.ArgumentParser()\nparser.add_argument(\"--take\", type=int, choices=range(5), default=3)\nargs = parser.parse_args([\"--take\", \"2\"])\nassert args.take == 2",
+          "exercise": "分别试--take 9与--take text，记录退出状态和错误信息，而不是只检查成功案例。"
+        },
+        {
+          "title": "解包、位置参数与关键字参数保持调用含义",
+          "explanation": "元组解包把结构中的各项绑定给名字，星号可以展开位置参数，双星号展开关键字参数。args和kwargs只是常见变量名；参数传错、重复传入或漏必需值仍会出错，不要靠静默默认隐藏问题。",
+          "code": "def calibrate(value, gain=1, *, offset=0):\n    return value * gain + offset\nargs = (8, 2)\nkwargs = {\"offset\": 1}\nassert calibrate(*args, **kwargs) == 17",
+          "exercise": "再向kwargs加入gain=3，说明为什么已经按位置传gain时会触发重复参数错误。"
+        },
+        {
+          "title": "map、filter和推导式表达转换与筛选",
+          "explanation": "map把函数应用到输入，filter按谓词保留元素，推导式能把两者写在一处。Python3的map与filter也按需迭代；需要反复访问时可显式转列表，但应知道这会立刻消费并保存结果。",
+          "code": "values = [12, 18, 12, 26]\nshifted = [value + 1 for value in values if value >= 15]\nassert shifted == list(map(lambda value: value + 1, filter(lambda value: value >= 15, values)))",
+          "exercise": "先写不使用lambda的普通循环，再核对三种写法的值、顺序和消费时机。"
+        },
+        {
+          "title": "enumerate保留位置，生成器保存暂停点",
+          "explanation": "enumerate返回索引和值，yield产生一个结果后暂停。这里把visited放在每次真正访问输入的位置；islice只请求前k个结果，跳过的输入也算被访问，不能把输出条数当作扫描条数。",
+          "code": "from itertools import islice\nmetrics = {\"visited\": 0}\nstream = unique_above([12,18,12,26], 10, metrics)\nassert metrics[\"visited\"] == 0\nfirst = list(islice(stream, 1))\nassert metrics[\"visited\"] == 1",
+          "exercise": "继续消费同一个stream，再尝试消费第三次，区分剩余结果与重新创建一个流。"
+        },
+        {
+          "title": "本地 Python 复现：运行完整原创例程",
+          "explanation": "把下面代码保存为单独文件，用 Python 3 运行；先手算预期再核对实际输出。例程只使用标准库，断言与失败分支验证输入约定，不连接设备，也不自动写入个人学习完成记录。",
+          "code": "\"\"\"Sets and lazy evaluation. Counts are operation counts, not timings.\"\"\"\nimport argparse\nfrom itertools import islice\nimport json\n\nREADINGS = [12, 18, 12, 26]\n\n\ndef unique_above(values, minimum, metrics):\n    \"\"\"Yield (zero-based index, value), keeping the first occurrence.\"\"\"\n    seen = set()\n    for index, value in enumerate(values):\n        metrics[\"visited\"] += 1\n        if value < minimum or value in seen:\n            continue\n        seen.add(value)\n        yield {\"index\": index, \"value\": value}\n\n\ndef summarize(minimum: int = 10, take: int = 3, strategy: str = \"lazy\") -> dict:\n    \"\"\"Type hints document expected input; validate at the actual interface.\"\"\"\n    if take < 0 or take > 4:\n        raise ValueError(\"take must be between 0 and 4\")\n    metrics = {\"visited\": 0}\n    stream = unique_above(READINGS, minimum, metrics)\n    if strategy == \"eager\":\n        selected = list(stream)[:take]\n    elif strategy == \"lazy\":\n        selected = list(islice(stream, take))\n    else:\n        raise ValueError(\"unknown strategy\")\n    return {\"visited\": metrics[\"visited\"], \"selected\": selected,\n            \"total\": sum(row[\"value\"] for row in selected)}\n\n\ndef main(argv=None):\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"--minimum\", type=int, default=10)\n    parser.add_argument(\"--take\", type=int, choices=range(5), default=3)\n    parser.add_argument(\"--strategy\", choices=[\"lazy\", \"eager\"], default=\"lazy\")\n    args = parser.parse_args(argv)\n    assert summarize(take=0)[\"visited\"] == 0\n    assert summarize(take=0, strategy=\"eager\")[\"visited\"] == 4\n    assert summarize(take=1)[\"visited\"] == 1\n    assert summarize(minimum=30)[\"total\"] == 0\n    stream = unique_above(READINGS, 10, {\"visited\": 0})\n    assert len(list(stream)) == 3\n    assert list(stream) == []\n    print(json.dumps(summarize(args.minimum, args.take, args.strategy)))\n\n\nif __name__ == \"__main__\":\n    main()\n",
+          "exercise": "改一组参数并补上独立断言，记录你预测的值、实际值以及差异原因。"
+        }
+      ]
+    },
+    {
+      "id": "cs50p-project",
+      "course": "cs50p",
+      "unit": "11",
+      "title": "第11讲 原创综合项目：从记录文件到可复核报告",
+      "summary": "遇到一条坏记录时，程序应该中止，还是带着明确错误清单继续？",
+      "question": "遇到一条坏记录时，程序应该中止，还是带着明确错误清单继续？",
+      "outcome": "交付一个有清晰合同、函数拆分、独立测试和使用说明的原创命令行报告器。",
+      "prerequisites": [
+        "已学习函数、条件、文件、测试、正则、类与命令行接口"
+      ],
+      "explanation": [
+        "这次把知识串成一个小作品：读取UTF-8人工距离记录，严格解析文本，按阈值筛选，输出条数、总和、均值和错误行号。先定义行为合同，再做函数拆分，最后让陌生人用同一输入得到同一结果。",
+        "坏行策略是需求的一部分。skip保留错误清单并继续，strict在第一条坏行后中止且不生成成功报告；空输入仍可得到0条、总和0、均值缺失。相同文本出现在不同行时不会擅自合并成一条观测。",
+        "本站提供原创练习脚手架与可运行例程，帮助理解需求、实现和验证的闭环。官方Final Project仍要求学习者自己的选题、实现、pytest测试、文档及展示；运行本站例程不表示完成或提交官方项目。"
+      ],
+      "formula": "格式解析 → 明确坏行策略 → 阈值筛选 → 纯函数汇总 → 带错误清单的报告；中止状态不产生成功报告",
+      "worked": "默认4行是AB-12cm、bad、CD-20cm、AB-12cm。skip留下第2行错误，3次合法观测合计44、均值44/3；strict在第2行中止，summary与report均缺失，不把第1行伪装成完整报告。",
+      "misconception": "程序能运行或测试全绿，不等于需求已覆盖；官方项目也不只是把本站例程改个名字。不要先生成半份报告再忽略中途错误，也不要没有业务依据就删掉重复数值。",
+      "practice": [
+        "先写输入格式、坏行策略、阈值含义和空输入行为；据此手算默认报告。",
+        "切换strict与skip，再选空文件或全部坏行，核对状态、报告与错误清单。",
+        "在独立目录运行project.py和test_project.py，增加一个未见过的边界，再让另一人照README复现。"
+      ],
+      "exercise": {
+        "prompt": "有效输入AB-12cm、CD-20cm、EF-4cm，下限10，skip策略，纳入报告的读数总和是多少？",
+        "expected": 32,
+        "tolerance": 0,
+        "unit": "cm",
+        "hint": "4低于下限；12和20都要保留。",
+        "solution": "12+20=32，条数2，均值16；没有坏行，错误清单为空。",
+        "transfer": "自己更换为学习日志、支出或设备实验记录等选题，定义新合同并实现至少三个可独立测试函数；保留正常、空输入、坏行和边界的预期与实际结果，再写清启动命令和已知限制。"
+      },
+      "sources": [
+        "cs50p-project-official"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs50p-tests",
+          "label": "回看测试：检查项目承诺的边界"
+        }
+      ],
+      "boundary": "本站原创、有限输入的JavaScript状态模型；不执行任意Python或官方作业。Python例程已实际运行，文件实验只使用临时目录。页面步骤、模型输出与真实设备或学习完成分别记录。",
+      "modelId": "cs50p-project",
+      "demos": [
+        {
+          "modelId": "cs50p-project",
+          "title": "原创综合项目：从记录文件到可复核报告"
+        }
+      ],
+      "sections": [
+        {
+          "title": "先写一个陌生人能执行的验收合同",
+          "explanation": "输入格式、错误处理、重复观测、筛选阈值和报告字段都要先明确。用三至五行人工数据写出预期结果，比“做一个统计工具”更能指导实现，也能发现需求之间是否互相矛盾。",
+          "code": "lines = [\"AB-12cm\", \"bad\", \"CD-20cm\", \"AB-12cm\"]\n# skip: count=3, total=44, errors=[2]\n# strict: status=\"aborted\", summary=None, report=None",
+          "exercise": "增加空文件、全坏行和合法零值，分别写出完整预期，不只写总和。"
+        },
+        {
+          "title": "把解析、计算与显示分成纯函数",
+          "explanation": "parse_record只解释单行格式，summarize只计算已经合法的数据，format_report只负责显示。main处理参数和文件；三个纯函数可用很小输入测试，文件和终端不再挡住定位错误。",
+          "code": "def parse_record(line): ...\ndef summarize(records): ...\ndef format_report(summary, errors): ...\ndef main(argv=None): ...",
+          "exercise": "给每个函数各写一条输入、输出和不负责的事情，检查是否互相偷做了工作。"
+        },
+        {
+          "title": "记录错误位置，中止时不返回半份成功",
+          "explanation": "每条错误保留原始行号，严格模式在第一个错误停止。跳过模式明确报告损失的数据；空结果的均值是None。重复观测按原始行保存，让去重决定保留在业务合同里。",
+          "code": "for number, line in enumerate(lines, start=1):\n    record = parse_record(line)\n    if record is None:\n        errors.append(number)\n        if policy == \"strict\":\n            return {\"status\": \"aborted\", \"summary\": None, \"report\": None}",
+          "exercise": "在第二行放坏数据，核对后面第三行是否被处理；再对比skip模式。"
+        },
+        {
+          "title": "独立测试需要覆盖承诺，不能照抄实现",
+          "explanation": "从事先写好的合同推导期望，至少分别检查解析、空集合汇总和输出格式，再测试strict与skip。本站test_project.py的测试函数兼容pytest；当前环境没有pytest，已用标准库包装逐项实际执行。",
+          "code": "assert parse_record(\"AB-000cm\")[\"value\"] == 0\nassert parse_record(\"prefix AB-12cm\") is None\nassert summarize([]) == {\"count\": 0, \"total\": 0, \"mean\": None}",
+          "exercise": "故意把完整匹配改为search，或者把空均值改为0，找出各自应该失败的测试。"
+        },
+        {
+          "title": "对照官方项目要求，再规划自己的作品",
+          "explanation": "官方项目强调由学习者自己设计实现，main之外至少三个顶层函数配套pytest测试，并准备依赖清单、README和展示。这里的标准库练习帮助拆解流程，不能替代个人选题、实际开发与官方验收。",
+          "code": "project.py\ntest_project.py\nrequirements.txt  # 记录实际运行依赖\nREADME.md         # 用法、设计与限制",
+          "exercise": "选择自己的主题，列出必做、可选、延期三组功能，再为必做功能安排可验证的小里程碑。"
+        },
+        {
+          "title": "让交付可以在新目录里重新运行",
+          "explanation": "保存清晰的输入样例、启动命令、预期报告与测试命令，运行时文件只在指定路径读取，示范则使用临时目录。依赖和版本如实记录，截图只是展示，不能替代实际输入与可重复的测试结果。",
+          "code": "python3 project.py\npython3 project.py readings.txt --policy strict --minimum 10\npython3 test_project.py\n# 在已安装pytest的开发环境中：python3 -m pytest test_project.py",
+          "exercise": "让另一人在不读取你个人数据的全新临时目录复现，记录他在哪一步需要额外解释。"
+        },
+        {
+          "title": "本地 Python 复现：运行完整原创例程",
+          "explanation": "把下面代码保存为单独文件，用 Python 3 运行；先手算预期再核对实际输出。例程只使用标准库，断言与失败分支验证输入约定，不连接设备，也不自动写入个人学习完成记录。",
+          "code": "\"\"\"Original practice project: report validated artificial distance records.\n\nThis program is a teaching scaffold. Choose and implement your own project\nbefore considering the separate CS50P final project submission requirements.\n\"\"\"\nimport argparse\nimport json\nfrom pathlib import Path\nimport re\nfrom tempfile import TemporaryDirectory\n\n\ndef parse_record(line):\n    match = re.fullmatch(r\"([A-Z]{2})-([0-9]{1,3})cm\", line.strip())\n    return {\"sensor\": match[1], \"value\": int(match[2])} if match else None\n\n\ndef summarize(records):\n    count = len(records)\n    total = sum(row[\"value\"] for row in records)\n    return {\"count\": count, \"total\": total, \"mean\": total / count if count else None}\n\n\ndef format_report(summary, errors):\n    value = summary[\"mean\"]\n    mean = \"NA\" if value is None else str(int(value)) if float(value).is_integer() else str(value)\n    return f\"count={summary['count']}; total={summary['total']}; mean={mean}; errors={len(errors)}\"\n\n\ndef build_report(lines, *, policy=\"skip\", minimum=0):\n    if policy not in {\"skip\", \"strict\"}:\n        raise ValueError(\"unknown bad-line policy\")\n    records, errors = [], []\n    for number, line in enumerate(lines, start=1):\n        record = parse_record(line)\n        if record is None:\n            errors.append(number)\n            if policy == \"strict\":\n                return {\"status\": \"aborted\", \"records\": records, \"summary\": None,\n                        \"errors\": errors, \"report\": None}\n            continue\n        if record[\"value\"] >= minimum:\n            records.append({**record, \"line\": number})\n    summary = summarize(records)\n    return {\"status\": \"ok\", \"records\": records, \"summary\": summary,\n            \"errors\": errors, \"report\": format_report(summary, errors)}\n\n\ndef main(argv=None):\n    parser = argparse.ArgumentParser(description=__doc__)\n    parser.add_argument(\"path\", nargs=\"?\", help=\"UTF-8 input file; omitted: isolated demo\")\n    parser.add_argument(\"--policy\", choices=[\"skip\", \"strict\"], default=\"skip\")\n    parser.add_argument(\"--minimum\", type=int, default=0)\n    args = parser.parse_args(argv)\n    try:\n        if args.path:\n            lines = Path(args.path).read_text(encoding=\"utf-8\").splitlines()\n        else:\n            with TemporaryDirectory() as directory:\n                path = Path(directory) / \"readings.txt\"\n                path.write_text(\"AB-12cm\\nbad\\nCD-20cm\\nAB-12cm\\n\", encoding=\"utf-8\")\n                lines = path.read_text(encoding=\"utf-8\").splitlines()\n        result = build_report(lines, policy=args.policy, minimum=args.minimum)\n    except (OSError, UnicodeError) as error:\n        parser.error(str(error))\n    print(json.dumps(result, ensure_ascii=False))\n    return 0 if result[\"status\"] == \"ok\" else 1\n\n\nif __name__ == \"__main__\":\n    raise SystemExit(main())\n",
+          "exercise": "改一组参数并补上独立断言，记录你预测的值、实际值以及差异原因。"
+        }
+      ]
+    }
+  ]
+}

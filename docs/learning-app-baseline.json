@@ -1,0 +1,13 @@
+{
+  "baseline_sha256": "bc656029ec1072c28b53dc4431daa50765c17a6d91d09bc4f818db4919fcb046",
+  "source_files": [
+    "web/learning-app/data-engine.js",
+    "web/learning-app/layout.css",
+    "web/learning-app/layout.html",
+    "web/learning-app/map.css",
+    "web/learning-app/page.css",
+    "web/learning-app/workspace.js"
+  ],
+  "course_catalog": "config/learning_app_catalog.json",
+  "scope": "Final layout promoted after all five related chats completed; public templates only."
+}

@@ -1,0 +1,1216 @@
+{
+  "checked": "2026-11-08",
+  "course": {
+    "id": "cs146s",
+    "label": "CS146S",
+    "title": "让 Agent 参与真实工程",
+    "edition": "Fall 2026",
+    "position": "AI 软件工程分支",
+    "description": "依据 Fall 2026 已公开课件逐场展开：从最小循环、harness、上下文与工具，走向技能、仓库环境、长期运行、验证与代码评审。",
+    "prerequisites": [
+      "会编程、使用 Git 和运行测试",
+      "理解模型调用与结构化输入输出；可按需回补原理"
+    ],
+    "published": [
+      {
+        "unit": "9/22",
+        "title": "导论：从模型回复到最小 Coding Agent",
+        "lessons": [
+          "agent"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习"
+      },
+      {
+        "unit": "9/24",
+        "title": "解剖生产级 Coding Agent Harness",
+        "lessons": [
+          "cs146s-harness"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习；官网课堂转录已核对"
+      },
+      {
+        "unit": "9/29",
+        "title": "Context Engineering：RePPIT 与规格驱动",
+        "lessons": [
+          "context"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习；官网课堂转录已核对"
+      },
+      {
+        "unit": "10/1",
+        "title": "MCP：从工具发现到可靠契约",
+        "lessons": [
+          "tools"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习；官网课堂转录已核对"
+      },
+      {
+        "unit": "10/6",
+        "title": "Agent Skills 与 CLI：把做法变成能力",
+        "lessons": [
+          "cs146s-skills"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习"
+      },
+      {
+        "unit": "10/8",
+        "title": "Lee Robinson：Always-on Agent 的系统结构",
+        "lessons": [
+          "cs146s-always-on"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习"
+      },
+      {
+        "unit": "10/13",
+        "title": "定制 Agent：说明、Hooks、Skills 与子代理",
+        "lessons": [
+          "cs146s-config"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习"
+      },
+      {
+        "unit": "10/20",
+        "title": "Agent-Ready Codebases：先让环境可验证",
+        "lessons": [
+          "cs146s-readiness"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习"
+      },
+      {
+        "unit": "10/22",
+        "title": "Eno Reyes：把目标变成便宜的检查",
+        "lessons": [
+          "cs146s-verification"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习"
+      },
+      {
+        "unit": "10/27",
+        "title": "Agentic Code Review：发现、验证与聚合",
+        "lessons": [
+          "cs146s-review"
+        ],
+        "material": "已读取 2026 课件正文；已补讲解、逐步模型、代码示踪与练习"
+      }
+    ],
+    "pending": "官网 10/15、10/29、11/5 嘉宾场次本次未列可核实课件；11/3 为 University holiday，无课。11/10 之后仅有安排的讲次待发布材料后加入。当前 10 场公开课件已制作本站配套讲义，并非官方逐字翻译。",
+    "sources": [
+      "cs146s-syllabus",
+      "cs146s-assignments",
+      "cs146s-cn"
+    ],
+    "schedule_checked": "2026-11-09",
+    "scheduled": [
+      {
+        "unit": "10/15",
+        "date": "2026-10-15",
+        "title": "Boris Cherny 嘉宾讲",
+        "summary": "Claude Code 创作者的工程实践分享"
+      },
+      {
+        "unit": "10/29",
+        "date": "2026-10-29",
+        "title": "Silas Alberti 嘉宾讲",
+        "summary": "Cognition 嘉宾分享"
+      },
+      {
+        "unit": "11/5",
+        "date": "2026-11-05",
+        "title": "Isaac Evans 嘉宾讲",
+        "summary": "Semgrep 嘉宾分享 · 安全专题"
+      },
+      {
+        "unit": "11/10",
+        "date": "2026-11-10",
+        "title": "后台 Agent：异步启动与委派任务",
+        "summary": "异步 Agent、并行任务管理与 Issue-to-PR 流程"
+      },
+      {
+        "unit": "11/12",
+        "date": "2026-11-12",
+        "title": "Rajesh Bhatia 嘉宾讲",
+        "summary": "Cloudflare 嘉宾分享"
+      },
+      {
+        "unit": "11/17",
+        "date": "2026-11-17",
+        "title": "Elad Gil 嘉宾讲",
+        "summary": "AI 原生团队专题 · 投资人与行业视角"
+      },
+      {
+        "unit": "11/19",
+        "date": "2026-11-19",
+        "title": "Amjad Masad 嘉宾讲",
+        "summary": "AI 原生团队专题 · Replit 嘉宾分享"
+      },
+      {
+        "unit": "12/1",
+        "date": "2026-12-01",
+        "title": "大团队中的 Coding Agent",
+        "summary": "MCP 门户、模型网关、团队模式、成本与模型路由"
+      },
+      {
+        "unit": "12/3",
+        "date": "2026-12-03",
+        "title": "软件工厂：自主运行与持续改进",
+        "summary": "自主运行、自我改进的软件系统"
+      }
+    ]
+  },
+  "sources": {
+    "cs146s-harness-slides": {
+      "kind": "官方课件",
+      "label": "9/24 · Modern Coding Agent Harness",
+      "url": "https://docs.google.com/presentation/d/1RZu-p18Qybbgm8WVP2RH04ESc4Bn377B-T9j5-TBFdQ/edit",
+      "locator": "PDF 第 6、8–16 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official"
+    },
+    "cs146s-skills-slides": {
+      "kind": "官方课件",
+      "label": "10/6 · Agent Skills Best Practices",
+      "url": "https://docs.google.com/presentation/d/15bPu5c-i8D8McTh6l7SpUPk2n9M_Y-CdDQLfyzL8RD8/edit",
+      "locator": "PDF 第 5、7–14 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official"
+    },
+    "cs146s-lee-slides": {
+      "kind": "官方课件",
+      "label": "10/8 · Lee Robinson: How always-on agents work",
+      "url": "https://drive.google.com/file/d/1b8WiBk_lcB3ue-jZMLijSUMLj6SDiF6Z/view",
+      "locator": "PDF 第 14–22、24–37、39–45 页；访谈产品实现与设想按讲者案例阅读",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official"
+    },
+    "cs146s-customize-slides": {
+      "kind": "官方课件",
+      "label": "10/13 · Customizing Your Agent Setup",
+      "url": "https://docs.google.com/presentation/d/152VaUifBKH4T6hxd6fCKKM9kJTSAuBmkF8zSYwuTYAo/edit",
+      "locator": "PDF 第 7–13 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official"
+    },
+    "cs146s-readiness-slides": {
+      "kind": "官方课件",
+      "label": "10/20 · Agent-Ready Repositories",
+      "url": "https://docs.google.com/presentation/d/1yCxocmUrGIN7IrC42WB6NW08PtYYFLe1ombDj3Ay6_8/edit",
+      "locator": "PDF 第 5–9、11–15 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official"
+    },
+    "cs146s-eno-slides": {
+      "kind": "官方课件",
+      "label": "10/22 · Eno Reyes: Verification and Agent Readiness",
+      "url": "https://drive.google.com/file/d/1Nbi1QEdiLXFBFAu1lRKkTkd85QRGpWOx/view",
+      "locator": "PDF 第 12–24、28–29 页；概率例题仅作显式假设下复算",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official"
+    },
+    "cs146s-review-slides": {
+      "kind": "官方课件",
+      "label": "10/27 · Agentic Code Review",
+      "url": "https://docs.google.com/presentation/d/1u8WYtFj0O9yc4H4JX9D4URYKhDzvrAGKLzn38DXSrak/edit",
+      "locator": "PDF 第 4–5、7、10、13–15 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official"
+    },
+    "cs146s-assignment-1": {
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 1 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week1/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official"
+    },
+    "cs146s-assignment-2": {
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 2 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week2/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official"
+    },
+    "cs146s-assignment-3": {
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 3 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week3/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official"
+    },
+    "cs146s-assignment-4": {
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 4 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week4/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official"
+    },
+    "cs146s-assignment-5": {
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 5 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week5/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official"
+    },
+    "cs146s-original-code": {
+      "kind": "本站原创可运行代码",
+      "label": "CS146S 2026 · 八个新增教学模型",
+      "url": "./ai-cs146s-2026.js",
+      "status": "本地确定性计算、内存状态与断点快照；不调用真实 Agent、MCP 或第三方账号",
+      "role": "original"
+    }
+  },
+  "lessons": [
+    {
+      "id": "agent",
+      "course": "cs146s",
+      "unit": "9/22",
+      "title": "9/22 · 导论：从模型回复到最小 Coding Agent",
+      "summary": "读代码、运行测试、修改、接收结果，再检查预算。",
+      "question": "怎样区分一次调用失败、修复未成功和整个任务已经结束？",
+      "outcome": "解释最小 Agent 的消息、工具和控制循环，复现失败—修改—重验，并区分停止原因。",
+      "prerequisites": [
+        "函数、循环与条件判断",
+        "会读测试的实际值和预期值"
+      ],
+      "explanation": [
+        "核心循环可以很小：模型提出动作，harness 执行工具，把结果送回上下文，再决定是否继续。真实产品还要管理工具、权限、配置与长任务状态。",
+        "课堂转录把核心循环与外围 harness 分开。本站用一个有错的加法函数复现这层关系：决策策略预设，工具操作与算术测试在浏览器内存里实际执行。",
+        "测试通过、工具报错和预算耗尽是不同的结束原因。一次修改后必须重新验证；循环停下来本身不能被记录为修复成功。"
+      ],
+      "formula": "决策 → 工具调用 → 观察回送 → 验证与停止检查 → 下一轮",
+      "worked": "默认“先修错再修好”：read → test 失败 → edit 为乘法 → test 失败 → edit 为加法 → test 通过，共 6 次工具调用。预算设为 3 时会提前耗尽。",
+      "misconception": "示例中的策略不是大模型推理；测试通过仅对应给定的三个用例，不证明函数对任意输入正确。",
+      "practice": [
+        "先预测把预算设为 3 时，是否有机会验证最后一次修改。",
+        "逐步看工具结果何时进入上下文，再对比“先修错”和“工具报错”。",
+        "选择“反复无效修改”，说明为什么预算耗尽必须与成功分开。"
+      ],
+      "exercise": {
+        "prompt": "沿用“一次修好”的预设策略：read、test、edit、test。若预算只有 3 次，结束时是否已经验证修改？填 1 表示已验证，0 表示未验证。",
+        "expected": 0,
+        "tolerance": 0,
+        "unit": "",
+        "hint": "第三次调用只做 edit，第四次才会再测试。",
+        "solution": "0。第三次改完后预算已用完，尚未运行验证，结束原因应是 budget_exhausted。",
+        "transfer": "独立验证：选择“先修错再修好”，预算设为 6。运行应恰好在第 6 次调用通过三个案例；设为 5 时应停止于未验证的修改后。"
+      },
+      "sources": [
+        "cs146s-1-slides",
+        "cs146s-1-transcript",
+        "cs146s-1-code",
+        "cs146s-cn",
+        "original-code",
+        "cs146s-original-code",
+        "cs146s-assignment-1"
+      ],
+      "bridges": [
+        {
+          "lesson": "context",
+          "label": "下一步：让下一轮看到合适的信息"
+        },
+        {
+          "lesson": "tools",
+          "label": "继续：工具定义和输入契约"
+        },
+        {
+          "lesson": "sampling",
+          "label": "按需回补 CME 295：模型输出分布"
+        }
+      ],
+      "boundary": "有界的内存案例。未接入模型或你的文件；官方 Completed code 本次未取得，案例代码为本站原创。",
+      "modelId": "agent",
+      "demos": [
+        {
+          "modelId": "agent",
+          "title": "读代码、运行测试、修改、接收结果，再检查预算。"
+        }
+      ],
+      "sections": [
+        {
+          "title": "01 模型调用先有输入输出约定",
+          "explanation": "先把模型当作接收消息与工具定义、返回文本或结构化工具请求的组件。messages 不是程序的整个状态：工具还要知道工作目录、允许的动作与实际文件版本。代码生成只占整个开发流程的一部分。",
+          "code": "const messages = [{role:\"user\",content:\"修复 add 的失败用例\"}];\nconst reply = scriptedPolicy(messages); // 本站示例固定决策，无模型调用",
+          "exercise": "画出 messages、模型回复、工具请求和工具结果四种对象。"
+        },
+        {
+          "title": "02 用 read / test / edit 组成闭环",
+          "explanation": "在加法缺陷里，先读现状，运行能复现失败的测试，再修改实现并重跑。read 的内容和 test 的结果必须进入下一轮上下文；否则下一轮只是在没有反馈的情况下重复猜测。",
+          "code": "const actual = (a,b)=>a-b;\nconst failed = actual(1,2) !== 3;",
+          "exercise": "删掉中间的测试反馈，指出下一轮缺少什么证据。"
+        },
+        {
+          "title": "03 工具执行由 harness 承担",
+          "explanation": "工具名称、参数和返回结构要在调用前约定。模型提出 edit 不等于修改已经落盘，工具返回错误也不应被丢掉。本站内存案例把策略和工具实现分开，用实际算术运行测试。",
+          "code": "context.push({tool:\"test\",observation:{actual:-1,expected:3}});",
+          "exercise": "对比工具错误与测试失败，两者如何影响下一步？"
+        },
+        {
+          "title": "04 停止、成功与开发者判断",
+          "explanation": "模型停止输出工具请求、调用预算耗尽、工具报错与验收通过，是不同状态。开发者仍要理解代码、给出需求与验收，不能用“Agent 说完成了”替代验证。",
+          "code": "const success = stopReason === \"tests_passed\";",
+          "exercise": "把预算设为 3，解释为什么完成一次 edit 仍不算修复成功。"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-harness",
+      "course": "cs146s",
+      "unit": "9/24",
+      "title": "9/24 · 解剖生产级 Coding Agent Harness",
+      "summary": "工具加载、配置与压缩如何共同影响上下文",
+      "question": "核心循环很短，生产级代理为什么还需要大量外围设计？",
+      "outcome": "区分模型与 harness 组件，核算工具定义和历史费用，并检查压缩后的恢复信息。",
+      "prerequisites": [
+        "会读函数、条件与循环",
+        "能区分计划、工具输出和验证证据"
+      ],
+      "explanation": [
+        "最小循环只负责问模型、调用工具、回送结果。生产系统还要决定哪些工具可见、仓库规则如何加载、何时进入计划模式、怎样派发子任务和压缩历史。",
+        "把每次请求看成可观察的组装过程：固定规则、工具元信息、当前任务与历史共同占用上下文。工具的说明、参数签名和返回结构既是接口也是提示的一部分。",
+        "这里用人工费用对照完整工具预载、按需加载与给定摘要。降低 token 数不是唯一目标；任务、已选方案、未解决问题和可恢复引用要保留下来。"
+      ],
+      "formula": "本次输入费用 = 固定规则 + 工具名字 + 详细定义 + 历史/摘要",
+      "worked": "默认 4 个工具、按需详细定义和给定摘要：12+10+4+8+12=46 教学 token；全部预载详细定义时为 70。",
+      "misconception": "不把某个产品的配置优先级或工具数量当通用协议；摘要变短也不说明信息无损。",
+      "practice": [
+        "先预测关闭按需加载后输入增加多少，再逐步核算。",
+        "关闭摘要，列出需要从历史中保留的任务与验证状态。",
+        "把预算改为 48，比较哪些配置需要重新组织输入。"
+      ],
+      "exercise": {
+        "prompt": "4 个工具每份详细定义费用为 8，本轮只加载其中 1 份。与全部预载相比少加载多少 token？",
+        "expected": 24,
+        "tolerance": 1e-06,
+        "unit": "token",
+        "hint": "4 份完整定义共 32，按需一份为 8。",
+        "solution": "32−8=24 教学 token；元信息费用保持相同。",
+        "transfer": "独立验证：默认配置关闭摘要，费用应为 70；再同时关闭按需详细定义，费用应为 94。说明省掉的内容各是什么。"
+      },
+      "sections": [
+        {
+          "title": "01 循环的边界",
+          "explanation": "LLM 负责产生候选回复或动作，harness 承担环境、工具执行与控制。工具是否真正成功要从观察判定，不能从模型文本推断。",
+          "code": "const action = policy(context);\nconst observation = tool(action);",
+          "exercise": "在最小循环外列出三项必须由软件实现的责任。"
+        },
+        {
+          "title": "02 工具列表与系统提示",
+          "explanation": "工具名字、说明与完整签名会影响模型可见能力和上下文成本。少量通用工具可有很强表达力，但也需要清晰边界；工具更多并不自动等于任务更容易。",
+          "code": "const input = [system,repoInstructions,toolDefinitions,history];",
+          "exercise": "合并两个碎片工具后，什么输入输出约定必须重新检查？"
+        },
+        {
+          "title": "03 计划模式、Skill 与子代理",
+          "explanation": "计划模式使变更前的规格和疑问显式化；Skill 保存可复用过程；子代理隔离工作流上下文并把短结果交回。并行任务的成本与共享资源竞争仍要核算。",
+          "code": "const result = {findings,changedFiles,checks,remaining};",
+          "exercise": "给一个子任务写明输入、范围和可独立验收的交付。"
+        },
+        {
+          "title": "04 Hook 与控制点",
+          "explanation": "前后置 Hook 在固定生命周期位置检查或转换事件。控制流应记录真实退出状态；把“测试通过”硬写进总结会破坏观察链。",
+          "code": "const gate = runDeterministicCheck(observation);",
+          "exercise": "指出格式 Hook 通过后仍未验证的一个行为。"
+        },
+        {
+          "title": "05 Compaction 与适应",
+          "explanation": "压缩历史必须保留目标、已接受决策、实际验证、未决问题和引用。过度压缩容易让之后重复工作或误认任务完成；摘要应可调整，而不是神奇的无损内存。",
+          "code": "const summary = {goal,decision,checks,openQuestions,references};",
+          "exercise": "从自己的一段实验轨迹写出可恢复摘要，再试着只靠摘要续做。"
+        }
+      ],
+      "sources": [
+        "cs146s-harness-slides",
+        "cs146s-1-transcript",
+        "cs146s-assignment-1",
+        "cs146s-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "agent",
+          "label": "回到最小循环"
+        },
+        {
+          "lesson": "context",
+          "label": "继续上下文工程"
+        },
+        {
+          "lesson": "cs146s-skills",
+          "label": "把重复过程整理成 Skill"
+        }
+      ],
+      "boundary": "固定元信息费用和作者给定摘要的本地案例；不复刻商业产品完整系统提示。",
+      "modelId": "cs146s-harness",
+      "demos": [
+        {
+          "modelId": "cs146s-harness",
+          "title": "工具加载、配置与压缩如何共同影响上下文"
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "course": "cs146s",
+      "unit": "9/29",
+      "title": "9/29 · Context Engineering：RePPIT 与规格驱动",
+      "summary": "保留任务与约束，给输出留位置，再挑选相关片段。",
+      "question": "文件都放不进上下文时，先保留什么，怎样知道缺了什么？",
+      "outcome": "按 RePPIT 组织一个具体改动，比较候选实现并运行边界验证，再核算上下文取舍。",
+      "prerequisites": [
+        "Token 与上下文窗口的基本含义",
+        "会区分任务、约束、代码与测试"
+      ],
+      "explanation": [
+        "课堂把复杂代码任务组织成 Research、Propose、Plan、Implement、Test。研究阶段先弄清需要哪些文件和证据，才能决定把什么放进后续上下文。",
+        "本样章只抽出容量约束做一个装箱案例：先扣除输出预留，再保留任务与约束，最后按顺序尝试放入完整片段。",
+        "真实系统还需要检索、摘要、版本核对与长期恢复。相关性也不是固定排序；这里用人工指定的开销和优先级，观察“窗口利用率”和“信息是否够用”之间的差别。"
+      ],
+      "formula": "输入可用量 = 总预算 − 输出预留；片段费用之和 ≤ 输入可用量",
+      "worked": "默认总预算 56、预留 16，输入可用 40。约束与任务共 15，再放目标函数 14、相关测试 10，使用 39；失败日志 6 暂时放不下。数字是人工教学值。",
+      "misconception": "课件中的上下文占比是课堂经验，不能当作所有模型统一的“聪明/变笨”硬阈值；装得满也不代表信息对。",
+      "practice": [
+        "先预测预留输出从 16 增到 24，哪个片段会被挤出。",
+        "比较按文件顺序与任务相关性装入，列出每种方案遗漏的片段。",
+        "把“缺少什么”写进下一步研究任务，而非推断模型一定能够补全。"
+      ],
+      "exercise": {
+        "prompt": "新案例：总预算 80，输出预留 20，任务与约束占 15，目标代码占 25。剩余输入空间是多少 token？",
+        "expected": 20,
+        "tolerance": 0,
+        "unit": "token",
+        "hint": "先从总预算扣输出预留，再扣必须输入和目标代码。",
+        "solution": "80−20−15−25=20。开销若来自真实 tokenizer，还需要计入消息格式与工具定义等实际内容。",
+        "transfer": "独立验证：总预算 32、预留 24 时，仅余 8。必须内容需 15，案例应明确报容量不足；不能显示成功装入。"
+      },
+      "sources": [
+        "cs146s-2-slides",
+        "cs146s-2-transcript",
+        "cs146s-cn",
+        "original-code",
+        "cs146s-original-code",
+        "cs146s-assignment-4"
+      ],
+      "bridges": [
+        {
+          "lesson": "agent",
+          "label": "回到 Agent 循环：观察怎样被送回"
+        },
+        {
+          "lesson": "attention",
+          "label": "原理连接：哪些信息可见"
+        },
+        {
+          "lesson": "tools",
+          "label": "工具定义本身也占用上下文"
+        }
+      ],
+      "boundary": "人工 token 费用的确定性装箱演示；不调用 tokenizer 或检索服务，不评估模型成功率。",
+      "modelId": "context",
+      "demos": [
+        {
+          "modelId": "context",
+          "title": "保留任务与约束，给输出留位置，再挑选相关片段。"
+        },
+        {
+          "modelId": "cs146s-reppit",
+          "title": "Research → Propose → Plan → Implement → Test"
+        }
+      ],
+      "sections": [
+        {
+          "title": "01 Research：先形成能审阅的代码库认识",
+          "explanation": "接到“修复折扣舍入”后，研究金额单位、调用链、现有测试、边界和配置。研究产物是带位置的事实与未决问题；把不清楚的业务规则写成假设会让后续计划建立在错误基础上。",
+          "code": "const research = {unit:\"cents\",rounding:\"half_up\",unknowns:[]};",
+          "exercise": "补一条你会去查看的调用位置，并说明它会改变哪个判断。"
+        },
+        {
+          "title": "02 Propose：比较真正不同的方案",
+          "explanation": "提出向下取整和半分向上两个候选时，要用 1 分打五折这样的反例比较，而非把同一做法换两种措辞。方案阶段讨论取舍，测试范围与规格是否改变也要同时说明。",
+          "code": "Math.floor(1*0.5) === 0;\nMath.round(1*0.5) === 1;",
+          "exercise": "在演示中选择 floor，预测旧测试能否发现规则不符。"
+        },
+        {
+          "title": "03 Plan / Implement / Test：把文字连接到可执行检查",
+          "explanation": "计划应列出变更点、执行顺序、现有检查与新增边界用例。实现后执行这些检查，保留 actual 与 expected。若研究发现契约改变，返回前面更新方案，不能把原计划当成不可修改的承诺。",
+          "code": "const plan = [\"改纯函数\",\"跑旧用例\",\"加半分边界\",\"记录结果\"];",
+          "exercise": "给“改成正确的”补齐可检查的完成条件。"
+        },
+        {
+          "title": "04 输入预算与信息取舍",
+          "explanation": "窗口预算还需容纳输出、工具定义、消息格式和必要约束。课堂的上下文占比经验用于提醒信息管理，不是所有模型都有一个统一的变笨阈值。本站装箱演示的 token 费用人工给定，目的在比较缺失信息。",
+          "code": "const inputBudget = budget-reservedOutput;",
+          "exercise": "比较按文件顺序与任务相关性选择，列出缺少的具体证据。"
+        },
+        {
+          "title": "05 长任务的中间文档与恢复",
+          "explanation": "大变更拆成任务后，每段结束保留研究事实、已选方案、实际修改、已跑检查和下一步。摘要压缩篇幅但可能丢细节，应留下可回到源文件或日志的引用。",
+          "code": "const handoff = {facts,decision,changes,checks,next};",
+          "exercise": "将本次运行整理为五行交接，检查下一人能否独立续做。"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "course": "cs146s",
+      "unit": "10/1",
+      "title": "10/1 · MCP：从工具发现到可靠契约",
+      "summary": "从发现 schema 到校验、返回结果与幂等重试。",
+      "question": "工具能被调用，还需要哪些设计才能让 Agent 可靠地使用？",
+      "outcome": "画出 MCP 调用链，设计有界输入输出与错误契约，区分协议能力与具体工具工程责任。",
+      "prerequisites": [
+        "JSON 对象、参数与返回值",
+        "输入校验和错误返回"
+      ],
+      "explanation": [
+        "课件描述的链路是：client 发现工具，server 返回名称、说明和 schema，host 将定义交给模型，模型选择调用后，由 server 执行并返回结果。",
+        "统一协议降低连接适配成本，工具仍要设计参数限制、结果大小、错误信息与写入语义。把要求只写在自然语言里，不等于已经校验。",
+        "本样章先演示 limit 越界拒绝，再演示版本冲突与同一请求重试。版本与幂等键是本站加的工具工程案例，不是 MCP 自动赋予的事务能力。"
+      ],
+      "formula": "tools/list → 工具定义 → 结构化参数 → 校验 → 执行 → 结构化结果",
+      "worked": "读工具要求 limit 是 1–3 的整数，limit=4 返回参数错误。写工具的案例记录从 version=1 开始；预期版本 1 写入一次后，同一幂等键重试返回已有回执，实际写入仍为 1 次。",
+      "misconception": "MCP 不会自动实现业务权限、幂等、事务与限流；这些要由工具服务和宿主共同设计。",
+      "practice": [
+        "先把 limit 设为 4，预测输入校验是否通过，再查看返回的错误。",
+        "切到写工具，预期版本设为 0，再设为 1，对比冲突与成功。",
+        "查看成功写入后的相同请求重试，说明为什么要先查回执、再校验版本。"
+      ],
+      "exercise": {
+        "prompt": "同一条写入请求使用同一个幂等键重试两次，首次请求已经成功，服务器正确复用成功回执。应产生几次实际写入？",
+        "expected": 1,
+        "tolerance": 0,
+        "unit": "次",
+        "hint": "返回次数与实际执行次数不是同一件事。",
+        "solution": "1。之后的相同请求返回已保存的成功回执；不同请求复用相同键的冲突处理需要另行设计。",
+        "transfer": "独立验证：写工具预期版本为 2 时，案例初始版本仍是 1。应返回版本冲突，实际写入为 0；解释为何不能静默覆盖。"
+      },
+      "sources": [
+        "cs146s-mcp-slides",
+        "cs146s-mcp-transcript",
+        "cs146s-assignments",
+        "cs146s-cn",
+        "original-code",
+        "cs146s-original-code",
+        "cs146s-assignment-2"
+      ],
+      "bridges": [
+        {
+          "lesson": "agent",
+          "label": "把工具返回接回 Agent 循环"
+        },
+        {
+          "lesson": "context",
+          "label": "选择工具定义，控制上下文成本"
+        }
+      ],
+      "boundary": "两个固定 schema 的手工校验与内存对象调用；不启动真实 MCP server，不访问外部服务。",
+      "modelId": "tools",
+      "demos": [
+        {
+          "modelId": "tools",
+          "title": "从发现 schema 到校验、返回结果与幂等重试。"
+        }
+      ],
+      "sections": [
+        {
+          "title": "01 Host、Client、Server 与 Tool 的位置",
+          "explanation": "Host 承载模型交互，Client 与某个 Server 建立连接，Server 暴露可调用工具。协议把发现和调用统一起来，不等于 Server 替你实现了第三方 API 的业务逻辑。",
+          "code": "const tool = {name:\"issues_list\",description:\"读取问题\",inputSchema:{type:\"object\"}};",
+          "exercise": "把编辑器、MCP client、问题管理 API 和 wrapper 放到正确位置。"
+        },
+        {
+          "title": "02 tools/list 与调用后的反馈链",
+          "explanation": "Client 发现名称、说明和输入 schema，Host 给模型提供定义，模型再提出结构化调用。结果或可处理错误返回对话，成为下一步决策证据。stdlib/streamable HTTP 等传输方式不改变这一逻辑关系。",
+          "code": "const request = {name:\"issues_list\",arguments:{limit:2}};",
+          "exercise": "说明 schema 进入上下文为什么也有 token 成本。"
+        },
+        {
+          "title": "03 面向结果的工具设计",
+          "explanation": "一个“整理今天失败构建”的工具，可以合理组合检索与过滤，避免让 Agent 先理解十个碎片接口。仍需保持明确字段、有限输出、可恢复错误，不把任意嵌套对象当作缺省参数契约。",
+          "code": "const limitSchema = {type:\"integer\",minimum:1,maximum:3};",
+          "exercise": "把“返回所有问题”改成有上限、有游标和必要字段的契约。"
+        },
+        {
+          "title": "04 读、写、版本与重试分别设计",
+          "explanation": "读取通常可以直接重试；写入要考虑版本冲突和重复副作用。本站 close_issue 采用预期版本与幂等键，先查同一请求的回执，再校验当前版本；这属于工具实现，不是 MCP 自动事务。",
+          "code": "if (receipts.has(key)) return receipts.get(key);\nif (actualVersion !== expectedVersion) return conflict;",
+          "exercise": "用 expected_version=0 和 1 分别运行，再解释为什么重试要先查回执。"
+        },
+        {
+          "title": "05 API、MCP、Skill 的组合",
+          "explanation": "API 是应用服务接口，MCP 让工具能按统一方式被发现调用，Skill 把跨多个步骤的做法组织成过程。三者可以组合；协议标准化不能消除鉴权、限流、日志和数据一致性的责任。",
+          "code": "const workflow = [\"discover\",\"read\",\"decide\",\"write\",\"verify\"];",
+          "exercise": "把自己的一个日常流程分别拆成 API、工具定义与过程指令。"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-skills",
+      "course": "cs146s",
+      "unit": "10/6",
+      "title": "10/6 · Agent Skills 与 CLI：把做法变成能力",
+      "summary": "发现、按需加载、执行与验证 Skill",
+      "question": "重复粘贴一段提示，怎样变成可靠而可复用的工作流程？",
+      "outcome": "写出有清晰触发范围、判断点、确定性命令与验证步骤的 Skill，并测试近义误触发。",
+      "prerequisites": [
+        "会读函数、条件与循环",
+        "能区分计划、工具输出和验证证据"
+      ],
+      "explanation": [
+        "Skill 不只是收藏一段长提示。它要说明什么时候使用、怎样判断分支、要调用什么工具或脚本，以及怎样知道结果满足要求。",
+        "常驻的是轻量元信息，正文和参考材料按需展开。把大段参考资料写进每次触发都加载的正文，会重复消耗上下文，也更难维护。",
+        "本例先在三个明确请求之间确定路由，再执行数值转换和独立检查。真实 Skill 的触发还需要正例、近义反例和一次端到端实践，不能把本例固定路由当作模型实测。"
+      ],
+      "formula": "发现描述 → 选择技能 → 读取正文/参考 → 工具或 CLI → 独立验证",
+      "worked": "默认请求验证转换；[1,2,3] 经正确实现成为 [2,4,6]，三项检查通过。换成原样返回后，检查会失败；关闭检查则保持未验证。",
+      "misconception": "一个固定命令更像别名；有意义的 Skill 要编码判断。选择页面预设任务并不证明真实自然语言触发可靠。",
+      "practice": [
+        "把实现改成原样返回，先预测验证结果，再逐步运行。",
+        "选择无关请求，检查是否加载正文、是否伪造转换结果。",
+        "关闭验证，再说明为什么不能写“任务已通过”。"
+      ],
+      "exercise": {
+        "prompt": "三个 Skill 的元信息每个 2 token，正文每个 20 token。本轮只加载一份正文，共多少 token？",
+        "expected": 26,
+        "tolerance": 1e-06,
+        "unit": "token",
+        "hint": "三个元信息共 3×2，再加选中的一份正文 20。",
+        "solution": "3×2+20=26 token，而不是将三份正文全部加载。",
+        "transfer": "独立验证：请求为“讨论周末安排”时不触发本例三个技能，结果 selected 应为 null、verified 为 null；再设计自己的三正一反触发测试。"
+      },
+      "sections": [
+        {
+          "title": "01 为重复流程选择合适范围",
+          "explanation": "先亲手走一次任务，找出真正需要判断的节点：例如性能调查先建立基线再决定改哪处；固定运行一条命令通常不值得包装为大技能。",
+          "code": "const scope = \"复现失败、形成假设、验证后再修复\";",
+          "exercise": "说出流程中一个不能用“总是下一步”替代的判断。"
+        },
+        {
+          "title": "02 让 description 能被发现",
+          "explanation": "描述要同时写清做什么和何时用，采用用户自然会说的请求措辞。范围过广会误触发，过窄则永远不被发现。",
+          "code": "const triggerCases = {positive:[\"复现这个错误\",\"调查失败用例\",\"定位回归\"],nearMiss:\"解释错误是什么\"};",
+          "exercise": "为你的技能补三个应触发和一个不应触发的近义请求。"
+        },
+        {
+          "title": "03 正文编码判断与确定性工具",
+          "explanation": "正文保存流程、判断分支和精确命令。已有 CLI 可以完成的解析或格式化交给工具，避免模型逐字重造机械步骤；所有检查须在可复现环境里运行。",
+          "code": "const steps = [\"inspect\",\"reproduce\",\"compare hypotheses\",\"patch\",\"verify\"];",
+          "exercise": "指出这五步中哪两步需要记录可复算证据。"
+        },
+        {
+          "title": "04 按需引用与组合",
+          "explanation": "正文只保留当前能力的关键路径，长参考文件用明确引用。验证可以做成单独的能力，但组合前要明确输入产物、失败传播和停止条件。",
+          "code": "const verificationInput = {artifact,acceptanceCriteria,runCommand};",
+          "exercise": "如果研究没找到支持证据，验证能力应返回什么状态？"
+        },
+        {
+          "title": "05 运行测试与维护",
+          "explanation": "官方 Week 3 作业要求触发正例、近义反例和端到端运行。把实际误触发或漏步骤记录下来，再修改说明；不要把手写预期当作已经观察的模型行为。",
+          "code": "const report = {prompts,observedTriggers,runEvidence,revision};",
+          "exercise": "在真实小仓库重复执行你的技能，并记录一次有证据的改进。"
+        }
+      ],
+      "sources": [
+        "cs146s-skills-slides",
+        "cs146s-assignment-3",
+        "cs146s-cn",
+        "cs146s-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "context",
+          "label": "把流程接入 RePPIT"
+        },
+        {
+          "lesson": "tools",
+          "label": "区分 Skill 与 MCP"
+        },
+        {
+          "lesson": "cs146s-config",
+          "label": "把技能接入仓库配置"
+        }
+      ],
+      "boundary": "固定请求路由与本地转换案例；不是模型自然语言触发的效果测评。",
+      "modelId": "cs146s-skills",
+      "demos": [
+        {
+          "modelId": "cs146s-skills",
+          "title": "发现、按需加载、执行与验证 Skill"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-always-on",
+      "course": "cs146s",
+      "unit": "10/8",
+      "title": "10/8 · Lee Robinson：Always-on Agent 的系统结构",
+      "summary": "事件去重、持久步骤、恢复与业务幂等",
+      "question": "Agent 在服务端崩溃后继续工作时，怎样避免重复业务效果？",
+      "outcome": "区分事件路由、会话队列、持久步骤与业务回执，并解释上下文缓存、工具和长期记忆的边界。",
+      "prerequisites": [
+        "会读函数、条件与循环",
+        "能区分计划、工具输出和验证证据"
+      ],
+      "explanation": [
+        "这场嘉宾课从一次性的终端循环扩展到长期运行的服务：事件唤醒、会话队列、服务端状态、工具计算机和多个访问渠道分别承担责任。",
+        "“一直在线”可以是状态一直可恢复，而不是进程一直消耗算力。收到事件后加载状态执行一轮，空闲时保存并休眠；客户端通知只是提示变化，数据库保留可重读的事实。",
+        "崩溃可能发生在外部效果完成、进度尚未记录之间。持久工作流减少重复步骤，业务幂等回执控制重复效果。本站把这两个记录分开，让同一 store 调用两次但实际写入一次。"
+      ],
+      "formula": "持久检查点控制从哪一步恢复；业务幂等键控制一次效果是否再次发生",
+      "worked": "默认在 store 写入后、检查点之前中断。恢复时再次调用 store；有回执时 writeAttempts=2、writes=1，关闭回执则 writes=2。",
+      "misconception": "工作流可恢复不自动意味着外部系统 exactly-once。课件中的产品实现与未来设想是讲者案例，不能当通用 Agent 平台契约。",
+      "practice": [
+        "先预测写入后崩溃、关闭幂等回执时会写几次。",
+        "比较整项重跑与从检查点续做，核对 read 和 store 调用次数。",
+        "选择不中断，再说明事件去重与业务幂等为什么仍是两层不同责任。"
+      ],
+      "exercise": {
+        "prompt": "同一 store 操作已成功写入，在保存进度前崩溃；恢复后使用相同幂等键再次调用。正确回执实现应产生几次实际写入？",
+        "expected": 1,
+        "tolerance": 1e-06,
+        "unit": "次",
+        "hint": "相同操作键第一次成功后，重试复用成功回执。",
+        "solution": "业务写入一次，调用可能多次；检查点与回执应保留各自作用。",
+        "transfer": "独立验证：从检查点恢复、在写后中断、关闭幂等时 writes 应为 2；开启幂等后 writes 为 1，而 writeAttempts 仍为 2。"
+      },
+      "sections": [
+        {
+          "title": "01 事件、队列与唯一 ID",
+          "explanation": "用户消息、定时触发、webhook 或子任务完成都能唤醒一轮任务。入口应保留事件来源、去重标识和会话归属；同会话按序处理，才能解释插入新需求时哪个状态被采用。",
+          "code": "const uniqueEvents = [...new Set([\"a\",\"a\",\"b\"])];",
+          "exercise": "相同 ID 重试与两个不同事件的相同文本，应该怎样分别处理？"
+        },
+        {
+          "title": "02 服务端、工具计算机与客户端",
+          "explanation": "服务端运行循环和保存会话；工具计算机负责文件、浏览器等执行；客户端展示同一会话。通知可能丢失，所以通知仅表示“有变化”，客户端凭序列号重读真实状态。",
+          "code": "if (receivedSequence !== lastSequence+1) reloadFromDatabase();",
+          "exercise": "说明“收到一次通知”为什么不能当作数据只写入了一次。"
+        },
+        {
+          "title": "03 持久工作流与重试缝隙",
+          "explanation": "单纯重跑任务会重复已完成工作；逐步记录能从最后确认位置继续。但业务效果与进度检查点若不在同一事务里，仍需要业务操作键、回执与冲突检查。",
+          "code": "if (receiptExists(operationKey)) return savedResult;",
+          "exercise": "设计一次效果成功而回执失败的故障注入，并说明仍需什么保证。"
+        },
+        {
+          "title": "04 工具、辅助 Agent 与有意义的输出",
+          "explanation": "主代理把长输出保存到文件、把工具密集工作交给助手，只取简洁结果。工具应返回可行动的错误；任务有变化或需要选择时才给用户有价值的更新，避免把所有内部文本直接发送出去。",
+          "code": "const report = {evidencePath,result,openQuestions};",
+          "exercise": "给一个子任务写清输入范围、可用工具、完成判据和回传格式。"
+        },
+        {
+          "title": "05 稳定前缀与按需上下文",
+          "explanation": "课件强调工具与固定规则的顺序稳定、历史追加到末尾，方便前缀缓存。实际缓存粒度与有效期依模型服务而定，不能把讲者某个字符/时间限制当所有模型的统一阈值。",
+          "code": "const prompt = [stableTools,stableRules,...history,newMessage];",
+          "exercise": "哪种变化会破坏稳定前缀？设计日志来定位发生变化的片段。"
+        },
+        {
+          "title": "06 长期记忆与摘要",
+          "explanation": "重要事实、带日期事件、临时笔记与可搜索的其他记忆有不同寿命。摘要保留恢复信息，记忆中的文字是事实参考而非新权限；修正与删除需要能追溯到实际可见记录。",
+          "code": "const memoryItem = {fact,source,date,expires};",
+          "exercise": "给过时偏好设计一次修正，说明怎样验证旧值不再被使用。"
+        },
+        {
+          "title": "07 用评测带动系统改进",
+          "explanation": "将一次长期任务失败转成可复现评测，再选择修改提示、工具、调度或模型。模型能力、产品与评测互相影响；更好的模型可能使某些包装变得多余，但不会取消状态一致性的责任。",
+          "code": "const improvement = [\"capture failure\",\"write eval\",\"change harness\",\"rerun eval\"];",
+          "exercise": "从断点恢复演示写出一个回归测试，包含写入次数断言。"
+        }
+      ],
+      "sources": [
+        "cs146s-lee-slides",
+        "cs146s-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "agent",
+          "label": "回看终端里的最小循环"
+        },
+        {
+          "lesson": "cs146s-harness",
+          "label": "连接 harness 组件"
+        },
+        {
+          "lesson": "cs146s-readiness",
+          "label": "为并行后台任务准备环境"
+        }
+      ],
+      "boundary": "本地有限事件与内存工作流；不创建真实后台任务、例行任务、消息或外部写入。",
+      "modelId": "cs146s-durable",
+      "demos": [
+        {
+          "modelId": "cs146s-durable",
+          "title": "事件去重、持久步骤、恢复与业务幂等"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-config",
+      "course": "cs146s",
+      "unit": "10/13",
+      "title": "10/13 · 定制 Agent：说明、Hooks、Skills 与子代理",
+      "summary": "仓库范围、事件 Hook 与独立检查",
+      "question": "提示里写“记得测试”，与系统真正运行检查有什么区别？",
+      "outcome": "为仓库写具体约定，区分配置、过程与事件检查，并复现格式与逻辑的不同失败。",
+      "prerequisites": [
+        "会读函数、条件与循环",
+        "能区分计划、工具输出和验证证据"
+      ],
+      "explanation": [
+        "仓库说明提供代码地图、准确命令和局部约定；Skill 保存可反复使用的过程；Hook 在固定事件点执行确定性检查；子代理隔离一段任务上下文。它们解决的问题不同。",
+        "根目录说明可以做路由，把 API 和 UI 的细节放到对应文件，但具体加载优先级取决于使用的产品。写得越长不一定越好：过时命令会把之后每一轮带偏。",
+        "本案例在编辑之后实际检查一个本地片段的格式和算术逻辑。只运行格式检查时，逻辑缺陷保持未验证；Hook 报错与任务验收通过必须分开记录。"
+      ],
+      "formula": "仓库约定说明怎样做；Skill 组织过程；Hook 在事件点检查；验证证据说明实际发生了什么",
+      "worked": "格式正确但返回 a-b 的片段能通过分号检查，却会在 1+2=3 的逻辑检查失败。只开格式 Hook 时结果为 tests_unknown。",
+      "misconception": "AGENTS.md 的存在不等于命令已验证；也没有一个适用于所有 Agent 产品的统一配置优先级。",
+      "practice": [
+        "选择逻辑错误片段和只运行格式 Hook，先预测结论。",
+        "开启两种检查，核对哪一步阻止了“检查通过”。",
+        "切换 API/UI 目录，指出通用约定与局部补充。"
+      ],
+      "exercise": {
+        "prompt": "生成代码格式检查通过，但逻辑测试未运行。能否把逻辑测试记作通过？填 1 表示能，0 表示不能。",
+        "expected": 0,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "没有运行测试，就没有逻辑通过的证据。",
+        "solution": "0。分号规则只能核对本例格式，不能证明函数返回值正确。",
+        "transfer": "独立验证：选择逻辑错误、运行全部 Hook，结果应为 tests_failed；选择缺分号时应先得到 lint_failed。"
+      },
+      "sections": [
+        {
+          "title": "01 先探索，再写仓库说明",
+          "explanation": "官方作业要求面对陌生仓库找到真实入口、构建测试命令和生成目录。不是把 README 改成命令语气，而是把能帮助当前仓库工作的具体知识留下。",
+          "code": "const repoMap = {entry:\"src/main.js\",tests:\"tests/\",generated:\"dist/\"};",
+          "exercise": "在自己的仓库运行一次写入说明的检查命令，保留输出。"
+        },
+        {
+          "title": "02 根目录负责导航，细节按范围组织",
+          "explanation": "根说明写共有规则和局部文档入口；子目录提供接口、测试与约定的补充。本文的根加局部合并只是明确的教学规则，不能据此推断任意平台对系统消息的权限关系。",
+          "code": "const context = [rootInstructions,matchingDirectoryInstructions];",
+          "exercise": "若局部说明给出不同测试命令，应先核对哪一个事实？"
+        },
+        {
+          "title": "03 Hook 是可执行的事件程序",
+          "explanation": "前置检查可在动作前拒绝条件不满足的调用；后置检查可以格式化或收集测试结果。每个 Hook 需有可解释的输入、退出状态和失败处理，避免偷偷吞掉失败。",
+          "code": "const ok = generatedSource.endsWith(\";\");",
+          "exercise": "为 Hook 失败设计一条能指导下一步的错误信息。"
+        },
+        {
+          "title": "04 Skill 与子代理的分工",
+          "explanation": "Skill 描述重复过程，子代理创建相对独立的运行上下文。主任务交给子任务的不是模糊命令，而是范围、输入和验收；返回结果需有证据引用和未完成项。",
+          "code": "const delegatedTask = {scope,inputs,acceptance,outputFormat};",
+          "exercise": "找出一个适合独立探索但不适合多人同时改同一文件的任务。"
+        },
+        {
+          "title": "05 用两次任务检验配置是否有效",
+          "explanation": "官方 Week 4 作业要求实际试用并据观察改进说明。记录 Agent 是否用了正确命令、是否遵守生成目录边界、是否仍遗漏信息，而不是以文件字数充当有效性。",
+          "code": "const evidence = {commandUsed,exitCode,observedGap,revision};",
+          "exercise": "给同一配置做“运行测试”和“一次小改动”两项试用。"
+        }
+      ],
+      "sources": [
+        "cs146s-customize-slides",
+        "cs146s-assignment-4",
+        "cs146s-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs146s-skills",
+          "label": "回看可复用过程"
+        },
+        {
+          "lesson": "cs146s-readiness",
+          "label": "检查整个仓库是否可验证"
+        }
+      ],
+      "boundary": "案例 Hook 只检查本地字符串与预设算术函数；未配置你的真实编辑器或仓库 Hook。",
+      "modelId": "cs146s-config",
+      "demos": [
+        {
+          "modelId": "cs146s-config",
+          "title": "仓库范围、事件 Hook 与独立检查"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-readiness",
+      "course": "cs146s",
+      "unit": "10/20",
+      "title": "10/20 · Agent-Ready Codebases：先让环境可验证",
+      "summary": "环境、文档、测试与共享资源隔离",
+      "question": "同一个模型换到另一个仓库，为什么会突然做不成任务？",
+      "outcome": "识别环境缺口，给阻塞项留下证据和修复任务，并区分文件隔离与运行资源隔离。",
+      "prerequisites": [
+        "会读函数、条件与循环",
+        "能区分计划、工具输出和验证证据"
+      ],
+      "explanation": [
+        "人能绕过坏文档、脆弱构建和口头知识，Agent 很难稳定地弥补这些缺口。仓库就绪度首先关心环境能否复现、约定能否发现、修改能否客观验证。",
+        "可执行测试、可靠构建、当前文档、明确模式与观察日志相互配合。它们也帮助新人，不是专为某个模型优化一套隐秘提示。",
+        "后台或并行工作额外需要隔离。worktree 分离文件版本，却不会替你分配端口和数据库。本站把四项条件作为透明案例清单，逐项显示阻塞，而不伪造官方自治等级。"
+      ],
+      "formula": "当前任务的可开始条件 = 环境可复现 ∧ 文档适用 ∧ 可执行验证 ∧ 运行资源隔离",
+      "worked": "默认环境、测试与隔离可用，文档过时，因此阻塞项只有“当前文档”。把全部条件打开后，仅给出 ready_for_this_task。",
+      "misconception": "有测试目录不等于有有效检查；两个 worktree 也不等于两个隔离环境。课件的效率示意不作为本站的学习或生产效率承诺。",
+      "practice": [
+        "逐项切换缺口，列出本例阻塞任务的条件。",
+        "保持 worktree 分离但关闭运行资源隔离，说明会在哪些地方冲突。",
+        "全部打开后列出仍没验证的两项真实工程条件。"
+      ],
+      "exercise": {
+        "prompt": "两个任务已有独立 worktree，但都使用同一测试端口和同一数据库。题目明确指出了几种仍共享的运行资源？",
+        "expected": 2,
+        "tolerance": 1e-06,
+        "unit": "种",
+        "hint": "仓库文件隔离不改变监听地址或服务数据。",
+        "solution": "2。两个任务仍竞争同一端口并共享数据库状态。",
+        "transfer": "独立验证：只保留“文档已过时”，其余条件具备，blockers 应仅为 [当前文档]。写出一条修复后能重新核对的命令。"
+      },
+      "sections": [
+        {
+          "title": "01 把人能绕过的问题写成失败证据",
+          "explanation": "没有文档时人会问同事，构建不稳定时人会重试，但自动任务需要可描述、可复现的路径。保存失败命令、缺失变量、错误路径和预期行为，比一句“仓库很乱”有用。",
+          "code": "const blocker = {command:\"node --test\",error:\"missing fixture\",owner:\"tests\"};",
+          "exercise": "从一次真实失败中找出最小复现步骤。"
+        },
+        {
+          "title": "02 构建、测试、约定与观察",
+          "explanation": "可复现依赖减少环境漂移；测试验证行为；文档描述约定；日志帮助还原实际执行。每种证据作用不同，不能用覆盖率数字代替接口契约。",
+          "code": "const checks = [\"install locked deps\",\"build\",\"run focused tests\",\"inspect logs\"];",
+          "exercise": "为一个 API 改动写出四种证据各自回答的问题。"
+        },
+        {
+          "title": "03 从小任务到后台任务的前置条件",
+          "explanation": "后台任务失去人在旁边不断纠正的反馈，更依赖明确规格和可执行检查。先用受限小改动验证环境，再扩大范围，保留失败退出和中间产物。",
+          "code": "const task = {scope:\"one pure function\",budget:6,checks:[\"unit test\"]};",
+          "exercise": "哪个阻塞应先修：无测试入口，还是文档排版不好？给出理由。"
+        },
+        {
+          "title": "04 文件隔离与资源隔离分别核对",
+          "explanation": "worktree 保持提交和文件修改互不覆盖；端口、数据库、凭据、缓存等仍可能共享。为并行任务分配独立资源和清理范围，才能防止彼此的测试污染。",
+          "code": "const jobs = [{port:8101,db:\"test_a\"},{port:8102,db:\"test_b\"}];",
+          "exercise": "检查自己项目中还有哪个资源可能被两个测试同时覆盖。"
+        },
+        {
+          "title": "05 比较仓库时限制结论范围",
+          "explanation": "官方 Week 5 作业要求对三个不同仓库比较报告并批判评分框架。本例透明清单不是该工具的评分重现；三个仓库的关联也不能证明语言或年龄导致就绪度差。",
+          "code": "const report = {criteria,evidence,blockers,cheapFix,limits};",
+          "exercise": "选三份可比报告，写一个它们能支持的结论和一个不能支持的结论。"
+        }
+      ],
+      "sources": [
+        "cs146s-readiness-slides",
+        "cs146s-assignment-5",
+        "cs146s-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs146s-config",
+          "label": "为缺口补精确配置"
+        },
+        {
+          "lesson": "cs146s-verification",
+          "label": "继续看检查粒度与反馈成本"
+        },
+        {
+          "lesson": "cs146s-always-on",
+          "label": "连接后台工作流"
+        }
+      ],
+      "boundary": "四项给定事实的透明依赖检查，不运行 Factory 报告，不模拟其评分或真实代码库健康。",
+      "modelId": "cs146s-readiness",
+      "demos": [
+        {
+          "modelId": "cs146s-readiness",
+          "title": "环境、文档、测试与共享资源隔离"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-verification",
+      "course": "cs146s",
+      "unit": "10/22",
+      "title": "10/22 · Eno Reyes：把目标变成便宜的检查",
+      "summary": "逐步检查、有限重试与显式概率假设",
+      "question": "为什么长任务只在最后检查，往往很难定位和修复错误？",
+      "outcome": "复算逐步验证的概率模型，解释独立性、检查器准确性与成本假设，再设计小而快的反馈。",
+      "prerequisites": [
+        "会读函数、条件与循环",
+        "能区分计划、工具输出和验证证据"
+      ],
+      "explanation": [
+        "嘉宾课把注意力从模型本身转到环境：如果任务目标能被明确检查，模型的候选就能通过反馈迭代。把“好”变成可验证条件，是工程设计的一部分。",
+        "课件用一个 20 步的简化概率例子比较末尾检查与每步重试。这个演示复算该例子，并让学习者关闭独立重试假设，看到相关错误为什么会让乐观收益消失。",
+        "检查也有成本。更快、更细的反馈允许更早发现问题，但每小时次数只是一项等待上限，不等于实际开发吞吐。真实系统还要验证检查器本身是否准确。"
+      ],
+      "formula": "末尾全对 pⁿ；独立且完美检查时，每步最多 k 次后的全对率 [1−(1−p)^k]ⁿ",
+      "worked": "p=.9、n=20、k=3 时，pⁿ≈.1216，逐步检查模型≈.9802。若重试错误完全相关，则收益回到 .1216。",
+      "misconception": "这是演示假设下的计算，不是实测 Agent 成功率；“可验证”不保证一定能解决，失败相关性与检查器漏检都可能破坏推导。",
+      "practice": [
+        "先手算两步、p=.5、每步两次时的全对概率。",
+        "切到完全相关的重试，对比曲线和最后数值。",
+        "把检查从 5 秒改为 600 秒，说明次数上限与实际工作效率的区别。"
+      ],
+      "exercise": {
+        "prompt": "p=0.5、任务两步、每步最多尝试两次，假设独立且检查完美。整项全对概率是多少？填写 0 到 1。",
+        "expected": 0.5625,
+        "tolerance": 1e-06,
+        "unit": "比例",
+        "hint": "每步最多两次成功概率是 1−.5²=.75，两步都成功为 .75²。",
+        "solution": "0.75×0.75=0.5625，要求步骤和尝试独立，且检查完美。",
+        "transfer": "独立验证：p=.9、n=20、k=3 应约 .9802；切换相关错误后应约 .1216。再找一种会让检查器错误接受结果的案例。"
+      },
+      "sections": [
+        {
+          "title": "01 从模糊目标到明确检查",
+          "explanation": "“改得更好”缺少判定依据；“在这三种输入上保持约定输出，且无新增错误”才有可操作反馈。检查需要匹配产品目标，而不是只对容易测的部分优化。",
+          "code": "const acceptance = {inputs:[[1,2],[0,4]],expected:[3,4]};",
+          "exercise": "把一个模糊需求改写成包含输入、行为和限度的验收条件。"
+        },
+        {
+          "title": "02 把长任务拆成能定位失败的阶段",
+          "explanation": "末尾一次失败可能来自前面任意步骤。逐步检查使问题在局部暴露，缩小修复范围；粒度过细也可能带来管理开销，应围绕可独立验证的产物切分。",
+          "code": "const phases = [\"parse\",\"transform\",\"persist\",\"read_back\"];",
+          "exercise": "为每个阶段写出一种能检查的产物。"
+        },
+        {
+          "title": "03 概率收益依赖哪些假设",
+          "explanation": "[1−(1−p)^k]^n 需要同一步的重试失败互相独立、不同步骤独立、检查无误。总是重复同样的坏假设、测试只覆盖表面或反馈本身错误，都会减弱甚至取消收益。",
+          "code": "const improved = Math.pow(1-Math.pow(1-p,k),n);",
+          "exercise": "说明“重试三次”在这里是最多三次尝试，还是初次后再试三次。"
+        },
+        {
+          "title": "04 检查时间与验证预算",
+          "explanation": "快速 linter、focused test 与较慢 CI 分别适合不同阶段。3600/检查秒数只是忽略其他工作后的上限；应同时观察工具执行、候选生成和人工判断的实际耗时。",
+          "code": "const waitOnlyCeiling = Math.floor(3600/checkSeconds);",
+          "exercise": "为一个慢测试设计快速子检查，并注明它遗漏什么。"
+        },
+        {
+          "title": "05 就绪度框架用于定位缺口",
+          "explanation": "嘉宾 PDF 展示九类问题，当前官方 Week 5 作业引用八柱框架，两份材料应各自保留版本。教学案例不拿不同口径混算成一个权威分数；使用证据说明当前最值得修复的缺口。",
+          "code": "const remediation = {gap,evidence,lowestCostFix,rerun};",
+          "exercise": "选一个缺口，解释为什么优先修它，并用重新运行检查验证。"
+        }
+      ],
+      "sources": [
+        "cs146s-eno-slides",
+        "cs146s-assignment-5",
+        "cs146s-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs146s-readiness",
+          "label": "回到仓库就绪度清单"
+        },
+        {
+          "lesson": "cs146s-review",
+          "label": "将可复算检查用于代码评审"
+        }
+      ],
+      "boundary": "仅复算课件的简化独立概率模型；不评估真实模型成功率、自治等级或开发效率。",
+      "modelId": "cs146s-verification",
+      "demos": [
+        {
+          "modelId": "cs146s-verification",
+          "title": "逐步检查、有限重试与显式概率假设"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-review",
+      "course": "cs146s",
+      "unit": "10/27",
+      "title": "10/27 · Agentic Code Review：发现、验证与聚合",
+      "summary": "规格上下文、边界复现与根因去重",
+      "question": "多个评审给出很多意见后，怎样区分可复现缺陷、重复报告与未经核实猜测？",
+      "outcome": "按变更风险组织评审，运行独立用例验证发现，并合并同根证据、保留未覆盖范围。",
+      "prerequisites": [
+        "会读函数、条件与循环",
+        "能区分计划、工具输出和验证证据"
+      ],
+      "explanation": [
+        "代码评审既帮助发现缺陷，也建立团队共享的设计认识。生成速度提高后，评审必须更有针对性；更多评论不等于更可靠。",
+        "课件介绍从单个评审到按风险分工、最后聚合的结构。每个评审需要合适的上下文和可执行验证；生成与评审的模型不同也不能保证判断相互独立。",
+        "本例围绕价格舍入补丁读取规格、选择普通与边界用例、运行实际计算，再把多个失败证据合并为一个根因。缺少规格时明确请求补齐，当前测试通过也不自动合并。"
+      ],
+      "formula": "补丁 + 规格/调用方 → 风险对应检查 → 复现证据 → 同根聚合 → 评审结论",
+      "worked": "floor 补丁在整数用例 1000 分减 20% 上返回 800，但在 1 分减 50% 时返回 0，违反半分向上得 1 的规则。加入边界后才有可复现发现。",
+      "misconception": "单模型或多模型评审都不能替代规格；当前测试通过不是全场景正确，评审阶段也不能把未经验证的建议当阻塞缺陷。",
+      "practice": [
+        "先选择只跑普通整数用例，预测 floor 缺陷会不会被发现。",
+        "加入边界用例，再检查实际值、预期值和根因聚合。",
+        "移除规格，说明为什么评审结论应变为 needs_spec。"
+      ],
+      "exercise": {
+        "prompt": "三个用例均因同一个折扣公式错误失败，聚合报告按根因去重，应保留几项根因发现？",
+        "expected": 1,
+        "tolerance": 1e-06,
+        "unit": "项",
+        "hint": "多个失败输入可能对应同一条错误公式。",
+        "solution": "1 项根因，保留全部可复现失败用例作为证据。",
+        "transfer": "独立验证：半分向上补丁加边界集应得到 eligible_for_human_review；缺规格时即使测试表存在也得到 needs_spec。解释还需覆盖哪些输入类型。"
+      },
+      "sections": [
+        {
+          "title": "01 评审到底要回答什么",
+          "explanation": "正确性、可维护性、性能、安全和团队约定是不同问题。先读变更触发条件和业务契约，确定哪些路径受影响；不要只凭文件数量决定风险，也不要对无关领域堆泛化意见。",
+          "code": "const scope = {changedFunction:\"discountedPrice\",contract:\"cents + half_up\"};",
+          "exercise": "给本例选择一个主评审问题，并说明没有检查的领域。"
+        },
+        {
+          "title": "02 分工评审与聚合裁决",
+          "explanation": "图中的多个评审角色可以关注不同风险；聚合方检查证据、重复根因和冲突结论。分工应围绕真实路径，而不是换几个角色名字后重复读相同 diff。",
+          "code": "const finding = {rootCause,trigger,actual,expected,evidence};",
+          "exercise": "设计两个不同视角的检查，说明它们各自需要什么上下文。"
+        },
+        {
+          "title": "03 用运行而非措辞验证发现",
+          "explanation": "在受控环境运行最小复现，把输入、实际结果、预期结果和约定联系起来。只有“这里可能出问题”而没有可达路径或冲突规则，通常还需要继续核实。",
+          "code": "const case1 = {cents:1,discount:50,expected:1};",
+          "exercise": "不改待测函数，写出能稳定触发 floor 缺陷的最小断言。"
+        },
+        {
+          "title": "04 去重、优先级和修复范围",
+          "explanation": "多个失败用例若源于同一公式，报告合并根因并保留证据。优先级依据影响范围与触发条件；风格建议与行为缺陷分别表达，避免一条评论要求不相干的大改。",
+          "code": "const rootKey = \"price.js:discount_formula\";",
+          "exercise": "将三条重复报告合成一条，让审阅者能直接复算。"
+        },
+        {
+          "title": "05 用历史缺陷评估评审系统",
+          "explanation": "真实评审系统应在有标签的历史补丁、事故回退与已知正常变更上评测漏报和误报，同时核算成本。只展示一次抓到 bug 不足以说明系统稳定有效；模型选择要和任务复杂度相匹配。",
+          "code": "const evaluation = {knownBugs,cleanChanges,trueFindings,falseAlarms,cost};",
+          "exercise": "为这个评审器新增一个正常补丁，检查它是否误报。"
+        }
+      ],
+      "sources": [
+        "cs146s-review-slides",
+        "cs146s-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs146s-verification",
+          "label": "先理解独立检查的作用"
+        },
+        {
+          "lesson": "context",
+          "label": "回看评审所需的规格上下文"
+        },
+        {
+          "lesson": "cs146s-config",
+          "label": "把重复检查写成仓库约定"
+        }
+      ],
+      "boundary": "本地预设价格函数与四个给定用例；未调用评审模型、不扫描真实仓库，也不自动提交或合并补丁。",
+      "modelId": "cs146s-review",
+      "demos": [
+        {
+          "modelId": "cs146s-review",
+          "title": "规格上下文、边界复现与根因去重"
+        }
+      ]
+    }
+  ]
+}

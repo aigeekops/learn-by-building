@@ -1,0 +1,3 @@
+# Framework API version actually tested with offline ReplayModel.
+# The browser course and eight stdlib examples do not need this package.
+smolagents==1.26.0

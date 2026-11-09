@@ -1,0 +1,17 @@
+{
+  "courseId": "cs146s",
+  "course": "CS146S · 现代AI软件工程",
+  "lectures": 10,
+  "models": ["agent", "cs146s-harness", "context", "cs146s-reppit", "tools", "cs146s-skills", "cs146s-durable", "cs146s-config", "cs146s-readiness", "cs146s-verification", "cs146s-review"],
+  "modelCount": 11,
+  "experimentCount": 23,
+  "inspection": "按当前及此前快照展开测试用例、输入费用各项、候选片段装入判断、输入schema、版本与幂等回执、技能转换、检查点和恢复入口、Hook执行状态、阻塞项、明确假设下的概率、独立评审用例和根因聚合。",
+  "preserved": ["课程与讲次ID", "既有模型计算", "来源与排期", "参数草稿命名", "个人计划", "学习记录与时长"],
+  "limitations": ["Agent决策和请求路由为预设策略，未调用真实LLM。", "工具、工作流与测试均为内存案例，不修改真实仓库或数据库。", "token费用为人工教学数字，不代表实际分词结果。", "准备状态读取给定案例事实，不代表执行过真实环境安装或外部验证。", "验证概率依赖明确写出的独立性及完美检查器假设，非实测成功率。", "静态算术与状态检查不添加循环动画；保留原真实事件回放。"],
+  "validation": {
+    "command": "node --test tests/course_inspector_cs146s.test.cjs tests/ai_cs146s_2026.test.cjs",
+    "testsPassed": 15,
+    "genericCheck": {"command": "node scripts/check_course_inspectors.cjs cs146s", "framesChecked": 561, "cellsChecked": 2181, "experimentsPassed": 23},
+    "checks": ["覆盖全部11模型", "23组实验实际执行且verify检查具体变化", "默认与所有控制量端点的全帧检查", "冻结trace保持不可变", "未执行检查保留null", "初始帧不展示未来Agent测试结果", "恢复下标与最终检查点分别保留"]
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "checked": "2026-11-09",
+  "courses": 10,
+  "lessons": 80,
+  "models": 80,
+  "default_steps": 320,
+  "source": "config/extension_*.json",
+  "examples": "examples/extension-courses/*.cjs",
+  "validation": {
+    "python": {
+      "passed": 91
+    },
+    "node": {
+      "passed": 388,
+      "skipped": 1,
+      "skip_reason": "optional smolagents real framework fixture environment not supplied"
+    },
+    "extension_node": {
+      "passed": 85
+    },
+    "packaged_programs_executed": 80,
+    "desktop_arduino_syntax": 8,
+    "avr_compilation": "not run",
+    "robotics_framework_execution": "not run",
+    "browser": {
+      "courses": 10,
+      "lessons": 80,
+      "panels": 1280,
+      "frames": 1280,
+      "recomputations": 320,
+      "errors": [],
+      "network": [],
+      "widths": [
+        1440,
+        390
+      ],
+      "modes": [
+        "offline",
+        "http"
+      ]
+    }
+  },
+  "saved_records_rewritten": false
+}

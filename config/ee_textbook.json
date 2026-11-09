@@ -778,7 +778,17 @@
       "lab": "",
       "terms": "单位 前缀 千欧 毫安 微法 科学计数法",
       "minutes": 30,
-      "prerequisites": []
+      "prerequisites": [],
+      "teaching": {
+        "id": "ee-units",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "units",
+        "question": "视频里的 4.7k、100μ 和 mA 到底多大？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "circuit",
@@ -824,7 +834,17 @@
       "minutes": 30,
       "prerequisites": [
         "units"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-circuit",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "loop",
+        "question": "为什么一根线接上去，灯还是不亮？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "meter",
@@ -870,7 +890,17 @@
       "minutes": 30,
       "prerequisites": [
         "circuit"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-meter",
+        "map_course_id": "arduino",
+        "model": "measurement",
+        "variant": "meter",
+        "question": "电压档和电流档为什么不能用同一种接法？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "ohm",
@@ -920,7 +950,17 @@
       "minutes": 30,
       "prerequisites": [
         "meter"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-ohm",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "ohm",
+        "question": "为什么电阻会发热，换小一点又更亮？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "networks",
@@ -974,7 +1014,17 @@
       "minutes": 30,
       "prerequisites": [
         "ohm"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-networks",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "parallel",
+        "question": "电流遇到岔路怎样分，电压又在哪里掉下去？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "divider",
@@ -1020,7 +1070,17 @@
       "minutes": 30,
       "prerequisites": [
         "networks"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-divider",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "divider",
+        "question": "视频说两个相同电阻得到一半电压，为什么我的不是？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "thevenin",
@@ -1066,7 +1126,17 @@
       "minutes": 30,
       "prerequisites": [
         "divider"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-thevenin",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "thevenin",
+        "question": "为什么接上设备后电源电压会下跌？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "power",
@@ -1112,7 +1182,17 @@
       "minutes": 30,
       "prerequisites": [
         "thevenin"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-power",
+        "map_course_id": "arduino",
+        "model": "power",
+        "variant": "battery",
+        "question": "1000 mAh 的电池能让机器人运行一小时吗？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "rc",
@@ -1162,7 +1242,17 @@
       "minutes": 30,
       "prerequisites": [
         "power"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-rc",
+        "map_course_id": "arduino",
+        "model": "rc",
+        "variant": "charge",
+        "question": "电容为什么能让电压慢慢变，而不是马上跳？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "inductor",
@@ -1212,7 +1302,17 @@
       "minutes": 30,
       "prerequisites": [
         "rc"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-inductor",
+        "map_course_id": "arduino",
+        "model": "inductor",
+        "variant": "switch",
+        "question": "线圈关掉了，为什么还可能损坏开关？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "wave",
@@ -1258,7 +1358,17 @@
       "minutes": 30,
       "prerequisites": [
         "inductor"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-wave",
+        "map_course_id": "arduino",
+        "model": "wave",
+        "variant": "sine",
+        "question": "交流电压的“几伏”说的是哪个数？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "filter",
@@ -1308,7 +1418,17 @@
       "minutes": 30,
       "prerequisites": [
         "wave"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-filter",
+        "map_course_id": "arduino",
+        "model": "filter",
+        "variant": "lowpass",
+        "question": "“加个电容滤波”到底滤掉什么，也损失什么？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "diode",
@@ -1354,7 +1474,17 @@
       "minutes": 30,
       "prerequisites": [
         "filter"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-diode",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "led",
+        "question": "为什么 LED 不能像电阻那样直接接电源？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "switch",
@@ -1400,7 +1530,17 @@
       "minutes": 30,
       "prerequisites": [
         "diode"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-switch",
+        "map_course_id": "arduino",
+        "model": "switch",
+        "variant": "gpio",
+        "question": "为什么 GPIO 能点灯，却不该直接带电机？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "opamp",
@@ -1450,7 +1590,17 @@
       "minutes": 30,
       "prerequisites": [
         "switch"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-opamp",
+        "map_course_id": "arduino",
+        "model": "opamp",
+        "variant": "saturation",
+        "question": "运放为什么有时按公式放大，有时顶在电源边上？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "motor",
@@ -1500,7 +1650,17 @@
       "minutes": 30,
       "prerequisites": [
         "opamp"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-motor",
+        "map_course_id": "arduino",
+        "model": "switch",
+        "variant": "motor",
+        "question": "为什么电机启动和正常转动时的电流差很多？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "levels",
@@ -1546,7 +1706,17 @@
       "minutes": 30,
       "prerequisites": [
         "motor"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-levels",
+        "map_course_id": "arduino",
+        "model": "levels",
+        "variant": "levels",
+        "question": "3.3 V 的 1 能直接接到 5 V 的输入吗？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "logic",
@@ -1592,7 +1762,17 @@
       "minutes": 30,
       "prerequisites": [
         "levels"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-logic",
+        "map_course_id": "arduino",
+        "model": "logic",
+        "variant": "logic",
+        "question": "“满足条件才启动”怎样变成能检查的规则？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "state",
@@ -1642,7 +1822,17 @@
       "minutes": 30,
       "prerequisites": [
         "logic"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-state",
+        "map_course_id": "arduino",
+        "model": "digital",
+        "variant": "button",
+        "question": "为什么按一次按钮会被程序数成好几次？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "adc",
@@ -1688,7 +1878,17 @@
       "minutes": 30,
       "prerequisites": [
         "state"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-adc",
+        "map_course_id": "arduino",
+        "model": "adc",
+        "variant": "sensor",
+        "question": "12 位 ADC 就代表传感器一定很精确吗？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "pwm",
@@ -1734,7 +1934,17 @@
       "minutes": 30,
       "prerequisites": [
         "adc"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-pwm",
+        "map_course_id": "arduino",
+        "model": "pwm",
+        "variant": "duty",
+        "question": "PWM 输出 50%，是不是就得到稳定的一半电压？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "reference",
@@ -1784,7 +1994,17 @@
       "minutes": 30,
       "prerequisites": [
         "pwm"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-reference",
+        "map_course_id": "arduino",
+        "model": "circuit",
+        "variant": "divider",
+        "question": "复杂公式出现时，怎样知道自己该补哪块数学？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "debug",
@@ -1830,7 +2050,17 @@
       "minutes": 30,
       "prerequisites": [
         "reference"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-debug",
+        "map_course_id": "arduino",
+        "model": "measurement",
+        "variant": "debug",
+        "question": "电路不工作，是不是先把所有东西换一遍？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     },
     {
       "id": "project",
@@ -1884,7 +2114,17 @@
       "minutes": 30,
       "prerequisites": [
         "debug"
-      ]
+      ],
+      "teaching": {
+        "id": "ee-project",
+        "map_course_id": "arduino",
+        "model": "digital",
+        "variant": "scheduler",
+        "question": "学完这些，怎样证明自己能用而不是只看过？",
+        "stage": "robotics-1",
+        "route": "robotics",
+        "attribution": "本站原创理想模型；按本节公式理解适用条件，实物结果另行测量。"
+      }
     }
   ],
   "questions": [

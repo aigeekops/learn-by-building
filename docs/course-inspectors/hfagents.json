@@ -1,0 +1,58 @@
+{
+  "courseId": "hfagents",
+  "course": "HF Agents Course · 可追溯、可停止的资料助手",
+  "lectures": 8,
+  "models": [
+    "hfagents-state",
+    "hfagents-tools",
+    "hfagents-loop",
+    "hfagents-context",
+    "hfagents-smolagents",
+    "hfagents-rag",
+    "hfagents-evaluation",
+    "hfagents-project"
+  ],
+  "modelCount": 8,
+  "experimentCount": 16,
+  "inspection": "逐帧按实际代码行展开消息角色与条数、只读工具集合与整数参数契约、调用前null状态和错误类型、决策/工具调用双计数、输入预算逐项求和与装入判断、计数乘单价、逐词重合率与阈值/top-k、候选对问题的支持性、四题逐题匹配/来源/超时、固定分母正确率，以及有界重试、成功后提交和同id异参数重放冲突。插件只读取当前及此前快照，不读取trace.result；新RAG查询不会把前次排序或证据展示为本次结果。",
+  "preserved": [
+    "课程和讲次ID及八讲顺序",
+    "原有模型、图示和真实状态回放",
+    "公开来源与选编范围",
+    "参数控件和草稿命名",
+    "个人计划、学习记录、回执与时长"
+  ],
+  "limitations": [
+    "Agent动作、查询改写及ReplayModel输出采用原模型预设策略，未调用真实LLM，不展示模型内部思考。",
+    "所有资料、工具、库存数量与回执均在本次内存案例中；无网络、任意代码执行、真实文件修改或数据库写入。",
+    "浏览器smolagents示意不执行Python或真实CodeAgent；独立框架示例的实跑结论不由本插件验证。",
+    "上下文成本为人工单位，摘要事实与来源为给定案例，不代表真实分词、自动摘要质量或持久记忆服务。",
+    "RAG为词项重合检索，支持性使用人工给定规则，不代表embedding检索或自动引用证明。",
+    "评测为固定四题离线fixture；来源条件仅判断字段存在，正确率门槛不是GAIA成绩、课程认证或生产能力证明。",
+    "检查与实验不会增加学习时长或完成状态；未增加循环动画。",
+    "本次课程独立交付不修改共享UI、模型、配置和构建，也不进行浏览器验收。"
+  ],
+  "validation": {
+    "command": "node --test tests/course_inspector_hfagents.test.cjs",
+    "testsPassed": 10,
+    "genericCheck": {
+      "command": "node scripts/check_course_inspectors.cjs hfagents",
+      "framesChecked": 601,
+      "cellsChecked": 1461,
+      "experimentsPassed": 16
+    },
+    "checks": [
+      "八讲八模型与当前catalog demos精确对应",
+      "每模型两组真实单控件before/after实验，verify拒绝无变化与反向变化",
+      "通用检查覆盖默认与实际控制端点全部601帧及1461格，并验证实验UI状态",
+      "冻结默认trace逐帧检查且内容不变，结果字段代理禁止读取未来最终值",
+      "工具契约拒绝与执行超时分离，工具调用前无返回文档",
+      "retry预算2得到观测但未final，预算3完成；fatal与预算耗尽独立保留",
+      "必需费用12+8+6+记忆逐项相加，可选背景仅在自己的步骤后出现",
+      "未注册工具的计数、金额与答案均保持null",
+      "RAG首查0.5/改写后1.0可复算，新查询帧不泄漏旧排序，阈值0仍排除零匹配",
+      "评测逐题已判定结果才显示，超时始终留在四题分母内",
+      "临时读取失败不提交回执，明确资料不足可完成但无事实来源，同id异参数冲突无重放答案且不增加读取"
+    ]
+  }
+}

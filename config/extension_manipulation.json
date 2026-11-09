@@ -1,0 +1,839 @@
+{
+  "checked": "2026-11-09",
+  "course": {
+    "id": "manipulation",
+    "label": "MIT Robotic Manipulation",
+    "title": "机械臂操作：感知、抓取、规划与反馈",
+    "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+    "position": "Modern Robotics之后，连接MoveIt工程",
+    "description": "围绕抓取与放置组织坐标、逆运动学、配准、接触、路径、轨迹和任务状态。",
+    "prerequisites": [
+      "坐标变换、正逆运动学与Jacobian基础",
+      "基础概率、微积分和反馈控制"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "坐标变换：目标究竟在哪个坐标系？",
+        "lessons": [
+          "manipulation-frames"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.3 Monogram Notation；Spatial Algebra。"
+      },
+      {
+        "unit": "2",
+        "title": "逆运动学：一个目标为何有多种构形？",
+        "lessons": [
+          "manipulation-ik"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.3 Forward/Differential Kinematics；Ch.6 Inverse Kinematics。"
+      },
+      {
+        "unit": "3",
+        "title": "几何感知：配准残差如何受离群点影响？",
+        "lessons": [
+          "manipulation-perception"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.4 Known Correspondences；ICP；Outliers。"
+      },
+      {
+        "unit": "4",
+        "title": "摩擦与抓取：夹住为什么还会滑？",
+        "lessons": [
+          "manipulation-contact"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.5 Static Equilibrium with Frictional Contact；Grasp Selection。"
+      },
+      {
+        "unit": "5",
+        "title": "路径规划：端点安全为何整段仍碰撞？",
+        "lessons": [
+          "manipulation-path"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.6 Sampling-based Motion Planning；Collision-free Configuration Space。"
+      },
+      {
+        "unit": "6",
+        "title": "轨迹：同一路径怎样安排时间？",
+        "lessons": [
+          "manipulation-trajectory"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.3 Pick and Place Trajectory；Ch.6 Time Parameterization。"
+      },
+      {
+        "unit": "7",
+        "title": "柔顺控制：刚度和阻尼分别做什么？",
+        "lessons": [
+          "manipulation-control"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.8 Point-mass Control；Cartesian Stiffness。"
+      },
+      {
+        "unit": "8",
+        "title": "任务层：抓取命令发出后还缺哪一步？",
+        "lessons": [
+          "manipulation-task"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Ch.5 Programming the Task Level；State Machines and Behavior Trees。"
+      }
+    ],
+    "pending": "本站八讲按核心任务选编。Drake、HardwareStation、完整3D碰撞、深度视觉和接触仿真未在浏览器运行，原讲义仍持续更新。",
+    "sources": [
+      "manipulation-official"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "manipulation-frames",
+      "course": "manipulation",
+      "unit": "1",
+      "title": "第1讲 坐标变换：目标究竟在哪个坐标系？",
+      "summary": "按旋转和平移顺序变换点，再用逆变换回代。",
+      "question": "相机看到的点，怎样变成机械臂基座下的目标？",
+      "outcome": "按旋转和平移顺序变换点，再用逆变换回代。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "抓取任务涉及世界、机器人、相机、物体与夹爪。点的三个数字必须带坐标系；同名数字放在不同原点和方向下代表不同位置。",
+        "本例使用二维切片：先用R把点向量表达成世界方向，再加相机原点的世界位置t。逆变换先减t再乘R转置。",
+        "真实系统还需标定、时间同步和单位检查。数学变换正确并不证明相机外参已经测准。"
+      ],
+      "formula": "p_W=R_WC p_C+t_WC；p_C=R_WCᵀ(p_W−t_WC)",
+      "worked": "相机在[1,1]、旋转90°，相机点[1,0]变为世界点[1,2]，逆变换回到[1,0]。",
+      "misconception": "旋转和平移不能随意交换；位置点与纯方向向量的平移规则不同。",
+      "sections": [
+        {
+          "title": "明确坐标的上下标",
+          "explanation": "相机坐标里的点p_C=[1,0]，相机原点在世界[tx,1]。"
+        },
+        {
+          "title": "先旋转点向量",
+          "explanation": "旋转只改变表达方向；此处是二维刚体变换的教学切片。"
+        },
+        {
+          "title": "再加原点平移",
+          "explanation": "p_W=R_WC p_C+t_WC，矩阵乘法的顺序不能交换。"
+        },
+        {
+          "title": "用逆变换回到相机系",
+          "explanation": "先减平移，再乘旋转转置，核对结果回到[1,0]。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"angle\":90,\"tx\":1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 明确坐标的上下标\nObject.assign(s, ((s,p)=>({pointCamera:[1,0],translation:[p.tx,1],theta:p.angle*Math.PI/180}))(s, p));\n// 先旋转点向量\nObject.assign(s, ((s,p)=>({rotated:[Math.cos(s.theta),Math.sin(s.theta)]}))(s, p));\n// 再加原点平移\nObject.assign(s, ((s,p)=>({pointWorld:s.rotated.map((x,i)=>x+s.translation[i])}))(s, p));\n// 用逆变换回到相机系\nObject.assign(s, ((s,p)=>{const d=s.pointWorld.map((x,i)=>x-s.translation[i]);return {recovered:[Math.cos(s.theta)*d[0]+Math.sin(s.theta)*d[1],-Math.sin(s.theta)*d[0]+Math.cos(s.theta)*d[1]]};})(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-frames.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "将旋转改成0°与−90°并手算；把变换与其逆相乘核对单位矩阵。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：相机看到的点，怎样变成机械臂基座下的目标？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "将旋转改成0°与−90°并手算；把变换与其逆相乘核对单位矩阵。"
+      ],
+      "exercise": {
+        "prompt": "默认世界目标的y坐标是多少？",
+        "expected": 2,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "旋转后[0,1]加平移[1,1]，得到[1,2]。",
+        "transfer": "将旋转改成0°与−90°并手算；把变换与其逆相乘核对单位矩阵。"
+      },
+      "sources": [
+        "manipulation-frames-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-ik",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "manipulation-frames",
+      "demos": [
+        {
+          "modelId": "manipulation-frames",
+          "title": "坐标变换：目标究竟在哪个坐标系？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "manipulation-ik",
+      "course": "manipulation",
+      "unit": "2",
+      "title": "第2讲 逆运动学：一个目标为何有多种构形？",
+      "summary": "解平面两连杆IK，先判可达，再用FK检查两个分支。",
+      "question": "机械臂末端到达同一点，肘部可以有几种位置？",
+      "outcome": "解平面两连杆IK，先判可达，再用FK检查两个分支。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "逆运动学把任务位姿转为关节变量，解可能没有、一个或多个。本例两连杆均长1，可达距离不能超过2。",
+        "用余弦定理解肘角，再通过atan2求肩角。肘角正负给出两个分支，FK回代能检查单位和象限错误。",
+        "几何到达仍需检查关节限制、碰撞、工具朝向和连续性。不可达时保留失败，不能把越界数值裁成假解。"
+      ],
+      "formula": "cos q2=(x²+y²−l1²−l2²)/(2l1l2)",
+      "worked": "目标[1,1]时q2=π/2、q1=0；另一个分支q2=−π/2、q1=π/2。",
+      "misconception": "IK成功不等于抓取成功，两个分支也可能只有一个满足场景约束。",
+      "sections": [
+        {
+          "title": "先检查目标是否可达",
+          "explanation": "平面两连杆长度均为1；距离必须在[0,2]内。"
+        },
+        {
+          "title": "用余弦定理解肘角",
+          "explanation": "不可达时保持null，不把越界余弦截到一个虚假可行解。"
+        },
+        {
+          "title": "补回肩角",
+          "explanation": "atan2保留象限，正负肘角给出不同构形。"
+        },
+        {
+          "title": "用正运动学独立回代",
+          "explanation": "可达不等于满足关节限制、碰撞或抓取约束。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={clamp:(x,a,b)=>Math.max(a,Math.min(b,x))};\nconst p={\"x\":1,\"y\":1,\"elbow\":\"up\"};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先检查目标是否可达\nObject.assign(s, ((s,p)=>({radius:Math.hypot(p.x,p.y),reachable:Math.hypot(p.x,p.y)<=2}))(s, p));\n// 用余弦定理解肘角\nObject.assign(s, ((s,p)=>({q2:s.reachable?(p.elbow==='up'?1:-1)*Math.acos(H.clamp((s.radius*s.radius-2)/2,-1,1)):null}))(s, p));\n// 补回肩角\nObject.assign(s, ((s,p)=>({q1:s.reachable?Math.atan2(p.y,p.x)-Math.atan2(Math.sin(s.q2),1+Math.cos(s.q2)):null}))(s, p));\n// 用正运动学独立回代\nObject.assign(s, ((s,p)=>({end:s.reachable?[Math.cos(s.q1)+Math.cos(s.q1+s.q2),Math.sin(s.q1)+Math.sin(s.q1+s.q2)]:null,elbow:s.reachable?[Math.cos(s.q1),Math.sin(s.q1)]:null}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-ik.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "目标改成[2,2]，说明为何应失败；切换肘分支，核对末端相同而中间连杆不同。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：机械臂末端到达同一点，肘部可以有几种位置？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "目标改成[2,2]，说明为何应失败；切换肘分支，核对末端相同而中间连杆不同。"
+      ],
+      "exercise": {
+        "prompt": "目标[1,1]时正分支q2是多少rad？",
+        "expected": 1.5707963267948966,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "cos q2=(1+1−2)/2=0，所以q2=π/2。",
+        "transfer": "目标改成[2,2]，说明为何应失败；切换肘分支，核对末端相同而中间连杆不同。"
+      },
+      "sources": [
+        "manipulation-ik-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-frames",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "manipulation-perception",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "manipulation-ik",
+      "demos": [
+        {
+          "modelId": "manipulation-ik",
+          "title": "逆运动学：一个目标为何有多种构形？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "manipulation-perception",
+      "course": "manipulation",
+      "unit": "3",
+      "title": "第3讲 几何感知：配准残差如何受离群点影响？",
+      "summary": "比较一维配准的最小二乘与中位数估计并检查残差。",
+      "question": "三对点都用于估计位移，其中一对错误会怎样？",
+      "outcome": "比较一维配准的最小二乘与中位数估计并检查残差。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "位姿估计依赖几何与对应关系。本例假设点已正确配对且只有x方向平移，把复杂3D问题缩成可手算的位移估计。",
+        "每对点给出一个位移候选。均值最小化平方误差，中位数最小化绝对误差；离群值对两者的影响不同。",
+        "这不是完整ICP。ICP还要交替寻找对应与估计变换，真实点云存在遮挡、旋转和局部最优。"
+      ],
+      "formula": "t_L2=mean(yᵢ−xᵢ)；t_L1=median(yᵢ−xᵢ)",
+      "worked": "默认目标比源点整体平移1，两个估计均为1；若最后一对多错3，L2估计2而中位数仍1。",
+      "misconception": "小配准残差不等于抓取几何可行；错误对应也可能产生貌似合理的变换。",
+      "sections": [
+        {
+          "title": "显式给定点对应关系",
+          "explanation": "源点[0,1,2]只沿x平移；完整3D配准还需旋转和对应估计。"
+        },
+        {
+          "title": "每对点提供一个位移候选",
+          "explanation": "对应关系错一条会影响最小二乘；本例故意可加一个离群误差。"
+        },
+        {
+          "title": "比较均值与中位数平移",
+          "explanation": "均值最小化平方误差；中位数最小化绝对误差，不等于通用ICP。"
+        },
+        {
+          "title": "回算配准残差",
+          "explanation": "对齐数值好看不能证明几何无碰撞或抓取可行。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={mean:xs=>xs.reduce((a,b)=>a+b,0)/xs.length};\nconst p={\"offset\":1,\"outlier\":0};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 显式给定点对应关系\nObject.assign(s, ((s,p)=>({source:[0,1,2],target:[p.offset,1+p.offset,2+p.offset+p.outlier]}))(s, p));\n// 每对点提供一个位移候选\nObject.assign(s, ((s,p)=>({differences:s.target.map((v,i)=>v-s.source[i])}))(s, p));\n// 比较均值与中位数平移\nObject.assign(s, ((s,p)=>({leastSquares:H.mean(s.differences),robust:s.differences.slice().sort((a,b)=>a-b)[1]}))(s, p));\n// 回算配准残差\nObject.assign(s, ((s,p)=>({residuals:s.target.map((v,i)=>v-(s.source[i]+s.leastSquares)),robustResiduals:s.target.map((v,i)=>v-(s.source[i]+s.robust))}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-perception.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "分别给离群误差0、2、4，记录两种估计和每对残差；说明鲁棒性依赖的多数正确假设。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：三对点都用于估计位移，其中一对错误会怎样？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "分别给离群误差0、2、4，记录两种估计和每对残差；说明鲁棒性依赖的多数正确假设。"
+      ],
+      "exercise": {
+        "prompt": "位移候选[1,1,4]的最小二乘平移是多少？",
+        "expected": 2,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "(1+1+4)/3=2。",
+        "transfer": "分别给离群误差0、2、4，记录两种估计和每对残差；说明鲁棒性依赖的多数正确假设。"
+      },
+      "sources": [
+        "manipulation-perception-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-ik",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "manipulation-contact",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "manipulation-perception",
+      "demos": [
+        {
+          "modelId": "manipulation-perception",
+          "title": "几何感知：配准残差如何受离群点影响？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "manipulation-contact",
+      "course": "manipulation",
+      "unit": "4",
+      "title": "第4讲 摩擦与抓取：夹住为什么还会滑？",
+      "summary": "按静态库仑模型计算双侧摩擦容量和余量。",
+      "question": "双指夹爪的法向力怎样支持物体重量？",
+      "outcome": "按静态库仑模型计算双侧摩擦容量和余量。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "法向力垂直接触面，抵抗滑动的是切向摩擦。库仑模型给出单侧|f_t|≤μN，不能把法向力本身直接当向上的支撑力。",
+        "对称双指竖直夹持时，两侧共同支持重力，需要2μN≥mg。本讲只检查竖直滑落这一种失效形式。",
+        "完整力闭合还涉及接触位置、转矩和三维扳手空间；真实摩擦系数、形变和接触面积需要实验与裕量。"
+      ],
+      "formula": "F_t,max=2μN；margin=2μN−mg",
+      "worked": "μ=0.5、每侧N=5、m=0.4：重量3.924N，摩擦容量5N，余量1.076N。",
+      "misconception": "满足一个方向的静态平衡不等于对所有扰动形成力闭合。",
+      "sections": [
+        {
+          "title": "画出对称双指夹持的受力",
+          "explanation": "物体静止、重力g=9.81，两侧法向力大小相同。"
+        },
+        {
+          "title": "计算单侧摩擦锥边界",
+          "explanation": "每侧切向力上限μN；这是库仑摩擦的理想模型。"
+        },
+        {
+          "title": "两侧共同抵抗重力",
+          "explanation": "这里仅讨论竖直滑落，没有证明完整扳手空间力闭合。"
+        },
+        {
+          "title": "保留模型假设和裕量",
+          "explanation": "边界相等在理想静态模型中可平衡；真实接触还需不确定性裕量。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"mu\":0.5,\"normal\":5,\"mass\":0.4};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 画出对称双指夹持的受力\nObject.assign(s, ((s,p)=>({weight:p.mass*9.81}))(s, p));\n// 计算单侧摩擦锥边界\nObject.assign(s, ((s,p)=>({perFinger:p.mu*p.normal}))(s, p));\n// 两侧共同抵抗重力\nObject.assign(s, ((s,p)=>({capacity:2*s.perFinger,margin:2*s.perFinger-s.weight}))(s, p));\n// 保留模型假设和裕量\nObject.assign(s, ((s,p)=>({staticFeasible:s.margin>=0,requiredPerFinger:s.weight/(2*p.mu)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-contact.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "将质量增加到1kg，求每侧至少需要多少法向力；记录哪些未建模因素会改变实测结果。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：双指夹爪的法向力怎样支持物体重量？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "将质量增加到1kg，求每侧至少需要多少法向力；记录哪些未建模因素会改变实测结果。"
+      ],
+      "exercise": {
+        "prompt": "按默认条件双侧摩擦容量是多少N？",
+        "expected": 5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "2×0.5×5=5。",
+        "transfer": "将质量增加到1kg，求每侧至少需要多少法向力；记录哪些未建模因素会改变实测结果。"
+      },
+      "sources": [
+        "manipulation-contact-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-perception",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "manipulation-path",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "manipulation-contact",
+      "demos": [
+        {
+          "modelId": "manipulation-contact",
+          "title": "摩擦与抓取：夹住为什么还会滑？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "manipulation-path",
+      "course": "manipulation",
+      "unit": "5",
+      "title": "第5讲 路径规划：端点安全为何整段仍碰撞？",
+      "summary": "检查路径每一段到障碍的最小距离，再在可行候选中选最短。",
+      "question": "起点和终点都无碰撞，连接它们的直线能直接执行吗？",
+      "outcome": "检查路径每一段到障碍的最小距离，再在可行候选中选最短。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "路径是配置随路径参数变化的几何曲线。只检查路点会漏掉中间碰撞，尤其当采样间隔较大或障碍较窄。",
+        "本例把机器人简化成点，比较穿过圆心的直线与上方绕行折线。每段对圆心求最短距离，要求大于障碍半径加间隙。",
+        "固定候选中最短不等于全局最短。真实机械臂还需检查全部连杆、自碰撞、附着物体和关节限制。"
+      ],
+      "formula": "clear ⇔ min_segment distance(center,segment)>radius+clearance",
+      "worked": "默认圆半径0.4、间隙0.1：直线长度2但无效，绕行长度4且可行。",
+      "misconception": "把末端看成点会低估机器人占用空间；路径无碰撞也不代表动力学可执行。",
+      "sections": [
+        {
+          "title": "给出起终点和两条候选路径",
+          "explanation": "点机器人从(0,0)到(2,0)，圆障碍中心(1,0)。"
+        },
+        {
+          "title": "检查整段距离",
+          "explanation": "只检查离散路径点会漏掉直线中间穿过的障碍。"
+        },
+        {
+          "title": "同时计算可行性和长度",
+          "explanation": "障碍边界接触按无效处理，间隙用于模型约束。"
+        },
+        {
+          "title": "只在可行路径里选择最短",
+          "explanation": "候选集固定，不能宣称全局最短或完整运动规划器。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0),\ndist:(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]),\nsegmentDistance:(a,b,c)=>{const dx=b[0]-a[0],dy=b[1]-a[1],den=dx*dx+dy*dy,t=den?Math.max(0,Math.min(1,((c[0]-a[0])*dx+(c[1]-a[1])*dy)/den)):0;return Math.hypot(a[0]+t*dx-c[0],a[1]+t*dy-c[1]);}};\nconst p={\"radius\":0.4,\"clearance\":0.1};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 给出起终点和两条候选路径\nObject.assign(s, ((s,p)=>({paths:[[[0,0],[2,0]],[[0,0],[0,1],[2,1],[2,0]]],center:[1,0]}))(s, p));\n// 检查整段距离\nObject.assign(s, ((s,p)=>({distances:s.paths.map(path=>Math.min(...path.slice(1).map((b,i)=>H.segmentDistance(path[i],b,s.center))))}))(s, p));\n// 同时计算可行性和长度\nObject.assign(s, ((s,p)=>({valid:s.distances.map(d=>d>p.radius+p.clearance),lengths:s.paths.map(path=>H.sum(path.slice(1).map((b,i)=>H.dist(path[i],b))))}))(s, p));\n// 只在可行路径里选择最短\nObject.assign(s, ((s,p)=>({selected:s.valid.map((ok,i)=>ok?i:-1).filter(i=>i>=0).sort((a,b)=>s.lengths[a]-s.lengths[b])[0]??null}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-path.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把圆半径和间隙总和调到1，按边界接触无效的规则核对；解释安全距离是否足够。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：起点和终点都无碰撞，连接它们的直线能直接执行吗？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把圆半径和间隙总和调到1，按边界接触无效的规则核对；解释安全距离是否足够。"
+      ],
+      "exercise": {
+        "prompt": "本例绕行折线的总长是多少？",
+        "expected": 4,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "从[0,0]到[0,1]长1，再到[2,1]长2，再到[2,0]长1，合计4。",
+        "transfer": "把圆半径和间隙总和调到1，按边界接触无效的规则核对；解释安全距离是否足够。"
+      },
+      "sources": [
+        "manipulation-path-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-contact",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "manipulation-trajectory",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "manipulation-path",
+      "demos": [
+        {
+          "modelId": "manipulation-path",
+          "title": "路径规划：端点安全为何整段仍碰撞？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "manipulation-trajectory",
+      "course": "manipulation",
+      "unit": "6",
+      "title": "第6讲 轨迹：同一路径怎样安排时间？",
+      "summary": "求三次时间标度的位置、速度与加速度，并检查速度上限。",
+      "question": "位置路径相同，把运动时间减半会怎样改变速度和加速度？",
+      "outcome": "求三次时间标度的位置、速度与加速度，并检查速度上限。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "路径只描述“经过哪里”，轨迹还给出“何时到达”。时间尺度变短会提高速度，并更快地提高加速度要求。",
+        "本例用3σ²−2σ³连接0到1，使起终速度为零。对真实时间求导时要分别乘1/T和1/T²。",
+        "这条三次曲线端点加速度非零，也未考虑jerk和电机力矩。满足位置边界不能替代执行器约束。"
+      ],
+      "formula": "q=3σ²−2σ³；qdot=(6σ−6σ²)/T；qddot=(6−12σ)/T²",
+      "worked": "T=2、σ=0.5时q=0.5，速度0.75，加速度0，峰值速度0.75。",
+      "misconception": "把路径变平滑不自动使速度与加速度满足限制。",
+      "sections": [
+        {
+          "title": "选一个零端点速度的时间标度",
+          "explanation": "起点q=0，终点q=1；σ=t/T。"
+        },
+        {
+          "title": "计算三次位置曲线",
+          "explanation": "q=3σ²−2σ³，沿同一几何路径改变时间。"
+        },
+        {
+          "title": "求速度与加速度",
+          "explanation": "对真实时间求导，分别带1/T和1/T²。"
+        },
+        {
+          "title": "检查峰值速度",
+          "explanation": "三次曲线峰值速度在σ=0.5，为1.5/T；端点加速度非零。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"duration\":2,\"position\":0.5};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 选一个零端点速度的时间标度\nObject.assign(s, ((s,p)=>({sigma:p.position,t:p.position*p.duration}))(s, p));\n// 计算三次位置曲线\nObject.assign(s, ((s,p)=>({q:3*s.sigma*s.sigma-2*s.sigma**3}))(s, p));\n// 求速度与加速度\nObject.assign(s, ((s,p)=>({velocity:(6*s.sigma-6*s.sigma*s.sigma)/p.duration,acceleration:(6-12*s.sigma)/(p.duration*p.duration)}))(s, p));\n// 检查峰值速度\nObject.assign(s, ((s,p)=>({peakVelocity:1.5/p.duration,withinLimit:1.5/p.duration<=1}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-trajectory.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立计算T=1和T=2时端点加速度；说明时间加倍对速度和加速度的不同影响。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：位置路径相同，把运动时间减半会怎样改变速度和加速度？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立计算T=1和T=2时端点加速度；说明时间加倍对速度和加速度的不同影响。"
+      ],
+      "exercise": {
+        "prompt": "T=3时峰值速度是多少？",
+        "expected": 0.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "最大6σ(1−σ)=1.5，除以T=3得到0.5。",
+        "transfer": "独立计算T=1和T=2时端点加速度；说明时间加倍对速度和加速度的不同影响。"
+      },
+      "sources": [
+        "manipulation-trajectory-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-path",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "manipulation-control",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "manipulation-trajectory",
+      "demos": [
+        {
+          "modelId": "manipulation-trajectory",
+          "title": "轨迹：同一路径怎样安排时间？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "manipulation-control",
+      "course": "manipulation",
+      "unit": "7",
+      "title": "第7讲 柔顺控制：刚度和阻尼分别做什么？",
+      "summary": "分解弹性和阻尼反馈，计算加速度与一次离散更新。",
+      "question": "目标位置还没到，为什么阻尼力可能与弹性力相反？",
+      "outcome": "分解弹性和阻尼反馈，计算加速度与一次离散更新。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "刚度反馈按位置误差拉向目标，阻尼反馈抵抗速度。两项可以同向也可以反向，不能把D也乘位置误差。",
+        "本例把末端视为1kg质量，忽略重力和接触，用F=K(x_d−x)−Dv求加速度；明确Euler更新位置时使用旧速度。",
+        "真实机械臂的笛卡尔刚度还需Jacobian、动力学和执行器映射；接触稳定性不能由这个单质量算例推出。"
+      ],
+      "formula": "F=K(x_d−x)−Dv；a=F/m",
+      "worked": "x=0.5、目标1、K=4、D=2、v=0.5：弹性力2N，阻尼−1N，合力1N。",
+      "misconception": "高刚度不必然更好，采样延迟、饱和和接触都可能放大振荡。",
+      "sections": [
+        {
+          "title": "从一维末端质量开始",
+          "explanation": "位置x=0.5，目标1，质量1kg；不含接触和重力项。"
+        },
+        {
+          "title": "分别计算弹性与阻尼反馈",
+          "explanation": "阻尼项反对当前速度，不是反对位置误差。"
+        },
+        {
+          "title": "合力决定加速度",
+          "explanation": "把目标位姿换成力命令需要动力学和执行器能力。"
+        },
+        {
+          "title": "显式Euler走0.1秒",
+          "explanation": "使用旧速度更新位置；数值积分误差与控制误差分别观察。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"stiffness\":4,\"damping\":2,\"velocity\":0.5};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 从一维末端质量开始\nObject.assign(s, ((s,p)=>({position:.5,goal:1,mass:1}))(s, p));\n// 分别计算弹性与阻尼反馈\nObject.assign(s, ((s,p)=>({elastic:p.stiffness*(s.goal-s.position),dampingForce:-p.damping*p.velocity}))(s, p));\n// 合力决定加速度\nObject.assign(s, ((s,p)=>({force:s.elastic+s.dampingForce,acceleration:(s.elastic+s.dampingForce)/s.mass}))(s, p));\n// 显式Euler走0.1秒\nObject.assign(s, ((s,p)=>({nextPosition:s.position+.1*p.velocity,nextVelocity:p.velocity+.1*s.acceleration}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-control.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把速度改为−0.5，手算两项变为同向；用不同dt独立积分，比较数值误差。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：目标位置还没到，为什么阻尼力可能与弹性力相反？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把速度改为−0.5，手算两项变为同向；用不同dt独立积分，比较数值误差。"
+      ],
+      "exercise": {
+        "prompt": "默认加速度是多少m/s²？",
+        "expected": 1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "[4×(1−0.5)−2×0.5]/1=1。",
+        "transfer": "把速度改为−0.5，手算两项变为同向；用不同dt独立积分，比较数值误差。"
+      },
+      "sources": [
+        "manipulation-control-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-trajectory",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "manipulation-task",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "manipulation-control",
+      "demos": [
+        {
+          "modelId": "manipulation-control",
+          "title": "柔顺控制：刚度和阻尼分别做什么？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    },
+    {
+      "id": "manipulation-task",
+      "course": "manipulation",
+      "unit": "8",
+      "title": "第8讲 任务层：抓取命令发出后还缺哪一步？",
+      "summary": "建立有确认和失败分支的抓取放置状态机。",
+      "question": "夹爪合拢了，为什么不能立刻假设物体已被抓住？",
+      "outcome": "建立有确认和失败分支的抓取放置状态机。",
+      "prerequisites": [
+        "坐标变换、正逆运动学与Jacobian基础",
+        "基础概率、微积分和反馈控制"
+      ],
+      "explanation": [
+        "复杂操作用任务状态协调连续控制与感知。靠近、合拢、确认、搬运、释放各有进入条件，不应只按时间盲目切换。",
+        "本例要求抓取确认成功才搬运，放置区域允许才释放。传感结果由选择框明确提供，展示规则控制流。",
+        "状态机输出是教学决策，没有真实传感器或机械臂回执。实际任务需要超时、重试、取消和错误恢复策略。"
+      ],
+      "formula": "success = grasp_confirmed AND place_clear",
+      "worked": "抓取成功且区域空闲时经过approach→close→verify→transport→release；失败则在verify后stop。",
+      "misconception": "命令被接收、执行结束和任务成功是三个不同事实。",
+      "sections": [
+        {
+          "title": "定义有限任务状态",
+          "explanation": "依次靠近、合拢、确认、搬运、释放；传感结果由滑块固定提供。"
+        },
+        {
+          "title": "先确认抓取再搬运",
+          "explanation": "合拢命令发出不等于物体已经被抓住。"
+        },
+        {
+          "title": "在放置前检查环境",
+          "explanation": "抓取失败不进入释放；区域阻塞时保留物体并停止。"
+        },
+        {
+          "title": "报告任务结果与失败条件",
+          "explanation": "这是明确规则的状态机，没有感知网络或真实机器人执行。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"grasp\":\"ok\",\"place\":\"clear\"};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 定义有限任务状态\nObject.assign(s, ((s,p)=>({states:['approach','close'],held:null}))(s, p));\n// 先确认抓取再搬运\nObject.assign(s, ((s,p)=>({held:p.grasp==='ok',states:s.states.concat(p.grasp==='ok'?['verify','transport']:['verify','stop'])}))(s, p));\n// 在放置前检查环境\nObject.assign(s, ((s,p)=>({states:s.states.concat(s.held?(p.place==='clear'?['release']:['wait']):[]),released:s.held&&p.place==='clear'}))(s, p));\n// 报告任务结果与失败条件\nObject.assign(s, ((s,p)=>({success:s.released,reason:!s.held?'抓取确认失败':p.place==='blocked'?'放置区域阻塞':'完成本例流程'}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node manipulation-task.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "穷举抓取成功/失败与区域空闲/阻塞的四种组合；确认失败分支不会到达release。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：夹爪合拢了，为什么不能立刻假设物体已被抓住？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "穷举抓取成功/失败与区域空闲/阻塞的四种组合；确认失败分支不会到达release。"
+      ],
+      "exercise": {
+        "prompt": "默认流程中释放前已有几个状态？",
+        "expected": 4,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "approach、close、verify、transport，共4个。",
+        "transfer": "穷举抓取成功/失败与区域空闲/阻塞的四种组合；确认失败分支不会到达release。"
+      },
+      "sources": [
+        "manipulation-task-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "manipulation-control",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "moveit-model",
+          "label": "连接后续课程：第1讲 机器人模型：URDF之外为什么还要SRDF？"
+        }
+      ],
+      "modelId": "manipulation-task",
+      "demos": [
+        {
+          "modelId": "manipulation-task",
+          "title": "任务层：抓取命令发出后还缺哪一步？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    }
+  ],
+  "sources": {
+    "manipulation-official": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · 官方目录",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.3 Basic Pick and Place；Ch.4 Geometric Pose Estimation；Ch.5 Bin Picking；Ch.6 Motion Planning；Ch.8 Manipulator Control",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-frames-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.3 Monogram Notation；Spatial Algebra",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.3 Monogram Notation；Spatial Algebra",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-ik-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.3 Forward/Differential Kinematics；Ch.6 Inverse Kinematics",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.3 Forward/Differential Kinematics；Ch.6 Inverse Kinematics",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-perception-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.4 Known Correspondences；ICP；Outliers",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.4 Known Correspondences；ICP；Outliers",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-contact-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.5 Static Equilibrium with Frictional Contact；Grasp Selection",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.5 Static Equilibrium with Frictional Contact；Grasp Selection",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-path-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.6 Sampling-based Motion Planning；Collision-free Configuration Space",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.6 Sampling-based Motion Planning；Collision-free Configuration Space",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-trajectory-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.3 Pick and Place Trajectory；Ch.6 Time Parameterization",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.3 Pick and Place Trajectory；Ch.6 Time Parameterization",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-control-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.8 Point-mass Control；Cartesian Stiffness",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.8 Point-mass Control；Cartesian Stiffness",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "manipulation-task-reading": {
+      "kind": "官方公开材料",
+      "label": "MIT Robotic Manipulation · Ch.5 Programming the Task Level；State Machines and Behavior Trees",
+      "url": "https://manipulation.mit.edu/",
+      "locator": "Ch.5 Programming the Task Level；State Machines and Behavior Trees",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "MIT 在线工作讲义 · 2026-11-09目录快照 · 八讲选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    }
+  }
+}

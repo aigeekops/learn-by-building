@@ -20,6 +20,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self.valid_host(): return self.send({'error':'Invalid Host'},403)
         route=urlsplit(self.path).path
+        if route=='/ai-courses.json':return self.send(core.config('ai_courses'))
+        if route=='/robotics-foundations.json':
+            from scripts.build_robotics_foundations import collect_data
+            return self.send(collect_data())
         if route=='/api/backup':return self.send(backup.export())
         if route in ('/api/state','/api/export'):
             with core.connect() as db:
@@ -55,7 +59,14 @@ class Handler(BaseHTTPRequestHandler):
         files.update({'/site-route.js':('site-route.js','text/javascript; charset=utf-8'),'/site-route.css':('site-route.css','text/css; charset=utf-8'),'/ee-textbook.js':('ee-textbook.js','text/javascript; charset=utf-8'),'/ee-textbook.css':('ee-textbook.css','text/css; charset=utf-8')})
         files.update({'/learning-links.js':('learning-links.js','text/javascript; charset=utf-8'),'/learning-links.css':('learning-links.css','text/css; charset=utf-8')})
         files.update({'/robotics-curriculum.js':('robotics-curriculum.js','text/javascript; charset=utf-8'),'/robotics-curriculum.css':('robotics-curriculum.css','text/css; charset=utf-8')})
+        files.update({'/'+name:(name,'text/css; charset=utf-8' if name.endswith('.css') else 'text/javascript; charset=utf-8') for name in ('course-teaching-models.js','course-teaching.js','course-teaching.css')})
         files.update({'/study-resources.js':('study-resources.js','text/javascript; charset=utf-8'),'/study-resources.css':('study-resources.css','text/css; charset=utf-8')})
+        files.update({'/ai-courses.html':('ai-courses.html','text/html; charset=utf-8'),'/ai-courses.js':('ai-courses.js','text/javascript; charset=utf-8'),'/ai-course-models.js':('ai-course-models.js','text/javascript; charset=utf-8'),'/ai-courses.css':('ai-courses.css','text/css; charset=utf-8')})
+        files.update({'/'+name:(name,'text/javascript; charset=utf-8') for name in ('ai-cme295-2026.js','ai-cs336-2026.js','ai-cs146s-2026.js')})
+        files.update({'/attention-workbench.js':('attention-workbench.js','text/javascript; charset=utf-8'),'/attention-workbench.css':('attention-workbench.css','text/css; charset=utf-8')})
+        files.update({'/'+name:(name,'text/css; charset=utf-8' if name.endswith('.css') else 'text/javascript; charset=utf-8') for name in ('course-inspector.js','course-inspector.css','course-inspectors/cme295.js','course-inspectors/cs336.js','course-inspectors/cs146s.js','course-inspectors/mit2007.js','course-inspectors/modern.js','course-inspectors/pid.js','course-inspectors/kalman.js','course-inspectors/ros.js')})
+        from scripts.build_robotics_foundations import ASSETS
+        files.update({'/'+name:(name,'text/html; charset=utf-8' if name.endswith('.html') else 'text/css; charset=utf-8' if name.endswith('.css') else 'text/javascript; charset=utf-8') for name in ASSETS})
         for name in ('divider-load','diagnosis-path','load-current-tradeoff'):
             files[f'/assets/{name}.png']=(f'assets/{name}.png','image/png')
         if route not in files:return self.send({'error':'Not found'},404)

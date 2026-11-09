@@ -1,0 +1,273 @@
+{
+  "checked": "2026-11-09",
+  "basis": "actual authored catalogs verified in an isolated browser; content readiness is separate from personal learning progress",
+  "initial_completely_unmade": [
+    "linear",
+    "probability",
+    "cs229",
+    "cs234",
+    "bonn",
+    "manipulation",
+    "nav2",
+    "moveit",
+    "cs224r",
+    "underactuated"
+  ],
+  "new_batch": {
+    "linear": 6,
+    "probability": 6,
+    "cs229": 6
+  },
+  "completely_unmade": [],
+  "prerequisite_only": [],
+  "authored_courses": 26,
+  "authored_lessons": 220,
+  "scheduled_lessons_pending": 12,
+  "scope_note": "Courses contain authored selections and retain explicit pending topics; this is not a full translation or full coverage of every original course.",
+  "validated_build_sha256": "9c2cee455ceb9c5c983c0243296a7ab080ebb9f47cc7c490caf83de0730af25a",
+  "catalog_snapshot": [
+    {
+      "id": "cs50p",
+      "kind": "authored",
+      "family": "foundation",
+      "count": 11,
+      "pendingCount": 0,
+      "first": "cs50p-functions"
+    },
+    {
+      "id": "tools",
+      "kind": "authored",
+      "family": "foundation",
+      "count": 9,
+      "pendingCount": 0,
+      "first": "missing-shell"
+    },
+    {
+      "id": "linear",
+      "kind": "authored",
+      "family": "foundation",
+      "count": 6,
+      "pendingCount": 0,
+      "first": "linear-vectors"
+    },
+    {
+      "id": "probability",
+      "kind": "authored",
+      "family": "foundation",
+      "count": 6,
+      "pendingCount": 0,
+      "first": "probability-binomial"
+    },
+    {
+      "id": "cs229",
+      "kind": "authored",
+      "family": "foundation",
+      "count": 6,
+      "pendingCount": 0,
+      "first": "cs229-gradient"
+    },
+    {
+      "id": "d2l",
+      "kind": "authored",
+      "family": "foundation",
+      "count": 16,
+      "pendingCount": 0,
+      "first": "d2l-tensors"
+    },
+    {
+      "id": "cme295",
+      "kind": "authored",
+      "family": "ai",
+      "count": 6,
+      "pendingCount": 3,
+      "first": "attention"
+    },
+    {
+      "id": "cs336",
+      "kind": "authored",
+      "family": "ai",
+      "count": 18,
+      "pendingCount": 0,
+      "first": "cs336-tokenization"
+    },
+    {
+      "id": "hfagents",
+      "kind": "authored",
+      "family": "application",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "hfagents-state"
+    },
+    {
+      "id": "cs146s",
+      "kind": "authored",
+      "family": "ai",
+      "count": 10,
+      "pendingCount": 9,
+      "first": "agent"
+    },
+    {
+      "id": "cs231n",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "cs231n-linear"
+    },
+    {
+      "id": "fsdl",
+      "kind": "authored",
+      "family": "application",
+      "count": 13,
+      "pendingCount": 0,
+      "first": "fsdl-metrics"
+    },
+    {
+      "id": "cs234",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "cs234-return"
+    },
+    {
+      "id": "arduino",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "arduino-led"
+    },
+    {
+      "id": "mit2007",
+      "kind": "authored",
+      "family": "robotics",
+      "count": 6,
+      "pendingCount": 0,
+      "first": "rf-gears"
+    },
+    {
+      "id": "modern",
+      "kind": "authored",
+      "family": "robotics",
+      "count": 7,
+      "pendingCount": 0,
+      "first": "rf-transform"
+    },
+    {
+      "id": "pid",
+      "kind": "authored",
+      "family": "robotics",
+      "count": 6,
+      "pendingCount": 0,
+      "first": "rf-p-feedback"
+    },
+    {
+      "id": "kalman",
+      "kind": "authored",
+      "family": "robotics",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "rf-noisy-measurements"
+    },
+    {
+      "id": "ros",
+      "kind": "authored",
+      "family": "robotics",
+      "count": 4,
+      "pendingCount": 0,
+      "first": "rf-ros-pubsub"
+    },
+    {
+      "id": "bonn",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "bonn-motion"
+    },
+    {
+      "id": "manipulation",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "manipulation-frames"
+    },
+    {
+      "id": "nav2",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "nav2-lifecycle"
+    },
+    {
+      "id": "moveit",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "moveit-model"
+    },
+    {
+      "id": "lerobot",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "lerobot-schema"
+    },
+    {
+      "id": "cs224r",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "cs224r-bc"
+    },
+    {
+      "id": "underactuated",
+      "kind": "authored",
+      "family": "extension",
+      "count": 8,
+      "pendingCount": 0,
+      "first": "underactuated-actuation"
+    }
+  ],
+  "browser_checks": {
+    "panelVisits": 288,
+    "frames": 288,
+    "recomputations": 72,
+    "automaticLearningRecords": 0,
+    "errors": []
+  },
+  "tests": {
+    "node_passed": 383,
+    "node_skipped": 1,
+    "python_passed": 87
+  },
+  "final_delivery_verification": {
+    "observed_utc": "2026-11-08T19:01:08.850225+00:00",
+    "targets": [
+      {
+        "path": "/Users/bytedance/Documents/pam/output/learning-unified-20261108/index.html",
+        "sha256": "9c2cee455ceb9c5c983c0243296a7ab080ebb9f47cc7c490caf83de0730af25a"
+      },
+      {
+        "path": "/Users/bytedance/.codex/visualizations/2026/11/08/01a1ba7a-aa05-7d22-b7d8-d43060f03248/learning-map-courses-integrated.html",
+        "sha256": "9c2cee455ceb9c5c983c0243296a7ab080ebb9f47cc7c490caf83de0730af25a"
+      },
+      {
+        "path": "/Users/bytedance/.codex/visualizations/2026/11/08/01a1bb29-4d02-7ee2-9841-644b864031b5/learning-map-courses-integrated.html",
+        "sha256": "9c2cee455ceb9c5c983c0243296a7ab080ebb9f47cc7c490caf83de0730af25a"
+      }
+    ],
+    "identical": true,
+    "second_batch_source_content_matches": true,
+    "course_count": 26,
+    "authored_lessons": 220,
+    "standalone_sha256": "9c2cee455ceb9c5c983c0243296a7ab080ebb9f47cc7c490caf83de0730af25a",
+    "personal_records_read_or_rewritten": false
+  }
+}

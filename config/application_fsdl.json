@@ -1,0 +1,1236 @@
+{
+  "course": {
+    "id": "fsdl",
+    "label": "Full Stack Deep Learning",
+    "title": "从能运行的模型到可检查的交付",
+    "edition": "2022公开版 · 本站13讲选编与完整本地项目",
+    "position": "模型与应用之后的工程交付",
+    "description": "13讲原创中文配套：原工程交付8讲，加Foundation Models、ML Teams、Ethics与两讲完整本地项目。项目真实完成数据、训练、制品、HTTP检查、坏包拒绝和回滚。",
+    "prerequisites": [
+      "能运行Python程序、读字典和测试断言",
+      "了解训练与独立验证，可按需回补动手学深度学习",
+      "能说明一个模型或应用的输入输出；不要求真实云账户或GPU"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "问题与指标：准确率相同，代价为什么不同？",
+        "lessons": [
+          "fsdl-metrics"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "2",
+        "title": "数据与版本：先分组，再拟合预处理",
+        "lessons": [
+          "fsdl-data"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "3",
+        "title": "实验管理：同一验证版本，才有可比的分数",
+        "lessons": [
+          "fsdl-experiments"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "4",
+        "title": "调试与误差分析：下降的曲线也可能用了错梯度",
+        "lessons": [
+          "fsdl-debugging"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "5",
+        "title": "测试与质量：绿色套件覆盖了哪些输入？",
+        "lessons": [
+          "fsdl-testing"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "6",
+        "title": "部署与服务：批处理省了开销，也增加了等待",
+        "lessons": [
+          "fsdl-serving"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "7",
+        "title": "监控与漂移：分布告警不等于模型失效",
+        "lessons": [
+          "fsdl-monitoring"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "8",
+        "title": "更新与回滚：让每次切换都有版本和证据",
+        "lessons": [
+          "fsdl-release"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "9",
+        "title": "Foundation Models：冻结表示与完整微调的区别",
+        "lessons": [
+          "fsdl-foundation-models"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "10",
+        "title": "ML Teams：把模型文件交接成可负责的系统",
+        "lessons": [
+          "fsdl-ml-teams"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "11",
+        "title": "Ethics：分组错误、遗漏样本与人工复核",
+        "lessons": [
+          "fsdl-ethics"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "12",
+        "title": "完整项目上半程：数据分组、训练与模型制品",
+        "lessons": [
+          "fsdl-project-train"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "13",
+        "title": "完整项目下半程：HTTP契约、监控、坏包与回滚",
+        "lessons": [
+          "fsdl-project-serve"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      }
+    ],
+    "pending": "本轮已补指定专题与完整原创本地实验；FSDL 2022的Text Recognizer、云服务及全套原始Labs并未全环境复现。工具演示保持2022版本说明。",
+    "sources": [
+      "fsdl-home-2022"
+    ],
+    "checked": "2026-11-09"
+  },
+  "sources": {
+    "fsdl-home-2022": {
+      "kind": "官方2022公开课程",
+      "label": "FSDL 2022 课程目录",
+      "url": "https://fullstackdeeplearning.com/course/2022/",
+      "locator": "2022完整公开课程与Labs；本站选编8讲，不对应原课1–8逐讲翻译",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-vision-2022": {
+      "kind": "官方2022公开课程",
+      "label": "Lecture 1 · Course Vision and When to Use ML",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-1-course-vision-and-when-to-use-ml/",
+      "locator": "2 When To Use Machine Learning；ML Feasibility Assessment；3 Lifecycle；2022-08-08",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-experiments-2022": {
+      "kind": "官方2022公开课程",
+      "label": "Lab 4 · Experiment Management",
+      "url": "https://fullstackdeeplearning.com/course/2022/lab-4-experiment-management/",
+      "locator": "Outline：Why 00:00、Artifact versioning 16:27、Hyperparameter sweeps 25:00；2022-08-17",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-testing-2022": {
+      "kind": "官方2022公开课程",
+      "label": "Lecture 3 · Troubleshooting & Testing",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-3-troubleshooting-and-testing/",
+      "locator": "1 Testing Software；2 Testing ML Systems；3 Troubleshooting Models；2022-08-22",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-data-2022": {
+      "kind": "官方2022公开课程",
+      "label": "Lecture 4 · Data Management",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-4-data-management/",
+      "locator": "4 Data Processing；6 Datasets；8 Data Versioning；2022-08-29",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-deployment-2022": {
+      "kind": "官方2022公开课程",
+      "label": "Lecture 5 · Deployment",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-5-deployment/",
+      "locator": "2.1 Batch Prediction；2.2 Model-as-Service：Concurrency、Batching、Model Rollouts；2022-09-05",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-continual-2022": {
+      "kind": "官方2022公开课程",
+      "label": "Lecture 6 · Continual Learning",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-6-continual-learning/",
+      "locator": "4 Metrics to Monitor：Distribution Drift；5 Retraining Strategy：Offline/Online Testing；2022-09-12",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-monitoring-lab-2022": {
+      "kind": "官方2022公开课程",
+      "label": "Lab 8 · Model Monitoring",
+      "url": "https://fullstackdeeplearning.com/course/2022/lab-8-model-monitoring/",
+      "locator": "Outline：Basic user feedback 00:00、logging feedback 04:51、distributions and filters 14:23；2022-09-14",
+      "status": "2026-11-08已核对官方页面正文/目录；原理按2022版标注，本站算例和代码为原创，不宣称原课云环境已复现",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-foundation-2022": {
+      "kind": "原作者公开材料",
+      "label": "FSDL Lecture 7 · Foundation Models",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-7-foundation-models/",
+      "locator": "Fine-Tuning、Transformers、Large Language Models、Prompt Engineering与跨模态应用",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-teams-2022": {
+      "kind": "原作者公开材料",
+      "label": "FSDL Lecture 8 · ML Teams and Project Management",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-8-teams-and-pm/",
+      "locator": "团队角色、项目管理、技能与端到端交付；具体教学排程为本站原创",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-ethics-2022": {
+      "kind": "原作者公开材料",
+      "label": "FSDL Lecture 9 · Ethics",
+      "url": "https://fullstackdeeplearning.com/course/2022/lecture-9-ethics/",
+      "locator": "公平、隐私、影响与责任；本例使用虚构分组，不进行真实高影响决策",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "FSDL 2022"
+    },
+    "fsdl-project-2022": {
+      "kind": "原作者公开材料",
+      "label": "FSDL Lab Overview",
+      "url": "https://fullstackdeeplearning.com/course/2022/lab-0-overview/",
+      "locator": "由训练走向实验、测试、部署与监控的完整项目方法；本站项目为独立合成图像分类，不复刻原Text Recognizer",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "FSDL 2022"
+    }
+  },
+  "lessons": [
+    {
+      "id": "fsdl-metrics",
+      "course": "fsdl",
+      "unit": "1",
+      "title": "第1讲 问题与指标：准确率相同，代价为什么不同？",
+      "summary": "定义预测任务、阈值、混淆矩阵和比较条件，复算一次误报与漏报代价。",
+      "question": "模型分数已经算出，为什么还不能只挑准确率最高的版本？",
+      "outcome": "定义预测任务、阈值、混淆矩阵和比较条件，复算一次误报与漏报代价。",
+      "prerequisites": [
+        "会读列表和条件判断",
+        "能解释比例的分子与分母"
+      ],
+      "explanation": [
+        "先用规则或简单统计做基线，再决定是否需要模型。产品目标不是“拥有一个模型”，而是在给定输入和约束下改善一个具体任务；成功条件应该在比较候选前说清楚。",
+        "一个分数要通过阈值变成行动，之后才有真阳、假阳、假阴和真阴。精确率问“报出来的有多少是真的”，召回率问“真的有多少被找出”；两个分母不同，不能互换。",
+        "误报和漏报可能影响不同。这里为它们指定教学代价，逐条计算后再汇总。代价数值由案例约定，验证集上的分数也不等于已经改善真实产品。"
+      ],
+      "formula": "precision=TP/(TP+FP)；recall=TP/(TP+FN)；代价=FP×误报代价+FN×漏报代价",
+      "worked": "默认阈值0.5得到TP=2、FP=1、FN=1、TN=2。准确率、精确率和召回率均为2/3；误报代价2、漏报代价5时总计7。阈值0.8仍只错两条，但代价变为10。",
+      "misconception": "分数不一定是经过校准的概率；一项指标也不是整体产品价值。没有正类预测时精确率未定义，应保留未知并解释。",
+      "sections": [
+        {
+          "title": "先写任务契约",
+          "explanation": "把输入、输出、用户如何使用输出、错误后果写成一小段约定。FSDL的原理先关注产品问题和可行性；本例用六条人工样本单独练习指标，不是原课的完整产品评估。",
+          "exercise": "给一个“文档是否需要人工复核”的任务列出误报与漏报的不同后果。"
+        },
+        {
+          "title": "把阈值与规则固定后再比较",
+          "explanation": "统一规定score≥threshold判正。先在同一组已核对标签上逐条记账，再选择指标与阈值。若反复看测试集选择阈值，最后的测试分数就不能再当独立证据。",
+          "exercise": "保持代价不变，将阈值改为0.8，手数四个格子并说明准确率为什么没有揭示全部差异。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import json\n\ndef evaluate(threshold, fp_cost=2, fn_cost=5):\n    rows = [(0.9, 1), (0.75, 0), (0.6, 1), (0.45, 0), (0.3, 1), (0.1, 0)]\n    tp = fp = fn = tn = 0\n    for score, label in rows:\n        predicted = score >= threshold\n        if predicted and label: tp += 1\n        elif predicted: fp += 1\n        elif label: fn += 1\n        else: tn += 1\n    return dict(tp=tp, fp=fp, fn=fn, tn=tn,\n                precision=tp / (tp + fp) if tp + fp else None,\n                recall=tp / (tp + fn), accuracy=(tp + tn) / len(rows),\n                penalty=fp * fp_cost + fn * fn_cost)\n\nresult = evaluate(0.5)\nassert (result['tp'], result['fp'], result['fn'], result['tn']) == (2, 1, 1, 2)\nassert result['penalty'] == 7\nassert evaluate(0.8)['penalty'] == 10\nprint(json.dumps(result, sort_keys=True))\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "先预测阈值从0.5提高到0.8会漏掉哪条正类。",
+        "播放每条记录进入四格计数的过程，再改变两种代价。",
+        "不看总分，先逐条解释错误类别，再用公式复算代价。"
+      ],
+      "exercise": {
+        "prompt": "默认四格计数FP=1、FN=1；误报代价2、漏报代价5时总计多少单位？",
+        "expected": 7,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "把两类错误分别乘以各自代价。",
+        "solution": "1×2+1×5=7。",
+        "transfer": "独立比较阈值0.8：TP=1、FP=0、FN=2、TN=3，代价10；解释两个阈值准确率都为2/3却不能直接认定等价。"
+      },
+      "sources": [
+        "fsdl-vision-2022",
+        "fsdl-testing-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-data",
+          "label": "下一讲：先保证比较数据独立"
+        }
+      ],
+      "modelId": "fsdl-metrics",
+      "demos": [
+        {
+          "modelId": "fsdl-metrics",
+          "title": "问题与指标：准确率相同，代价为什么不同？的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-data",
+      "course": "fsdl",
+      "unit": "2",
+      "title": "第2讲 数据与版本：先分组，再拟合预处理",
+      "summary": "保存数据清单与版本，区分实体泄漏和预处理泄漏，复算训练中心与验证转换。",
+      "question": "模型没有看验证标签，验证集为什么仍可能被污染？",
+      "outcome": "保存数据清单与版本，区分实体泄漏和预处理泄漏，复算训练中心与验证转换。",
+      "prerequisites": [
+        "会读字典、列表与集合",
+        "知道均值是总和除以条数"
+      ],
+      "explanation": [
+        "同一份数据需要带着身份进入实验。文件名不够：样本清单、标签修订、划分规则和预处理版本都会改变结果。浏览器展示完整小清单，本地示例另外计算真实SHA-256摘要。",
+        "如果目标是预测未见过的新实体，不能随意把同一个实体的相近记录分到两侧。按行随机或交替可能把相关样本拆开，使验证结果变得过于乐观；真实任务也可能需要时间切分。",
+        "先划分，再仅在训练侧拟合中心等统计量，最后把同一个变换应用于验证。即使不使用验证标签，从保留验证特征拟合统计量仍然破坏这个流程的独立性。"
+      ],
+      "formula": "训练中心μ=Σx_train/n_train；x_validation′=x_validation−μ_train",
+      "worked": "默认A、B实体进入训练，特征[0,2,4,6]，中心为3；C实体[8,10]验证转换为[5,7]。按行交替会让三个实体全部跨边界；全部数据中心为5，也会让严格保留的验证集参与拟合。",
+      "misconception": "一个固定seed不能解决实体泄漏。数据摘要能识别字节版本，但不能证明标签正确或划分符合任务。",
+      "sections": [
+        {
+          "title": "数据版本应该能重建",
+          "explanation": "原课Data Management讨论来源、处理、数据集和版本；本例将这些原则缩成六条可逐行核对的记录。本地示例对规范JSON字节求摘要，模型中的清单字符串只用于教学比较，不冒充防篡改证明。",
+          "exercise": "改变revision后，指出哪条记录发生了变化，列出必须重新计算的派生结果。"
+        },
+        {
+          "title": "两个独立的泄漏检查",
+          "explanation": "实体是否重叠与预处理统计使用了哪些样本是两个不同问题。按实体切分后仍可能错误地在全数据上拟合；只用训练拟合也不能修复错误的实体划分。",
+          "exercise": "分别只制造一种泄漏，保持另一种检查通过，写出两个反例。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import hashlib\nimport json\nfrom statistics import mean\n\nrows = [dict(id=f'r{i}', group='AABBCC'[i], x=x, y=int(x >= 5))\n        for i, x in enumerate([0, 2, 4, 6, 8, 10])]\n# Freeze canonical bytes so the same dataset can be identified again.\npayload = json.dumps(rows, sort_keys=True, separators=(',', ':')).encode()\nmanifest = dict(revision=0, sha256=hashlib.sha256(payload).hexdigest())\ntrain = [row for row in rows if row['group'] != 'C']\nvalidation = [row for row in rows if row['group'] == 'C']\ncenter = mean(row['x'] for row in train)\nvalidation_x = [row['x'] - center for row in validation]\noverlap = {row['group'] for row in train} & {row['group'] for row in validation}\nassert center == 3 and validation_x == [5, 7] and not overlap\nrow_train, row_validation = rows[::2], rows[1::2]\nassert len({r['group'] for r in row_train} & {r['group'] for r in row_validation}) == 3\nprint(json.dumps(dict(manifest=manifest, center=center, validationX=validation_x)))\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "先手算训练中心，并预测是否有实体同时出现在两侧。",
+        "切换分组/按行、训练拟合/全部拟合，单步看清单与中心。",
+        "用独立Python集合检查重叠，再复算转换结果，不把“已划分”当作“独立”。"
+      ],
+      "exercise": {
+        "prompt": "训练特征为[0,2,4,6]，只能用训练数据拟合中心。中心是多少？",
+        "expected": 3,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先相加12，再除以4。",
+        "solution": "(0+2+4+6)/4=3。",
+        "transfer": "独立验证按行交替：训练为[0,4,8]，中心4，验证为[2,6,10]。A/B/C三组全有重叠；解释为什么中心算对也不能修复实体泄漏。"
+      },
+      "sources": [
+        "fsdl-data-2022",
+        "fsdl-testing-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-experiments",
+          "label": "下一讲：把版本放进每次实验"
+        },
+        {
+          "lesson": "d2l-generalization",
+          "label": "回补：独立验证与泛化"
+        }
+      ],
+      "modelId": "fsdl-data",
+      "demos": [
+        {
+          "modelId": "fsdl-data",
+          "title": "数据与版本：先分组，再拟合预处理的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-experiments",
+      "course": "fsdl",
+      "unit": "3",
+      "title": "第3讲 实验管理：同一验证版本，才有可比的分数",
+      "summary": "把数据、配置、轨迹和评价版本连接起来，复算两次训练并在可比条件下选优。",
+      "question": "两个分数都保留了四位小数，为什么仍可能不能比较？",
+      "outcome": "把数据、配置、轨迹和评价版本连接起来，复算两次训练并在可比条件下选优。",
+      "prerequisites": [
+        "会读一次梯度更新",
+        "完成数据划分与版本的检查"
+      ],
+      "explanation": [
+        "实验记录不是在结束时抄一个最低损失。至少保留数据、代码、超参数、运行条件、模型制品和评价版本，才能解释结果来自哪里。这里用确定性标量目标隔离一个学习率变量。",
+        "两个实验都从w=0出发，以(w−2)²为训练目标，B的学习率是A的两倍。动画逐次更新并保存当时参数，随后才计算训练和独立验证目标上的损失。",
+        "训练目标和验证目标不必给候选相同的排序。如果验证版本不同，先拒绝选优，让候选在同一基准上重新评价。本例的简单验证目标是教学反例，不证明真实泛化规律。"
+      ],
+      "formula": "w_next=w−lr×2(w−2)；在相同验证版本上比较L_validation",
+      "worked": "学习率A=0.1、B=0.2，三次更新得到w_A=0.976、w_B=1.568。验证目标1.5时损失为0.274576和0.004624，选B；更新六次时验证目标可能改选A，说明训练损失不能替代验证选择。",
+      "misconception": "追踪平台保存了日志，不等于数据和运行条件已经一致。选择规则必须先核对评价版本；本课不联网使用W&B。",
+      "sections": [
+        {
+          "title": "配置、指标、制品属于一次运行",
+          "explanation": "2022 Lab4使用W&B讲实验工作流、表格、制品版本和sweeps。本课采用标准库JSON实现可审查的小记录，不复制历史平台API，也不声称已经配置外部追踪服务。",
+          "exercise": "为本地例子增加code_revision字段，再说明仅保存模型权重会漏掉什么。"
+        },
+        {
+          "title": "先区分可比较，再排序",
+          "explanation": "显示两个验证损失不自动意味着可比。更换验证数据后保留两个数字并标出版本，不用较小值宣布胜利。正式选择还需要足够样本、重复运行及不确定性分析。",
+          "exercise": "将验证版本改成不同，解释为什么即便B分数看起来更低，winner也应保持未知。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import json\n\ndef run(rate, epochs, validation_target=1.5):\n    w, history = 0.0, []\n    for epoch in range(1, epochs + 1):\n        w -= rate * 2 * (w - 2)\n        history.append(dict(epoch=epoch, w=w))\n    return dict(rate=rate, data='train-v1', validation='val-v1',\n                history=history, w=w, train_loss=(w - 2) ** 2,\n                val_loss=(w - validation_target) ** 2)\n\nruns = [run(0.1, 3), run(0.2, 3)]\nassert abs(runs[0]['w'] - 0.976) < 1e-12\nassert abs(runs[1]['w'] - 1.568) < 1e-12\nassert runs[0]['validation'] == runs[1]['validation']\nwinner = min(range(2), key=lambda i: (runs[i]['val_loss'], i))\nassert winner == 1\n# Compare on one fixed held-out validation version before choosing an artifact.\nprint(json.dumps(dict(runs=runs, winner=['A', 'B'][winner])))\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "先手推A第一次更新后的w，预测B会走多远。",
+        "比较三轮和六轮轨迹，同时查看训练损失与验证损失。",
+        "切换验证版本并用本地记录核对，写明本次允许和不允许得出的结论。"
+      ],
+      "exercise": {
+        "prompt": "训练目标(w−2)²，w=0、lr=0.1，更新一次后w是多少？",
+        "expected": 0.4,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先求梯度2(0−2)=−4，再沿负梯度移动。",
+        "solution": "w_next=0−0.1×(−4)=0.4。",
+        "transfer": "独立手推B的第二步：lr=0.2，第一步w=0.8，第二步得到1.28。再比较六轮时A/B的验证目标1.5损失，不以训练最低者自动胜出。"
+      },
+      "sources": [
+        "fsdl-experiments-2022",
+        "fsdl-vision-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-debugging",
+          "label": "下一讲：独立检查训练计算是否正确"
+        }
+      ],
+      "modelId": "fsdl-experiments",
+      "demos": [
+        {
+          "modelId": "fsdl-experiments",
+          "title": "实验管理：同一验证版本，才有可比的分数的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-debugging",
+      "course": "fsdl",
+      "unit": "4",
+      "title": "第4讲 调试与误差分析：下降的曲线也可能用了错梯度",
+      "summary": "从可手算数据定位误差、损失归约和梯度，使用独立中心差分验证，再观察参数更新。",
+      "question": "一次更新让损失下降，能否说明梯度实现正确？",
+      "outcome": "从可手算数据定位误差、损失归约和梯度，使用独立中心差分验证，再观察参数更新。",
+      "prerequisites": [
+        "知道梯度更新的方向",
+        "能复算平均半平方损失"
+      ],
+      "explanation": [
+        "先让训练在很小、能检查的数据上正确运行，再考虑速度和规模。把样本索引、标签、预测和误差逐项对齐，可以把“效果不好”拆成可定位的问题。",
+        "本课的损失是平均半平方误差，每条梯度贡献为x×误差，最后还要除以样本数。故意使用sum模式可制造一个明确缺陷：它与显示的平均损失不一致。",
+        "中心差分只从损失函数的两个邻近值估计导数，不复用解析公式，因此能独立检查口径。之后观察更新与损失变化；即便错误梯度偶尔让损失下降，也不能忽略检查失败。"
+      ],
+      "formula": "L(w)=Σ(wx_i−y_i)²/(2n)；g=Σx_i(wx_i−y_i)/n；g_num≈[L(w+ε)−L(w−ε)]/(2ε)",
+      "worked": "数据x=[1,2]、y=[2,4]、w=0：误差[−2,−4]，损失5，梯度贡献[−2,−8]，平均梯度−5。lr=0.1更新到w=0.5，损失2.8125；漏除2的sum梯度是−10，与差分不符。",
+      "misconception": "损失下降不是梯度正确的充分条件。差分也有浮点误差，需选适当步长与容差；本例平滑函数不涉及ReLU拐点。",
+      "sections": [
+        {
+          "title": "把一次失败缩成一个能复现的样本",
+          "explanation": "原课Troubleshooting提出Make It Run、Fast、Right，并讨论训练与测试。本课先固定两条数据，检查列、单位和归约，而不是在大任务上盲调许多超参数。",
+          "exercise": "为误差表加上样本ID，故意交换两个标签，指出变化首先出现在哪一层。"
+        },
+        {
+          "title": "用另一条计算路线做证据",
+          "explanation": "解析梯度和差分计算应各自独立。如果用同一段错误梯度代码产生“期望”，测试就只是在重复实现。即使差分吻合，还需独立数据与任务指标验证。",
+          "exercise": "切到sum并比较梯度差值；再增加学习率，区分口径错误与步长太大的影响。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import json\nfrom statistics import mean\n\nxs, ys = [1, 2], [2, 4]\ndef half_mse(w):\n    return mean((w * x - y) ** 2 for x, y in zip(xs, ys)) / 2\n\nw, rate = 0.0, 0.1\nerrors = [w * x - y for x, y in zip(xs, ys)]\ncontributions = [x * error for x, error in zip(xs, errors)]\ngradient = mean(contributions)\neps = 1e-5\nnumerical = (half_mse(w + eps) - half_mse(w - eps)) / (2 * eps)\nassert abs(gradient - numerical) < 1e-8\nassert abs(sum(contributions) - numerical) > 1  # Deliberate reduction defect.\nnext_w = w - rate * gradient\nassert next_w == 0.5 and half_mse(next_w) == 2.8125\nprint(json.dumps(dict(loss=half_mse(w), gradient=gradient, numerical=numerical,\n                      nextWeight=next_w, nextLoss=half_mse(next_w))))\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "不播放，先算w=0时两条误差、损失与平均梯度。",
+        "切换mean/sum，跟踪独立差分值是否跟着变。",
+        "用本地代码逐项核对，再说明一次下降可以证明和不能证明什么。"
+      ],
+      "exercise": {
+        "prompt": "x=[1,2]、y=[2,4]、w=0，平均半平方损失对w的梯度是多少？",
+        "expected": -5,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "各贡献为1×(−2)、2×(−4)，再除以2。",
+        "solution": "[−2+(−8)]/2=−5。",
+        "transfer": "独立验证w=1：损失1.25，平均梯度−2.5，lr=0.1后w=1.25。用中心差分核对，不直接复制动画里的解析值。"
+      },
+      "sources": [
+        "fsdl-testing-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-testing",
+          "label": "下一讲：让检查覆盖具体失败条件"
+        }
+      ],
+      "modelId": "fsdl-debugging",
+      "demos": [
+        {
+          "modelId": "fsdl-debugging",
+          "title": "调试与误差分析：下降的曲线也可能用了错梯度的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-testing",
+      "course": "fsdl",
+      "unit": "5",
+      "title": "第5讲 测试与质量：绿色套件覆盖了哪些输入？",
+      "summary": "用独立规格、边界与数据/制品契约构建有限门禁，区分测试通过与质量证明。",
+      "question": "普通输入都通过，为什么独立验证仍能发现一条明确缺陷？",
+      "outcome": "用独立规格、边界与数据/制品契约构建有限门禁，区分测试通过与质量证明。",
+      "prerequisites": [
+        "能解释条件中的>与≥",
+        "会读Python断言与布尔条件"
+      ],
+      "explanation": [
+        "测试要瞄准会发生的具体错误。规则是x≥0判正，候选却可能写成x>0；普通输入−2和2都会通过，只有边界0能显出差异。",
+        "期望来自独立规格，实际来自候选实现。把两者混为同一函数会让错误自证正确；每条检查都应该给出触发条件和能定位的结果。",
+        "模型函数正确还不够，输入字段、类型、模型与预处理版本也要匹配。这里把这些条件做成一个可解释门禁，全部通过也只覆盖这些有限条件，不代表所有真实场景无误。"
+      ],
+      "formula": "release_ready=data_valid ∧ selected_tests_pass ∧ independent_boundary_pass ∧ artifact_match",
+      "worked": "缺陷实现x>0在普通用例[-2,2]上全绿；边界[-1,0,1]只有0失败。即便切回普通套件，单独保留的边界0仍会阻断门禁；正确实现也可能因数据或制品契约失败被拒绝。",
+      "misconception": "测试数量和覆盖率都不能独自充当可靠性证明。门禁通过也不说明真实服务已部署；本课不创建生产发布。",
+      "sections": [
+        {
+          "title": "从触发条件反推测试",
+          "explanation": "FSDL原课把测试视为帮助发现部分错误的工具，强调数据期望、训练记忆、模型回归与生产检查。本例只选择可独立重现的边界缺陷来说明思路，不追求堆测试数量。",
+          "exercise": "写清这个边界测试能抓到什么，不能抓到哪些输入格式或分布变化问题。"
+        },
+        {
+          "title": "软件、数据与模型契约分开",
+          "explanation": "字段检查失败是数据入口问题，边界失败是行为问题，模型和配置不匹配是制品问题。分别报告原因能避免“把测试改绿”掩盖真正的错误。",
+          "exercise": "保持正确函数不变，分别让schema缺失和artifact不匹配，解释为什么门禁仍应拒绝。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import json\n\ndef predict(x, fixed=False):\n    return int(x >= 0 if fixed else x > 0)\n\ndef audit(cases, fixed, data_valid=True, artifact_match=True):\n    checks = [dict(x=x, expected=int(x >= 0), actual=predict(x, fixed)) for x in cases]\n    selected = all(c['expected'] == c['actual'] for c in checks)\n    independent = predict(0, fixed) == 1\n    return dict(checks=checks, selectedTestsPass=selected,\n                independentBoundaryPass=independent,\n                releaseReady=data_valid and selected and independent and artifact_match)\n\nassert audit([-2, 2], False)['selectedTestsPass']\nassert not audit([-2, 2], False)['releaseReady']\nresult = audit([-1, 0, 1], False)\nassert sum(c['expected'] != c['actual'] for c in result['checks']) == 1\nassert audit([-1, 0, 1], True)['releaseReady']\nassert not audit([-1, 0, 1], True, artifact_match=False)['releaseReady']\nprint(json.dumps(result))\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "先预测普通套件是否能抓住x>0缺陷。",
+        "逐条检查边界0的期望与实际，再切换数据/制品条件。",
+        "增加独立风险用例并解释它的证据范围，保留一次失败记录。"
+      ],
+      "exercise": {
+        "prompt": "规则x≥0，缺陷实现x>0，用例[-1,0,1]中有几条结果不一致？",
+        "expected": 1,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "分别核对−1、0、1，注意等号。",
+        "solution": "只有0的期望1与实际0不一致，共1条。",
+        "transfer": "独立把规则阈值改为5，设计4/5/6三条用例并核对期望；不要让候选实现同时生成测试答案。"
+      },
+      "sources": [
+        "fsdl-testing-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-serving",
+          "label": "下一讲：把一个通过检查的模型放进请求流程"
+        },
+        {
+          "lesson": "missing-quality",
+          "label": "回补：工程检查与可复现交付"
+        }
+      ],
+      "modelId": "fsdl-testing",
+      "demos": [
+        {
+          "modelId": "fsdl-testing",
+          "title": "测试与质量：绿色套件覆盖了哪些输入？的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-serving",
+      "course": "fsdl",
+      "unit": "6",
+      "title": "第6讲 部署与服务：批处理省了开销，也增加了等待",
+      "summary": "在有限请求轨迹里复算批处理、并行槽、端到端延迟和吞吐，明确模型计算与真实性能的区别。",
+      "question": "一批请求只计算10ms，为什么有人实际要等24ms？",
+      "outcome": "在有限请求轨迹里复算批处理、并行槽、端到端延迟和吞吐，明确模型计算与真实性能的区别。",
+      "prerequisites": [
+        "会读时间轴与毫秒单位",
+        "能区分每条请求、每批和每个服务槽"
+      ],
+      "explanation": [
+        "部署先把模型与界面分开，说明输入输出、版本和失败行为。原课讨论批预测、模型服务、依赖和扩展；本例只取批处理与并发的一个可手算时间片段。",
+        "一批的服务时间包含固定开销和逐条计算，但先到请求还可能等待凑批和等待空闲槽。端到端延迟从每条到达时刻算，不能用一批的计算时间直接替代。",
+        "吞吐按观察窗口内完成的请求数衡量，延迟看单条的等待。增加批次和槽数会改变权衡，真实系统还包含网络、缓存、硬件、调度和随机到达，必须另做实际负载实验。"
+      ],
+      "formula": "批服务时间=overhead+b×per_item；延迟=finish−arrival；吞吐=完成数/窗口秒数",
+      "worked": "默认2条一批、1个槽、固定4ms、每条3ms。三批在[2,12]、[12,22]、[22,32]运行；延迟[12,10,18,16,24,22]ms，nearest-rank p95=24ms，有限窗口吞吐为6/0.032=187.5 req/s。",
+      "misconception": "动画中的毫秒是教学输入和计算结果，不是当前机器或云服务实测。六条样本的p95恰好是最大值，不能视为稳定生产尾延迟。",
+      "sections": [
+        {
+          "title": "先写服务边界，再选部署方式",
+          "explanation": "2022 Lecture5涵盖批预测、Model-as-Service、依赖、并发、缓存和batching。先把模型、预处理和UI边界说清楚，再按交互性和规模选部署形式；本课不复制历史云平台安装步骤。",
+          "exercise": "给同一分类模型分别写出离线批任务和在线请求的一组输入、输出与失败条件。"
+        },
+        {
+          "title": "把等待放回时间轴",
+          "explanation": "本例预先按到达顺序凑满一批，等最后一条到达，再找最早空闲的槽。这个明确策略便于复算，但真实在线服务还需要最大凑批等待和超时规则。",
+          "exercise": "先手推batch=1与batch=3的一批启动时间，再解释为什么更大批并不总让每条请求更快。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import heapq\nimport json\nfrom math import ceil\n\ndef replay(batch=2, workers=1, overhead=4, per_item=3):\n    arrivals = [0, 2, 4, 6, 8, 10]\n    free, jobs = [(0, worker) for worker in range(workers)], []\n    heapq.heapify(free)\n    for i in range(0, len(arrivals), batch):\n        group = arrivals[i:i + batch]\n        available, worker = heapq.heappop(free)\n        start = max(available, group[-1])\n        finish = start + overhead + len(group) * per_item\n        jobs.append(dict(worker=worker, start=start, finish=finish, group=group))\n        heapq.heappush(free, (finish, worker))\n    latency = [job['finish'] - arrival for job in jobs for arrival in job['group']]\n    makespan = max(job['finish'] for job in jobs)\n    return dict(jobs=jobs, latencies=latency,\n                p95=sorted(latency)[ceil(0.95 * len(latency)) - 1],\n                throughput=len(arrivals) * 1000 / makespan)\n\nresult = replay()\nassert result['latencies'] == [12, 10, 18, 16, 24, 22]\nassert result['p95'] == 24 and result['throughput'] == 187.5\nprint(json.dumps(result))  # Simulated queue; not a measured service benchmark.\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "先预测最早到达请求的计算时间和端到端延迟是否相同。",
+        "改变batch和workers，观察甘特图，再复算其中一条请求。",
+        "独立计算六条延迟与nearest-rank p95，并列出真实压测还缺少的条件。"
+      ],
+      "exercise": {
+        "prompt": "每批固定4ms，每条3ms，一批2条，纯服务时间是多少ms？",
+        "expected": 10,
+        "tolerance": 1e-06,
+        "unit": "ms",
+        "hint": "固定开销只付一次，逐条成本付两次。",
+        "solution": "4+2×3=10ms；不包含等待凑批和排队。",
+        "transfer": "独立验证默认轨迹第三批的第一条：到达8ms、完成32ms，延迟24ms。将workers改为2后重新手排三批，核对吞吐和尾延迟。"
+      },
+      "sources": [
+        "fsdl-deployment-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-monitoring",
+          "label": "下一讲：运行之后，监控什么信号？"
+        },
+        {
+          "lesson": "compute",
+          "label": "连接训练系统：单位与资源口径"
+        }
+      ],
+      "modelId": "fsdl-serving",
+      "demos": [
+        {
+          "modelId": "fsdl-serving",
+          "title": "部署与服务：批处理省了开销，也增加了等待的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-monitoring",
+      "course": "fsdl",
+      "unit": "7",
+      "title": "第7讲 监控与漂移：分布告警不等于模型失效",
+      "summary": "比较两个窗口的分箱比例，复算总变差距离，并将代理信号与延迟标签下的真实质量分开。",
+      "question": "输入分布变了，能否立即断言模型错误率上升？",
+      "outcome": "比较两个窗口的分箱比例，复算总变差距离，并将代理信号与延迟标签下的真实质量分开。",
+      "prerequisites": [
+        "知道比例与绝对值",
+        "能区分观测到的输入和后来核对的真实标签"
+      ],
+      "explanation": [
+        "线上变化包括输入质量、分布、模型任务指标和系统指标。每种信号都要说清窗口、分母、缺失值和延迟，不能只盯一个看板数字。",
+        "本例将100条基准与100条当前输入分成两箱，计算总变差距离。它是分布差异的一种度量；相同的漂移可能不影响任务，不漂移也可能存在标签或服务问题。",
+        "真实标签尚未返回时，实际错误率保持未知。有了标签后只对已核对的小窗口计算，保留样本量与限制。告警触发调查，不自动触发训练或发布。"
+      ],
+      "formula": "TV(P,Q)=½Σ|P_i−Q_i|；错误率=已核对错误数/已核对样本数",
+      "worked": "基准[80,20]、当前[50,50]，比例差绝对值各0.3，TV=0.3。默认阈值0.2会告警，但标签延迟时errorRate仍为null；返回8条[0,1,0,0,1,1,0,1]后，该小窗口错误率为4/8=0.5。",
+      "misconception": "漂移告警既不是错误率，也不证明因果关系。不能因输入分布稳定，就说模型或产品质量稳定；小窗口结果也有很大不确定性。",
+      "sections": [
+        {
+          "title": "代理信号与任务结果各自负责什么",
+          "explanation": "原课Continual Learning区分用户反馈、模型性能、代理指标、数据质量、分布漂移和系统指标。本站用两箱小例子看清分母，实际多维分布和监控策略仍需按任务设计。",
+          "exercise": "列出一个漂移但任务仍正确的可能例子，以及一个分布没变但服务质量下降的例子。"
+        },
+        {
+          "title": "标签延迟不要用假数字填空",
+          "explanation": "2022 Lab8通过flagging与用户日志观察问题。本课不连接原课的Gantry或旧应用；以显式标签开关演示为什么未知要保持未知，不能把代理指标填成真正质量分数。",
+          "exercise": "关闭标签，保持漂移告警；再打开标签并改变窗口长度，分别说明可得出的结论。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import json\nfrom fractions import Fraction\n\nbaseline, current = [80, 20], [50, 50]\nreference = [Fraction(n, sum(baseline)) for n in baseline]\nobserved = [Fraction(n, sum(current)) for n in current]\ntv = sum(abs(a - b) for a, b in zip(reference, observed)) / 2\nassert tv == Fraction(3, 10)\ndrift_alert = tv >= Fraction(1, 5)\n\ndef quality(feedback):\n    return sum(feedback) / len(feedback) if feedback else None\n\nassert quality(None) is None\nassert quality([0, 1, 0, 0, 1, 1, 0, 1]) == 0.5\nprint(json.dumps(dict(totalVariation=float(tv), driftAlert=drift_alert,\n                      feedback=None, errorRate=quality(None))))\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "先手算两个箱子的比例变化与TV。",
+        "改变shift和threshold，核对边界等于阈值时的规则。",
+        "独立用已核对反馈计算错误率，再解释它为什么不能由TV直接推导。"
+      ],
+      "exercise": {
+        "prompt": "P=[0.8,0.2]、Q=[0.5,0.5]，总变差距离是多少？",
+        "expected": 0.3,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "两项绝对差相加，再除以2。",
+        "solution": "(|0.8−0.5|+|0.2−0.5|)/2=0.3。",
+        "transfer": "独立验证shift=10：当前[70,30]，TV=0.1，阈值0.1按本例规则应告警。标签未返回时，仍不能报告实际错误率。"
+      },
+      "sources": [
+        "fsdl-continual-2022",
+        "fsdl-monitoring-lab-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-release",
+          "label": "下一讲：检查候选、观察金丝雀，再决定回滚"
+        }
+      ],
+      "modelId": "fsdl-monitoring",
+      "demos": [
+        {
+          "modelId": "fsdl-monitoring",
+          "title": "监控与漂移：分布告警不等于模型失效的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-release",
+      "course": "fsdl",
+      "unit": "8",
+      "title": "第8讲 更新与回滚：让每次切换都有版本和证据",
+      "summary": "组合离线门禁、制品检查、有限金丝雀观测与回滚状态，保留可复现的版本清单。",
+      "question": "候选离线更好，为什么仍可能保持旧版本或回滚？",
+      "outcome": "组合离线门禁、制品检查、有限金丝雀观测与回滚状态，保留可复现的版本清单。",
+      "prerequisites": [
+        "能读有限状态与布尔门禁",
+        "完成独立验证和监控窗口的检查"
+      ],
+      "explanation": [
+        "更新不是覆盖旧模型文件。模型、数据、预处理和配置需要连成一个可识别制品，旧版本要能找到，检查结果要能解释为什么允许进入下一步。",
+        "先检查离线质量和延迟，再检查版本清单；通过才进入有限金丝雀。不通过时保持旧版本，也就没有金丝雀观测，不能把那个未执行的分支画成成功。",
+        "金丝雀得到实际案例观测后，再按明确规则晋升或回滚。本例用20条固定样本练习状态转移，真实发布还需要样本量、置信度、业务影响与运维流程，网页不会替你上线。"
+      ],
+      "formula": "eligible=(score≥0.88)∧(p95≤120ms)∧manifest_ok；rollback=eligible∧(errors/20>0.1)",
+      "worked": "默认质量0.9、p95=100ms、清单完整，进入20%金丝雀；1/20错误率0.05，最终晋升v2。3/20=0.15则回滚v1；离线质量0.86会阻断，canaryRate保持null且流量一直在v1。",
+      "misconception": "版本号本身不保证可复现。哈希匹配只验证字节一致，不证明模型好；金丝雀没有超阈值，也不意味着已经证明长期稳定。",
+      "sections": [
+        {
+          "title": "把制品和运行条件一起保存",
+          "explanation": "FSDL Deployment中的Model Rollouts与Continual Learning中的离线/在线测试提供原理入口。本站增加一个明确的有限门禁，用标准库真实写入并核对临时制品摘要，便于独立检查。",
+          "exercise": "保留模型、数据、配置、代码版本和评价条件；指出删除配置版本后为什么必须拒绝候选。"
+        },
+        {
+          "title": "未执行、被拒绝和回滚是不同状态",
+          "explanation": "门禁失败是blocked，没有金丝雀结果；开始金丝雀后发现问题才是rolled_back。promoted才把全部流量转给候选。每一步保留当时的流量比例，不能提前画最终版本。",
+          "exercise": "分别构造blocked、rolled_back、promoted，写出每条路径实际观察到了什么。"
+        },
+        {
+          "title": "本地复现：保存输入、结果与断言",
+          "explanation": "下面是本站原创、仅使用Python 3标准库的完整小案例。先核对默认结果，再修改题目要求的输入。它用于独立复算数学与流程，不启动FSDL原课中的云服务、W&B、Gantry或GPU训练。",
+          "exercise": "另存为独立.py文件运行，保留输入、输出与一次失败案例；浏览器动画并不代表你运行过本地代码。",
+          "code": "import hashlib\nimport json\nfrom pathlib import Path\nfrom tempfile import TemporaryDirectory\n\ndef decide(score, latency, manifest_ok, errors):\n    eligible = score >= 0.88 and latency <= 120 and manifest_ok\n    canary_rate = errors / 20 if eligible else None\n    state = 'blocked' if not eligible else 'rolled_back' if canary_rate > 0.1 else 'promoted'\n    return dict(state=state, active='v2' if state == 'promoted' else 'v1',\n                canaryRate=canary_rate)\n\nwith TemporaryDirectory() as directory:\n    path = Path(directory) / 'candidate.json'\n    artifact = dict(model='v2', data='data-v1', config='config-v2')\n    path.write_text(json.dumps(artifact, sort_keys=True), encoding='utf-8')\n    expected_digest = hashlib.sha256(path.read_bytes()).hexdigest()\n    manifest_ok = hashlib.sha256(path.read_bytes()).hexdigest() == expected_digest\n    assert all(artifact.get(key) for key in ('model', 'data', 'config'))\n    assert decide(0.9, 100, manifest_ok, 1)['active'] == 'v2'\n    assert decide(0.9, 100, manifest_ok, 3)['state'] == 'rolled_back'\n    blocked = decide(0.86, 100, manifest_ok, 5)\n    assert blocked['active'] == 'v1' and blocked['canaryRate'] is None\n    print(json.dumps(decide(0.9, 100, manifest_ok, 1)))\n",
+          "language": "python",
+          "execution": "Python 3 标准库；可保存为.py文件在自己的本地环境运行；浏览器不执行此代码。"
+        }
+      ],
+      "practice": [
+        "先预测质量0.86时是否应该看到金丝雀错误率。",
+        "保持门禁通过，分别设1、2、3条错误，核对严格大于阈值的边界。",
+        "用本地临时制品与状态函数复现三条路径，保留版本与断言结果。"
+      ],
+      "exercise": {
+        "prompt": "离线和制品检查均通过，20条金丝雀中3条错误；按错误率>0.1回滚，最终使用版本号几？",
+        "expected": 1,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "3/20=0.15，大于0.1，回到保留的旧版本v1。",
+        "solution": "回滚后active=v1，数值版本号为1。",
+        "transfer": "独立验证2条错误：2/20=0.1，按本例严格>规则不会回滚；再移除配置版本，确认金丝雀根本未开始且结果保持未知。"
+      },
+      "sources": [
+        "fsdl-deployment-2022",
+        "fsdl-continual-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-metrics",
+          "label": "回到任务目标：上线仍需检验真实价值"
+        },
+        {
+          "lesson": "missing-quality",
+          "label": "回补：可复现交付与独立检查"
+        },
+        {
+          "lesson": "fsdl-foundation-models",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "modelId": "fsdl-release",
+      "demos": [
+        {
+          "modelId": "fsdl-release",
+          "title": "更新与回滚：让每次切换都有版本和证据的逐步算例"
+        }
+      ],
+      "boundary": "FSDL 2022公开材料的本站原创选编。页面仅运行有限、可复算的JavaScript教学模型；不执行任意Python、不联网调用云服务，不代表真实训练、部署性能或生产发布。"
+    },
+    {
+      "id": "fsdl-foundation-models",
+      "course": "fsdl",
+      "unit": "9",
+      "title": "第9讲 Foundation Models：冻结表示与完整微调的区别",
+      "question": "保持表示层不变、只更新任务头时，训练改变了哪些能力与参数？",
+      "summary": "区分预训练表示、下游任务头、冻结与微调，并核对梯度更新范围。",
+      "outcome": "区分预训练表示、下游任务头、冻结与微调，并核对梯度更新范围。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "基础模型从大规模数据学习可复用表示，再通过提示、检索或微调服务下游任务。选型时要同时核对任务适配、数据来源、许可、部署与评估成本，而不是把模型规模当作唯一判断。",
+        "本站用一个人工2×2矩阵充当表示层，用两个线性权重作为任务头。它不是预训练模型，但能把冻结和完整更新的差异缩到每个数字都能复算。",
+        "冻结分支只更新任务头；完整微调同时更新两层。两层梯度必须来自同一次旧参数前向，不能先改变任务头再继续用新头反传。",
+        "真实冻结还要处理BatchNorm或Dropout的训练模式和激活开销。一个训练点的损失下降仅证明这一步优化执行了；选择方案应比较独立数据效果、可恢复制品和运行预算。"
+      ],
+      "formula": "h=E x，ŷ=wᵀh，L=(ŷ−y)²/2；∂L/∂w=(ŷ−y)h；∂L/∂Eᵢⱼ=(ŷ−y)wᵢxⱼ。",
+      "worked": "x=[1,2]、E=diag(1,0.5)、w=[0.5,−0.5]时h=[1,1]、预测0。标签1、学习率0.1时冻结更新后的w=[0.6,−0.4]，预测0.2。",
+      "misconception": "冻结参数不等于没有前向计算或没有激活存储；人工矩阵也不能证明真实基础模型的迁移效果。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "基础模型从大规模数据学习可复用表示，再通过提示、检索或微调服务下游任务。选型时要同时核对任务适配、数据来源、许可、部署与评估成本，而不是把模型规模当作唯一判断。\n\n本站用一个人工2×2矩阵充当表示层，用两个线性权重作为任务头。它不是预训练模型，但能把冻结和完整更新的差异缩到每个数字都能复算。",
+          "exercise": "先在纸上回答：保持表示层不变、只更新任务头时，训练改变了哪些能力与参数？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "冻结分支只更新任务头；完整微调同时更新两层。两层梯度必须来自同一次旧参数前向，不能先改变任务头再继续用新头反传。 真实冻结还要处理BatchNorm或Dropout的训练模式和激活开销。一个训练点的损失下降仅证明这一步优化执行了；选择方案应比较独立数据效果、可恢复制品和运行预算。",
+          "exercise": "固定学习率，在冻结与完整微调间切换；检查表示矩阵是否改变，并解释两层梯度为什么要从同一旧状态计算。",
+          "modelId": "fsdl-foundation-models"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "标准库例子独立复算冻结头更新；浏览器另展示完整微调反例。没有下载或调用外部模型。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import json\nx=[1.,2.]; encoder=[[1.,0.],[0.,0.5]]; head=[0.5,-0.5]\ndot=lambda a,b:sum(v*w for v,w in zip(a,b))\nfeatures=[dot(row,x) for row in encoder]\nerror=dot(head,features)-1\ngradient=[error*h for h in features]\nnew_head=[w-0.1*g for w,g in zip(head,gradient)]\nafter=dot(new_head,features)\nassert new_head==[0.6,-0.4] and abs(after-0.2)<1e-12\nassert encoder==[[1.,0.],[0.,0.5]]\nprint(json.dumps(dict(features=features,new_head=new_head,prediction=after)))\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "固定学习率，在冻结与完整微调间切换；检查表示矩阵是否改变，并解释两层梯度为什么要从同一旧状态计算。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：表示矩阵2×2被完全冻结，任务头有2个标量权重且无偏置。实际可训练参数有多少个？",
+        "expected": 2,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "表示层4个权重不更新，只有任务头的2个权重可训练，共2个。",
+        "transfer": "固定学习率，在冻结与完整微调间切换；检查表示矩阵是否改变，并解释两层梯度为什么要从同一旧状态计算。"
+      },
+      "sources": [
+        "fsdl-foundation-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-ml-teams",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "本站原创小规模案例，对照FSDL 2022公开材料；不等于原课逐字翻译或完整Text Recognizer复现。浏览器计算与本地实际运行分别说明。",
+      "modelId": "fsdl-foundation-models",
+      "demos": [
+        {
+          "modelId": "fsdl-foundation-models",
+          "title": "Foundation Models：冻结表示与完整微调的区别 · 计算与状态对照"
+        }
+      ]
+    },
+    {
+      "id": "fsdl-ml-teams",
+      "course": "fsdl",
+      "unit": "10",
+      "title": "第10讲 ML Teams：把模型文件交接成可负责的系统",
+      "question": "数据负责人缺失时，后面的训练和发布能否在排程中自动视为已完成？",
+      "summary": "把产品、数据、模型、评估和运行的责任、依赖与交付证据连起来。",
+      "outcome": "把产品、数据、模型、评估和运行的责任、依赖与交付证据连起来。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "一个模型项目通常跨越产品目标、数据定义、建模、评估和运行。角色名称可以一人兼任，但每份产物的负责人、接收人和验收方式必须清楚，不能只交一个权重文件。",
+        "本例把交付拆成五项有依赖的工作：验收约定→标签与数据版本→训练基线→独立评估→运行与回滚。给定工作日只是教学估计，不能据此推断现实团队效率。",
+        "计算每项开始时间时，先检查负责人和所有前置产物。任一前置阻塞，后续时间保持未知，不把未知天数画成0，也不自动宣称完成。",
+        "完整项目的manifest、评估报告、服务契约、监控阈值和回滚路径正是交接物。团队讨论应围绕这些可检查产物，以及谁有权中止或批准具体切换。"
+      ],
+      "formula": "start(task)=max(finish(dependencies))；若owner缺失或依赖阻塞，则start与finish均未知。",
+      "worked": "五项工期为1、2、2、1、1日且串行依赖，完整责任下预计7日。缺数据负责人时只有第一项可排程，后四项阻塞。",
+      "misconception": "可排程不等于已经有人做完；图中的绿色只表示本例依赖条件满足。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "一个模型项目通常跨越产品目标、数据定义、建模、评估和运行。角色名称可以一人兼任，但每份产物的负责人、接收人和验收方式必须清楚，不能只交一个权重文件。\n\n本例把交付拆成五项有依赖的工作：验收约定→标签与数据版本→训练基线→独立评估→运行与回滚。给定工作日只是教学估计，不能据此推断现实团队效率。",
+          "exercise": "先在纸上回答：数据负责人缺失时，后面的训练和发布能否在排程中自动视为已完成？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "计算每项开始时间时，先检查负责人和所有前置产物。任一前置阻塞，后续时间保持未知，不把未知天数画成0，也不自动宣称完成。 完整项目的manifest、评估报告、服务契约、监控阈值和回滚路径正是交接物。团队讨论应围绕这些可检查产物，以及谁有权中止或批准具体切换。",
+          "exercise": "分别去掉数据与评估负责人，解释阻塞从哪个节点向后传播；给每个交接物补上一条可检查验收条件。",
+          "modelId": "fsdl-ml-teams"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "代码仅计算给定依赖图与责任缺口；不读取团队成员数据、不发消息或创建真实排期。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import json\ntasks=[('specification',1,[],True),('labels',2,['specification'],False),('training',2,['labels'],True),('evaluation',1,['training'],True),('release',1,['evaluation'],True)]\nresult={}\nfor name,days,dependencies,owner in tasks:\n    blocked=not owner or any(result[d]['finish'] is None for d in dependencies)\n    start=None if blocked else max([0]+[result[d]['finish'] for d in dependencies])\n    result[name]=dict(start=start,finish=None if blocked else start+days)\nassert result['specification']['finish']==1\nassert result['release']['finish'] is None\nprint(json.dumps(result))\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "分别去掉数据与评估负责人，解释阻塞从哪个节点向后传播；给每个交接物补上一条可检查验收条件。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：五项串行依赖的工期为1、2、2、1、1工作日，负责人全部齐全。预计总工期是多少？",
+        "expected": 7,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "1+2+2+1+1=7工作日。该估计不包含现实风险和返工。",
+        "transfer": "分别去掉数据与评估负责人，解释阻塞从哪个节点向后传播；给每个交接物补上一条可检查验收条件。"
+      },
+      "sources": [
+        "fsdl-teams-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-ethics",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "本站原创小规模案例，对照FSDL 2022公开材料；不等于原课逐字翻译或完整Text Recognizer复现。浏览器计算与本地实际运行分别说明。",
+      "modelId": "fsdl-ml-teams",
+      "demos": [
+        {
+          "modelId": "fsdl-ml-teams",
+          "title": "ML Teams：把模型文件交接成可负责的系统 · 计算与状态对照"
+        }
+      ]
+    },
+    {
+      "id": "fsdl-ethics",
+      "course": "fsdl",
+      "unit": "11",
+      "title": "第11讲 Ethics：分组错误、遗漏样本与人工复核",
+      "question": "总体准确率不错，但漏掉一个分组的评估，是否足以判断适用性？",
+      "summary": "逐组报告错误类型、分母、覆盖与未知，连接到隐私和责任审查。",
+      "outcome": "逐组报告错误类型、分母、覆盖与未知，连接到隐私和责任审查。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "模型的错误可能由不同人承担。评估应说明任务是否合理、数据怎样取得、错误后果、谁能复核以及怎样申诉；一个平均指标无法替代这些问题。",
+        "使用八条完全虚构数据说明分组误差。FPR分母是实际负类，FNR分母是实际正类；分母为0时结果未知，不能补成“没有错误”。",
+        "只展示表现较好的分组会掩盖适用范围。切换遗漏分组反例时，组间差异保持未知，报告必须明确缺失，不把缺失样本当作风险为零。",
+        "差异为0也不是公平证明：标签定义、抽样偏差、交叉群体、隐私与实质后果仍需审查。这里不对真实个人作任何就业、信贷、教育或其他决策。"
+      ],
+      "formula": "FPR=FP/(FP+TN)，FNR=FN/(FN+TP)；差异比较必须同时公开样本数和覆盖。",
+      "worked": "默认阈值0.5：A组FP=1、TN=1，FPR=0.5；B组FP=0、TN=2，FPR=0。FPR差为0.5，但样本极少，不作人群推断。",
+      "misconception": "分组指标相等不是“已经公平”，总体准确率高也不能消除遗漏或不合理用途。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "模型的错误可能由不同人承担。评估应说明任务是否合理、数据怎样取得、错误后果、谁能复核以及怎样申诉；一个平均指标无法替代这些问题。\n\n使用八条完全虚构数据说明分组误差。FPR分母是实际负类，FNR分母是实际正类；分母为0时结果未知，不能补成“没有错误”。",
+          "exercise": "先在纸上回答：总体准确率不错，但漏掉一个分组的评估，是否足以判断适用性？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "只展示表现较好的分组会掩盖适用范围。切换遗漏分组反例时，组间差异保持未知，报告必须明确缺失，不把缺失样本当作风险为零。 差异为0也不是公平证明：标签定义、抽样偏差、交叉群体、隐私与实质后果仍需审查。这里不对真实个人作任何就业、信贷、教育或其他决策。",
+          "exercise": "提高统一阈值后同时检查FPR和FNR，再打开遗漏B的反例；写出还缺哪些数据与责任审查，避免用一个阈值宣布问题解决。",
+          "modelId": "fsdl-ethics"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "数据和分组完全虚构；代码只逐条记账并公开分母，不给真实对象评分或决定待遇。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import json\nrows={'A':[(0.9,1),(0.7,0),(0.6,1),(0.1,0)],'B':[(0.8,1),(0.5,1),(0.4,0),(0.2,0)]}\naudit={}\nfor group,samples in rows.items():\n    fp=sum(score>=0.5 and label==0 for score,label in samples)\n    negatives=sum(label==0 for _,label in samples)\n    fn=sum(score<0.5 and label==1 for score,label in samples)\n    positives=sum(label==1 for _,label in samples)\n    audit[group]=dict(fpr=fp/negatives if negatives else None,fnr=fn/positives if positives else None,n=len(samples))\nassert audit['A']['fpr']==0.5 and audit['B']['fpr']==0\nprint(json.dumps(audit))\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "提高统一阈值后同时检查FPR和FNR，再打开遗漏B的反例；写出还缺哪些数据与责任审查，避免用一个阈值宣布问题解决。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：A组FP=1、TN=1，B组FP=0、TN=2。两组假阳性率的绝对差是多少？",
+        "expected": 0.5,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "A组1/(1+1)=0.5，B组0/(0+2)=0，绝对差0.5。",
+        "transfer": "提高统一阈值后同时检查FPR和FNR，再打开遗漏B的反例；写出还缺哪些数据与责任审查，避免用一个阈值宣布问题解决。"
+      },
+      "sources": [
+        "fsdl-ethics-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-project-train",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "本站原创小规模案例，对照FSDL 2022公开材料；不等于原课逐字翻译或完整Text Recognizer复现。浏览器计算与本地实际运行分别说明。",
+      "modelId": "fsdl-ethics",
+      "demos": [
+        {
+          "modelId": "fsdl-ethics",
+          "title": "Ethics：分组错误、遗漏样本与人工复核 · 计算与状态对照"
+        }
+      ]
+    },
+    {
+      "id": "fsdl-project-train",
+      "course": "fsdl",
+      "unit": "12",
+      "title": "第12讲 完整项目上半程：数据分组、训练与模型制品",
+      "question": "怎样把一次训练变成别人能重跑、能核对数据版本的实验？",
+      "summary": "完成合成图像生成、按组切分、训练、独立评估与模型哈希。",
+      "outcome": "完成合成图像生成、按组切分、训练、独立评估与模型哈希。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "项目选择“识别合成横条或竖条图像”，使训练、测试和服务都能在本机复现。它是本站原创的完整小项目，不是FSDL原Text Recognizer，也没有真实照片的质量承诺。",
+        "每组包含同一基础图案的多个扰动版本，先按组分训练、验证和测试，避免近重复图同时进入不同用途。特征是左右与上下图像强度的对比，模型为可直接审查的逻辑回归。",
+        "浏览器用四条二维特征逐步解释同样的训练核。下载项目会实际生成图像数据、训练、保存JSON权重和manifest，再在未参与更新的测试组上评估，所有随机性固定。",
+        "制品包括数据SHA-256、特征版本、训练参数、模型SHA-256、验证/测试指标和错误案例。训练与评估完成后，下一讲才把这个包加载进HTTP服务验证。"
+      ],
+      "formula": "p=σ(wᵀx+b)；g_w=mean((p−y)x)；BCE=mean(max(z,0)−yz+log(1+exp(−|z|)))。",
+      "worked": "四条训练特征[[-1,−1],[-1,−0.5],[1,0.5],[1,1]]，初始w=b=0时，每条概率0.5，第一轮两个权重梯度为−0.5和−0.375。",
+      "misconception": "把模型文件保存成功不等于实验可复现；数据划分、特征定义和训练配置也必须随包保存。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "项目选择“识别合成横条或竖条图像”，使训练、测试和服务都能在本机复现。它是本站原创的完整小项目，不是FSDL原Text Recognizer，也没有真实照片的质量承诺。\n\n每组包含同一基础图案的多个扰动版本，先按组分训练、验证和测试，避免近重复图同时进入不同用途。特征是左右与上下图像强度的对比，模型为可直接审查的逻辑回归。",
+          "exercise": "先在纸上回答：怎样把一次训练变成别人能重跑、能核对数据版本的实验？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "浏览器用四条二维特征逐步解释同样的训练核。下载项目会实际生成图像数据、训练、保存JSON权重和manifest，再在未参与更新的测试组上评估，所有随机性固定。 制品包括数据SHA-256、特征版本、训练参数、模型SHA-256、验证/测试指标和错误案例。训练与评估完成后，下一讲才把这个包加载进HTTP服务验证。",
+          "exercise": "先手算第一轮两个权重梯度，再运行完整项目；检查训练、验证和测试的group_id互不相交，并记录制品哈希。",
+          "modelId": "fsdl-project-train"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "本段可独立运行训练核。完整项目文件与复现命令在本讲代码中给出；独立运行会真实生成数据、制品和测试回执。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import math,json\nX=[[-1.,-1.],[-1.,-0.5],[1.,0.5],[1.,1.]]; Y=[0.,0.,1.,1.]\nw=[0.,0.]; b=0.; history=[]\nfor epoch in range(4):\n    probs=[1/(1+math.exp(-(sum(a*c for a,c in zip(w,x))+b))) for x in X]\n    errors=[p-y for p,y in zip(probs,Y)]\n    gradient=[sum(e*x[j] for e,x in zip(errors,X))/len(X) for j in range(2)]\n    w=[a-0.3*g for a,g in zip(w,gradient)]; b-=0.3*sum(errors)/len(X)\n    history.append(dict(epoch=epoch+1,w=w[:],b=b))\nassert w[0]>0 and w[1]>0\nprint(json.dumps(history))\n# 完整项目：python examples/application-fsdl/full_project.py --output /tmp/lbb-fsdl-project\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "先手算第一轮两个权重梯度，再运行完整项目；检查训练、验证和测试的group_id互不相交，并记录制品哈希。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：第一轮四个x第一维为[−1,−1,1,1]，标签[0,0,1,1]，预测全为0.5。w₀的平均梯度是多少？",
+        "expected": -0.5,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "四项(0.5−y)x均为−0.5，平均仍为−0.5。",
+        "transfer": "先手算第一轮两个权重梯度，再运行完整项目；检查训练、验证和测试的group_id互不相交，并记录制品哈希。"
+      },
+      "sources": [
+        "fsdl-project-2022",
+        "fsdl-data-2022",
+        "fsdl-testing-2022"
+      ],
+      "bridges": [
+        {
+          "lesson": "fsdl-project-serve",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "本站原创小规模案例，对照FSDL 2022公开材料；不等于原课逐字翻译或完整Text Recognizer复现。浏览器计算与本地实际运行分别说明。",
+      "modelId": "fsdl-project-train",
+      "demos": [
+        {
+          "modelId": "fsdl-project-train",
+          "title": "完整项目上半程：数据分组、训练与模型制品 · 计算与状态对照"
+        }
+      ],
+      "programs": [
+        {
+          "path": "examples/application-fsdl/full_project.py",
+          "label": "下载完整本地项目（Python标准库）",
+          "command": "python full_project.py --output /tmp/lbb-fsdl-project"
+        }
+      ],
+      "executionStatus": "2026-11-09：完整本地项目已实际运行，按组切分、训练/测试、模型哈希、HTTP有效/无效请求、坏包拒绝及回滚检查通过。仅为合成条纹任务。"
+    },
+    {
+      "id": "fsdl-project-serve",
+      "course": "fsdl",
+      "unit": "13",
+      "title": "第13讲 完整项目下半程：HTTP契约、监控、坏包与回滚",
+      "question": "离线指标正常的模型包，怎样证明服务实际加载了正确版本并能回滚？",
+      "summary": "实际启动本地服务、核验请求和版本、拒绝坏包并保存回滚证据。",
+      "outcome": "实际启动本地服务、核验请求和版本、拒绝坏包并保存回滚证据。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "完整项目读取上一讲保存的模型与manifest，先验证SHA-256、特征schema和有限数值，再创建HTTP接口。服务返回模型版本，便于检查请求到底由哪个包处理。",
+        "实验会启动绑定127.0.0.1的临时服务，发送有效请求和错误输入，记录状态码、概率与版本，然后构造哈希错误的包检验拒绝加载。不会把一个无效输入默默转成默认预测。",
+        "浏览器的候选包案例展示离线门槛、试流量和回滚条件；只有实际进入候选分支时才有错误率。固定20请求和5%阈值只是教学规则，不是生产可靠性保证。",
+        "本地实验最后切回基线包，重新发送请求确认版本和结果恢复，保存HTTP检查与回滚回执。这里的“完整”指这个有限本地项目完成全链条，不指云端部署或原课全环境复现。"
+      ],
+      "formula": "load_ok=(实际模型SHA-256=manifest值)且schema有效；canary错误率>0.05触发本例回滚。",
+      "worked": "20个候选请求有2个错误，错误率0.1>0.05，回滚；1个错误时恰好0.05，不触发这条严格大于规则。",
+      "misconception": "浏览器画出发布状态机不证明HTTP服务已启动；回滚也必须重新请求并核对活动版本。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "完整项目读取上一讲保存的模型与manifest，先验证SHA-256、特征schema和有限数值，再创建HTTP接口。服务返回模型版本，便于检查请求到底由哪个包处理。\n\n实验会启动绑定127.0.0.1的临时服务，发送有效请求和错误输入，记录状态码、概率与版本，然后构造哈希错误的包检验拒绝加载。不会把一个无效输入默默转成默认预测。",
+          "exercise": "先在纸上回答：离线指标正常的模型包，怎样证明服务实际加载了正确版本并能回滚？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "浏览器的候选包案例展示离线门槛、试流量和回滚条件；只有实际进入候选分支时才有错误率。固定20请求和5%阈值只是教学规则，不是生产可靠性保证。 本地实验最后切回基线包，重新发送请求确认版本和结果恢复，保存HTTP检查与回滚回执。这里的“完整”指这个有限本地项目完成全链条，不指云端部署或原课全环境复现。",
+          "exercise": "运行完整项目，逐项核对有效请求、坏schema拒绝、模型哈希拒绝和回滚后的版本；浏览器另比较1次与2次错误的边界。",
+          "modelId": "fsdl-project-serve"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "本段独立验证发布判定边界；完整项目实际启动本地HTTP服务并发请求核验，不调用外部云服务。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import json\ndef decide(valid_manifest,passed_offline,errors):\n    eligible=valid_manifest and passed_offline\n    rate=errors/20 if eligible else None\n    rollback=eligible and rate>0.05\n    return dict(rate=rate,active='candidate' if eligible and not rollback else 'baseline',rollback=rollback)\nassert decide(True,True,2)['rollback']\nassert not decide(True,True,1)['rollback']\nassert decide(False,True,0)['rate'] is None\nprint(json.dumps(decide(True,True,2)))\n# 真正HTTP与回滚：python examples/application-fsdl/full_project.py --output /tmp/lbb-fsdl-project\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "运行完整项目，逐项核对有效请求、坏schema拒绝、模型哈希拒绝和回滚后的版本；浏览器另比较1次与2次错误的边界。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：20次候选请求出现2次错误，错误率是多少？按严格大于5%的规则是否回滚？请填错误率。",
+        "expected": 0.1,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "2/20=0.1，严格大于0.05，因此回滚。",
+        "transfer": "运行完整项目，逐项核对有效请求、坏schema拒绝、模型哈希拒绝和回滚后的版本；浏览器另比较1次与2次错误的边界。"
+      },
+      "sources": [
+        "fsdl-project-2022",
+        "fsdl-deployment-2022",
+        "fsdl-monitoring-lab-2022"
+      ],
+      "bridges": [],
+      "boundary": "本站原创小规模案例，对照FSDL 2022公开材料；不等于原课逐字翻译或完整Text Recognizer复现。浏览器计算与本地实际运行分别说明。",
+      "modelId": "fsdl-project-serve",
+      "demos": [
+        {
+          "modelId": "fsdl-project-serve",
+          "title": "完整项目下半程：HTTP契约、监控、坏包与回滚 · 计算与状态对照"
+        }
+      ],
+      "programs": [
+        {
+          "path": "examples/application-fsdl/full_project.py",
+          "label": "下载完整本地项目（Python标准库）",
+          "command": "python full_project.py --output /tmp/lbb-fsdl-project"
+        }
+      ],
+      "executionStatus": "2026-11-09：完整本地项目已实际运行，按组切分、训练/测试、模型哈希、HTTP有效/无效请求、坏包拒绝及回滚检查通过。仅为合成条纹任务。"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "courseId": "nav2",
+  "courseLabel": "Nav2（ROS 2 Jazzy）配套原创八讲",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "nav2-lifecycle",
+      "experiments": ["wait-for-sensor", "reject-invalid-config"],
+      "scope": "逐帧解释初始 unconfigured、配置成功/失败、inactive、配置与传感器就绪的激活合取、active/blocked、两个布尔条件的数值计数和目标受理；blocked 明确为本例标签。"
+    },
+    {
+      "id": "nav2-tf",
+      "experiments": ["expire-transform", "shift-map-origin"],
+      "scope": "逐段 map→odom→base_link→laser 链、固定安装偏移、两项平移中间和、三项 laser 原点、观测端点加法；最后独立展开0.3s含等号门槛、时效余量与 usable。"
+    },
+    {
+      "id": "nav2-localization",
+      "experiments": ["move-two-cells"],
+      "scope": "地图列/分辨率/原点输入、i+0.5格心坐标、乘分辨率的米制偏移、平移后的 map 位置、给定初始位姿与固定修正、同坐标相对目标、连续反算坐标及 floor 列号。"
+    },
+    {
+      "id": "nav2-costmap",
+      "experiments": ["increase-buffer", "wider-robot"],
+      "scope": "固定通道净宽、圆形直径、机身扣除后的总余量/单边余量与严格几何门槛；单侧半径加缓冲、两侧需求宽度和缓冲余量，最后区分严格 bufferPass 与几何碰撞。"
+    },
+    {
+      "id": "nav2-planner",
+      "experiments": ["prefer-clearance"],
+      "scope": "两条固定可行候选的每项长度与邻近代价，分别展开λ乘积与总成本；成本差、包含平分规则的索引选择、最终查表得到的长度与成本。"
+    },
+    {
+      "id": "nav2-controller",
+      "experiments": ["double-lookahead", "reverse-turn"],
+      "scope": "机体系前视目标的L²−y²、非负平方根、横向坐标和圆距离核对；曲率分子/分母、κ=2y/L²、ω=vκ、20Hz周期、航向增量和沿弧线行驶距离。"
+    },
+    {
+      "id": "nav2-behavior",
+      "experiments": ["add-one-recovery"],
+      "scope": "初始空事件与零尝试，按真实已生成列表逐项解释plan/recover/follow；0起始尝试门控、失败次数与预算关系、尝试总数/恢复总数、成功布尔值、SUCCESS/FAILURE和停止原因。"
+    },
+    {
+      "id": "nav2-validation",
+      "experiments": ["collision-veto", "reach-rate-threshold"],
+      "scope": "人工10回合及可交叉的到达/碰撞/超时标记，样本比例、Wilson分母/中心/根号项/半宽/上下界；三个独立门槛与逻辑合取；末帧明确人工证据类型和仍待运行的目标环境。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs nav2",
+      "node --test tests/course_inspector_nav2.test.cjs"
+    ],
+    "models": 8,
+    "lessons": 8,
+    "framesChecked": 184,
+    "cellsChecked": 549,
+    "experiments": 13,
+    "semanticTests": 13,
+    "checks": [
+      "统一检查器基于实际 config/extension_nav2.json demos、原模型默认值及各控件两个边界，运行8模型所有184计算帧；所有算格有限且ID唯一。",
+      "所有32默认快照深冻结，算格有具体公式、输入、单位/假设和四位小数说明；inspect不修改trace，负索引/NaN/正负Infinity均安全夹取。",
+      "13组before/after均通过真实控件运行原模型；verify检查具体输出与保持量，拒绝相同前值对/后值对及人为篡改的结果。",
+      "浏览器无依赖注册通过；所有当前帧在禁止读取完整result、scene、visual及未来step的代理下仍产生相同检查内容。",
+      "生命周期核对配置与激活分离、两种readyCount=1但无法受理的原因和blocked标签边界；TF核对有符号平移、0.3s恰好允许与0.4s拒绝，空间候选保持。",
+      "格心用独立10.5×0.25−2=0.625m及零列案例核对；定位修正固定不随地图控件变化，反算使用floor。",
+      "通道比较物理可通过而缓冲受限、半径过大导致物理碰撞及零缓冲余量一致；规划逐项核对λ=3的[9,4.6]与实际选择。",
+      "控制器以L=|y|=0.5的合法几何边界核对纵坐标为0，独立圆半径倒数核对负曲率/角速度及20Hz增量，并检查y=0直行。",
+      "恢复流程检查预算耗尽的真实事件顺序、每个事件算格与原列表一致，以及failures=budget=0时无需恢复的首次成功；不拆造运行时帧。",
+      "Wilson区间用独立记分检验二次方程求根核对0/10、8/10和10/10，逐格检查中心和半宽；到达门槛、碰撞否决和超时否决分别检查。"
+    ]
+  },
+  "limitations": [
+    "现有八讲是原创有限教学选题，不是完整 Nav2 教程或 Nav2 内部实现；未启动 ROS、Nav2、Gazebo 或机器人，也不生成学习完成和用时证据。",
+    "inspect只读取trace.params和当前steps[index].variables/title；不读取完整result、scene、visual或未来步骤。verify可读取前后两次完整运行的末帧做最终核对。",
+    "所有静态模型保留原有4个计算快照；逐项展开只解释该快照已生成计算，不新增伪动画。行为模型第2个快照一次执行完整有限循环，列表事件不冒充逐tick实时执行。",
+    "生命周期门控是人工配置/传感器输入；blocked不是ROS生命周期主状态，ready和acceptGoal不证明Lifecycle Manager或Action Server真实就绪。",
+    "TF是无旋转、同向、同一时刻的一维纯平移；只有年龄差，没有绝对查询时间、缓存、插值或外推。0.3s为算例阈值，空间坐标保留不等于时间上可用或适合真实控制。",
+    "栅格换算忽略二维行号与原点旋转；机器人位姿修正为给定常数，未运行AMCL、粒子滤波或传感器定位，也不证明定位收敛。",
+    "costmap仅固定净宽和圆形footprint几何，缓冲为硬偏好，不复刻Nav2连续膨胀代价，也不包括未知格、射线清除、动态障碍或多层合成。",
+    "规划仅比较两条假定可行路径的教学成本，不执行搜索或碰撞检查，不等同任意Nav2规划插件的内部成本；规划选择不证明跟踪成功。",
+    "控制器为pure pursuit几何与恒速单周期增量，不含完整RPP减速、约束、碰撞预测、执行器饱和或路径闭环仿真；travelStep是弧长而不是机体系x位移。",
+    "行为模型是有界确定性内存事件，不运行Nav2 XML或BehaviorTree.CPP，不处理真实取消、超时、恢复节点结果或物理障碍解除。",
+    "验收计数为人工教学数据，标记可以交叉；Wilson双侧约95%区间使用z=1.96并要求独立同分布二项样本。通过门槛是本站例子而非官方规范，目标环境字符串不是执行回执。",
+    "只新增本课程插件、测试和本清单；未改课程/讲次ID、配置、共享模型、原图、草稿、记录、构建或交付产物。浏览器和总体交付验收由根agent负责。"
+  ],
+  "files": [
+    "web/course-inspectors/nav2.js",
+    "tests/course_inspector_nav2.test.cjs",
+    "docs/course-inspectors/nav2.json"
+  ]
+}

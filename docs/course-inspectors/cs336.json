@@ -1,0 +1,445 @@
+{
+  "courseId": "cs336",
+  "title": "CS336 逐格教学推广",
+  "checked": "2026-11-09",
+  "coverage": {
+    "course": "cs336",
+    "models": 23,
+    "lessons": 18,
+    "framesChecked": 815,
+    "cellsChecked": 2218,
+    "experiments": 23
+  },
+  "models": [
+    {
+      "id": "cs336-bpe",
+      "intuition": "先数词内相邻对，再用固定并列规则选一对合并；压缩后仍能拼回原词。",
+      "experiments": [
+        {
+          "id": "merge-more",
+          "label": "多做一次合并",
+          "prediction": "token 数应下降，解码得到的三个词保持相同。",
+          "before": {
+            "merges": 1
+          },
+          "after": {
+            "merges": 2
+          },
+          "expectation": "合并压缩符号序列，不能更改 low、low、lower。"
+        }
+      ]
+    },
+    {
+      "id": "compute",
+      "intuition": "先把参数和 token 统一为个数，再用工作量÷有效速度求时间，状态显存单独算。",
+      "experiments": [
+        {
+          "id": "double-gpus",
+          "label": "只把 GPU 数翻倍",
+          "prediction": "工作量不变；MFU 固定时，计算用时是否恰好减半？",
+          "before": {
+            "gpus": 8
+          },
+          "after": {
+            "gpus": 16
+          },
+          "expectation": "本模型的理想时间减半，工作量和未分片状态显存不变。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-roofline",
+      "intuition": "同一工作同时受计算速度和搬运速度限制；理想重叠取两项时间的较大值。",
+      "experiments": [
+        {
+          "id": "reuse",
+          "label": "只提高算术强度",
+          "prediction": "搬运字节减少，瓶颈会从内存转成计算吗？",
+          "before": {
+            "intensity": 16
+          },
+          "after": {
+            "intensity": 64
+          },
+          "expectation": "算术强度从16变64，默认带宽和峰值下 roofline 从16增至50 TFLOP/s。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-rms",
+      "intuition": "RMSNorm、残差和门控逐维展开；FFN 参数形状计数与玩具投影分开核对。",
+      "experiments": [
+        {
+          "id": "residual-zero",
+          "label": "关闭教学残差分支",
+          "prediction": "scale=0 时残差向量是否等于原输入？",
+          "before": {
+            "scale": 1
+          },
+          "after": {
+            "scale": 0
+          },
+          "expectation": "输入与归一化不变，残差向量恢复为 x；后面的 FFN 仍会计算。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-moe",
+      "intuition": "路由选择专家，专家各算一个值，再用归一化路由权重汇总。",
+      "experiments": [
+        {
+          "id": "top-one",
+          "label": "只激活一个专家",
+          "prediction": "k=1 后权重是否为1，输出是否等于该专家函数？",
+          "before": {
+            "topk": 2
+          },
+          "after": {
+            "topk": 1
+          },
+          "expectation": "专家0的权重为1，输出为输入 x，激活参数减半。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-linear-attention",
+      "intuition": "逐 token 累加外积和 Key，最后用 Query 读取固定大小状态。",
+      "experiments": [
+        {
+          "id": "longer-prefix",
+          "label": "只增加一个历史 token",
+          "prediction": "状态仍是2×2和2维；数值是否随历史更新？",
+          "before": {
+            "tokens": 3
+          },
+          "after": {
+            "tokens": 4
+          },
+          "expectation": "S/z 大小不变，累计值与输出改变。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-tiling",
+      "intuition": "跟踪 C[0,0] 跨 K 块累加，再分开估算全局读取次数。",
+      "experiments": [
+        {
+          "id": "bigger-tile",
+          "label": "只增大 K 分块",
+          "prediction": "C00 会变吗？理想读取次数会变吗？",
+          "before": {
+            "tile": 2
+          },
+          "after": {
+            "tile": 4
+          },
+          "expectation": "乘法结果不变；默认 n=8 的理想读取次数减半。"
+        }
+      ]
+    },
+    {
+      "id": "parallel",
+      "intuition": "区别状态分片与梯度同步，逐卡/逐维复算平均与参数更新。",
+      "experiments": [
+        {
+          "id": "shard-state",
+          "label": "只改 ZeRO 分片级别",
+          "prediction": "梯度与逻辑更新是否不变？每卡状态会怎样？",
+          "before": {
+            "zero": 0
+          },
+          "after": {
+            "zero": 3
+          },
+          "expectation": "固定4卡时每卡持久状态变为1/4；逻辑平均梯度和更新不变。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-tensorparallel",
+      "intuition": "切输出维产生片段，切输入维产生部分和；两种布局最后必须还原同一向量。",
+      "experiments": [
+        {
+          "id": "change-layout",
+          "label": "只切换分片方向",
+          "prediction": "局部结果改变，最终 y 是否仍相同？",
+          "before": {
+            "mode": "output"
+          },
+          "after": {
+            "mode": "input"
+          },
+          "expectation": "输出片段改为部分和；最终向量仍为[11,12,13,14]。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-pipeline",
+      "intuition": "每个真实记录的时间槽里，微批前进一段；空泡是没有合法微批的阶段槽。",
+      "experiments": [
+        {
+          "id": "more-microbatches",
+          "label": "只增加微批数",
+          "prediction": "空泡数量不变，有效槽占比如何变化？",
+          "before": {
+            "microbatches": 2
+          },
+          "after": {
+            "microbatches": 8
+          },
+          "expectation": "固定4阶段，空泡仍为12，利用率增加。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-scaling",
+      "intuition": "在 N×D 固定的约束下，增大模型会减少数据，两项代价需要共同比较。",
+      "experiments": [
+        {
+          "id": "off-optimum",
+          "label": "同预算只增加模型规模",
+          "prediction": "从默认最优点离开，数据项能否抵消模型项改善？",
+          "before": {
+            "N": 20
+          },
+          "after": {
+            "N": 40
+          },
+          "expectation": "N翻倍、D减半；此人为函数的总损失反而升高。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-kv",
+      "intuition": "先按 B×T×Hkv×D 数 K/V 元素，再按每元素2字节换算一层缓存。",
+      "experiments": [
+        {
+          "id": "mqa",
+          "label": "只把 KV heads 从2降为1",
+          "prediction": "缓存减半时，Query 的分数项是否也减半？",
+          "before": {
+            "kvheads": 2
+          },
+          "after": {
+            "kvheads": 1
+          },
+          "expectation": "KV容量减半；同一Query head的prefill/decode计数不变。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-serving",
+      "intuition": "跟踪每槽正在生成的请求、剩余长度和等待队列，最后对同样11个 token 比较调度。",
+      "experiments": [
+        {
+          "id": "more-slots",
+          "label": "只增加并发槽位",
+          "prediction": "相同请求工作量下，总时间槽和每槽产出会怎样？",
+          "before": {
+            "slots": 1
+          },
+          "after": {
+            "slots": 2
+          },
+          "expectation": "总token仍为11；连续时间槽减少，每槽产出增加。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-fit",
+      "intuition": "扣除假设下界后取对数，拟合斜率与截距，再用独立留出函数复核。",
+      "experiments": [
+        {
+          "id": "wrong-floor",
+          "label": "只改变假设下界",
+          "prediction": "错误下界是否改变拟合指数并扩大留出误差？",
+          "before": {
+            "floor": 2
+          },
+          "after": {
+            "floor": 1
+          },
+          "expectation": "人工真值下界是2；改为1后，拟合误差从零增加。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-evaluation",
+      "intuition": "每题先算k个候选全失败，再取补集；分数与允许的采样预算一起报告。",
+      "experiments": [
+        {
+          "id": "more-samples",
+          "label": "只把每题预算从1改为4",
+          "prediction": "分数提高时，允许的采样成本是否也变了？",
+          "before": {
+            "k": 1
+          },
+          "after": {
+            "k": 4
+          },
+          "expectation": "宏平均提高；允许采样次数增加到4倍。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-bpb",
+      "intuition": "同一文本总NLL相同，按token归一化的PPL可变，按字节归一化的BPB不变。",
+      "experiments": [
+        {
+          "id": "tokenizer",
+          "label": "只更换同一文本的切分",
+          "prediction": "总NLL相同，PPL和BPB会怎样变化？",
+          "before": {
+            "tokenizer": "A"
+          },
+          "after": {
+            "tokenizer": "B"
+          },
+          "expectation": "PPL改变，BPB保持相同。不能用PPL直接跨tokenizer排名。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-data-sources",
+      "intuition": "每条样本携带来源、语言与许可标记，筛选步骤保留具体去留原因。",
+      "experiments": [
+        {
+          "id": "short-text",
+          "label": "只提高最小字符数",
+          "prediction": "哪条短样本会被排除，剩余来源是否仍保留？",
+          "before": {
+            "minChars": 15
+          },
+          "after": {
+            "minChars": 45
+          },
+          "expectation": "默认英文筛选下，代码样本w4被移除，只保留w1及其来源标记。"
+        }
+      ]
+    },
+    {
+      "id": "dedup",
+      "intuition": "先用明确规则生成比较键，稳定去重，再只从训练集排除评测重合。",
+      "experiments": [
+        {
+          "id": "without-decontamination",
+          "label": "只关闭去污染",
+          "prediction": "集内去重能否自动排除训练/评测重合？",
+          "before": {
+            "decontaminate": "yes"
+          },
+          "after": {
+            "decontaminate": "no"
+          },
+          "expectation": "train-c重回训练集；固定评测集eval-e始终保留。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-jaccard",
+      "intuition": "交集除以并集得到精确Jaccard，LSH公式只估计进入候选集概率。",
+      "experiments": [
+        {
+          "id": "more-bands",
+          "label": "只增加 band 数",
+          "prediction": "Jaccard真值不变，候选概率会如何改变？",
+          "before": {
+            "bands": 2
+          },
+          "after": {
+            "bands": 8
+          },
+          "expectation": "精确相似度不变，理想候选概率增加。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-posttrain",
+      "intuition": "SFT先按助手mask平均NLL；DPO按相对参考的偏好差计算单对损失。",
+      "experiments": [
+        {
+          "id": "equal-ratios",
+          "label": "只令chosen等于rejected",
+          "prediction": "偏好margin为0时，单对DPO损失是多少？",
+          "before": {
+            "mode": "dpo",
+            "chosen": 2,
+            "rejected": 1
+          },
+          "after": {
+            "mode": "dpo",
+            "chosen": 1,
+            "rejected": 1
+          },
+          "expectation": "margin为0、偏好概率0.5、损失ln2；SFT项不变。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-grpo",
+      "intuition": "先按可验证答案给奖励，再做组内归一化，并保留负优势的裁剪符号。",
+      "experiments": [
+        {
+          "id": "equal-reward",
+          "label": "只把候选组改成全部正确",
+          "prediction": "都有奖励是否必然产生非零组相对优势？",
+          "before": {
+            "group": "mixed"
+          },
+          "after": {
+            "group": "allcorrect"
+          },
+          "expectation": "总体标准差为0，所有优势和目标均为0，避免NaN。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-patches",
+      "intuition": "先数图像网格与额外全局token，再比较序列平方增长；玩具patch特征逐格平均。",
+      "experiments": [
+        {
+          "id": "larger-patches",
+          "label": "只增大patch边长",
+          "prediction": "图像token减少后，稠密分数矩阵格数会怎样？",
+          "before": {
+            "patch": 16
+          },
+          "after": {
+            "patch": 32
+          },
+          "expectation": "视觉token与序列长度下降，完整分数格数下降；固定玩具patch均值不变。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-clip",
+      "intuition": "图像与文本先给定单位向量，逐对点积、按行Softmax，再累计对角正样本NLL。",
+      "experiments": [
+        {
+          "id": "swap-labels",
+          "label": "只交换前两条文本向量",
+          "prediction": "目标仍在对角线时，错误配对会怎样影响损失？",
+          "before": {
+            "pairing": "correct"
+          },
+          "after": {
+            "pairing": "swapped"
+          },
+          "expectation": "前两对正样本概率下降，单向交叉熵增大。"
+        }
+      ]
+    }
+  ],
+  "tests": {
+    "command": "node --test tests/course_inspector_cs336.test.cjs",
+    "passed": 8
+  },
+  "scope": "覆盖18讲全部23个实际演示模型。按当前帧展开具体乘加、平均、归一化、集合判断、分片与调度状态；静态计算保持检查语义，实际token/分块/时间槽沿用既有真实记录。",
+  "boundaries": [
+    "只渲染同一份trace，不执行模型、不访问网络、不读写记录或时长。",
+    "训练工作量、显存、roofline与调度均为明确口径下的教学计算，不是GPU/分布式实测。",
+    "Q/K/V、门控和CLIP均使用小型给定数值；不代表运行或训练真实语言模型。",
+    "虚构语料只保留给定来源和许可标签，不证明真实授权。",
+    "使用完整结果进行核对的格子显式标注最终核对或完整案例。"
+  ]
+}

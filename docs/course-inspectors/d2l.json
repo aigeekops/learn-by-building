@@ -1,0 +1,360 @@
+{
+  "courseId": "d2l",
+  "courseLabel": "动手学深度学习（D2L）",
+  "lessons": 16,
+  "models": [
+    {
+      "id": "d2l-tensors",
+      "intuition": "先核对元素到二维坐标的映射，再按末轴检查广播；每个输出格只加上同列的向量元素。",
+      "experiments": [
+        {
+          "id": "shape-guard",
+          "label": "只改变 B 的末轴长度",
+          "prediction": "多一个元素时还能逐格相加吗？",
+          "before": {
+            "mode": "row"
+          },
+          "after": {
+            "mode": "incompatible"
+          },
+          "expectation": "相同 A 保持不变；合法分支有矩阵，非法分支拒绝并返回空输出。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-matrix-probability",
+      "intuition": "逐格特征乘积先按行求预测，再把非负质量归一化；期望的每一项是概率乘相应预测。",
+      "experiments": [
+        {
+          "id": "mass-only",
+          "label": "只增加第一个结果的质量",
+          "prediction": "改变概率是否会改掉已经算出的 Xw？",
+          "before": {
+            "p0": 0
+          },
+          "after": {
+            "p0": 4
+          },
+          "expectation": "预测仍为[5,5]；概率[0,1]变为[0.8,0.2]，期望仍为5。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-autograd",
+      "intuition": "半平方误差的上游梯度是预测误差；沿加法与乘法的局部导数分别乘回 w、b 和输入。",
+      "experiments": [
+        {
+          "id": "target-shift",
+          "label": "只把目标增加1",
+          "prediction": "目标改变时哪些局部导数不变、上游误差怎样变化？",
+          "before": {
+            "target": 3
+          },
+          "after": {
+            "target": 4
+          },
+          "expectation": "预测仍为2；误差−1→−2，dw−2→−4，db与dx−1→−2。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-regression",
+      "intuition": "每轮从同一组旧参数生成两条预测、损失和平均梯度，再同时更新 w 与 b；只播放实际已执行的更新。",
+      "experiments": [
+        {
+          "id": "learning-rate",
+          "label": "只把学习率加倍",
+          "prediction": "第一轮参数步长是否都加倍？",
+          "before": {
+            "epochs": 1,
+            "rate": 0.1
+          },
+          "after": {
+            "epochs": 1,
+            "rate": 0.2
+          },
+          "expectation": "同一旧状态 dw=−5、db=−3，更新由(0.5,0.3)变为(1,0.6)。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-classification",
+      "intuition": "逐类减最大值、取指数并归一化；交叉熵只读取标签类概率，对每个 logit 的梯度是 p 减 one-hot。",
+      "experiments": [
+        {
+          "id": "common-shift",
+          "label": "只共同平移所有 logit",
+          "prediction": "每个分数加10，概率与梯度会改变吗？",
+          "before": {
+            "shift": 0
+          },
+          "after": {
+            "shift": 10
+          },
+          "expectation": "概率、交叉熵、各类梯度都保持；原始logit共同增加10。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-mlp",
+      "intuition": "按仿射、ReLU、输出和半平方损失的顺序执行前向；反向在 ReLU 门处乘0或1，再分给第一层参数。",
+      "experiments": [
+        {
+          "id": "close-gate",
+          "label": "只把隐藏权重由正改负",
+          "prediction": "损失仍大于0时，关门支路还能得到梯度吗？",
+          "before": {
+            "w": 1
+          },
+          "after": {
+            "w": -1
+          },
+          "expectation": "z由1变−1，门由1变0；dW与dB从2变0，关闭后损失为0.5。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-generalization",
+      "intuition": "拟合只读取训练标签；逐点平方误差分别属于训练集和验证集，泄漏模式不能当作独立泛化证据。",
+      "experiments": [
+        {
+          "id": "memorize",
+          "label": "只将直线改为训练点查表",
+          "prediction": "训练误差为0能否保证独立验证误差更低？",
+          "before": {
+            "capacity": "line",
+            "split": "clean",
+            "noise": 1
+          },
+          "after": {
+            "capacity": "memorize",
+            "split": "clean",
+            "noise": 1
+          },
+          "expectation": "查表训练MSE为0，但独立验证未知点返回0，MSE为140/3，显著大于直线。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-attention",
+      "intuition": "Query 与每个 Key 点积并除以√2；遮罩在归一化前生效，权重逐项乘 Value 后求和。",
+      "experiments": [
+        {
+          "id": "value-only",
+          "label": "只增加第二个 Value",
+          "prediction": "取回内容改变时，匹配权重是否保持？",
+          "before": {
+            "value": 2
+          },
+          "after": {
+            "value": 6
+          },
+          "expectation": "相同 QK 的权重保持[0.5,0.5]，输出2→4。"
+        },
+        {
+          "id": "mask",
+          "label": "只遮住第二个位置",
+          "prediction": "被遮住的 Value 再大还能贡献输出吗？",
+          "before": {
+            "visible": "both",
+            "value": 6
+          },
+          "after": {
+            "visible": "first",
+            "value": 6
+          },
+          "expectation": "第二权重严格为0；第一权重为1，输出回到2。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-convolution",
+      "intuition": "深度学习互相关不翻转核；每个真实窗口的四个乘积写入一个输出格，尚未经过窗口的格子保持空。",
+      "experiments": [
+        {
+          "id": "stride",
+          "label": "只把步幅由1改2",
+          "prediction": "取样窗口减少后，保留的位置是否仍为相同乘加？",
+          "before": {
+            "stride": 1
+          },
+          "after": {
+            "stride": 2
+          },
+          "expectation": "输出2×2变1×1；唯一保留的左上窗口仍为−2。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-cnn-pooling",
+      "intuition": "每格共享卷积核与偏置，ReLU逐格截断；汇聚成标量后生成两个logit和标签0的交叉熵。",
+      "experiments": [
+        {
+          "id": "pool-rule",
+          "label": "只从最大汇聚改为平均汇聚",
+          "prediction": "激活矩阵相同，汇聚与概率如何改变？",
+          "before": {
+            "pool": "max"
+          },
+          "after": {
+            "pool": "average"
+          },
+          "expectation": "相同激活[[0,0],[0,1]]；汇聚1→0.25，标签0概率下降、损失上升。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-rnn",
+      "intuition": "共享循环权重逐时刻乘上旧状态，再加输入并取tanh；末状态对初状态的梯度是各步局部导数连乘。",
+      "experiments": [
+        {
+          "id": "cut-memory",
+          "label": "只把循环权重设为0",
+          "prediction": "前向仍有非零输出时，初状态对末状态还有影响吗？",
+          "before": {
+            "recurrent": 0.5
+          },
+          "after": {
+            "recurrent": 0
+          },
+          "expectation": "循环权重0时末状态=tanh(0.5)，所有局部时间导数和连乘为0。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-gru",
+      "intuition": "采用D2L门约定，z保留旧状态、r控制候选支路的历史份额；最终状态由保留项与接纳项相加。",
+      "experiments": [
+        {
+          "id": "update-extremes",
+          "label": "只把保留门由0改1",
+          "prediction": "两个极端是否分别严格等于候选与旧状态？",
+          "before": {
+            "update": 0
+          },
+          "after": {
+            "update": 1
+          },
+          "expectation": "候选保持tanh(1)，z=0输出候选；z=1输出旧状态1，接纳项0。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-momentum",
+      "intuition": "速度保留旧梯度方向并加入当前梯度；参数减去学习率乘速度，实际轨迹可能越过最优点。",
+      "experiments": [
+        {
+          "id": "momentum-state",
+          "label": "只把动量从0改为0.8",
+          "prediction": "初始速度相同，第一次与第二次更新分别如何变化？",
+          "before": {
+            "momentum": 0
+          },
+          "after": {
+            "momentum": 0.8
+          },
+          "expectation": "首步θ都为1.8；第二步无动量θ=1.62，有动量θ=1.46。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-adam",
+      "intuition": "一阶矩积累梯度，二阶矩积累平方梯度；逐步偏差校正后，以√v̂加ε缩放参数更新。",
+      "experiments": [
+        {
+          "id": "rate-only",
+          "label": "只把Adam学习率加倍",
+          "prediction": "第一步校正矩是否保持、更新距离是否加倍？",
+          "before": {
+            "rate": 0.1
+          },
+          "after": {
+            "rate": 0.2
+          },
+          "expectation": "第一步m̂=2、v̂=4保持；参数从2移动的距离加倍。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-data-parallel",
+      "intuition": "每样本半平方误差梯度先在rank内求和；全局分母必须是总样本数，大小不均时局部均值等权会改变目标。",
+      "experiments": [
+        {
+          "id": "unequal-mean",
+          "label": "不均分片下只改归约规则",
+          "prediction": "1与3个样本的两个rank直接平均均值会得到什么？",
+          "before": {
+            "split": 1,
+            "reduction": "weighted"
+          },
+          "after": {
+            "split": 1,
+            "reduction": "rank_mean"
+          },
+          "expectation": "正确全局梯度−15；错误均值−32/3，更新1.5变16/15。"
+        }
+      ]
+    },
+    {
+      "id": "d2l-ddp",
+      "intuition": "每rank给定的微批梯度先按累积次数缩放并相加，最后在等大小rank间平均；缺失缩放会放大更新。",
+      "experiments": [
+        {
+          "id": "missing-scaling",
+          "label": "只取消微批loss缩放",
+          "prediction": "累积3个微批会把更新放大几倍？",
+          "before": {
+            "microbatches": 3,
+            "scaling": "correct"
+          },
+          "after": {
+            "microbatches": 3,
+            "scaling": "missing"
+          },
+          "expectation": "正确梯度1.5、更新−0.15；错误梯度4.5、更新−0.45，正好放大3倍。"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "courseValidator": {
+      "course": "d2l",
+      "models": 16,
+      "lessons": 16,
+      "framesChecked": 779,
+      "cellsChecked": 2675,
+      "experiments": 17
+    },
+    "unitTests": {
+      "passed": 12,
+      "command": "node --test tests/course_inspector_d2l.test.cjs"
+    },
+    "sharedValidator": "node scripts/check_course_inspectors.cjs d2l",
+    "independentChecks": [
+      "所有默认值及单个控件上下边界的每一帧，冻结trace并检查不可变性",
+      "所有17组真实before/after参数均通过verify，before/before与after/after反例均拒绝",
+      "通过Proxy拒绝未来快照与result访问，确认逐格只读当前与既有输入",
+      "逐格复算广播、矩阵点积、期望、损失、梯度、同步参数更新",
+      "中心差分验证自动微分与非拐点MLP参数梯度、RNN初状态时间链导数",
+      "独立窗口循环复算所有stride/padding与核边界组合",
+      "独立迭代复算Momentum、Adam矩与偏差校正",
+      "独立检查不均分片归约错误、DDP微批loss缺失缩放反例",
+      "浏览器globalThis注册与Node导出均可用"
+    ]
+  },
+  "teachingScope": "全部16讲原有数值模型逐帧逐格检查：输入坐标、矩阵格、广播形状保护、概率分母、期望贡献、计算图局部导数、真实训练更新、softmax与交叉熵、ReLU门、训练验证误差、Attention遮罩权重、卷积窗口、RNN/GRU、Momentum/Adam、数据并行/DDP归约。数值展示四位小数，验证保留原始精度；不读取未来帧或result。",
+  "limitations": [
+    "全部为既有JavaScript原创有限教学算例；不等同于完整D2L课程翻译或真实数据集训练。",
+    "卷积与静态前向仅检查真实已计算格；不新增虚假时间轨迹或动画。",
+    "RNN时间链是末状态对初状态的导数，不冒充共享循环权重的完整梯度。",
+    "GRU门值由现有控件直接指定，未模拟门参数训练；MLP的z=0采用PyTorch梯度0约定。",
+    "最小二乘与查表使用固定小数据；数据泄漏和过拟合反例不构成真实泛化测量。",
+    "并行归约、DDP微批与优化器均为本地算术，不启动Gloo/NCCL，也不证明GPU性能。",
+    "不改变任何模型、课程/讲次ID、草稿、任务、学习记录或时长。"
+  ],
+  "files": [
+    "web/course-inspectors/d2l.js",
+    "tests/course_inspector_d2l.test.cjs",
+    "docs/course-inspectors/d2l.json"
+  ]
+}

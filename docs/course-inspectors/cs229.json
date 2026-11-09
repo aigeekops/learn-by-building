@@ -1,0 +1,220 @@
+{
+  "courseId": "cs229",
+  "courseLabel": "CS229 机器学习原创伴学",
+  "lessons": 6,
+  "models": [
+    {
+      "id": "cs229-gradient",
+      "intuition": "每轮用旧权重逐样本算误差、平均梯度，再沿负梯度更新；损失与更新前后权重保持对应，过大学习率保留真实发散。",
+      "experiments": [
+        {
+          "id": "rate-double",
+          "label": "只把一步学习率加倍",
+          "prediction": "旧状态和梯度相同，权重移动距离会加倍吗？",
+          "before": {
+            "iterations": 1,
+            "rate": 0.1
+          },
+          "after": {
+            "iterations": 1,
+            "rate": 0.2
+          },
+          "expectation": "首轮梯度都为−5；新权重0.5→1，最终损失2.8125→1.25。"
+        },
+        {
+          "id": "unstable-rate",
+          "label": "只把学习率从0.2改为1",
+          "prediction": "更新同样四次，较大的步长是否仍使损失下降？",
+          "before": {
+            "iterations": 4,
+            "rate": 0.2
+          },
+          "after": {
+            "iterations": 4,
+            "rate": 1
+          },
+          "expectation": "稳定分支最终w=1.875、损失0.01953125；过大步长使w=−8.125、损失128.14453125。"
+        }
+      ]
+    },
+    {
+      "id": "cs229-logistic",
+      "intuition": "分数先经sigmoid得到概率，再按给定标签算稳定交叉熵和p−y；最后的0.5阈值只决定类别，本模型没有参数训练步骤。",
+      "experiments": [
+        {
+          "id": "label-only",
+          "label": "只把标签0改为1",
+          "prediction": "相同分数下概率保持，损失和梯度会怎样变？",
+          "before": {
+            "score": 2,
+            "label": 0
+          },
+          "after": {
+            "score": 2,
+            "label": 1
+          },
+          "expectation": "sigmoid(2)保持；标签1损失比标签0低2，梯度恰好减1。"
+        },
+        {
+          "id": "confidence",
+          "label": "标签1固定，只翻转分数符号",
+          "prediction": "由−6改为6后，预测、损失与梯度绝对值怎样变？",
+          "before": {
+            "score": -6,
+            "label": 1
+          },
+          "after": {
+            "score": 6,
+            "label": 1
+          },
+          "expectation": "概率互补；预测0→1，损失下降，梯度从接近−1收缩到接近0。"
+        }
+      ]
+    },
+    {
+      "id": "cs229-ridge",
+      "intuition": "先逐项汇总Σx²与Σxy，再用分母Σx²+λ解驻点；对照未惩罚权重、逐样本拟合损失、惩罚项与正曲率。",
+      "experiments": [
+        {
+          "id": "shrinkage",
+          "label": "只把λ从0改为5",
+          "prediction": "权重向0收缩时，训练拟合项与惩罚项分别怎样变？",
+          "before": {
+            "lambda": 0
+          },
+          "after": {
+            "lambda": 5
+          },
+          "expectation": "权重2→1；拟合项0→2.5，惩罚项0→2.5，两组解的目标梯度都约为0。"
+        }
+      ]
+    },
+    {
+      "id": "cs229-validation",
+      "intuition": "候选只由训练点决定；分别逐样本计算训练与验证MSE，明确选择准则后再比较，未执行的最终测试保持null。",
+      "experiments": [
+        {
+          "id": "selection-source",
+          "label": "只把选择准则改为训练误差",
+          "prediction": "候选与两套分数不变，选中的模型会变吗？",
+          "before": {
+            "selection": "validation"
+          },
+          "after": {
+            "selection": "training"
+          },
+          "expectation": "独立验证选择constant（MSE=1/225）；训练误差选择curve（训练MSE=0、验证MSE=0.1225）；最终测试仍为空。"
+        }
+      ]
+    },
+    {
+      "id": "cs229-kmeans",
+      "intuition": "最近中心指派使用旧中心；固定指派后逐簇求均值并检查SSE，空簇均值保持null并明确保留旧中心，最终再指派一次。",
+      "experiments": [
+        {
+          "id": "empty-cluster",
+          "label": "只把初始中心从[0,10]改为[0,0]",
+          "prediction": "同中心导致所有点并列时，空簇会怎样处理？",
+          "before": {
+            "iterations": 1,
+            "initial": "apart"
+          },
+          "after": {
+            "iterations": 1,
+            "initial": "same"
+          },
+          "expectation": "分离初值首轮中心[0.5,9.5]、SSE=1；相同初值首轮指派全0，空簇保留0，中心[5,0]、SSE=82；最终会重新指派。"
+        },
+        {
+          "id": "another-iteration",
+          "label": "只给相同初值增加一轮",
+          "prediction": "第一轮的最终重新指派进入第二轮后，SSE还能下降吗？",
+          "before": {
+            "iterations": 1,
+            "initial": "same"
+          },
+          "after": {
+            "iterations": 2,
+            "initial": "same"
+          },
+          "expectation": "第一轮中心[5,0]、固定指派SSE=82；第二轮变为[9.5,0.5]、SSE=1。"
+        }
+      ]
+    },
+    {
+      "id": "cs229-pca",
+      "intuition": "逐坐标求中心、逐格汇总1/n协方差，再沿控件给定的单位方向投影；逐项平方得到方向方差，并与总方差比较。",
+      "experiments": [
+        {
+          "id": "translation",
+          "label": "只共同平移两个特征",
+          "prediction": "均值变了，中心化、协方差和投影会改变吗？",
+          "before": {
+            "offset": 0,
+            "angle": 45
+          },
+          "after": {
+            "offset": 5,
+            "angle": 45
+          },
+          "expectation": "每个原始坐标与均值都加5；中心化点、协方差、投影分数保持，保留比例都为1。"
+        },
+        {
+          "id": "projection-angle",
+          "label": "只把方向从45°改为0°",
+          "prediction": "方向仍为单位向量，保留的方差是否一样？",
+          "before": {
+            "offset": 2,
+            "angle": 45
+          },
+          "after": {
+            "offset": 2,
+            "angle": 0
+          },
+          "expectation": "中心化数据保持；方向方差5→2.5，比例1→0.5；手动方向不保证最大方差。"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "courseValidator": {
+      "course": "cs229",
+      "models": 6,
+      "lessons": 6,
+      "framesChecked": 246,
+      "cellsChecked": 1324,
+      "experiments": 10
+    },
+    "unitTests": {
+      "passed": 8,
+      "command": "node --test tests/course_inspector_cs229.test.cjs"
+    },
+    "sharedValidator": "node scripts/check_course_inspectors.cjs cs229",
+    "independentChecks": [
+      "6个实际模型的全部默认值与单控件上下边界快照，冻结trace检查不可变性；不创建新帧。",
+      "全部10组实际before/after实验验证通过；before/before和after/after均拒绝。",
+      "以Proxy拒绝future snapshot和result访问，逐帧只读取当前及过去快照。",
+      "梯度下降、logistic分数梯度和ridge驻点以独立目标函数中心差分核对。",
+      "零学习率和过大学习率保留实际轨迹；更新前损失与新权重明确区分。",
+      "两候选每个训练/验证样本预测、平方误差与MSE独立核对，未执行测试保持null。",
+      "空簇均值保持null；同初值首轮固定指派SSE=82与最终重新指派SSE=42明确区分。",
+      "PCA协方差逐格乘积、解析方向方差、平移不变性和独立正交重建误差核对。",
+      "Node导出和浏览器globalThis注册均通过。"
+    ]
+  },
+  "teachingScope": "全部6讲既有有限数值模型逐帧逐格检查：平均半平方误差、样本梯度与真实更新、sigmoid和稳定交叉熵、闭式ridge与驻点、训练验证的逐项MSE与模型选择、kmeans指派/均值/SSE/最终再指派、PCA中心化/1-n协方差/方向投影/方差比例。所有格子使用同一实际trace的当前或过去值；数值展示四位小数，验证使用完整精度。",
+  "limitations": [
+    "全部为既有JavaScript原创小算例，未提供CS229完整课程翻译、真实数据集训练或泛化结论。",
+    "静态logistic、ridge、验证选择和PCA保留原有计算快照，没有添加训练动画；logistic未执行权重更新。",
+    "ridge使用平方误差求和而非平均的目标缩放；不存在截距，λ的尺度依赖此约定。",
+    "验证选择没有独立最终测试集；null不代表0，也不能将验证分数冒充无偏测试结果。",
+    "kmeans为一维k=2有限交替计算，距离并列归簇0、空簇保留旧中心，不保证全局最优或任意收敛标准。",
+    "PCA采用1/n协方差，方向由控件给定；45度仅是此固定数据的主方向，没有运行通用特征向量求解器。",
+    "不改变模型、课程或讲次ID、原始数据、草稿、学习记录、完成状态或学习时长。"
+  ],
+  "files": [
+    "web/course-inspectors/cs229.js",
+    "tests/course_inspector_cs229.test.cjs",
+    "docs/course-inspectors/cs229.json"
+  ]
+}

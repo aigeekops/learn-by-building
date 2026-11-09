@@ -1,0 +1,15 @@
+#lbb-course-prototype .ext-originals{margin-top:1.5rem;padding:1rem;border:1px solid var(--border,#dce2e8);border-radius:12px}
+#lbb-course-prototype .ext-originals summary{cursor:pointer;font-weight:600}
+#lbb-course-prototype .ext-originals .row{margin-top:1rem}
+#lbb-course-prototype [data-extension-course] .aid-code ol{white-space:pre;overflow:auto}
+#lbb-course-prototype [data-extension-course] .aid-workspace-left .aid-visual{overflow:auto;min-height:200px}
+#lbb-course-prototype [data-extension-course] .aid-visual *{animation:none!important;transition:none!important}
+#lbb-course-prototype .ext-geometry{display:block;width:100%;max-height:340px;min-height:180px;background:#f8fafc;border-radius:10px}
+#lbb-course-prototype .ext-geometry text{font:12px sans-serif;fill:#334155}
+#lbb-course-prototype .ext-coordinates{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+#lbb-course-prototype .ext-matrix{display:grid;place-content:center;gap:8px;min-height:180px}
+#lbb-course-prototype .ext-matrix [role=row]{display:flex;gap:8px}
+#lbb-course-prototype .ext-matrix [role=cell]{display:grid;place-content:center;min-width:52px;min-height:48px;padding:8px;background:#e0f2fe;border:1px solid #7dd3fc;border-radius:8px;font:16px ui-monospace,monospace;color:#075985}
+#lbb-course-prototype .ext-execution{color:var(--text-muted,#64748b);font-size:13px}
+#lbb-course-prototype [data-extension-course] .aid-code-caption{display:flex;justify-content:space-between;align-items:center;gap:12px}
+#lbb-course-prototype .aid-code-caption .ext-download{font-size:10px;white-space:nowrap;padding:5px 8px;color:#f5f3ff;border-color:#7c6a94;background:#493758}

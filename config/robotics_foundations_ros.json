@@ -1,0 +1,124 @@
+{
+  "id": "ros",
+  "title": "ROS 2 与仿真集成基础",
+  "subtitle": "把消息、坐标、时间和仿真链路分开检查，再接成可复现系统",
+  "courseLabel": "ROS 2 Jazzy 官方教程与 Gazebo Harmonic 配套材料",
+  "officialUrl": "https://docs.ros.org/en/jazzy/Tutorials.html",
+  "scope": "本站原创四节配套基础课：发布订阅、TF坐标与时间、日志回放、仿真桥接与时钟。保留既定Jazzy/Harmonic组合；不代表官方教程已全部完成。",
+  "boundary": "网页内运行的是可复算的JavaScript教学模型。附带ROS 2软件包、launch、日志和Gazebo桥接步骤；本制作机没有ros2或gz，真实ROS/DDS/Gazebo运行尚待目标环境验证。",
+  "lessons": [
+    {
+      "id": "rf-ros-pubsub",
+      "title": "发布了，为什么还没有处理？",
+      "question": "一个发布者连续发消息，慢订阅者能处理全部样本吗？",
+      "prerequisites": ["能读懂Python列表和循环", "知道输入、处理与输出是不同阶段"],
+      "objectives": ["区分发布、进入缓冲和回调处理", "按给定调度手算有界队列", "分别记录链路丢失与缓冲覆盖，并核对QoS兼容性"],
+      "explanation": [
+        "先把topic想成带有消息类型的通信接口，而不是一个所有节点共享的全局变量。发布者产生样本，订阅者通过自己的回调处理样本。发布动作结束，并不表示订阅回调已经执行。真实ROS 2还涉及节点发现、QoS兼容和执行器调度。",
+        "本课只定义一个容易手算的消费者缓冲：每来一条样本先放到队尾；长度超过depth，就覆盖最旧的未处理样本；每发生consumeEvery次发布，再处理队首一条。深度的单位是条，消费周期的单位是发布次数；这个确定性规则用于说明生产和处理速度不一致的后果，不是DDS内部实现。",
+        "把两种损失分开：人为链路丢失的样本根本不进入缓冲；缓冲满时被覆盖的样本曾进入但没有被处理。发布结束后继续排空，必须满足发布数=已处理数+覆盖数+人为丢失数。改变调度可以改变处理集合，因此不要把一次动画中的顺序当成真实ROS的调度保证。",
+        "在真实系统中，Keep Last的depth约束历史样本，reliability和durability又是不同策略。Best Effort允许网络丢失；Reliable涉及传输确认与重试，也不证明应用回调及时完成。两端QoS不兼容时可能根本不建立连接。先用ros2 topic info --verbose检查，再查看接收计数和时间。"
+      ],
+      "modelId": "rf-ros-pubsub",
+      "practice": [
+        {"title":"先手推，再播放", "instruction":"设发布6条、深度2、每3次发布处理一条、无链路丢失；逐条写出缓冲，再单步对照。", "expectedObservation":"最终处理序号2、5、6，覆盖1、3、4；六条消息去向全部可核对。"},
+        {"title":"只改变处理速度", "instruction":"保持其他参数，把消费周期从3改为1，解释为什么覆盖数变化。", "expectedObservation":"每次发布后立即处理，缓冲不积压；此结论只对本课定义的调度成立。"},
+        {"title":"运行代码并分开证据", "instruction":"先运行离线脚本的queue子命令；有Jazzy环境后再运行ROS示例发布者和订阅者，保存topic类型、QoS和实际回调日志。", "expectedObservation":"离线计数可以精确复算；真实回调日志是另一份运行证据，不能用动画代替。"}
+      ],
+      "verification": {"prompt":"换一组条件：发布4条、缓冲深度1、每2次发布后处理1条，无链路丢失，最后排空。一共处理几条？", "expected":2, "tolerance":0.001, "unit":"条", "explanation":"1被2覆盖后处理2；3被4覆盖后处理4；缓冲已空。处理2条，覆盖2条，总数4条。", "transfer":"如果将两端QoS改为不兼容，为什么不能继续沿用这个队列计数来预测真实接收条数？"},
+      "sources": [
+        {"title":"ROS 2 Jazzy：Python发布者与订阅者", "url":"https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Beginner-Client-Libraries/Writing-A-Simple-Py-Publisher-And-Subscriber.rst", "locator":"Background；Write the publisher node；Write the subscriber node；Build and run", "accessed":"2026-11-08"},
+        {"title":"ROS 2 Jazzy：Quality of Service settings", "url":"https://github.com/ros2/ros2_documentation/blob/jazzy/source/Concepts/Intermediate/About-Quality-of-Service-Settings.rst", "locator":"QoS policies：History / Depth / Reliability；QoS compatibilities", "accessed":"2026-11-08"}
+      ],
+      "localFiles": [
+        {"path":"examples/robotics-foundations/ros/offline_demo.py", "label":"Python离线复算", "command":"python3 examples/robotics-foundations/ros/offline_demo.py queue --count 6 --depth 2 --consume-every 3"},
+        {"path":"examples/robotics-foundations/ros/README.md", "label":"ROS包构建、运行与证据说明", "command":"ros2 launch lbb_robotics_basics basics.launch.py"},
+        {"path":"examples/robotics-foundations/ros/lbb_robotics_basics/lbb_robotics_basics/publisher.py", "label":"ROS 2真实发布节点", "command":"ros2 run lbb_robotics_basics publisher"}
+      ]
+    },
+    {
+      "id": "rf-ros-tf",
+      "title": "坐标正确，还要时间正确",
+      "question": "传感器中的一个点，经过车体旋转和平移后在哪里？旧变换还能使用吗？",
+      "prerequisites": ["理解二维点和米的单位", "知道正弦、余弦表示旋转", "完成坐标变换基础课或能复算二维旋转"],
+      "objectives": ["沿world←base_link←sensor复算点坐标", "解释先旋转再平移的参考系约定", "把空间计算与时间有效性检查分开"],
+      "explanation": [
+        "点坐标必须和参考系一起读。传感器前方1米、车体前方1米和世界x方向1米不一定是同一个位置。本例让sensor安装在base_link前方0.2米，安装朝向相同；所有长度用米，逆时针为正角度。",
+        "用T_parent_child表示把child中的坐标变到parent。先算p_base=p_sensor+[0.2,0]，再算p_world=R(yaw)·p_base+[tx,ty]。旋转角度先从度换成弧度。车体原点的位置[tx,ty]已经在world中，不能先加进局部点再一起旋转。",
+        "即使公式和单位正确，旧变换也可能让控制使用错误位置。本课另设一个应用规则：变换年龄ageMs不超过maxAgeMs才允许使用；超过阈值时保留候选数值用于解释，但不输出可用控制坐标。年龄阈值是本站例子的策略，不是tf2统一的过期定义。",
+        "真实tf2维护带时间的坐标变换树，查询需要指定目标系、源系和查询时间。历史查询、最新查询、缓存和外推错误必须按真实系统检查；还要区分静态安装变换与随机器人运动变化的动态变换。本课的二维单时间戳计算为这些概念建立直觉。"
+      ],
+      "modelId": "rf-ros-tf",
+      "practice": [
+        {"title":"逐级写坐标", "instruction":"默认yaw=90°、车体世界坐标(1,0)、sensor中的点(1,0)。在播放前写出base_link中的点、旋转后的点和world中的点。", "expectedObservation":"依次得到(1.2,0)、(0,1.2)、(1,1.2)米，浮点余量接近零。"},
+        {"title":"制造过期变换", "instruction":"保持空间参数，只把年龄改为400ms、阈值300ms。", "expectedObservation":"候选坐标不变，但应用检查拒绝使用；空间正确与时间有效是两项独立检查。"},
+        {"title":"在真实TF树中核对", "instruction":"有ROS环境后启动示例launch，使用tf2_echo world sensor；记录frame名、变换方向与时间，再对照离线脚本。", "expectedObservation":"真实工具输出与本课相同的静态几何约定；本地计算本身不能证明TF消息实际送达。"}
+      ],
+      "verification": {"prompt":"新条件：yaw=0°，车体原点world坐标(2,1)米，sensor前向安装偏移仍为0.2米，点在sensor中为(0.8,0)米，时间有效。该点world的x是多少？", "expected":3, "tolerance":0.0001, "unit":"m", "explanation":"先算base_link的x=0.8+0.2=1，再加world平移2，得到x=3米。yaw=0°时不改变方向。", "transfer":"如果空间参数完全相同，但查询用的是运动之前的动态变换，应检查什么时间条件？为什么候选数值可算不等于可以用于控制？"},
+      "sources": [
+        {"title":"ROS 2 Jazzy：Introducing tf2", "url":"https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Intermediate/Tf2/Introduction-To-Tf2.rst", "locator":"What is happening?；Using view_frames；Using tf2_echo", "accessed":"2026-11-08"}
+      ],
+      "localFiles": [
+        {"path":"examples/robotics-foundations/ros/offline_demo.py", "label":"二维坐标与时间离线复算", "command":"python3 examples/robotics-foundations/ros/offline_demo.py tf --yaw 90 --tx 1 --px 1"},
+        {"path":"examples/robotics-foundations/ros/lbb_robotics_basics/launch/basics.launch.py", "label":"含静态TF的ROS启动文件", "command":"ros2 run tf2_ros tf2_echo world sensor"}
+      ]
+    },
+    {
+      "id": "rf-ros-replay",
+      "title": "回放加速，时间戳也变快了吗？",
+      "question": "原日志首末间隔一秒，2倍速回放时要等多久，消息时间戳是否改写？",
+      "prerequisites": ["会用减法计算相对时间", "理解记录中的时间戳与程序当前时间不同", "知道topic可以记录后再次发布"],
+      "objectives": ["计算不同速率下的理想回放调度", "区分记录时刻、消息header时间与回放墙钟", "用固定输入复现处理结果并保留运行条件"],
+      "explanation": [
+        "可复现先从固定输入开始。本课用五条原创记录，每条保留序号、时间戳和数值。记录能让同一段数据再次进入处理程序，但重放并不自动证明处理器、系统状态和时钟配置都与第一次相同。",
+        "理想调度取第一条记录为回放起点，等待时间为elapsed=(stamp-firstStamp)/rate。rate=2表示原来相隔100毫秒的两条消息，回放时理想等待50毫秒。消息中保存的stamp保持原值；加速回放不等于把消息字段里的时间戳除以二。",
+        "还要分清记录工具使用的录制时间和消息自带header.stamp。真实bag文件中它们可能不同。本课故意让它们一致，以专注于相对间隔；进入真实rosbag2时先检查bag info、消息字段、是否发布/clock，以及节点是否启用use_sim_time。",
+        "回放同一份输入后，对比输出数量、顺序、数值和错误日志，比只看机器人是否移动更可靠。CPU负载、节点初始状态、控制器内部状态与物理仿真都会影响结果；本课算出的等待时间是理想调度，不是实际运行耗时承诺。"
+      ],
+      "modelId": "rf-ros-replay",
+      "practice": [
+        {"title":"核对两种时间", "instruction":"保持默认五条记录，先预测2倍速下每条消息的等待时间，再单步查看原时间戳。", "expectedObservation":"等待时间为0、125、250、375、500毫秒；原时间戳仍为1000、1250、1500、1750、2000毫秒。"},
+        {"title":"平移记录时间原点", "instruction":"只把首条时间戳由1000改成3000毫秒，比较理想等待序列。", "expectedObservation":"等待序列不变，因为调度只使用相对时间差。"},
+        {"title":"记录再回放", "instruction":"先运行离线replay子命令；在ROS环境启动订阅者与记录工具后再启动有限发布者，停止记录，停掉原发布者后按README重放。", "expectedObservation":"可以分别对照录制消息数量和回放回调日志；不能让原发布者与回放同时往同一topic发送而误算输入。"}
+      ],
+      "verification": {"prompt":"另一份日志的首末记录相隔1200毫秒。使用3倍速做理想回放，首末两条发布之间应相隔多少毫秒？", "expected":400, "tolerance":0.001, "unit":"ms", "explanation":"使用相对时间公式1200÷3=400毫秒。这个数值描述理想发布间隔，不表示消息header.stamp也被改成400。", "transfer":"为什么同一份bag、同一速率仍可能得到不同机器人运动轨迹？列出一个时钟因素和一个状态或调度因素。"},
+      "sources": [
+        {"title":"ROS 2 Jazzy：Recording and playing back data", "url":"https://github.com/ros2/ros2_documentation/blob/jazzy/source/Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data/Recording-And-Playing-Back-Data.rst", "locator":"Record topics；Inspect topic data；Play topic data", "accessed":"2026-11-08"}
+      ],
+      "localFiles": [
+        {"path":"examples/robotics-foundations/ros/offline_demo.py", "label":"离线回放调度复算", "command":"python3 examples/robotics-foundations/ros/offline_demo.py replay --duration-ms 1200 --rate 3"},
+        {"path":"examples/robotics-foundations/ros/lbb_robotics_basics/lbb_robotics_basics/recorder.py", "label":"实际ROS消息JSONL记录节点", "command":"ros2 run lbb_robotics_basics recorder --ros-args -p output:=/tmp/robotics-points.jsonl"},
+        {"path":"examples/robotics-foundations/ros/README.md", "label":"rosbag2录制、检查与重放步骤", "command":"ros2 bag play points_bag --rate 2"}
+      ]
+    },
+    {
+      "id": "rf-ros-bridge",
+      "title": "连通仿真，还要连通时钟",
+      "question": "Gazebo在运行，为什么ROS节点时间仍然是零？",
+      "prerequisites": ["知道ROS topic和消息类型", "知道时间戳可以来自仿真时钟", "完成发布订阅与回放两课"],
+      "objectives": ["检查Gazebo与ROS两侧的topic、消息类型和方向", "区分普通消息桥接和/clock桥接", "解释use_sim_time启用但未收到Clock时的等待条件"],
+      "explanation": [
+        "Gazebo Transport和ROS 2并不是同一套消息系统。ros_gz_bridge负责转换受支持的类型对，例如gz.msgs.Clock与rosgraph_msgs/msg/Clock。只创建同名topic，或者让两侧各自能打印数据，都不足以证明桥接已建立。",
+        "先检查类型，再检查方向。本课只有Gazebo侧数据源，因此只有GZ_TO_ROS方向能把它送入ROS。映射为错误的Gazebo类型会失败；方向反过来也不能把这个源送入ROS。真实系统还要检查topic名、桥接器运行、QoS与发现，本例只计算给定合同是否满足。",
+        "仿真时间还需要单独连通/clock，并让使用者启用use_sim_time。Clock消息与普通标量即使都带有数字，也不能互相替代。本例在选择仿真时间但没有送达Clock时保持节点时间0，并把应用状态标成等待；选墙钟则取另一个时间来源。",
+        "配套工程沿用ROS 2 Jazzy和Gazebo Harmonic。simulation.launch.py启动原创小场景、单向时钟桥和示例节点；时钟桥明确使用/world/foundations/clock到/clock的映射。真实运行需在已配好这组环境的机器进行；网页动画和离线Python均不声称启动了仿真器。"
+      ],
+      "modelId": "rf-ros-bridge",
+      "practice": [
+        {"title":"逐项断开链路", "instruction":"默认配置下观察节点时间2秒。分别只改错配类型、方向、样本类型，解释哪一项阻断了时钟。", "expectedObservation":"错误类型或方向会阻断当前数据；普通标量即使转发成功，也不能作为Clock更新节点时间。"},
+        {"title":"比较墙钟与仿真时间", "instruction":"保持桥接错误，只将节点时间来源从仿真改为墙钟；再解释为什么有数值不等于仿真时间正确。", "expectedObservation":"节点会显示墙钟1002秒，但这不能作为仿真时钟已连通的证据。"},
+        {"title":"按真实环境检查清单运行", "instruction":"在Jazzy/Harmonic环境运行simulation.launch.py，先看Gazebo源topic，再检查ROS /clock和节点use_sim_time参数，最后保存日志。", "expectedObservation":"真实运行证据应包含版本、Clock类型、topic数据与节点参数；本制作机尚未执行这些目标环境步骤。"}
+      ],
+      "verification": {"prompt":"新条件：Gazebo Clock样本为7秒，正确匹配类型并按Gazebo→ROS桥接，节点use_sim_time=true，本例墙钟1007秒。节点应该使用多少秒？", "expected":7, "tolerance":0.0001, "unit":"s", "explanation":"节点选择仿真时间，且Clock正确送达，所以使用7秒；1007秒属于墙钟来源。", "transfer":"如果仿真暂停，/clock不再前进而墙钟继续前进，基于ROS时间的定时器和基于墙钟的性能计时应如何分别解释？"},
+      "sources": [
+        {"title":"Gazebo Harmonic：Use ROS 2 to interact with Gazebo", "url":"https://gazebosim.org/docs/harmonic/ros2_integration/", "locator":"ros_gz_bridge；Launching the bridge manually；YAML topic mapping", "accessed":"2026-11-08"},
+        {"title":"ros_gz Jazzy：Bridge communication between ROS and Gazebo", "url":"https://github.com/gazebosim/ros_gz/tree/jazzy/ros_gz_bridge", "locator":"Supported message types；Clock；Gazebo to ROS unidirectional bridge", "accessed":"2026-11-08"}
+      ],
+      "localFiles": [
+        {"path":"examples/robotics-foundations/ros/offline_demo.py", "label":"桥接合同与时间来源离线复算", "command":"python3 examples/robotics-foundations/ros/offline_demo.py bridge --sim-seconds 7"},
+        {"path":"examples/robotics-foundations/ros/lbb_robotics_basics/launch/simulation.launch.py", "label":"真实Gazebo/Clock桥接启动文件", "command":"ros2 launch lbb_robotics_basics simulation.launch.py"},
+        {"path":"examples/robotics-foundations/ros/lbb_robotics_basics/config/clock_bridge.yaml", "label":"单向时钟桥配置", "command":"ros2 topic echo /clock"}
+      ]
+    }
+  ]
+}

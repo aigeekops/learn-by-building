@@ -1,0 +1,531 @@
+{
+  "course": {
+    "id": "linear",
+    "label": "MIT 18.06",
+    "title": "从向量到最小二乘的线性代数",
+    "edition": "MIT 18.06 · 2010公开版选编",
+    "position": "AI与机器人共用数学基础",
+    "description": "六讲原创配套：先用二维坐标建立直觉，再复算消元、变换、投影、回归和特征方向。此处先修只适用于本站入门选编；MIT原课列有多元微积分要求。",
+    "prerequisites": [
+      "本站六讲需要基本代数、坐标和Python列表",
+      "MIT 18.06原课先修为18.02；后续系统学习须另行补足"
+    ],
+    "pending": "本批未系统覆盖四个基本子空间、LU/QR、行列式、SVD、复数与全部原课作业。六讲已整理不表示完成MIT整门课程。",
+    "published": [
+      {
+        "unit": "1",
+        "title": "第1讲 列向量：矩阵乘法是在组合什么",
+        "lessons": [
+          "linear-vectors"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "2",
+        "title": "第2讲 消元与秩：唯一、多解还是无解",
+        "lessons": [
+          "linear-elimination"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "3",
+        "title": "第3讲 变换复合：先缩放还是先旋转",
+        "lessons": [
+          "linear-composition"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "4",
+        "title": "第4讲 正交投影：最近点为什么留下垂直残差",
+        "lessons": [
+          "linear-projection"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "5",
+        "title": "第5讲 最小二乘：有误差时怎样拟合直线",
+        "lessons": [
+          "linear-least-squares"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      },
+      {
+        "unit": "6",
+        "title": "第6讲 特征方向：反复作用后谁占主导",
+        "lessons": [
+          "linear-eigen"
+        ],
+        "material": "官方知识点定位已核对；本站原创配套讲解、可复算图示、标准库例程和独立练习。"
+      }
+    ],
+    "batch": "第二批 · 数学与机器学习",
+    "sources": [
+      "linear-2010"
+    ]
+  },
+  "sources": {
+    "linear-2010": {
+      "kind": "官方公开课程材料",
+      "label": "MIT 18.06 · Spring 2010 · Calendar",
+      "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/pages/calendar/",
+      "locator": "Sessions 1–3, 7–10, 14–16, 21–22, 33：列组合、消元、变换、投影、最小二乘、特征值",
+      "edition": "2010公开版；本站选编6个基础专题，非全课翻译",
+      "checked": "2026-11-09",
+      "role": "official",
+      "status": "2026-11-09 已核对官方页面与章节定位；本站讲解、算例和Python代码独立创作，未复制原课讲义。"
+    }
+  },
+  "lessons": [
+    {
+      "id": "linear-vectors",
+      "title": "第1讲 列向量：矩阵乘法是在组合什么",
+      "summary": "同一矩阵乘[2,1]，为什么得到[3,1]？",
+      "question": "同一矩阵乘[2,1]，为什么得到[3,1]？",
+      "outcome": "用列组合与行点积两种方法复算二维变换。",
+      "prerequisites": [
+        "会加减乘除、坐标与Python列表"
+      ],
+      "explanation": [
+        "先把矩阵的每列当作一根带方向的箭头。矩阵A的两列分别为[1,1]和[1,−1]；输入向量的两个数告诉我们各取多少倍，再把两份位移相加。",
+        "按行计算时，第一行与输入点积得到第一个输出坐标，第二行得到第二个坐标。列组合回答“由哪些方向组成”，行点积回答“每个坐标是多少”，两种结果必须一致。",
+        "列向量约定下A为2×2、x为2×1，输出仍是2×1。不要把同维数组的逐元素相乘与矩阵乘法混为一谈；推广到三维前先写清每个对象的形状。"
+      ],
+      "formula": "Ax=x₁a₁+x₂a₂=[x₁+x₂, x₁−x₂]",
+      "worked": "默认2[1,1]+1[1,−1]=[2,2]+[1,−1]=[3,1]；平方长度3²+1²=10。",
+      "misconception": "点积给出标量；矩阵作用给出向量。输出两个坐标不是两次独立试验，也不表示概率。",
+      "practice": [
+        "先写x=[2,1]时两列各贡献多少。",
+        "把x₁设为0，检查输出是否只剩第二列的倍数。",
+        "把x₂设为−1，画出反向后的第二根箭头，再与行点积比较。"
+      ],
+      "exercise": {
+        "prompt": "A两列仍为[1,1]、[1,−1]，x=[1,−2]时输出的纵坐标是多少？",
+        "expected": 3,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "纵坐标为x₁−x₂。",
+        "solution": "1−(−2)=3。",
+        "transfer": "换成x=[−1,2]，手算完整输出[1,−3]，分别用两种视角验证。"
+      },
+      "sources": [
+        "linear-2010"
+      ],
+      "bridges": [
+        {
+          "lesson": "linear-elimination",
+          "label": "继续：什么情况下解不唯一"
+        },
+        {
+          "lesson": "d2l-tensors",
+          "label": "连接张量的形状"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "linear-vectors",
+      "demos": [
+        {
+          "modelId": "linear-vectors",
+          "title": "列向量：矩阵乘法是在组合什么"
+        }
+      ],
+      "sections": [
+        {
+          "title": "形状先于计算",
+          "explanation": "A的列数必须等于输入的分量数。每个输出坐标代表什么，应在计算前写明；如果它们有物理单位，列的单位也要匹配。",
+          "exercise": "列出A、x和输出各自的行列数。"
+        },
+        {
+          "title": "负系数怎样改变方向",
+          "explanation": "对向量逐坐标乘同一系数。负系数反向，零系数消去该列的贡献；列本身并没有被永久修改。",
+          "exercise": "只保留第二列，说明输出可到达哪些点。"
+        },
+        {
+          "title": "列空间的第一步",
+          "explanation": "所有Ax构成列向量能张成的集合。本例两列独立，可以覆盖二维平面；只有一列时通常只能覆盖一条过原点直线。",
+          "exercise": "试解哪组x能得到[2,0]。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 linear-vectors.py，运行 python3 linear-vectors.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "a = [[1, 1], [1, -1]]\nx = [2, 1]\nfirst = [x[0]*v for v in a[0]]\nsecond = [x[1]*v for v in a[1]]\noutput = [u+v for u, v in zip(first, second)]\nrow_result = [x[0]+x[1], x[0]-x[1]]\nassert output == row_result == [3, 1]\nprint(output, sum(v*v for v in output))",
+          "exercise": "换成x=[−1,2]，手算完整输出[1,−3]，分别用两种视角验证。"
+        }
+      ],
+      "course": "linear",
+      "unit": "1"
+    },
+    {
+      "id": "linear-elimination",
+      "title": "第2讲 消元与秩：唯一、多解还是无解",
+      "summary": "第二行变成0=0和0=1，分别说明什么？",
+      "question": "第二行变成0=0和0=1，分别说明什么？",
+      "outcome": "对三种二维系统做增广消元，区分自由变量与矛盾。",
+      "prerequisites": [
+        "上一讲列组合；一元方程"
+      ],
+      "explanation": [
+        "先把等式的系数和右端一起写成增广行。以x+y=2为第一行，通过第二行减去若干倍第一行，消去第二行的x。合法行变换应保留整个解集。",
+        "如果第二行还有非零y系数，可以回代得到唯一解；如果得到0=0，第二式未提供新约束，会留下自由变量；若得到0=1，两个要求相互矛盾，没有任何解。",
+        "秩数独立约束的数量。相容系统里，变量数减去系数矩阵的秩给出自由度。本例只做首主元非零的2×2消元；一般算法还需要换行与数值稳定性处理。"
+      ],
+      "formula": "R₂ ← R₂ − (a₂₁/a₁₁)R₁；rank(A)≤rank([A|b])",
+      "worked": "默认x+y=2、x−y=0，消元得−2y=−2，因此y=1、x=1。若第二式是2x+2y=5，则消元得0=1。",
+      "misconception": "没有第二个主元并不自动意味着无解。必须连右端一起看；0=0与0=1不能合并为“不可逆”。",
+      "practice": [
+        "分别手算三种系统的新第二行。",
+        "多解模式写成x=2−t、y=t，选两个不同t代回。",
+        "无解模式说明系数秩与增广秩为何不同。"
+      ],
+      "exercise": {
+        "prompt": "方程x+y=2、2x+2y=4的系数矩阵秩是多少？",
+        "expected": 1,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "第二行是第一行的2倍。",
+        "solution": "只有一条独立约束，rank(A)=1。",
+        "transfer": "把右端4改成6，计算两种秩并说明为何无解。"
+      },
+      "sources": [
+        "linear-2010"
+      ],
+      "bridges": [
+        {
+          "lesson": "linear-projection",
+          "label": "继续：无法精确满足时找最近点"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "linear-elimination",
+      "demos": [
+        {
+          "modelId": "linear-elimination",
+          "title": "消元与秩：唯一、多解还是无解"
+        }
+      ],
+      "sections": [
+        {
+          "title": "为什么右端也要变",
+          "explanation": "行变换操作的是等式，减去几倍第一式时必须对左右两侧做同一操作。只对系数消元会产生另一个问题。",
+          "exercise": "给出忘记改右端会得到的错误结论。"
+        },
+        {
+          "title": "自由变量不是未知错误",
+          "explanation": "x+y=2是一条直线，选择y=t就确定x=2−t。参数化描述的是全部解，而不是算法没有找到某个答案。",
+          "exercise": "列出t=0与t=2的解。"
+        },
+        {
+          "title": "从小系统到一般情形",
+          "explanation": "可逆只适用于方阵。矩形系统也可能有唯一解或多解；检查主元与相容性比直接套逆矩阵更普遍。",
+          "exercise": "说明3个变量、秩为2的相容系统有几个自由变量。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 linear-elimination.py，运行 python3 linear-elimination.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "def solve(kind):\n    row2 = [1, -1, 0] if kind == 'unique' else [2, 2, 4 if kind == 'many' else 5]\n    first = [1, 1, 2]\n    factor = row2[0]/first[0]\n    reduced = [a-factor*b for a,b in zip(row2, first)]\n    status = 'unique' if reduced[1] else 'many' if reduced[2] == 0 else 'none'\n    return status, reduced\nassert solve('unique') == ('unique', [0, -2, -2])\nassert solve('many') == ('many', [0, 0, 0])\nassert solve('none') == ('none', [0, 0, 1])\nprint({k: solve(k) for k in ['unique', 'many', 'none']})",
+          "exercise": "把右端4改成6，计算两种秩并说明为何无解。"
+        }
+      ],
+      "course": "linear",
+      "unit": "2"
+    },
+    {
+      "id": "linear-composition",
+      "title": "第3讲 变换复合：先缩放还是先旋转",
+      "summary": "横向缩放2倍与旋转90度，交换顺序后点在哪里？",
+      "question": "横向缩放2倍与旋转90度，交换顺序后点在哪里？",
+      "outcome": "明确列向量约定，用一个反例解释矩阵乘法的顺序。",
+      "prerequisites": [
+        "二维坐标；上一讲矩阵作用"
+      ],
+      "explanation": [
+        "把一个点看成相对原点的位移。横向缩放S只改变横坐标；逆时针旋转90度的R把[x,y]变成[−y,x]，这两种操作都没有平移。",
+        "列向量记法RSx的右侧操作先执行。x=[1,1]先缩放得到[2,1]，再旋转得到[−1,2]；若先旋转到[−1,1]，再缩放便得到[−2,1]。",
+        "当缩放倍数为1时S是恒等变换，两个顺序会相同。一个特殊输入相同也不能证明所有输入都相同；比较线性变换可以检查一组基向量。"
+      ],
+      "formula": "R=[[0,−1],[1,0]]；S=diag(s,1)；一般RS≠SR",
+      "worked": "默认s=2，RS[1,1]=[−1,2]；SR[1,1]=[−2,1]。s=0时S把平面压到纵轴，横向信息无法恢复。",
+      "misconception": "矩阵从左写到右不等于按这个顺序执行。必须先说明列向量还是行向量的记法。",
+      "practice": [
+        "手画两个中间点与两个最终点。",
+        "令s=1检查两个顺序是否相同。",
+        "令s=0解释丢失了哪个分量，以及为什么不存在逆变换。"
+      ],
+      "exercise": {
+        "prompt": "x=[1,1]，先横向缩放3倍再逆时针旋转90度，最终纵坐标是多少？",
+        "expected": 3,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "[1,1]先变成[3,1]。",
+        "solution": "旋转后[−1,3]，纵坐标为3。",
+        "transfer": "对输入[2,0]重复两个顺序，解释差异。"
+      },
+      "sources": [
+        "linear-2010"
+      ],
+      "bridges": [
+        {
+          "lesson": "linear-vectors",
+          "label": "回看：变换的列向量"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "linear-composition",
+      "demos": [
+        {
+          "modelId": "linear-composition",
+          "title": "变换复合：先缩放还是先旋转"
+        }
+      ],
+      "sections": [
+        {
+          "title": "同一输入、两条路径",
+          "explanation": "比较顺序必须从相同的原始点重新开始，不能把第一条路径的结果作为第二条路径的起点。",
+          "exercise": "给两条路径的每个点编号。"
+        },
+        {
+          "title": "用基向量比较",
+          "explanation": "线性变换由基向量的像确定。分别算两种复合对[1,0]、[0,1]的作用，比只看单个点更有说服力。",
+          "exercise": "计算RS与SR各自的两列。"
+        },
+        {
+          "title": "与机器人坐标衔接",
+          "explanation": "在运动学里也必须写清变换方向和表达坐标。本讲的线性变换过原点；含平移的刚体位姿需另用齐次坐标。",
+          "exercise": "指出本例哪里没有包含平移。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 linear-composition.py，运行 python3 linear-composition.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "def rotate(v): return [-v[1], v[0]]\ndef scale(v, s): return [s*v[0], v[1]]\nx = [1, 1]\nrs = rotate(scale(x, 2))\nsr = scale(rotate(x), 2)\nassert rs == [-1, 2] and sr == [-2, 1]\nassert rotate(scale(x, 1)) == scale(rotate(x), 1)\nprint(rs, sr)",
+          "exercise": "对输入[2,0]重复两个顺序，解释差异。"
+        }
+      ],
+      "course": "linear",
+      "unit": "3"
+    },
+    {
+      "id": "linear-projection",
+      "title": "第4讲 正交投影：最近点为什么留下垂直残差",
+      "summary": "点[2,0]投影到y=x，为什么最近点是[1,1]？",
+      "question": "点[2,0]投影到y=x，为什么最近点是[1,1]？",
+      "outcome": "计算投影系数、向量与残差，检查正交性和零方向。",
+      "prerequisites": [
+        "点积；向量加减"
+      ],
+      "explanation": [
+        "过原点直线上的点都能写成ca。给定目标b，我们寻找令||b−ca||²最小的系数c。a是方向向量，不能是零向量。",
+        "展开平方并对c求导，最优条件是aᵀ(b−ca)=0，得到c=(aᵀb)/(aᵀa)。这既是一元二次函数的驻点条件，也是残差与直线垂直的几何条件。",
+        "默认a=[1,1]、b=[2,0]，系数1，投影[1,1]，残差[1,−1]。把a变成2a会改变系数，但投影点仍相同；方向的长度不是直线本身的属性。"
+      ],
+      "formula": "c=(aᵀb)/(aᵀa)；p=ca；r=b−p；aᵀr=0",
+      "worked": "aᵀb=2，aᵀa=2，所以c=1；残差与a的点积1−1=0。零方向时分母为0，模型返回无效状态。",
+      "misconception": "投影系数是标量，投影点是向量。不能把系数1直接当作二维最近点，也不能把无效方向显示成投影零向量。",
+      "practice": [
+        "先预测投影和残差，再逐步核对。",
+        "把目标改成[1,−1]，解释投影为何为零。",
+        "切换零方向，检查页面是否拒绝计算而不是产生坐标。"
+      ],
+      "exercise": {
+        "prompt": "b=[3,1]投影到a=[1,1]的直线，投影系数是多少？",
+        "expected": 2,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "分子3+1，分母1+1。",
+        "solution": "c=4/2=2，投影[2,2]。",
+        "transfer": "把方向换成[2,2]，独立算出c=1，核对投影仍为[2,2]。"
+      },
+      "sources": [
+        "linear-2010"
+      ],
+      "bridges": [
+        {
+          "lesson": "linear-least-squares",
+          "label": "继续：投影到一整组拟合数据"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "linear-projection",
+      "demos": [
+        {
+          "modelId": "linear-projection",
+          "title": "正交投影：最近点为什么留下垂直残差"
+        }
+      ],
+      "sections": [
+        {
+          "title": "从距离平方推公式",
+          "explanation": "f(c)=bᵀb−2c aᵀb+c²aᵀa。a非零时二次项系数为正，驻点即唯一最小值。",
+          "exercise": "写出默认输入下的f(c)。"
+        },
+        {
+          "title": "残差代表未能解释的分量",
+          "explanation": "目标等于线上投影加垂直残差。两部分平方长度相加等于目标平方长度，这是正交分解的检验。",
+          "exercise": "核对默认输入的2+2=4。"
+        },
+        {
+          "title": "方向无效时停下",
+          "explanation": "零向量的所有倍数只构成单点，不是这里假设的方向直线。模型明确区分参数错误与合法零投影。",
+          "exercise": "比较a=0和b与a垂直两种结果。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 linear-projection.py，运行 python3 linear-projection.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "def project(a, b):\n    denominator = sum(x*x for x in a)\n    if denominator == 0: return None\n    c = sum(x*y for x,y in zip(a,b))/denominator\n    point = [c*x for x in a]\n    residual = [x-y for x,y in zip(b,point)]\n    assert abs(sum(x*y for x,y in zip(a,residual))) < 1e-12\n    return c, point, residual\nassert project([1,1], [2,0]) == (1, [1,1], [1,-1])\nassert project([0,0], [2,0]) is None\nprint(project([1,1], [2,0]))",
+          "exercise": "把方向换成[2,2]，独立算出c=1，核对投影仍为[2,2]。"
+        }
+      ],
+      "course": "linear",
+      "unit": "4"
+    },
+    {
+      "id": "linear-least-squares",
+      "title": "第5讲 最小二乘：有误差时怎样拟合直线",
+      "summary": "三个不共线的点，怎样得到一条可核对的拟合线？",
+      "question": "三个不共线的点，怎样得到一条可核对的拟合线？",
+      "outcome": "复算含截距回归，使用残差正交条件检查解。",
+      "prerequisites": [
+        "均值、投影；知道平方函数的最小值"
+      ],
+      "explanation": [
+        "观测x=[0,1,2]、y=[1,2,2]，通常没有一条线同时穿过全部点。最小二乘选择使残差平方和最小的斜率w和截距b，而非让每个残差都相同。",
+        "先求均值，再用中心化后的协变项除以x的平方偏差，得到w；由b=ȳ−w x̄得到截距。这一公式要求x不全相同，否则分母为零。",
+        "把预测重新代回全部观测，检查Σr≈0与Σx r≈0。两条等式对应含截距设计矩阵的两列；训练误差最小还没有回答新数据是否预测准确。"
+      ],
+      "formula": "w=Σ(x−x̄)(y−ȳ)/Σ(x−x̄)²；b=ȳ−wx̄",
+      "worked": "默认w=1/2、b=7/6，预测[7/6,5/3,13/6]，残差[−1/6,1/3,−1/6]，SSE=1/6。",
+      "misconception": "残差和为零不等于每个残差为零。省略截距后，残差和也不一定为零，不能沿用这里的完整检查。",
+      "practice": [
+        "手算均值、斜率与截距。",
+        "把最后一个观测从2改成3，检查是否得到完美直线。",
+        "保留一组新x值做预测，说明这些预测尚无真实误差可报告。"
+      ],
+      "exercise": {
+        "prompt": "默认三个点的残差平方和SSE是多少？",
+        "expected": 0.16666666666666666,
+        "tolerance": 1e-08,
+        "unit": "",
+        "hint": "将−1/6、1/3、−1/6分别平方后相加。",
+        "solution": "1/36+1/9+1/36=1/6。",
+        "transfer": "把y改成[2,2,2]，独立求w=0、b=2与SSE=0。"
+      },
+      "sources": [
+        "linear-2010"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs229-gradient",
+          "label": "连接：迭代求回归参数"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "linear-least-squares",
+      "demos": [
+        {
+          "modelId": "linear-least-squares",
+          "title": "最小二乘：有误差时怎样拟合直线"
+        }
+      ],
+      "sections": [
+        {
+          "title": "误差如何定义",
+          "explanation": "本讲统一r=y−ŷ，优化平方和。使用ŷ−y会改变有符号残差，但不会改变平方误差；推导和图示必须保持同一约定。",
+          "exercise": "说明残差负数意味着什么。"
+        },
+        {
+          "title": "法方程的几何意义",
+          "explanation": "设计矩阵两列为常数1和x。最优残差与两列均垂直，这把单方向投影推广到了由多列张成的子空间。",
+          "exercise": "写出这个3×2设计矩阵。"
+        },
+        {
+          "title": "训练拟合与泛化分开",
+          "explanation": "本例精确算出训练最优点，尚无验证划分、噪声假设或独立测试。后续CS229讨论模型选择时再引入这些问题。",
+          "exercise": "给出一个不能只凭SSE回答的问题。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 linear-least-squares.py，运行 python3 linear-least-squares.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "x, y = [0,1,2], [1,2,2]\nmx, my = sum(x)/3, sum(y)/3\nw = sum((a-mx)*(b-my) for a,b in zip(x,y))/sum((a-mx)**2 for a in x)\nb = my-w*mx\nprediction = [b+w*a for a in x]\nr = [a-b for a,b in zip(y,prediction)]\nsse = sum(a*a for a in r)\nassert abs(w-0.5)<1e-12 and abs(b-7/6)<1e-12\nassert abs(sum(r))<1e-12 and abs(sum(a*b for a,b in zip(x,r)))<1e-12\nassert abs(sse-1/6)<1e-12\nprint(w,b,prediction,r,sse)",
+          "exercise": "把y改成[2,2,2]，独立求w=0、b=2与SSE=0。"
+        }
+      ],
+      "course": "linear",
+      "unit": "5"
+    },
+    {
+      "id": "linear-eigen",
+      "title": "第6讲 特征方向：反复作用后谁占主导",
+      "summary": "同一个矩阵作用多次，向量为什么越来越接近横轴？",
+      "question": "同一个矩阵作用多次，向量为什么越来越接近横轴？",
+      "outcome": "区分特征值与向量，解释矩阵幂在一个可复算例子中的作用。",
+      "prerequisites": [
+        "矩阵作用与复合；平方根"
+      ],
+      "explanation": [
+        "若非零向量v满足Av=λv，矩阵作用只按λ缩放这条方向，v就是特征向量。零向量被排除，否则所有λ都能满足等式，定义便失去区分作用。",
+        "本例A=diag(2,0.5)，横轴与纵轴是两个特征方向。初始向量[1,1]每次作用后横分量翻倍、纵分量减半，三次后是[8,0.125]。",
+        "归一化只比较方向，不把长度增长误读成方向变化。这个收敛直觉依赖主特征值绝对值占优、起始向量含相应分量等条件，不适用于任意矩阵和初值。"
+      ],
+      "formula": "Av=λv；Aᵏ[1,t]=[2ᵏ, 0.5ᵏt]",
+      "worked": "三次作用得到[8,1/8]；它还不是恰好横向，但归一化后纵向分量已很小。对[0,1]则始终沿纵轴缩短。",
+      "misconception": "不是每个向量都是特征向量。特征值描述方向上的缩放倍数，不是某个坐标，也不等于模型准确率。",
+      "practice": [
+        "用手算列出前3次向量。",
+        "改变初始纵分量，核对每次作用的比例。",
+        "单独讨论初始[0,1]，指出页面固定横分量1的控件没有覆盖这个情况。"
+      ],
+      "exercise": {
+        "prompt": "初始[1,1]经A=diag(2,0.5)作用4次，横坐标是多少？",
+        "expected": 16,
+        "tolerance": 1e-09,
+        "unit": "",
+        "hint": "每次乘2。",
+        "solution": "2⁴=16；纵坐标为1/16。",
+        "transfer": "用初始[0,1]重复推导，解释为什么不会靠近横向。"
+      },
+      "sources": [
+        "linear-2010"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs229-pca",
+          "label": "连接：从方差找到主方向"
+        }
+      ],
+      "boundary": "本站原创有限数值模型；浏览器仅运行本地JavaScript计算，不执行任意Python、不训练真实大模型、不连接硬件。Python标准库例程需在本地执行；页面操作不等同于学习完成或真实实验成果。",
+      "modelId": "linear-eigen",
+      "demos": [
+        {
+          "modelId": "linear-eigen",
+          "title": "特征方向：反复作用后谁占主导"
+        }
+      ],
+      "sections": [
+        {
+          "title": "检验定义而非看图猜",
+          "explanation": "先用Av与λv逐坐标比较，再决定是否是特征对。一般向量可能由多个特征方向叠加，单次箭头看起来接近不构成证明。",
+          "exercise": "检验[1,−1]是不是本例特征向量。"
+        },
+        {
+          "title": "反复作用就是矩阵幂",
+          "explanation": "在特征基下，每次只对各分量乘对应λ，因此k次变为λ的k次幂。这为理解稳定性、差分方程与PCA提供入口。",
+          "exercise": "比较λ=2和λ=0.5的长期大小。"
+        },
+        {
+          "title": "边界条件要说清",
+          "explanation": "负特征值可让方向交替反向；相同绝对值的多个主方向可能不收敛。不能从这一对角正数案例推出所有算法表现。",
+          "exercise": "构造diag(−1,1)的反例。"
+        },
+        {
+          "title": "本地Python复现与独立核对",
+          "explanation": "保存为 linear-eigen.py，运行 python3 linear-eigen.py。仅使用Python标准库；保留输入、预测、中间值和断言。先手算再运行，最后使用新的输入验证。",
+          "code": "from math import hypot\nv = [1.0,1.0]\nfor k in range(3):\n    v = [2*v[0], 0.5*v[1]]\n    print(k+1,v)\nassert v == [8,0.125]\nu = [a/hypot(*v) for a in v]\nassert abs(sum(a*a for a in u)-1)<1e-12\nprint(u)",
+          "exercise": "用初始[0,1]重复推导，解释为什么不会靠近横向。"
+        }
+      ],
+      "course": "linear",
+      "unit": "6"
+    }
+  ]
+}

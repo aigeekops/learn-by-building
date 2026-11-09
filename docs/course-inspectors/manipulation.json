@@ -1,0 +1,248 @@
+{
+  "courseId": "manipulation",
+  "courseLabel": "MIT Robotic Manipulation 原创八讲",
+  "agent": "course_manipulation",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "manipulation-frames",
+      "intuition": "点的坐标先随相机轴旋转，再加相机原点的世界平移；逆变换要先减平移，再乘旋转转置。",
+      "experiments": [
+        {
+          "id": "camera-translation",
+          "label": "只把相机世界x从0改1m",
+          "prediction": "旋转向量与恢复点保持吗？世界点哪一格改变？",
+          "before": {
+            "angle": 90,
+            "tx": 0
+          },
+          "after": {
+            "angle": 90,
+            "tx": 1
+          },
+          "expectation": "旋转向量均为[0,1]m；世界点[0,2]→[1,2]m，逆变换均回到[1,0]m。"
+        }
+      ]
+    },
+    {
+      "id": "manipulation-ik",
+      "intuition": "先判断等长两杆能否到达目标，再选择正负肘角，最后把肩肘角代回正运动学；不可达结果始终保留未知。",
+      "experiments": [
+        {
+          "id": "elbow-branch",
+          "label": "只切换正负肘角分支",
+          "prediction": "同一目标处两组角度与肘部怎样变化？末端保持吗？",
+          "before": {
+            "x": 1,
+            "y": 1,
+            "elbow": "up"
+          },
+          "after": {
+            "x": 1,
+            "y": 1,
+            "elbow": "down"
+          },
+          "expectation": "肩肘角约[0,π/2]→[π/2,−π/2]rad，肘部[1,0]→[0,1]m，末端均为[1,1]m。"
+        },
+        {
+          "id": "unreachable-target",
+          "label": "只把目标y从0改1m（x=2m）",
+          "prediction": "外边界目标移出工作空间后会得到零角还是未知？",
+          "before": {
+            "x": 2,
+            "y": 0
+          },
+          "after": {
+            "x": 2,
+            "y": 1
+          },
+          "expectation": "原目标可达且q₂=0；新目标距离√5m不可达，q₁、q₂、肘部与末端均为null。"
+        }
+      ]
+    },
+    {
+      "id": "manipulation-perception",
+      "intuition": "每个已知对应点先提供一项位移；均值与中位数分别估计平移，再逐对回算各自残差。",
+      "experiments": [
+        {
+          "id": "single-outlier",
+          "label": "只把最后一对的额外误差从0改3m",
+          "prediction": "均值与中位数会偏移多少？各自残差怎样分配？",
+          "before": {
+            "offset": 1,
+            "outlier": 0
+          },
+          "after": {
+            "offset": 1,
+            "outlier": 3
+          },
+          "expectation": "均值平移1→2m，中位数仍1m；均值残差[0,0,0]→[−1,−1,2]m，中位数残差变[0,0,3]m。"
+        }
+      ]
+    },
+    {
+      "id": "manipulation-contact",
+      "intuition": "两指各提供μN的向上摩擦力上限，合计后与mg比较；可平衡还要区分裕量与最低法向力。",
+      "experiments": [
+        {
+          "id": "normal-force",
+          "label": "只把每侧法向力从3改5N",
+          "prediction": "重力不变时，摩擦容量和可行性怎样改变？",
+          "before": {
+            "mu": 0.5,
+            "normal": 3,
+            "mass": 0.4
+          },
+          "after": {
+            "mu": 0.5,
+            "normal": 5,
+            "mass": 0.4
+          },
+          "expectation": "重力均3.924N；容量3→5N，裕量−0.924→1.076N，从不可平衡变为理想可平衡；最低法向力均3.924N。"
+        }
+      ]
+    },
+    {
+      "id": "manipulation-path",
+      "intuition": "对每条线段把障碍圆心投影到夹紧后的段内，再取整条路径最小距离；可行性先于候选最短选择。",
+      "experiments": [
+        {
+          "id": "clearance-failure",
+          "label": "只把要求间隙从0改0.3m（半径0.8m）",
+          "prediction": "候选几何不变时，绕行路径还满足距离要求吗？",
+          "before": {
+            "radius": 0.8,
+            "clearance": 0
+          },
+          "after": {
+            "radius": 0.8,
+            "clearance": 0.3
+          },
+          "expectation": "距离均为[0,1]m、长度均[2,4]m；绕行路径由1>0.8有效变1>1.1无效，selected从1变null。"
+        }
+      ]
+    },
+    {
+      "id": "manipulation-trajectory",
+      "intuition": "固定路径坐标q从0到1，用σ=t/T代入三次时间标度；对真实时间求导才会出现1/T与1/T²。",
+      "experiments": [
+        {
+          "id": "double-duration",
+          "label": "只把时长T从1改2s（σ=0.2）",
+          "prediction": "同一归一化位置的时间、速度、加速度和峰值怎样变化？",
+          "before": {
+            "duration": 1,
+            "position": 0.2
+          },
+          "after": {
+            "duration": 2,
+            "position": 0.2
+          },
+          "expectation": "q均0.104；t由0.2→0.4s，速度0.96→0.48s⁻¹，加速度3.6→0.9s⁻²，峰值1.5→0.75s⁻¹，速度约束从失败变通过。"
+        }
+      ]
+    },
+    {
+      "id": "manipulation-control",
+      "intuition": "弹性项按位置误差拉向目标，阻尼项反对当前速度；合力除质量后，用旧速度与加速度各做一次显式Euler更新。",
+      "experiments": [
+        {
+          "id": "velocity-reversal",
+          "label": "只把旧速度从+0.5改−0.5m/s",
+          "prediction": "阻尼符号怎样改变？弹性力与新位置保持吗？",
+          "before": {
+            "stiffness": 4,
+            "damping": 2,
+            "velocity": 0.5
+          },
+          "after": {
+            "stiffness": 4,
+            "damping": 2,
+            "velocity": -0.5
+          },
+          "expectation": "弹性力均2N，阻尼−1→+1N，合力1→3N；新位置0.55→0.45m，新速度0.6→−0.2m/s。"
+        }
+      ]
+    },
+    {
+      "id": "manipulation-task",
+      "intuition": "先靠近并合拢，抓取确认通过才运输；区域可放置才释放，状态序列只反映给定传感输入下的规则分支。",
+      "experiments": [
+        {
+          "id": "grasp-failure",
+          "label": "只把抓取确认从ok改fail",
+          "prediction": "放置区保持clear时，是否还能到transport或release？",
+          "before": {
+            "grasp": "ok",
+            "place": "clear"
+          },
+          "after": {
+            "grasp": "fail",
+            "place": "clear"
+          },
+          "expectation": "成功序列approach→close→verify→transport→release；失败序列停在verify→stop，held/released/success均为false。"
+        },
+        {
+          "id": "blocked-place",
+          "label": "只把放置区从clear改blocked",
+          "prediction": "抓取已经确认时，会错误释放还是保留物体？",
+          "before": {
+            "grasp": "ok",
+            "place": "clear"
+          },
+          "after": {
+            "grasp": "ok",
+            "place": "blocked"
+          },
+          "expectation": "held均true；末状态release→wait，released与success由true变false，原因是放置区域阻塞。"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "courseValidator": {
+      "course": "manipulation",
+      "models": 8,
+      "lessons": 8,
+      "framesChecked": 184,
+      "cellsChecked": 642,
+      "experiments": 10
+    },
+    "sharedValidator": "node scripts/check_course_inspectors.cjs manipulation",
+    "unitTests": {
+      "passed": 10,
+      "failed": 0,
+      "command": "node --test tests/course_inspector_manipulation.test.cjs"
+    },
+    "independentChecks": [
+      "共享检查器一次覆盖8模型默认和单控件范围/选择边界，共184帧642格；10组真实before/after通过共享UI准备、应用与verify。",
+      "独立测试覆盖32个默认实际计算快照与不可变性；10个实验拒绝before/before、after/after及反向输入。",
+      "Node导出与无依赖浏览器注册；Proxy禁止读取未来帧、result、scene和visual。",
+      "30度旋转用√3/2与1/2独立核对四格矩阵、世界坐标、逆变换和RᵀR。",
+      "IK核对两个解析肘分支、2m共线外边界及√5m不可达目标的null角度和坐标。",
+      "固定对应点逐项位移、均值/中位数、两组残差、平方和/绝对和与各自损失最优性。",
+      "双指摩擦核对3.924N重力和最低每侧法向力；通过允许的4N/5N控件跨越4.905N滑落阈值。",
+      "逐线段投影、最近点、距离和长度；检查直线路径的端点无碰撞但中段穿障碍，以及严格间隙等号无效。",
+      "三次时间标度使用真实秒单位的中心有限差分独立核对一二阶导数，保留端点非零加速度。",
+      "控制反馈核对弹性/阻尼符号、合力与加速度，确认显式Euler位置使用旧速度。",
+      "状态机确认初始held未知，并穷举ok/fail与clear/blocked的四个规则分支，验证运输、释放、等待和停止。"
+    ]
+  },
+  "teachingScope": "八讲逐帧展示二维变换矩阵各格与坐标、解析IK、三对点配准、双指摩擦、逐线段碰撞、三次时间标度、一次阻抗反馈Euler更新与任务状态分支。inspect只读取当前累计variables和实际输入参数；完整曲线峰值或收尾检查明确标注完整/最终核对。数值公式显示四位小数、验证保留完整精度。",
+  "limitations": [
+    "均为现有原创有限算例，不是MIT原课程的完整翻译、机器人仿真、真机验证或执行回执。",
+    "二维坐标变换不包含三维标定；IK限定两根1m杆及现有控件范围，没有关节限位、碰撞和抓取约束。不可达值保持null，不能解释为零。",
+    "点云算例仅一维纯平移且固定对应；三点中位数不构成完整ICP或任意离群比例下的鲁棒保证。",
+    "接触仅是对称双指理想库仑静力学的竖直滑落检查，不证明力矩平衡、力闭合或真实接触稳定。现有离散控件无法精确产生零摩擦裕量，未伪造边界参数实验。",
+    "路径只比较点机器人的两条固定折线与一个圆障碍；无可行候选不证明空间无路径，最短候选不是全局最优。",
+    "轨迹q明确为0到1的无量纲路径坐标，速度与加速度单位为s⁻¹和s⁻²；只检查解析峰值速度，不检查完整机器人动力学与执行约束。",
+    "控制只含1kg点质量、理想力执行器与0.1s显式Euler单步；忽略重力、接触、Jacobian、延迟与饱和，不能推出长期稳定性。",
+    "任务输入是固定教学传感选择，不代表真实感知结果；不包含超时、重试、取消或恢复。",
+    "计算步骤不增加虚构物理时间、学习时长或完成记录；本任务仅新增插件、独立测试和本清单三个文件，未运行浏览器或真机。"
+  ],
+  "files": [
+    "web/course-inspectors/manipulation.js",
+    "tests/course_inspector_manipulation.test.cjs",
+    "docs/course-inspectors/manipulation.json"
+  ]
+}

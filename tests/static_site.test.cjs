@@ -1,7 +1,8 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),{execFileSync}=require('node:child_process');
 const R=require('../web/static-records.js'),P=require('../web/static-plan.js');
 const root=path.resolve(__dirname,'..'),tmp=fs.mkdtempSync(path.join(os.tmpdir(),'static-radar-test-'));
-execFileSync(process.env.PYTHON||'python3',['scripts/build_static.py','--output',path.join(tmp,'site')],{cwd:root});
+const cleanEnv={...process.env};delete cleanEnv.UMAMI_WEBSITE_ID;delete cleanEnv.UMAMI_SCRIPT_URL;
+execFileSync(process.env.PYTHON||'python3',['scripts/build_static.py','--output',path.join(tmp,'site')],{cwd:root,env:cleanEnv});
 const config=JSON.parse(fs.readFileSync(path.join(tmp,'site/public-config.json')));
 process.on('exit',()=>fs.rmSync(tmp,{recursive:true,force:true}));
 class Store{
@@ -13,14 +14,43 @@ function setup(){const store=new Store();return {store,api:new R.Records(config,
 const plan={id:'test-plan-123456789',goal:'robotics',level:'zero',minutes:30,days:7,start:'2026-10-07',progression:'current'};
 const note={id:'journal-test-123456',title:'测试记录',track:'robotics',entry_date:'2026-10-07',kind:'note',status:'recorded',evidence_type:'reading',body:'真实观察',links:[]};
 
-test('build works without private files and supports GitHub project subpaths',()=>{
- const files=fs.readdirSync(path.join(tmp,'site'));for(const name of ['server.py','data','config','internal-pages.js'])assert.ok(!files.includes(name));
+test('build publishes the learning app as the root entry and drops legacy pages',()=>{
+ const site=path.join(tmp,'site');
+ const files=fs.readdirSync(site);for(const name of ['server.py','data','config','internal-pages.js','app.js','dashboard.js','style.css'])assert.ok(!files.includes(name));
  for(const name of ['sources','settings','items','runs','ai_usage'])assert.ok(!(name in config));
- const html=fs.readFileSync(path.join(tmp,'site/index.html'),'utf8'),app=fs.readFileSync(path.join(tmp,'site/app.js'),'utf8');
+ const html=fs.readFileSync(path.join(site,'index.html'),'utf8');
  assert.ok(!/(src|href)="\//.test(html));assert.ok(!html.includes('internal-pages'));
- assert.ok(!/function (feed|sources|settings|sourceModal)\(/.test(app));
- assert.ok(html.includes('./static-bootstrap.js'));assert.ok(html.includes('./course-editor.js'));
- for(const link of html.matchAll(/(?:src|href)="\.\/([^"#?]+)"/g))assert.ok(fs.existsSync(path.join(tmp,'site',link[1])),link[1]);
+ assert.ok(!html.includes('cloud.umami.is'));assert.ok(!fs.readFileSync(path.join(root,'web/index.html'),'utf8').includes('cloud.umami.is'));
+ assert.ok(html.includes('lbb-course-prototype'),'root entry must be the complete learning app');
+ assert.ok(!html.includes('课程地图与课件'),'legacy sidebar entry must be gone');
+ assert.equal(fs.readFileSync(path.join(site,'learning/index.html'),'utf8'),html);
+ for(const p of ['standalone.html','learning-map-courses-integrated.html','build-info.json'])assert.ok(fs.existsSync(path.join(site,p)),p);
+ for(const link of html.matchAll(/(?:src|href)="\.\/([^"#?]+)"/g))assert.ok(fs.existsSync(path.join(site,link[1])),link[1]);
+});
+test('deploy analytics stays opt-in, validated and off by default',()=>{
+ const id='00000000-0000-0000-0000-000000000000';
+ const py=(body,env=cleanEnv)=>execFileSync(process.env.PYTHON||'python3',['-c',body],{cwd:root,env,stdio:['ignore','pipe','pipe']}).toString().trim();
+ const tag=(url)=>`<script defer src="${url}" data-website-id="${id}"></script>`;
+ const cloud='https://cloud.umami.is/script.js';
+ assert.equal(py('from scripts.build_static import tracking_script; print(tracking_script())'),'');
+ assert.equal(py(`from scripts.build_static import tracking_script; print(tracking_script('${id}'))`),tag(cloud));
+ assert.equal(py('from scripts.build_static import tracking_script; print(tracking_script())',{...cleanEnv,UMAMI_WEBSITE_ID:id}),tag(cloud));
+ assert.equal(py(`from scripts.build_static import tracking_script; print(tracking_script(''))`,{...cleanEnv,UMAMI_WEBSITE_ID:id}),'');
+ assert.equal(py(`from scripts.build_static import tracking_script; print(tracking_script('${id}','https://stats.example.com/script.js'))`),tag('https://stats.example.com/script.js'));
+ assert.throws(()=>py(`from scripts.build_static import tracking_script; print(tracking_script('not-a-uuid'))`));
+ assert.throws(()=>py(`from scripts.build_static import tracking_script; print(tracking_script('${id}','http://insecure.example.com/s.js'))`));
+ assert.throws(()=>py(`from scripts.build_static import tracking_script; print(tracking_script('${id}','https://x.example.com/s.js" onload="bad()'))`));
+});
+test('an opted-in deploy injects exactly one tag into the main entry only',()=>{
+ const id='00000000-0000-0000-0000-000000000000',tracked=path.join(tmp,'tracked');
+ execFileSync(process.env.PYTHON||'python3',['scripts/build_static.py','--output',tracked,'--umami-website-id',id],{cwd:root,env:cleanEnv});
+ const html=fs.readFileSync(path.join(tracked,'index.html'),'utf8');
+ const tag=`<script defer src="https://cloud.umami.is/script.js" data-website-id="${id}"></script>`;
+ assert.equal((html.match(/cloud\.umami\.is/g)||[]).length,1);
+ assert.ok(html.includes(tag+'</head>'));
+ assert.equal(html.replace(tag,''),fs.readFileSync(path.join(tmp,'site/index.html'),'utf8'));
+ for(const p of ['learning/index.html','learning/standalone.html','standalone.html','learning-map-courses-integrated.html'])assert.ok(!fs.readFileSync(path.join(tracked,p),'utf8').includes('cloud.umami.is'));
+ for(const link of html.matchAll(/(?:src|href)="\.\/([^"#?]+)"/g))assert.ok(fs.existsSync(path.join(tracked,link[1])),link[1]);
 });
 test('plan output matches existing Python pacing including current-block and edge budgets',()=>{
  const bodies=[];for(const goal of ['robotics','agent'])for(const minutes of [1,15,45,1440])for(const progression of ['current','sequential'])bodies.push({...plan,goal,minutes,days:14,progression});

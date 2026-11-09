@@ -1,0 +1,318 @@
+{
+  "courseId": "cme295",
+  "courseLabel": "CME 295",
+  "lessons": 6,
+  "models": [
+    {
+      "id": "attention",
+      "intuition": "由同一 Query 与三个 Key 的匹配分数决定 Value 混合比例；保留原有 Attention 专用逐格面板。",
+      "experiments": [
+        {
+          "id": "value",
+          "label": "只改取回内容",
+          "before": {
+            "value": 1
+          },
+          "after": {
+            "value": 3
+          },
+          "expectation": "权重保持，输出第一维改变，第二维保持。"
+        }
+      ]
+    },
+    {
+      "id": "cme-representations",
+      "intuition": "同一套 BPE 规则决定 token；查表后的均值丢失顺序，递归状态保留顺序。",
+      "experiments": [
+        {
+          "id": "order",
+          "label": "倒转输入词序",
+          "before": {
+            "order": "normal",
+            "merges": 2
+          },
+          "after": {
+            "order": "reverse",
+            "merges": 2
+          },
+          "expectation": "相同 token 集合保持均值，RNN 的有序递推末状态变化。"
+        }
+      ]
+    },
+    {
+      "id": "cme-moe",
+      "intuition": "先对路由分数归一化，再选择专家并重新分配所选权重，最后计算加权输出。",
+      "experiments": [
+        {
+          "id": "topk",
+          "label": "激活一位或两位专家",
+          "before": {
+            "topk": 1
+          },
+          "after": {
+            "topk": 2
+          },
+          "expectation": "活跃参数4→8，总参数12不变；第二个专家加入汇总。"
+        }
+      ]
+    },
+    {
+      "id": "cme-kv",
+      "intuition": "把共同 prefill、逐步 decode 的分数对数，以及 KV 存储字节分别核算。",
+      "experiments": [
+        {
+          "id": "heads",
+          "label": "MHA 改成 MQA",
+          "before": {
+            "kvheads": 8
+          },
+          "after": {
+            "kvheads": 1
+          },
+          "expectation": "存储减少到1/8；本例单个 Query 头的分数对计数保持。"
+        }
+      ]
+    },
+    {
+      "id": "cme-rope",
+      "intuition": "检查二维旋转的坐标、点积与共同位置平移；几何是静态数值检查。",
+      "experiments": [
+        {
+          "id": "shift",
+          "label": "共同平移三个位置",
+          "before": {
+            "shift": 0
+          },
+          "after": {
+            "shift": 3
+          },
+          "expectation": "旋转坐标变化；原点积与共同平移后的点积相等，模长为1。"
+        }
+      ]
+    },
+    {
+      "id": "cme-training",
+      "intuition": "明确监督位置与概率分布，区分交叉熵、SFT、DPO 和教师 KL 的口径。",
+      "experiments": [
+        {
+          "id": "sft-mask",
+          "label": "只改 prompt 位置概率",
+          "before": {
+            "objective": "sft",
+            "p": 0.2
+          },
+          "after": {
+            "objective": "sft",
+            "p": 0.8
+          },
+          "expectation": "SFT回答损失保持；两位置预训练损失下降。"
+        }
+      ]
+    },
+    {
+      "id": "cme-rl",
+      "intuition": "从一组奖励计算均值、相对优势、候选策略和裁剪目标；全部是给定样本上的算术。",
+      "experiments": [
+        {
+          "id": "equal-rewards",
+          "label": "把同组奖励改为同分",
+          "before": {
+            "rewards": "mixed"
+          },
+          "after": {
+            "rewards": "equal"
+          },
+          "expectation": "同分组标准差为0，优势、梯度为0，候选策略等于旧策略。"
+        }
+      ]
+    },
+    {
+      "id": "cme-online-softmax",
+      "intuition": "每块保留共同最大值 m、分母 l 和加权分子 z，检查结果与完整 Softmax 一致。",
+      "experiments": [
+        {
+          "id": "offset",
+          "label": "所有分数共同增加1000",
+          "before": {
+            "offset": 0,
+            "block": 2
+          },
+          "after": {
+            "offset": 1000,
+            "block": 2
+          },
+          "expectation": "共同减最大值保持输出，在线值仍与完整归一化一致。"
+        }
+      ]
+    },
+    {
+      "id": "cme-speculative",
+      "intuition": "区分草稿提出、按 p/q 接受，以及拒绝后的残差重采样。",
+      "experiments": [
+        {
+          "id": "accept-draw",
+          "label": "只改变接受判断落点",
+          "before": {
+            "acceptU": 0.7
+          },
+          "after": {
+            "acceptU": 0.2
+          },
+          "expectation": "接受概率保持0.625；落点跨越阈值后接受状态与输出候选变化。"
+        }
+      ]
+    },
+    {
+      "id": "cme-memory",
+      "intuition": "按人工向量算余弦、筛选证据并保留来源，资料不足时明确返回空结果。",
+      "experiments": [
+        {
+          "id": "missing-evidence",
+          "label": "改问天气",
+          "before": {
+            "query": "returns",
+            "threshold": 0.7
+          },
+          "after": {
+            "query": "weather",
+            "threshold": 0.7
+          },
+          "expectation": "退货问题有检索片段，天气问题无片段，返回资料不足。"
+        }
+      ]
+    },
+    {
+      "id": "sampling",
+      "intuition": "温度与 top-k 改变归一化分布，固定落点 u 在累计区间内选择一个候选。",
+      "experiments": [
+        {
+          "id": "temperature",
+          "label": "降低温度",
+          "before": {
+            "temperature": 1
+          },
+          "after": {
+            "temperature": 0.25
+          },
+          "expectation": "概率更集中，固定u=0.7从第二候选变为第一候选。"
+        }
+      ]
+    },
+    {
+      "id": "lora",
+      "intuition": "保留冻结基座，逐格核对 A 降维、B 升维、α/r 缩放与残差相加。",
+      "experiments": [
+        {
+          "id": "zero-alpha",
+          "label": "把α设为0",
+          "before": {
+            "alpha": 1
+          },
+          "after": {
+            "alpha": 0
+          },
+          "expectation": "增量全0、输出等于基座，可训练参数计数保持。"
+        }
+      ]
+    },
+    {
+      "id": "parallel",
+      "intuition": "分别核算状态分片与跨卡梯度平均，避免把显存分片直接当作加速。",
+      "experiments": [
+        {
+          "id": "zero3",
+          "label": "DDP改为ZeRO-3",
+          "before": {
+            "zero": 0,
+            "gpus": 4
+          },
+          "after": {
+            "zero": 3,
+            "gpus": 4
+          },
+          "expectation": "每卡持久状态32GB→8GB，逻辑平均梯度及更新保持。"
+        }
+      ]
+    },
+    {
+      "id": "agent",
+      "intuition": "逐事件跟踪预设策略、工具返回、测试结果和停止条件；停止不等于修复成功。",
+      "experiments": [
+        {
+          "id": "budget",
+          "label": "把工具预算5增至6",
+          "before": {
+            "scenario": "retry",
+            "budget": 5
+          },
+          "after": {
+            "scenario": "retry",
+            "budget": 6
+          },
+          "expectation": "5次时缺最终测试而预算耗尽；6次时收到全部通过的测试结果。"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "intuition": "先校验结构化请求，再比较版本；相同幂等键重试读取已有回执而非再写一次。",
+      "experiments": [
+        {
+          "id": "stale-version",
+          "label": "提交过期写入版本",
+          "before": {
+            "mode": "write",
+            "version": 1
+          },
+          "after": {
+            "mode": "write",
+            "version": 0
+          },
+          "expectation": "正确版本写一次并幂等重放；过期版本写零次并返回冲突。"
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "intuition": "先给输出留预算，再保留必需约束与任务，逐片段判断能否完整装入。",
+      "experiments": [
+        {
+          "id": "reserve",
+          "label": "多预留8个输出token",
+          "before": {
+            "reserve": 16
+          },
+          "after": {
+            "reserve": 24
+          },
+          "expectation": "输入预算40→32，必需任务与约束保持，少装入一个可选片段。"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "courseValidator": {
+      "models": 16,
+      "framesChecked": 878,
+      "cellsChecked": 1940,
+      "experiments": 16
+    },
+    "unitTests": {
+      "passed": 7,
+      "command": "node --test tests/course_inspector_cme295.test.cjs"
+    },
+    "sharedValidator": "node scripts/check_course_inspectors.cjs cme295"
+  },
+  "teachingScope": "给定数值和内存工具上的原创计算/状态检查；原 Attention 专用样板保持。所有当前格子来自实际 trace 当前帧或其已出现的输入；最终结果核对明确标注。",
+  "limitations": [
+    "几何使用静态坐标检查，不制造连续运动。",
+    "BPE词表、路由分数、检索向量、奖励和工具策略均为指定教学案例。",
+    "KV/ZeRO计数不是GPU测量；LoRA、RL和偏好目标未进行训练。",
+    "不调用网络、外部模型或真实商业/天气服务；不改任务、记录、学习时长、草稿或课程ID。"
+  ],
+  "files": [
+    "web/course-inspectors/cme295.js",
+    "tests/course_inspector_cme295.test.cjs",
+    "docs/course-inspectors/cme295.json"
+  ]
+}

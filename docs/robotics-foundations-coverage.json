@@ -1,0 +1,98 @@
+{
+  "checked": "2026-11-08",
+  "status": "first batch authored and validated in local draft",
+  "topics": [
+    {
+      "id": "mechanics",
+      "title": "机械设计与传动基础",
+      "lessons": [
+        "rf-gears",
+        "rf-motor-load",
+        "rf-fit"
+      ],
+      "config_sha256": "37b5e7047c1adab54127e64e793bec153d779c7c8ecd417fa7751f2b4d2590ee"
+    },
+    {
+      "id": "kinematics",
+      "title": "坐标与两连杆运动学",
+      "lessons": [
+        "rf-transform",
+        "rf-forward-kinematics",
+        "rf-inverse-kinematics"
+      ],
+      "config_sha256": "89135cd299d4cfa99ceab45fc251829af042432582165cf19f98b12bd1ae0cc1"
+    },
+    {
+      "id": "control",
+      "title": "反馈与离散控制",
+      "lessons": [
+        "rf-p-feedback",
+        "rf-discrete-pid",
+        "rf-anti-windup"
+      ],
+      "config_sha256": "8fc3f356d275010c4b20f0159401fed207e3899aa4a52517c4aadd727caf1aad"
+    },
+    {
+      "id": "estimation",
+      "title": "测量与状态估计",
+      "lessons": [
+        "rf-noisy-measurements",
+        "rf-kalman-update",
+        "rf-filter-assumptions"
+      ],
+      "config_sha256": "30a338e4e7b4ec8fe5d631b17f8b63f496ed8e433379716399e6d61d91219992"
+    },
+    {
+      "id": "ros",
+      "title": "ROS 2 与仿真集成基础",
+      "lessons": [
+        "rf-ros-pubsub",
+        "rf-ros-tf",
+        "rf-ros-replay",
+        "rf-ros-bridge"
+      ],
+      "config_sha256": "c77614fa14dccd6d6d9fa6d70a8c520c6bb3c7184be1f0a89b5f89e40e60a48d"
+    }
+  ],
+  "lessons": 16,
+  "node_model_checks_passed": 37,
+  "python_independent_checks_passed": 35,
+  "existing_python_regression_checks_passed": 69,
+  "builder_and_http_checks_passed": 4,
+  "ros_gazebo_runtime_executed": false,
+  "browser_results": "../../../output/robotics-foundations-20261108/qa/results.json",
+  "browser": {
+    "lessons": 16,
+    "topics": 5,
+    "widths": [
+      1440,
+      390
+    ],
+    "lessonVisits": 32,
+    "allFiveComponents": true,
+    "standaloneCodeDownload": true,
+    "independentCorrectAndIncorrectAnswers": true,
+    "playPause": true,
+    "nativeMapIntegration": true,
+    "originalUnitsRetained": true,
+    "nonRoboticsCoursesRetained": [
+      "cme295",
+      "cs336",
+      "cs146s",
+      "cs50p"
+    ],
+    "automaticRoutesCreated": 0,
+    "errors": []
+  },
+  "download_archive_extracted_and_tested": true,
+  "download_archive_checks_passed": 37,
+  "later_ai_refresh_preserves_robotics": true,
+  "runtime_files_sha256": {
+    "robotics-foundations.js": "f4cd95141c3a039748c952a46386522795c075e1485e9ba91a540284d43d55e9",
+    "robotics-foundations-integration.js": "9791055764c32853a04b5be3e566e77752b79ddd1fc4e873ec51cd3f87ad0067",
+    "robotics-foundations.css": "c75e216178f6a3f1b7d141fb9a53aab3ddfbdc7c89c5569b50d12f4ba1847597"
+  },
+  "standalone_sha256": "f46599d51e848ea7e6ac61931a0f897e21b92240aaff677129c868eae0a04cbc",
+  "integrated_draft_sha256_at_verification": "e1a9cc56e882c16e6dffb2d9c05a7fb7637e4cdffa8561dcde4f931de925c936",
+  "code_archive_sha256": "1f744cef982dc9328b2ede8e082752b149af8f3ad4d3235287ac6b80949b3721"
+}

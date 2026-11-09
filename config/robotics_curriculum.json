@@ -200,6 +200,16 @@
             "core_minutes": 90,
             "deep_minutes": 180,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "circuit-foundation",
+            "map_course_id": "arduino",
+            "model": "circuit",
+            "variant": "led",
+            "question": "断开回路或增加电阻，LED 模型的电流怎样变？",
+            "stage": "robotics-1",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -395,6 +405,16 @@
             "core_minutes": 150,
             "deep_minutes": 300,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "measurement-basics",
+            "map_course_id": "arduino",
+            "model": "measurement",
+            "variant": "meter",
+            "question": "测电压和测电流为什么不能使用相同接法？",
+            "stage": "robotics-1",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -603,6 +623,16 @@
               }
             ],
             "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          },
+          "teaching": {
+            "id": "python-data",
+            "map_course_id": "cs50p",
+            "model": "python",
+            "variant": "data",
+            "question": "同一组读数怎样经过循环变成平均值？",
+            "stage": "robotics-1",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -763,6 +793,16 @@
               }
             ],
             "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          },
+          "teaching": {
+            "id": "engineering-tools",
+            "map_course_id": "tools",
+            "model": "delivery",
+            "variant": "environment",
+            "question": "命令、路径与输入文件缺一项会怎样？",
+            "stage": "robotics-1",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -994,6 +1034,16 @@
               }
             ],
             "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          },
+          "teaching": {
+            "id": "gpio",
+            "map_course_id": "arduino",
+            "model": "digital",
+            "variant": "button",
+            "question": "按钮抖动为什么会被当成多次按下？",
+            "stage": "robotics-2",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1206,6 +1256,16 @@
               }
             ],
             "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          },
+          "teaching": {
+            "id": "sensor-input",
+            "map_course_id": "arduino",
+            "model": "adc",
+            "variant": "sensor",
+            "question": "模拟电压怎样变成离散的数字？",
+            "stage": "robotics-2",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1394,6 +1454,16 @@
               }
             ],
             "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          },
+          "teaching": {
+            "id": "motor-drive",
+            "map_course_id": "arduino",
+            "model": "switch",
+            "variant": "motor",
+            "question": "GPIO 控制信号与电机供电路径怎样分工？",
+            "stage": "robotics-2",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1568,6 +1638,16 @@
               }
             ],
             "attribution": "本站原创跟练；示例、模拟时间和预期输出是教学材料，不是你的已完成实验。原主教材与阅读链接保留，模型结果不能充当硬件验证。"
+          },
+          "teaching": {
+            "id": "nonblocking-control",
+            "map_course_id": "arduino",
+            "model": "digital",
+            "variant": "scheduler",
+            "question": "等待时间较长时，程序还能及时检查按钮吗？",
+            "stage": "robotics-2",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -1639,6 +1719,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "cad-sketch",
+            "map_course_id": "mit2007",
+            "model": "cad",
+            "variant": "sketch",
+            "question": "尺寸变化后，孔的位置是否仍由约束确定？",
+            "stage": "robotics-3",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1694,6 +1784,16 @@
             "core_minutes": 240,
             "deep_minutes": 480,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "cad-solid",
+            "map_course_id": "mit2007",
+            "model": "cad",
+            "variant": "solid",
+            "question": "拉伸与去除材料怎样改变零件？",
+            "stage": "robotics-3",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1747,6 +1847,16 @@
             "core_minutes": 180,
             "deep_minutes": 360,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "design-for-print",
+            "map_course_id": "mit2007",
+            "model": "cad",
+            "variant": "clearance",
+            "question": "名义尺寸相等，为什么不一定装得进去？",
+            "stage": "robotics-3",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1761,7 +1871,7 @@
           "first_step": "用纸上尺寸核对一个模块与底板的孔距，圈出不确定项。",
           "companion": "assembly-check",
           "lesson": "debug",
-          "lab": "soldering",
+          "lab": "",
           "intuition": "装配检查关注的不只是“能装上”，还包括走线、维修和下一次修改是否方便。",
           "remedy": {
             "text": "先做纸样或尺寸核对，列待测项；没有实物时不要猜测最终配合效果。",
@@ -1800,6 +1910,16 @@
             "core_minutes": 180,
             "deep_minutes": 360,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "assembly-review",
+            "map_course_id": "mit2007",
+            "model": "cad",
+            "variant": "assembly",
+            "question": "间隙太小或壁厚不足，应修改哪一个尺寸？",
+            "stage": "robotics-3",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -1894,6 +2014,16 @@
             "core_minutes": 600,
             "deep_minutes": 1200,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "ros-messages",
+            "map_course_id": "ros",
+            "model": "ros",
+            "variant": "topics",
+            "question": "发布者、话题与订阅者怎样传递一条消息？",
+            "stage": "robotics-4",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1964,6 +2094,16 @@
             "core_minutes": 360,
             "deep_minutes": 720,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "ros-frames",
+            "map_course_id": "ros",
+            "model": "transform",
+            "variant": "frames",
+            "question": "传感器局部坐标怎样变到机器人坐标？",
+            "stage": "robotics-4",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -1978,7 +2118,7 @@
           "first_step": "写下 OS、ROS 和 Gazebo 版本，用官方配对表核对。",
           "companion": "ros-hardware",
           "lesson": "pwm",
-          "lab": "interface",
+          "lab": "",
           "intuition": "仿真接收命令并产生状态；ROS 与仿真交换消息时，需要匹配的数据接口。",
           "remedy": {
             "text": "先验证节点之间能传消息，再查仿真桥接。环境问题先固定版本与报错，不要随意混装多个发行版。",
@@ -2029,6 +2169,16 @@
             "core_minutes": 480,
             "deep_minutes": 960,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "ros-simulation",
+            "map_course_id": "ros",
+            "model": "ros",
+            "variant": "simulation",
+            "question": "控制命令、模型与传感器反馈怎样闭环？",
+            "stage": "robotics-4",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -2043,7 +2193,7 @@
           "first_step": "选一条已有话题，写下字段、单位和计划录制时长。",
           "companion": "ros-hardware",
           "lesson": "debug",
-          "lab": "interface",
+          "lab": "",
           "intuition": "录制保存当时的消息，回放重新提供这些输入；它不等于重新做了一次实物实验。",
           "remedy": {
             "text": "先确定要复现的症状和相关话题；如果不知道数据来自哪里，先回到消息追踪练习。",
@@ -2090,6 +2240,16 @@
             "core_minutes": 300,
             "deep_minutes": 600,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "ros-replay",
+            "map_course_id": "ros",
+            "model": "ros",
+            "variant": "replay",
+            "question": "保留时间戳后，日志怎样重放同一事件？",
+            "stage": "robotics-4",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -2170,6 +2330,16 @@
             "core_minutes": 360,
             "deep_minutes": 720,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "robot-math",
+            "map_course_id": "modern",
+            "model": "transform",
+            "variant": "point",
+            "question": "先旋转再平移，与先平移再旋转一样吗？",
+            "stage": "robotics-5",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -2223,6 +2393,16 @@
             "core_minutes": 420,
             "deep_minutes": 840,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "feedback",
+            "map_course_id": "pid",
+            "model": "pid",
+            "variant": "control",
+            "question": "改变比例增益，响应速度与误差怎样变？",
+            "stage": "robotics-5",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -2237,7 +2417,7 @@
           "first_step": "列一小段真实位置与带噪观测数值，先区分状态和测量。",
           "companion": "signal-chain",
           "lesson": "filter",
-          "lab": "rc",
+          "lab": "",
           "intuition": "估计把“之前认为会发生什么”和“这次测到了什么”结合起来。",
           "remedy": {
             "text": "先把无噪曲线和观测曲线画在一起，弄清误差；不要先调一堆没有物理含义的参数。",
@@ -2282,6 +2462,16 @@
             "core_minutes": 360,
             "deep_minutes": 720,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "state-estimation",
+            "map_course_id": "kalman",
+            "model": "kalman",
+            "variant": "filter",
+            "question": "测量更不可信时，估计应该更相信谁？",
+            "stage": "robotics-5",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -2335,6 +2525,16 @@
             "core_minutes": 300,
             "deep_minutes": 600,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "camera-calibration",
+            "map_course_id": "cs231n",
+            "model": "camera",
+            "variant": "projection",
+            "question": "焦距与深度怎样改变同一个点的像素位置？",
+            "stage": "robotics-5",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],
@@ -2408,6 +2608,16 @@
             "core_minutes": 180,
             "deep_minutes": 360,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "robot-learning",
+            "map_course_id": "lerobot",
+            "model": "dataset",
+            "variant": "policy",
+            "question": "示范数据里，观测与动作应如何对应？",
+            "stage": "robotics-6",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -2422,7 +2632,7 @@
           "first_step": "只看一个公开 episode 的三个字段，确认单位、频率与含义。",
           "companion": "model-evidence",
           "lesson": "reference",
-          "lab": "dc",
+          "lab": "",
           "intuition": "一个 episode 是一段有起止的任务过程；图像、状态和动作要能沿同一时间线核对。",
           "remedy": {
             "block": "python-data",
@@ -2467,6 +2677,16 @@
             "core_minutes": 360,
             "deep_minutes": 720,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "dataset-inspection",
+            "map_course_id": "lerobot",
+            "model": "dataset",
+            "variant": "alignment",
+            "question": "动作错开一帧，会怎样破坏训练样本？",
+            "stage": "robotics-6",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -2535,6 +2755,16 @@
             "core_minutes": 600,
             "deep_minutes": 1200,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "imitation-experiment",
+            "map_course_id": "lerobot",
+            "model": "imitation",
+            "variant": "fit",
+            "question": "只看训练误差，能否判断策略对新输入有效？",
+            "stage": "robotics-6",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         },
         {
@@ -2549,7 +2779,7 @@
           "first_step": "选前面已完成的一个作品，写它解决的问题和可展示结果。",
           "companion": "system-project",
           "lesson": "project",
-          "lab": "interface",
+          "lab": "",
           "intuition": "作品集让别人看清你解决了什么、怎样验证，以及还有什么没解决。",
           "remedy": {
             "text": "如果只能展示一个视频，先补可重放输入、运行步骤和失败记录，再写效果结论。",
@@ -2588,6 +2818,16 @@
             "core_minutes": 300,
             "deep_minutes": 600,
             "note": "编排参考，非实测完成时长；安装、阅读语言与基础会影响进度。先按 15–30 分钟体验一个步骤。"
+          },
+          "teaching": {
+            "id": "portfolio",
+            "map_course_id": "fsdl",
+            "model": "delivery",
+            "variant": "robot",
+            "question": "仿真结果、硬件测量和演示视频分别能证明什么？",
+            "stage": "robotics-6",
+            "route": "robotics",
+            "attribution": "本站原创算例与教学演示；原始课程作为配套阅读。"
           }
         }
       ],

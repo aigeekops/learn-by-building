@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-"""Build an allowlisted public site without reading private records or configuration."""
+"""Build the public site with the complete learning app as the root entry.
+
+The legacy workbench is no longer published. The learning app is built once into
+``learning/`` and promoted to the site root; only the root index.html can receive
+an opt-in analytics tag, while learning/ and standalone.html stay self-contained.
+"""
 import argparse
 import json
+import os
 from pathlib import Path
 import re
 import shutil
@@ -12,12 +18,30 @@ ROOT=Path(__file__).resolve().parent.parent
 sys.path.insert(0,str(ROOT))
 PUBLIC_CONFIG=('roadmaps','guides','electronics_paths','ee_textbook','learning_links',
                'robotics_curriculum','agent_curriculum','electronics_beginner','community')
-RUNTIME=('static-plan.js','static-records.js','static-bootstrap.js')
 ASSETS=('divider-load.png','divider-load.svg','diagnosis-path.png','diagnosis-path.svg',
         'load-current-tradeoff.png','load-current-tradeoff.svg','wechat-qr.jpg')
+DEFAULT_TRACKING_SCRIPT='https://cloud.umami.is/script.js'
+WEBSITE_ID=re.compile(r'[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\Z')
+PROMOTED=('index.html','learning-map-courses-integrated.html','standalone.html',
+          'build-info.json','LICENSE','.nojekyll')
 
-def relative(text):
-    return text.replace('src="/','src="./').replace('href="/','href="./').replace("'/assets/","'./assets/").replace("fetch('/author.json')","fetch('./author.json')")
+def tracking_script(website_id=None,script_url=None):
+    """Build one analytics tag for an opted-in deploy; '' when no id is supplied.
+
+    Repository sources and the committed dist/ never contain third-party scripts.
+    An explicit CLI value overrides the environment; passing '' disables injection.
+    Only the root index.html receives the tag; learning/ and standalone.html stay
+    self-contained and offline-capable.
+    """
+    website_id=os.environ.get('UMAMI_WEBSITE_ID','') if website_id is None else website_id
+    website_id=website_id.strip()
+    if not website_id:return ''
+    if not WEBSITE_ID.fullmatch(website_id):raise ValueError('UMAMI_WEBSITE_ID 必须是 UUID 格式')
+    script_url=os.environ.get('UMAMI_SCRIPT_URL','') if script_url is None else script_url
+    script_url=script_url.strip() or DEFAULT_TRACKING_SCRIPT
+    if not script_url.startswith('https://') or any(c in script_url for c in ('"',"'",'<','>',' ','\n','\r','\t')):
+        raise ValueError('UMAMI_SCRIPT_URL 必须是不含引号与空白的 https URL')
+    return f'<script defer src="{script_url}" data-website-id="{website_id}"></script>'
 
 def public_value(value):
     if isinstance(value,dict):return {k:public_value(v) for k,v in value.items()}
@@ -25,10 +49,8 @@ def public_value(value):
     if isinstance(value,str) and value.startswith(('/assets/','/?')):return '.'+value
     return value
 
-def build(destination):
-    destination=destination.resolve()
-    if destination==ROOT or destination in ROOT.parents or destination==ROOT/'web' or destination==ROOT/'config':
-        raise ValueError('构建目录不能覆盖项目源码')
+def public_configuration():
+    """Public course metadata and an empty schema; never inspect runtime records."""
     # Derive backup fields from an empty temporary schema, never the real database.
     from radar import core,backup,routes,community,resources
     previous=core.DATA
@@ -41,36 +63,42 @@ def build(destination):
     config['community']=community.clean(config['community'])
     config.update(learning_routes=routes.ROUTES,record_schemas=schemas)
     config['study_resources']=resources.build(ROOT)
-    html=(ROOT/'web/index.html').read_text()
-    files=set(re.findall(r'(?:src|href)="/([^"?#]+\.(?:js|css))"',html))
-    html=html.replace('<script src="/dashboard.js">',''.join(f'<script src="/{name}"></script>' for name in RUNTIME)+'<script src="/dashboard.js">')
-    files.add('course-editor.js')
-    html=html.replace('<script src="/immersive.js"></script>','<script src="/immersive.js"></script><script src="/course-editor.js"></script>')
+    return config
+
+def build(destination,tracking=''):
+    """Publish the learning app at the site root, with learning/ kept as a copy."""
+    destination=destination.resolve()
+    if destination==ROOT or destination in ROOT.parents or destination==ROOT/'web' or destination==ROOT/'config':
+        raise ValueError('构建目录不能覆盖项目源码')
+    from scripts.build_learning_app import build as build_learning_app
     with tempfile.TemporaryDirectory(prefix='static-build-') as tmp:
         stage=Path(tmp)
-        for name in sorted(files|set(RUNTIME)):
-            if '/' in name:raise ValueError('站点文件列表含未允许或未知入口')
-            (stage/name).write_text(relative((ROOT/'web'/name).read_text()))
-        (stage/'index.html').write_text(relative(html))
-        (stage/'public-config.json').write_text(json.dumps(public_value(config),ensure_ascii=False,separators=(',',':'))+'\n')
-        author=json.loads((ROOT/'web/author.json').read_text())
-        author={k:author[k] for k in ('enabled','name','description','qr_image') if k in author}
-        (stage/'author.json').write_text(json.dumps(public_value(author),ensure_ascii=False)+'\n')
-        (stage/'assets').mkdir()
-        for name in ASSETS:
-            source=ROOT/'web/assets'/name
-            if source.is_file() and not source.is_symlink():shutil.copy2(source,stage/'assets'/name)
-        shutil.copy2(ROOT/'LICENSE',stage/'LICENSE')
-        (stage/'.nojekyll').write_text('')
+        app=stage/'learning'
+        build_learning_app(app)
+        for name in PROMOTED:
+            shutil.copy2(app/name,stage/name)
+        shutil.copytree(app/'assets',stage/'assets')
+        (stage/'public-config.json').write_text(
+            json.dumps(public_value(public_configuration()),ensure_ascii=False,separators=(',',':'))+'\n')
+        if tracking:
+            page=(stage/'index.html').read_text()
+            if page.count('</head>')!=1:raise ValueError('index.html 缺少唯一的 </head>，无法注入部署统计脚本')
+            (stage/'index.html').write_text(page.replace('</head>',tracking+'</head>',1))
+        (stage/'.static-build').write_text('Generated by scripts/build_static.py\n')
         # Only replace a previous generated site, never an arbitrary user's folder.
         if destination.exists():
             if not (destination/'.static-build').is_file():raise ValueError('目标目录已存在且不是本站构建产物，请选择空目录')
             shutil.rmtree(destination)
         destination.parent.mkdir(parents=True,exist_ok=True)
-        (stage/'.static-build').write_text('Generated by scripts/build_static.py\n')
         shutil.copytree(stage,destination)
     return destination
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=ROOT/'dist');args=p.parse_args()
-    print('Public static site:',build(args.output))
+    p=argparse.ArgumentParser(description='构建公开静态站点（课程地图与课件为默认页）；统计脚本只在部署时按需注入')
+    p.add_argument('--output',type=Path,default=ROOT/'dist')
+    p.add_argument('--umami-website-id',default=None,help='部署用 Umami website id（UUID）；缺省读取 UMAMI_WEBSITE_ID，两者皆空则不注入；传空串可显式关闭')
+    p.add_argument('--umami-script-url',default=None,help='自托管 Umami 脚本的 https URL；缺省读取 UMAMI_SCRIPT_URL，默认 cloud.umami.is')
+    args=p.parse_args()
+    tracking=tracking_script(args.umami_website_id,args.umami_script_url)
+    print('Public static site:',build(args.output,tracking))
+    print('Analytics injection:','enabled' if tracking else 'disabled (default)')

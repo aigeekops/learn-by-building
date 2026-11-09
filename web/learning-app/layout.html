@@ -1,0 +1,98 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>动手学 · 课程学习工作台</title><!-- LEARNING_APP_STYLE page.css --></head><body><div id="lbb-course-prototype" aria-label="动手学 · 课程学习工作台">
+  <div class="app-frame">
+    <aside class="app-sidebar" aria-label="学习导航" tabindex="0">
+      <button class="brand cursor-interaction" data-action="map" aria-label="动手学，返回学习地图"><span class="brand-mark">◈</span><span>动手学<small>LEARN BY BUILDING</small></span></button>
+      <span class="nav-caption">学习空间</span>
+<nav aria-label="全站导航"><button type="button" class="nav-item cursor-interaction" data-action="map"><i data-lucide="map" aria-hidden="true"></i>学习地图</button><button type="button" class="nav-item cursor-interaction" data-action="workspace"><i data-lucide="clock-3" aria-hidden="true"></i>今日学习台</button><button type="button" class="nav-item cursor-interaction" data-action="route-view"><i data-lucide="route" aria-hidden="true"></i>我的路线</button><button type="button" class="nav-item cursor-interaction" data-action="records"><i data-lucide="notebook-text" aria-hidden="true"></i>学习记录</button><button type="button" class="nav-item cursor-interaction" data-action="resources"><i data-lucide="library" aria-hidden="true"></i>学习资料</button><button type="button" class="nav-item cursor-interaction" data-action="projects"><i data-lucide="blocks" aria-hidden="true"></i>项目实践</button></nav>
+      <div id="lbb-context-nav"></div>
+      <!-- LEARNING_APP_BRANDING -->
+      <div class="sidebar-foot">AI × 机器人 · 开源学习</div>
+    </aside>
+    <div class="app-workspace">
+      <header class="app-topbar"><nav id="lbb-breadcrumbs" aria-label="当前位置"></nav><div class="header-learning-actions"></div></header>
+      <main id="lbb-main"></main>
+      <footer class="app-footer"><span>动手学 · LEARN BY BUILDING</span><span>地图找方向 · 小例子看原理 · 用作品检验</span></footer>
+    </div>
+  </div>
+  <div id="lbb-announcement" class="sr-label" role="status" aria-live="polite"></div>
+</div>
+<!-- LEARNING_APP_STYLE map.css -->
+<template id="lbb-atlas-overview">
+          <div class="learning-atlas" aria-label="三条学习路线从共同基础分叉，在共享能力和项目处汇合">
+            <svg class="atlas-lines" aria-hidden="true" focusable="false"></svg>
+            <div class="atlas-grid">
+              <div class="atlas-origin map-point" data-map-key="start" data-lane="shared">
+                <div class="origin-heading"><span class="origin-icon"><i data-lucide="sprout" aria-hidden="true"></i></span><div><small>START HERE</small><b>从共同基础，走向不同的作品</b></div><span class="origin-badge">共同基础</span></div>
+                <div class="origin-topics">
+                  <button type="button" class="atlas-clickable cursor-interaction" data-action="node" data-value="plan-cs50p"><b>CS50P</b><span>Python 与编程 ↗</span></button>
+                  <button type="button" class="atlas-clickable cursor-interaction" data-action="node" data-value="plan-tools"><b>Missing Semester</b><span>工程工具与实验 ↗</span></button>
+                  <button type="button" class="atlas-clickable cursor-interaction" data-action="node" data-value="plan-linear"><b>MIT 18.06</b><span>线性代数 ↗</span></button>
+                  <button type="button" class="atlas-clickable cursor-interaction" data-action="node" data-value="plan-probability"><b>MIT 18.05</b><span>概率与统计 ↗</span></button>
+                </div>
+              </div>
+
+              <div class="atlas-lane-heading lane-a"><span>A</span><div><b>大模型原理与研发</b><small>UNDERSTAND & TRAIN</small></div></div>
+              <div class="atlas-lane-heading lane-b"><span>B</span><div><b>AI 应用与 Agent</b><small>CONNECT & CREATE</small></div></div>
+              <div class="atlas-lane-heading lane-c"><span>C</span><div><b>机器人与具身实践</b><small>PERCEIVE & ACT</small></div></div>
+
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-ml" data-map-key="ml" data-lane="a" data-action="node" data-value="a1">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="chart-no-axes-combined" aria-hidden="true"></i></span><small>机器学习</small><span class="atlas-number">A.01</span></span>
+                <b>数据、损失与泛化</b><span class="atlas-node-caption">CS229 · 回归、分类与泛化</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-apps" data-map-key="apps" data-lane="b" data-action="node" data-value="b1">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="braces" aria-hidden="true"></i></span><small>应用起步</small><span class="atlas-number">B.01</span></span>
+                <b>模型调用与结构化输出</b><span class="atlas-node-caption">让模型完成一个明确的小任务</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-embedded" data-map-key="embedded" data-lane="c" data-action="node" data-value="c1">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="cpu" aria-hidden="true"></i></span><small>电子与编程</small><span class="atlas-number">C.01</span></span>
+                <b>嵌入式与电子基础</b><span class="atlas-node-caption">Arduino · Learn ESP32 在线实验</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-dl" data-map-key="dl" data-lane="a" data-action="node" data-value="a2">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="network" aria-hidden="true"></i></span><small>深度学习</small><span class="atlas-number">A.02</span></span>
+                <b>神经网络与 PyTorch</b><span class="atlas-node-caption">动手学深度学习 · PyTorch 实作</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-rag" data-map-key="rag" data-lane="b" data-action="node" data-value="b2">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="search" aria-hidden="true"></i></span><small>资料问答</small><span class="atlas-number">B.02</span></span>
+                <b>RAG 与检索评测</b><span class="atlas-node-caption">找到依据，再组织可靠回答</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-control" data-map-key="control" data-lane="c" data-action="node" data-value="c3">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="sliders-horizontal" aria-hidden="true"></i></span><small>测量与反馈</small><span class="atlas-number">C.02</span></span>
+                <b>机械、传感器与控制</b><span class="atlas-node-caption">机械与 CAD · 运动学 · PID · 滤波</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <button type="button" class="atlas-junction atlas-clickable cursor-interaction map-point shared-junction" data-map-key="shared" data-lane="shared" data-action="node" data-value="shared">
+                <span class="junction-icon"><i data-lucide="git-merge" aria-hidden="true"></i></span><span class="junction-copy"><small>在这里交汇 · 共享能力</small><b>数据表征与实验评测</b><span>读懂数据，也学会判断结果</span></span><span class="junction-lanes" aria-label="连接 A、B、C 三条路线"><i>A</i><i>B</i><i>C</i></span><span class="junction-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-transformer" data-map-key="transformer" data-lane="a" data-action="node" data-value="a3">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="layers" aria-hidden="true"></i></span><small>CME 295 · 原理主干</small><span class="atlas-number">A.03</span></span>
+                <b>CME 295 · 大模型原理</b><span class="atlas-node-caption">Token、Attention、训练与推理</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-agent" data-map-key="agent" data-lane="b" data-action="node" data-value="b4">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="workflow" aria-hidden="true"></i></span><small>Agent → 软件工程</small><span class="atlas-number">B.03</span></span>
+                <b>CS146S · AI 软件工程</b><span class="atlas-node-caption">上下文、工具、测试与评审</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction map-point node-ros" data-map-key="ros" data-lane="c" data-action="node" data-value="c4">
+                <span class="atlas-node-top"><span class="atlas-topic-icon"><i data-lucide="scan-eye" aria-hidden="true"></i></span><small>感知与规划</small><span class="atlas-number">C.03</span></span>
+                <b>ROS 2 · 导航与操作</b><span class="atlas-node-caption">移动机器人 ↔ 机械臂操作</span><span class="atlas-node-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <button type="button" class="atlas-node atlas-clickable cursor-interaction atlas-course map-point" data-map-key="cs336" data-lane="a" data-action="node" data-value="a4">
+                <span class="atlas-node-top"><small><span class="feature-dot"></span> 当前专题 · CS336</small><span class="atlas-number">A.04</span></span>
+                <b>从零构建大模型</b><span class="atlas-node-caption">搭模型 → 算资源 → 数据 → 后训练</span><span class="atlas-course-bottom">16 讲中文精读 <span>进入课程 ↗</span></span>
+              </button>
+              <button type="button" class="atlas-junction atlas-clickable cursor-interaction atlas-embodied map-point" data-map-key="embodied" data-lane="bc" data-action="node" data-value="c5">
+                <span class="junction-icon"><i data-lucide="bot" aria-hidden="true"></i></span><span class="junction-copy"><small>应用 × 机器人 · 再次交汇</small><b>让智能走进真实世界</b><span>LeRobot · 模仿学习 · CS224R</span></span><span class="junction-lanes" aria-label="连接 B、C 两条路线"><i>B</i><i>C</i></span><span class="junction-arrow" aria-hidden="true">↗</span>
+              </button>
+
+              <button type="button" class="atlas-destination atlas-clickable cursor-interaction map-point" data-map-key="build" data-lane="shared" data-action="node" data-value="b5">
+                <span class="destination-icon"><i data-lucide="rocket" aria-hidden="true"></i></span><span><small>BUILD SOMETHING REAL</small><b>把交汇的知识，变成你的作品。</b><span>项目实践 · 可靠性验证 · 真实交付</span></span><span class="destination-arrow" aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+
+</template>
+<!-- LEARNING_APP_STYLE layout.css -->
+<!-- LEARNING_APP_SCRIPT workspace.js -->
+<!-- LEARNING_APP_SCRIPT icons.js --></body></html>

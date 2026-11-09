@@ -1,0 +1,1266 @@
+{
+  "checked": "2026-11-08",
+  "material_year": 2026,
+  "note": "Public source metadata and retrieved-snapshot receipts only; raw third-party slides and full subtitles are not distributed. Official access and missing materials remain separately marked.",
+  "sources": [
+    {
+      "id": "cme-syllabus",
+      "kind": "官方大纲",
+      "label": "CME 295 · Autumn 2026",
+      "url": "https://cme295.stanford.edu/syllabus/",
+      "status": "已核对 2026 年课次与公开材料",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cme-1-slides",
+      "kind": "官方课件",
+      "label": "Lecture 1 · Attention 与 masking",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture1.pdf#page=59",
+      "locator": "全讲118页；重点：分词/表示、Word2vec/RNN/LSTM、自注意力、Transformer与端到端例子",
+      "status": "已下载、提取文字并检查关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "attention"
+      ]
+    },
+    {
+      "id": "cme-1-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 1 · Query / Key / Value",
+      "url": "https://www.youtube.com/watch?v=114i2Kz-LZA&t=3600s",
+      "locator": "约 60:00 起讲 Q/K/V；84:11 起讲 masking",
+      "status": "已取得英文字幕；公式与课件交叉核对",
+      "role": "official",
+      "used_in_lectures": [
+        "attention"
+      ]
+    },
+    {
+      "id": "cme-2-slides",
+      "kind": "官方课件",
+      "label": "Lecture 2 · Sampling 与 temperature",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture2.pdf#page=106",
+      "locator": "全讲138页；重点：模型家族、MoE、共享KV、RoPE与采样",
+      "status": "已下载并检查温度公式页",
+      "role": "official",
+      "used_in_lectures": [
+        "sampling"
+      ]
+    },
+    {
+      "id": "cme-2-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 2 · 采样策略",
+      "url": "https://www.youtube.com/watch?v=GaIeu3npx04&t=5232s",
+      "locator": "87:12 起 top-k；88:59 起 temperature",
+      "status": "已取得英文字幕并核对相关段落",
+      "role": "official",
+      "used_in_lectures": [
+        "sampling"
+      ]
+    },
+    {
+      "id": "cme-3-slides",
+      "kind": "官方课件",
+      "label": "Lecture 3 · LoRA",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture3.pdf#page=53",
+      "locator": "全讲165页；重点：预训练、SFT、LoRA、偏好、推理、OPD与蒸馏",
+      "status": "已下载并检查基座加低秩增量示意",
+      "role": "official",
+      "used_in_lectures": [
+        "lora"
+      ]
+    },
+    {
+      "id": "cme-3-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 3 · Low-Rank Adaptation",
+      "url": "https://www.youtube.com/watch?v=S3bCDcJhz4s&t=2418s",
+      "locator": "40:18 起引入 LoRA",
+      "status": "已取得英文字幕并核对相关段落",
+      "role": "official",
+      "used_in_lectures": [
+        "lora"
+      ]
+    },
+    {
+      "id": "cs336-syllabus",
+      "kind": "官方大纲",
+      "label": "CS336 · Spring 2026",
+      "url": "https://cs336.stanford.edu/",
+      "status": "已核对第 1–17 讲公开入口；嘉宾讲座另列",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs336-2-code",
+      "kind": "官方代码",
+      "label": "lecture_02.py · 资源核算",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_02.py#L99",
+      "locator": "motivating_questions；gradients_flops；optimizer；train_loop",
+      "status": "已下载；与已有字幕项目的代码副本 SHA-256 一致",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs336-2-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 2 · PyTorch / 资源核算",
+      "url": "https://www.youtube.com/watch?v=kuYAsz7zspQ&t=2235s",
+      "locator": "37:15 起 MFU 定义；结合原课动机算例阅读",
+      "status": "已读取存档英文字幕；视频标题与 2026 官方播放列表一致",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs336-7-code",
+      "kind": "官方代码",
+      "label": "lecture_07.py · 并行与集合通信",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_07.py",
+      "locator": "DDP / FSDP、all-reduce 与 reduce-scatter 相关小节",
+      "status": "已下载；与已有代码副本 SHA-256 一致",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs336-7-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 7 · Parallelism",
+      "url": "https://www.youtube.com/watch?v=SzpOcwdIL0Y&t=185s",
+      "locator": "03:05 起复制与分片；07:13 起集合通信",
+      "status": "已读取存档英文字幕并对照代码",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs336-14-code",
+      "kind": "官方代码",
+      "label": "lecture_14.py · Data II",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_14.py#L145",
+      "locator": "deduplication；exact_deduplication",
+      "status": "已下载；与已有代码副本 SHA-256 一致",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs336-14-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 14 · 去重与去污染",
+      "url": "https://www.youtube.com/watch?v=5sxHosTLPF8&t=1394s",
+      "locator": "23:14 起精确/近似重复；26:58 起 decontamination",
+      "status": "已读取存档英文字幕并对照代码",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs146s-syllabus",
+      "kind": "官方大纲",
+      "label": "CS146S · Fall 2026",
+      "url": "https://themodernsoftware.dev/",
+      "status": "已读取当前 2026 大纲及官网公开材料链接",
+      "role": "official",
+      "used_in_lectures": []
+    },
+    {
+      "id": "cs146s-1-slides",
+      "kind": "官方课件",
+      "label": "9/22 · 导论与最小 Coding Agent",
+      "url": "https://docs.google.com/presentation/d/1uztIhjHAG6O_9QOD1N_3wdhwhABml1fANXEN2dGwdbg/edit",
+      "locator": "第 7 页：上下文与代码理解；配合 9/24 课堂转录",
+      "status": "公开 PDF 导出可读，已下载核对",
+      "role": "official",
+      "used_in_lectures": [
+        "agent"
+      ]
+    },
+    {
+      "id": "cs146s-1-transcript",
+      "kind": "官方课堂转录",
+      "label": "9/24 · Agent harness",
+      "url": "https://themodernsoftware.dev/materials/9-24-26-transcript.txt",
+      "locator": "12:16.582 段：模型、工具调用、结果回送的核心循环",
+      "status": "已读取；是官网课堂转录，不标作 YouTube 字幕",
+      "role": "official",
+      "used_in_lectures": [
+        "agent",
+        "cs146s-harness"
+      ]
+    },
+    {
+      "id": "cs146s-1-code",
+      "kind": "官方代码入口",
+      "label": "9/22 · Completed code",
+      "url": "https://drive.google.com/file/d/1DxKa_autBOu9s8DvItodgUAwH_pBg7aR/view",
+      "status": "官方已列链接；本次未取得文件正文，不据此声称代码复现通过",
+      "role": "unavailable",
+      "used_in_lectures": [
+        "agent"
+      ]
+    },
+    {
+      "id": "cs146s-2-slides",
+      "kind": "官方课件",
+      "label": "9/29 · Context Engineering / RePPIT",
+      "url": "https://docs.google.com/presentation/d/17brqoQQZHF3K82WgYaV6urAV3Q7iIwyGUBYRvSuY8QY/edit",
+      "locator": "PDF 第 4、10、13–14 页",
+      "status": "已下载；上下文占比是课堂经验，未当作所有模型的硬阈值",
+      "role": "official",
+      "used_in_lectures": [
+        "context"
+      ]
+    },
+    {
+      "id": "cs146s-2-transcript",
+      "kind": "官方课堂转录",
+      "label": "9/29 · 研究、方案、计划、实现、测试",
+      "url": "https://themodernsoftware.dev/materials/9-29-26-transcript.txt",
+      "locator": "按 Research / Propose / Plan / Implement / Test 小节对照",
+      "status": "已读取课堂转录",
+      "role": "official",
+      "used_in_lectures": [
+        "context"
+      ]
+    },
+    {
+      "id": "cs146s-mcp-slides",
+      "kind": "官方课件",
+      "label": "10/1 · MCP 与工具设计",
+      "url": "https://docs.google.com/presentation/d/1q2cB1a7P4XsR0UJqE0RmtZFeggNOLdPaSnOpbBVewHA/edit",
+      "locator": "PDF 第 9、11、17 页",
+      "status": "已下载；对协议标准化与具体工程责任分别说明",
+      "role": "official",
+      "used_in_lectures": [
+        "tools"
+      ]
+    },
+    {
+      "id": "cs146s-mcp-transcript",
+      "kind": "官方课堂转录",
+      "label": "10/1 · tools/list、schema、调用与返回",
+      "url": "https://themodernsoftware.dev/materials/10-1-26-transcript.txt",
+      "locator": "MCP A Bit Deeper 与工具设计相应讲述",
+      "status": "已读取课堂转录",
+      "role": "official",
+      "used_in_lectures": [
+        "tools"
+      ]
+    },
+    {
+      "id": "cs146s-assignments",
+      "kind": "官方作业",
+      "label": "Fall 2026 · 官方作业仓库",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments",
+      "status": "已核对 2026 标识与 week1–week5 公开目录；本站练习为独立原创",
+      "role": "official",
+      "used_in_lectures": [
+        "tools"
+      ]
+    },
+    {
+      "id": "cs146s-cn",
+      "kind": "中文辅助阅读",
+      "label": "Lucaswang81 / CS146S_CN",
+      "url": "https://github.com/Lucaswang81/CS146S_CN#fall-2026进行中内容以官网发布为准",
+      "locator": "README 的 Fall 2026 部分；_assignments/2026 fall",
+      "status": "非官方；2026 大纲中文索引和第 1–3 周英文作业副本。2025 存档不混入本课件",
+      "role": "auxiliary",
+      "used_in_lectures": [
+        "agent",
+        "context",
+        "tools",
+        "cs146s-skills"
+      ]
+    },
+    {
+      "id": "original-code",
+      "kind": "本站原创代码",
+      "label": "九个教学模型的完整源码",
+      "url": "./ai-course-models.js",
+      "status": "浏览器本地计算；核心摘录逐步回放。Agent 决策预设，工具与测试使用内存案例",
+      "role": "original",
+      "used_in_lectures": [
+        "attention",
+        "sampling",
+        "lora",
+        "cme-rl-lecture",
+        "cme-systems",
+        "cme-agents",
+        "cs336-tokenization",
+        "compute",
+        "cs336-architecture",
+        "cs336-attention-moe",
+        "cs336-hardware",
+        "cs336-kernels",
+        "parallel",
+        "cs336-parallel-systems",
+        "cs336-scaling-basics",
+        "cs336-inference",
+        "cs336-scaling-practice",
+        "cs336-evaluation-lecture",
+        "cs336-data-origins",
+        "dedup",
+        "cs336-post-training",
+        "cs336-rlvr",
+        "cs336-multimodal",
+        "cs336-guest-danfu",
+        "agent",
+        "context",
+        "tools"
+      ],
+      "sha256": "1d8edcdbec8406fa049dd59394495f851f94ffa1255c811d53264f912ada93d2"
+    },
+    {
+      "id": "cme-4-slides",
+      "kind": "官方课件",
+      "label": "CME295 2026 · Lecture 4",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture4.pdf",
+      "locator": "PDF共135页（从1计数）；第22–30页奖励/梯度；43–66页PPO；70–94页GRPO；末段OPD",
+      "status": "已下载与提取正文；相关公式/示意关键页已渲染核对",
+      "role": "official",
+      "used_in_lectures": [
+        "cme-rl-lecture"
+      ]
+    },
+    {
+      "id": "cme-5-slides",
+      "kind": "官方课件",
+      "label": "CME295 2026 · Lecture 5",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture5.pdf",
+      "locator": "PDF共156页（从1计数）；第15–62页FlashAttention；71–78页并行；99–107页硬件/KV；139–146页投机解码",
+      "status": "已下载与提取正文；相关公式/示意关键页已渲染核对",
+      "role": "official",
+      "used_in_lectures": [
+        "cme-systems"
+      ]
+    },
+    {
+      "id": "cme-6-slides",
+      "kind": "官方课件",
+      "label": "CME295 2026 · Lecture 6",
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture6.pdf",
+      "locator": "PDF共152页（从1计数）；第14–47页RAG与检索；工具调用/MCP；105页Harness；130–135页压缩与记忆；140–144页编码Agent/Skills",
+      "status": "已下载与提取正文；相关公式/示意关键页已渲染核对",
+      "role": "official",
+      "used_in_lectures": [
+        "cme-agents"
+      ]
+    },
+    {
+      "id": "cme-4-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 4 官方2026录播",
+      "url": "https://www.youtube.com/watch?v=3Vaj0Oka_t4",
+      "locator": "40:40起PPO；41:03起优势；67:37起GRPO",
+      "status": "已取得公开英文字幕并对照课件；字幕自动识别可能有误，公式以课件核对",
+      "role": "official",
+      "used_in_lectures": [
+        "cme-rl-lecture"
+      ]
+    },
+    {
+      "id": "cme-5-video",
+      "kind": "视频与字幕",
+      "label": "Lecture 5 官方2026录播",
+      "url": "https://www.youtube.com/watch?v=25KIyaeI_Fg",
+      "locator": "17:11起FlashAttention；83:06起KV；92:57起投机解码",
+      "status": "已取得公开英文字幕并对照课件；字幕自动识别可能有误，公式以课件核对",
+      "role": "official",
+      "used_in_lectures": [
+        "cme-systems"
+      ]
+    },
+    {
+      "id": "cme-original-code",
+      "kind": "本站原创代码",
+      "label": "CME295 九个新增计算模型的完整源码",
+      "url": "./ai-cme295-2026.js",
+      "status": "与页面使用同一注册模块；可按Node API或浏览器运行，计算轨迹回放不执行任意代码",
+      "role": "original",
+      "used_in_lectures": [
+        "attention",
+        "sampling",
+        "lora",
+        "cme-rl-lecture",
+        "cme-systems",
+        "cme-agents"
+      ],
+      "sha256": "d34a59aa3112622560f82ef1a93ea88382447e4cbb44c06d3c170ce500bf97fb"
+    },
+    {
+      "id": "cs336-l01-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 1 · lecture_01.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_01.py",
+      "locator": "tokenization / byte_tokenizer / train_bpe",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6",
+      "used_in_lectures": [
+        "cs336-tokenization"
+      ]
+    },
+    {
+      "id": "cs336-l01-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 1: Overview, Tokenization",
+      "url": "https://www.youtube.com/watch?v=JuoVZkPBiKk&t=1713s",
+      "locator": "存档字幕相关词 BPE 首次定位 28:33",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-tokenization"
+      ]
+    },
+    {
+      "id": "cs336-l02-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 2 · lecture_02.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_02.py",
+      "locator": "motivating_questions / tensor_einops / gradients_flops / train_loop",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "f731b3849afc970a062f1fe692d7d80f5952cf82c2a4f6f2803a8fb9a9dabfd6",
+      "used_in_lectures": [
+        "compute"
+      ]
+    },
+    {
+      "id": "cs336-l02-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 2: PyTorch (einops)",
+      "url": "https://www.youtube.com/watch?v=kuYAsz7zspQ&t=2235s",
+      "locator": "存档字幕相关词 utilization 首次定位 37:15",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "compute"
+      ]
+    },
+    {
+      "id": "cs336-l03-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 3 · lecture_03.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_03.pdf",
+      "locator": "PDF 第 4、10–15、20–23、30–32、50–51 页；架构与超参数",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e",
+      "used_in_lectures": [
+        "cs336-architecture"
+      ]
+    },
+    {
+      "id": "cs336-l03-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 3: Architectures",
+      "url": "https://www.youtube.com/watch?v=lVynu4bo1rY&t=135s",
+      "locator": "存档字幕相关词 norm 首次定位 02:15",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-architecture"
+      ]
+    },
+    {
+      "id": "cs336-l04-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 4 · lecture_04.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_04.pdf",
+      "locator": "PDF 第 4–13、15–18、26–28、39–45 页；线性/混合注意力与 MoE",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "used_in_lectures": [
+        "cs336-attention-moe"
+      ]
+    },
+    {
+      "id": "cs336-l04-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 4: Attention Alternatives",
+      "url": "https://www.youtube.com/watch?v=cKSwj_qZ8Jg&t=538s",
+      "locator": "存档字幕相关词 linear attention 首次定位 08:58",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-attention-moe"
+      ]
+    },
+    {
+      "id": "cs336-l05-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 5 · lecture_05.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_05.pdf",
+      "locator": "PDF 第 8–16 页执行/内存层级及后续性能分析",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe",
+      "used_in_lectures": [
+        "cs336-hardware"
+      ]
+    },
+    {
+      "id": "cs336-l05-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 5: GPUs, TPUs",
+      "url": "https://www.youtube.com/watch?v=izZba4UA7iY&t=615s",
+      "locator": "存档字幕相关词 memory 首次定位 10:15",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-hardware"
+      ]
+    },
+    {
+      "id": "cs336-l06-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 6 · lecture_06.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_06.py",
+      "locator": "benchmarking / triton_softmax_example / triton_row_sum_example / triton_matmul_relu_example",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "4be1200d93d1f38963d40d7c46a5be72dd67a230ebf8a48d446f018d5e8fa788",
+      "used_in_lectures": [
+        "cs336-kernels"
+      ]
+    },
+    {
+      "id": "cs336-l06-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 6: Kernels, Triton, XLA",
+      "url": "https://www.youtube.com/watch?v=xnDHaNUvHBg&t=25s",
+      "locator": "存档字幕相关词 triton 首次定位 00:25",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-kernels"
+      ]
+    },
+    {
+      "id": "cs336-l07-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 7 · lecture_07.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_07.py",
+      "locator": "collective_operations / data_parallelism / tensor_parallelism / pipeline_parallelism",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "7cdec6c6e2b78afd667c98e2826efea637bb076cd926c45b4f404b0528c42e60",
+      "used_in_lectures": [
+        "parallel"
+      ]
+    },
+    {
+      "id": "cs336-l07-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 7: Parallelism",
+      "url": "https://www.youtube.com/watch?v=SzpOcwdIL0Y&t=439s",
+      "locator": "存档字幕相关词 all reduce 首次定位 07:19",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "parallel"
+      ]
+    },
+    {
+      "id": "cs336-l08-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 8 · lecture_08.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf",
+      "locator": "PDF 第 14–26、31 页起并行策略；流水线与张量并行相关页",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1",
+      "used_in_lectures": [
+        "cs336-parallel-systems"
+      ]
+    },
+    {
+      "id": "cs336-l08-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 8: Parallelism",
+      "url": "https://www.youtube.com/watch?v=6-cXp-aOmdg&t=1892s",
+      "locator": "存档字幕相关词 pipeline 首次定位 31:32",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-parallel-systems"
+      ]
+    },
+    {
+      "id": "cs336-l09-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 9 · lecture_09.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf",
+      "locator": "PDF 第 13–16、45–49 页；幂律与等算力拟合",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+      "used_in_lectures": [
+        "cs336-scaling-basics"
+      ]
+    },
+    {
+      "id": "cs336-l09-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 9: Scaling Laws",
+      "url": "https://www.youtube.com/watch?v=Q15rhEWZPQ4&t=3715s",
+      "locator": "存档字幕相关词 chinchilla 首次定位 61:55",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-scaling-basics"
+      ]
+    },
+    {
+      "id": "cs336-l10-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 10 · lecture_10.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_10.py",
+      "locator": "arithmetic_intensity_of_inference / reduce_kv_cache_size / speculative_sampling / continuous_batching / paged_attention",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "e79acd9115d75f0b8bf4902d97dc41c1f6b5016778321f19c2dc241a90cfe9b9",
+      "used_in_lectures": [
+        "cs336-inference"
+      ]
+    },
+    {
+      "id": "cs336-l10-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 10: Inference",
+      "url": "https://www.youtube.com/watch?v=EfM546A79aM&t=1478s",
+      "locator": "存档字幕相关词 prefill 首次定位 24:38",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-inference"
+      ]
+    },
+    {
+      "id": "cs336-l11-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 11 · lecture_11.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_11.pdf",
+      "locator": "PDF 第 5–16 页公开配方、μP、WSD 与后续数据约束讨论",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+      "used_in_lectures": [
+        "cs336-scaling-practice"
+      ]
+    },
+    {
+      "id": "cs336-l11-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 11:  Scaling Laws",
+      "url": "https://www.youtube.com/watch?v=vTfEyOyzV9E&t=673s",
+      "locator": "存档字幕相关词 warm 首次定位 11:13",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-scaling-practice"
+      ]
+    },
+    {
+      "id": "cs336-l12-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 12 · lecture_12.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_12.py",
+      "locator": "perplexity / exam_benchmarks / agentic_benchmarks / realism / validity",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "93e4049c9ee2665a7e5c883fee2c213e2eaa45aa5d452e447b5a15a5f353fd09",
+      "used_in_lectures": [
+        "cs336-evaluation-lecture"
+      ]
+    },
+    {
+      "id": "cs336-l12-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 12: Evaluation",
+      "url": "https://www.youtube.com/watch?v=JpAxdTWQJxM&t=341s",
+      "locator": "存档字幕相关词 perplexity 首次定位 05:41",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-evaluation-lecture"
+      ]
+    },
+    {
+      "id": "cs336-l13-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 13 · lecture_13.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_13.py",
+      "locator": "raw_sources / copyright / common_crawl / wikipedia / github / dolma / dclm",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "321fbab635378c275f65c41487119f3b9b171fc0ddef1454a4c607c9db72163b",
+      "used_in_lectures": [
+        "cs336-data-origins"
+      ]
+    },
+    {
+      "id": "cs336-l13-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 13: Data (Sources, Datasets)",
+      "url": "https://www.youtube.com/watch?v=-qm0ln33G24&t=73s",
+      "locator": "存档字幕相关词 copyright 首次定位 01:13",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-data-origins"
+      ]
+    },
+    {
+      "id": "cs336-l14-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 14 · lecture_14.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_14.py",
+      "locator": "transformation / filtering / exact_deduplication / jaccard_minhash / locality_sensitive_hashing / data_mixing",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "8e0e17f868002f2e8f73afed018b2dd787c0a1b371eec599c44d8dbfe555ae9b",
+      "used_in_lectures": [
+        "dedup"
+      ]
+    },
+    {
+      "id": "cs336-l14-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 14: Data",
+      "url": "https://www.youtube.com/watch?v=5sxHosTLPF8&t=57s",
+      "locator": "存档字幕相关词 dedup 首次定位 00:57",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "dedup"
+      ]
+    },
+    {
+      "id": "cs336-l15-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 15 · lecture_15.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_15.pdf",
+      "locator": "PDF 第 7–17、32–37、49 页起；SFT、偏好与 DPO",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "42a4bc02408a96e0b414f789f32780ae1d8461000f872d93aa38c94fe369e862",
+      "used_in_lectures": [
+        "cs336-post-training"
+      ]
+    },
+    {
+      "id": "cs336-l15-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 15: Mid/Post-Training",
+      "url": "https://www.youtube.com/watch?v=2oH6PWPrYFo&t=1209s",
+      "locator": "存档字幕相关词 preference 首次定位 20:09",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-post-training"
+      ]
+    },
+    {
+      "id": "cs336-l16-material",
+      "kind": "官方课件",
+      "label": "CS336 2026 · Lecture 16 · lecture_16.pdf",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_16.pdf",
+      "locator": "PDF 第 5–20 页 PPO→GRPO；后续变体与推理现象",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "1a2bea825499f226b1c3fe990606253ad1b4fdbdf2ae90b4d12d7d0c07f2c8b3",
+      "used_in_lectures": [
+        "cs336-rlvr"
+      ]
+    },
+    {
+      "id": "cs336-l16-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 16: Post-Training - RLVR",
+      "url": "https://www.youtube.com/watch?v=dIFAi87Ws4E&t=876s",
+      "locator": "存档字幕相关词 group 首次定位 14:36",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-rlvr"
+      ]
+    },
+    {
+      "id": "cs336-l17-material",
+      "kind": "官方代码",
+      "label": "CS336 2026 · Lecture 17 · lecture_17.py",
+      "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_17.py",
+      "locator": "clip / siglip / llava / qwen_vl / chameleon",
+      "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。",
+      "role": "official",
+      "sha256": "d8c3054ecce42fda3d92b4f21677a83d65cb525e8b3fbd4361c079f3cd20da52",
+      "used_in_lectures": [
+        "cs336-multimodal"
+      ]
+    },
+    {
+      "id": "cs336-l17-recording",
+      "kind": "官方视频与英文字幕",
+      "label": "Stanford CS336 Language Modeling from Scratch | Spring 2026 | Lecture 17: Alignment - Multimodality",
+      "url": "https://www.youtube.com/watch?v=26FtD08ZpOU&t=265s",
+      "locator": "存档字幕相关词 clip 首次定位 04:25",
+      "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。",
+      "role": "official",
+      "used_in_lectures": [
+        "cs336-multimodal"
+      ]
+    },
+    {
+      "id": "cs336-guest-danfu",
+      "kind": "官方嘉宾视频与英文字幕",
+      "label": "CS336 Spring 2026 · Guest Lecture: Dan Fu",
+      "url": "https://www.youtube.com/watch?v=9EEm4iMAF5s&t=991s",
+      "locator": "16:31 continuous batching；37:35 Megakernels；64:47 起 co-design 问答；结尾 71:30 感谢 Dan",
+      "status": "已取得官方视频英文自动字幕（1914段），并与既有时间戳字幕的选定段落核对；未取得官方独立课件，不伪造页码。",
+      "role": "official",
+      "sha256": "5cb9d64f7fa89d09bc4b9a44ed58180f41d28942c5bdad6a509c9267c9f11a71",
+      "used_in_lectures": [
+        "cs336-guest-danfu"
+      ]
+    },
+    {
+      "id": "cs146s-harness-slides",
+      "kind": "官方课件",
+      "label": "9/24 · Modern Coding Agent Harness",
+      "url": "https://docs.google.com/presentation/d/1RZu-p18Qybbgm8WVP2RH04ESc4Bn377B-T9j5-TBFdQ/edit",
+      "locator": "PDF 第 6、8–16 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-harness"
+      ]
+    },
+    {
+      "id": "cs146s-skills-slides",
+      "kind": "官方课件",
+      "label": "10/6 · Agent Skills Best Practices",
+      "url": "https://docs.google.com/presentation/d/15bPu5c-i8D8McTh6l7SpUPk2n9M_Y-CdDQLfyzL8RD8/edit",
+      "locator": "PDF 第 5、7–14 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-skills"
+      ]
+    },
+    {
+      "id": "cs146s-lee-slides",
+      "kind": "官方课件",
+      "label": "10/8 · Lee Robinson: How always-on agents work",
+      "url": "https://drive.google.com/file/d/1b8WiBk_lcB3ue-jZMLijSUMLj6SDiF6Z/view",
+      "locator": "PDF 第 14–22、24–37、39–45 页；访谈产品实现与设想按讲者案例阅读",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-always-on"
+      ]
+    },
+    {
+      "id": "cs146s-customize-slides",
+      "kind": "官方课件",
+      "label": "10/13 · Customizing Your Agent Setup",
+      "url": "https://docs.google.com/presentation/d/152VaUifBKH4T6hxd6fCKKM9kJTSAuBmkF8zSYwuTYAo/edit",
+      "locator": "PDF 第 7–13 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-config"
+      ]
+    },
+    {
+      "id": "cs146s-readiness-slides",
+      "kind": "官方课件",
+      "label": "10/20 · Agent-Ready Repositories",
+      "url": "https://docs.google.com/presentation/d/1yCxocmUrGIN7IrC42WB6NW08PtYYFLe1ombDj3Ay6_8/edit",
+      "locator": "PDF 第 5–9、11–15 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-readiness"
+      ]
+    },
+    {
+      "id": "cs146s-eno-slides",
+      "kind": "官方课件",
+      "label": "10/22 · Eno Reyes: Verification and Agent Readiness",
+      "url": "https://drive.google.com/file/d/1Nbi1QEdiLXFBFAu1lRKkTkd85QRGpWOx/view",
+      "locator": "PDF 第 12–24、28–29 页；概率例题仅作显式假设下复算",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-verification"
+      ]
+    },
+    {
+      "id": "cs146s-review-slides",
+      "kind": "官方课件",
+      "label": "10/27 · Agentic Code Review",
+      "url": "https://docs.google.com/presentation/d/1u8WYtFj0O9yc4H4JX9D4URYKhDzvrAGKLzn38DXSrak/edit",
+      "locator": "PDF 第 4–5、7、10、13–15 页",
+      "status": "已读取 2026 原课 PDF 正文，并核对相关关键页",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-review"
+      ]
+    },
+    {
+      "id": "cs146s-assignment-1",
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 1 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week1/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official",
+      "used_in_lectures": [
+        "agent",
+        "cs146s-harness"
+      ]
+    },
+    {
+      "id": "cs146s-assignment-2",
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 2 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week2/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official",
+      "used_in_lectures": [
+        "tools"
+      ]
+    },
+    {
+      "id": "cs146s-assignment-3",
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 3 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week3/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-skills"
+      ]
+    },
+    {
+      "id": "cs146s-assignment-4",
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 4 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week4/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official",
+      "used_in_lectures": [
+        "context",
+        "cs146s-config"
+      ]
+    },
+    {
+      "id": "cs146s-assignment-5",
+      "kind": "官方作业",
+      "label": "Fall 2026 · Week 5 assignment",
+      "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week5/assignment.md",
+      "locator": "Learning Goals / Parts / Deliverables",
+      "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业",
+      "role": "official",
+      "used_in_lectures": [
+        "cs146s-readiness",
+        "cs146s-verification"
+      ]
+    },
+    {
+      "id": "cs146s-original-code",
+      "kind": "本站原创可运行代码",
+      "label": "CS146S 2026 · 八个新增教学模型",
+      "url": "./ai-cs146s-2026.js",
+      "status": "本地确定性计算、内存状态与断点快照；不调用真实 Agent、MCP 或第三方账号",
+      "role": "original",
+      "used_in_lectures": [
+        "agent",
+        "cs146s-harness",
+        "context",
+        "tools",
+        "cs146s-skills",
+        "cs146s-always-on",
+        "cs146s-config",
+        "cs146s-readiness",
+        "cs146s-verification",
+        "cs146s-review"
+      ],
+      "sha256": "a524c7e57e36e4b56becd7dd1acf7f692c1e6fe6f20abe21daf7f01b4515e704"
+    }
+  ],
+  "retrieved_snapshots": [
+    {
+      "url": "https://cme295.stanford.edu/syllabus/",
+      "sha256": "35479e0f9fe221bbd94bb5c9e63daca940a0bef125b111a9f724d00c4b0f0623",
+      "bytes": 13221
+    },
+    {
+      "url": "https://cs336.stanford.edu/",
+      "sha256": "bd57fae299fec60afedb5a22edb325a68107fa1af0cd83641695470587f7a4a7",
+      "bytes": 33995
+    },
+    {
+      "url": "https://cs336.stanford.edu/lectures/?trace=lecture_02",
+      "sha256": "a01bc9649576309a7428d9bafbc73cbae318feeb832c97c77da88da73b0c9a64",
+      "bytes": 826
+    },
+    {
+      "url": "https://themodernsoftware.dev/",
+      "sha256": "8566d8ad058d4e35a1040227d73e85886dc59919911e3c6663c6fe950b515129",
+      "bytes": 27161
+    },
+    {
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture1.pdf",
+      "sha256": "556f3df511a4c2f6f935f1ceb432dff9d4093e8b545e8b840beb355a7c88ca42",
+      "bytes": 4072402
+    },
+    {
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture2.pdf",
+      "sha256": "cd6fb64ada1ac430d362042e32e237149d93ab010ae88a869f1c27dcc4b71af3",
+      "bytes": 6772522
+    },
+    {
+      "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture3.pdf",
+      "sha256": "519f23b9014932a6be0e4e3b899c2a731aa5418c20b285f817fcd5fc7b169a20",
+      "bytes": 9575268
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_02.py",
+      "sha256": "f731b3849afc970a062f1fe692d7d80f5952cf82c2a4f6f2803a8fb9a9dabfd6",
+      "bytes": 35396
+    },
+    {
+      "url": "https://themodernsoftware.dev/materials/9-24-26-transcript.txt",
+      "sha256": "c19a165345967e2668c0273345e2eac2b42cc9386eede015ce6a0c36c5f5549b",
+      "bytes": 39513
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_14.py",
+      "sha256": "8e0e17f868002f2e8f73afed018b2dd787c0a1b371eec599c44d8dbfe555ae9b",
+      "bytes": 24169
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_07.py",
+      "sha256": "7cdec6c6e2b78afd667c98e2826efea637bb076cd926c45b4f404b0528c42e60",
+      "bytes": 26346
+    },
+    {
+      "url": "https://themodernsoftware.dev/materials/9-29-26-transcript.txt",
+      "sha256": "c7ad161830111a6c599abb60634e88406d0a506ccf323ca480f1c4e601ce1704",
+      "bytes": 33540
+    },
+    {
+      "url": "https://themodernsoftware.dev/materials/10-1-26-transcript.txt",
+      "sha256": "2d9e7eda8f8e8659d34ad4ae38cbbf19373517468fd8550b76f014e0cba3cd03",
+      "bytes": 29384
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/17brqoQQZHF3K82WgYaV6urAV3Q7iIwyGUBYRvSuY8QY/export/pdf",
+      "sha256": "5816e87acb38cc073855e998ca6de3d8c77febc92c456c25ead1e2a3dec4872f",
+      "bytes": 523055
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/1uztIhjHAG6O_9QOD1N_3wdhwhABml1fANXEN2dGwdbg/export/pdf",
+      "sha256": "5a357281c7583d1dfb3a58a67d7acf5b1c93de27ca1371a095fca2cee88c0428",
+      "bytes": 1676365
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/1q2cB1a7P4XsR0UJqE0RmtZFeggNOLdPaSnOpbBVewHA/export/pdf",
+      "sha256": "9d8f2c36022819b43fae36e7bcfe37b379020f5c038e355e8587abeaf5204b0f",
+      "bytes": 1357553
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=114i2Kz-LZA",
+      "sha256": "e2dbbe0968ee444efb55ffd465156fd218e8c60595389cfc4fd37177fd3739cd"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=S3bCDcJhz4s",
+      "sha256": "cb8dac3ed7fce85293156c708efa34cb945ce3ae4fcf8cb8774a6af414f2c864"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=GaIeu3npx04",
+      "sha256": "8f6e254bde5c378d88c9b12892ceb77ad4a9aa388b0164972ea87dc2b9b15bd4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_06.py",
+      "sha256": "4be1200d93d1f38963d40d7c46a5be72dd67a230ebf8a48d446f018d5e8fa788",
+      "bytes": 31366
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_01.py",
+      "sha256": "a7d47339eab889679010e926db8beb79f475a0596243f19bb15dbd69223f67e6",
+      "bytes": 42672
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_10.py",
+      "sha256": "e79acd9115d75f0b8bf4902d97dc41c1f6b5016778321f19c2dc241a90cfe9b9",
+      "bytes": 31289
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_05.pdf",
+      "sha256": "a2d5664a3b5a1f246df2fe58b43189215f29931ec05bde4d8a6af4664f55cafe",
+      "bytes": 5200951
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_04.pdf",
+      "sha256": "922da01cee70ed9dc9eef13d8116f1d6f45d663c12e632b3e80954c783bd3ce5",
+      "bytes": 6500834
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_12.py",
+      "sha256": "93e4049c9ee2665a7e5c883fee2c213e2eaa45aa5d452e447b5a15a5f353fd09",
+      "bytes": 21557
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_13.py",
+      "sha256": "321fbab635378c275f65c41487119f3b9b171fc0ddef1454a4c607c9db72163b",
+      "bytes": 33754
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_08.pdf",
+      "sha256": "4c4d7674b333693f20f328935d84dd8a073362c9725c5e05302b6650751ad4d1",
+      "bytes": 6563256
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_17.py",
+      "sha256": "d8c3054ecce42fda3d92b4f21677a83d65cb525e8b3fbd4361c079f3cd20da52",
+      "bytes": 13890
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_09.pdf",
+      "sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+      "bytes": 6941146
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_03.pdf",
+      "sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e",
+      "bytes": 5990936
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_15.pdf",
+      "sha256": "42a4bc02408a96e0b414f789f32780ae1d8461000f872d93aa38c94fe369e862",
+      "bytes": 6395151
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_11.pdf",
+      "sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+      "bytes": 6702855
+    },
+    {
+      "url": "https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_16.pdf",
+      "sha256": "1a2bea825499f226b1c3fe990606253ad1b4fdbdf2ae90b4d12d7d0c07f2c8b3",
+      "bytes": 6755659
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mihail911/modern-software-dev-assignments/master/week1/assignment.md",
+      "sha256": "690229137e566f4bd81ee591c71711ca6a965a089a2a5eb518d6a030d47e0ff8",
+      "bytes": 10070
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mihail911/modern-software-dev-assignments/master/week2/assignment.md",
+      "sha256": "ea590fa307a23f2768067f3bb594432ecb07e14ab9093488fcc4873df2d69651",
+      "bytes": 5165
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mihail911/modern-software-dev-assignments/master/week3/assignment.md",
+      "sha256": "2e942e8a4a915fbb956fadf691215d6ab57e0f141992cec72836dce63aec02b7",
+      "bytes": 4960
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mihail911/modern-software-dev-assignments/master/week4/assignment.md",
+      "sha256": "f807f34e31c0e58b9d77bd2409be8774108e8847dd2c7c246eb985cae057cc99",
+      "bytes": 3794
+    },
+    {
+      "url": "https://raw.githubusercontent.com/mihail911/modern-software-dev-assignments/master/week5/assignment.md",
+      "sha256": "28ffeae940d00a12fa534e51169dcdf17d45f627b70d8b6201c6102b6d37df0f",
+      "bytes": 3412
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/15bPu5c-i8D8McTh6l7SpUPk2n9M_Y-CdDQLfyzL8RD8/export/pdf",
+      "sha256": "69e0d6e8500ca27a309da34521308e92b0129f4c3558c9d4f5da4f61f89ccfd2",
+      "bytes": 128433
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/1yCxocmUrGIN7IrC42WB6NW08PtYYFLe1ombDj3Ay6_8/export/pdf",
+      "sha256": "a6285d9bb030f51349baf3d3b5e4c238578a81512e4c6d5277039fb491e24f39",
+      "bytes": 100278
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/152VaUifBKH4T6hxd6fCKKM9kJTSAuBmkF8zSYwuTYAo/export/pdf",
+      "sha256": "f1bb30bbbdfa91bc1b4b2fc564bf7315de707b13463ce3740a7d15fc294b428f",
+      "bytes": 271826
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/1RZu-p18Qybbgm8WVP2RH04ESc4Bn377B-T9j5-TBFdQ/export/pdf",
+      "sha256": "e5df163bf7c2afdf04cd65f52c63f638dbaad519f0c58d311a3f13bba4f2f4dd",
+      "bytes": 675730
+    },
+    {
+      "url": "https://docs.google.com/presentation/d/1u8WYtFj0O9yc4H4JX9D4URYKhDzvrAGKLzn38DXSrak/export/pdf",
+      "sha256": "5311e9ce8156cb0a992ceeffde796f31942c183341a5a7acd1020eb7cfb9848e",
+      "bytes": 876355
+    },
+    {
+      "url": "https://drive.google.com/uc?export=download&id=1Nbi1QEdiLXFBFAu1lRKkTkd85QRGpWOx",
+      "sha256": "dfad21fa272bbaa896c88e093014842fc4eca95716120044010eefc9948289e5",
+      "bytes": 1332130
+    },
+    {
+      "url": "https://drive.google.com/uc?export=download&id=1b8WiBk_lcB3ue-jZMLijSUMLj6SDiF6Z",
+      "sha256": "31c94bf8cfb0458092abdf0929e7c63772b95f651637baa3487b28b6e07cede2",
+      "bytes": 2408688
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/turbopack-0f0.39yiczl4t.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "d75a382bca4e7f06050eba61a6e4409f96253f4a2093c5bedd58c71faae5521e",
+      "bytes": 11041
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/173qvra~fczs6.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "b213ee92e98e97dfaf302036e5c2278d389f1bcf261b7400590e2bf79a3e8cd6",
+      "bytes": 44403
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/12mz0_._155bq.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "3966d2b948cfee930280a262364ca84547d476c629f7dadea064ff1745b24b31",
+      "bytes": 227312
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/0g9qkcnu6zh5f.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "35e658b701b7c57aed891a736be0d5d386c31d4a17e720fad26b565c7fbb50c3",
+      "bytes": 6324
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/0_au5jyjui1qq.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "9418c5fb110a82f4b989bc28760bf25b3a86d42eda6c27a496c15ebc78f3ba25",
+      "bytes": 141685
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/14xdthwga5u9i.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "ffe2d97e68632fd57139137911d6c7da6f3f7a20ef077be4c172d1c8bd7b5f85",
+      "bytes": 54640
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/0qlshu9kvcoy9.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "79b5cb723cd3850775a8ce4dba43aca61a552af051a6d8791c3773d4a883b83d",
+      "bytes": 89791
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/0kx4ix8zt8kwy.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "331c5722e55beab4405774005a6e3e4d050a695b491a21295b0c514970a6ada6",
+      "bytes": 32804
+    },
+    {
+      "url": "https://themodernsoftware.dev/_next/static/chunks/03~yq9q893hmn.js?dpl=dpl_CrycWeFUjHi83B57tJxsVYkySqFS",
+      "sha256": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+      "bytes": 112594
+    }
+  ]
+}

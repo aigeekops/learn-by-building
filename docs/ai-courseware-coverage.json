@@ -1,0 +1,1117 @@
+{
+  "checked": "2026-11-08",
+  "material_year": 2026,
+  "lectures": 34,
+  "sections": 161,
+  "unique_models": 46,
+  "coverage": [
+    {
+      "id": "attention",
+      "course": "cme295",
+      "unit": "1",
+      "title": "第1讲 Transformers：从文本表示到自回归生成",
+      "sections": [
+        "1. NLP任务与自回归分解",
+        "2. 分词与BPE：规则在训练时确定",
+        "3. Word2vec与表示：查表不是理解",
+        "4. RNN与LSTM：让历史进入状态",
+        "5. 缩放点积注意力与多个头",
+        "6. Transformer块与端到端生成"
+      ],
+      "models": [
+        "cme-representations",
+        "attention"
+      ],
+      "exercise": "换一个一维案例：两个可见 Value 为 2 和 6，权重分别为 0.25 和 0.75。加权输出是多少？",
+      "independent_validation": "独立验证：不打开双向模式，将位置设为 1、第三个 Key 设为 4。第三个位置的权重仍应为 0；解释它为什么不受 Key 的数值影响。",
+      "official_sources": [
+        {
+          "id": "cme-1-slides",
+          "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture1.pdf#page=59",
+          "locator": "全讲118页；重点：分词/表示、Word2vec/RNN/LSTM、自注意力、Transformer与端到端例子",
+          "status": "已下载、提取文字并检查关键页"
+        },
+        {
+          "id": "cme-1-video",
+          "url": "https://www.youtube.com/watch?v=114i2Kz-LZA&t=3600s",
+          "locator": "约 60:00 起讲 Q/K/V；84:11 起讲 masking",
+          "status": "已取得英文字幕；公式与课件交叉核对"
+        }
+      ]
+    },
+    {
+      "id": "sampling",
+      "course": "cme295",
+      "unit": "2",
+      "title": "第2讲 Large Language Models：架构、位置与采样",
+      "sections": [
+        "1. 模型家族与LLM定义",
+        "2. MoE的总参数与活跃参数",
+        "3. MHA、MQA与GQA如何共享KV",
+        "4. RoPE让点积感知相对位置",
+        "5. 上下文长度与有效使用不同",
+        "6. 温度、top-k与top-p的先后关系"
+      ],
+      "models": [
+        "cme-moe",
+        "cme-kv",
+        "cme-rope",
+        "sampling"
+      ],
+      "exercise": "两个保留候选的 logits 都为 0，T=0.5，k=2。第一个候选的概率是多少？填写 0 到 1 的数。",
+      "independent_validation": "独立验证：使用页面默认 logits，设 T=1、k=2、u=0.80。第二个候选应被取出；自己算截断后的累计概率来核对。",
+      "official_sources": [
+        {
+          "id": "cme-2-slides",
+          "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture2.pdf#page=106",
+          "locator": "全讲138页；重点：模型家族、MoE、共享KV、RoPE与采样",
+          "status": "已下载并检查温度公式页"
+        },
+        {
+          "id": "cme-2-video",
+          "url": "https://www.youtube.com/watch?v=GaIeu3npx04&t=5232s",
+          "locator": "87:12 起 top-k；88:59 起 temperature",
+          "status": "已取得英文字幕并核对相关段落"
+        }
+      ]
+    },
+    {
+      "id": "lora",
+      "course": "cme295",
+      "unit": "3",
+      "title": "第3讲 LLM training：预训练、微调、偏好与蒸馏",
+      "sections": [
+        "1. 预训练与数据分布",
+        "2. Mid-training与长上下文训练",
+        "3. SFT与指令微调的监督mask",
+        "4. LoRA与参数高效适配",
+        "5. RLHF与DPO的偏好信号",
+        "6. 推理训练与蒸馏：过程、结果、轨迹分开"
+      ],
+      "models": [
+        "cme-training",
+        "lora"
+      ],
+      "exercise": "换成一个 6×6 矩阵，用 r=2 的 A、B 做 LoRA，不计偏置。A、B 合计多少个可训练参数？",
+      "independent_validation": "独立验证：默认 r=1、α=1，把 x 的第一维设为 2。自行算出输出应为 [4,3,0,-1]，再核对。",
+      "official_sources": [
+        {
+          "id": "cme-3-slides",
+          "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture3.pdf#page=53",
+          "locator": "全讲165页；重点：预训练、SFT、LoRA、偏好、推理、OPD与蒸馏",
+          "status": "已下载并检查基座加低秩增量示意"
+        },
+        {
+          "id": "cme-3-video",
+          "url": "https://www.youtube.com/watch?v=S3bCDcJhz4s&t=2418s",
+          "locator": "40:18 起引入 LoRA",
+          "status": "已取得英文字幕并核对相关段落"
+        }
+      ]
+    },
+    {
+      "id": "cme-rl-lecture",
+      "course": "cme295",
+      "unit": "4",
+      "title": "第4讲 强化学习：从奖励到受约束的策略更新",
+      "sections": [
+        "1. 先约定token与序列概率",
+        "2. 主观奖励、可验证奖励与奖励漏洞",
+        "3. 策略梯度与基线：把稀疏回报传回概率",
+        "4. PPO：价值估计、ratio与更新幅度",
+        "5. GRPO：组内比较替代独立价值网络",
+        "6. On-policy distillation与RL的边界"
+      ],
+      "models": [
+        "cme-rl",
+        "cme-training"
+      ],
+      "exercise": "同一提示三个回答的奖励均为1，本例对零标准差组将优势置0。三个优势之和是多少？",
+      "independent_validation": "设rewards=equal、theta=0.5、eta=3，核对gradient=0，新旧策略一致；再用mixed检查方向。",
+      "official_sources": [
+        {
+          "id": "cme-4-slides",
+          "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture4.pdf",
+          "locator": "PDF共135页（从1计数）；第22–30页奖励/梯度；43–66页PPO；70–94页GRPO；末段OPD",
+          "status": "已下载与提取正文；相关公式/示意关键页已渲染核对"
+        },
+        {
+          "id": "cme-4-video",
+          "url": "https://www.youtube.com/watch?v=3Vaj0Oka_t4",
+          "locator": "40:40起PPO；41:03起优势；67:37起GRPO",
+          "status": "已取得公开英文字幕并对照课件；字幕自动识别可能有误，公式以课件核对"
+        }
+      ]
+    },
+    {
+      "id": "cme-systems",
+      "course": "cme295",
+      "unit": "5",
+      "title": "第5讲 LLM systems：IO、并行与高效推理",
+      "sections": [
+        "1. 容量、带宽与算力三种约束",
+        "2. FlashAttention：精确计算，改变IO次序",
+        "3. 多卡并行：数据、宽度与深度分开",
+        "4. Prefill与decode：计算结构不同",
+        "5. 分页、GQA与MLA解决不同存储问题",
+        "6. 投机解码：快草稿必须由目标模型修正",
+        "7. 如何验证一次系统优化"
+      ],
+      "models": [
+        "cme-kv",
+        "cme-online-softmax",
+        "cme-speculative",
+        "parallel"
+      ],
+      "exercise": "目标分布[0.5,0.5]，草稿分布[0.8,0.2]，草稿提出候选0。接受概率min(1,p/q)是多少？",
+      "independent_validation": "将投机面板p0与q0设为相同，接受概率应为1；在线softmax offset=1000也应输出约2.0830043。",
+      "official_sources": [
+        {
+          "id": "cme-5-slides",
+          "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture5.pdf",
+          "locator": "PDF共156页（从1计数）；第15–62页FlashAttention；71–78页并行；99–107页硬件/KV；139–146页投机解码",
+          "status": "已下载与提取正文；相关公式/示意关键页已渲染核对"
+        },
+        {
+          "id": "cme-5-video",
+          "url": "https://www.youtube.com/watch?v=25KIyaeI_Fg",
+          "locator": "17:11起FlashAttention；83:06起KV；92:57起投机解码",
+          "status": "已取得公开英文字幕并对照课件；字幕自动识别可能有误，公式以课件核对"
+        }
+      ]
+    },
+    {
+      "id": "cme-agents",
+      "course": "cme295",
+      "unit": "6",
+      "title": "第6讲 AI Agents：检索、工具、记忆与Harness",
+      "sections": [
+        "1. RAG：召回、重排与生成各负其责",
+        "2. 检索指标需要独立标注",
+        "3. 工具调用与MCP：定义、调用、结果分开",
+        "4. Harness、计划和动作序列",
+        "5. 上下文压缩与短期/长期记忆",
+        "6. Coding Agents、Skills与plugins",
+        "7. 评测Agent：观察结果和成本，保留失败"
+      ],
+      "models": [
+        "cme-memory",
+        "agent",
+        "tools",
+        "context"
+      ],
+      "exercise": "评测标注的相关片段有2条，top-3检索结果中只包含其中1条。Recall@3是多少？",
+      "independent_validation": "记忆检索面板query=unknown、threshold=0.7，应选入0条并返回资料不足；别把固定摘录误当模型回答。",
+      "official_sources": [
+        {
+          "id": "cme-6-slides",
+          "url": "https://cme295.stanford.edu/slides/fall26-cme295-lecture6.pdf",
+          "locator": "PDF共152页（从1计数）；第14–47页RAG与检索；工具调用/MCP；105页Harness；130–135页压缩与记忆；140–144页编码Agent/Skills",
+          "status": "已下载与提取正文；相关公式/示意关键页已渲染核对"
+        }
+      ]
+    },
+    {
+      "id": "cs336-tokenization",
+      "course": "cs336",
+      "unit": "1",
+      "title": "分词与课程全景：先确定模型看到什么",
+      "sections": [
+        "从文本到从零训练的闭环",
+        "字符、字节与词的取舍",
+        "BPE 的训练与编码",
+        "把分词选择连接到训练成本"
+      ],
+      "models": [
+        "cs336-bpe"
+      ],
+      "exercise": "对 low、low、lower 的 11 个初始字符 token，第一轮合并 l+o（出现 3 次）后共剩几个 token？",
+      "independent_validation": "把合并次数设为 0、1、2，核对 token 数 11、8、5，解码始终为 low、low、lower。",
+      "official_sources": [
+        {
+          "id": "cs336-l01-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_01.py",
+          "locator": "tokenization / byte_tokenizer / train_bpe",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l01-recording",
+          "url": "https://www.youtube.com/watch?v=JuoVZkPBiKk&t=1713s",
+          "locator": "存档字幕相关词 BPE 首次定位 28:33",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "compute",
+      "course": "cs336",
+      "unit": "2",
+      "title": "PyTorch 与资源核算：形状、计算、显存一起算",
+      "sections": [
+        "张量的形状与内存不是一回事",
+        "从矩阵乘到训练 FLOP",
+        "算术强度与性能上限",
+        "训练循环、优化器与容量换速度"
+      ],
+      "models": [
+        "compute",
+        "cs336-roofline"
+      ],
+      "exercise": "沿用默认案例的 N、D、每卡峰值和 MFU，仅把 GPU 数由 8 增加到 16。理想粗估需要多少小时？保留两位小数。",
+      "independent_validation": "独立验证：N=2B、D=20B、GPU=8、峰值=100 TFLOP/s、MFU=0.5。用时应约 166.67 小时；列出真实训练可能偏离的两项额外成本。",
+      "official_sources": [
+        {
+          "id": "cs336-l02-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_02.py",
+          "locator": "motivating_questions / tensor_einops / gradients_flops / train_loop",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l02-recording",
+          "url": "https://www.youtube.com/watch?v=kuYAsz7zspQ&t=2235s",
+          "locator": "存档字幕相关词 utilization 首次定位 37:15",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-architecture",
+      "course": "cs336",
+      "unit": "3",
+      "title": "架构与超参数：从一个 block 看现代 Transformer",
+      "sections": [
+        "用一个 block 建立结构图",
+        "RMSNorm 与门控 FFN",
+        "位置、head 与参数形状",
+        "超参数靠控制实验决定"
+      ],
+      "models": [
+        "cs336-rms"
+      ],
+      "exercise": "标准 SwiGLU 的 d=6、h=12，不计偏置，gate/up/down 三个矩阵共多少参数？",
+      "independent_validation": "设 d=4、扩张倍数 2 再 4，核对参数 96 与 192；解释宽度翻倍时参数为何不是简单翻倍。",
+      "official_sources": [
+        {
+          "id": "cs336-l03-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_03.pdf",
+          "locator": "PDF 第 4、10–15、20–23、30–32、50–51 页；架构与超参数",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l03-recording",
+          "url": "https://www.youtube.com/watch?v=lVynu4bo1rY&t=135s",
+          "locator": "存档字幕相关词 norm 首次定位 02:15",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-attention-moe",
+      "course": "cs336",
+      "unit": "4",
+      "title": "注意力替代与 MoE：把稀疏计算放在哪里",
+      "sections": [
+        "先看长上下文的二次项",
+        "线性与递归状态是机制取舍",
+        "MoE 路由和专家输出分开算",
+        "训练稳定性与系统代价"
+      ],
+      "models": [
+        "cs336-moe",
+        "cs336-linear-attention"
+      ],
+      "exercise": "8 个专家，每个 100 参数，一个 token 只激活 top-2。不计共享层，本 token 激活多少专家参数？",
+      "independent_validation": "把 k=1、2 分别核算，保留路由权重、实际输出与总/激活参数；说明其中哪些不等于真实耗时。",
+      "official_sources": [
+        {
+          "id": "cs336-l04-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_04.pdf",
+          "locator": "PDF 第 4–13、15–18、26–28、39–45 页；线性/混合注意力与 MoE",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l04-recording",
+          "url": "https://www.youtube.com/watch?v=cKSwj_qZ8Jg&t=538s",
+          "locator": "存档字幕相关词 linear attention 首次定位 08:58",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-hardware",
+      "course": "cs336",
+      "unit": "5",
+      "title": "GPU 与 TPU：计算之外还有搬运",
+      "sections": [
+        "执行层级：thread、warp、block 与 SM",
+        "内存层级与数据复用",
+        "Tensor core、精度与 TPU 取舍",
+        "Roofline 与可复现测量"
+      ],
+      "models": [
+        "cs336-roofline"
+      ],
+      "exercise": "峰值 50 TFLOP/s、带宽 1000 GB/s、I=8 FLOP/byte，简化 roofline 上界是多少 TFLOP/s？",
+      "independent_validation": "默认 I=16 时核对 16 TFLOP/s；I=64 时核对 50 TFLOP/s，说明图上限不是实测值。",
+      "official_sources": [
+        {
+          "id": "cs336-l05-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_05.pdf",
+          "locator": "PDF 第 8–16 页执行/内存层级及后续性能分析",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l05-recording",
+          "url": "https://www.youtube.com/watch?v=izZba4UA7iY&t=615s",
+          "locator": "存档字幕相关词 memory 首次定位 10:15",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-kernels",
+      "course": "cs336",
+      "unit": "6",
+      "title": "Kernel 与 Triton：把计算按数据复用组织起来",
+      "sections": [
+        "先做基准与数值对照",
+        "融合与逐行 softmax",
+        "Triton 的 block 思维与 mask",
+        "矩阵乘分块与性能证据"
+      ],
+      "models": [
+        "cs336-tiling"
+      ],
+      "exercise": "按本章简化模型 n=8、tile=4，2n²ceil(n/tile) 共读多少个输入元素？",
+      "independent_validation": "设 n=12，分别用 tile=4 和 8，C[0,0] 应相同；列出不整除尾块，并用完整矩阵参考验证。",
+      "official_sources": [
+        {
+          "id": "cs336-l06-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_06.py",
+          "locator": "benchmarking / triton_softmax_example / triton_row_sum_example / triton_matmul_relu_example",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l06-recording",
+          "url": "https://www.youtube.com/watch?v=xnDHaNUvHBg&t=25s",
+          "locator": "存档字幕相关词 triton 首次定位 00:25",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "parallel",
+      "course": "cs336",
+      "unit": "7",
+      "title": "并行 I：集合通信、复制与分片",
+      "sections": [
+        "网络层级成为新的内存层级",
+        "集合通信从数学语义开始",
+        "数据并行与分片训练状态",
+        "把数值验证扩展到程序验证"
+      ],
+      "models": [
+        "parallel",
+        "cs336-tensorparallel"
+      ],
+      "exercise": "N=2B、G=4、ZeRO-3，采用本例 16 字节/参数口径。每卡理想持久状态是多少 GB（十进制）？",
+      "independent_validation": "独立验证：N=1B、G=8、ZeRO-2。每卡应为 2+14/8=3.75 GB；写清保留完整的那一类状态。",
+      "official_sources": [
+        {
+          "id": "cs336-l07-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_07.py",
+          "locator": "collective_operations / data_parallelism / tensor_parallelism / pipeline_parallelism",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l07-recording",
+          "url": "https://www.youtube.com/watch?v=SzpOcwdIL0Y&t=439s",
+          "locator": "存档字幕相关词 all reduce 首次定位 07:19",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-parallel-systems",
+      "course": "cs336",
+      "unit": "8",
+      "title": "并行 II：组合策略与流水线空泡",
+      "sections": [
+        "拓扑与集体通信约束组合方式",
+        "ZeRO、tensor 与 sequence parallel",
+        "流水线调度与空泡",
+        "专家并行、上下文与真实吞吐"
+      ],
+      "models": [
+        "cs336-pipeline",
+        "cs336-tensorparallel"
+      ],
+      "exercise": "均匀前向流水线 p=4、m=8，理想有效阶段槽利用率是多少？填写 0 到 1 的数，保留四位小数。",
+      "independent_validation": "将 p=3、m=2，核对槽数 4、有效阶段槽 6、空泡 6、利用率 0.5；自己画排程。",
+      "official_sources": [
+        {
+          "id": "cs336-l08-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_08.pdf",
+          "locator": "PDF 第 14–26、31 页起并行策略；流水线与张量并行相关页",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l08-recording",
+          "url": "https://www.youtube.com/watch?v=6-cXp-aOmdg&t=1892s",
+          "locator": "存档字幕相关词 pipeline 首次定位 31:32",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-scaling-basics",
+      "course": "cs336",
+      "unit": "9",
+      "title": "Scaling Laws I：在同一预算里分配模型与数据",
+      "sections": [
+        "经验规律先回答可预测什么",
+        "区分不可约与可约损失",
+        "等算力曲线与 compute-optimal",
+        "从小实验到训练决策"
+      ],
+      "models": [
+        "cs336-scaling"
+      ],
+      "exercise": "在本章归一化约束 ND=1600 下，选择 N=20，D 必须是多少？",
+      "independent_validation": "C=3600 时解析 N*=30、D*=120。分别计算两项损失；说明假设系数改变后最优点也会变。",
+      "official_sources": [
+        {
+          "id": "cs336-l09-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_09.pdf",
+          "locator": "PDF 第 13–16、45–49 页；幂律与等算力拟合",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l09-recording",
+          "url": "https://www.youtube.com/watch?v=Q15rhEWZPQ4&t=3715s",
+          "locator": "存档字幕相关词 chinchilla 首次定位 61:55",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-inference",
+      "course": "cs336",
+      "unit": "10",
+      "title": "推理：prefill、decode 与 KV 缓存",
+      "sections": [
+        "先定义服务目标与推理负载",
+        "缓存与架构共同决定状态大小",
+        "量化、剪枝与推测校验",
+        "调度和存储管理也在推理路径上"
+      ],
+      "models": [
+        "cs336-kv",
+        "cs336-serving"
+      ],
+      "exercise": "单层 KV：batch=1、T=32、KVheads=2、headDim=16，每元素 2 字节。K 和 V 合计多少字节？",
+      "independent_validation": "保持 T=64、batch=2、headDim=32，依次选 KVheads=1、2、8，核对单层缓存按 1:2:8 变化。",
+      "official_sources": [
+        {
+          "id": "cs336-l10-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_10.py",
+          "locator": "arithmetic_intensity_of_inference / reduce_kv_cache_size / speculative_sampling / continuous_batching / paged_attention",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l10-recording",
+          "url": "https://www.youtube.com/watch?v=EfM546A79aM&t=1478s",
+          "locator": "存档字幕相关词 prefill 首次定位 24:38",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-scaling-practice",
+      "course": "cs336",
+      "unit": "11",
+      "title": "Scaling Laws II：拟合、学习率与配方迁移",
+      "sections": [
+        "配方是 scaling 实验的一部分",
+        "参数化与超参数迁移",
+        "WSD 与同一运行中的不同预算",
+        "拟合误差、数据限制和总成本"
+      ],
+      "models": [
+        "cs336-fit",
+        "cs336-scaling"
+      ],
+      "exercise": "本章数据生成函数 L=2+20/N，在 N=160 的留出真值是多少？",
+      "independent_validation": "把拟合 floor 改为 1，查看拟合指数与留出误差；写下为什么训练点拟合好不代表远距离外推可靠。",
+      "official_sources": [
+        {
+          "id": "cs336-l11-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_11.pdf",
+          "locator": "PDF 第 5–16 页公开配方、μP、WSD 与后续数据约束讨论",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l11-recording",
+          "url": "https://www.youtube.com/watch?v=vTfEyOyzV9E&t=673s",
+          "locator": "存档字幕相关词 warm 首次定位 11:13",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-evaluation-lecture",
+      "course": "cs336",
+      "unit": "12",
+      "title": "评测：先定义想测什么，再定义分数",
+      "sections": [
+        "从目标行为选择评测",
+        "语言建模指标要统一分母",
+        "采样方法与判题器要一起评估",
+        "现实性、有效性与误差分析"
+      ],
+      "models": [
+        "cs336-evaluation",
+        "cs336-bpb"
+      ],
+      "exercise": "同一文本总 NLL=8 nat、原文本 20 字节，BPB 是多少？保留四位小数。",
+      "independent_validation": "将 tokenizer A 与 B 切换，验证总 NLL 和 BPB 不变、PPL 改变；解释本例人为控制了什么。",
+      "official_sources": [
+        {
+          "id": "cs336-l12-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_12.py",
+          "locator": "perplexity / exam_benchmarks / agentic_benchmarks / realism / validity",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l12-recording",
+          "url": "https://www.youtube.com/watch?v=JpAxdTWQJxM&t=341s",
+          "locator": "存档字幕相关词 perplexity 首次定位 05:41",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-data-origins",
+      "course": "cs336",
+      "unit": "13",
+      "title": "数据 I：语料从哪里来，怎样保留来源",
+      "sections": [
+        "从在线服务到数据快照",
+        "处理流程本身决定数据分布",
+        "许可、隐私与元数据分开记录",
+        "已有语料集是流程案例而非同质资源"
+      ],
+      "models": [
+        "cs336-data-sources"
+      ],
+      "exercise": "三条已通过语言筛选的文本长度为 10、30、60 字符，最小长度设为 20。按本例规则保留几条？",
+      "independent_validation": "把默认最小长度从 15 改成 35，核对保留 ID，再解释一条代码样本为何可能被误删；不要改写原始文本。",
+      "official_sources": [
+        {
+          "id": "cs336-l13-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_13.py",
+          "locator": "raw_sources / copyright / common_crawl / wikipedia / github / dolma / dclm",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l13-recording",
+          "url": "https://www.youtube.com/watch?v=-qm0ln33G24&t=73s",
+          "locator": "存档字幕相关词 copyright 首次定位 01:13",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "dedup",
+      "course": "cs336",
+      "unit": "14",
+      "title": "数据 II：过滤、去重、混合与合成数据",
+      "sections": [
+        "变换与过滤规则需要留痕",
+        "精确、近似与评测污染是不同关系",
+        "哈希扩展检索，精确复核控制错误",
+        "数据混合与合成样本靠验证闭环"
+      ],
+      "models": [
+        "dedup",
+        "cs336-jaccard"
+      ],
+      "exercise": "新案例：训练文本依次为 A、A、B、C，评测文本为 B、D。先稳定去重，再从训练集中排除评测精确重合项。训练最终剩几条？",
+      "independent_validation": "独立验证：在页面关闭空白合并、保留去污染。训练应剩 train-a、train-b、train-d 共 3 条；再说明近似重复为什么仍会遗漏。",
+      "official_sources": [
+        {
+          "id": "cs336-l14-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_14.py",
+          "locator": "transformation / filtering / exact_deduplication / jaccard_minhash / locality_sensitive_hashing / data_mixing",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l14-recording",
+          "url": "https://www.youtube.com/watch?v=5sxHosTLPF8&t=57s",
+          "locator": "存档字幕相关词 dedup 首次定位 00:57",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-post-training",
+      "course": "cs336",
+      "unit": "15",
+      "title": "Mid/Post-training：从模仿回复到学习偏好",
+      "sections": [
+        "中训练与指令数据改变目标分布",
+        "SFT 的训练目标与消息边界",
+        "奖励学习与 RLHF 的基本分工",
+        "DPO 把偏好写成可复算损失"
+      ],
+      "models": [
+        "cs336-posttrain"
+      ],
+      "exercise": "DPO 的 margin=0 时，−logσ(0) 等于多少？保留四位小数。",
+      "independent_validation": "在动画选 DPO，chosen=2、rejected=1、β=0.5，核对损失约 0.4741；交换二者后解释方向变化。",
+      "official_sources": [
+        {
+          "id": "cs336-l15-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_15.pdf",
+          "locator": "PDF 第 7–17、32–37、49 页起；SFT、偏好与 DPO",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l15-recording",
+          "url": "https://www.youtube.com/watch?v=2oH6PWPrYFo&t=1209s",
+          "locator": "存档字幕相关词 preference 首次定位 20:09",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-rlvr",
+      "course": "cs336",
+      "unit": "16",
+      "title": "RLVR：验证奖励、组相对优势与裁剪",
+      "sections": [
+        "从 PPO 到组相对信号",
+        "Verifier 必须与任务条件绑定",
+        "组归一化与零方差边界",
+        "裁剪、KL 与长推理的评估"
+      ],
+      "models": [
+        "cs336-grpo"
+      ],
+      "exercise": "奖励 [0,1,0,1]，总体标准差为 0.5。第一个回答的组归一化优势是多少？",
+      "independent_validation": "选择全错组与全对组，核对标准差和优势均为 0；再说明为什么不能把“没有相对梯度”解释成任务已经学会。",
+      "official_sources": [
+        {
+          "id": "cs336-l16-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_16.pdf",
+          "locator": "PDF 第 5–20 页 PPO→GRPO；后续变体与推理现象",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l16-recording",
+          "url": "https://www.youtube.com/watch?v=dIFAi87Ws4E&t=876s",
+          "locator": "存档字幕相关词 group 首次定位 14:36",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-multimodal",
+      "course": "cs336",
+      "unit": "17",
+      "title": "多模态：图像怎样进入语言模型",
+      "sections": [
+        "把不同模态变成可处理的序列",
+        "CLIP 与 SigLIP 的图文对齐",
+        "从视觉编码器到 LLaVA/Qwen-VL",
+        "理解与生成的路线不同"
+      ],
+      "models": [
+        "cs336-patches",
+        "cs336-clip"
+      ],
+      "exercise": "224×224 图像切 16×16 patch，本例每图另加 1 个 CLS，再加 32 个文本 token，总数是多少？",
+      "independent_validation": "用 patch=32 复算总数为 82；核对 4×4 玩具图 patch 均值，再说明二者不是同一张真实图像的模型输出。",
+      "official_sources": [
+        {
+          "id": "cs336-l17-material",
+          "url": "https://github.com/stanford-cs336/lectures/blob/main/lecture_17.py",
+          "locator": "clip / siglip / llava / qwen_vl / chameleon",
+          "status": "已下载并核对指定主题；原始文件摘要保存在来源元数据中。"
+        },
+        {
+          "id": "cs336-l17-recording",
+          "url": "https://www.youtube.com/watch?v=26FtD08ZpOU&t=265s",
+          "locator": "存档字幕相关词 clip 首次定位 04:25",
+          "status": "已取得用户既有英文字幕并核对选定主题段落；视频标题与官方 2026 播放列表一致。字幕可能存在转录误差，以代码和公式交叉核对。"
+        }
+      ]
+    },
+    {
+      "id": "cs336-guest-danfu",
+      "course": "cs336",
+      "unit": "Guest · Dan Fu",
+      "title": "Dan Fu 嘉宾讲：从模型到可服务的推理系统",
+      "sections": [
+        "从端到端服务流程定位瓶颈",
+        "连续 batching 的实际排程",
+        "把 kernel 边界当作优化对象",
+        "协同设计随应用而变化"
+      ],
+      "models": [
+        "cs336-serving",
+        "cs336-kv"
+      ],
+      "exercise": "四个同时到达请求的输出长度为 [2,5,1,3]，两槽并发，每槽每个请求生成一个 token，完成后下一槽补入新请求。连续调度共需几个时间槽？",
+      "independent_validation": "独立验证三槽并发：连续调度 5 槽，静态分组 8 槽；说明这些不是实测 GPU 延迟。",
+      "official_sources": [
+        {
+          "id": "cs336-guest-danfu",
+          "url": "https://www.youtube.com/watch?v=9EEm4iMAF5s&t=991s",
+          "locator": "16:31 continuous batching；37:35 Megakernels；64:47 起 co-design 问答；结尾 71:30 感谢 Dan",
+          "status": "已取得官方视频英文自动字幕（1914段），并与既有时间戳字幕的选定段落核对；未取得官方独立课件，不伪造页码。"
+        }
+      ]
+    },
+    {
+      "id": "agent",
+      "course": "cs146s",
+      "unit": "9/22",
+      "title": "9/22 · 导论：从模型回复到最小 Coding Agent",
+      "sections": [
+        "01 模型调用先有输入输出约定",
+        "02 用 read / test / edit 组成闭环",
+        "03 工具执行由 harness 承担",
+        "04 停止、成功与开发者判断"
+      ],
+      "models": [
+        "agent"
+      ],
+      "exercise": "沿用“一次修好”的预设策略：read、test、edit、test。若预算只有 3 次，结束时是否已经验证修改？填 1 表示已验证，0 表示未验证。",
+      "independent_validation": "独立验证：选择“先修错再修好”，预算设为 6。运行应恰好在第 6 次调用通过三个案例；设为 5 时应停止于未验证的修改后。",
+      "official_sources": [
+        {
+          "id": "cs146s-1-slides",
+          "url": "https://docs.google.com/presentation/d/1uztIhjHAG6O_9QOD1N_3wdhwhABml1fANXEN2dGwdbg/edit",
+          "locator": "第 7 页：上下文与代码理解；配合 9/24 课堂转录",
+          "status": "公开 PDF 导出可读，已下载核对"
+        },
+        {
+          "id": "cs146s-1-transcript",
+          "url": "https://themodernsoftware.dev/materials/9-24-26-transcript.txt",
+          "locator": "12:16.582 段：模型、工具调用、结果回送的核心循环",
+          "status": "已读取；是官网课堂转录，不标作 YouTube 字幕"
+        },
+        {
+          "id": "cs146s-assignment-1",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week1/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-harness",
+      "course": "cs146s",
+      "unit": "9/24",
+      "title": "9/24 · 解剖生产级 Coding Agent Harness",
+      "sections": [
+        "01 循环的边界",
+        "02 工具列表与系统提示",
+        "03 计划模式、Skill 与子代理",
+        "04 Hook 与控制点",
+        "05 Compaction 与适应"
+      ],
+      "models": [
+        "cs146s-harness"
+      ],
+      "exercise": "4 个工具每份详细定义费用为 8，本轮只加载其中 1 份。与全部预载相比少加载多少 token？",
+      "independent_validation": "独立验证：默认配置关闭摘要，费用应为 70；再同时关闭按需详细定义，费用应为 94。说明省掉的内容各是什么。",
+      "official_sources": [
+        {
+          "id": "cs146s-harness-slides",
+          "url": "https://docs.google.com/presentation/d/1RZu-p18Qybbgm8WVP2RH04ESc4Bn377B-T9j5-TBFdQ/edit",
+          "locator": "PDF 第 6、8–16 页",
+          "status": "已读取 2026 原课 PDF 正文，并核对相关关键页"
+        },
+        {
+          "id": "cs146s-1-transcript",
+          "url": "https://themodernsoftware.dev/materials/9-24-26-transcript.txt",
+          "locator": "12:16.582 段：模型、工具调用、结果回送的核心循环",
+          "status": "已读取；是官网课堂转录，不标作 YouTube 字幕"
+        },
+        {
+          "id": "cs146s-assignment-1",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week1/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "context",
+      "course": "cs146s",
+      "unit": "9/29",
+      "title": "9/29 · Context Engineering：RePPIT 与规格驱动",
+      "sections": [
+        "01 Research：先形成能审阅的代码库认识",
+        "02 Propose：比较真正不同的方案",
+        "03 Plan / Implement / Test：把文字连接到可执行检查",
+        "04 输入预算与信息取舍",
+        "05 长任务的中间文档与恢复"
+      ],
+      "models": [
+        "context",
+        "cs146s-reppit"
+      ],
+      "exercise": "新案例：总预算 80，输出预留 20，任务与约束占 15，目标代码占 25。剩余输入空间是多少 token？",
+      "independent_validation": "独立验证：总预算 32、预留 24 时，仅余 8。必须内容需 15，案例应明确报容量不足；不能显示成功装入。",
+      "official_sources": [
+        {
+          "id": "cs146s-2-slides",
+          "url": "https://docs.google.com/presentation/d/17brqoQQZHF3K82WgYaV6urAV3Q7iIwyGUBYRvSuY8QY/edit",
+          "locator": "PDF 第 4、10、13–14 页",
+          "status": "已下载；上下文占比是课堂经验，未当作所有模型的硬阈值"
+        },
+        {
+          "id": "cs146s-2-transcript",
+          "url": "https://themodernsoftware.dev/materials/9-29-26-transcript.txt",
+          "locator": "按 Research / Propose / Plan / Implement / Test 小节对照",
+          "status": "已读取课堂转录"
+        },
+        {
+          "id": "cs146s-assignment-4",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week4/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "tools",
+      "course": "cs146s",
+      "unit": "10/1",
+      "title": "10/1 · MCP：从工具发现到可靠契约",
+      "sections": [
+        "01 Host、Client、Server 与 Tool 的位置",
+        "02 tools/list 与调用后的反馈链",
+        "03 面向结果的工具设计",
+        "04 读、写、版本与重试分别设计",
+        "05 API、MCP、Skill 的组合"
+      ],
+      "models": [
+        "tools"
+      ],
+      "exercise": "同一条写入请求使用同一个幂等键重试两次，首次请求已经成功，服务器正确复用成功回执。应产生几次实际写入？",
+      "independent_validation": "独立验证：写工具预期版本为 2 时，案例初始版本仍是 1。应返回版本冲突，实际写入为 0；解释为何不能静默覆盖。",
+      "official_sources": [
+        {
+          "id": "cs146s-mcp-slides",
+          "url": "https://docs.google.com/presentation/d/1q2cB1a7P4XsR0UJqE0RmtZFeggNOLdPaSnOpbBVewHA/edit",
+          "locator": "PDF 第 9、11、17 页",
+          "status": "已下载；对协议标准化与具体工程责任分别说明"
+        },
+        {
+          "id": "cs146s-mcp-transcript",
+          "url": "https://themodernsoftware.dev/materials/10-1-26-transcript.txt",
+          "locator": "MCP A Bit Deeper 与工具设计相应讲述",
+          "status": "已读取课堂转录"
+        },
+        {
+          "id": "cs146s-assignments",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments",
+          "locator": "",
+          "status": "已核对 2026 标识与 week1–week5 公开目录；本站练习为独立原创"
+        },
+        {
+          "id": "cs146s-assignment-2",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week2/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-skills",
+      "course": "cs146s",
+      "unit": "10/6",
+      "title": "10/6 · Agent Skills 与 CLI：把做法变成能力",
+      "sections": [
+        "01 为重复流程选择合适范围",
+        "02 让 description 能被发现",
+        "03 正文编码判断与确定性工具",
+        "04 按需引用与组合",
+        "05 运行测试与维护"
+      ],
+      "models": [
+        "cs146s-skills"
+      ],
+      "exercise": "三个 Skill 的元信息每个 2 token，正文每个 20 token。本轮只加载一份正文，共多少 token？",
+      "independent_validation": "独立验证：请求为“讨论周末安排”时不触发本例三个技能，结果 selected 应为 null、verified 为 null；再设计自己的三正一反触发测试。",
+      "official_sources": [
+        {
+          "id": "cs146s-skills-slides",
+          "url": "https://docs.google.com/presentation/d/15bPu5c-i8D8McTh6l7SpUPk2n9M_Y-CdDQLfyzL8RD8/edit",
+          "locator": "PDF 第 5、7–14 页",
+          "status": "已读取 2026 原课 PDF 正文，并核对相关关键页"
+        },
+        {
+          "id": "cs146s-assignment-3",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week3/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-always-on",
+      "course": "cs146s",
+      "unit": "10/8",
+      "title": "10/8 · Lee Robinson：Always-on Agent 的系统结构",
+      "sections": [
+        "01 事件、队列与唯一 ID",
+        "02 服务端、工具计算机与客户端",
+        "03 持久工作流与重试缝隙",
+        "04 工具、辅助 Agent 与有意义的输出",
+        "05 稳定前缀与按需上下文",
+        "06 长期记忆与摘要",
+        "07 用评测带动系统改进"
+      ],
+      "models": [
+        "cs146s-durable"
+      ],
+      "exercise": "同一 store 操作已成功写入，在保存进度前崩溃；恢复后使用相同幂等键再次调用。正确回执实现应产生几次实际写入？",
+      "independent_validation": "独立验证：从检查点恢复、在写后中断、关闭幂等时 writes 应为 2；开启幂等后 writes 为 1，而 writeAttempts 仍为 2。",
+      "official_sources": [
+        {
+          "id": "cs146s-lee-slides",
+          "url": "https://drive.google.com/file/d/1b8WiBk_lcB3ue-jZMLijSUMLj6SDiF6Z/view",
+          "locator": "PDF 第 14–22、24–37、39–45 页；访谈产品实现与设想按讲者案例阅读",
+          "status": "已读取 2026 原课 PDF 正文，并核对相关关键页"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-config",
+      "course": "cs146s",
+      "unit": "10/13",
+      "title": "10/13 · 定制 Agent：说明、Hooks、Skills 与子代理",
+      "sections": [
+        "01 先探索，再写仓库说明",
+        "02 根目录负责导航，细节按范围组织",
+        "03 Hook 是可执行的事件程序",
+        "04 Skill 与子代理的分工",
+        "05 用两次任务检验配置是否有效"
+      ],
+      "models": [
+        "cs146s-config"
+      ],
+      "exercise": "生成代码格式检查通过，但逻辑测试未运行。能否把逻辑测试记作通过？填 1 表示能，0 表示不能。",
+      "independent_validation": "独立验证：选择逻辑错误、运行全部 Hook，结果应为 tests_failed；选择缺分号时应先得到 lint_failed。",
+      "official_sources": [
+        {
+          "id": "cs146s-customize-slides",
+          "url": "https://docs.google.com/presentation/d/152VaUifBKH4T6hxd6fCKKM9kJTSAuBmkF8zSYwuTYAo/edit",
+          "locator": "PDF 第 7–13 页",
+          "status": "已读取 2026 原课 PDF 正文，并核对相关关键页"
+        },
+        {
+          "id": "cs146s-assignment-4",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week4/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-readiness",
+      "course": "cs146s",
+      "unit": "10/20",
+      "title": "10/20 · Agent-Ready Codebases：先让环境可验证",
+      "sections": [
+        "01 把人能绕过的问题写成失败证据",
+        "02 构建、测试、约定与观察",
+        "03 从小任务到后台任务的前置条件",
+        "04 文件隔离与资源隔离分别核对",
+        "05 比较仓库时限制结论范围"
+      ],
+      "models": [
+        "cs146s-readiness"
+      ],
+      "exercise": "两个任务已有独立 worktree，但都使用同一测试端口和同一数据库。题目明确指出了几种仍共享的运行资源？",
+      "independent_validation": "独立验证：只保留“文档已过时”，其余条件具备，blockers 应仅为 [当前文档]。写出一条修复后能重新核对的命令。",
+      "official_sources": [
+        {
+          "id": "cs146s-readiness-slides",
+          "url": "https://docs.google.com/presentation/d/1yCxocmUrGIN7IrC42WB6NW08PtYYFLe1ombDj3Ay6_8/edit",
+          "locator": "PDF 第 5–9、11–15 页",
+          "status": "已读取 2026 原课 PDF 正文，并核对相关关键页"
+        },
+        {
+          "id": "cs146s-assignment-5",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week5/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-verification",
+      "course": "cs146s",
+      "unit": "10/22",
+      "title": "10/22 · Eno Reyes：把目标变成便宜的检查",
+      "sections": [
+        "01 从模糊目标到明确检查",
+        "02 把长任务拆成能定位失败的阶段",
+        "03 概率收益依赖哪些假设",
+        "04 检查时间与验证预算",
+        "05 就绪度框架用于定位缺口"
+      ],
+      "models": [
+        "cs146s-verification"
+      ],
+      "exercise": "p=0.5、任务两步、每步最多尝试两次，假设独立且检查完美。整项全对概率是多少？填写 0 到 1。",
+      "independent_validation": "独立验证：p=.9、n=20、k=3 应约 .9802；切换相关错误后应约 .1216。再找一种会让检查器错误接受结果的案例。",
+      "official_sources": [
+        {
+          "id": "cs146s-eno-slides",
+          "url": "https://drive.google.com/file/d/1Nbi1QEdiLXFBFAu1lRKkTkd85QRGpWOx/view",
+          "locator": "PDF 第 12–24、28–29 页；概率例题仅作显式假设下复算",
+          "status": "已读取 2026 原课 PDF 正文，并核对相关关键页"
+        },
+        {
+          "id": "cs146s-assignment-5",
+          "url": "https://github.com/mihail911/modern-software-dev-assignments/blob/master/week5/assignment.md",
+          "locator": "Learning Goals / Parts / Deliverables",
+          "status": "已下载并阅读当前官方作业说明；本站练习为独立配套，不冒充已完成官方作业"
+        }
+      ]
+    },
+    {
+      "id": "cs146s-review",
+      "course": "cs146s",
+      "unit": "10/27",
+      "title": "10/27 · Agentic Code Review：发现、验证与聚合",
+      "sections": [
+        "01 评审到底要回答什么",
+        "02 分工评审与聚合裁决",
+        "03 用运行而非措辞验证发现",
+        "04 去重、优先级和修复范围",
+        "05 用历史缺陷评估评审系统"
+      ],
+      "models": [
+        "cs146s-review"
+      ],
+      "exercise": "三个用例均因同一个折扣公式错误失败，聚合报告按根因去重，应保留几项根因发现？",
+      "independent_validation": "独立验证：半分向上补丁加边界集应得到 eligible_for_human_review；缺规格时即使测试表存在也得到 needs_spec。解释还需覆盖哪些输入类型。",
+      "official_sources": [
+        {
+          "id": "cs146s-review-slides",
+          "url": "https://docs.google.com/presentation/d/1u8WYtFj0O9yc4H4JX9D4URYKhDzvrAGKLzn38DXSrak/edit",
+          "locator": "PDF 第 4–5、7、10、13–15 页",
+          "status": "已读取 2026 原课 PDF 正文，并核对相关关键页"
+        }
+      ]
+    }
+  ]
+}

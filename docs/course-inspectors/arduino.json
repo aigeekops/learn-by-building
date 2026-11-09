@@ -1,0 +1,87 @@
+{
+  "courseId": "arduino",
+  "courseLabel": "Arduino Lessons · Uno R3配套原创八讲",
+  "lessons": 8,
+  "models": [
+    {
+      "id": "arduino-led",
+      "experiments": ["double-resistance"],
+      "scope": "逐帧列明5V理想电源、LED固定压降和串联电阻；展开Vs−Vf、V/R安培电流、乘1000转毫安、I²与I²R功耗，并用同一模型V²/R交叉核对。"
+    },
+    {
+      "id": "arduino-input",
+      "experiments": ["press-grounded-button", "remove-released-pullup"],
+      "scope": "把按钮和上拉选项转为布尔输入，展开接地LOW、上拉HIGH与浮空null的原始电平选择；保持未知的低有效转换、known判断和当前真值行的LED语义。"
+    },
+    {
+      "id": "arduino-adc",
+      "experiments": ["change-reference"],
+      "scope": "逐项解释10位代码及2^10−1最大索引；端点映射code×Vref/1023的乘积与电压、Vref/1024量化区间步距、Vref/1023插值间距，以及1/2分压比的外部电压与量化步距恢复。"
+    },
+    {
+      "id": "arduino-pwm",
+      "experiments": ["double-frequency", "continuous-high"],
+      "scope": "8位输入与5V高电平、code/255占空比、1/f秒制周期及毫秒换算、duty×period高电平时长、(1−duty)×period低电平时长、时长和与理想时间平均电压。"
+    },
+    {
+      "id": "arduino-timing",
+      "experiments": ["reach-interval"],
+      "scope": "给定2^32−100ms上次时刻，展开加elapsed的未取模值、32位now、有符号时间差与模2^32无符号差；检查包含等号的任务门槛、余量、单次执行数与last=now更新策略。"
+    },
+    {
+      "id": "arduino-debounce",
+      "experiments": ["longer-quiet-window"],
+      "scope": "逐个列出6个给定原始采样；在真实整批计算快照中，逐采样展开候选变化、since重置、候选年龄、稳定门槛和stable前后状态；随后展示已确认按下事件及次数、原始逐项下降沿贡献、总数与首次确认时间。"
+    },
+    {
+      "id": "arduino-actuator",
+      "experiments": ["double-load-current", "change-angle-command"],
+      "scope": "目标角与独立给定电流、angle/180归一比例、1000–2000μs教学脉宽映射；I×R压降、I²与I²R导通功耗；末帧区分脉宽单位和外部驱动供电要求。"
+    },
+    {
+      "id": "arduino-project",
+      "experiments": ["sensor-timeout", "reach-distance-threshold"],
+      "scope": "有效性门控后的距离或null、人工使能、known判断、包含15cm等号的距离条件与短路合取run；最后展开PWM100/0及按超时、关闭、过近、允许优先级选出的具体原因。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs arduino",
+      "node --test tests/course_inspector_arduino.test.cjs"
+    ],
+    "models": 8,
+    "lessons": 8,
+    "framesChecked": 232,
+    "cellsChecked": 580,
+    "experiments": 12,
+    "semanticTests": 11,
+    "checks": [
+      "统一检查器按实际config/extension_arduino.json的8个demos运行默认、各控件端点及组合端点，共232帧、580算格；算格有限、ID唯一，12组真实控件实验和共享实验UI核验均通过。",
+      "专项测试只补关键语义检查，不重复穷举控件端点。32个默认快照深冻结，检查所有实际demos的算格、公式、输入、边界说明、索引夹取和不可变性。",
+      "无依赖浏览器UMD注册通过；使用会抛错的getter和代理禁止result、scene、visual及未来step读取，当前帧输出保持相同。",
+      "12组实验均由原模型真实运行before/after；verify检查具体数值和状态，拒绝相同前值对、相同后值对及人为损坏的相关结果；不修改输入trace。",
+      "LED独立核对3/220A、3000/220mA与9/220W；输入核对浮空null和按钮接地LOW；ADC核对代码1023映到5V而LSB为5/1024V/code，分压前步距不是总误差。",
+      "PWM核对128/255占空比、高低时间和、640/255V时间平均与频率独立性；millis用独立模运算检查回绕、恰好到期和漏过3周期仍只执行一次。",
+      "去抖核对20ms与30ms门槛下完整stable序列、15ms候选起点、40ms采样年龄25ms、2次原始下降沿但1次稳定事件及40/70ms确认。",
+      "执行器核对1500/2000μs标定与电流翻倍损耗四倍；项目分别检查超时优先、人工关闭、过近和15cm恰好允许，未知距离不强制转为数字。"
+    ]
+  },
+  "limitations": [
+    "八讲是原创有限教学选题，不是原课完整翻译。本插件没有连接开发板、运行GPIO、Arduino目标编译、仿真器、硬件或浏览器验收，不生成学习完成或用时证据。",
+    "inspect只读trace.params及当前steps[index].variables/title，不读取未来step、result、scene或visual。实验verify允许读取两次完整运行的末帧做最终核对。",
+    "保留原模型每讲4个计算快照，不新增伪造动态。去抖第二快照一次处理完整采样数组；逐项展开不是逐tick实时硬件回放。",
+    "LED是理想5V与固定LED压降、理想电阻模型，不建模GPIO输出限流、LED非线性、器件容差或温升；功率交叉算式不构成实物额定值或接线通过证据。",
+    "输入采用按钮闭合接地、上拉可选的三值逻辑；未知维持null，不模拟噪声和机械抖动。ADC端点线性标定不是精确传输函数，Vref/1024是理想量化区间步距；外部电压恢复假定已核对等阻分压，未给出总误差。",
+    "PWM采用code/255端点近似及理想0/5V幅值，频率为教学输入；平均值不等于恒定输出电压或LED亮度、电机转速的线性响应。",
+    "计时无符号差要求实际时间小于2^32ms周期；仅模拟一次非阻塞判断，last=now不补跑漏掉周期。去抖仅在给定采样点确认，稀疏采样可能漏短按，确认时间不等于真实接触时刻。",
+    "舵机1000–2000μs是教学线性标定，不证明实际角度或特定器件范围；I²R只包含驱动等效导通损耗，不含启动、堵转、开关或热模型。",
+    "项目仅为有限距离与使能逻辑，不模拟传感器时序、运动或硬件保护，也不替代独立急停与驱动保护。",
+    "只新增本课程插件、专项测试和本清单；未改共享模型、课程配置、图形、草稿、记录或构建产物。总体构建与浏览器验收由根agent负责。"
+  ],
+  "files": [
+    "web/course-inspectors/arduino.js",
+    "tests/course_inspector_arduino.test.cjs",
+    "docs/course-inspectors/arduino.json"
+  ]
+}

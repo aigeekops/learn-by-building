@@ -1,0 +1,258 @@
+{
+  "courseId": "modern",
+  "courseLabel": "Modern Robotics 原创配套基础专题",
+  "lessons": 7,
+  "models": [
+    {
+      "id": "rf-transform",
+      "intuition": "列向量先用二维旋转换轴，再加世界平移；齐次矩阵的每格和逆变换的每项都与同一个点核对。",
+      "experiments": [
+        {
+          "id": "world-translation",
+          "label": "只把世界x平移从0改1m",
+          "prediction": "旋转后的向量、世界点和逆变换会分别怎么变？",
+          "before": {
+            "x": 1,
+            "y": 0,
+            "angle": 90,
+            "tx": 0,
+            "ty": 0
+          },
+          "after": {
+            "x": 1,
+            "y": 0,
+            "angle": 90,
+            "tx": 1,
+            "ty": 0
+          },
+          "expectation": "旋转结果保持[0,1]m；世界点[0,1]→[1,1]m，恢复点均为[1,0]m；另一顺序的距离从0变√2m。"
+        }
+      ]
+    },
+    {
+      "id": "rf-forward-kinematics",
+      "intuition": "第一杆方向θ₁，第二杆方向θ₁+θ₂；逐坐标相加，再将位置对两关节弧度求导得到Jacobian四格。",
+      "experiments": [
+        {
+          "id": "bend-elbow",
+          "label": "只把肘角从0°改90°",
+          "prediction": "肩角和杆长不变，末端位置与Jacobian行列式会怎么变？",
+          "before": {
+            "l1": 1,
+            "l2": 1,
+            "theta1": 0,
+            "theta2": 0
+          },
+          "after": {
+            "l1": 1,
+            "l2": 1,
+            "theta1": 0,
+            "theta2": 90
+          },
+          "expectation": "末端[2,0]→[1,1]m；det J从0变1m²/rad²，位置任务从奇异变为非奇异。"
+        }
+      ]
+    },
+    {
+      "id": "rf-inverse-kinematics",
+      "intuition": "先用圆环范围拒绝不可达目标，再由余弦定理保留分支；将选中角度代回FK，明确边界合并和等长杆原点的无穷多解。",
+      "experiments": [
+        {
+          "id": "elbow-branch",
+          "label": "只把分支索引从0改1",
+          "prediction": "同一可达目标的肩角、肘角会怎样变化，末端能否保持？",
+          "before": {
+            "l1": 1,
+            "l2": 1,
+            "x": 1,
+            "y": 1,
+            "branch": 0
+          },
+          "after": {
+            "l1": 1,
+            "l2": 1,
+            "x": 1,
+            "y": 1,
+            "branch": 1
+          },
+          "expectation": "角度[0°,90°]→[90°,−90°]；两个分支均重建[1,1]m，残差约0。"
+        },
+        {
+          "id": "outside-workspace",
+          "label": "只把目标x从2m改3m",
+          "prediction": "处在外边界的解会不会被余弦截断伪装成仍可达？",
+          "before": {
+            "l1": 1,
+            "l2": 1,
+            "x": 2,
+            "y": 0,
+            "branch": 0
+          },
+          "after": {
+            "l1": 1,
+            "l2": 1,
+            "x": 3,
+            "y": 0,
+            "branch": 0
+          },
+          "expectation": "2m时两分支合并且奇异；3m时不可达、解数0、selected与singular均为null。"
+        }
+      ]
+    },
+    {
+      "id": "rf-rotation3d",
+      "intuition": "固定世界轴主动旋转按RzRyRx相乘；每次向量行点积、复合矩阵九格与RᵀR九格都独立展开。",
+      "experiments": [
+        {
+          "id": "yaw-quarter-turn",
+          "label": "只把yaw从0°改90°",
+          "prediction": "roll与pitch为0时，三个坐标与长度会如何变化？",
+          "before": {
+            "roll": 0,
+            "pitch": 0,
+            "yaw": 0
+          },
+          "after": {
+            "roll": 0,
+            "pitch": 0,
+            "yaw": 90
+          },
+          "expectation": "向量[1,2,1]→[−2,1,1]；z与长度√6保持，RᵀR均为I、det R均为1。"
+        }
+      ]
+    },
+    {
+      "id": "rf-se3-chain",
+      "intuition": "用下标C→B→W组合齐次变换；相机偏移先随机体旋转，每格矩阵乘积和反向撤销次序均可检查。",
+      "experiments": [
+        {
+          "id": "rotate-camera-offset",
+          "label": "只把机体yaw从0°改90°",
+          "prediction": "相机偏移0.2m是否也要随机体转动？",
+          "before": {
+            "yaw": 0,
+            "tx": 0,
+            "ty": 0,
+            "tz": 0
+          },
+          "after": {
+            "yaw": 90,
+            "tx": 0,
+            "ty": 0,
+            "tz": 0
+          },
+          "expectation": "世界点[1.2,0,0.5]→[0,1.2,0.5]m；逆链都恢复[1,0,0]m，错误顺序在90°产生√0.08m偏差。"
+        }
+      ]
+    },
+    {
+      "id": "rf-arm-dynamics",
+      "intuition": "两根均匀1kg、1m杆的τ=Mq̈+C+G逐项相加，再解同一2×2系统还原加速度；速度项与重力项不能互换。",
+      "experiments": [
+        {
+          "id": "velocity-coupling",
+          "label": "只把两关节速度从0改1rad/s",
+          "prediction": "姿态与加速度保持，哪些扭矩项会变化？",
+          "before": {
+            "q1": 0,
+            "q2": 90,
+            "acceleration": 0,
+            "velocity": 0
+          },
+          "after": {
+            "q1": 0,
+            "q2": 90,
+            "acceleration": 0,
+            "velocity": 1
+          },
+          "expectation": "M与G保持；C从[0,0]变[−1.5,0.5]N·m，τ增加同一向量，动能0→4/3J，恢复加速度仍为[0,0]。"
+        }
+      ]
+    },
+    {
+      "id": "rf-joint-trajectory",
+      "intuition": "真实采样时间t进入同一个三次或五次多项式；位置及一、二阶时间导数逐项检查，最后单独展示解析峰值。",
+      "experiments": [
+        {
+          "id": "double-duration",
+          "label": "只把总时间从2s改4s",
+          "prediction": "相同归一化位置下，角度、速度和加速度怎样缩放？",
+          "before": {
+            "duration": 2,
+            "target": 90,
+            "quintic": 1
+          },
+          "after": {
+            "duration": 4,
+            "target": 90,
+            "quintic": 1
+          },
+          "expectation": "每个采样角度保持、物理时间翻倍；速度减半，加速度变1/4，解析峰值遵守同样比例。"
+        },
+        {
+          "id": "cubic-to-quintic",
+          "label": "只把时间标度索引从0改1",
+          "prediction": "五次如何改变端点加速度与中间的速度峰值？",
+          "before": {
+            "duration": 2,
+            "target": 90,
+            "quintic": 0
+          },
+          "after": {
+            "duration": 2,
+            "target": 90,
+            "quintic": 1
+          },
+          "expectation": "两种位置均从0°到90°且端点速度为0；端点加速度[135,−135]→[0,0]°/s²，速度峰值67.5→84.375°/s。"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "commands": [
+      "node scripts/check_course_inspectors.cjs modern",
+      "node --test tests/course_inspector_modern.test.cjs"
+    ],
+    "lessons": 7,
+    "models": 7,
+    "framesChecked": 387,
+    "cellsChecked": 3180,
+    "experiments": 9,
+    "semanticTests": 10,
+    "status": "passed",
+    "checks": [
+      "当前目录7个实际modelId全覆盖；统一检查器一次检查默认、全部控件最小/最大或首尾数值选项的所有实际帧和UI实验验证。",
+      "默认trace与实验前后trace深冻结；inspect与verify不可变；verify拒绝前后相同输入。浏览器注册无需依赖。",
+      "Proxy禁止inspect读取未来帧、任何scene或trace.result；包括不可达、内外奇异边界、等长杆原点与三次轨迹。",
+      "二维齐次矩阵9格、旋转和平移顺序及反向撤销；FK相对角与对弧度求导的Jacobian四格独立中央差分。",
+      "IK两个分支重建同一目标；圆环外和内孔保留未知角度/残差/奇异状态；分支合并与无穷多肩角特例。",
+      "SO(3)基本矩阵27格、复合乘积和RᵀR逐格，基向量独立重建列；SE(3)两个16格输入矩阵、16格链及逆链。",
+      "动力学质量矩阵对照独立质心动能，重力矩对照势能梯度，速度项、惯性项与2×2逆解分别核对。",
+      "三次/五次真实13个时间样本，位置导数独立中央差分，端点约束、时长缩放与最后解析峰值核对。"
+    ]
+  },
+  "scope": [
+    "rf-transform：局部坐标与世界平移、角度转弧度、旋转四格、逐坐标行点积、长度、齐次九格、逆变换与错误顺序距离。",
+    "rf-forward-kinematics：相对角与世界方向、两个连杆位移、末端逐项和、内外可达半径、Jacobian四格及行列式奇异判断。",
+    "rf-inverse-kinematics：目标距离与圆环、余弦条件与acos门控、分支数/选中角/atan2偏角、FK回代与残差、奇异和无穷多解。",
+    "rf-rotation3d：Rx/Ry/Rz每格、逐轴行点积、RyRx与RzRyRx逐格乘加、完整输出与顺序核对、RᵀR/行列式/逆变换/长度。",
+    "rf-se3-chain：T_WB与T_BC各16格、机体点/换轴/世界平移、相机世界原点、T_WC各格乘加、逆链及未旋转相机偏移的反例。",
+    "rf-arm-dynamics：惯量和输入单位、质量矩阵各格与正定性、速度扭矩、重力扭矩、Mq̈逐项和与τ叠加、2×2还原加速度与动能。",
+    "rf-joint-trajectory：真实t与u、三次/五次多项式逐项、位置/一阶/二阶导数、前一真实样本差值，最后才给解析速度和加速度峰值。"
+  ],
+  "limitations": [
+    "七讲为现有原创有限算例的逐格检查，不代表完整Modern Robotics官方课程。",
+    "二维几何、三维变换与逆动力学保持静态计算检查；没有新增、复制或伪造运动帧。仅单关节时间标度有真实物理时间样本。",
+    "SO(3)原模型向量未规定米制尺度，使用模型长度单位；其他模型明确m、rad、度、s、N·m、kg·m²与J。Jacobian显式按弧度求导。",
+    "IK不可达保留null；等长杆原点仅展示原模型的一个代表解，不把它当成唯一解。",
+    "时间轨迹原模型使用度；加速度峰值是解析值，不能用离散采样最大值代替。未包含关节耦合、障碍物、速度/力矩限制或真实执行。",
+    "理想刚体计算不包含真实标定、TF时间同步、关节限制、碰撞、摩擦、齿隙、执行器或硬件验收。",
+    "公式显示四位小数，数值与verify保留完整精度；独立差分与几何重建允许机器误差。",
+    "仅新增本课程插件、测试和清单；未改共享文件、模型、课程/讲次ID、配置、草稿、记录与学习时长。浏览器、构建与全课程交付由根agent统一验收。"
+  ],
+  "files": [
+    "web/course-inspectors/modern.js",
+    "tests/course_inspector_modern.test.cjs",
+    "docs/course-inspectors/modern.json"
+  ]
+}

@@ -23,6 +23,9 @@ jobs:
       - run: python3 -m unittest discover -s tests -q
       - run: node --test tests/*.test.cjs
       - run: python3 scripts/build_static.py
+        env:
+          UMAMI_WEBSITE_ID: ${{ vars.UMAMI_WEBSITE_ID }}
+          UMAMI_SCRIPT_URL: ${{ vars.UMAMI_SCRIPT_URL }}
       - uses: actions/upload-pages-artifact@v4
         with:
           path: dist

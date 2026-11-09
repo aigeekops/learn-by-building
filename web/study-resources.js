@@ -70,6 +70,7 @@ function renderResourceDetail(r) {
     + '<span class="sr-date">' + esc(r.added || "") + "</span>"
     + (r.source_article ? '<span class="sr-src">来源：' + esc(r.source_article) + "</span>" : "")
     + "</div>"
+    + (r.reading_scope?'<p class="sr-note">当前路线选读：'+esc(r.reading_scope)+'</p>':'')
     + renderMarkdown(r.content || "（暂无正文）")
     + "</article>";
 }
@@ -94,7 +95,7 @@ function renderStudyResources() {
         + '<span class="sr-date">' + esc(r.added || "") + "</span></div>"
         + "<h3>" + esc(r.title) + "</h3>"
         + srTags(r)
-        + '<p class="sr-note">' + esc(r.note || "") + "</p>"
+        + '<p class="sr-note">' + esc(r.reading_scope || r.note || "") + "</p>"
         + '<div class="actions">' + btn("查看资料", "sr-open", r.id, "small primary") + "</div></article>").join("")
     + "</div>";
 }

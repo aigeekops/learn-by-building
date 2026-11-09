@@ -9,7 +9,14 @@
       "format": "md",
       "added": "2026-10-15",
       "source_article": "Articles/articles/2026-10-15-agentic-llm-textbook",
-      "note": "原书 arXiv:2610.13455，472 页 / 23 章；本文件为章节结构衍生整理，非原书正文。"
+      "note": "原书 arXiv:2610.13455，472 页 / 23 章；本文件为章节结构衍生整理，非原书正文。",
+      "map_course_ids": [
+        "hfagents",
+        "cme295",
+        "cs336"
+      ],
+      "reading_scope": "当前路线优先第 9–13 章（Agent、工具与检索）；语言模型基础按需回补，行为与社会模拟不进入主线。",
+      "role": "按需参考"
     },
     {
       "id": "cs146s-modern-software-dev-2026",
@@ -18,8 +25,17 @@
       "file": "agent/cs146s-modern-software-dev-2026.md",
       "format": "md",
       "added": "2026-10-24",
-      "tags": ["软件开发"],
-      "note": "Stanford CS146S Fall 2026 全课地图：11 周骨架、6 次作业的真实要求、2025→2026 迭代轨迹，附「无学籍 6 周自学改造表」。"
+      "tags": [
+        "软件开发"
+      ],
+      "note": "Stanford CS146S Fall 2026 全课地图：11 周骨架、6 次作业的真实要求、2025→2026 迭代轨迹，附「无学籍 6 周自学改造表」。",
+      "map_course_ids": [
+        "cs146s",
+        "fsdl",
+        "tools"
+      ],
+      "reading_scope": "历史整理稿，事实截止 2026-10-24；当前已发布课件与动画以 2026 课程专栏为准，不另建重复课程。",
+      "role": "历史课程地图"
     }
   ]
 }

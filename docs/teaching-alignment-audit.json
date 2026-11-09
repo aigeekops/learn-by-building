@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "date": "2026-11-08",
+  "retained_blocks": [
+    {
+      "id": "python-first",
+      "title": "第一行程序与变量",
+      "map_course_id": "cs50p",
+      "model": "python"
+    },
+    {
+      "id": "python-branches",
+      "title": "条件与重复",
+      "map_course_id": "cs50p",
+      "model": "python"
+    },
+    {
+      "id": "python-functions",
+      "title": "函数与排错",
+      "map_course_id": "cs50p",
+      "model": "python"
+    },
+    {
+      "id": "python-files",
+      "title": "读写自己的学习笔记",
+      "map_course_id": "cs50p",
+      "model": "python"
+    },
+    {
+      "id": "llm-basics",
+      "title": "模型能做什么，什么要核对",
+      "map_course_id": "hfagents",
+      "model": "retrieval"
+    },
+    {
+      "id": "prompt-contract",
+      "title": "把需求说清楚",
+      "map_course_id": "hfagents",
+      "model": "contract"
+    },
+    {
+      "id": "api-data",
+      "title": "请求、响应与结构化数据",
+      "map_course_id": "hfagents",
+      "model": "contract"
+    },
+    {
+      "id": "chat-state",
+      "title": "对话历史与失败处理",
+      "map_course_id": "hfagents",
+      "model": "agent"
+    },
+    {
+      "id": "search-baseline",
+      "title": "先做能解释的关键词搜索",
+      "map_course_id": "hfagents",
+      "model": "retrieval"
+    },
+    {
+      "id": "search-chunks",
+      "title": "切分材料并保留来源",
+      "map_course_id": "hfagents",
+      "model": "chunks"
+    },
+    {
+      "id": "search-answer",
+      "title": "带着证据回答",
+      "map_course_id": "hfagents",
+      "model": "retrieval"
+    },
+    {
+      "id": "search-evaluate",
+      "title": "用十个问题检查检索",
+      "map_course_id": "hfagents",
+      "model": "retrieval"
+    },
+    {
+      "id": "tools-functions",
+      "title": "从普通函数到工具",
+      "map_course_id": "hfagents",
+      "model": "contract"
+    },
+    {
+      "id": "tools-workflow",
+      "title": "先做固定流程",
+      "map_course_id": "hfagents",
+      "model": "agent"
+    },
+    {
+      "id": "agent-loop",
+      "title": "受限的思考与行动循环",
+      "map_course_id": "hfagents",
+      "model": "agent"
+    },
+    {
+      "id": "agent-eval",
+      "title": "记录工具轨迹与对照",
+      "map_course_id": "hfagents",
+      "model": "agent"
+    },
+    {
+      "id": "service-first",
+      "title": "把程序做成本地接口",
+      "map_course_id": "fsdl",
+      "model": "contract"
+    },
+    {
+      "id": "service-validation",
+      "title": "输入校验与异常",
+      "map_course_id": "fsdl",
+      "model": "contract"
+    },
+    {
+      "id": "service-tests",
+      "title": "可重复的接口检查",
+      "map_course_id": "fsdl",
+      "model": "delivery"
+    },
+    {
+      "id": "service-package",
+      "title": "环境与启动说明",
+      "map_course_id": "tools",
+      "model": "delivery"
+    },
+    {
+      "id": "project-scope",
+      "title": "只解决一个真实问题",
+      "map_course_id": "fsdl",
+      "model": "delivery"
+    },
+    {
+      "id": "project-reproduce",
+      "title": "从空目录复现",
+      "map_course_id": "fsdl",
+      "model": "delivery"
+    },
+    {
+      "id": "project-case",
+      "title": "写清取舍与失败",
+      "map_course_id": "fsdl",
+      "model": "delivery"
+    },
+    {
+      "id": "project-demo",
+      "title": "演示与下一阶段",
+      "map_course_id": "fsdl",
+      "model": "delivery"
+    },
+    {
+      "id": "circuit-foundation",
+      "title": "看懂第一个电路",
+      "map_course_id": "arduino",
+      "model": "circuit"
+    },
+    {
+      "id": "measurement-basics",
+      "title": "学会测量与排错",
+      "map_course_id": "arduino",
+      "model": "measurement"
+    },
+    {
+      "id": "python-data",
+      "title": "用 Python 整理观察",
+      "map_course_id": "cs50p",
+      "model": "python"
+    },
+    {
+      "id": "engineering-tools",
+      "title": "留下可复现的过程",
+      "map_course_id": "tools",
+      "model": "delivery"
+    },
+    {
+      "id": "gpio",
+      "title": "按钮与 LED",
+      "map_course_id": "arduino",
+      "model": "digital"
+    },
+    {
+      "id": "sensor-input",
+      "title": "读数、标定与噪声",
+      "map_course_id": "arduino",
+      "model": "adc"
+    },
+    {
+      "id": "motor-drive",
+      "title": "为什么电机需要驱动板",
+      "map_course_id": "arduino",
+      "model": "switch"
+    },
+    {
+      "id": "nonblocking-control",
+      "title": "组合成不会卡住的控制程序",
+      "map_course_id": "arduino",
+      "model": "digital"
+    },
+    {
+      "id": "cad-sketch",
+      "title": "从尺寸画出草图",
+      "map_course_id": "mit2007",
+      "model": "cad"
+    },
+    {
+      "id": "cad-solid",
+      "title": "把草图变成可调整零件",
+      "map_course_id": "mit2007",
+      "model": "cad"
+    },
+    {
+      "id": "design-for-print",
+      "title": "让模型适合打印",
+      "map_course_id": "mit2007",
+      "model": "cad"
+    },
+    {
+      "id": "assembly-review",
+      "title": "装配与迭代一次",
+      "map_course_id": "mit2007",
+      "model": "cad"
+    },
+    {
+      "id": "ros-messages",
+      "title": "节点、话题与消息",
+      "map_course_id": "ros",
+      "model": "ros"
+    },
+    {
+      "id": "ros-frames",
+      "title": "坐标与机器人描述",
+      "map_course_id": "ros",
+      "model": "transform"
+    },
+    {
+      "id": "ros-simulation",
+      "title": "接通仿真控制",
+      "map_course_id": "ros",
+      "model": "ros"
+    },
+    {
+      "id": "ros-replay",
+      "title": "用日志复现一个问题",
+      "map_course_id": "ros",
+      "model": "ros"
+    },
+    {
+      "id": "robot-math",
+      "title": "先学二维坐标变换",
+      "map_course_id": "modern",
+      "model": "transform"
+    },
+    {
+      "id": "feedback",
+      "title": "看懂 P、I、D 各自做什么",
+      "map_course_id": "pid",
+      "model": "pid"
+    },
+    {
+      "id": "state-estimation",
+      "title": "从噪声中估计状态",
+      "map_course_id": "kalman",
+      "model": "kalman"
+    },
+    {
+      "id": "camera-calibration",
+      "title": "理解标定与验证",
+      "map_course_id": "cs231n",
+      "model": "camera"
+    },
+    {
+      "id": "robot-learning",
+      "title": "弄清机器人如何从示范中学习",
+      "map_course_id": "lerobot",
+      "model": "dataset"
+    },
+    {
+      "id": "dataset-inspection",
+      "title": "把数据变成可检查的时间线",
+      "map_course_id": "lerobot",
+      "model": "dataset"
+    },
+    {
+      "id": "imitation-experiment",
+      "title": "读懂并复现最小训练实验",
+      "map_course_id": "lerobot",
+      "model": "imitation"
+    },
+    {
+      "id": "portfolio",
+      "title": "把六个月收束成一个作品",
+      "map_course_id": "fsdl",
+      "model": "delivery"
+    }
+  ],
+  "removed_associations": [
+    {
+      "block": "assembly-review",
+      "old_lab": "soldering",
+      "reason": "原练习主题与当前学习目标不对应"
+    },
+    {
+      "block": "ros-simulation",
+      "old_lab": "interface",
+      "reason": "原练习主题与当前学习目标不对应"
+    },
+    {
+      "block": "ros-replay",
+      "old_lab": "interface",
+      "reason": "原练习主题与当前学习目标不对应"
+    },
+    {
+      "block": "state-estimation",
+      "old_lab": "rc",
+      "reason": "原练习主题与当前学习目标不对应"
+    },
+    {
+      "block": "dataset-inspection",
+      "old_lab": "dc",
+      "reason": "原练习主题与当前学习目标不对应"
+    },
+    {
+      "block": "portfolio",
+      "old_lab": "interface",
+      "reason": "原练习主题与当前学习目标不对应"
+    }
+  ],
+  "principle": "保留能支撑地图的课程与资料，删除不相关的配套入口；不改写任务和成果历史。",
+  "retained_ee_lessons": 24,
+  "resources": [
+    {
+      "id": "agentic-llm-textbook-chapter-map",
+      "courses": [
+        "hfagents",
+        "cme295",
+        "cs336"
+      ],
+      "scope": "当前路线优先第 9–13 章（Agent、工具与检索）；语言模型基础按需回补，行为与社会模拟不进入主线。"
+    },
+    {
+      "id": "cs146s-modern-software-dev-2026",
+      "courses": [
+        "cs146s",
+        "fsdl",
+        "tools"
+      ],
+      "scope": "历史整理稿，事实截止 2026-10-24；当前已发布课件与动画以 2026 课程专栏为准，不另建重复课程。"
+    }
+  ]
+}

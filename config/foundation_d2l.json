@@ -1,0 +1,1592 @@
+{
+  "course": {
+    "id": "d2l",
+    "label": "动手学深度学习",
+    "title": "从张量和梯度到小模型训练",
+    "edition": "中文版2.0.0 · PyTorch路径 · 16讲选编",
+    "position": "深度学习共同基础",
+    "description": "16讲原创中文配套，包含原8讲基础与卷积/CNN、RNN/GRU、动量/Adam、数据并行与DDP。PyTorch片段、CNN训练和CPU分布式验证分开留存实际运行回执。",
+    "prerequisites": [
+      "能运行基本Python程序、理解列表与循环",
+      "完成CS50P的函数与文件基础；数学知识按讲回补",
+      "运行PyTorch片段前需自己的Python环境已安装可用的torch；页面不代装依赖"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "张量形状与广播：先知道每个数放在哪里",
+        "lessons": [
+          "d2l-tensors"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "2",
+        "title": "矩阵、点积与概率：把特征贡献加起来",
+        "lessons": [
+          "d2l-matrix-probability"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "3",
+        "title": "自动微分：从损失沿计算图走回来",
+        "lessons": [
+          "d2l-autograd"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "4",
+        "title": "训练循环：预测、损失、梯度与更新",
+        "lessons": [
+          "d2l-regression"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "5",
+        "title": "分类、softmax与交叉熵：让正确类别得到更高概率",
+        "lessons": [
+          "d2l-classification"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "6",
+        "title": "隐藏层与反向传播：ReLU是一道有条件的门",
+        "lessons": [
+          "d2l-mlp"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "7",
+        "title": "训练与验证：记住样本不等于学会规律",
+        "lessons": [
+          "d2l-generalization"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "8",
+        "title": "注意力与Transformer衔接：按上下文组合信息",
+        "lessons": [
+          "d2l-attention"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "9",
+        "title": "卷积窗口、步幅与填充：一个输出格怎样算出来",
+        "lessons": [
+          "d2l-convolution"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "10",
+        "title": "从卷积到小型CNN：激活、汇聚与分类头",
+        "lessons": [
+          "d2l-cnn-pooling"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "11",
+        "title": "循环状态与时间展开：信息怎样留下又衰减",
+        "lessons": [
+          "d2l-rnn"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "12",
+        "title": "GRU的保留与重置：两个门分别控制哪条路径",
+        "lessons": [
+          "d2l-gru"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "13",
+        "title": "动量与优化器状态：为什么梯度为零还可能继续移动",
+        "lessons": [
+          "d2l-momentum"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "14",
+        "title": "Adam的两类矩与偏差校正：分子分母都从哪里来",
+        "lessons": [
+          "d2l-adam"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "15",
+        "title": "数据并行的正确平均：分片大小不同时怎么办",
+        "lessons": [
+          "d2l-data-parallel"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      },
+      {
+        "unit": "16",
+        "title": "DDP、微批累积与真实进程：先验证等价再谈提速",
+        "lessons": [
+          "d2l-ddp"
+        ],
+        "material": "本站原创配套教学；讲解、计算轨迹、代码、练习与来源均已接入。实际运行范围见本讲说明。"
+      }
+    ],
+    "pending": "本轮已补指定主题，不等于完成全书。真实多CUDA GPU与多机性能实验需目标硬件；CPU Gloo等价验证不能替代它们。",
+    "sources": [
+      "d2l-home"
+    ],
+    "checked": "2026-11-09",
+    "validation": {
+      "checked": "2026-11-09",
+      "torch": "2.9.1",
+      "device": "CPU",
+      "executed_snippets": 16,
+      "cnn_training": true,
+      "gru_training": true,
+      "ddp_gloo_processes": 2,
+      "ddp_max_absolute_error": 0.0,
+      "actual_multi_gpu": false
+    }
+  },
+  "sources": {
+    "d2l-home": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 教材首页与PyTorch入口",
+      "url": "https://zh.d2l.ai/",
+      "locator": "中文版2.0.0文档；PyTorch分支；本站选编16讲，并非全书翻译。",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-ndarray": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 2.1 数据操作",
+      "url": "https://zh.d2l.ai/chapter_preliminaries/ndarray.html",
+      "locator": "2.1.1 创建与形状、2.1.2 运算、2.1.3 广播机制；PyTorch页签",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-algebra": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 2.3 线性代数",
+      "url": "https://zh.d2l.ai/chapter_preliminaries/linear-algebra.html",
+      "locator": "向量、矩阵、点积、矩阵-向量积；PyTorch页签",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-probability": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 2.6 概率",
+      "url": "https://zh.d2l.ai/chapter_preliminaries/probability.html",
+      "locator": "概率分布、期望与采样；按需回补",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-autograd-source": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 2.5 自动微分",
+      "url": "https://zh.d2l.ai/chapter_preliminaries/autograd.html",
+      "locator": "反向传播、梯度累加与清零、分离计算；PyTorch页签",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-regression-source": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 3.2 线性回归的从零开始实现",
+      "url": "https://zh.d2l.ai/chapter_linear-networks/linear-regression-scratch.html",
+      "locator": "线性模型、平方损失、小批量SGD与梯度清零；PyTorch页签",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-softmax-source": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 3.4 softmax回归",
+      "url": "https://zh.d2l.ai/chapter_linear-networks/softmax-regression.html",
+      "locator": "分类分数、softmax与交叉熵；另参考3.6实现",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-softmax-scratch": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 3.6 softmax回归的从零开始实现",
+      "url": "https://zh.d2l.ai/chapter_linear-networks/softmax-regression-scratch.html",
+      "locator": "softmax、交叉熵、训练与评估；PyTorch页签",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-mlp-source": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 4.1 多层感知机",
+      "url": "https://zh.d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+      "locator": "隐藏层、非线性与ReLU；零点梯度约定；PyTorch页签",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-generalization-source": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 4.4 模型选择、欠拟合和过拟合",
+      "url": "https://zh.d2l.ai/chapter_multilayer-perceptrons/underfit-overfit.html",
+      "locator": "训练误差与泛化误差、验证集、测试集和模型复杂度",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-attention-source": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 10.3 注意力评分函数",
+      "url": "https://zh.d2l.ai/chapter_attention-mechanisms/attention-scoring-functions.html",
+      "locator": "10.3.3 缩放点积注意力；可见长度、masked softmax与Value汇总",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-transformer-source": {
+      "kind": "作者公开教材",
+      "label": "动手学深度学习 · 10.7 Transformer",
+      "url": "https://zh.d2l.ai/chapter_attention-mechanisms/transformer.html",
+      "locator": "多头注意力、位置表示、残差与层归一化、编码器解码器结构",
+      "status": "2026-11-08 已核对公开章节与PyTorch内容入口；本站例子与编排独立创作",
+      "role": "official",
+      "checked": "2026-11-08",
+      "edition": "中文版当前公开版（2.0.0文档）"
+    },
+    "d2l-original-code": {
+      "kind": "本站原创计算模型",
+      "label": "D2L基础8讲：可复算计算轨迹",
+      "url": "./foundation-d2l.js",
+      "locator": "8个d2l-模型；数值、梯度和错误路径由本地代码计算",
+      "status": "原创建模与讲义；非Python/PyTorch解释器。PyTorch代码需在自己的Python环境运行。",
+      "role": "original",
+      "checked": "2026-11-08"
+    },
+    "d2l-conv-source": {
+      "kind": "原作者公开材料",
+      "label": "6.2 图像卷积",
+      "url": "https://zh.d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+      "locator": "6.2.1 互相关运算、卷积核与输出；PyTorch页签",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    },
+    "d2l-pool-source": {
+      "kind": "原作者公开材料",
+      "label": "6.5 汇聚层",
+      "url": "https://zh.d2l.ai/chapter_convolutional-neural-networks/pooling.html",
+      "locator": "最大汇聚、平均汇聚与形状；并读6.6 LeNet",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    },
+    "d2l-rnn-source": {
+      "kind": "原作者公开材料",
+      "label": "8.4 循环神经网络",
+      "url": "https://zh.d2l.ai/chapter_recurrent-neural-networks/rnn.html",
+      "locator": "隐藏状态、跨时间共享参数与按时间展开",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    },
+    "d2l-gru-source": {
+      "kind": "原作者公开材料",
+      "label": "9.1 门控循环单元",
+      "url": "https://zh.d2l.ai/chapter_recurrent-modern/gru.html",
+      "locator": "重置门、更新门与候选状态；使用D2L的保留门约定",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    },
+    "d2l-momentum-source": {
+      "kind": "原作者公开材料",
+      "label": "11.6 动量法",
+      "url": "https://zh.d2l.ai/chapter_optimization/momentum.html",
+      "locator": "动量和优化轨迹；本案例使用PyTorch SGD的未归一化速度约定",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    },
+    "d2l-adam-source": {
+      "kind": "原作者公开材料",
+      "label": "11.10 Adam算法",
+      "url": "https://zh.d2l.ai/chapter_optimization/adam.html",
+      "locator": "一阶、二阶矩及偏差校正",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    },
+    "d2l-multi-source": {
+      "kind": "原作者公开材料",
+      "label": "12.5 多GPU训练",
+      "url": "https://zh.d2l.ai/chapter_computational-performance/multiple-gpus.html",
+      "locator": "数据分片、梯度聚合与参数同步",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    },
+    "d2l-ddp-source": {
+      "kind": "原作者公开材料",
+      "label": "PyTorch DistributedDataParallel",
+      "url": "https://docs.pytorch.org/tutorials/intermediate/ddp_tutorial.html",
+      "locator": "进程初始化、梯度同步、数据分片与训练检查点；CPU Gloo验证与CUDA NCCL验证分开",
+      "status": "2026-11-09 核对公开材料；以下为本站原创教学案例",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "中文公开教材2.0.0 / PyTorch机制"
+    }
+  },
+  "lessons": [
+    {
+      "id": "d2l-tensors",
+      "course": "d2l",
+      "unit": "1",
+      "title": "第1讲 张量形状与广播：先知道每个数放在哪里",
+      "summary": "读懂二维形状、重排与行向量广播；提前拒绝不兼容形状，并手工复算结果。",
+      "question": "同样六个数，为什么可以排成2×3，而两个形状不同的张量有时还能相加？",
+      "outcome": "读懂二维形状、重排与行向量广播；提前拒绝不兼容形状，并手工复算结果。",
+      "prerequisites": [
+        "会读Python列表与索引",
+        "知道乘法表示总数，例如2行×3列"
+      ],
+      "explanation": [
+        "张量先是按规则排列的一组数。形状告诉我们每条轴有多少个位置：2×3表示两行、每行三个数。先给每条轴说清含义，之后的batch、特征与序列长度才不会混淆。",
+        "把0到5排成两行，数值和总数都没有改变。reshape能改变排列方式，却不能凭空增加或删除元素。真实框架还涉及存储与视图；本课先只学习可检查的数值和形状。",
+        "矩阵加行向量时，每一行都使用同一个向量。从最右轴对齐，轴长度必须相等或其中一个为1。广播描述运算规则，不意味着需要在内存里真正复制完整数据。"
+      ],
+      "formula": "A.shape=(r,c)，B.shape=(c,) → C[i,j]=A[i,j]+B[j]；sum(C)=sum(A)+r·sum(B)",
+      "worked": "默认A=[[0,1,2],[3,4,5]]、B=[1,2,3]，输出[[1,3,5],[4,6,8]]，总和27。将B长度改成4时，末轴3与4冲突，应先报错。",
+      "misconception": "形状能广播只说明运算合法，不说明业务含义正确。把“每样本一个值”误放到特征轴，代码可能运行却算错。",
+      "practice": [
+        "先预测默认输出第一行，再按下一步逐列核对。",
+        "把行数改为3，解释为什么B保持三项却可以应用到三行。",
+        "选择不兼容长度，说明在出现错误后为什么不应继续展示相加结果。"
+      ],
+      "exercise": {
+        "prompt": "换一组输入：A=[[1,2],[3,4]]，B=[10,20]。广播相加后四个元素的总和是多少？",
+        "expected": 70,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "每行都加同一个[10,20]。",
+        "solution": "输出[[11,22],[13,24]]，总和70；也可算10+2×30。",
+        "transfer": "自己写一个3×1列向量加1×2行向量的PyTorch例子，预测输出形状并用代码核对。"
+      },
+      "sections": [
+        {
+          "title": "1. 形状是带含义的轴",
+          "explanation": "样本数、特征数与通道数都可能出现在形状里。先写A有多少行列，再索引A[0,1]；不要只看元素总数。",
+          "exercise": "把索引改成[1][2]，先猜再运行。",
+          "code": "A = [[0, 1, 2], [3, 4, 5]]\nprint(len(A), len(A[0]), A[0][1])"
+        },
+        {
+          "title": "2. 广播前逐轴对齐",
+          "explanation": "本课动画只实现矩阵与行向量相加；完整版广播还允许前导维扩展。错误分支明确返回shape_error，不把多出的数静默丢弃。",
+          "exercise": "画出(2,3)与(3,)右对齐；再判断(2,3)与(4,)为什么失败。",
+          "modelId": "d2l-tensors"
+        },
+        {
+          "title": "3. 在PyTorch里运行同一个数值例子",
+          "explanation": "以下代码需要预先可用的CPU版torch；页面不会安装依赖或执行Python。保存为tensor_demo.py，在自己的环境执行python tensor_demo.py。",
+          "exercise": "改成torch.arange(9).reshape(3,3)，先手算总和，再运行。",
+          "code": "import torch\nA = torch.arange(6).reshape(2, 3)\nB = torch.tensor([1, 2, 3])\nC = A + B\nprint(A.shape, B.shape, C.tolist())\nassert C.sum().item() == 27\ntry:\n    A + torch.arange(4)\nexcept RuntimeError:\n    print(\"shape_error: 最后一维不兼容\")\n"
+        }
+      ],
+      "sources": [
+        "d2l-ndarray",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-matrix-probability",
+          "label": "连接下一步：继续基础练习"
+        }
+      ],
+      "boundary": "本地JavaScript重排与加法，只覆盖矩阵加行向量；不是完整张量库，也不展示实际设备存储。",
+      "modelId": "d2l-tensors",
+      "demos": [
+        {
+          "modelId": "d2l-tensors",
+          "title": "张量形状与广播：先知道每个数放在哪里 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-matrix-probability",
+      "course": "d2l",
+      "unit": "2",
+      "title": "第2讲 矩阵、点积与概率：把特征贡献加起来",
+      "summary": "用点积计算两条样本输出，归一化非负权重，并复算离散期望。",
+      "question": "怎样同时为多条样本打分，又怎样把多个可能结果变成一个期望？",
+      "outcome": "用点积计算两条样本输出，归一化非负权重，并复算离散期望。",
+      "prerequisites": [
+        "完成张量与广播",
+        "会做分数和加权平均"
+      ],
+      "explanation": [
+        "点积像一张逐项计价单：每个特征乘上对应权重，最后求和。多条样本按行放进矩阵，矩阵乘向量就为每条样本各算一次。",
+        "概率不是随便写的一组分数：每项要非负，所有结果的概率加起来应为1。本例先给非负份额，再除以总量形成一个离散分布。",
+        "期望把可能结果按概率加权。它是分布的数学总结，未必等于任何一次观测；把期望与一次抽样混为一谈，会误解训练和评测中的平均量。"
+      ],
+      "formula": "z_i=Σ_j X[i,j]·w_j；p_i=a_i/Σa；E[z]=Σ_i p_i·z_i",
+      "worked": "默认X=[[1,2],[3,1]]、w=[1,2]，输出[5,5]；概率[1/2,1/2]，期望5。把w0改为2，输出[6,8]，期望变为7。",
+      "misconception": "X*w的逐元素乘法与X@w的矩阵向量积不是同一个结果；归一化非负份额也不同于对任意实数分数应用softmax。",
+      "practice": [
+        "先手算每个特征的贡献，再对比动画的逐项乘积。",
+        "将w0改为2、首项概率权重改为3，复算两种结果的贡献。",
+        "将首项份额设为0，解释为何分布与期望仍然有效。"
+      ],
+      "exercise": {
+        "prompt": "两个可能输出分别为2和8，概率为0.25和0.75。数学期望是多少？",
+        "expected": 6.5,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先按概率分别缩放两个输出。",
+        "solution": "0.25×2+0.75×8=6.5。期望不是从两个输出中任选一个。",
+        "transfer": "在默认矩阵中把w0设为2，再把两个未归一化概率权重设为3和1；应得到期望6.5。解释为什么它落在6和8之间。"
+      },
+      "sections": [
+        {
+          "title": "1. 从一条点积到一批输出",
+          "explanation": "固定列顺序后，点积负责压缩特征轴；批量轴保留。动画用两条样本与两个特征，逐一展示对应项相乘。",
+          "exercise": "把权重顺序交换，比较结果并解释这不只是显示顺序改变。",
+          "modelId": "d2l-matrix-probability"
+        },
+        {
+          "title": "2. 概率归一化与期望",
+          "explanation": "非负份额可以归一化为概率，但全零份额没有定义有效分布。本例第二份额固定为1，避免零分母；用户仍应知道这一前提。",
+          "exercise": "说明为什么期望是6.5，且不是输出值之一。",
+          "code": "mass = [3, 1]\np = [v / sum(mass) for v in mass]\nprint(sum(p), sum(a*b for a,b in zip(p, [6,8])))"
+        },
+        {
+          "title": "3. 在PyTorch里核对形状与期望",
+          "explanation": "需要torch。矩阵向量乘法保留两条样本输出，概率向量与输出做点积得到标量。",
+          "exercise": "把X的两行交换，同时交换概率的两项，期望应保持不变。",
+          "code": "import torch\nX = torch.tensor([[1., 2.], [3., 1.]])\nw = torch.tensor([2., 2.])\nz = X @ w\nmass = torch.tensor([3., 1.])\np = mass / mass.sum()\nexpected = p @ z\nprint(z.tolist(), p.tolist(), expected.item())\nassert torch.allclose(expected, torch.tensor(6.5))\n"
+        }
+      ],
+      "sources": [
+        "d2l-algebra",
+        "d2l-probability",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-autograd",
+          "label": "连接下一步：继续基础练习"
+        }
+      ],
+      "boundary": "二维矩阵乘向量与二项离散分布；没有随机采样、矩阵求逆或概率推断模型。",
+      "modelId": "d2l-matrix-probability",
+      "demos": [
+        {
+          "modelId": "d2l-matrix-probability",
+          "title": "矩阵、点积与概率：把特征贡献加起来 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-autograd",
+      "course": "d2l",
+      "unit": "3",
+      "title": "第3讲 自动微分：从损失沿计算图走回来",
+      "summary": "沿乘法、加法和半平方误差计算图复算梯度，并区分前向值、局部导数和梯度累加。",
+      "question": "模型这次错了多少，怎样变成每个参数应该修改的方向？",
+      "outcome": "沿乘法、加法和半平方误差计算图复算梯度，并区分前向值、局部导数和梯度累加。",
+      "prerequisites": [
+        "点积与变量",
+        "知道导数表示局部变化率；不熟悉可先看平方函数斜率"
+      ],
+      "explanation": [
+        "前向计算把输入变成预测，再与目标比较得到损失。每个计算节点保留必要信息，反向时才能知道上游误差怎样传到当前输入。",
+        "链式法则把一条路径上的局部导数相乘；如果同一个变量沿多条路径影响损失，还要把各路径贡献相加。页面的单路径标量图用小数值把这个过程展开。",
+        "自动微分不等于自动优化。backward负责梯度，优化器或手写更新负责改参数；PyTorch的.grad会累加，重复backward前通常要在新一轮清零。"
+      ],
+      "formula": "ŷ=wx+b；e=ŷ−y；L=e²/2；∂L/∂w=e·x，∂L/∂b=e，∂L/∂x=e·w",
+      "worked": "默认x=2、w=1、b=0、y=3，预测2、误差−1、损失0.5；梯度dw=−2、db=−1、dx=−1。沿负梯度小步移动w会增大预测。",
+      "misconception": "loss越大不表示每个参数的梯度都大；x=0时，损失可非零而dw=0。梯度还与计算路径和输入相关。",
+      "practice": [
+        "先猜默认dw的正负，再从损失一步一步回到w。",
+        "把x设为0，保留非零误差，检查dw是否仍非零。",
+        "改变目标值，解释为何前向的wx+b不变，反向梯度却改变。"
+      ],
+      "exercise": {
+        "prompt": "新输入x=3、w=2、b=0、目标y=4，损失定义仍是半平方误差。dL/dw是多少？",
+        "expected": 6,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先算预测6，再算误差2，最后乘x。",
+        "solution": "dL/dw=(2×3+0−4)×3=6。",
+        "transfer": "用中心差分(L(w+ε)−L(w−ε))/(2ε)核对这个梯度；选择ε=1e−5，说明它与自动微分的计算方式不同。"
+      },
+      "sections": [
+        {
+          "title": "1. 先把计算图拆成可命名的节点",
+          "explanation": "用product、prediction、error、loss四个名字，能分别核对乘法、加法、比较和平方。动画变量快照全部来自本次计算。",
+          "exercise": "把每个节点的输入和输出写在纸上。",
+          "modelId": "d2l-autograd"
+        },
+        {
+          "title": "2. 沿链式法则回传",
+          "explanation": "乘法节点的局部导数要使用前向时的另一个输入。偏置经过加法时局部导数为1，不能错误地再乘x。",
+          "exercise": "x改为0后，指出哪条梯度路径变为0。",
+          "code": "x, w, b, y = 2., 1., 0., 3.\ne = w*x+b-y\nprint(e*x, e, e*w)"
+        },
+        {
+          "title": "3. 使用PyTorch的backward",
+          "explanation": "需要torch。本例先创建浮点叶张量，再反向计算；这里不执行参数更新，因此不会把“算出梯度”当作“训练完成”。",
+          "exercise": "构造新loss再次backward，比较清零前后的w.grad；不要复用已被释放的同一张图。",
+          "code": "import torch\nx = torch.tensor(2., requires_grad=True)\nw = torch.tensor(1., requires_grad=True)\nb = torch.tensor(0., requires_grad=True)\ny = torch.tensor(3.)\nloss = 0.5 * (w*x+b-y)**2\nloss.backward()\nprint(loss.item(), w.grad.item(), b.grad.item(), x.grad.item())\nassert w.grad.item() == -2.\n"
+        }
+      ],
+      "sources": [
+        "d2l-autograd-source",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-regression",
+          "label": "连接下一步：继续基础练习"
+        }
+      ],
+      "boundary": "标量计算图的解析链式法则；动画不执行PyTorch，也不是通用自动微分引擎。",
+      "modelId": "d2l-autograd",
+      "demos": [
+        {
+          "modelId": "d2l-autograd",
+          "title": "自动微分：从损失沿计算图走回来 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-regression",
+      "course": "d2l",
+      "unit": "4",
+      "title": "第4讲 训练循环：预测、损失、梯度与更新",
+      "summary": "复算两样本线性回归的全批量更新，解释平均损失与学习率，并留下每轮参数轨迹。",
+      "question": "把一次求梯度重复起来，参数与损失会怎样变化？",
+      "outcome": "复算两样本线性回归的全批量更新，解释平均损失与学习率，并留下每轮参数轨迹。",
+      "prerequisites": [
+        "完成自动微分",
+        "能读取Python for循环"
+      ],
+      "explanation": [
+        "训练循环是重复的实验：用当前参数预测，计算损失与梯度，按学习率更新，再用新参数检查结果。每个环节都应有可检查的数值。",
+        "本课固定两条数据(1,2)、(2,4)。为了便于手算，每次都使用两条数据的平均梯度；这是全批量梯度下降，而不是大数据训练中的随机小批量采样。",
+        "dw和db必须从同一组旧参数计算，再一起更新。不能先改w，再用修改后的w计算本来属于同一步的db。过大的步长可能越过更低的损失区域。"
+      ],
+      "formula": "L=mean((wx+b−y)²/2)；dw=mean(e·x)，db=mean(e)；w←w−ηdw，b←b−ηdb",
+      "worked": "从w=0、b=0开始，两条误差为−2和−4，平均半平方损失5；dw=−5、db=−3。学习率0.1更新为w=0.5、b=0.3，新损失2.1825。",
+      "misconception": "页面损失下降只证明这两条教学数据上的数值变化，不证明模型已学到通用规律，也不提供GPU吞吐或真实训练时间。",
+      "practice": [
+        "把更新次数设为1，先手算默认更新，再核对代码行与变量。",
+        "固定初值，只改变学习率，比较第一轮更新后损失。",
+        "逐步增加更新次数，描述w、b与损失的关系，不用“已经掌握”替代数值证据。"
+      ],
+      "exercise": {
+        "prompt": "还是两条数据(1,2)、(2,4)，初始w=b=0。使用平均半平方误差，学习率0.2，更新一次后的w是多少？",
+        "expected": 1,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "初始dw是(−2×1−4×2)/2=−5。",
+        "solution": "w_new=0−0.2×(−5)=1；同时b_new=0.6。",
+        "transfer": "用更新后的w=1、b=0.6独立计算两条预测与平均半平方损失，应得到0.53。"
+      },
+      "sections": [
+        {
+          "title": "1. 平均损失的口径保持一致",
+          "explanation": "本课loss已经除以样本数，dw与db也直接取均值。实际框架的reduction设置不同，必须检查是否需要额外除以batch大小。",
+          "exercise": "比较sum损失与mean损失对应的梯度差多少倍。",
+          "modelId": "d2l-regression"
+        },
+        {
+          "title": "2. 一步更新是可复算的算法",
+          "explanation": "使用旧参数计算整个梯度，然后同时应用。动画中每轮保留更新前后损失，便于发现步长引起的变化。",
+          "exercise": "把rate改为0.2，核对w=1和b=0.6。",
+          "code": "X, Y = [1., 2.], [2., 4.]\nw, b, rate = 0., 0., 0.1\ne = [w*x+b-y for x,y in zip(X,Y)]\ndw = sum(a*x for a,x in zip(e,X))/len(X)\ndb = sum(e)/len(e)\nw, b = w-rate*dw, b-rate*db\nprint(w, b)"
+        },
+        {
+          "title": "3. 把相同步骤写成PyTorch循环",
+          "explanation": "需要torch。本例使用float64便于比对，no_grad内更新，随后清空梯度；无随机初始化与网络数据下载。",
+          "exercise": "将range(3)改为range(1)，与动画的一次更新结果逐项比较。",
+          "code": "import torch\nX = torch.tensor([1., 2.], dtype=torch.float64)\nY = torch.tensor([2., 4.], dtype=torch.float64)\nw = torch.tensor(0., dtype=torch.float64, requires_grad=True)\nb = torch.tensor(0., dtype=torch.float64, requires_grad=True)\nfor epoch in range(3):\n    loss = (0.5 * (w*X+b-Y)**2).mean()\n    loss.backward()\n    with torch.no_grad():\n        w -= 0.1*w.grad\n        b -= 0.1*b.grad\n        w.grad.zero_()\n        b.grad.zero_()\n    after = (0.5 * (w*X+b-Y)**2).mean().item()\n    print(epoch+1, w.item(), b.item(), after)\n"
+        }
+      ],
+      "sources": [
+        "d2l-regression-source",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-classification",
+          "label": "连接下一步：继续基础练习"
+        }
+      ],
+      "boundary": "两条固定数据的全批量JavaScript训练循环，使用解析梯度；未执行PyTorch/GPU训练。",
+      "modelId": "d2l-regression",
+      "demos": [
+        {
+          "modelId": "d2l-regression",
+          "title": "训练循环：预测、损失、梯度与更新 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-classification",
+      "course": "d2l",
+      "unit": "5",
+      "title": "第5讲 分类、softmax与交叉熵：让正确类别得到更高概率",
+      "summary": "计算稳定softmax、单样本交叉熵和对logit的梯度，并验证共同平移不改变概率。",
+      "question": "三个类别的分数怎样变成概率，标签又怎样生成训练信号？",
+      "outcome": "计算稳定softmax、单样本交叉熵和对logit的梯度，并验证共同平移不改变概率。",
+      "prerequisites": [
+        "概率归一化与自然对数基本含义",
+        "完成梯度与训练循环"
+      ],
+      "explanation": [
+        "分类模型先为每类输出一个logit。这些实数分数不需要位于0到1之间；softmax通过指数和归一化，把它们转换为一个离散分布。",
+        "交叉熵读取正确类别的概率并取负自然对数。高概率给小损失，低概率给大损失；同一个前向分布在目标类别不同的时候会得到不同的损失。",
+        "所有logit加同一个常数，softmax不变。先减去最大值既保留结果，又避免大指数。对logit的交叉熵梯度是预测概率减去one-hot标签。"
+      ],
+      "formula": "p_i=exp(z_i−max(z))/Σexp(z−max(z))；L=−ln(p_y)；∂L/∂z_i=p_i−1[i=y]",
+      "worked": "默认logit=[1,0,−1]，概率约[0.665241,0.244728,0.090031]，正确类别0的损失约0.407606。改成类别2，损失约2.407606。",
+      "misconception": "训练中正确类别概率提高不等于模型置信度已经校准；一次三分类算例也不能替代独立数据上的准确率与校准评估。",
+      "practice": [
+        "先预测把正确类别从0改为2会改变哪些量，再单步核对。",
+        "把共同平移从0改为10，比较概率、损失和梯度。",
+        "把间隔设为0，解释为何三类概率相同，交叉熵为ln(3)。"
+      ],
+      "exercise": {
+        "prompt": "四个类别的logit完全相同，正确类别只有一个。交叉熵是多少？用自然对数，保留至少四位小数。",
+        "expected": 1.3862943611198906,
+        "tolerance": 0.0001,
+        "unit": "",
+        "hint": "softmax给每类1/4。",
+        "solution": "−ln(1/4)=ln(4)≈1.3862943611。",
+        "transfer": "用torch.nn.functional.cross_entropy核对；注意它接收原始logit，不要先softmax再传入。"
+      },
+      "sections": [
+        {
+          "title": "1. 从相对分数到稳定概率",
+          "explanation": "动画把“减最大值”“指数”“归一化”分成独立步骤。这里的gap只是构造三个logit的参数，不是训练得到的权重。",
+          "exercise": "写出共同平移不变性的分子分母约去过程。",
+          "modelId": "d2l-classification"
+        },
+        {
+          "title": "2. 标签进入损失，不直接改前向概率",
+          "explanation": "一个输入的预测由logit决定；监督标签用于评价当前预测，并产生梯度。保持logit不动更换目标，是区分二者的直接方法。",
+          "exercise": "解释为什么正确类别概率越小，损失越大。",
+          "code": "import math\np = 0.25\nprint(-math.log(p))"
+        },
+        {
+          "title": "3. 使用PyTorch的稳定交叉熵",
+          "explanation": "需要torch。cross_entropy内部结合log_softmax和负对数似然；给它原始logit。样本维度为1，类别维度为3。",
+          "exercise": "共同给logits加10，用新叶张量重新求梯度并比较。",
+          "code": "import torch\nimport torch.nn.functional as F\nlogits = torch.tensor([[1., 0., -1.]], dtype=torch.float64, requires_grad=True)\ntarget = torch.tensor([0], dtype=torch.long)\nloss = F.cross_entropy(logits, target)\nloss.backward()\nprint(torch.softmax(logits.detach(), dim=1).tolist())\nprint(loss.item(), logits.grad.tolist())\n"
+        }
+      ],
+      "sources": [
+        "d2l-softmax-source",
+        "d2l-softmax-scratch",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-mlp",
+          "label": "连接下一步：继续基础练习"
+        }
+      ],
+      "boundary": "一个三分类样本的logit概率与损失计算；未加载分类数据、训练分类器或测量真实准确率。",
+      "modelId": "d2l-classification",
+      "demos": [
+        {
+          "modelId": "d2l-classification",
+          "title": "分类、softmax与交叉熵：让正确类别得到更高概率 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-mlp",
+      "course": "d2l",
+      "unit": "6",
+      "title": "第6讲 隐藏层与反向传播：ReLU是一道有条件的门",
+      "summary": "走完单隐藏单元MLP的前向与反向，并解释ReLU关闭和零点梯度约定。",
+      "question": "为什么线性层之间要加入非线性，梯度又怎样通过这道门？",
+      "outcome": "走完单隐藏单元MLP的前向与反向，并解释ReLU关闭和零点梯度约定。",
+      "prerequisites": [
+        "完成自动微分与分类",
+        "知道max(0,z)的含义"
+      ],
+      "explanation": [
+        "只有线性变换的多层网络仍可以合并成一个线性变换。加入非线性以后，模型可以表示更复杂的关系；本课用一个ReLU单元看清这一变化。",
+        "隐藏层先算z=wx+b，再取h=max(0,z)，输出层计算v·h。正区间的ReLU让梯度直接通过，负区间的梯度为0；门的状态由前向数值决定。",
+        "反向传播沿输出层、ReLU和第一层依次应用链式法则。即使预测错误，关闭的隐藏单元也可能收不到梯度，这提醒我们同时观察损失、激活与梯度。"
+      ],
+      "formula": "z=wx+b；h=ReLU(z)；ŷ=vh；L=(ŷ−1)²/2；dw=(ŷ−1)v·1[z>0]·x",
+      "worked": "默认x=1、w=1、b=0、v=2，z=h=1，预测2、损失0.5，dv=1、dw=2、db=2。把w改为−1，h=0、损失0.5，隐藏层梯度为0。",
+      "misconception": "ReLU在0处不可导。页面约定该点梯度为0，与PyTorch采用的约定一致；不能把跨越零点的中心差分当作唯一正确的导数。",
+      "practice": [
+        "保持输入为1，先猜w从正变负时隐藏值和dw怎样变化。",
+        "把w设为0，观察“零点”标志，解释与负区间的异同。",
+        "只改变输出层v，比较dV与dW各依赖哪些前向值。"
+      ],
+      "exercise": {
+        "prompt": "一个隐藏单元：x=2、w=1、b=0、v=1，目标为1，使用半平方误差。dL/dw是多少？",
+        "expected": 2,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "z=2>0，ReLU门为1；预测2、误差1。",
+        "solution": "dw=(2−1)×1×1×2=2。",
+        "transfer": "再把w改成−1，复算loss和dw；解释为什么损失不为0但dw为0。"
+      },
+      "sections": [
+        {
+          "title": "1. 非线性改变可表达的函数",
+          "explanation": "动画把仿射变换与非线性分开显示。单隐藏单元只是观察机制的最小网络，不代表它具备复杂分类能力。",
+          "exercise": "把ReLU替换成恒等函数，手动合并两层权重。",
+          "modelId": "d2l-mlp"
+        },
+        {
+          "title": "2. 局部导数控制误差路径",
+          "explanation": "先算输出层dL/dh=误差×v，再乘ReLU导数，最后乘x得到dw。沿路每个乘数都有一个前向来源。",
+          "exercise": "分别在z正、负、零三种情况下说明梯度。",
+          "code": "x, w, b, v = 1., 1., 0., 2.\nz = w*x+b\nh = max(0., z)\ne = v*h-1\ndw = e*v*(1. if z > 0 else 0.)*x\nprint(h, dw)"
+        },
+        {
+          "title": "3. 使用PyTorch核对整个计算图",
+          "explanation": "需要torch。显式保存隐藏单元，避免把不同激活状态混在一条公式里。默认数值没有位于ReLU零点。",
+          "exercise": "w改成−1后重建计算图，检查三个参数的梯度。",
+          "code": "import torch\nx = torch.tensor(1., dtype=torch.float64)\nw = torch.tensor(1., dtype=torch.float64, requires_grad=True)\nb = torch.tensor(0., dtype=torch.float64, requires_grad=True)\nv = torch.tensor(2., dtype=torch.float64, requires_grad=True)\nh = torch.relu(w*x+b)\nloss = 0.5*(v*h-1.)**2\nloss.backward()\nprint(h.item(), loss.item(), w.grad.item(), b.grad.item(), v.grad.item())\nassert w.grad.item() == 2.\n"
+        }
+      ],
+      "sources": [
+        "d2l-mlp-source",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-generalization",
+          "label": "连接下一步：继续基础练习"
+        }
+      ],
+      "boundary": "一个标量隐藏单元的前后向，使用解析ReLU梯度；不是完整深层网络训练，也不实现自动微分引擎。",
+      "modelId": "d2l-mlp",
+      "demos": [
+        {
+          "modelId": "d2l-mlp",
+          "title": "隐藏层与反向传播：ReLU是一道有条件的门 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-generalization",
+      "course": "d2l",
+      "unit": "7",
+      "title": "第7讲 训练与验证：记住样本不等于学会规律",
+      "summary": "比较拟合直线与查表模型，识别训练验证重叠，并按明确数据条件解释误差。",
+      "question": "一个模型训练误差为0，为什么在新输入上仍然可能很差？",
+      "outcome": "比较拟合直线与查表模型，识别训练验证重叠，并按明确数据条件解释误差。",
+      "prerequisites": [
+        "完成回归训练循环",
+        "知道平均平方误差与平均半平方误差相差常数2"
+      ],
+      "explanation": [
+        "训练集用于选择参数，验证集用于比较模型与超参数，最终测试集用于在选择结束后评价。把相同样本重复放进验证集，会让本来应该独立的问题变成“还记得吗”。",
+        "本课训练点为0、2、4，保留验证点为1、3、5。我们比较一条最小二乘直线与一个专门记忆训练标签、对未见输入返回0的查表模型。后者是刻意构造的反例。",
+        "模型复杂度与数据量共同影响泛化，但一个小例子不能给出普遍的复杂度结论。这里最重要的是保留划分、说明标签来源，并区分训练MSE与独立验证MSE。"
+      ],
+      "formula": "MSE=mean((预测−标签)²)；模型参数只由训练集拟合；训练索引∩验证索引应为空",
+      "worked": "noise=1时训练标签为[1,3,9]。最小二乘直线为w=2、b=1/3，训练MSE=8/9、验证MSE=1/9。查表模型训练MSE=0，独立验证MSE=140/3；若错误复用训练点，验证MSE也变成0。",
+      "misconception": "查表模型的未见点返回0是本课明确规定的行为，不是所有高容量神经网络的行为。一次小数据结果不能证明“复杂模型都差”。",
+      "practice": [
+        "先预测查表模型的训练与独立验证误差谁更大，再核对。",
+        "把验证切成重复训练点，指出为什么分数变好却没有新证据。",
+        "保持独立划分，改变噪声，解释拟合参数和误差的变化。"
+      ],
+      "exercise": {
+        "prompt": "训练样本的两个残差分别为1和−3，计算MSE（不是半平方误差）。结果是多少？",
+        "expected": 5,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "先平方每个残差，再除以样本数2。",
+        "solution": "MSE=(1²+(−3)²)/2=5；若使用平均半平方误差才是2.5。",
+        "transfer": "在noise=0的动画中比较直线与查表模型：两者训练MSE均为0，独立验证表现却不同。保留索引与预测作为证据。"
+      },
+      "sections": [
+        {
+          "title": "1. 在比较模型前固定数据用途",
+          "explanation": "本例干净模式不让验证点参与拟合。泄漏模式明确标红语义并展示重叠索引，让错误得分的来源可以被追查。",
+          "exercise": "写出两种模式中的索引交集。",
+          "modelId": "d2l-generalization"
+        },
+        {
+          "title": "2. 把零训练误差当作要解释的现象",
+          "explanation": "查表模型从训练标签构建字典。它可以精确重现旧样本；但未知输入的行为由规则决定，这里故意设置为0。",
+          "exercise": "给查表模型增加一种插值规则后，应重新独立评估，而不是复用旧结论。",
+          "code": "train = {0: 1., 2: 3., 4: 9.}\nprint([train.get(x, 0.) for x in [0, 2, 4]])\nprint([train.get(x, 0.) for x in [1, 3, 5]])"
+        },
+        {
+          "title": "3. 用PyTorch拟合直线，单独评估保留点",
+          "explanation": "需要torch。最小二乘仅接收训练设计矩阵；验证标签来自本例预先固定的y=2x。真实任务需要合法的数据划分，时间序列也不能随意打乱。",
+          "exercise": "保存两个索引列表，核对交集为空；再说明真实项目何时才能查看最终测试集。",
+          "code": "import torch\ntrain_x = torch.tensor([0., 2., 4.], dtype=torch.float64)\ntrain_y = torch.tensor([1., 3., 9.], dtype=torch.float64)\nA = torch.stack([train_x, torch.ones_like(train_x)], dim=1)\nw, b = torch.linalg.lstsq(A, train_y).solution\nvalidation_x = torch.tensor([1., 3., 5.], dtype=torch.float64)\nvalidation_y = 2*validation_x\ntrain_mse = ((w*train_x+b-train_y)**2).mean()\nvalidation_mse = ((w*validation_x+b-validation_y)**2).mean()\nprint(w.item(), b.item(), train_mse.item(), validation_mse.item())\n"
+        }
+      ],
+      "sources": [
+        "d2l-generalization-source",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-attention",
+          "label": "连接下一步：继续基础练习"
+        }
+      ],
+      "boundary": "两种手工指定候选模型、六个原创样本的确定性对照；不代表真实MLP泛化实验，没有最终测试集结果。",
+      "modelId": "d2l-generalization",
+      "demos": [
+        {
+          "modelId": "d2l-generalization",
+          "title": "训练与验证：记住样本不等于学会规律 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-attention",
+      "course": "d2l",
+      "unit": "8",
+      "title": "第8讲 注意力与Transformer衔接：按上下文组合信息",
+      "summary": "复算一个查询的缩放点积注意力，区分Key和Value，说明它与完整Transformer之间还缺哪些模块。",
+      "question": "同一个查询怎样从多个位置取信息，为什么遮住位置后它必须完全退出计算？",
+      "outcome": "复算一个查询的缩放点积注意力，区分Key和Value，说明它与完整Transformer之间还缺哪些模块。",
+      "prerequisites": [
+        "向量点积、softmax与加权平均",
+        "知道位置序号从0开始"
+      ],
+      "explanation": [
+        "注意力把“怎么找”和“取什么”分开：Query与Key共同决定匹配分数，Value提供被混合的信息。本课给定两组Key与标量Value，避免一开始就被大矩阵淹没。",
+        "点积分数除以Key维度的平方根，再根据可见位置做softmax。被遮位置不应进入归一化分母，也不应对输出有任何贡献。",
+        "Transformer在此基础上加入多个头的投影、位置表示、前馈层、残差和归一化。学会这一个小汇总只是进入CME 295与CS336的桥梁，不能据此声称已实现完整语言模型。"
+      ],
+      "formula": "s_i=q·k_i/√d；a=softmax(s+mask)；output=Σ_i a_i·V_i",
+      "worked": "默认q=[1,1]，两Key分别为[1,0]、[0,1]，分数相同，权重各0.5；Value=[2,4]时输出3。只保留位置0，权重变成[1,0]，输出严格为2。",
+      "misconception": "注意力权重不是事实正确率；Value改变不应改变本例的权重，因为Q与K没有跟着变。真实网络里这些向量可能共享更早的输入计算，应按实际计算图分析。",
+      "practice": [
+        "先猜只改变第二个Value会影响权重还是输出，再单步核对。",
+        "把可见范围设为只允许位置0，改变第二个Value，输出应始终为2。",
+        "改变Query第一维，解释哪个Key与它更匹配，并复算两个分数。"
+      ],
+      "exercise": {
+        "prompt": "两个可见Value分别为1和5，注意力权重分别为0.25与0.75。输出是多少？",
+        "expected": 4,
+        "tolerance": 1e-06,
+        "unit": "",
+        "hint": "把每个Value乘对应权重后相加。",
+        "solution": "0.25×1+0.75×5=4。",
+        "transfer": "独立构造第三个被遮位置，改变其Key和Value后检查现有输出是否不变；再进入CME 295注意力课观察多位置因果可见性。"
+      },
+      "sections": [
+        {
+          "title": "1. 把匹配和内容分开观察",
+          "explanation": "Query第一维影响对第一个Key的分数；第二个Value只影响汇总内容。动画将两个控制项分开，便于检查因果关系。",
+          "exercise": "预测query=2时哪个位置权重大。",
+          "modelId": "d2l-attention"
+        },
+        {
+          "title": "2. 可见范围先于归一化",
+          "explanation": "把权重算完再删除某个位置会让剩余权重和小于1，与正确masked softmax不同。本例从可见分数中计算softmax，再补回严格0。",
+          "exercise": "解释为什么只剩一个可见位置时，它的权重必须为1。",
+          "code": "import math\nscores = [1/math.sqrt(2), 1/math.sqrt(2)]\np = [math.exp(x-max(scores)) for x in scores]\np = [x/sum(p) for x in p]\nprint(sum(a*v for a,v in zip(p,[2,4])))"
+        },
+        {
+          "title": "3. 在PyTorch里复算，准备阅读Transformer结构",
+          "explanation": "需要torch。这个例子只有一个查询、两个Key与两个标量Value；没有学习Q/K/V投影，没有多头、残差或训练循环。",
+          "exercise": "写出还需要加入哪些模块才能构成Transformer块，再到CME 295对应课核对。",
+          "code": "import math\nimport torch\nq = torch.tensor([[1., 1.]], dtype=torch.float64)\nK = torch.tensor([[1., 0.], [0., 1.]], dtype=torch.float64)\nV = torch.tensor([[2.], [4.]], dtype=torch.float64)\nscores = q @ K.T / math.sqrt(K.shape[-1])\nweights = torch.softmax(scores, dim=-1)\nprint(weights.tolist(), (weights @ V).item())\nscores[:, 1] = -torch.inf\nmasked = torch.softmax(scores, dim=-1)\nassert (masked @ V).item() == 2.\n"
+        }
+      ],
+      "sources": [
+        "d2l-attention-source",
+        "d2l-transformer-source",
+        "d2l-original-code"
+      ],
+      "bridges": [
+        {
+          "lesson": "attention",
+          "label": "连接下一步：Transformer里的注意力"
+        },
+        {
+          "lesson": "d2l-convolution",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "给定Q/K/V的单查询缩放点积注意力；没有训练投影、多头、完整Transformer或语言模型。",
+      "modelId": "d2l-attention",
+      "demos": [
+        {
+          "modelId": "d2l-attention",
+          "title": "注意力与Transformer衔接：按上下文组合信息 · 逐步计算"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-convolution",
+      "course": "d2l",
+      "unit": "9",
+      "title": "第9讲 卷积窗口、步幅与填充：一个输出格怎样算出来",
+      "question": "同一个2×2核怎样从图像不同位置提取特征，步幅为什么会改变输出大小？",
+      "summary": "逐窗口复算互相关，区分空间输出尺寸、填充和参数共享。",
+      "outcome": "逐窗口复算互相关，区分空间输出尺寸、填充和参数共享。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "把卷积核想成一张带四个系数的小透明片。每次盖住图像的一块区域，四对数字相乘再相加，就得到一个输出格。核在不同位置使用相同系数，因而不是每个像素都要新建一套权重。",
+        "深度学习中Conv2d通常计算不翻转核的互相关。先明确这一约定，才不会把数学卷积中的核翻转混进手算。图中N=C=1，只展示最后两个空间轴；多输入、多输出通道还需要沿输入通道求和。",
+        "输出宽度为floor((输入宽度+2p−核宽度)/s)+1。零填充为边界补0，步幅决定窗口起点的间隔。边界未被取到不等于输出为0；还没计算的格子保持空白。",
+        "本课只做前向互相关，下一讲连接ReLU、汇聚和分类头。本地实验另使用autograd检查卷积核梯度并实际更新网络。"
+      ],
+      "formula": "Y[i,j]=ΣₐΣᵦ Xpad[i·s+a,j·s+b]K[a,b]；Hout=⌊(H+2p−k)/s⌋+1。",
+      "worked": "默认图像[[1,2,0],[0,1,3],[2,1,0]]、核[[1,−1],[1,−1]]，输出[[−2,0],[0,−1]]。左上格为1−2+0−1=−2。",
+      "misconception": "核共享降低参数量，但并不自动保证平移不变性、边缘语义或模型已训练。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "把卷积核想成一张带四个系数的小透明片。每次盖住图像的一块区域，四对数字相乘再相加，就得到一个输出格。核在不同位置使用相同系数，因而不是每个像素都要新建一套权重。\n\n深度学习中Conv2d通常计算不翻转核的互相关。先明确这一约定，才不会把数学卷积中的核翻转混进手算。图中N=C=1，只展示最后两个空间轴；多输入、多输出通道还需要沿输入通道求和。",
+          "exercise": "先在纸上回答：同一个2×2核怎样从图像不同位置提取特征，步幅为什么会改变输出大小？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "输出宽度为floor((输入宽度+2p−核宽度)/s)+1。零填充为边界补0，步幅决定窗口起点的间隔。边界未被取到不等于输出为0；还没计算的格子保持空白。 本课只做前向互相关，下一讲连接ReLU、汇聚和分类头。本地实验另使用autograd检查卷积核梯度并实际更新网络。",
+          "exercise": "把步幅改为2，先算输出尺寸，再核对实际窗口；解释为什么参数数量没有随着输出格数变化。",
+          "modelId": "d2l-convolution"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "代码实际调用torch.nn.functional.conv2d，并对核反向求导；不是把浏览器结果直接写成PyTorch输出。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\nimport torch.nn.functional as F\nx=torch.tensor([[[[1.,2.,0.],[0.,1.,3.],[2.,1.,0.]]]])\nk=torch.tensor([[[[1.,-1.],[1.,-1.]]]],requires_grad=True)\ny=F.conv2d(x,k)\nassert torch.allclose(y,torch.tensor([[[[-2.,0.],[0.,-1.]]]]))\ny.square().sum().backward()\nassert k.grad.shape==k.shape and torch.isfinite(k.grad).all()\nprint('convolution',y.tolist(),'kernel_gradient',k.grad.tolist())\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "把步幅改为2，先算输出尺寸，再核对实际窗口；解释为什么参数数量没有随着输出格数变化。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立图块[[1,2],[3,4]]，核[[1,0],[0,0.25]]，偏置为0，互相关结果是多少？",
+        "expected": 2,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "1×1+2×0+3×0+4×0.25=2。",
+        "transfer": "把步幅改为2，先算输出尺寸，再核对实际窗口；解释为什么参数数量没有随着输出格数变化。"
+      },
+      "sources": [
+        "d2l-conv-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-cnn-pooling",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "浏览器执行原创小规模JavaScript模型；本地PyTorch代码单独执行与记录。未进行真实多GPU性能实验。",
+      "modelId": "d2l-convolution",
+      "demos": [
+        {
+          "modelId": "d2l-convolution",
+          "title": "卷积窗口、步幅与填充：一个输出格怎样算出来 · 计算与状态对照"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-cnn-pooling",
+      "course": "d2l",
+      "unit": "10",
+      "title": "第10讲 从卷积到小型CNN：激活、汇聚与分类头",
+      "question": "为什么卷积结果还不是分类概率，最大汇聚和平均汇聚分别保留什么？",
+      "summary": "沿同一输入检查Conv→ReLU→Pool→Head，并运行可训练的小CNN。",
+      "outcome": "沿同一输入检查Conv→ReLU→Pool→Head，并运行可训练的小CNN。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "卷积输出是局部响应，可能为正也可能为负。ReLU把负值置零后，汇聚再降低空间尺寸。每一层都应先写形状和数值用途，不能把颜色亮度直接叫作识别概率。",
+        "默认使用核[[1,0],[0,−1]]，互相关结果为[[0,−1],[−1,1]]；ReLU得到[[0,0],[0,1]]。2×2最大汇聚得到1，平均汇聚得到0.25，说明两者保留的信息不同。",
+        "分类头用固定权重[1,−1]得到两个logit，再用softmax形成概率。这样可手算前向链；只有执行反向传播与参数更新，才是训练。",
+        "配套完整实验生成合成横竖条纹图像，按生成组划分训练和验证，训练一个Conv2d小网络并保存损失、准确率与模型哈希。合成任务上的正确不代表能识别真实照片。"
+      ],
+      "formula": "A=max(0,Conv(X)+b)；MaxPool(A)=max(A)；p=softmax([h,−h])。",
+      "worked": "默认最大汇聚h=1，两个logit为[1,−1]；类别0概率约0.880797，标签0交叉熵约0.126928。",
+      "misconception": "最大汇聚改变信息保留方式，不等于免费获得旋转、尺度或语义不变性。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "卷积输出是局部响应，可能为正也可能为负。ReLU把负值置零后，汇聚再降低空间尺寸。每一层都应先写形状和数值用途，不能把颜色亮度直接叫作识别概率。\n\n默认使用核[[1,0],[0,−1]]，互相关结果为[[0,−1],[−1,1]]；ReLU得到[[0,0],[0,1]]。2×2最大汇聚得到1，平均汇聚得到0.25，说明两者保留的信息不同。",
+          "exercise": "先在纸上回答：为什么卷积结果还不是分类概率，最大汇聚和平均汇聚分别保留什么？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "分类头用固定权重[1,−1]得到两个logit，再用softmax形成概率。这样可手算前向链；只有执行反向传播与参数更新，才是训练。 配套完整实验生成合成横竖条纹图像，按生成组划分训练和验证，训练一个Conv2d小网络并保存损失、准确率与模型哈希。合成任务上的正确不代表能识别真实照片。",
+          "exercise": "保持输入和核不变，把最大汇聚换成平均汇聚；先预测概率更靠近0.5还是更远，再运行解释。",
+          "modelId": "d2l-cnn-pooling"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "本段实际反向计算卷积核梯度；完整训练命令见课程配套实验说明。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\nimport torch.nn.functional as F\nx=torch.tensor([[[[1.,2.,0.],[0.,1.,3.],[2.,1.,0.]]]])\nk=torch.tensor([[[[1.,0.],[0.,-1.]]]],requires_grad=True)\nactivation=F.relu(F.conv2d(x,k))\nh=F.max_pool2d(activation,2).reshape(1)\nlogits=torch.stack([h,-h],dim=1)\nloss=F.cross_entropy(logits,torch.tensor([0]))\nloss.backward()\nassert h.item()==1 and abs(loss.item()-0.126928)<1e-5\nprint('pool',h.item(),'loss',loss.item(),'gradient',k.grad.tolist())\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "保持输入和核不变，把最大汇聚换成平均汇聚；先预测概率更靠近0.5还是更远，再运行解释。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：ReLU后的2×2特征图为[[0,0],[0,1]]，对整块做平均汇聚，结果是多少？",
+        "expected": 0.25,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "四个数相加为1，再除以4，得到0.25。",
+        "transfer": "保持输入和核不变，把最大汇聚换成平均汇聚；先预测概率更靠近0.5还是更远，再运行解释。"
+      },
+      "sources": [
+        "d2l-conv-source",
+        "d2l-pool-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-rnn",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "浏览器复算小网络前向；独立PyTorch实验已在CPU训练CNN和GRU。合成条纹任务不证明真实图像识别能力，也未进行真实多GPU实验。",
+      "modelId": "d2l-cnn-pooling",
+      "demos": [
+        {
+          "modelId": "d2l-cnn-pooling",
+          "title": "从卷积到小型CNN：激活、汇聚与分类头 · 计算与状态对照"
+        }
+      ],
+      "programs": [
+        {
+          "path": "examples/foundation-d2l/train.py",
+          "label": "下载完整CNN与GRU训练实验",
+          "command": "python train.py --output /tmp/lbb-d2l-training"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-rnn",
+      "course": "d2l",
+      "unit": "11",
+      "title": "第11讲 循环状态与时间展开：信息怎样留下又衰减",
+      "question": "相同的循环权重连续用了四次，末状态对初始状态的导数怎样计算？",
+      "summary": "逐时刻计算隐藏状态，并用autograd核对跨时间导数。",
+      "outcome": "逐时刻计算隐藏状态，并用autograd核对跨时间导数。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "序列模型关心输入的先后顺序。RNN每次把新输入与旧隐藏状态合并，再得到新状态。把它沿时间展开会看到多个运算节点，但它们共享同一个循环权重。",
+        "本例是单隐藏单元hₜ=tanh(xₜ+w hₜ₋₁)。先保存旧h，算线性部分，再过tanh。状态并不是最终预测；语言模型还需要输出投影、训练标签和损失。",
+        "末状态对初状态的导数等于各步w(1−hₜ²)的连乘。连续小于1的因子会迅速缩小，帮助理解梯度消失。对共享权重的导数不同，需要把所有时间路径的贡献相加。",
+        "真实训练还要处理批次之间的状态、截断反向传播和padding。不能把未来标签写进当前输入，也不能无意把不相干样本的状态接在一起。"
+      ],
+      "formula": "hₜ=tanh(xₜ+w hₜ₋₁)；∂hT/∂h0=∏ₜ w(1−hₜ²)。",
+      "worked": "若w=0且初状态0，第一步h=tanh(1)，但任何一步对旧状态的导数都为0，跨时间梯度也为0。",
+      "misconception": "时间上用了四次同一个权重，不是出现四份独立可训练参数。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "序列模型关心输入的先后顺序。RNN每次把新输入与旧隐藏状态合并，再得到新状态。把它沿时间展开会看到多个运算节点，但它们共享同一个循环权重。\n\n本例是单隐藏单元hₜ=tanh(xₜ+w hₜ₋₁)。先保存旧h，算线性部分，再过tanh。状态并不是最终预测；语言模型还需要输出投影、训练标签和损失。",
+          "exercise": "先在纸上回答：相同的循环权重连续用了四次，末状态对初始状态的导数怎样计算？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "末状态对初状态的导数等于各步w(1−hₜ²)的连乘。连续小于1的因子会迅速缩小，帮助理解梯度消失。对共享权重的导数不同，需要把所有时间路径的贡献相加。 真实训练还要处理批次之间的状态、截断反向传播和padding。不能把未来标签写进当前输入，也不能无意把不相干样本的状态接在一起。",
+          "exercise": "比较w=0、0.5、0.9，先预测保留初状态信息的能力，再核对末状态对初状态的导数；不要把它当成对w的梯度。",
+          "modelId": "d2l-rnn"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "PyTorch分别对初状态和共享权重求导，避免把两种不同导数混为一谈。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\nw=torch.tensor(0.5,dtype=torch.float64,requires_grad=True)\nh0=torch.tensor(0.,dtype=torch.float64,requires_grad=True)\nh=h0; factors=[]; states=[]\nfor x in [1.,0.,-0.5,0.5]:\n    h=torch.tanh(torch.tensor(x,dtype=torch.float64)+w*h)\n    states.append(h.item()); factors.append(w*(1-h.square()))\ndh0,dw=torch.autograd.grad(h,(h0,w))\nassert torch.allclose(dh0,torch.stack(factors).prod())\nprint('states',states,'d_last_d_initial',dh0.item(),'d_last_d_shared_weight',dw.item())\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "比较w=0、0.5、0.9，先预测保留初状态信息的能力，再核对末状态对初状态的导数；不要把它当成对w的梯度。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：循环权重w=0，不论本例四个输入是什么，末状态对初状态的导数是多少？",
+        "expected": 0,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "每个局部导数都包含因子w，连乘结果为0。",
+        "transfer": "比较w=0、0.5、0.9，先预测保留初状态信息的能力，再核对末状态对初状态的导数；不要把它当成对w的梯度。"
+      },
+      "sources": [
+        "d2l-rnn-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-gru",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "浏览器执行原创小规模JavaScript模型；本地PyTorch代码单独执行与记录。未进行真实多GPU性能实验。",
+      "modelId": "d2l-rnn",
+      "demos": [
+        {
+          "modelId": "d2l-rnn",
+          "title": "循环状态与时间展开：信息怎样留下又衰减 · 计算与状态对照"
+        }
+      ],
+      "programs": [
+        {
+          "path": "examples/foundation-d2l/train.py",
+          "label": "下载CNN与GRU训练实验",
+          "command": "python train.py --output /tmp/lbb-d2l-training"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-gru",
+      "course": "d2l",
+      "unit": "12",
+      "title": "第12讲 GRU的保留与重置：两个门分别控制哪条路径",
+      "question": "更新门z=1时，无论重置门和候选怎样变化，新状态会是什么？",
+      "summary": "拆开重置、候选、保留与接纳四条数值路径。",
+      "outcome": "拆开重置、候选、保留与接纳四条数值路径。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "RNN可能难以长时间传递信息。GRU增加可学习门，让网络按输入和状态决定哪些旧信息保留、哪些候选信息进入。门不是额外的正确率，而是计算图中的逐元素系数。",
+        "采用D2L约定h=z·h旧+(1−z)·h候选，z越大保留越多。另一些接口或实现可能采用相反命名；对照公式而不是只对照变量名。",
+        "重置门r先乘旧状态，再参与候选tanh。r=0仅让候选忽略旧状态；只要z仍为1，最终输出依然完全保留旧状态。",
+        "为了直接观察机制，控件给定z、r。完整GRU会从输入与旧状态通过仿射变换及sigmoid学习门值，不能把本课三项参数当成完整网络。"
+      ],
+      "formula": "h候选=tanh(x+r h旧)；h新=z h旧+(1−z)h候选。",
+      "worked": "旧状态1、x=0.5、r=0.5时，候选=tanh(1)≈0.761594；z=0.8时新状态≈0.952319。",
+      "misconception": "重置门为0不表示把最终隐藏状态清零；它只作用于候选分支。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "RNN可能难以长时间传递信息。GRU增加可学习门，让网络按输入和状态决定哪些旧信息保留、哪些候选信息进入。门不是额外的正确率，而是计算图中的逐元素系数。\n\n采用D2L约定h=z·h旧+(1−z)·h候选，z越大保留越多。另一些接口或实现可能采用相反命名；对照公式而不是只对照变量名。",
+          "exercise": "先在纸上回答：更新门z=1时，无论重置门和候选怎样变化，新状态会是什么？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "重置门r先乘旧状态，再参与候选tanh。r=0仅让候选忽略旧状态；只要z仍为1，最终输出依然完全保留旧状态。 为了直接观察机制，控件给定z、r。完整GRU会从输入与旧状态通过仿射变换及sigmoid学习门值，不能把本课三项参数当成完整网络。",
+          "exercise": "分别把z设为0和1，再独立改变r；解释哪个门改变旧状态直通路径，哪个门改变候选内容。",
+          "modelId": "d2l-gru"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "代码按教材公式搭建可求导的标量GRU组件；不是对torch.nn.GRU不同权重布局的完整复刻。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\nold=torch.tensor(1.,dtype=torch.float64,requires_grad=True)\nz=torch.tensor(0.8,dtype=torch.float64); r=torch.tensor(0.5,dtype=torch.float64)\ncandidate=torch.tanh(torch.tensor(0.5,dtype=torch.float64)+r*old)\nnew=z*old+(1-z)*candidate\nnew.backward()\nassert abs(new.item()-0.952318831191153)<1e-10\nassert torch.allclose(old,1*old+0*candidate)\nprint('candidate',candidate.item(),'new',new.item(),'gradient',old.grad.item())\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "分别把z设为0和1，再独立改变r；解释哪个门改变旧状态直通路径，哪个门改变候选内容。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：旧状态为1，更新门z=1，候选为−0.7。按本课约定，新状态是多少？",
+        "expected": 1,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "1×1+(1−1)×(−0.7)=1。",
+        "transfer": "分别把z设为0和1，再独立改变r；解释哪个门改变旧状态直通路径，哪个门改变候选内容。"
+      },
+      "sources": [
+        "d2l-gru-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-momentum",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "浏览器执行原创小规模JavaScript模型；本地PyTorch代码单独执行与记录。未进行真实多GPU性能实验。",
+      "modelId": "d2l-gru",
+      "demos": [
+        {
+          "modelId": "d2l-gru",
+          "title": "GRU的保留与重置：两个门分别控制哪条路径 · 计算与状态对照"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-momentum",
+      "course": "d2l",
+      "unit": "13",
+      "title": "第13讲 动量与优化器状态：为什么梯度为零还可能继续移动",
+      "question": "上一步速度不为零而当前梯度为零，带动量的更新会不会停止？",
+      "summary": "复算动量累积，理解学习率、惯性与恢复训练的状态。",
+      "outcome": "复算动量累积，理解学习率、惯性与恢复训练的状态。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "普通梯度下降只看当前位置梯度。动量把历史方向存入速度v，再用速度更新参数，帮助沿持续方向移动，也可能在靠近最优点后越过它。",
+        "教材中有归一化或未归一化等多种动量写法。本例明确采用v=βv+g、θ=θ−ηv，与不使用dampening和Nesterov的PyTorch SGD一致。把β不同约定混用会改变有效步长。",
+        "目标L=θ²/2，梯度正好等于θ。每个步骤把旧θ的梯度、更新后的v与新θ列在一起，损失曲线只画已经执行的更新。",
+        "恢复训练时除了参数还要保存速度状态。只加载模型权重会让下一步重新从v=0出发，数值轨迹可能不同。"
+      ],
+      "formula": "vₜ=βvₜ₋₁+gₜ；θₜ=θₜ₋₁−ηvₜ。",
+      "worked": "θ₀=2、v₀=0、η=0.1时第一步g=2、v=2、θ=1.8；若下一步g=0且β=0.8，速度仍为1.6。",
+      "misconception": "动量不是保证每步损失下降；比较优化器时要明确学习率、状态和目标。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "普通梯度下降只看当前位置梯度。动量把历史方向存入速度v，再用速度更新参数，帮助沿持续方向移动，也可能在靠近最优点后越过它。\n\n教材中有归一化或未归一化等多种动量写法。本例明确采用v=βv+g、θ=θ−ηv，与不使用dampening和Nesterov的PyTorch SGD一致。把β不同约定混用会改变有效步长。",
+          "exercise": "先在纸上回答：上一步速度不为零而当前梯度为零，带动量的更新会不会停止？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "目标L=θ²/2，梯度正好等于θ。每个步骤把旧θ的梯度、更新后的v与新θ列在一起，损失曲线只画已经执行的更新。 恢复训练时除了参数还要保存速度状态。只加载模型权重会让下一步重新从v=0出发，数值轨迹可能不同。",
+          "exercise": "令β=0与β=0.8，比较六步轨迹；另保存并恢复optimizer.state_dict，检查下一步是否一致。",
+          "modelId": "d2l-momentum"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "实际调用torch.optim.SGD，并读取其真实momentum_buffer，而非仅模拟速度变量。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\ntheta=torch.tensor(2.,dtype=torch.float64,requires_grad=True)\noptimizer=torch.optim.SGD([theta],lr=0.1,momentum=0.8)\nhistory=[]\nfor _ in range(6):\n    optimizer.zero_grad(); loss=theta.square()/2; loss.backward(); optimizer.step()\n    history.append((theta.item(),optimizer.state[theta]['momentum_buffer'].item()))\nassert abs(history[0][0]-1.8)<1e-12\nassert 'momentum_buffer' in optimizer.state_dict()['state'][0]\nprint('momentum',history)\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "令β=0与β=0.8，比较六步轨迹；另保存并恢复optimizer.state_dict，检查下一步是否一致。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：旧速度v=2、β=0.8、当前梯度g=0。未归一化动量的新速度是多少？",
+        "expected": 1.6,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "v新=0.8×2+0=1.6，因此若学习率非零参数还会移动。",
+        "transfer": "令β=0与β=0.8，比较六步轨迹；另保存并恢复optimizer.state_dict，检查下一步是否一致。"
+      },
+      "sources": [
+        "d2l-momentum-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-adam",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "浏览器执行原创小规模JavaScript模型；本地PyTorch代码单独执行与记录。未进行真实多GPU性能实验。",
+      "modelId": "d2l-momentum",
+      "demos": [
+        {
+          "modelId": "d2l-momentum",
+          "title": "动量与优化器状态：为什么梯度为零还可能继续移动 · 计算与状态对照"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-adam",
+      "course": "d2l",
+      "unit": "14",
+      "title": "第14讲 Adam的两类矩与偏差校正：分子分母都从哪里来",
+      "question": "初始矩为零时，第一步为什么要分别除以1−β₁和1−β₂？",
+      "summary": "计算一阶矩、二阶矩和校正后的更新，并对照PyTorch Adam。",
+      "outcome": "计算一阶矩、二阶矩和校正后的更新，并对照PyTorch Adam。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "Adam给每个参数维护梯度均值和梯度平方的指数滑动平均。前者指示方向，后者给出尺度；后者不是已经减去均值平方的梯度方差。",
+        "m与v从0开始，会在早期低估对应矩。使用m̂=m/(1−β₁ᵗ)、v̂=v/(1−β₂ᵗ)校正。步数t也是优化器状态的一部分。",
+        "按θ←θ−ηm̂/(√v̂+ε)更新。本例ε=1e−8放在根号外，β₂采用0.9以便短轨迹观察；这不是建议所有任务都改成同一超参数。",
+        "Adam与AdamW的权重衰减语义不同。本例权重衰减为0，只在可手算的θ²/2上比较实现；不能从五步演示认定真实模型训练优劣。"
+      ],
+      "formula": "m=β₁m+(1−β₁)g；v=β₂v+(1−β₂)g²；θ←θ−η[m/(1−β₁ᵗ)]/(√[v/(1−β₂ᵗ)]+ε)。",
+      "worked": "首步g=2，β₁=β₂=0.9：m=0.2、v=0.4，校正后m̂=2、v̂=4；η=0.1时θ从2变到约1.9。",
+      "misconception": "二阶矩不等于方差；ε的位置和偏差校正步数错误都会改变结果。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "Adam给每个参数维护梯度均值和梯度平方的指数滑动平均。前者指示方向，后者给出尺度；后者不是已经减去均值平方的梯度方差。\n\nm与v从0开始，会在早期低估对应矩。使用m̂=m/(1−β₁ᵗ)、v̂=v/(1−β₂ᵗ)校正。步数t也是优化器状态的一部分。",
+          "exercise": "先在纸上回答：初始矩为零时，第一步为什么要分别除以1−β₁和1−β₂？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "按θ←θ−ηm̂/(√v̂+ε)更新。本例ε=1e−8放在根号外，β₂采用0.9以便短轨迹观察；这不是建议所有任务都改成同一超参数。 Adam与AdamW的权重衰减语义不同。本例权重衰减为0，只在可手算的θ²/2上比较实现；不能从五步演示认定真实模型训练优劣。",
+          "exercise": "固定输入和学习率，仅改变β₁或β₂；观察m̂、v̂与参数轨迹，并说明为什么恢复训练需要保存步数。",
+          "modelId": "d2l-adam"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "实际使用torch.optim.Adam并读取exp_avg、exp_avg_sq；数值另与浏览器模型逐步比较。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\ntheta=torch.tensor(2.,dtype=torch.float64,requires_grad=True)\noptimizer=torch.optim.Adam([theta],lr=0.1,betas=(0.9,0.9),eps=1e-8)\nhistory=[]\nfor _ in range(5):\n    optimizer.zero_grad(); (theta.square()/2).backward(); optimizer.step()\n    state=optimizer.state[theta]\n    history.append((theta.item(),state['exp_avg'].item(),state['exp_avg_sq'].item()))\nassert abs(history[0][0]-(2-0.2/(2+1e-8)))<1e-12\nprint('adam',history)\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "固定输入和学习率，仅改变β₁或β₂；观察m̂、v̂与参数轨迹，并说明为什么恢复训练需要保存步数。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：第一次梯度g=2、β₂=0.9、v₀=0。完成偏差校正后的v̂是多少？",
+        "expected": 4,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "v₁=0.9×0+0.1×4=0.4；v̂=0.4/(1−0.9)=4。",
+        "transfer": "固定输入和学习率，仅改变β₁或β₂；观察m̂、v̂与参数轨迹，并说明为什么恢复训练需要保存步数。"
+      },
+      "sources": [
+        "d2l-adam-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-data-parallel",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "浏览器执行原创小规模JavaScript模型；本地PyTorch代码单独执行与记录。未进行真实多GPU性能实验。",
+      "modelId": "d2l-adam",
+      "demos": [
+        {
+          "modelId": "d2l-adam",
+          "title": "Adam的两类矩与偏差校正：分子分母都从哪里来 · 计算与状态对照"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-data-parallel",
+      "course": "d2l",
+      "unit": "15",
+      "title": "第15讲 数据并行的正确平均：分片大小不同时怎么办",
+      "question": "一个rank有1条样本、另一个有3条，能不能把两个局部平均梯度再除以2？",
+      "summary": "分开梯度和与样本数，验证并行归约是否等价于全局批次。",
+      "outcome": "分开梯度和与样本数，验证并行归约是否等价于全局批次。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "数据并行让每个设备保存相同参数，各读一部分样本、各算局部梯度。要保持原训练目标，归约后的梯度必须等于同一全局批次的平均梯度。",
+        "局部样本数相同时，局部均值再等权平均是正确的。大小不同时，应该合并梯度和再除总样本数，或等价地按局部样本数加权。",
+        "本例全局x=[1,2,3,4]、y=2x、w=0，单样本半平方误差梯度为−2x²，全局平均−15。将第一片改成1条会立即暴露均值平均的错误。",
+        "真实DDP默认的rank平均语义和局部loss reduction需要一起检查。padding、重复样本、drop_last和梯度累积都可能改变分母；此图不计算网络通信性能。"
+      ],
+      "formula": "g全局=(Σᵣ nᵣg均值,ᵣ)/(Σᵣ nᵣ)，不能无条件使用Σᵣg均值,ᵣ/world_size。",
+      "worked": "分成1条与3条时，局部均值分别为−2和−58/3；等权平均约−10.6667，正确加权结果为−15。",
+      "misconception": "所有rank参数相同并不意味着有效训练目标也相同；不等长分片的分母不能丢失。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "数据并行让每个设备保存相同参数，各读一部分样本、各算局部梯度。要保持原训练目标，归约后的梯度必须等于同一全局批次的平均梯度。\n\n局部样本数相同时，局部均值再等权平均是正确的。大小不同时，应该合并梯度和再除总样本数，或等价地按局部样本数加权。",
+          "exercise": "先在纸上回答：一个rank有1条样本、另一个有3条，能不能把两个局部平均梯度再除以2？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "本例全局x=[1,2,3,4]、y=2x、w=0，单样本半平方误差梯度为−2x²，全局平均−15。将第一片改成1条会立即暴露均值平均的错误。 真实DDP默认的rank平均语义和局部loss reduction需要一起检查。padding、重复样本、drop_last和梯度累积都可能改变分母；此图不计算网络通信性能。",
+          "exercise": "把rank0样本数从2改为1，分别运行正确加权和错误平均分支；解释为什么2/2分片时错误写法恰好不暴露。",
+          "modelId": "d2l-data-parallel"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "PyTorch对完整批次实际求导，再用不等长分片复算并展示错误反例。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\nx=torch.tensor([1.,2.,3.,4.],dtype=torch.float64)\nw=torch.tensor(0.,dtype=torch.float64,requires_grad=True)\nloss=((w*x-2*x).square()/2).mean(); loss.backward(); reference=w.grad.item()\nsums=[(-2*part.square()).sum().item() for part in (x[:1],x[1:])]\ncounts=[1,3]\nweighted=sum(sums)/sum(counts)\nwrong=sum(g/n for g,n in zip(sums,counts))/2\nassert reference==weighted==-15 and abs(wrong-weighted)>1\nprint('single_batch',reference,'weighted',weighted,'wrong_rank_mean',wrong)\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "把rank0样本数从2改为1，分别运行正确加权和错误平均分支；解释为什么2/2分片时错误写法恰好不暴露。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：四条样本的梯度分别为−2、−8、−18、−32。全局平均梯度是多少？",
+        "expected": -15,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "总和−60除以4，结果−15。",
+        "transfer": "把rank0样本数从2改为1，分别运行正确加权和错误平均分支；解释为什么2/2分片时错误写法恰好不暴露。"
+      },
+      "sources": [
+        "d2l-multi-source",
+        "d2l-ddp-source"
+      ],
+      "bridges": [
+        {
+          "lesson": "d2l-ddp",
+          "label": "继续学习下一讲"
+        }
+      ],
+      "boundary": "浏览器执行原创小规模JavaScript模型；本地PyTorch代码单独执行与记录。未进行真实多GPU性能实验。",
+      "modelId": "d2l-data-parallel",
+      "demos": [
+        {
+          "modelId": "d2l-data-parallel",
+          "title": "数据并行的正确平均：分片大小不同时怎么办 · 计算与状态对照"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。"
+    },
+    {
+      "id": "d2l-ddp",
+      "course": "d2l",
+      "unit": "16",
+      "title": "第16讲 DDP、微批累积与真实进程：先验证等价再谈提速",
+      "question": "每rank累积m个相同大小微批，却忘了把loss除以m，会发生什么？",
+      "summary": "验证累积缩放、同步时机、进程一致性与硬件验证边界。",
+      "outcome": "验证累积缩放、同步时机、进程一致性与硬件验证边界。",
+      "prerequisites": [
+        "完成本课程前面的基础例子",
+        "能解释变量、矩阵或状态各自的单位与用途"
+      ],
+      "explanation": [
+        "DDP通常每进程负责一个GPU，并在反向传播时同步梯度。它不会替你自动划分所有训练数据；采样器、随机种子和每轮set_epoch都要明确安排。",
+        "为了构成更大batch，可以先积累多个微批梯度。局部微批大小相同时，每个loss先除以微批数，才保持与大batch平均一致；前几次用no_sync时应同时包住前向与反向。",
+        "本例各rank微批梯度固定为rank+1，便于观察同步和缩放。正确分支不随微批数改变全局平均，错误分支把更新放大m倍。",
+        "下载脚本可真实启动两进程CPU Gloo，与单进程全局批次逐步对照；有至少两张CUDA GPU时用NCCL路径。CPU进程验证不提供GPU速度、显存或多机结论。"
+      ],
+      "formula": "g累积,ᵣ=Σₖgᵣ,ₖ/m；g同步=Σᵣg累积,ᵣ/world_size。",
+      "worked": "两rank梯度1和2，每rank累积2次：正确全局平均1.5；忘记除2后为3，学习率0.1时更新从−0.15变成−0.3。",
+      "misconception": "CPU Gloo双进程通过证明同步语义和实现等价，不证明多GPU已运行或已经提速。",
+      "sections": [
+        {
+          "title": "1. 从问题建立模型",
+          "explanation": "DDP通常每进程负责一个GPU，并在反向传播时同步梯度。它不会替你自动划分所有训练数据；采样器、随机种子和每轮set_epoch都要明确安排。\n\n为了构成更大batch，可以先积累多个微批梯度。局部微批大小相同时，每个loss先除以微批数，才保持与大batch平均一致；前几次用no_sync时应同时包住前向与反向。",
+          "exercise": "先在纸上回答：每rank累积m个相同大小微批，却忘了把loss除以m，会发生什么？"
+        },
+        {
+          "title": "2. 逐步复算并改变条件",
+          "explanation": "本例各rank微批梯度固定为rank+1，便于观察同步和缩放。正确分支不随微批数改变全局平均，错误分支把更新放大m倍。 下载脚本可真实启动两进程CPU Gloo，与单进程全局批次逐步对照；有至少两张CUDA GPU时用NCCL路径。CPU进程验证不提供GPU速度、显存或多机结论。",
+          "exercise": "实际运行双进程脚本，比较每个rank参数与单进程参考；然后在浏览器打开缺失缩放反例，说明更新为何放大。",
+          "modelId": "d2l-ddp"
+        },
+        {
+          "title": "3. 运行代码，保存实际输出",
+          "explanation": "本段先实际验证autograd梯度累积；独立脚本验证真实Gloo进程、DDP参数同步和全局批次等价。",
+          "exercise": "先运行默认案例并保留断言输出，再按独立验证题改变输入；说明数值和解释是否一致。",
+          "code": "import torch\ndef accumulated(divide=True):\n    weight=torch.tensor(0.,dtype=torch.float64,requires_grad=True)\n    for gradient in [1.,1.]:\n        (weight*gradient/(2 if divide else 1)).backward()\n    return weight.grad.item()\nassert accumulated()==1 and accumulated(False)==2\nprint('microbatch_gradient',accumulated(),'without_scaling',accumulated(False))\n# 实际双进程同步另运行：python examples/foundation-d2l/distributed_train.py\n# CUDA路径需要至少2张CUDA GPU：--device cuda\n",
+          "language": "python",
+          "execution": "本地Python执行；网页只展示代码，不执行Python。"
+        }
+      ],
+      "practice": [
+        "不播放，先根据给定公式手算一个中间结果，并写明每项的单位或轴含义。",
+        "实际运行双进程脚本，比较每个rank参数与单进程参考；然后在浏览器打开缺失缩放反例，说明更新为何放大。",
+        "运行本地代码，保留输入、输出及一次边界或失败案例；解释哪些结论只适用于当前模型。"
+      ],
+      "exercise": {
+        "prompt": "独立条件：两rank的微批梯度分别为1、2，每rank积累2次且忘了除以2。DDP按rank平均后的梯度是多少？",
+        "expected": 3,
+        "tolerance": 1e-05,
+        "unit": "",
+        "hint": "先写清本题的新条件，再按本讲公式逐项计算；不要直接抄默认演示结果。",
+        "solution": "两rank累积梯度为2和4，按rank平均得到(2+4)/2=3。",
+        "transfer": "实际运行双进程脚本，比较每个rank参数与单进程参考；然后在浏览器打开缺失缩放反例，说明更新为何放大。"
+      },
+      "sources": [
+        "d2l-multi-source",
+        "d2l-ddp-source"
+      ],
+      "bridges": [],
+      "boundary": "浏览器执行原创小规模JavaScript模型；本地PyTorch代码单独执行与记录。未进行真实多GPU性能实验。",
+      "modelId": "d2l-ddp",
+      "demos": [
+        {
+          "modelId": "d2l-ddp",
+          "title": "DDP、微批累积与真实进程：先验证等价再谈提速 · 计算与状态对照"
+        }
+      ],
+      "programs": [
+        {
+          "path": "examples/foundation-d2l/distributed_train.py",
+          "label": "下载真实双进程DDP实验",
+          "command": "python distributed_train.py --output /tmp/lbb-ddp"
+        }
+      ],
+      "executionStatus": "2026-11-09：本讲PyTorch片段已在Python 3.12 / PyTorch 2.9.1 CPU实际运行并核对断言。网页不执行Python。 独立双进程Gloo/DDP已运行，与单进程全局批次逐步一致；未运行CUDA多GPU。"
+    }
+  ]
+}

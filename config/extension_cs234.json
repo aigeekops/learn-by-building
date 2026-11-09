@@ -1,0 +1,839 @@
+{
+  "checked": "2026-11-09",
+  "course": {
+    "id": "cs234",
+    "label": "CS234",
+    "title": "强化学习：从交互到策略更新",
+    "edition": "Stanford Winter 2026 · 八讲主题选编",
+    "position": "AI与机器人共享的强化学习基础",
+    "description": "从MDP、动态规划、采样更新走到探索、函数近似和策略梯度；用手算与独立代码解释每个目标。",
+    "prerequisites": [
+      "会读Python或JavaScript列表与循环",
+      "概率期望、向量和基础求导；可按需回补现有基础课"
+    ],
+    "published": [
+      {
+        "unit": "1",
+        "title": "MDP与回报：奖励怎样定义目标？",
+        "lessons": [
+          "cs234-return"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Introduction to Reinforcement Learning；SB Chapter 1、3。"
+      },
+      {
+        "unit": "2",
+        "title": "Bellman方程：把未来缩成下一步",
+        "lessons": [
+          "cs234-bellman"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tabular MDP planning；SB 3、4.1–4.4。"
+      },
+      {
+        "unit": "3",
+        "title": "价值迭代：已知环境时先做规划",
+        "lessons": [
+          "cs234-planning"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tabular MDP planning；Policy/Value Iteration。"
+      },
+      {
+        "unit": "4",
+        "title": "Monte Carlo与TD：等回合结束还是先更新？",
+        "lessons": [
+          "cs234-td"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Tabular RL policy evaluation；SB 5.1、6.1–6.3。"
+      },
+      {
+        "unit": "5",
+        "title": "SARSA与Q-learning：谁在决定下一步目标？",
+        "lessons": [
+          "cs234-qlearning"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Q-learning；SB 6.4–6.5、6.7。"
+      },
+      {
+        "unit": "6",
+        "title": "探索与利用：ε-greedy的概率到底怎样分？",
+        "lessons": [
+          "cs234-exploration"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Introduction / Data Efficient RL；exploration主题。"
+      },
+      {
+        "unit": "7",
+        "title": "价值函数近似：一次更新为何影响多个状态？",
+        "lessons": [
+          "cs234-approximation"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Function approximation连接；Policy Gradient前置。"
+      },
+      {
+        "unit": "8",
+        "title": "策略梯度：直接改变动作概率",
+        "lessons": [
+          "cs234-policy-gradient"
+        ],
+        "material": "本站原创配套讲次；对照官方材料：Policy Gradient；SB Chapter 13。"
+      }
+    ],
+    "pending": "本站八讲为核心主题选编。Data Efficient RL、MCTS、客座讲座及完整作业另见官方目录，未声称完整覆盖原课。",
+    "sources": [
+      "cs234-official"
+    ]
+  },
+  "lessons": [
+    {
+      "id": "cs234-return",
+      "course": "cs234",
+      "unit": "1",
+      "title": "第1讲 MDP与回报：奖励怎样定义目标？",
+      "summary": "区分状态、动作、奖励、终止与期望回报，独立复算有限轨迹。",
+      "question": "同一条奖励序列，折扣改变后为什么回报会变化？",
+      "outcome": "区分状态、动作、奖励、终止与期望回报，独立复算有限轨迹。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "强化学习先定义交互问题：在状态下选择动作，环境返回奖励和下一状态。奖励是任务设计的一部分；如果只奖励“快速移动”，机器人可能学到与“平稳到达”不同的行为。",
+        "回报把从当前时刻开始的奖励放在同一口径比较。折扣γ降低远期奖励的权重；有限回合也可以γ=1。终止后没有后续奖励，不应重复加入终点价值。",
+        "本讲只算一条给定轨迹。策略价值还要对策略动作和环境转移求期望，因此一次高回报并不能说明策略通常表现好。"
+      ],
+      "formula": "G₀ = r₁ + γr₂ + γ²r₃",
+      "worked": "默认奖励[1,0,2]、γ=0.9，折回起点后为[1,0,1.62]，回报2.62。",
+      "misconception": "折扣不是学习率；把奖励换个尺度也会改变数值口径，比较前需固定定义。",
+      "sections": [
+        {
+          "title": "固定交互顺序",
+          "explanation": "动作之后收到的奖励列为 [1, 0, 2]，最后一步终止。"
+        },
+        {
+          "title": "把未来奖励折回起点",
+          "explanation": "终止以后的价值为零。有限回合允许 γ=1。"
+        },
+        {
+          "title": "合成一次回报",
+          "explanation": "一条轨迹的回报是样本，不是策略期望。"
+        },
+        {
+          "title": "比较即时和未来收益",
+          "explanation": "奖励定义影响目标；相同动作在另一个奖励函数下可能排序不同。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0)};\nconst p={\"gamma\":0.9};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 固定交互顺序\nObject.assign(s, ((s,p)=>({rewards:[1,0,2]}))(s, p));\n// 把未来奖励折回起点\nObject.assign(s, ((s,p)=>({discounted:s.rewards.map((r,t)=>r*p.gamma**t)}))(s, p));\n// 合成一次回报\nObject.assign(s, ((s,p)=>({return:H.sum(s.discounted)}))(s, p));\n// 比较即时和未来收益\nObject.assign(s, ((s,p)=>({immediate:s.rewards[0],future:s.return-s.rewards[0]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-return.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "把奖励改为[0,0,2]，分别手算γ=0和γ=1；说明延迟奖励如何影响短视策略。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：同一条奖励序列，折扣改变后为什么回报会变化？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "把奖励改为[0,0,2]，分别手算γ=0和γ=1；说明延迟奖励如何影响短视策略。"
+      ],
+      "exercise": {
+        "prompt": "奖励[1,0,2]，γ=0.5，起点回报是多少？",
+        "expected": 1.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "1+0.5×0+0.5²×2=1.5。",
+        "transfer": "把奖励改为[0,0,2]，分别手算γ=0和γ=1；说明延迟奖励如何影响短视策略。"
+      },
+      "sources": [
+        "cs234-return-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-bellman",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs234-return",
+      "demos": [
+        {
+          "modelId": "cs234-return",
+          "title": "MDP与回报：奖励怎样定义目标？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 120
+    },
+    {
+      "id": "cs234-bellman",
+      "course": "cs234",
+      "unit": "2",
+      "title": "第2讲 Bellman方程：把未来缩成下一步",
+      "summary": "列出转移分支、做一次价值备份，并用固定点检查迭代目标。",
+      "question": "一项行动可能成功，也可能留在原地，怎样把两种结果都算进去？",
+      "outcome": "列出转移分支、做一次价值备份，并用固定点检查迭代目标。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "Bellman关系把长程目标拆成即时奖励与下一状态价值。随机转移要求对所有可能结果加权；只保留最可能分支会丢掉失败的影响。",
+        "本例只有一个非终止状态：成功概率p，得到2分并终止；失败留在原地。给定旧估计后能做一次更新，重复更新才逐步接近固定点。",
+        "这个小例子还能直接解方程。用解析值对照迭代可以找出折扣、终止掩码和转移概率的错误；大问题通常没有这么简单的闭式解。"
+      ],
+      "formula": "V_new = 2p + (1−p)γV_old；V* = 2p/[1−(1−p)γ]",
+      "worked": "p=0.8、γ=0.9、旧V=1，一次更新1.78；固定点约1.95122。",
+      "misconception": "一次更新结果不是收敛价值；终止分支没有额外bootstrap项。",
+      "sections": [
+        {
+          "title": "列出转移的所有结果",
+          "explanation": "一次行动成功得2分并终止；失败留在原地得0分。"
+        },
+        {
+          "title": "对转移结果求期望",
+          "explanation": "不能只取成功分支，也不能把终止状态再次 bootstrap。"
+        },
+        {
+          "title": "进行一次 Bellman 更新",
+          "explanation": "这是从 V_old=1 出发的一次备份，还不是收敛结果。"
+        },
+        {
+          "title": "独立解固定点",
+          "explanation": "此自环问题可直接解线性方程，用于核对迭代目标。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0)};\nconst p={\"gamma\":0.9,\"success\":0.8};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 列出转移的所有结果\nObject.assign(s, ((s,p)=>({probabilities:[p.success,1-p.success],oldValue:1}))(s, p));\n// 对转移结果求期望\nObject.assign(s, ((s,p)=>({contributions:[p.success*2,(1-p.success)*p.gamma*s.oldValue]}))(s, p));\n// 进行一次 Bellman 更新\nObject.assign(s, ((s,p)=>({nextValue:H.sum(s.contributions)}))(s, p));\n// 独立解固定点\nObject.assign(s, ((s,p)=>({fixedPoint:2*p.success/(1-(1-p.success)*p.gamma),residual:Math.abs(s.nextValue-s.oldValue)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-bellman.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "独立解同一参数的固定点5/3，再从0迭代五次，记录误差是否减小。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：一项行动可能成功，也可能留在原地，怎样把两种结果都算进去？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "独立解同一参数的固定点5/3，再从0迭代五次，记录误差是否减小。"
+      ],
+      "exercise": {
+        "prompt": "p=0.5、γ=0.8、旧V=1，一次更新值是多少？",
+        "expected": 1.4,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.5×2+0.5×0.8×1=1.4。",
+        "transfer": "独立解同一参数的固定点5/3，再从0迭代五次，记录误差是否减小。"
+      },
+      "sources": [
+        "cs234-bellman-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-return",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs234-planning",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs234-bellman",
+      "demos": [
+        {
+          "modelId": "cs234-bellman",
+          "title": "Bellman方程：把未来缩成下一步 · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "cs234-planning",
+      "course": "cs234",
+      "unit": "3",
+      "title": "第3讲 价值迭代：已知环境时先做规划",
+      "summary": "做同步价值迭代，再从动作价值提取贪心策略。",
+      "question": "知道转移和奖励后，如何从零估计找到应选的动作？",
+      "outcome": "做同步价值迭代，再从动作价值提取贪心策略。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "规划利用已知模型，不需要采真实环境样本。本例两状态通向终点：状态0可以立刻退出拿1分，也可以走到状态1；状态1随后终止得2分。",
+        "同步迭代一整轮只读旧V，计算结束后再整体替换。若更新第一个状态时立刻读到本轮的新值，就换成了另一种更新顺序，需要单独说明。",
+        "策略选择比较的是各动作的即时奖励加折扣后续价值。状态价值只保存最大期望回报，本身不是动作编号。"
+      ],
+      "formula": "Vₖ₊₁(0)=max(1,γVₖ(1))；Vₖ₊₁(1)=2",
+      "worked": "γ=0.9：从[0,0]到[1,2]再到[1.8,2]，状态0选择前进。",
+      "misconception": "贪心是相对于当前价值估计而言；价值尚不准确时，选出的策略也可能改变。",
+      "sections": [
+        {
+          "title": "定义两状态和终点",
+          "explanation": "状态1向终点得2；状态0可立即退出得1，或前进到状态1得0。"
+        },
+        {
+          "title": "同步执行价值迭代",
+          "explanation": "一轮内全部使用上一轮V，保留每轮记录。"
+        },
+        {
+          "title": "用更新后的价值选择动作",
+          "explanation": "比较两种行动的Q，不把状态值当动作编号。"
+        },
+        {
+          "title": "给出贪心策略",
+          "explanation": "平分时固定选择退出，保证例子可重复。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"gamma\":0.9,\"sweeps\":3};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 定义两状态和终点\nObject.assign(s, ((s,p)=>({values:[0,0]}))(s, p));\n// 同步执行价值迭代\nObject.assign(s, ((s,p)=>{let v=s.values.slice(),history=[v.slice()];for(let k=0;k<p.sweeps;k++){v=[Math.max(1,p.gamma*v[1]),2];history.push(v.slice());}return {values:v,history};})(s, p));\n// 用更新后的价值选择动作\nObject.assign(s, ((s,p)=>({actionValues:[1,p.gamma*s.values[1]]}))(s, p));\n// 给出贪心策略\nObject.assign(s, ((s,p)=>({action:s.actionValues[0]>=s.actionValues[1]?'退出':'前进',value:Math.max(...s.actionValues)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-planning.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "将γ设为0和0.9，逐轮记录V与动作；解释高折扣为什么更偏好延迟收益。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：知道转移和奖励后，如何从零估计找到应选的动作？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "将γ设为0和0.9，逐轮记录V与动作；解释高折扣为什么更偏好延迟收益。"
+      ],
+      "exercise": {
+        "prompt": "γ=0.5且已收敛，状态0的价值是多少？",
+        "expected": 1,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "max(1,0.5×2)=1；平分按本例规则选退出。",
+        "transfer": "将γ设为0和0.9，逐轮记录V与动作；解释高折扣为什么更偏好延迟收益。"
+      },
+      "sources": [
+        "cs234-planning-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-bellman",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs234-td",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs234-planning",
+      "demos": [
+        {
+          "modelId": "cs234-planning",
+          "title": "价值迭代：已知环境时先做规划 · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "cs234-td",
+      "course": "cs234",
+      "unit": "4",
+      "title": "第4讲 Monte Carlo与TD：等回合结束还是先更新？",
+      "summary": "区分完整回报与单步bootstrap，正确处理真正终止。",
+      "question": "还没看到整段未来，为什么可以用下一状态估计来更新？",
+      "outcome": "区分完整回报与单步bootstrap，正确处理真正终止。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "Monte Carlo用实际完整回报作为目标，需要看到回合结尾。TD利用一步奖励加下一状态的旧价值，可以在非终止转移上立即更新，代价是目标也含估计误差。",
+        "TD误差是目标减旧值，学习率控制这一次修正幅度。折扣决定远期收益的权重，两者进入公式的位置不同。",
+        "真正终止时后续价值为零。训练采样因为时间上限而截断，不一定意味着任务终止；是否bootstrap取决于任务定义和环境返回的终止语义。"
+      ],
+      "formula": "δ = r + γ(1−terminated)V(s′) − V(s)；V←V+αδ",
+      "worked": "V=1、V′=2、r=0、γ=0.9、α=0.5：非终止目标1.8，更新1.4；终止时更新0.5。",
+      "misconception": "不能因为采样数组结束就一律清空后续价值，也不能给真正终止状态重复加值。",
+      "sections": [
+        {
+          "title": "取出一条经验",
+          "explanation": "旧估计V(s)=1；下一状态估计V(s′)=2；本次奖励为0。"
+        },
+        {
+          "title": "构造单步目标",
+          "explanation": "真正终止时去掉下一状态价值；时间截断需另行判断。"
+        },
+        {
+          "title": "计算 TD 误差",
+          "explanation": "目标减去旧估计，正负号决定更新方向。"
+        },
+        {
+          "title": "只走一步更新",
+          "explanation": "α决定靠近样本目标的比例，不是折扣。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"alpha\":0.5,\"gamma\":0.9,\"terminal\":\"no\"};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 取出一条经验\nObject.assign(s, ((s,p)=>({value:1,nextValue:2,reward:0}))(s, p));\n// 构造单步目标\nObject.assign(s, ((s,p)=>({target:s.reward+(p.terminal==='yes'?0:p.gamma*s.nextValue)}))(s, p));\n// 计算 TD 误差\nObject.assign(s, ((s,p)=>({delta:s.target-s.value}))(s, p));\n// 只走一步更新\nObject.assign(s, ((s,p)=>({updated:s.value+p.alpha*s.delta}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-td.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "另给一条奖励[0,2]的完整回合，手算MC目标并与一步TD目标比较，说明两者信息来源。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：还没看到整段未来，为什么可以用下一状态估计来更新？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "另给一条奖励[0,2]的完整回合，手算MC目标并与一步TD目标比较，说明两者信息来源。"
+      ],
+      "exercise": {
+        "prompt": "相同默认值但真正终止，更新后V是多少？",
+        "expected": 0.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "目标0，δ=−1，1+0.5×(−1)=0.5。",
+        "transfer": "另给一条奖励[0,2]的完整回合，手算MC目标并与一步TD目标比较，说明两者信息来源。"
+      },
+      "sources": [
+        "cs234-td-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-planning",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs234-qlearning",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs234-td",
+      "demos": [
+        {
+          "modelId": "cs234-td",
+          "title": "Monte Carlo与TD：等回合结束还是先更新？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "cs234-qlearning",
+      "course": "cs234",
+      "unit": "5",
+      "title": "第5讲 SARSA与Q-learning：谁在决定下一步目标？",
+      "summary": "在同一条转移上比较on-policy与off-policy样本目标。",
+      "question": "下一步实际选了较差动作，Q-learning还会用最大动作值吗？",
+      "outcome": "在同一条转移上比较on-policy与off-policy样本目标。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "SARSA沿实际行为策略更新，目标读取已选的下一动作；Q-learning以贪心动作的价值构造目标，即使采样行为选择了别的动作。",
+        "两者都只更新本次访问的状态动作对。未访问项没有因为页面显示或规划动画而获得新经验。",
+        "这个查表例子方便手算，但并不涵盖深度Q网络的稳定性问题。加入函数近似、回放与目标网络后，需要重新检查数据和优化假设。"
+      ],
+      "formula": "SARSA: y=r+γQ(s′,a′)；Q-learning: y=r+γmaxₐQ(s′,a)",
+      "worked": "Q旧值0、奖励1、下一值[2,4]、实际下一动作0：α=0.5、γ=0.9时两种更新分别为1.4和2.3。",
+      "misconception": "off-policy说的是目标策略与采样策略可不同，不等于可以忽略数据覆盖。",
+      "sections": [
+        {
+          "title": "记录行为策略的一次转移",
+          "explanation": "本次Q=0，奖励1，下一状态两动作值为[2,4]，行为实际选了动作0。"
+        },
+        {
+          "title": "区分目标策略",
+          "explanation": "Q-learning使用max；SARSA使用实际选中动作。两者都不是重新采一次奖励。"
+        },
+        {
+          "title": "形成样本目标",
+          "explanation": "本例转移非终止；终止时应置bootstrap为0。"
+        },
+        {
+          "title": "更新被访问的Q",
+          "explanation": "未访问的状态动作值保持原值。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={};\nconst p={\"alpha\":0.5,\"gamma\":0.9,\"method\":\"q\"};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 记录行为策略的一次转移\nObject.assign(s, ((s,p)=>({q:0,reward:1,nextQ:[2,4],nextAction:0}))(s, p));\n// 区分目标策略\nObject.assign(s, ((s,p)=>({bootstrap:p.method==='q'?Math.max(...s.nextQ):s.nextQ[s.nextAction]}))(s, p));\n// 形成样本目标\nObject.assign(s, ((s,p)=>({target:s.reward+p.gamma*s.bootstrap}))(s, p));\n// 更新被访问的Q\nObject.assign(s, ((s,p)=>({updated:s.q+p.alpha*(s.target-s.q)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-qlearning.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "切到SARSA再把α改成1，手算得到2.8；解释为什么两者都不需要重新采样奖励。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：下一步实际选了较差动作，Q-learning还会用最大动作值吗？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "切到SARSA再把α改成1，手算得到2.8；解释为什么两者都不需要重新采样奖励。"
+      ],
+      "exercise": {
+        "prompt": "默认Q-learning的目标值是多少？",
+        "expected": 4.6,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "1+0.9×max(2,4)=4.6。",
+        "transfer": "切到SARSA再把α改成1，手算得到2.8；解释为什么两者都不需要重新采样奖励。"
+      },
+      "sources": [
+        "cs234-qlearning-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-td",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs234-exploration",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs234-qlearning",
+      "demos": [
+        {
+          "modelId": "cs234-qlearning",
+          "title": "SARSA与Q-learning：谁在决定下一步目标？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "cs234-exploration",
+      "course": "cs234",
+      "unit": "6",
+      "title": "第6讲 探索与利用：ε-greedy的概率到底怎样分？",
+      "summary": "正确分配探索概率，使用固定采样点重放一次选择。",
+      "question": "探索时贪心动作还可能被选中吗？",
+      "outcome": "正确分配探索概率，使用固定采样点重放一次选择。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "只选当前估计最好的动作可能永远看不到更好的选择。ε-greedy把概率ε交给均匀探索，其余交给贪心动作。",
+        "均匀探索覆盖所有动作，包括贪心动作本身。因此唯一贪心动作的概率是1−ε+ε/K，其余每个ε/K。平分动作要另行定义规则。",
+        "滑块u固定在[0,1)，用于解释累计概率区间。它让计算可复现，并不模拟大量独立抽样，也不能凭一次结果判断探索策略好坏。"
+      ],
+      "formula": "π(greedy)=1−ε+ε/K；π(other)=ε/K",
+      "worked": "K=3、ε=0.2：动作概率[1/15,13/15,1/15]；u=0.7选动作1。",
+      "misconception": "“贪心动作概率1−ε”漏掉了探索分支也可能选它的概率。",
+      "sections": [
+        {
+          "title": "先声明贪心动作和平分规则",
+          "explanation": "三个动作估计值[1,3,2]，唯一贪心动作1。"
+        },
+        {
+          "title": "分配 ε-greedy 概率",
+          "explanation": "探索时对所有动作均匀抽样，贪心动作也在其中。"
+        },
+        {
+          "title": "构造累计区间",
+          "explanation": "区间使用左闭右开；u来自教学滑块，不是随机实验。"
+        },
+        {
+          "title": "选出本次动作",
+          "explanation": "一次抽到贪心动作不证明没有探索。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={sum:xs=>xs.reduce((a,b)=>a+b,0)};\nconst p={\"epsilon\":0.2,\"draw\":0.7};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 先声明贪心动作和平分规则\nObject.assign(s, ((s,p)=>({q:[1,3,2],greedy:1}))(s, p));\n// 分配 ε-greedy 概率\nObject.assign(s, ((s,p)=>({probabilities:s.q.map((_,i)=>p.epsilon/3+(i===s.greedy?1-p.epsilon:0))}))(s, p));\n// 构造累计区间\nObject.assign(s, ((s,p)=>({cdf:s.probabilities.map((_,i)=>H.sum(s.probabilities.slice(0,i+1)))}))(s, p));\n// 选出本次动作\nObject.assign(s, ((s,p)=>({action:s.cdf.findIndex(x=>p.draw<x),total:H.sum(s.probabilities)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-exploration.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "手动取u=0.02和0.98，对照累计区间；再将ε=1验证概率变成均匀分布。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：探索时贪心动作还可能被选中吗？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "手动取u=0.02和0.98，对照累计区间；再将ε=1验证概率变成均匀分布。"
+      ],
+      "exercise": {
+        "prompt": "三个动作、ε=0.3，唯一贪心动作被选中的概率是多少？",
+        "expected": 0.8,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "1−0.3+0.3/3=0.8。",
+        "transfer": "手动取u=0.02和0.98，对照累计区间；再将ε=1验证概率变成均匀分布。"
+      },
+      "sources": [
+        "cs234-exploration-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-qlearning",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs234-approximation",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs234-exploration",
+      "demos": [
+        {
+          "modelId": "cs234-exploration",
+          "title": "探索与利用：ε-greedy的概率到底怎样分？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 120
+    },
+    {
+      "id": "cs234-approximation",
+      "course": "cs234",
+      "unit": "7",
+      "title": "第7讲 价值函数近似：一次更新为何影响多个状态？",
+      "summary": "算线性价值预测与半梯度更新，解释泛化和干扰。",
+      "question": "把价值存在共享权重里，与为每个状态建表有什么不同？",
+      "outcome": "算线性价值预测与半梯度更新，解释泛化和干扰。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "状态很多时查表难以覆盖，可以用特征和共享参数预测价值。相似特征共享同一组权重，既能泛化，也会相互干扰。",
+        "本例固定TD目标后最小化半平方误差，只对当前预测求导。这叫半梯度更新；如果目标来自同一个网络，不应该在这个公式里悄悄反传过去。",
+        "步长太大时，更新后预测可能越过目标。单个样本误差下降也不保证其他状态的误差下降，需用独立状态和轨迹核对。"
+      ],
+      "formula": "V=wᵀφ；w_new=w+α(y−V)φ",
+      "worked": "φ=[1,2]、w=[0.5,0.5]、y=3、α=0.1：V=1.5，w新=[0.65,0.8]，新预测2.25。",
+      "misconception": "共享权重不是免费获得所有状态的正确值；目标在此次更新中必须冻结。",
+      "sections": [
+        {
+          "title": "用特征共享参数",
+          "explanation": "φ(s)=[1,2]，w=[0.5,0.5]；多个状态可共享同一组w。"
+        },
+        {
+          "title": "前向估计",
+          "explanation": "线性价值函数V=wᵀφ，不是查表。"
+        },
+        {
+          "title": "冻结目标后取半梯度",
+          "explanation": "只对当前预测求导；本课目标由滑块固定，不反传到目标。"
+        },
+        {
+          "title": "更新共享权重",
+          "explanation": "一次样本会同时改变其他有相似特征的状态估计。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={dot:(a,b)=>a.reduce((v,x,i)=>v+x*b[i],0)};\nconst p={\"alpha\":0.1,\"target\":3};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 用特征共享参数\nObject.assign(s, ((s,p)=>({features:[1,2],weights:[.5,.5]}))(s, p));\n// 前向估计\nObject.assign(s, ((s,p)=>({prediction:H.dot(s.features,s.weights)}))(s, p));\n// 冻结目标后取半梯度\nObject.assign(s, ((s,p)=>({delta:p.target-s.prediction,gradient:s.features.map(x=>(s.prediction-p.target)*x)}))(s, p));\n// 更新共享权重\nObject.assign(s, ((s,p)=>({updated:s.weights.map((w,i)=>w-p.alpha*s.gradient[i]),newPrediction:H.dot(s.weights.map((w,i)=>w-p.alpha*s.gradient[i]),s.features)}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-approximation.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "用另一个状态φ=[2,0]比较更新前后预测，说明它未被采样却受到了什么影响。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：把价值存在共享权重里，与为每个状态建表有什么不同？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "用另一个状态φ=[2,0]比较更新前后预测，说明它未被采样却受到了什么影响。"
+      ],
+      "exercise": {
+        "prompt": "按默认参数更新后，第二个权重是多少？",
+        "expected": 0.8,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "0.5+0.1×(3−1.5)×2=0.8。",
+        "transfer": "用另一个状态φ=[2,0]比较更新前后预测，说明它未被采样却受到了什么影响。"
+      },
+      "sources": [
+        "cs234-approximation-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-exploration",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs234-policy-gradient",
+          "label": "继续下一讲"
+        }
+      ],
+      "modelId": "cs234-approximation",
+      "demos": [
+        {
+          "modelId": "cs234-approximation",
+          "title": "价值函数近似：一次更新为何影响多个状态？ · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 150
+    },
+    {
+      "id": "cs234-policy-gradient",
+      "course": "cs234",
+      "unit": "8",
+      "title": "第8讲 策略梯度：直接改变动作概率",
+      "summary": "计算一个二元策略的对数梯度，区分上升目标和下降损失。",
+      "question": "已采到的动作表现较好，怎样让它下一次更可能出现？",
+      "outcome": "计算一个二元策略的对数梯度，区分上升目标和下降损失。",
+      "prerequisites": [
+        "会读Python或JavaScript列表与循环",
+        "概率期望、向量和基础求导；可按需回补现有基础课"
+      ],
+      "explanation": [
+        "价值方法先估计动作价值，再据此选动作；策略梯度直接参数化概率分布，用采样回报或优势来调节概率。",
+        "对二元策略logit θ，采到动作1时对数概率梯度为1−π(1)。正优势沿这个方向增加θ，负优势则反向。",
+        "本例只更新一个已采样项，不是完整期望梯度。实践还涉及轨迹相关性、方差、基线和评测；基线不能依赖当前抽到的动作而引入偏差。"
+      ],
+      "formula": "p=σ(θ)；g=A(1−p)；θ_new=θ+αg",
+      "worked": "θ=0、A=1、α=0.2：p=0.5，g=0.5，θ新=0.1，p新约0.524979。",
+      "misconception": "最大化回报用梯度上升；写成负代理损失后才用梯度下降。",
+      "sections": [
+        {
+          "title": "把logit变成随机策略",
+          "explanation": "两个动作的logit为[0,θ]，使用稳定softmax。"
+        },
+        {
+          "title": "对已采到的动作1取对数梯度",
+          "explanation": "二元softmax的 d log π(1)/dθ=1−π(1)。"
+        },
+        {
+          "title": "用优势加权",
+          "explanation": "正优势增加该动作概率；负优势会降低。基线不得依赖当前采样动作。"
+        },
+        {
+          "title": "执行梯度上升并重新计算",
+          "explanation": "这是一个已采样项的更新，不是完整策略期望或机器人训练。"
+        },
+        {
+          "title": "独立运行与核对",
+          "explanation": "将下面的完整原创JavaScript保存为.cjs文件，使用Node.js运行。p是输入参数，s保留每步结果，H只包含本例使用的纯计算函数。浏览器使用同一实现回放步骤；你本地运行的输出应另存为自己的证据。",
+          "code": "'use strict';\nconst H={softmax:xs=>{const m=Math.max(...xs),e=xs.map(x=>Math.exp(x-m)),z=e.reduce((a,b)=>a+b,0);return e.map(x=>x/z);}};\nconst p={\"logit\":0,\"advantage\":1,\"alpha\":0.2};\nconst s={};\n// p 是输入参数；s 保存此前步骤的结果；H 是本文件中的纯计算辅助函数。\n// 把logit变成随机策略\nObject.assign(s, ((s,p)=>({probabilities:H.softmax([0,p.logit])}))(s, p));\n// 对已采到的动作1取对数梯度\nObject.assign(s, ((s,p)=>({score:1-s.probabilities[1]}))(s, p));\n// 用优势加权\nObject.assign(s, ((s,p)=>({gradient:p.advantage*s.score}))(s, p));\n// 执行梯度上升并重新计算\nObject.assign(s, ((s,p)=>({updatedLogit:p.logit+p.alpha*s.gradient,newProbability:H.softmax([0,p.logit+p.alpha*s.gradient])[1]}))(s, p));\nconsole.log(JSON.stringify(s,null,2));\n",
+          "language": "javascript",
+          "execution": "Node.js 标准库；node cs234-policy-gradient.cjs。无需安装依赖；不会启动原课框架或硬件。",
+          "exercise": "在相同θ和α下比较A=1与A=−1，记录新概率；再到CS224R的GAE与PPO核对目标差别。"
+        }
+      ],
+      "practice": [
+        "先不操作参数，回答：已采到的动作表现较好，怎样让它下一次更可能出现？",
+        "按步骤核对本讲算例，再改变一个参数，记录输入、关键中间值和输出。",
+        "在相同θ和α下比较A=1与A=−1，记录新概率；再到CS224R的GAE与PPO核对目标差别。"
+      ],
+      "exercise": {
+        "prompt": "θ=0、A=−1时，对数梯度乘优势的结果是多少？",
+        "expected": -0.5,
+        "tolerance": 0.000001,
+        "unit": "",
+        "hint": "先根据本讲公式手算，再对照步骤中的变量；复算方法在下方。",
+        "solution": "p=0.5，所以−1×(1−0.5)=−0.5。",
+        "transfer": "在相同θ和α下比较A=1与A=−1，记录新概率；再到CS224R的GAE与PPO核对目标差别。"
+      },
+      "sources": [
+        "cs234-policy-gradient-reading"
+      ],
+      "bridges": [
+        {
+          "lesson": "cs234-approximation",
+          "label": "回看上一讲"
+        },
+        {
+          "lesson": "cs224r-actor-critic",
+          "label": "连接后续课程：第3讲 Actor-Critic与GAE：优势从哪里来？"
+        }
+      ],
+      "modelId": "cs234-policy-gradient",
+      "demos": [
+        {
+          "modelId": "cs234-policy-gradient",
+          "title": "策略梯度：直接改变动作概率 · 逐步核对"
+        }
+      ],
+      "boundary": "本站原创有限计算案例；不训练真实深度网络、不调用机器人或外部服务，计算结果仅支持本讲明确的模型假设。",
+      "study_minutes": 180
+    }
+  ],
+  "sources": {
+    "cs234-official": {
+      "kind": "官方公开材料",
+      "label": "CS234 · 官方目录",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Lecture Materials：Introduction、Tabular MDP planning、policy evaluation、Q-learning、Policy Gradient",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-return-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Introduction to Reinforcement Learning；SB Chapter 1、3",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Introduction to Reinforcement Learning；SB Chapter 1、3",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-bellman-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Tabular MDP planning；SB 3、4.1–4.4",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Tabular MDP planning；SB 3、4.1–4.4",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-planning-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Tabular MDP planning；Policy/Value Iteration",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Tabular MDP planning；Policy/Value Iteration",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-td-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Tabular RL policy evaluation；SB 5.1、6.1–6.3",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Tabular RL policy evaluation；SB 5.1、6.1–6.3",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-qlearning-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Q-learning；SB 6.4–6.5、6.7",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Q-learning；SB 6.4–6.5、6.7",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-exploration-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Introduction / Data Efficient RL；exploration主题",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Introduction / Data Efficient RL；exploration主题",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-approximation-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Function approximation连接；Policy Gradient前置",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Function approximation连接；Policy Gradient前置",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    },
+    "cs234-policy-gradient-reading": {
+      "kind": "官方公开材料",
+      "label": "CS234 · Policy Gradient；SB Chapter 13",
+      "url": "https://web.stanford.edu/class/cs234/modules.html",
+      "locator": "Policy Gradient；SB Chapter 13",
+      "role": "official",
+      "checked": "2026-11-09",
+      "edition": "Stanford Winter 2026 · 八讲主题选编",
+      "status": "2026-11-09已核对官方目录与公开状态；本站讲解、算例、代码与练习为原创选编，原课视频和幻灯片未复制。"
+    }
+  }
+}

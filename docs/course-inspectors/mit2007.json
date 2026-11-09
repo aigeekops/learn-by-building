@@ -1,0 +1,80 @@
+{
+  "courseId": "mit2007",
+  "courseLabel": "MIT 2.007 配套机械设计与传动基础原创专题",
+  "lessons": 6,
+  "models": [
+    {
+      "id": "rf-gears",
+      "experiments": ["double-driven", "halve-efficiency"],
+      "scope": "齿数比、反向转速、实际示意角关系、理想与效率后扭矩、rpm到rad/s、输入/输出功率、损失和效率核对。"
+    },
+    {
+      "id": "rf-motor-load",
+      "experiments": ["double-lever", "zero-load"],
+      "scope": "质量乘重力加速度、水平力矩、设计系数、传动倍率、可用关节扭矩、最小电机扭矩、输出速度、带原模型容差的余量判断。"
+    },
+    {
+      "id": "rf-fit",
+      "experiments": ["contact-to-transition", "narrow-bracket"],
+      "scope": "孔轴四个极限直径、两个最坏组合、单边径向间隙、含零端点的六种配合状态、独立孔边余量及几何约束。"
+    },
+    {
+      "id": "rf-beam-design",
+      "experiments": ["double-thickness"],
+      "scope": "输入单位、根部弯矩、厚度三次方与截面惯性矩、最外纤维位置、弯曲应力和强度比、挠度分子/分母、独立强度及刚度判断与合取。"
+    },
+    {
+      "id": "rf-manufacturing-datums",
+      "experiments": ["loosen-position"],
+      "scope": "两个孔中心的四个坐标、相反偏移形成的孔距误差、中心距区间、孔径下限、直径及单边径向余量、每孔偏差保证、名义板宽与板高。"
+    },
+    {
+      "id": "rf-design-project",
+      "experiments": ["double-reduction", "stiffen-heavy-bracket"],
+      "scope": "惯性力和滚阻分项、车体驱动力、每轮扭矩、轮速与车速、单侧静重与支架梁计算、扭矩/速度/强度/刚度四条约束与各自余量、最终合取及计划交付文件。"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "commands": [
+      "node scripts/check_course_inspectors.cjs mit2007",
+      "node --test tests/course_inspector_mit2007.test.cjs"
+    ],
+    "models": 6,
+    "lessons": 6,
+    "framesChecked": 360,
+    "cellsChecked": 1249,
+    "experiments": 10,
+    "semanticTests": 10,
+    "checks": [
+      "统一检查器以真实controls默认值合并参数运行model.run，覆盖默认及每个控件两端的全部真实frames。该课程无选择控件。",
+      "全部默认trace深冻结、索引夹取、稳定且不重复的cell id、输入/算式/单位、完整精度值及不可变性。",
+      "每组before/after都实际运行模型，verify检查具体结果和保持量，拒绝未变化的前值对与后值对。",
+      "浏览器无依赖注册；未来frames、所有scene和完整result均设置拒读陷阱，当前检查结果保持一致。",
+      "齿数守恒、增速分支、独立rpm单位换算及功率损耗；静载同一工作点、零质量与恰好扭矩边界。",
+      "独立孔轴尺寸链、直径与径向差异、六种配合分类、恰好接触及孔边几何要求独立性。",
+      "梁的截面模量独立应力解、柔度公式、厚度平方/三次方、强度等号边界和强度通过但刚度失败案例。",
+      "逐坐标基准、枚举四种孔位极限组合验证孔距区间、每孔t与孔距2t区分及径向余量等号边界。",
+      "独立重算双轮力需求、线速度、支架静重和梁结果；逐项四约束与计划文件保持空白实测的边界。",
+      "静态模型保持原有5或6个有限计算快照；齿轮示意仅沿用原有运动学角，不新增或伪造播放帧。"
+    ]
+  },
+  "limitations": [
+    "六讲为现有原创MIT 2.007配套专题，不代表完整官方课程或原讲逐项翻译。",
+    "inspect只读取trace.params以及当前和此前frames[index].vars，不读取scene中的提前计算值或trace.result。后续功率、配合、挠度和最终合取不会冒充当前结果。",
+    "齿轮为定常无打滑外啮合的一对齿轮；示意角不是按真实时间积分的动力学状态，不检查齿形制造、强度、间隙或寿命。",
+    "负载仅为水平力臂末端静态点质量；不含杆件自重、加速、摩擦、电流、温升或真实连续承载验证。",
+    "配合为自定对称尺寸公差；几何边缘余量与强度独立。零间隙只表示接触可能性，不保证滑动或压装。",
+    "梁模型为理想固支、等截面、线弹性小挠度计算，使用教学材料参数；没有局部应力、连接柔度、疲劳、冲击或材料测试。",
+    "基准装配只检查固定名义螺杆、板不能平移补偿的一维最坏界限，不是二维位置度、GD&T或真实加工验收。",
+    "整车使用人工给定电机工作点、固定滚阻与效率及双轮均分载荷；不含坡度、轮滑、动态转动惯量、孔口应力或电机反扭矩。",
+    "最终文件列表只表示计划交付路径；检查器不生成文件、不执行制造、不填写实际尺寸、承载、温升或行驶验收。",
+    "算式显示四位小数，值和验证保留完整精度；状态分类和通过条件保留各原模型的浮点容差及等号规则。",
+    "仅新增课程插件、测试与本清单；不修改原模型、配置、课程/讲次ID、图示、草稿、学习记录、学习时长或硬件状态。浏览器和交付构建由根agent统一验收。"
+  ],
+  "files": [
+    "web/course-inspectors/mit2007.js",
+    "tests/course_inspector_mit2007.test.cjs",
+    "docs/course-inspectors/mit2007.json"
+  ]
+}

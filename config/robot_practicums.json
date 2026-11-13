@@ -1,0 +1,911 @@
+{
+  "schemaVersion": 1,
+  "checked": "2026-11-13",
+  "learningBaseUrl": "https://aigeekops.github.io/learn-by-building/",
+  "radarBaseUrl": "",
+  "robots": [
+    {
+      "id": "g1",
+      "title": "G1 Mode 10 · 23 轴配置",
+      "sourceCommit": "725b59b6de39a26c425632120c89f23c49a36f1e",
+      "sourceSha256": "9333e89c51614c92b416c2c22a28f1614284d02321548e10479cce73552bcf43",
+      "sourceUrl": "https://github.com/unitreerobotics/unitree_ros/blob/725b59b6de39a26c425632120c89f23c49a36f1e/robots/g1_description/g1_23dof_mode_10.urdf",
+      "defaultJoint": "left_elbow_joint",
+      "joints": [
+        {
+          "id": "left_hip_pitch_joint",
+          "type": "revolute",
+          "parent": "pelvis",
+          "child": "left_hip_pitch_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 0.064452 -0.1027",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.5307",
+            "upper": "2.8798",
+            "effort": "139",
+            "velocity": "20"
+          }
+        },
+        {
+          "id": "left_hip_roll_joint",
+          "type": "revolute",
+          "parent": "left_hip_pitch_link",
+          "child": "left_hip_roll_link",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0 0.052 -0.030465",
+            "rpy": "0 -0.1749 0"
+          },
+          "limit": {
+            "lower": "-0.5236",
+            "upper": "2.9671",
+            "effort": "139",
+            "velocity": "20"
+          }
+        },
+        {
+          "id": "left_hip_yaw_joint",
+          "type": "revolute",
+          "parent": "left_hip_roll_link",
+          "child": "left_hip_yaw_link",
+          "axis": "0 0 1",
+          "origin": {
+            "xyz": "0.025001 0 -0.12412",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.7576",
+            "upper": "2.7576",
+            "effort": "88",
+            "velocity": "32"
+          }
+        },
+        {
+          "id": "left_knee_joint",
+          "type": "revolute",
+          "parent": "left_hip_yaw_link",
+          "child": "left_knee_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "-0.078273 0.0021489 -0.17734",
+            "rpy": "0 0.1749 0"
+          },
+          "limit": {
+            "lower": "-0.087267",
+            "upper": "2.8798",
+            "effort": "139",
+            "velocity": "20"
+          }
+        },
+        {
+          "id": "left_ankle_pitch_joint",
+          "type": "revolute",
+          "parent": "left_knee_link",
+          "child": "left_ankle_pitch_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 -9.4445E-05 -0.30001",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-0.87267",
+            "upper": "0.5236",
+            "effort": "35",
+            "velocity": "30"
+          }
+        },
+        {
+          "id": "left_ankle_roll_joint",
+          "type": "revolute",
+          "parent": "left_ankle_pitch_link",
+          "child": "left_ankle_roll_link",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0 0 -0.017558",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-0.2618",
+            "upper": "0.2618",
+            "effort": "35",
+            "velocity": "30"
+          }
+        },
+        {
+          "id": "right_hip_pitch_joint",
+          "type": "revolute",
+          "parent": "pelvis",
+          "child": "right_hip_pitch_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 -0.064452 -0.1027",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.5307",
+            "upper": "2.8798",
+            "effort": "139",
+            "velocity": "20"
+          }
+        },
+        {
+          "id": "right_hip_roll_joint",
+          "type": "revolute",
+          "parent": "right_hip_pitch_link",
+          "child": "right_hip_roll_link",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0 -0.052 -0.030465",
+            "rpy": "0 -0.1749 0"
+          },
+          "limit": {
+            "lower": "-2.9671",
+            "upper": "0.5236",
+            "effort": "139",
+            "velocity": "20"
+          }
+        },
+        {
+          "id": "right_hip_yaw_joint",
+          "type": "revolute",
+          "parent": "right_hip_roll_link",
+          "child": "right_hip_yaw_link",
+          "axis": "0 0 1",
+          "origin": {
+            "xyz": "0.025001 0 -0.12412",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.7576",
+            "upper": "2.7576",
+            "effort": "88",
+            "velocity": "32"
+          }
+        },
+        {
+          "id": "right_knee_joint",
+          "type": "revolute",
+          "parent": "right_hip_yaw_link",
+          "child": "right_knee_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "-0.078273 -0.0021489 -0.17734",
+            "rpy": "0 0.1749 0"
+          },
+          "limit": {
+            "lower": "-0.087267",
+            "upper": "2.8798",
+            "effort": "139",
+            "velocity": "20"
+          }
+        },
+        {
+          "id": "right_ankle_pitch_joint",
+          "type": "revolute",
+          "parent": "right_knee_link",
+          "child": "right_ankle_pitch_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 9.4445E-05 -0.30001",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-0.87267",
+            "upper": "0.5236",
+            "effort": "35",
+            "velocity": "30"
+          }
+        },
+        {
+          "id": "right_ankle_roll_joint",
+          "type": "revolute",
+          "parent": "right_ankle_pitch_link",
+          "child": "right_ankle_roll_link",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0 0 -0.017558",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-0.2618",
+            "upper": "0.2618",
+            "effort": "35",
+            "velocity": "30"
+          }
+        },
+        {
+          "id": "waist_yaw_joint",
+          "type": "revolute",
+          "parent": "pelvis",
+          "child": "torso_link",
+          "axis": "0 0 1",
+          "origin": {
+            "xyz": "-0.0039635 0 0.044",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.618",
+            "upper": "2.618",
+            "effort": "88",
+            "velocity": "32"
+          }
+        },
+        {
+          "id": "left_shoulder_pitch_joint",
+          "type": "revolute",
+          "parent": "torso_link",
+          "child": "left_shoulder_pitch_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0.0039563 0.10022 0.24778",
+            "rpy": "0.27931 5.4949E-05 -0.00019159"
+          },
+          "limit": {
+            "lower": "-3.0892",
+            "upper": "2.6704",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "left_shoulder_roll_joint",
+          "type": "revolute",
+          "parent": "left_shoulder_pitch_link",
+          "child": "left_shoulder_roll_link",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0 0.038 -0.013831",
+            "rpy": "-0.27925 0 0"
+          },
+          "limit": {
+            "lower": "-1.5882",
+            "upper": "2.2515",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "left_shoulder_yaw_joint",
+          "type": "revolute",
+          "parent": "left_shoulder_roll_link",
+          "child": "left_shoulder_yaw_link",
+          "axis": "0 0 1",
+          "origin": {
+            "xyz": "0 0.00624 -0.1032",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.618",
+            "upper": "2.618",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "left_elbow_joint",
+          "type": "revolute",
+          "parent": "left_shoulder_yaw_link",
+          "child": "left_elbow_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0.015783 0 -0.080518",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.0472",
+            "upper": "2.0944",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "left_wrist_roll_joint",
+          "type": "revolute",
+          "parent": "left_elbow_link",
+          "child": "left_wrist_roll_rubber_hand",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0.100 0.00188791 -0.010",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "effort": "25",
+            "velocity": "37",
+            "lower": "-1.972222054",
+            "upper": "1.972222054"
+          }
+        },
+        {
+          "id": "right_shoulder_pitch_joint",
+          "type": "revolute",
+          "parent": "torso_link",
+          "child": "right_shoulder_pitch_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0.0039563 -0.10021 0.24778",
+            "rpy": "-0.27931 5.4949E-05 0.00019159"
+          },
+          "limit": {
+            "lower": "-3.0892",
+            "upper": "2.6704",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "right_shoulder_roll_joint",
+          "type": "revolute",
+          "parent": "right_shoulder_pitch_link",
+          "child": "right_shoulder_roll_link",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0 -0.038 -0.013831",
+            "rpy": "0.27925 0 0"
+          },
+          "limit": {
+            "lower": "-2.2515",
+            "upper": "1.5882",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "right_shoulder_yaw_joint",
+          "type": "revolute",
+          "parent": "right_shoulder_roll_link",
+          "child": "right_shoulder_yaw_link",
+          "axis": "0 0 1",
+          "origin": {
+            "xyz": "0 -0.00624 -0.1032",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.618",
+            "upper": "2.618",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "right_elbow_joint",
+          "type": "revolute",
+          "parent": "right_shoulder_yaw_link",
+          "child": "right_elbow_link",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0.015783 0 -0.080518",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.0472",
+            "upper": "2.0944",
+            "effort": "25",
+            "velocity": "37"
+          }
+        },
+        {
+          "id": "right_wrist_roll_joint",
+          "type": "revolute",
+          "parent": "right_elbow_link",
+          "child": "right_wrist_roll_rubber_hand",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0.100 -0.00188791 -0.010",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "effort": "25",
+            "velocity": "37",
+            "lower": "-1.972222054",
+            "upper": "1.972222054"
+          }
+        }
+      ]
+    },
+    {
+      "id": "go2",
+      "title": "Go2 · 当前源配置",
+      "sourceCommit": "725b59b6de39a26c425632120c89f23c49a36f1e",
+      "sourceSha256": "7d19fe48e2e689ee1a032ab99f2a4a8b671d87e73de48d3e65811682a5b48b9e",
+      "sourceUrl": "https://github.com/unitreerobotics/unitree_ros/blob/725b59b6de39a26c425632120c89f23c49a36f1e/robots/go2_description/urdf/go2_description.urdf",
+      "defaultJoint": "FL_hip_joint",
+      "joints": [
+        {
+          "id": "FL_hip_joint",
+          "type": "revolute",
+          "parent": "base",
+          "child": "FL_hip",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0.1934 0.0465 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.0472",
+            "upper": "1.0472",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "FL_thigh_joint",
+          "type": "revolute",
+          "parent": "FL_hip",
+          "child": "FL_thigh",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 0.0955 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.5708",
+            "upper": "3.4907",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "FL_calf_joint",
+          "type": "revolute",
+          "parent": "FL_thigh",
+          "child": "FL_calf",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 0 -0.213",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.7227",
+            "upper": "-0.83776",
+            "effort": "45.43",
+            "velocity": "15.70"
+          }
+        },
+        {
+          "id": "FR_hip_joint",
+          "type": "revolute",
+          "parent": "base",
+          "child": "FR_hip",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "0.1934 -0.0465 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.0472",
+            "upper": "1.0472",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "FR_thigh_joint",
+          "type": "revolute",
+          "parent": "FR_hip",
+          "child": "FR_thigh",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 -0.0955 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.5708",
+            "upper": "3.4907",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "FR_calf_joint",
+          "type": "revolute",
+          "parent": "FR_thigh",
+          "child": "FR_calf",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 0 -0.213",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.7227",
+            "upper": "-0.83776",
+            "effort": "45.43",
+            "velocity": "15.70"
+          }
+        },
+        {
+          "id": "RL_hip_joint",
+          "type": "revolute",
+          "parent": "base",
+          "child": "RL_hip",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "-0.1934 0.0465 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.0472",
+            "upper": "1.0472",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "RL_thigh_joint",
+          "type": "revolute",
+          "parent": "RL_hip",
+          "child": "RL_thigh",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 0.0955 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-0.5236",
+            "upper": "4.5379",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "RL_calf_joint",
+          "type": "revolute",
+          "parent": "RL_thigh",
+          "child": "RL_calf",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 0 -0.213",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.7227",
+            "upper": "-0.83776",
+            "effort": "45.43",
+            "velocity": "15.70"
+          }
+        },
+        {
+          "id": "RR_hip_joint",
+          "type": "revolute",
+          "parent": "base",
+          "child": "RR_hip",
+          "axis": "1 0 0",
+          "origin": {
+            "xyz": "-0.1934 -0.0465 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-1.0472",
+            "upper": "1.0472",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "RR_thigh_joint",
+          "type": "revolute",
+          "parent": "RR_hip",
+          "child": "RR_thigh",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 -0.0955 0",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-0.5236",
+            "upper": "4.5379",
+            "effort": "23.7",
+            "velocity": "30.1"
+          }
+        },
+        {
+          "id": "RR_calf_joint",
+          "type": "revolute",
+          "parent": "RR_thigh",
+          "child": "RR_calf",
+          "axis": "0 1 0",
+          "origin": {
+            "xyz": "0 0 -0.213",
+            "rpy": "0 0 0"
+          },
+          "limit": {
+            "lower": "-2.7227",
+            "upper": "-0.83776",
+            "effort": "45.43",
+            "velocity": "15.70"
+          }
+        }
+      ]
+    }
+  ],
+  "so101": {
+    "configuration": "SO-101 follower / Waveshare / 7.4V STS3215 C001 baseline",
+    "sourceCommit": "a758567c3978dfeefe282ede0500085a48fe8f78",
+    "sourceUrl": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md",
+    "license": "Apache-2.0（SO-ARM100 固定版本根许可；上游文件及各资料分别核对）",
+    "assemblyCommit": "e6ffde60312365c5452c46189a26872483943154",
+    "assemblyUrl": "https://github.com/huggingface/lerobot/blob/e6ffde60312365c5452c46189a26872483943154/docs/source/so101.mdx",
+    "printUrl": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/3DPRINT.md",
+    "rows": [
+      {
+        "id": "Base_motor_holder_SO101",
+        "name": "Base_motor_holder_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Base_SO101",
+        "name": "Base_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Motor_holder_SO101_Base",
+        "name": "Motor_holder_SO101_Base",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Motor_holder_SO101_Wrist",
+        "name": "Motor_holder_SO101_Wrist",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Under_arm_SO101",
+        "name": "Under_arm_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Upper_arm_SO101",
+        "name": "Upper_arm_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Rotation_Pitch_SO101",
+        "name": "Rotation_Pitch_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Wrist_Roll_Pitch_SO101",
+        "name": "Wrist_Roll_Pitch_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "WaveShare_Mounting_Plate_SO101",
+        "name": "WaveShare_Mounting_Plate_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Moving_Jaw_SO101",
+        "name": "Moving_Jaw_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "Wrist_Roll_Follower_SO101",
+        "name": "Wrist_Roll_Follower_SO101",
+        "category": "printed",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "One follower; shared-part quantity derived from 3DPRINT.md (two per leader/follower pair). Waveshare board variant only.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-4-print-the-parts"
+      },
+      {
+        "id": "servo",
+        "name": "STS3215 7.4V, 1/345 (C001)",
+        "category": "hardware",
+        "quantity": 6,
+        "unit": "piece",
+        "note": "Baseline follower only. 12V alternative requires matching power supply; never mix.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#parts-for-one-follower-arm"
+      },
+      {
+        "id": "board",
+        "name": "Waveshare motor control board",
+        "category": "hardware",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "Use matching Waveshare printed mounting plate; check connector and board revision.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#parts-for-one-follower-arm"
+      },
+      {
+        "id": "usb",
+        "name": "USB-C cable (2 pcs pack)",
+        "category": "hardware",
+        "quantity": 1,
+        "unit": "pack",
+        "note": "Upstream shopping unit is one two-cable pack, not two required connections. Confirm data capability.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#parts-for-one-follower-arm"
+      },
+      {
+        "id": "power",
+        "name": "Power supply",
+        "category": "hardware",
+        "quantity": 1,
+        "unit": "piece",
+        "note": "Baseline source references 5V supply for 7.4V servos. Verify actual motor, polarity, current and connector before power. 12V alternative: 12V 5A+ per source.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#parts-for-one-follower-arm"
+      },
+      {
+        "id": "clamp",
+        "name": "Table clamps (2 pcs pack)",
+        "category": "hardware",
+        "quantity": 1,
+        "unit": "pack",
+        "note": "Two physical clamps in one source pack.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#parts-for-one-follower-arm"
+      },
+      {
+        "id": "tools",
+        "name": "Screwdriver set",
+        "category": "hardware",
+        "quantity": 1,
+        "unit": "set",
+        "note": "Phillips #0 and #1 recommended.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#parts-for-one-follower-arm"
+      },
+      {
+        "id": "fasteners",
+        "name": "Screws / horns / servo cables",
+        "category": "hardware",
+        "quantity": null,
+        "unit": "kit",
+        "note": "Complete follower-only count not reconciled. Guide has ambiguous M2/M3 fastener wording. Verify kit contents and each official step; not purchase-ready.",
+        "source": "https://github.com/huggingface/lerobot/blob/e6ffde60312365c5452c46189a26872483943154/docs/source/so101.mdx#L225-L328"
+      }
+    ],
+    "printSettings": [
+      {
+        "parameter": "Material",
+        "value": "PLA+",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-1-choose-a-printer"
+      },
+      {
+        "parameter": "Nozzle / layer height",
+        "value": "0.4 mm / 0.2 mm OR 0.6 mm / 0.4 mm",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-1-choose-a-printer"
+      },
+      {
+        "parameter": "Infill (local printing)",
+        "value": "15%",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-1-choose-a-printer"
+      },
+      {
+        "parameter": "Infill (outsourced printing guide)",
+        "value": "20% FDM, mm units; separate context, not a replacement for local profile",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/3DPRINT.md"
+      },
+      {
+        "parameter": "Supports",
+        "value": "Source: supports everywhere; ignore slopes >45° to horizontal; none in horizontal-axis screw holes. Review slicer interpretation.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-2-set-up-the-printer"
+      },
+      {
+        "parameter": "Fit check",
+        "value": "Use upstream servo or Lego gauges before printing final parts; no physical fit validated here.",
+        "source": "https://github.com/TheRobotStudio/SO-ARM100/blob/a758567c3978dfeefe282ede0500085a48fe8f78/README.md#step-3-check-printer-accuracy"
+      }
+    ]
+  },
+  "practicums": [
+    {
+      "id": "robot-coordinates",
+      "title": "坐标与关节＋实验记录",
+      "subtitle": "在 G1 / Go2 源模型上预测、观察关节运动，带回可核对的实验记录。",
+      "courseId": "modern",
+      "courses": [
+        "modern"
+      ],
+      "evidenceType": "calculation",
+      "question": "同一个关节沿局部轴运动时，为什么从世界坐标观察到的方向可能不同？哪些下游连杆会跟着运动？",
+      "prerequisites": [
+        [
+          "坐标变换",
+          "modern",
+          "rf-transform"
+        ],
+        [
+          "三维坐标链",
+          "modern",
+          "rf-se3-chain"
+        ]
+      ],
+      "steps": [
+        "选择具体机型、源版本和一个关节，读清父子连杆、局部轴、单位和限位。",
+        "先写下运动方向、会联动的下游连杆，以及局部坐标与世界坐标的关系。",
+        "在 Robot Radar 复位模型，用关节实验或 JSON 关键帧改变一个关节；保留实际输入。",
+        "保存原始实验 JSON 或截图，记录实际姿态变化。检查时间、关节名、单位、有限值与限位。",
+        "对照预测与观察，用父子变换解释差异；预测不一致时写明修正依据。",
+        "换另一个关节独立预测并复做。提交记录、解释和局限，再按验收表自查。"
+      ],
+      "observationPrompt": "记录实际 q0/q1、观察的连杆、联动关系和参考坐标系。可附原始 JSON / 截图文件名及关键数值；不要只写“动了”。",
+      "transferPrompt": "换一个关节：写明新关节、预测、实际输入与观察，再解释为什么和第一组相同或不同。",
+      "boundary": "本实训记录运动学姿态与插值轨迹，归入计算证据。它不证明动力学、平衡、接触或实机执行。日志格式通过不代表解释已经通过评审。",
+      "acceptance": [
+        "机型、配置、源版本、关节、单位、参考系和两次输入清楚。",
+        "预测与观察分开记录，能指出哪些连杆联动并解释坐标变换。",
+        "保留原始结果，日志检查发现的问题有处理说明。",
+        "另一个关节已独立复做；明确计算证据和未验证内容。"
+      ]
+    },
+    {
+      "id": "so101-bom-audit",
+      "title": "SO-101 装配资料＋BOM 审核",
+      "subtitle": "为一个确定配置的 follower 审核打印件、采购件和装配资料，形成制作准备报告。",
+      "courseId": "mit2007",
+      "courses": [
+        "mit2007",
+        "lerobot"
+      ],
+      "evidenceType": "reading",
+      "question": "仅凭当前固定版本资料，能否组织一台 SO-101 follower 的制作清单？哪些资料缺口会阻断准备？",
+      "prerequisites": [
+        [
+          "尺寸与制造约束",
+          "mit2007",
+          "rf-fit"
+        ],
+        [
+          "制造基准与装配",
+          "mit2007",
+          "rf-manufacturing-datums"
+        ]
+      ],
+      "steps": [
+        "锁定单 follower / Waveshare / 7.4V STS3215 C001 基线，分别记录硬件仓库和装配文档版本。",
+        "先预测容易缺失或混淆的项目：leader/follower、板卡支架、包/件单位、紧固件数量。",
+        "逐行阅读固定版本 BOM、打印说明和装配文字；填写核对数量、审核判断和依据。可导入 Radar BOM 作为待审资料。",
+        "记录确认项、差异与未知；画出有文档依据的装配依赖，并与运动链父子关系分开。",
+        "解释配置兼容、打印与采购项、许可范围及缺项怎样影响准备；未知数量继续保留未知。",
+        "换成 leader 或更换板卡，独立列出必须重新审核的项目。下载审核报告并提交学习记录。"
+      ],
+      "observationPrompt": "列出确认项、差异和缺口。写出或引用一份装配依赖图，并为关键依赖附官方文档段落；区分阅读顺序、运动链与物理工序。",
+      "transferPrompt": "假设改成 leader 或换用另一板卡：独立列出至少三项需重新审核的清单、装配或兼容性问题及其依据。",
+      "boundary": "结果是资料与制作准备审核。阅读完成、BOM 核对和虚拟装配均不表示实物制造、供电、校准或硬件验收完成。紧固件未知行使当前参考清单仍有准备缺口。",
+      "acceptance": [
+        "单机配置、两份源版本、许可与资料范围明确。",
+        "18 行逐项审核；11 类打印件与 7 类采购项分开，包/件单位没有混用。",
+        "紧固件未知数量保留未知；每项差异和资料不足均有说明。",
+        "有出处的装配依赖与运动链分开；迁移审查和准备缺口已说明。"
+      ]
+    }
+  ]
+}

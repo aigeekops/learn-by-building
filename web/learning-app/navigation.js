@@ -5,6 +5,7 @@
   let navigationReady=false,navigationRestoring=false,navigationQueued=false,navigationKey='';
   function navigationLocation(){
     const p={view:state.view};
+    if(p.view==='projects'&&state.practicum)p.practicum=state.practicum;
     if(['course','lesson'].includes(p.view))p.course=state.course;
     if(p.view==='lesson'){
       if((fidIds.has(state.course)&&fidLegacy)||(appIds.has(state.course)&&appLegacy)||(extIds.has(state.course)&&extLegacy)||state.rfOriginal||!aidActive()&&!rfCourseTopics[state.course]){
@@ -14,12 +15,13 @@
     }
     return p;
   }
-  function navigationHash(p){return '#learn/'+[p.view,p.course,p.kind,p.lesson,p.tab].filter(v=>v!==undefined).map(encodeURIComponent).join('/');}
+  function navigationHash(p){return '#learn/'+(p.view==='projects'?[p.view,p.practicum]:[p.view,p.course,p.kind,p.lesson,p.tab]).filter(v=>v!==undefined).map(encodeURIComponent).join('/');}
   function navigationParse(hash){
     if(!hash.startsWith('#learn/'))return null;
     let parts;try{parts=hash.slice(7).split('/').map(decodeURIComponent);}catch{return {view:'map'};}
     const [view,course,kind,lesson,tab]=parts,p={view};
     if(!navigationViews.has(view)||parts.length>5)return {view:'map'};
+    if(view==='projects'&&parts.length===2&&Object.hasOwn(rpById,course))return {view,practicum:course};
     if(!['course','lesson'].includes(view))return parts.length===1?p:{view:'map'};
     if(!Object.hasOwn(courses,course))return {view:'map'};p.course=course;
     if(view==='course')return parts.length===2?p:{view:'map'};
@@ -56,6 +58,7 @@
       fidPlayerObserver?.disconnect();appPlayerObserver?.disconnect();
       root.querySelector('#lbb-workspace-dialog[open]')?.close();
       state.view=p.view;fidLegacy=false;appLegacy=false;extLegacy=false;state.rfOriginal=false;state.rfLesson=null;state.aiLesson=null;
+      state.practicum=p.practicum||null;
       if(p.course){state.course=p.course;state.node=courses[p.course].node;state.selected=1;}
       const transient=entry?.lbbNavigation;
       if(p.view==='map'&&transient?.version===1){

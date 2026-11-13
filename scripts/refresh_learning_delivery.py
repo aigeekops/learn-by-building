@@ -23,7 +23,7 @@ PUBLISH_TARGETS=(
  Path('/Users/bytedance/.codex/visualizations/2026/11/08/01a1ba7a-aa05-7d22-b7d8-d43060f03248')/DELIVERY_NAME,
  Path('/Users/bytedance/.codex/visualizations/2026/11/08/01a1bb29-4d02-7ee2-9841-644b864031b5')/DELIVERY_NAME,
 )
-MARKERS=('AI_DRAFT_INTEGRATION_START','FOUNDATION_DRAFT_START','APPLICATION_DRAFT_START','EXTENSION_DRAFT_START','ROBOTICS_FOUNDATIONS_ADAPTER_START','COURSE_MAP_STATUS_START')
+MARKERS=('AI_DRAFT_INTEGRATION_START','FOUNDATION_DRAFT_START','APPLICATION_DRAFT_START','EXTENSION_DRAFT_START','ROBOTICS_FOUNDATIONS_ADAPTER_START','COURSE_MAP_STATUS_START','ROBOT_PRACTICUMS_START')
 RAW_EXCLUDE_MARKERS=(*MARKERS,'  const mappedTeaching = ','globalThis.LBBLearningEngine=methods;')
 
 def sha(value):return hashlib.sha256(value).hexdigest()
@@ -121,6 +121,7 @@ def build(destination=DEFAULT_STAGE,source=RAW_SOURCE):
   html=module('sync_course_map').transform(html)
   status_sources=(ROOT/'web/learning-map-course-status.js',ROOT/'web/learning-map-course-status.css')
   if all(p.is_file() for p in status_sources):html=module('sync_learning_map').transform(html)
+  html=module('integrate_robot_practicums').transform(html)
   marker='  render();\n  if(globalThis.Tweak)'
   if html.count(marker)!=1:raise ValueError('Navigation startup marker missing or repeated')
   html=html.replace(marker,(ROOT/'web/learning-app/navigation.js').read_text()+'\n'+marker,1)
